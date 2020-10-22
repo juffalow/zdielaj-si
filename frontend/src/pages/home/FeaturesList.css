@@ -1,0 +1,9 @@
+.features-list {
+  list-style: none;
+  padding-left: 1em;
+}
+
+.features-list li:before {
+  content: "\2713\0020";
+  color: #28a745;
+}

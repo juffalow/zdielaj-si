@@ -1,0 +1,9 @@
+.thumbnail-container {
+  display: flex;
+  min-height: 100%;
+}
+
+.thumbnail-image {
+  max-width: 100%;
+  margin: auto;
+}
