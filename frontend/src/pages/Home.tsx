@@ -101,14 +101,14 @@ const Home: React.FC = () => {
           ) : null
         }
         <Row style={{ marginTop: 50 }}>
-          <Col>
+          <Col lg="6" md="6" sm="6" xs="12">
             <p style={{ marginBottom: '0.2em' }}>Zadarmo ako neprihlásený užívateľ:</p>
             <FeaturesList>
               <li>môžeš zdielať maximálne 10 fotiek naraz</li>
               <li>fotky budú po 24h automaticky zmazané</li>
             </FeaturesList>
           </Col>
-          <Col>
+          <Col lg="6" md="6" sm="6" xs="12">
             <p style={{ marginBottom: '0.2em' }}>Zadarmo ako prihlásený užívateľ:</p>
             <FeaturesList>
               <li>môžeš zdielať maximálne 50 fotiek naraz</li>
