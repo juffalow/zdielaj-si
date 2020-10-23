@@ -28,7 +28,7 @@ const Home: React.FC = () => {
 
     fetch(`${config.url}/upload`, {
       method: 'POST',
-      body: formData
+      body: formData,
     })
     .then(res => res.json())
     .then(res => {
