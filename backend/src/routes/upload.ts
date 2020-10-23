@@ -43,6 +43,8 @@ router.post('/:hash/upload', upload.array('images', 10), async (req: any, res) =
 });
 
 router.post('/upload', upload.array('images', 10), async (req: any, res) => {
+  console.log('/upload', req.files);
+
   const albumRepository = new AlbumRepository();
   const photoRepository = new PhotoRepository();
 

@@ -89,7 +89,7 @@ const Home: React.FC = () => {
                   <InputGroup>
                     <FormControl type="text" value={`${window.location.protocol}//${window.location.host}/album/${albumId}`} readOnly />
                     <InputGroup.Append>
-                      <Button variant="outline-secondary" onClick={onCopyClick}>Copy</Button>
+                      <Button variant="outline-secondary" onClick={onCopyClick}>Kopírovať</Button>
                     </InputGroup.Append>
                   </InputGroup>
                 </Col>

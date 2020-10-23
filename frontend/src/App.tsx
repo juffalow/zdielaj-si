@@ -11,7 +11,7 @@ const App = () => (
   <Router>
     <>
       <Menu />
-      <main role="main" className="flex-shrink-0" style={{ marginTop: 25, marginBottom: 25 }}>
+      <main role="main" className="flex-shrink-0 main-container" style={{ marginTop: 25, marginBottom: 25 }}>
         <Route path="/o-aplikacii" component={About} />
         <Route path="/album/:id" component={Album} />
         <Route path="/" component={Home} exact />
