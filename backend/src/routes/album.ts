@@ -9,7 +9,7 @@ router.get('/:id', async (req: any, res) => {
 
   const photos = await photoRepository.find(req.params.id);
 
-  if (typeof photos === 'undefined') {
+  if (typeof photos === 'undefined' || photos.length === 0) {
     res.status(404).json({
       error: 'Album not found!',
       data: null,
