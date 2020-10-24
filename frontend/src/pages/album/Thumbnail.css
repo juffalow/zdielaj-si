@@ -1,6 +1,6 @@
 .thumbnail-container {
   display: block;
-  height: 20vh;
+  padding-top: 100%;
   position: relative;
 }
 

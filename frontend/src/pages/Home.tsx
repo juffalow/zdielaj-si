@@ -94,7 +94,7 @@ const Home: React.FC = () => {
                   </InputGroup>
                 </Col>
               </Row>
-              <Row style={{ marginTop: 30 }} lg={6} md={6} sm={4} xs={2}>
+              <Row style={{ marginTop: 30 }}>
                 <Thumbnails files={files} />
               </Row>
             </>
