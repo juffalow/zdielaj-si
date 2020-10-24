@@ -10,14 +10,14 @@ class KnexPhotoRepository implements PhotoRepository {
         .leftJoin('thumbnail', 'photo.id', 'thumbnail.photoId')
         .where('albumId', albumId)
         .then((photos: Array<any>) => {
-          console.log(photos);
           resolve(photos.map(photo => {
             return {
               id: photo.id,
               albumId,
               path: photo.path,
               size: photo.size,
-              thumbnail: 'thumbnailPath' in photo ? {
+              thumbnail: photo.thumbnailId !== null ? {
+                id: photo.thumbnailId,
                 path: photo.thumbnailPath,
                 size: photo.thumbnailSize,
               } : null,
