@@ -4,7 +4,7 @@ import './Thumbnails.css';
 
 const Thumbnails = ({ files }: any) => {
   return files.map((file: any) => (
-    <Col lg="2" md="2" sm="3" xs="6">
+    <Col>
       <div className="thumbnail-container">
         <img src={file.preview} className="thumbnail-image" alt="" />
       </div>
