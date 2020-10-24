@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageLoader from '../../components/ImageLoader';
 import './Thumbnail.css';
 
 const Thumbnail = ({ photo }: any) => {
@@ -13,7 +14,12 @@ const Thumbnail = ({ photo }: any) => {
 
   return (
     <div className="thumbnail-container">
-      <img src={photo.thumbnail !== null ? photo.thumbnail.location : photo.location} className="thumbnail-image" alt="" onClick={onClick} />
+      <ImageLoader
+        src={photo.thumbnail !== null ? photo.thumbnail.location : photo.location}
+        alt=""
+        className="thumbnail-image"
+        onClick={onClick}
+      />
     </div>
   );
 };
