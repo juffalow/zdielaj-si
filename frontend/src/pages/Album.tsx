@@ -20,10 +20,10 @@ const Album: React.FC = (props: any) => {
       <Container>
         {
           files.length > 0 ? (
-            <Row style={{ marginTop: 50 }}>
+            <Row style={{ marginTop: 20 }}>
               {
                 files.map((file) => (
-                  <Col key={file.id}>
+                  <Col key={file.id} lg="2" md="2" sm="3" xs="6">
                     <Thumbnail photo={file} />
                   </Col>
                 ))
