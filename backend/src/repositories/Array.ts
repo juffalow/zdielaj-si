@@ -26,11 +26,27 @@ export default {
       albumId,
       path,
       size,
-    }
+    };
 
     photos[albumId].push(photo);
 
     return photo;
+  },
+  createPhotoThumbnail: (albumId: string, photoId: string, path: string, size: number): any => {
+    photos[albumId] = photos[albumId].map((photo) => {
+      if (photo.id === photoId) {
+        return {
+          ...photo,
+          thumbnail: {
+            path,
+            size,
+          }
+        }
+      }
+      return photo;
+    });
+
+    return { path, size };
   },
   getPhotos(albumId: string): Array<Photo> {
     return photos[albumId];

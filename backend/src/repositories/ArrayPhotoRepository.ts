@@ -9,4 +9,8 @@ export default class ArrayPhotoRepository implements PhotoRepository {
   public async create(albumId: string, path: string, size: number): Promise<Photo> {
     return array.createPhoto(albumId, path, size);
   }
+
+  public async createThumbnail(albumId: string, photoId: string, path: string, size: number): Promise<Photo> {
+    return array.createPhotoThumbnail(albumId, photoId, path, size);
+  }
 }

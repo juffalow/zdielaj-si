@@ -20,6 +20,10 @@ router.get('/:id', async (req: any, res) => {
   const photosWithLocation = photos.map((photo) => ({
     ...photo,
     location: `${config.storage.url}/${photo.path}`,
+    thumbnail: 'thumbnail' in photo ?  {
+      ...photo.thumbnail,
+      location: `${config.storage.url}/${photo.thumbnail.path}`,
+    } : null,
   }));
 
   res.status(200).json({

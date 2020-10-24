@@ -3,4 +3,5 @@ interface Photo {
   albumId: string;
   path: string;
   size: number;
+  thumbnail?: any;
 }
