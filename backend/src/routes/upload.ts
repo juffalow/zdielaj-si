@@ -24,7 +24,15 @@ const s3 = new aws.S3({
   secretAccessKey: config.storage.secret,
 });
 
-const upload = multer();
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+}
+
+const upload = multer({ fileFilter });
 
 const uploadImage = async (body: any, key: string) => {
   return new Promise((resolve, reject) => {
@@ -34,7 +42,7 @@ const uploadImage = async (body: any, key: string) => {
       Body: body,
       Key: key,
     };
-    const uploader = s3.upload(params, (err, data) => {
+    s3.upload(params, (err, data) => {
       if (err) {
         reject(err);
       } else {
@@ -59,7 +67,7 @@ router.post('/upload', upload.array('images', 10), async (req: any, res) => {
     const hash = crypto.createHash('sha1').update(`${file.originalname}${Date.now()}`).digest('hex');
     const extname = path.extname(file.originalname);
     const original = bufferToStream(file.buffer);
-    const thumbnail = sharp(file.buffer).resize({ width: 200 });
+    const thumbnail = sharp(file.buffer).resize(200, 200, { fit: 'inside' });
     let originalPath = null;
     let thumbnailPath = null;
 
