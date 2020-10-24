@@ -7,8 +7,8 @@ import sharp from 'sharp';
 import { Readable } from 'stream';
 import config from '../config';
 import { base64encode } from '../utils/functions';
-import AlbumRepository from '../repositories/ArrayAlbumRepository';
-import PhotoRepository from '../repositories/ArrayPhotoRepository';
+import AlbumRepository from '../repositories/KnexAlbumRepository';
+import PhotoRepository from '../repositories/KnexPhotoRepository';
 
 const bufferToStream = (buffer: Buffer) => {
   var stream = new Readable();

@@ -1,6 +1,6 @@
 import express from 'express';
 import config from '../config';
-import PhotoRepository from '../repositories/ArrayPhotoRepository';
+import PhotoRepository from '../repositories/KnexPhotoRepository';
 
 const router = express.Router();
 
