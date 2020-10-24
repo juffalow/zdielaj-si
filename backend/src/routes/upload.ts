@@ -67,7 +67,7 @@ router.post('/upload', upload.array('images', 10), async (req: any, res) => {
     const hash = crypto.createHash('sha1').update(`${file.originalname}${Date.now()}`).digest('hex');
     const extname = path.extname(file.originalname);
     const original = bufferToStream(file.buffer);
-    const thumbnail = sharp(file.buffer).resize(200, 200, { fit: 'inside' });
+    const thumbnail = sharp(file.buffer).resize(400, 400, { fit: 'inside' });
     let originalPath = null;
     let thumbnailPath = null;
 
