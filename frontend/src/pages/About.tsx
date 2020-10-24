@@ -9,11 +9,14 @@ const About: React.FC = () => (
     <Container>
       <Row>
         <Col>
-          <h1>Quotes - React &amp; Relay examole project</h1>
-          <p className="lead">The whole page is created with <a href="https://create-react-app.dev/" rel="noopener noreferrer" target="_blank">create-react-app</a> without eject. It uses newest version of <a href="https://reactjs.org/" rel="noopener noreferrer" target="_blank">React</a> (<i>16.13.1</i>) and <a href="https://relay.dev/" rel="noopener noreferrer" target="_blank">Relay</a> (<i>9.0.0</i>) that is now available (<i>27.3.2020</i>) and everything is coded in <a href="https://www.typescriptlang.org/" rel="noopener noreferrer" target="_blank">TypeScript</a>. You can find here how to use <code>QueryRenderer</code>, <code>createPaginationContainer</code> and <code>createFragmentContainer</code>. Backend is available in <a href="https://github.com/juffalow/slim-graphql-eloquent-example" rel="noopener noreferrer" target="_blank">PHP</a> and <a href="https://github.com/juffalow/express-graphql-example" rel="noopener noreferrer" target="_blank">NodeJS</a>.</p>
-          <p>This project was created because of lot of hours spent searching, trying and debugging. There are several articles and projects about Relay, but those are mostly using older versions, or it is just a small sample of a code without other major parts. Here is a complete web application with everything you need to start using React, Relay and GraphQL.</p>
-          <h2>Want to contribute?</h2>
-          <p>I am sure you can find several things that can be coded better, or are not clear. And it really needs tests to be a fully complete project. So if you have time, I would be very happy if you can write me some feedback, or even create a pull request.</p>
+          <h1>O aplikacii</h1>
+          <p className="lead">Bola streda, 21. október a my sme sa ako každú stredu boli otužovať ráno pred prácou v jazere. Hanka, náša hlavá fotografka, spravila pár fotiek ešte kým sme boli vo vode aby nám kamaráti verili.</p>
+          <p>Samozrejme, neskôr chcel každý z nás zdielať tieto fotky či už v aktivite na Strave, alebo v storieske na Instagrame. Dostupné boli v spoločnom chate v Slacku, ale kvalita fotky už bola značne znížená. Poslať si fotky medzi sebou, keď sme o miestnosť vedľa nie je problém v prípade, že všetci majú buď iPhone alebo Android. Ale nemajú... A niekto už sedel pekne doma pod perinkou na home office.</p>
+          <p>A tu, v týchto zlých, závislákom a zdielačom neprajných časoch sme si povedali, že prídeme s riešením.</p>
+          <blockquote className="blockquote text-right mt-4">
+            <p className="mb-0">Čo keby spravíme nejakú appku, kde sa budú dať zdielať fotky bez znižovania kvality?</p>
+            <footer className="blockquote-footer"><cite title="Filip">Filip</cite></footer>
+          </blockquote>
         </Col>
       </Row>
     </Container>
