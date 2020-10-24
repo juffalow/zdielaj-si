@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import Thumbnails from './home/Thumbnails';
 import FeaturesList from './home/FeaturesList';
 import SEO from '../components/SEO';
@@ -39,7 +40,6 @@ const Home: React.FC = () => {
   const {
     getRootProps,
     getInputProps,
-    open,
     isDragActive,
   } = useDropzone({ onDrop, accept: 'image/*', maxFiles: 10 });
 
@@ -75,7 +75,7 @@ const Home: React.FC = () => {
                   <p style={{ marginBottom: 0 }}>Drag 'n' drop some files here, or click to select files</p>
               }
               <div style={{ marginTop: 20 }}>
-                <Button variant="success" onClick={open}>Nahrať fotky</Button>
+                <Button variant="success">Nahrať fotky</Button>
               </div>
             </div>
           </Col>
@@ -85,9 +85,14 @@ const Home: React.FC = () => {
             <>
               <Row style={{ marginTop: 50 }}>
                 <Col>
-                  <h2>Tvoje fotky</h2>
+                  <h2 style={{ display: 'inline-block' }}>Tvoje fotky</h2>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
                   <InputGroup>
-                    <FormControl type="text" value={`${window.location.protocol}//${window.location.host}/album/${albumId}`} readOnly />
+                    { albumId.length === 0 ? <Spinner animation="border" size="sm" style={{ position: 'absolute', zIndex: 9999, left: 10, top: 10 }} /> : null }
+                    <FormControl type="text" value={albumId.length === 0 ? '': `${window.location.protocol}//${window.location.host}/album/${albumId}`} readOnly />
                     <InputGroup.Append>
                       <Button variant="outline-secondary" onClick={onCopyClick}>Kopírovať</Button>
                     </InputGroup.Append>
