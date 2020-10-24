@@ -13,7 +13,7 @@ const Thumbnail = ({ photo }: any) => {
 
   return (
     <div className="thumbnail-container">
-      <img src={photo.location} className="thumbnail-image" alt="" onClick={onClick} />
+      <img src={photo.thumbnail !== null ? photo.thumbnail.location : photo.location} className="thumbnail-image" alt="" onClick={onClick} />
     </div>
   );
 };
