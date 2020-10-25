@@ -47,7 +47,5 @@ jobs:
     - name: build
       run: |
         cd ./frontend
-        ls
-        ls ./src
         mv ./src/config.example.ts ./src/config.ts
         yarn run build
