@@ -27,6 +27,7 @@ jobs:
     - name: build
       run: |
         cd ./backend
+        mv ./src/config.example.ts ./src/config.ts
         yarn run build
   frontend:
     runs-on: ubuntu-latest
@@ -46,4 +47,5 @@ jobs:
     - name: build
       run: |
         cd ./frontend
+        mv ./src/config.example.ts ./src/config.ts
         yarn run build
