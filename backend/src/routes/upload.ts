@@ -11,7 +11,7 @@ import AlbumRepository from '../repositories/KnexAlbumRepository';
 import PhotoRepository from '../repositories/KnexPhotoRepository';
 
 const bufferToStream = (buffer: Buffer) => {
-  var stream = new Readable();
+  const stream = new Readable();
   stream.push(buffer);
   stream.push(null);
 
