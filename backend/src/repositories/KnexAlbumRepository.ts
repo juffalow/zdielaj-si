@@ -16,7 +16,7 @@ class KnexAlbumRepository implements AlbumRepository {
 
   public async create(): Promise<Album> {
     return new Promise((resolve, reject) => {
-      const id = crypto.randomBytes(16).toString('hex');
+      const id = crypto.randomBytes(8).toString('hex');
       database.insert({
         id,
       })

@@ -30,7 +30,7 @@ class KnexPhotoRepository implements PhotoRepository {
 
   public async create(albumId: string, path: string, size: number): Promise<Photo> {
     return new Promise((resolve, reject) => {
-      const id = crypto.randomBytes(16).toString('hex');
+      const id = crypto.randomBytes(8).toString('hex');
       database.insert({
         id,
         albumId,
@@ -49,7 +49,7 @@ class KnexPhotoRepository implements PhotoRepository {
 
   public async createThumbnail(albumId: string, photoId: string, path: string, size: number): Promise<Photo> {
     return new Promise((resolve, reject) => {
-      const id = crypto.randomBytes(16).toString('hex');
+      const id = crypto.randomBytes(8).toString('hex');
       database.insert({
         id,
         photoId,
