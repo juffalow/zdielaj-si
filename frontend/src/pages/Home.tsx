@@ -61,12 +61,12 @@ const Home: React.FC = () => {
   }
 
   return (
-    <SEO title="" description="Tiež máš problém, že ti Messanger zníži kvalitu fotiek? Tu ich môžeš zdielať bez problémov v plnej kvalite!">
+    <SEO title="" description="Tiež máš problém, že ti Messenger zníži kvalitu fotiek? Tu ich môžeš zdielať bez problémov v plnej kvalite!">
       <Container>
         <Row>
           <Col>
-            <h1>Zdielaj si fotky v plnej kvalite</h1>
-            <p className="lead">Tiež máš problém, že ti Messanger zníži kvalitu fotiek? Tu ich môžeš zdielať bez problémov v plnej kvalite!</p>
+            <h1>Zdieľaj si fotky v plnej kvalite</h1>
+            <p className="lead">Tiež máš problém, že ti Messenger zníži kvalitu fotiek? Tu ich môžeš zdielať bez problémov v plnej kvalite!</p>
             <div {...getRootProps()} style={{ border: '1px #28a745 dashed', padding: '40px', borderRadius: '20px', textAlign: 'center', marginTop: 50 }}>
               <input {...getInputProps()} />
               {
@@ -109,14 +109,14 @@ const Home: React.FC = () => {
           <Col lg="6" md="6" sm="6" xs="12">
             <p style={{ marginBottom: '0.2em' }}>Zadarmo ako neprihlásený užívateľ:</p>
             <FeaturesList>
-              <li>môžeš zdielať maximálne 10 fotiek naraz</li>
+              <li>môžeš zdieľať maximálne 10 fotiek naraz</li>
               <li>fotky budú po 24h automaticky zmazané</li>
             </FeaturesList>
           </Col>
           <Col lg="6" md="6" sm="6" xs="12">
             <p style={{ marginBottom: '0.2em' }}>Zadarmo ako prihlásený užívateľ:</p>
             <FeaturesList>
-              <li>môžeš zdielať maximálne 50 fotiek naraz</li>
+              <li>môžeš zdieľať maximálne 50 fotiek naraz</li>
               <li>fotky budú po 24h automaticky zmazané</li>
             </FeaturesList>
             <p style={{ marginBottom: '0.2em' }}>Čoskoro:</p>
