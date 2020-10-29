@@ -61,7 +61,7 @@ const Home: React.FC = () => {
   }
 
   return (
-    <SEO title="" description="">
+    <SEO title="" description="Tiež máš problém, že ti Messanger zníži kvalitu fotiek? Tu ich môžeš zdielať bez problémov v plnej kvalite!">
       <Container>
         <Row>
           <Col>
@@ -71,8 +71,8 @@ const Home: React.FC = () => {
               <input {...getInputProps()} />
               {
                 isDragActive ?
-                  <p>Drop the files here ...</p> :
-                  <p style={{ marginBottom: 0 }}>Drag 'n' drop some files here, or click to select files</p>
+                  <p>Presuň sem fotky...</p> :
+                  <p style={{ marginBottom: 0 }}>Presuň sem fotky alebo ich vyber kliknutím</p>
               }
               <div style={{ marginTop: 20 }}>
                 <Button variant="success">Nahrať fotky</Button>
