@@ -1,13 +1,14 @@
 import express from 'express';
-import config from '../config';
 import PhotoRepository from '../repositories/KnexPhotoRepository';
+import S3Storage from '../storage/S3Storage';
 
 const router = express.Router();
 
-router.get('/:id', async (req: any, res) => {
+router.get('/:id', async (req: express.Request, res: express.Response) => {
   const photoRepository = new PhotoRepository();
 
   const photos = await photoRepository.find(req.params.id);
+  const storage = new S3Storage();
 
   if (typeof photos === 'undefined' || photos.length === 0) {
     res.status(404).json({
@@ -19,10 +20,10 @@ router.get('/:id', async (req: any, res) => {
 
   const photosWithLocation = photos.map((photo) => ({
     ...photo,
-    location: `${config.storage.url}/${photo.path}`,
+    location: storage.getUrl(photo.path),
     thumbnail: photo.thumbnail !== null ?  {
       ...photo.thumbnail,
-      location: `${config.storage.url}/${photo.thumbnail.path}`,
+      location: storage.getUrl(photo.thumbnail.path),
     } : null,
   }));
 

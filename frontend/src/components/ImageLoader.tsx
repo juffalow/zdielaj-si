@@ -8,7 +8,7 @@ interface ImageLoaderProps {
   [x:string]: any;
 }
 
-const ImageLoader = ({ src, alt, alternativeImage, ...rest }: ImageLoaderProps) => {
+const ImageLoader: React.FC<ImageLoaderProps> = ({ src, alt, alternativeImage, ...rest }: ImageLoaderProps) => {
   const [ isLoading, setIsLoading ] = useState(true);
 
   useEffect(() => {

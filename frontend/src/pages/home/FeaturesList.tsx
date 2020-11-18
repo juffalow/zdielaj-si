@@ -1,7 +1,7 @@
 import React from 'react';
 import './FeaturesList.css';
 
-const FeaturesList = ({ children }: any) => (
+const FeaturesList: React.FC = ({ children }) => (
   <ul className="features-list">
     {children}
   </ul>

@@ -3,39 +3,34 @@ import Container from 'react-bootstrap/Container';
 import { useDropzone } from 'react-dropzone';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
-import Thumbnails from './home/Thumbnails';
+import Thumbnail from './home/Thumbnail';
+import AddPhotoCard from './home/AddPhotoCard';
 import FeaturesList from './home/FeaturesList';
 import SEO from '../components/SEO';
-import config from '../config';
+import ShareableLink from './home/ShareableLink';
+import { uploadPhotos, uploadPhoto } from '../api/services';
 
 const Home: React.FC = () => {
-  const [ files, setFiles ] = useState([]);
+  const [ files, setFiles ] = useState([] as Array<any>);
   const [ albumId, setAlbumId ] = useState('');
+  const [ hasError, setHasError ] = useState(false);
 
-  const onDrop = useCallback(files => {
-    setFiles(files.map((file: any) => {
+  const onDrop = useCallback(acceptedFiles => {
+    setFiles(acceptedFiles.map((file: any) => {
       return { ...file, preview: URL.createObjectURL(file) };
     }));
 
-    const formData = new FormData();
-
-    files.forEach((file: any) => {
-      formData.append(`images`, file);
-    });
-
-    fetch(`${config.url}/upload`, {
-      method: 'POST',
-      body: formData,
-    })
-    .then(res => res.json())
-    .then(res => {
-      setAlbumId(res.data.album.id);
-    });
+    uploadPhotos(acceptedFiles).then(album => setAlbumId(album.id));
   }, []);
+
+  const onSingleDrop = useCallback(acceptedFiles => {
+    setFiles([ ...files, { ...acceptedFiles[0], preview: URL.createObjectURL(acceptedFiles[0]) }]);
+
+    uploadPhoto(albumId, acceptedFiles[0])
+      .then(album => setAlbumId(album.id))
+      .catch(() => setHasError(true));
+  }, [ files, albumId ]);
 
   const {
     getRootProps,
@@ -43,22 +38,15 @@ const Home: React.FC = () => {
     isDragActive,
   } = useDropzone({ onDrop, accept: 'image/*', maxFiles: 10 });
 
+  const {
+    getRootProps: getSingleRootProps,
+    getInputProps: getSingleInputProps,
+  } = useDropzone({ onDrop: onSingleDrop, accept: 'image/*', maxFiles: 1 });
+
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks
     files.forEach((file: any) => URL.revokeObjectURL(file.preview));
   }, [files]);
-
-  const onCopyClick = () => {
-    const el = document.createElement('textarea');
-    el.value = `${window.location.protocol}//${window.location.host}/album/${albumId}`;
-    el.setAttribute('readonly', '');
-    el.style.position = 'absolute';
-    el.style.left = '-9999px';
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  }
 
   return (
     <SEO title="" description="Tiež máš problém, že ti Messenger zníži kvalitu fotiek? Tu ich môžeš zdielať bez problémov v plnej kvalite!">
@@ -86,21 +74,28 @@ const Home: React.FC = () => {
               <Row style={{ marginTop: 50 }}>
                 <Col>
                   <h2 style={{ display: 'inline-block' }}>Tvoje fotky</h2>
+                  <p>Svoje fotky môžeš teraz zdieľať pomocou nižšie uvedenej url adresy, alebo doplniť ďaľšie fotky kliknutím na tlačítko plus (+).</p>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <InputGroup>
-                    { albumId.length === 0 ? <Spinner animation="border" size="sm" style={{ position: 'absolute', zIndex: 9999, left: 10, top: 10 }} /> : null }
-                    <FormControl type="text" value={albumId.length === 0 ? '': `${window.location.protocol}//${window.location.host}/album/${albumId}`} readOnly />
-                    <InputGroup.Append>
-                      <Button variant="outline-secondary" onClick={onCopyClick}>Kopírovať</Button>
-                    </InputGroup.Append>
-                  </InputGroup>
+                  <ShareableLink albumId={albumId} />
                 </Col>
               </Row>
               <Row style={{ marginTop: 30 }}>
-                <Thumbnails files={files} />
+                {
+                  files.map((file: any, index: number) => (
+                    <Col lg={2} md={2} sm={3} xs={files.length === 1 ? true : 6} key={`${index}-${file.path}`}>
+                      <Thumbnail file={file} />
+                    </Col>
+                  ))
+                }
+                <Col lg={2} md={2} sm={3} xs={files.length === 1 ? true : 6}>
+                  <div {...getSingleRootProps()} style={{ border: '1px #28a745 dashed', borderRadius: '20px', textAlign: 'center' }}>
+                    <input {...getSingleInputProps()} />
+                    <AddPhotoCard />
+                  </div>
+                </Col>
               </Row>
             </>
           ) : null
@@ -118,6 +113,7 @@ const Home: React.FC = () => {
             <FeaturesList>
               <li>môžeš zdieľať maximálne 50 fotiek naraz</li>
               <li>fotky budú po 24h automaticky zmazané</li>
+              <li>môžeš vidieť zoznam svojich pridaných fotiek</li>
             </FeaturesList>
             <p style={{ marginBottom: '0.2em' }}>Čoskoro:</p>
             <ul>

@@ -2,7 +2,7 @@ import React from 'react';
 import ImageLoader from '../../components/ImageLoader';
 import './Thumbnail.css';
 
-const Thumbnail = ({ photo }: any) => {
+const Thumbnail: React.FC<any> = ({ photo }: any) => {
   const onClick = () => {
     const element = document.createElement('a');
     element.href = photo.location;

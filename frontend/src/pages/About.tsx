@@ -6,12 +6,12 @@ import SEO from '../components/SEO';
 import lake from './about/jazero.jpg';
 
 const About: React.FC = () => (
-  <SEO title="O aplikacii" description="">
+  <SEO title="O aplikácii" description="">
     <Container>
       <Row>
         <Col>
-          <h1>O aplikacii</h1>
-          <p className="lead">Bola streda, 21. október a my sme sa ako každú stredu boli otužovať ráno pred prácou v jazere. Hanka, náša hlavá fotografka, spravila pár fotiek ešte kým sme boli vo vode aby nám kamaráti verili.</p>
+          <h1>O aplikácii</h1>
+          <p className="lead">Bola streda, 21. október a my sme sa ako každú stredu boli otužovať ráno pred prácou v jazere. Hanka, náša hlavná fotografka, spravila pár fotiek ešte kým sme boli vo vode aby nám kamaráti verili.</p>
           <div className="text-center" style={{ margin: '2em 0' }}>
             <img src={lake} width="400" style={{ maxWidth: '100%' }} />
           </div>

@@ -28,6 +28,17 @@ class KnexPhotoRepository implements PhotoRepository {
     });
   }
 
+  public async count(albumId: string): Promise<number> {
+    return new Promise((resolve, reject) => {
+      database.count({ count: '*' })
+        .from('photo')
+        .where('albumId', albumId)
+        .first()
+        .then((result: any) => resolve(result.count))
+        .catch(err => reject(err));
+    });
+  }
+
   public async create(albumId: string, path: string, size: number): Promise<Photo> {
     return new Promise((resolve, reject) => {
       const id = crypto.randomBytes(8).toString('hex');
@@ -57,7 +68,7 @@ class KnexPhotoRepository implements PhotoRepository {
         size,
       })
       .into('thumbnail')
-      .then((ids: any[]) => {
+      .then(() => {
         resolve({ id, albumId, path, size });
       }).catch(err => {
         console.error(err);

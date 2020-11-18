@@ -3,10 +3,14 @@ export default {
   allowedOrigins: [
     'http://localhost:3000',
   ],
+  jwt: {
+    secret: process.env.JWT_SECRET || '',
+  },
   storage: {
     url: process.env.STORAGE_URL || '',
+    originalUrl: process.env.STORAGE_ORIGINAL_URL || '',
     key: process.env.STORAGE_KEY || '',
-    endpoint: process.env.STORAGE_ENDPOING || '',
+    endpoint: process.env.STORAGE_ENDPOINT || '',
     secret: process.env.STORAGE_SECRET || '',
     bucket: process.env.STORAGE_BUCKET || '',
   },

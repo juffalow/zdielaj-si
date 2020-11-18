@@ -14,15 +14,16 @@ class KnexAlbumRepository implements AlbumRepository {
     });
   }
 
-  public async create(): Promise<Album> {
+  public async create(userId: number = null): Promise<Album> {
     return new Promise((resolve, reject) => {
       const id = crypto.randomBytes(8).toString('hex');
       database.insert({
         id,
+        userId,
       })
       .into('album')
       .then(() => {
-        resolve({ id });
+        resolve({ id, userId });
       }).catch(err => {
         console.error(err);
         return this.create();
