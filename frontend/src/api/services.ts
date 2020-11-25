@@ -9,7 +9,7 @@ export async function login(email: string, password: string): Promise<any> {
   return post(`${config.url}/user/login`, { email, password });
 }
 
-export async function uploadPhotos(files: FileList): Promise<Album> {
+export async function uploadPhotos(files: FileList | Array<File>): Promise<Album> {
   const formData = new FormData();
   Array.from(files).forEach((file: File) => {
     formData.append(`images`, file);

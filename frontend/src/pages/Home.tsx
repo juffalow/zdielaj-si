@@ -16,12 +16,19 @@ const Home: React.FC = () => {
   const [ albumId, setAlbumId ] = useState('');
   const [ hasError, setHasError ] = useState(false);
 
-  const onDrop = useCallback(acceptedFiles => {
+  const onDrop = useCallback(async (acceptedFiles) => {
     setFiles(acceptedFiles.map((file: any) => {
       return { ...file, preview: URL.createObjectURL(file) };
     }));
 
-    uploadPhotos(acceptedFiles).then(album => setAlbumId(album.id));
+    const files = [ acceptedFiles.shift() ];
+    const album = await uploadPhotos(files);
+
+    setAlbumId(album.id);
+
+    for (const file of acceptedFiles) {
+      await uploadPhoto(album.id, file);
+    }
   }, []);
 
   const onSingleDrop = useCallback(acceptedFiles => {
@@ -36,12 +43,12 @@ const Home: React.FC = () => {
     getRootProps,
     getInputProps,
     isDragActive,
-  } = useDropzone({ onDrop, accept: 'image/*', maxFiles: 10 });
+  } = useDropzone({ onDrop, accept: 'image/*', maxFiles: 50 });
 
   const {
     getRootProps: getSingleRootProps,
     getInputProps: getSingleInputProps,
-  } = useDropzone({ onDrop: onSingleDrop, accept: 'image/*', maxFiles: 1 });
+  } = useDropzone({ onDrop: onSingleDrop, accept: 'image/*', maxFiles: 50 });
 
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks
