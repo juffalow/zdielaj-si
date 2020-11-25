@@ -19,7 +19,7 @@ async function handleErrors(response: any): Promise<any> {
   if (!response.ok) {
     if (response.headers.get('Content-Type').startsWith('application/json')) {
       const json = await response.json();
-      if ('error' in json) {
+      if ('error' in json && json.error !== null) {
         throw new BaseError(json.error);
       }
     }
