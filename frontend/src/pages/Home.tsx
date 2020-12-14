@@ -10,6 +10,7 @@ import FeaturesList from './home/FeaturesList';
 import SEO from '../components/SEO';
 import ShareableLink from './home/ShareableLink';
 import { uploadPhotos, uploadPhoto } from '../api/services';
+import GOOGLE_PLAY_LOGO from '../img/google_play_logo.png';
 
 const Home: React.FC = () => {
   const [ files, setFiles ] = useState([] as Array<any>);
@@ -113,25 +114,31 @@ const Home: React.FC = () => {
           ) : null
         }
         <Row style={{ marginTop: 50 }}>
-          <Col lg="6" md="6" sm="6" xs="12">
-            <p style={{ marginBottom: '0.2em' }}>Zadarmo ako neprihlásený užívateľ:</p>
+          <Col lg="4" md="4" sm="4" xs="12">
+            <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Zadarmo ako neprihlásený užívateľ:</p>
             <FeaturesList>
               <li>môžeš zdieľať maximálne 10 fotiek naraz</li>
               <li>fotky budú po 24h automaticky zmazané</li>
             </FeaturesList>
           </Col>
-          <Col lg="6" md="6" sm="6" xs="12">
-            <p style={{ marginBottom: '0.2em' }}>Zadarmo ako prihlásený užívateľ:</p>
+          <Col lg="4" md="4" sm="4" xs="12">
+            <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Zadarmo ako prihlásený užívateľ:</p>
             <FeaturesList>
               <li>môžeš zdieľať maximálne 50 fotiek naraz</li>
               <li>fotky budú po 24h automaticky zmazané</li>
               <li>môžeš vidieť zoznam svojich pridaných fotiek</li>
             </FeaturesList>
-            <p style={{ marginBottom: '0.2em' }}>Čoskoro:</p>
+            <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Čoskoro:</p>
             <ul>
               <li>nové formáty (video, text)</li>
               <li>zaheslovať prístup</li>
             </ul>
+          </Col>
+          <Col lg="4" md="4" sm="4" xs="12">
+            <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Stiahni si mobilnú aplikáciu:</p>
+            <a href="https://play.google.com/store/apps/details?id=com.zdielajsimobileapp" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none' }}>
+              <img style={{ width: 150 }} src={GOOGLE_PLAY_LOGO} alt='Google play' className="img-responsive" />
+            </a>
           </Col>
         </Row>
       </Container>
