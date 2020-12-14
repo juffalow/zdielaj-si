@@ -11,6 +11,7 @@ import SEO from '../components/SEO';
 import ShareableLink from './home/ShareableLink';
 import { uploadPhotos, uploadPhoto } from '../api/services';
 import GOOGLE_PLAY_LOGO from '../img/google_play_logo.png';
+import APP_STORE_LOGO from '../img/app_store_logo.png';
 
 const Home: React.FC = () => {
   const [ files, setFiles ] = useState([] as Array<any>);
@@ -136,9 +137,13 @@ const Home: React.FC = () => {
           </Col>
           <Col lg="4" md="4" sm="4" xs="12">
             <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Stiahni si mobilnú aplikáciu:</p>
-            <a href="https://play.google.com/store/apps/details?id=com.zdielajsimobileapp" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none' }}>
-              <img style={{ width: 150 }} src={GOOGLE_PLAY_LOGO} alt='Google play' className="img-responsive" />
+            <a href="https://play.google.com/store/apps/details?id=com.zdielajsimobileapp" target="_blank" rel="noopener noreferrer">
+              <img style={{ width: 135 }} src={GOOGLE_PLAY_LOGO} alt='Google play' className="img-responsive" />
             </a>
+            <p style={{ marginBottom: '0.2em', marginTop: '0.6em', fontWeight: 'bold' }}>Čoskoro:</p>
+            <span style={{ opacity: 0.5, cursor: 'not-allowed' }}>
+              <img style={{ width: 135 }} src={APP_STORE_LOGO} alt='Google play' className="img-responsive" />
+            </span>
           </Col>
         </Row>
       </Container>
