@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   const [ hasError, setHasError ] = useState(false);
 
   const onDrop = useCallback(async (acceptedFiles) => {
-    setFiles(acceptedFiles.map((file: any) => {
+    setFiles(acceptedFiles.map((file: File) => {
       return { ...file, preview: URL.createObjectURL(file) };
     }));
 
@@ -31,12 +31,17 @@ const Home: React.FC = () => {
     }
   }, []);
 
-  const onSingleDrop = useCallback(acceptedFiles => {
-    setFiles([ ...files, { ...acceptedFiles[0], preview: URL.createObjectURL(acceptedFiles[0]) }]);
+  const onSingleDrop = useCallback(async (acceptedFiles) => {
+    setFiles([
+      ...files,
+      acceptedFiles.map((file: File) => {
+        return { ...file, preview: URL.createObjectURL(file) };
+      }),
+    ]);
 
-    uploadPhoto(albumId, acceptedFiles[0])
-      .then(album => setAlbumId(album.id))
-      .catch(() => setHasError(true));
+    for (const file of acceptedFiles) {
+      await uploadPhoto(albumId, file);
+    }
   }, [ files, albumId ]);
 
   const {
