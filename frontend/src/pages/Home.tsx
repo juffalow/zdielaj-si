@@ -137,13 +137,12 @@ const Home: React.FC = () => {
           </Col>
           <Col lg="4" md="4" sm="4" xs="12">
             <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Stiahni si mobilnú aplikáciu:</p>
-            <a href="https://play.google.com/store/apps/details?id=com.zdielajsimobileapp" target="_blank" rel="noopener noreferrer">
-              <img style={{ width: 135 }} src={GOOGLE_PLAY_LOGO} alt='Google play' className="img-responsive" />
+            <a href="https://play.google.com/store/apps/details?id=si.zdielaj" target="_blank" rel="noopener noreferrer">
+              <img style={{ width: 135 }} src={GOOGLE_PLAY_LOGO} alt="Google play" className="img-responsive" />
             </a>
-            <p style={{ marginBottom: '0.2em', marginTop: '0.6em', fontWeight: 'bold' }}>Čoskoro:</p>
-            <span style={{ opacity: 0.5, cursor: 'not-allowed' }}>
-              <img style={{ width: 135 }} src={APP_STORE_LOGO} alt='Google play' className="img-responsive" />
-            </span>
+            <a href="https://apps.apple.com/sk/app/zdie%C4%BEaj-si-cloud/id1554659147?l=sk" target="_blank" rel="noopener noreferrer">
+              <img style={{ width: 135 }} src={APP_STORE_LOGO} alt="App store" className="img-responsive" />
+            </a>
           </Col>
         </Row>
       </Container>
