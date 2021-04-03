@@ -8,6 +8,7 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import SEO from '../components/SEO';
 import config from '../config';
 import DownloadIcon from './album/download-icon-new-white.png';
+import './album/album.css';
 
 const Album: React.FC = (props: any) => {
   const [ files, setFiles ] = useState([] as Array<any>);
@@ -67,8 +68,7 @@ const Album: React.FC = (props: any) => {
                   return (
                     <a
                       href=''
-                      className='image-gallery-custom-action'
-                      style={{ position: 'absolute', display: 'inline-block', width: 36, height: 36, filter: 'drop-shadow(0 2px 2px #1a1a1a)', right: 0, margin: 20, zIndex: 9999 }}
+                      className='image-gallery-download-button'
                       onClick={onImageClick}
                     >
                       <img src={DownloadIcon} style={{ maxWidth: '100%' }} />
