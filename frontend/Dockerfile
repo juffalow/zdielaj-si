@@ -3,6 +3,7 @@ FROM node:14.15.1-alpine as build
 RUN mkdir /home/node/zdielaj-si-frontend/ && chown -R node:node /home/node/zdielaj-si-frontend
 WORKDIR /home/node/zdielaj-si-frontend
 COPY --chown=node:node . .
+RUN rm tsconfig.json
 RUN yarn install --frozen-lockfile && yarn build
 
 FROM nginx:stable-alpine
