@@ -24,4 +24,7 @@ export default {
     },
     runMigrations: true,
   },
+  logger: {
+    level: process.env.LOGGER_LEVEL || 'info',
+  },
 }
