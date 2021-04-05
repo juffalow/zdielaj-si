@@ -4,6 +4,7 @@ import routes from './routes';
 import database from './database';
 import cors from './middlewares/cors';
 import auth from './middlewares/auth';
+import logger from './logger';
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors);
 app.use(auth);
 app.use((err, req, res, next) => {
-  console.error(err);
+  logger.error('Something went wrong!', { error: { message: err.message, stack: err.stack } });
   return res.status(500).json({
     error: {
       message: 'Something went wrong!',
@@ -31,15 +32,14 @@ async function start(): Promise<void> {
     if (config.database.runMigrations) {
       await database.migrate.latest();
       const currentVersion = await database.migrate.currentVersion();
-      console.log(`Database migrated to version ${currentVersion}!`);
+      logger.info(`Database migrated to version ${currentVersion}!`);
     }
 
     app.listen(config.port, () => {
-      console.log(`Server started at http://localhost:${ config.port }`);
+      logger.info(`Server started at http://localhost:${ config.port }`);
     });
-  } catch(error) {
-    console.error({ message: 'Unable to start server!', error });
-    console.log(error);
+  } catch(err) {
+    logger.error('Unable to start server!', { error: { message: err.message, stack: err.stack } })
     process.exit(1);
   }
 }

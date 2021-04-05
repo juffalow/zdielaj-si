@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import AlbumRepository from './AlbumRepository';
 import database from '../database';
+import logger from '../logger';
 
 class KnexAlbumRepository implements AlbumRepository {
   public async get(id: string): Promise<Album> {
@@ -25,7 +26,7 @@ class KnexAlbumRepository implements AlbumRepository {
       .then(() => {
         resolve({ id, userId });
       }).catch(err => {
-        console.error(err);
+        logger.error('Cannot create album!', { error: { message: err.message, stack: err.stack } });
         return this.create();
       });
     });

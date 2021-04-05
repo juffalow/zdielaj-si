@@ -2,6 +2,7 @@ import { Readable } from 'stream';
 import aws from 'aws-sdk';
 import Storage from './Storage';
 import config from '../config';
+import logger from '../logger';
 
 const s3 = new aws.S3({
   accessKeyId: config.storage.key,
@@ -21,6 +22,7 @@ export default class S3Storage implements Storage {
       };
       s3.upload(params, (err) => {
         if (err) {
+          logger.error('Unable to store file!', { error: { message: err.message, stack: err.stack } });
           reject(err);
         } else {
           resolve();

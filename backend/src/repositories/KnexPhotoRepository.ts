@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import PhotoRepository from './PhotoRepository';
 import database from '../database';
+import logger from '../logger';
 
 class KnexPhotoRepository implements PhotoRepository {
   public async find(albumId: string): Promise<Array<Photo>> {
@@ -71,7 +72,7 @@ class KnexPhotoRepository implements PhotoRepository {
       .then(() => {
         resolve({ id, albumId, path, size });
       }).catch(err => {
-        console.error(err);
+        logger.error('Cannot create thumbnail!', { error: { message: err.message, stack: err.stack } });
         return this.createThumbnail(albumId, photoId, path, size);
       });
     });
