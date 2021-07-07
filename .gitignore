@@ -4,4 +4,5 @@
 /backend/src/config.ts
 /frontend/build
 /backend/dist
+/frontend/.env
 .DS_Store
