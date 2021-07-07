@@ -1,25 +1,51 @@
 # Zdielaj si
 
-Sluzba na zdielanie obrazkov v plnej kvalite.
+Sluzba na zdielanie fotiek v plnej kvalite.
 
-## Build frontend
+## Co potrebuje
 
-```shell
-docker build -t juffalow/zdielaj-si-frontend .
+* S3 bucket (alebo cokolvek co implementuje ich API, napr. DigitalOcean Spaces)
+* databazu, kde sa budu ukladat data o albumoch a fotkach
 
-docker tag juffalow/zdielaj-si-frontend registry.digitalocean.com/juffalow/zdielaj-si-frontend:1.2.0
+## Ako spustit projekt
 
-docker push registry.digitalocean.com/juffalow/zdielaj-si-frontend:1.2.0
+Projekt sa sklada z dvoch separatnych projektov - backend a frontend. Pri oboch treba vytvorit subor `config.ts`, kde su napr. pristupy do databazy, S3 bucket pristupy alebo URL adresa na API a nainstalovat npm balicky.
+
+Ukazka z `backend/config.example.ts`:
+
+```ts
+  database: {
+    connection: {
+      database : process.env.DATABASE_NAME || '',
+      host : process.env.DATABASE_HOST || '',
+      password : process.env.DATABASE_PASSWORD || '',
+      user : process.env.DATABASE_USER || '',
+      port : process.env.DATABASE_PORT || 3306,
+    },
+    runMigrations: true,
+  },
 ```
 
-## Build backend
+Instalacia npm balickov:
 
 ```shell
-docker build -t juffalow/zdielaj-si-backend .
+# backend
+cd ./backend
+yarn install
 
-docker tag juffalow/zdielaj-si-backend registry.digitalocean.com/juffalow/zdielaj-si-backend:1.2.0
+# frontend
+cd ./frontend
+yarn install
+```
 
-docker push registry.digitalocean.com/juffalow/zdielaj-si-backend:1.2.0
+V oboch pripadoch sa potom spustaju pomocou prikazu `start`:
+
+```shell
+# backend
+yarn start
+
+# frontend
+yarn start
 ```
 
 ## License
