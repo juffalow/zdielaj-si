@@ -10,7 +10,7 @@ import S3Storage from '../storage/S3Storage';
 import { generateToken } from '../utils/functions';
 
 const fileFilter = (req: express.Request, file: any, cb: (err: unknown, isAccepted: boolean) => void) => {
-  if (file.mimetype.startsWith('image/')) {
+  if (file.mimetype.startsWith('image/') || file.mimetype.startsWith('video/')) {
     cb(null, true);
   } else {
     cb(null, false);
@@ -18,6 +18,16 @@ const fileFilter = (req: express.Request, file: any, cb: (err: unknown, isAccept
 };
 
 const processFile = async (storage: S3Storage, directory: string, file: any): Promise<{ originalPath: string, thumbnailPath: string }> => {
+  if (file.mimetype.startsWith('image/')) {
+    return processImageFile(storage, directory, file);
+  }
+
+  if (file.mimetype.startsWith('video/')) {
+    return processVideoFile(storage, directory, file);
+  }
+};
+
+const processImageFile = async (storage: S3Storage, directory: string, file: any): Promise<{ originalPath: string, thumbnailPath: string }> => {
   const hash = crypto.createHash('sha1').update(`${file.originalname}${Date.now()}`).digest('hex');
   const extname = path.extname(file.originalname);
   const original = bufferToStream(file.buffer);
@@ -42,6 +52,22 @@ const processFile = async (storage: S3Storage, directory: string, file: any): Pr
   return { originalPath, thumbnailPath };
 };
 
+const processVideoFile = async (storage: S3Storage, directory: string, file: any): Promise<{ originalPath: string, thumbnailPath: string }> => {
+  const hash = crypto.createHash('sha1').update(`${file.originalname}${Date.now()}`).digest('hex');
+  const extname = path.extname(file.originalname);
+  const original = bufferToStream(file.buffer);
+  let originalPath = null;
+
+  try {
+    await storage.store(original, `${directory}/${hash}${extname}`);
+    originalPath = `${directory}/${hash}${extname}`;
+  } catch (err) {
+    console.error(err);
+  }
+
+  return { originalPath, thumbnailPath: '' };
+};
+
 const upload = multer({ fileFilter });
 
 const router = express.Router();
@@ -57,7 +83,7 @@ router.post('/upload', upload.array('images', 10), async (req: express.Request, 
 
   for (const file of (req as any).files) {
     const processedFile = await processFile(storage, directory, file);
-    const photo = await photoRepository.create(album.id, processedFile.originalPath, (file as any).size);
+    const photo = await photoRepository.create(album.id, file.mimetype, processedFile.originalPath, (file as any).size);
 
     if (processedFile.thumbnailPath !== null) {
       await photoRepository.createThumbnail(album.id, photo.id, processedFile.thumbnailPath, 0);
@@ -134,7 +160,7 @@ router.post('/upload/:id', upload.single('image'), async (req: express.Request, 
   }
 
   const processedFile = await processFile(storage, directory, (req as any).file);
-  const photo = await photoRepository.create(album.id, processedFile.originalPath, (req as any).file.size);
+  const photo = await photoRepository.create(album.id, (req as any).file.mimetype, processedFile.originalPath, (req as any).file.size);
 
   if (processedFile.thumbnailPath !== null) {
     await photoRepository.createThumbnail(album.id, photo.id, processedFile.thumbnailPath, 0);

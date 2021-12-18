@@ -23,7 +23,7 @@ router.get('/:id', async (req: express.Request, res: express.Response) => {
     location: storage.getUrl(photo.path),
     thumbnail: photo.thumbnail !== null ?  {
       ...photo.thumbnail,
-      location: storage.getUrl(photo.thumbnail.path),
+      location: photo.mimetype.startsWith('video/') ? null : storage.getUrl(photo.thumbnail.path),
     } : null,
   }));
 

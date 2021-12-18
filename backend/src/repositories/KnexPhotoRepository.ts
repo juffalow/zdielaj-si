@@ -6,7 +6,7 @@ import logger from '../logger';
 class KnexPhotoRepository implements PhotoRepository {
   public async find(albumId: string): Promise<Array<Photo>> {
     return new Promise((resolve, reject) => {
-      database.select(database.raw('photo.id AS id, photo.path AS path, photo.size AS size, thumbnail.id AS thumbnailId, thumbnail.path AS thumbnailPath, thumbnail.size AS thumbnailSize'))
+      database.select(database.raw('photo.id AS id, photo.mimetype as mimetype, photo.path AS path, photo.size AS size, thumbnail.id AS thumbnailId, thumbnail.path AS thumbnailPath, thumbnail.size AS thumbnailSize'))
         .from('photo')
         .leftJoin('thumbnail', 'photo.id', 'thumbnail.photoId')
         .where('albumId', albumId)
@@ -15,6 +15,7 @@ class KnexPhotoRepository implements PhotoRepository {
             return {
               id: photo.id,
               albumId,
+              mimetype: photo.mimetype,
               path: photo.path,
               size: photo.size,
               thumbnail: photo.thumbnailId !== null ? {
@@ -40,21 +41,22 @@ class KnexPhotoRepository implements PhotoRepository {
     });
   }
 
-  public async create(albumId: string, path: string, size: number): Promise<Photo> {
+  public async create(albumId: string, mimetype: string, path: string, size: number): Promise<Photo> {
     return new Promise((resolve, reject) => {
       const id = crypto.randomBytes(8).toString('hex');
       database.insert({
         id,
         albumId,
+        mimetype,
         path,
         size,
       })
       .into('photo')
       .then(() => {
-        resolve({ id, albumId, path, size });
+        resolve({ id, albumId, mimetype, path, size });
       }).catch(err => {
         console.error(err);
-        return this.create(albumId, path, size);
+        return this.create(albumId, mimetype, path, size);
       });
     });
   }
