@@ -8,6 +8,7 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import SEO from '../components/SEO';
 import config from '../config';
 import DownloadIcon from './album/download-icon-new-white.png';
+import VideoPlaceholder from './album/video-placeholder.png';
 import './album/album.css';
 
 const Album: React.FC = (props: any) => {
@@ -57,8 +58,8 @@ const Album: React.FC = (props: any) => {
               <Col>
                 <ImageGallery items={files.map((file) => {
                   return {
-                    original: file.location,
-                    thumbnail: file.thumbnail.location,
+                    original: file.mimetype.startsWith('video/') ? VideoPlaceholder : file.location,
+                    thumbnail: file.mimetype.startsWith('video/') ? VideoPlaceholder : file.thumbnail.location,
                   };
                 })}
                 ref={ref}

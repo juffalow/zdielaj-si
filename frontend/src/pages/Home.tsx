@@ -50,12 +50,12 @@ const Home: React.FC = () => {
     getRootProps,
     getInputProps,
     isDragActive,
-  } = useDropzone({ onDrop, accept: 'image/*', maxFiles: 50 });
+  } = useDropzone({ onDrop, accept: 'image/*, video/*', maxFiles: 50 });
 
   const {
     getRootProps: getSingleRootProps,
     getInputProps: getSingleInputProps,
-  } = useDropzone({ onDrop: onSingleDrop, accept: 'image/*', maxFiles: 50 });
+  } = useDropzone({ onDrop: onSingleDrop, accept: 'image/*, video/*', maxFiles: 50 });
 
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks
@@ -126,12 +126,13 @@ const Home: React.FC = () => {
             <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Zadarmo ako prihlásený užívateľ:</p>
             <FeaturesList>
               <li>môžeš zdieľať maximálne 50 fotiek naraz</li>
+              <li>môžeš zdieľať video</li>
               <li>fotky budú po 24h automaticky zmazané</li>
               <li>môžeš vidieť zoznam svojich pridaných fotiek</li>
             </FeaturesList>
             <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Čoskoro:</p>
             <ul>
-              <li>nové formáty (video, text)</li>
+              <li>nové formáty (text, ?)</li>
               <li>zaheslovať prístup</li>
             </ul>
           </Col>
