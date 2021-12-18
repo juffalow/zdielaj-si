@@ -8,12 +8,12 @@ export function up(knex: Knex): Promise<any> {
     user.string('password').notNullable();
     user.timestamp('createdAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
   })
-  .createTable('album', (album) => {
+  .alterTable('album', (album) => {
     album.integer('userId').unsigned().nullable().after('id').references('id').inTable('user').onDelete('cascade');
   })
-  .createTable('photo', (photo) => {
+  .alterTable('photo', (photo) => {
     photo.foreign('albumId').references('id').inTable('album').onDelete('cascade');
-  })
+  });
 }
 
 export function down(knex: Knex): Promise<any> {
