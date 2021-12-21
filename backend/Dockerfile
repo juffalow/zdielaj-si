@@ -1,4 +1,4 @@
-FROM node:16-alpine AS build
+FROM node:16-alpine3.12 AS build
 
 USER node
 RUN mkdir /home/node/zdielaj-si-backend/ && chown -R node:node /home/node/zdielaj-si-backend
@@ -7,7 +7,7 @@ WORKDIR /home/node/zdielaj-si-backend
 COPY --chown=node:node . .
 RUN yarn install --frozen-lockfile && yarn build
 
-FROM node:16-alpine
+FROM node:16-alpine3.12
 
 USER node
 EXPOSE 3010
