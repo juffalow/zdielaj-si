@@ -7,18 +7,19 @@ import About from './pages/About';
 import Album from './pages/Album';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import { setToken } from './api/token';
 import './App.css';
 
 const App: React.FC = () => {
   const [ isLogged, setIsLogged ] = useState<boolean>(localStorage.getItem('userToken') !== null);
 
-  const onLogin = (user: User) => {
-    localStorage.setItem('userToken', user.token);
+  const onLogin = (response: { id: string; expiresAt: string; token: string; }) => {
+    setToken(response);
     setIsLogged(true);
   }
 
   const onLogout = () => {
-    localStorage.removeItem('userToken');
+    setToken({ id: '', expiresAt: '', token: null });
     setIsLogged(false);
   }
 

@@ -1,11 +1,14 @@
 export default {
   port: 3010,
+  env: process.env.ENV || 'DEVELOPMENT',
+  domain: process.env.DOMAIN || 'localhost',
   allowedOrigins: [
     'http://localhost:3000',
     'https://zdielaj.si',
   ],
   jwt: {
     secret: process.env.JWT_SECRET || '',
+    ttl: 15 * 60,
   },
   storage: {
     url: process.env.STORAGE_URL || '',

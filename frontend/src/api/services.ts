@@ -1,4 +1,4 @@
-import { post, postMultipart } from './client';
+import { post, postMultipart, get } from './client';
 import config from '../config';
 
 export async function register(name: string, email: string, password: string): Promise<any> {
@@ -6,7 +6,7 @@ export async function register(name: string, email: string, password: string): P
 }
 
 export async function login(email: string, password: string): Promise<any> {
-  return post(`${config.url}/user/login`, { email, password });
+  return post(`${config.url}/user/login`, { email, password }, { credentials: 'include' });
 }
 
 export async function uploadPhotos(files: FileList | Array<File>): Promise<Album> {
@@ -32,4 +32,17 @@ export async function uploadPhoto(albumId: string, file: File): Promise<Album> {
     .then(res => {
       return res.data.album;
     });
+}
+
+interface RefreshTokenResponse {
+  error: unknown;
+  data: {
+    id: string;
+    expiresAt: string;
+    token: string;
+  };
+}
+
+export async function refreshToken(userId: string): Promise<RefreshTokenResponse> {
+  return get(`${config.url}/user/refreshToken/${userId}`, { credentials: 'include' });
 }

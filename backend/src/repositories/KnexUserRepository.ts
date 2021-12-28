@@ -15,12 +15,11 @@ class KnexUserRepository implements UserRepository {
   }
 
   public async create(name: string, email: string, password: string): Promise<User> {
-    const passwordHash: string = bcrypt.hashSync(password, 10);
     return new Promise((resolve, reject) => {
       database.insert({
         name,
         email,
-        password: passwordHash,
+        password: password,
       })
       .into('user')
       .then(() => {

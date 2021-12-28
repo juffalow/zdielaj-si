@@ -37,13 +37,13 @@ function handleSuccess(response: any) {
   }
 }
 
-export async function get(endpoint: string): Promise<any> {
-  return fetch(endpoint)
+export async function get(endpoint: string, options?: RequestInit): Promise<any> {
+  return fetch(endpoint, options)
     .then(handleErrors)
     .then(handleSuccess);
 }
 
-export async function post(endpoint: string, data: unknown): Promise<any> {
+export async function post(endpoint: string, data: unknown, options: RequestInit = {}): Promise<any> {
   const headers = new Headers();
   const userToken = localStorage.getItem('userToken');
   const albumToken = localStorage.getItem('albumToken');
@@ -57,9 +57,12 @@ export async function post(endpoint: string, data: unknown): Promise<any> {
   }
 
   return fetch(endpoint, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(data),
+    ...options,
+    ...{
+      method: 'POST',
+      headers,
+      body: JSON.stringify(data),
+    }
   })
     .then(handleErrors)
     .then(handleSuccess);
