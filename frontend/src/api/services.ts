@@ -1,4 +1,5 @@
 import { post, postMultipart, get } from './client';
+import { setAlbumToken } from './token';
 import config from '../config';
 
 export async function register(name: string, email: string, password: string): Promise<any> {
@@ -17,7 +18,7 @@ export async function uploadPhotos(files: FileList | Array<File>): Promise<Album
 
   return postMultipart(`${config.url}/upload`, formData)
     .then(res => {
-      localStorage.setItem('albumToken', res.data.user.token);
+      setAlbumToken(res.data.user.token);
 
       return res.data.album;
     });

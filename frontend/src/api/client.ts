@@ -1,3 +1,5 @@
+import { getUserToken, getAlbumToken } from './token';
+
 interface BaseErrorConstructor {
   message: string;
   code: number;
@@ -45,8 +47,8 @@ export async function get(endpoint: string, options?: RequestInit): Promise<any>
 
 export async function post(endpoint: string, data: unknown, options: RequestInit = {}): Promise<any> {
   const headers = new Headers();
-  const userToken = localStorage.getItem('userToken');
-  const albumToken = localStorage.getItem('albumToken');
+  const userToken = getUserToken();
+  const albumToken = getAlbumToken();
 
   headers.set('Content-Type', 'application/json');
 
@@ -70,8 +72,8 @@ export async function post(endpoint: string, data: unknown, options: RequestInit
 
 export async function postMultipart(endpoint: string, data: FormData): Promise<any> {
   const headers = new Headers();
-  const userToken = localStorage.getItem('userToken');
-  const albumToken = localStorage.getItem('albumToken');
+  const userToken = getUserToken();
+  const albumToken = getAlbumToken();
 
   if (userToken !== null) {
     headers.set('Authorization', userToken);
