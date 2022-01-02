@@ -43,7 +43,7 @@ router.post('/login', async (req: express.Request, res: express.Response) => {
 
   await refreshTokenRepository.create(user.id, refreshToken, 7 * 24 * 60 * 60);
 
-  res.cookie('refreshToken', refreshToken, {
+  res.cookie('refreshToken', `${user.id}.${refreshToken}`, {
     secure: config.env !== 'DEVELOPMENT',
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,

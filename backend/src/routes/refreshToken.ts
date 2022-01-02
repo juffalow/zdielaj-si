@@ -6,9 +6,22 @@ import { generateToken } from '../utils/functions';
 
 const router = express.Router();
 
-router.get('/refreshToken/:userId', async (req, res) => {
+router.get('/refreshToken', async (req, res) => {
+  if (!('refreshToken' in req.cookies) || req.cookies.refreshToken.indexOf('.') === -1) {
+    res.status(401);
+    res.json({
+      error: {
+        code: 1,
+        message: 'Invalid refresh token!',
+      },
+      data: null,
+    });
+    return;
+  }
+
   const refreshTokenRepository = new RefreshTokenRepository();
-  const refreshToken = await refreshTokenRepository.get(req.params.userId as unknown as number, req.cookies.refreshToken);
+  const [ userId, userRefreshToken ] = req.cookies.refreshToken.split('.');
+  const refreshToken = await refreshTokenRepository.get(userId, userRefreshToken);
 
   if(typeof refreshToken === 'undefined') {
     res.status(401);

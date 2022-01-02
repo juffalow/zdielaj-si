@@ -15,8 +15,12 @@ const setUserToken = (response: { id: string, expiresAt: string, token: string |
   }
 
   setTimeout(async () => {
-    refreshToken(response.id).then(res => setUserToken(res.data)).catch(() => setUserToken({ id: '', expiresAt: '', token: null }));
+    refreshToken().then(res => setUserToken(res.data)).catch(() => setUserToken({ id: '', expiresAt: '', token: null }));
   }, 10 * 60 * 1000);
+}
+
+const refreshUserToken = async (): Promise<void> => {
+  await refreshToken().then(res => setUserToken(res.data)).catch(() => setUserToken({ id: '', expiresAt: '', token: null }));
 }
 
 window.addEventListener('storage', (event) => {
@@ -36,6 +40,7 @@ const setAlbumToken = (token: string | null): void => {
 export {
   getUserToken,
   setUserToken,
+  refreshUserToken,
   getAlbumToken,
   setAlbumToken,
 }

@@ -44,6 +44,6 @@ interface RefreshTokenResponse {
   };
 }
 
-export async function refreshToken(userId: string): Promise<RefreshTokenResponse> {
-  return get(`${config.url}/user/refreshToken/${userId}`, { credentials: 'include' });
+export async function refreshToken(): Promise<RefreshTokenResponse> {
+  return get(`${config.url}/user/refreshToken/`, { credentials: 'include' });
 }

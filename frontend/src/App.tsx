@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
@@ -7,11 +7,11 @@ import About from './pages/About';
 import Album from './pages/Album';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import { setUserToken } from './api/token';
+import { setUserToken, refreshUserToken, getUserToken } from './api/token';
 import './App.css';
 
 const App: React.FC = () => {
-  const [ isLogged, setIsLogged ] = useState<boolean>(localStorage.getItem('userToken') !== null);
+  const [ isLogged, setIsLogged ] = useState<boolean>(false);
 
   const onLogin = (response: { id: string; expiresAt: string; token: string; }) => {
     setUserToken(response);
@@ -22,6 +22,14 @@ const App: React.FC = () => {
     setUserToken({ id: '', expiresAt: '', token: null });
     setIsLogged(false);
   }
+
+  useEffect(() => {
+    async function loadUserToken() {
+      await refreshUserToken();
+      setIsLogged(getUserToken() !== null);
+    }
+    loadUserToken();
+  }, [])
 
   return (
     <Router>
