@@ -41,7 +41,7 @@ router.get('/refreshToken', async (req, res) => {
   await refreshTokenRepository.delete(refreshToken.userId, refreshToken.token);
   await refreshTokenRepository.create(refreshToken.userId, newRefreshToken, 7 * 24 * 60 * 60);
 
-  res.cookie('refreshToken', newRefreshToken, {
+  res.cookie('refreshToken', `${refreshToken.userId}.${newRefreshToken}`, {
     secure: config.env !== 'DEVELOPMENT',
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
