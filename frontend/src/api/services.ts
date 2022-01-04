@@ -10,6 +10,10 @@ export async function login(email: string, password: string): Promise<any> {
   return post(`${config.url}/user/login`, { email, password }, { credentials: 'include' });
 }
 
+export async function logout(): Promise<RefreshTokenResponse> {
+  return get(`${config.url}/user/logout`, { credentials: 'include' });
+}
+
 export async function uploadPhotos(files: FileList | Array<File>): Promise<Album> {
   const formData = new FormData();
   Array.from(files).forEach((file: File) => {

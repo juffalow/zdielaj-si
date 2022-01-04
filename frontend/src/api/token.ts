@@ -1,4 +1,4 @@
-import { refreshToken } from './services';
+import { refreshToken, logout } from './services';
 
 let userToken: string | null = null;
 let albumToken: string | null = null;
@@ -11,6 +11,7 @@ const setUserToken = (response: { id: string, expiresAt: string, token: string |
   userToken = response.token;
 
   if (response.token === null) {
+    logout();
     return;
   }
 
