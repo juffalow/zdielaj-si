@@ -47,3 +47,7 @@ interface RefreshTokenResponse {
 export async function refreshToken(): Promise<RefreshTokenResponse> {
   return get(`${config.url}/user/refreshToken/`, { credentials: 'include' });
 }
+
+export async function validateEmail(id: number, token: string): Promise<RefreshTokenResponse> {
+  return get(`${config.url}/user/emailValidation?id=${id}&token=${token}`);
+}

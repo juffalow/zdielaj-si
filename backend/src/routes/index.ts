@@ -4,6 +4,7 @@ import album from './album';
 import register from './register';
 import login from './login';
 import refreshToken from './refreshToken';
+import emailValidation from './emailValidation';
 
 const router = express.Router();
 
@@ -12,5 +13,6 @@ router.use('/album', album);
 router.use('/user', register);
 router.use('/user', login);
 router.use('/user', refreshToken);
+router.use('/user', emailValidation);
 
 export default router;

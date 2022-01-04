@@ -5,8 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { login } from '../api/services';
 
@@ -15,12 +14,12 @@ interface Props {
 }
 
 const Login: React.FC<Props> = ({ onSuccess }: Props) => {
+  const navigate = useNavigate();
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
   const [ email, setEmail ] = useState('');
   const [ password, setPassword  ] = useState('');
-  const [ shouldRedirect, setShouldRedirect  ] = useState(false);
 
   const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -42,7 +41,7 @@ const Login: React.FC<Props> = ({ onSuccess }: Props) => {
       login(email, password)
         .then((response: any) => {
           onSuccess(response.data.user);
-          setShouldRedirect(true);
+          navigate('/');
         })
         .catch(() => {
           setErrorMessage('Nesprávne prihlasovacie meno alebo heslo!');
@@ -83,11 +82,6 @@ const Login: React.FC<Props> = ({ onSuccess }: Props) => {
                 Prihlásiť sa
               </Button>
             </Form>
-            {
-              shouldRedirect ? (
-                <Redirect to="/" />
-              ) : null
-            }
           </Col>
         </Row>
       </Container>

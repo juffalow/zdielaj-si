@@ -1,6 +1,8 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
 import UserRepository from '../repositories/KnexUserRepository';
+import UserNotifications from '../notifications/user/MailNotifications';
 
 const router = express.Router();
 
@@ -22,7 +24,8 @@ router.post('/register', async (req: express.Request, res: express.Response) => 
   try {
     const userRepository = new UserRepository();
     const passwordHash = bcrypt.hashSync(data.password, 10);
-    user = await userRepository.create(data.name, data.email, passwordHash);
+    const token = uuidv4();
+    user = await userRepository.create({ name: data.name, email: data.email, password: passwordHash, token });
   } catch (err) {
     console.error(err);
     if (err.code === 'ER_DUP_ENTRY' || err.sqlMessage.toLowerCase().indexOf('duplicate') > -1) {
@@ -42,6 +45,9 @@ router.post('/register', async (req: express.Request, res: express.Response) => 
       data: null,
     }).end();
   }
+
+  const userNotifications = new UserNotifications();
+  await userNotifications.onRegister(user, user.token);
 
   delete user.password;
 
