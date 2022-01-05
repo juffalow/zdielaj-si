@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import ImageGallery from 'react-image-gallery';
+import { useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import SEO from '../components/SEO';
 import config from '../config';
@@ -11,13 +12,14 @@ import DownloadIcon from './album/download-icon-new-white.png';
 import VideoPlaceholder from './album/video-placeholder.png';
 import './album/album.css';
 
-const Album: React.FC = (props: any) => {
+const Album: React.FC = () => {
+  const params = useParams();
   const [ files, setFiles ] = useState([] as Array<any>);
   const [ hasError, setHasError ] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
-    fetch(`${config.url}/album/${props.match.params.id}`)
+    fetch(`${config.url}/album/${params.id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error();

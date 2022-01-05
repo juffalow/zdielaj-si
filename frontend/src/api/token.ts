@@ -10,7 +10,7 @@ const getUserToken = (): string | null => {
 const setUserToken = (response: { id: string, expiresAt: string, token: string | null }): void => {
   userToken = response.token;
 
-  if (response.token === null) {
+  if (response.token === null && userToken !== null) {
     logout();
     return;
   }
