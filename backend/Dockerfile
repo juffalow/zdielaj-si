@@ -9,14 +9,18 @@ RUN yarn install --frozen-lockfile && yarn build
 
 FROM node:16-alpine3.12
 
-USER node
-EXPOSE 3010
+RUN addgroup --gid 3000 --system juffgroup \
+  && adduser  --uid 2000 --system --ingroup juffgroup juffuser
 
-RUN mkdir /home/node/zdielaj-si-backend/ && chown -R node:node /home/node/zdielaj-si-backend
-WORKDIR /home/node/zdielaj-si-backend
+USER 2000:3000
 
-COPY --chown=node:node --from=build /home/node/zdielaj-si-backend/dist ./dist
-COPY --chown=node:node --from=build /home/node/zdielaj-si-backend/package.json /home/node/zdielaj-si-backend/yarn.lock ./
+RUN mkdir /home/juffuser/zdielaj-si-backend/
+WORKDIR /home/juffuser/zdielaj-si-backend
+
+COPY --from=build /home/node/zdielaj-si-backend/dist ./dist
+COPY --from=build /home/node/zdielaj-si-backend/package.json /home/node/zdielaj-si-backend/yarn.lock ./
 RUN yarn install --frozen-lockfile --production
+
+EXPOSE 3010
 
 CMD [ "node", "dist/index.js" ]
