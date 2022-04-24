@@ -27,14 +27,32 @@ RUN rm /etc/nginx/conf.d/default.conf
 RUN echo $'\n\
 server {\n\
   listen 8080;\n\
+  root   /usr/share/nginx/html;\n\
+  \n\
+  gzip on;\n\
+  gzip_vary on;\n\
+  gzip_min_length 1024;\n\
+  gzip_proxied expired no-cache no-store private auth;\n\
+  gzip_types text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/xml;\n\
+  gzip_disable "MSIE [1-6]\.";\n\
+  \n\
   location / {\n\
-    root   /usr/share/nginx/html;\n\
     index  index.html index.htm;\n\
     try_files $uri $uri/ /index.html;\n\
   }\n\
   error_page   500 502 503 504  /50x.html;\n\
   location = /50x.html {\n\
     root   /usr/share/nginx/html;\n\
+  }\n\
+  location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc)$ {\n\
+    expires 30d;\n\
+    access_log off;\n\
+    add_header Cache-Control "public";\n\
+  }\n\
+  location ~* \.(?:css|js)$ {\n\
+    expires 7d;\n\
+    access_log off;\n\
+    add_header Cache-Control "public";\n\
   }\n\
 }\n\
 ' > /etc/nginx/conf.d/default.conf
