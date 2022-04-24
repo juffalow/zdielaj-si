@@ -1,7 +1,11 @@
 import React from 'react';
 import './FeaturesList.css';
 
-const FeaturesList: React.FC = ({ children }) => (
+interface Props {
+  children: React.ReactNode;
+}
+
+const FeaturesList: React.FC<Props> = ({ children }) => (
   <ul className="features-list">
     {children}
   </ul>

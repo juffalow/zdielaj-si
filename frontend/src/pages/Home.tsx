@@ -18,13 +18,13 @@ const Home: React.FC = () => {
   const [ albumId, setAlbumId ] = useState('');
   const [ hasError, setHasError ] = useState(false);
 
-  const onDrop = useCallback(async (acceptedFiles) => {
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
     setFiles(acceptedFiles.map((file: File) => {
       return { ...file, preview: URL.createObjectURL(file) };
     }));
 
     const files = [ acceptedFiles.shift() ];
-    const album = await uploadPhotos(files);
+    const album = await uploadPhotos(files as File[]);
 
     setAlbumId(album.id);
 
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
     }
   }, []);
 
-  const onSingleDrop = useCallback(async (acceptedFiles) => {
+  const onSingleDrop = useCallback(async (acceptedFiles: File[]) => {
     setFiles([
       ...files,
       ...acceptedFiles.map((file: File) => {
@@ -61,8 +61,6 @@ const Home: React.FC = () => {
     // Make sure to revoke the data uris to avoid memory leaks
     files.forEach((file: any) => URL.revokeObjectURL(file.preview));
   }, [files]);
-
-  console.log(files);
 
   return (
     <SEO title="" description="Tiež máš problém, že ti Messenger zníži kvalitu fotiek? Tu ich môžeš zdielať bez problémov v plnej kvalite!">

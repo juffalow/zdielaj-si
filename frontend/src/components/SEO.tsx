@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 interface Props {
   title: string;
   description: string;
+  children: React.ReactNode;
 }
 
 const SEO: React.FC<Props> = (props) => (
