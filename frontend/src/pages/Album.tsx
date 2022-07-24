@@ -7,7 +7,6 @@ import ImageGallery from 'react-image-gallery';
 import { useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import SEO from '../components/SEO';
-import config from '../config';
 import DownloadIcon from './album/download-icon-new-white.png';
 import VideoPlaceholder from './album/video-placeholder.png';
 import './album/album.css';
@@ -19,7 +18,7 @@ const Album: React.FC = () => {
   const ref = useRef(null);
 
   useEffect(() => {
-    fetch(`${config.url}/album/${params.id}`)
+    fetch(`${process.env.REACT_APP_CORE_URL}/album/${params.id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error();

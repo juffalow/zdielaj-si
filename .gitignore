@@ -1,8 +1,1 @@
-/frontend/node_modules
-/backend/node_modules
-/frontend/src/config.ts
-/backend/src/config.ts
-/frontend/build
-/backend/dist
-/frontend/.env
 .DS_Store

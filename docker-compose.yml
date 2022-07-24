@@ -1,0 +1,136 @@
+services:
+  mysql_core:
+      container_name: zdielaj_si_db_core
+      image: mysql
+      environment:
+        - MYSQL_DATABASE=zdielajsi_core
+        - MYSQL_USER=zdielajsi_core
+        - MYSQL_PASSWORD=password
+        - MYSQL_ROOT_PASSWORD=password
+        - MYSQL_PORT=3306
+      ports:
+        - 3306:3306
+      volumes:
+        - 'mysql_core_data:/data/db'
+
+  mysql_notifications:
+      container_name: zdielaj_si_db_notifications
+      image: mysql
+      environment:
+        - MYSQL_DATABASE=zdielajsi_notifications
+        - MYSQL_USER=zdielajsi_notifications
+        - MYSQL_PASSWORD=password
+        - MYSQL_ROOT_PASSWORD=password
+        - MYSQL_PORT=3306
+      ports:
+        - 3307:3306
+      volumes:
+        - 'mysql_notifications_data:/data/db'
+
+  mysql_upload:
+      container_name: zdielaj_si_db_upload
+      image: mysql
+      environment:
+        - MYSQL_DATABASE=zdielajsi_upload
+        - MYSQL_USER=zdielajsi_upload
+        - MYSQL_PASSWORD=password
+        - MYSQL_ROOT_PASSWORD=password
+        - MYSQL_PORT=3306
+      ports:
+        - 3308:3306
+      volumes:
+        - 'mysql_upload_data:/data/db'
+
+  core:
+    image: node:16-alpine
+    working_dir: /home/node
+    command: sh -c "yarn install && yarn start"
+    depends_on:
+      - mysql_core
+    restart: unless-stopped
+    ports:
+      - 3010:3010
+    environment:
+      - DATABASE_HOST=mysql_core
+      - DATABASE_NAME=zdielajsi_core
+      - DATABASE_USER=zdielajsi_core
+      - DATABASE_PASSWORD=password
+      - DATABASE_PORT=3306
+    links:
+      - mysql_core
+    volumes:
+      - "./backend:/home/node"
+
+  notifications:
+    image: node:16-alpine
+    working_dir: /home/node
+    command: sh -c "yarn install && yarn start"
+    depends_on:
+      - mysql_notifications
+    restart: unless-stopped
+    ports:
+      - 3011:3010
+    environment:
+      - DATABASE_HOST=mysql_notifications
+      - DATABASE_NAME=zdielajsi_notifications
+      - DATABASE_USER=zdielajsi_notifications
+      - DATABASE_PASSWORD=password
+      - DATABASE_PORT=3306
+    links:
+      - mysql_notifications
+    volumes:
+      - "./notifications:/home/node"
+
+  notifications_worker:
+    image: node:16-alpine
+    working_dir: /home/node
+    command: sh -c "yarn start:worker"
+    depends_on:
+      - mysql_notifications
+      - notifications
+    restart: unless-stopped
+    environment:
+      - DATABASE_HOST=mysql_notifications
+      - DATABASE_NAME=zdielajsi_notifications
+      - DATABASE_USER=zdielajsi_notifications
+      - DATABASE_PASSWORD=password
+      - DATABASE_PORT=3306
+    links:
+      - mysql_notifications
+    volumes:
+      - "./notifications:/home/node"
+
+  frontend:
+    image: node:16-alpine
+    working_dir: /home/node
+    command: sh -c "yarn start"
+    restart: unless-stopped
+    volumes:
+      - "./frontend:/home/node"
+    ports:
+      - 3000:3000
+
+  upload:
+    image: node:16-alpine
+    working_dir: /home/node
+    command: sh -c "yarn install && yarn start"
+    depends_on:
+      - mysql_upload
+    restart: unless-stopped
+    ports:
+      - 3012:3010
+    environment:
+      - DATABASE_HOST=mysql_upload
+      - DATABASE_NAME=zdielajsi_upload
+      - DATABASE_USER=zdielajsi_upload
+      - DATABASE_PASSWORD=password
+      - DATABASE_PORT=3306
+    links:
+      - mysql_upload
+    volumes:
+      - "./upload:/home/node"
+
+volumes:
+  mysql_core_data:
+  mysql_notifications_data:
+  mysql_upload_data:

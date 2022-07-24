@@ -25,9 +25,7 @@ const ShareableLink: React.FC<ShareableLinkProps> = ({ albumId }: ShareableLinkP
     <InputGroup>
       { albumId.length === 0 ? <Spinner animation="border" size="sm" style={{ position: 'absolute', zIndex: 9999, left: 10, top: 10 }} /> : null }
       <FormControl type="text" value={albumId.length === 0 ? '': `${window.location.protocol}//${window.location.host}/album/${albumId}`} readOnly />
-      <InputGroup.Append>
-        <Button variant="outline-secondary" onClick={onCopyClick}>Kopírovať</Button>
-      </InputGroup.Append>
+      <Button variant="outline-secondary" onClick={onCopyClick}>Kopírovať</Button>
     </InputGroup>
   );
 }

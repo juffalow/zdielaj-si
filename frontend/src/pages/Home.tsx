@@ -9,7 +9,7 @@ import AddPhotoCard from './home/AddPhotoCard';
 import FeaturesList from './home/FeaturesList';
 import SEO from '../components/SEO';
 import ShareableLink from './home/ShareableLink';
-import { uploadPhotos, uploadPhoto } from '../api/services';
+import { uploadPhoto, createAlbum, addMedia } from '../api/services';
 import GOOGLE_PLAY_LOGO from '../img/google_play_logo.png';
 import APP_STORE_LOGO from '../img/app_store_logo.png';
 
@@ -23,13 +23,15 @@ const Home: React.FC = () => {
       return { ...file, preview: URL.createObjectURL(file) };
     }));
 
-    const files = [ acceptedFiles.shift() ];
-    const album = await uploadPhotos(files as File[]);
+    const album = await createAlbum();
+
+    console.log('album', album);
 
     setAlbumId(album.id);
 
     for (const file of acceptedFiles) {
-      await uploadPhoto(album.id, file);
+      const media = await uploadPhoto(file);
+      await addMedia(album.id, media.id);
     }
   }, []);
 
@@ -42,7 +44,7 @@ const Home: React.FC = () => {
     ]);
 
     for (const file of acceptedFiles) {
-      await uploadPhoto(albumId, file);
+      await uploadPhoto(file);
     }
   }, [ files, albumId ]);
 

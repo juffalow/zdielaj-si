@@ -10,14 +10,6 @@ export default {
     secret: process.env.JWT_SECRET || '',
     ttl: 15 * 60,
   },
-  storage: {
-    url: process.env.STORAGE_URL || '',
-    originalUrl: process.env.STORAGE_ORIGINAL_URL || '',
-    key: process.env.STORAGE_KEY || '',
-    endpoint: process.env.STORAGE_ENDPOINT || '',
-    secret: process.env.STORAGE_SECRET || '',
-    bucket: process.env.STORAGE_BUCKET || '',
-  },
   database: {
     connection: {
       database : process.env.DATABASE_NAME || '',
@@ -32,10 +24,11 @@ export default {
     level: process.env.LOGGER_LEVEL || 'info',
   },
   services: {
-    aws: {
-      accessKeyId: process.env.SERVICES_AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.SERVICES_AWS_SECRET_ACCESS_KEY,
-      region: process.env.SERVICES_AWS_REGION,
+    upload: {
+      url: process.env.SERVICES_UPLOAD_URL || 'http://upload:3010',
+    },
+    notifications: {
+      url: process.env.SERVICES_NOTIFICATIONS_URL || 'http://notifications:3010',
     },
   },
 }

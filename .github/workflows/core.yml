@@ -1,0 +1,69 @@
+name: Core
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  release:
+    types:
+      - published
+
+defaults:
+  run:
+    working-directory: ./backend
+
+jobs:
+  lint_core:
+    name: Run lint on Core
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 16
+        cache: 'yarn'
+        cache-dependency-path: './backend/yarn.lock'
+    - name: Install dependencies
+      run: yarn install
+    - name: Lint
+      run: yarn run lint
+    - name: build
+      run: |
+        mv ./src/config.example.ts ./src/config.ts
+        yarn run build
+  build_core:
+    name: Build core container with tag version
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    needs: lint_core
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Set version
+        id: version
+        run: echo ::set-output name=tag::latest
+    - name: Rename config
+      run: mv ./src/config.example.ts ./src/config.ts
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ZDIELAJ_SI_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_ZDIELAJ_SI_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_CONTAINER_REGISTRY_REGION }}
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Build, tag and push docker image to Amazon ECR
+      env:
+        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        REPOSITORY: zdielaj-si-core
+        TAG: latest
+      run: |
+        docker build -t $REGISTRY/$REPOSITORY:$TAG .
+        docker push $REGISTRY/$REPOSITORY:$TAG

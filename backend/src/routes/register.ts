@@ -2,7 +2,7 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import UserRepository from '../repositories/KnexUserRepository';
-import UserNotifications from '../notifications/user/MailNotifications';
+import { notify } from '../services/notifications';
 
 const router = express.Router();
 
@@ -46,8 +46,17 @@ router.post('/register', async (req: express.Request, res: express.Response) => 
     }).end();
   }
 
-  const userNotifications = new UserNotifications();
-  await userNotifications.onRegister(user, user.token);
+  await notify({
+    event: {
+      name: 'register',
+    },
+    parameters: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      token: user.token,
+    },
+  });
 
   delete user.password;
 

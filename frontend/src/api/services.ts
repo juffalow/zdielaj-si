@@ -1,41 +1,26 @@
 import { post, postMultipart, get } from './client';
 import { setAlbumToken } from './token';
-import config from '../config';
 
 export async function register(name: string, email: string, password: string): Promise<any> {
-  return post(`${config.url}/user/register`, { name, email, password });
+  return post(`${process.env.REACT_APP_CORE_URL}/user/register`, { name, email, password });
 }
 
 export async function login(email: string, password: string): Promise<any> {
-  return post(`${config.url}/user/login`, { email, password }, { credentials: 'include' });
+  return post(`${process.env.REACT_APP_CORE_URL}/user/login`, { email, password }, { credentials: 'include' });
 }
 
 export async function logout(): Promise<RefreshTokenResponse> {
-  return get(`${config.url}/user/logout`, { credentials: 'include' });
+  return get(`${process.env.REACT_APP_CORE_URL}/user/logout`, { credentials: 'include' });
 }
 
-export async function uploadPhotos(files: FileList | File[]): Promise<Album> {
-  const formData = new FormData();
-  Array.from(files).forEach((file: File) => {
-    formData.append(`images`, file);
-  });
-
-  return postMultipart(`${config.url}/upload`, formData)
-    .then(res => {
-      setAlbumToken(res.data.user.token);
-
-      return res.data.album;
-    });
-}
-
-export async function uploadPhoto(albumId: string, file: File): Promise<Album> {
+export async function uploadPhoto(file: File): Promise<Media> {
   const formData = new FormData();
 
   formData.append('image', file);
 
-  return postMultipart(`${config.url}/upload/${albumId}`, formData)
+  return postMultipart(`${process.env.REACT_APP_UPLOAD_URL}/upload`, formData)
     .then(res => {
-      return res.data.album;
+      return res.data.media;
     });
 }
 
@@ -48,10 +33,22 @@ interface RefreshTokenResponse {
   };
 }
 
+export async function createAlbum(): Promise<Album> {
+  return post(`${process.env.REACT_APP_CORE_URL}/album`, {})
+    .then((response) => {
+      setAlbumToken(response.data.user.token);
+      return response.data.album;
+    });
+}
+
+export async function addMedia(albumId: string, mediaId: number): Promise<any> {
+  return post(`${process.env.REACT_APP_CORE_URL}/album/${albumId}/media`, { mediaId });
+}
+
 export async function refreshToken(): Promise<RefreshTokenResponse> {
-  return get(`${config.url}/user/refreshToken/`, { credentials: 'include' });
+  return get(`${process.env.REACT_APP_CORE_URL}/user/refreshToken/`, { credentials: 'include' });
 }
 
 export async function validateEmail(id: number, token: string): Promise<RefreshTokenResponse> {
-  return get(`${config.url}/user/emailValidation?id=${id}&token=${token}`);
+  return get(`${process.env.REACT_APP_CORE_URL}/user/emailValidation?id=${id}&token=${token}`);
 }
