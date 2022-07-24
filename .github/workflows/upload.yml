@@ -46,8 +46,8 @@ jobs:
       with:
         fetch-depth: 1
     - name: Set version
-        id: version
-        run: echo ::set-output name=tag::latest
+      id: version
+      run: echo ::set-output name=tag::latest
     - name: Rename config
       run: mv ./src/config.example.ts ./src/config.ts
     - name: Configure AWS credentials
