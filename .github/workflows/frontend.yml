@@ -15,6 +15,9 @@ defaults:
   run:
     working-directory: ./frontend
 
+env: 
+  CI: false
+
 jobs:
   lint_frontend:
     name: Run lint on Frontend
