@@ -15,7 +15,7 @@ class ResizeImage {
     this.mediaConvertJobRepository = mediaConvertJobRepository;
   }
 
-  public async convert(mediaId: number): Promise<any> {
+  public async convert(mediaId: number, height: number, width: number, thumbnailHeight: number, thumbnailWidth: number): Promise<any> {
     const media = await this.getMedia(mediaId);
 
     const job = await aws.mc.createJob({
@@ -42,7 +42,9 @@ class ResizeImage {
                       "RateControlMode": "QVBR",
                       "SceneChangeDetect": "TRANSITION_DETECTION"
                     }
-                  }
+                  },
+                  "Width": width,
+                  "Height": height
                 },
                 "AudioDescriptions": [
                   {
@@ -67,7 +69,9 @@ class ResizeImage {
                       "MaxCaptures": 10,
                       "Quality": 100
                     }
-                  }
+                  },
+                  "Width": width,
+                  "Height": height
                 },
                 "ContainerSettings": {
                   "Container": "RAW"
@@ -84,8 +88,8 @@ class ResizeImage {
                       "Quality": 100
                     }
                   },
-                  "Width": 400,
-                  "Height": 400
+                  "Width": thumbnailWidth,
+                  "Height": thumbnailHeight
                 },
                 "ContainerSettings": {
                   "Container": "RAW"

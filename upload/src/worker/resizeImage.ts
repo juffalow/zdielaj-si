@@ -1,13 +1,11 @@
 import sharp from 'sharp';
 import fetch from 'node-fetch';
-import sizeOf from 'image-size';
 import MediaRepository from '../repositories/MediaRepository';
 import KnexMediaRepository from '../repositories/KnexMediaRepository';
 import ThumbnailRepository from '../repositories/ThumbnailRepository';
 import KnexThumbnailRepository from '../repositories/KnexThumbnailRepository';
 import Storage from '../storage/Storage';
 import S3Storage from '../storage/S3Storage';
-import { getDimensions } from '../utils/functions';
 
 class ResizeImage {
 
@@ -23,12 +21,10 @@ class ResizeImage {
     this.storage = storage;
   }
 
-  public async resize(mediaId: number, maxWidth: number, maxHeight: number): Promise<void> {
+  public async resize(mediaId: number, width: number, height: number): Promise<void> {
     const media = await this.getMedia(mediaId);
     const imageUrl = this.storage.getUrl(media.path);
     const imageBuffer = await this.loadImage(imageUrl);
-    const dimensions = sizeOf(imageBuffer);
-    const { width, height } = getDimensions(dimensions.height, dimensions.width, maxHeight, maxWidth);
   
     const image = sharp(imageBuffer).resize(width, height, { fit: 'inside' });
   

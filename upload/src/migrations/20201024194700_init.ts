@@ -23,6 +23,7 @@ export function up(knex: Knex): Promise<any> {
   .createTable('media_convert_job', (table) => {
     table.string('id').notNullable().comment('MediaConvert job ID').primary();
     table.integer('mediaId').unsigned().notNullable().references('id').inTable('media');
+    table.string('status').notNullable().defaultTo('NEW');
     table.timestamp('createdAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
   });
 }

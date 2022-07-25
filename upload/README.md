@@ -1,7 +1,10 @@
 # Upload
 
+Asynchronous upload service to store media - images and videos. It returns `id` of new media immediately and resizing and generating video previews are done in an async way.
+
 ## Requirements
 
+* AWS S3
 * AWS MediaConvert
 * AWS EventBridge
 * AWS Queue
@@ -28,3 +31,7 @@ graph TD
     K --> |image url| N["DB (thumbnail)"]
     M --> |image url| N
 ```
+
+## License
+
+[MIT license](../LICENSE)

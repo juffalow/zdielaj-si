@@ -66,18 +66,25 @@ export const getDimensions = (height: number, width: number, maxHeight: number, 
       height: maxHeight
     };
   }
-  
-  if (height > width && height > maxHeight) {
+
+  let mw = maxWidth;
+  let mh = maxHeight;
+
+  if (height > width) {
+    [mw, mh] = [mh, mw];
+  }
+
+  if (height > mh) {
     return {
-      height: maxHeight,
-      width: width * Math.ceil(maxHeight / height),
+      height: mh,
+      width: Math.ceil(width * (mh / height)),
     };
   }
 
-  if (width > height && width > maxWidth) {
+  if (width > mw) {
     return {
-      height: height * Math.ceil(maxWidth / width),
-      width: maxWidth,
+      height: Math.ceil(height * (mw / width)),
+      width: mw,
     };
   }
 
