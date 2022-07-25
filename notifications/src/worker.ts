@@ -24,5 +24,5 @@ app.on('processing_error', (err) => {
   logger.error(err.message, err);
 });
 
-logger.info('Emails service is running');
+logger.info('Notifications worker is running');
 app.start();

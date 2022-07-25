@@ -1,9 +1,12 @@
 import express from 'express';
 import multer from 'multer';
+import { Readable } from 'stream';
 import {
   base64encode,
   fileFilter,
   processFile,
+  getImageDimensions,
+  getVideoDimensions,
 } from '../utils/functions';
 import MediaRepository from '../repositories/KnexMediaRepository';
 import S3Storage from '../storage/S3Storage';
@@ -21,16 +24,29 @@ router.post('/', upload.single('image'), async (req: express.Request, res: expre
   const directory = base64encode((new Date).toISOString().split('T')[0]);
 
   const path = await processFile(storage, directory, (req as any).file);
+  let dimensions = null;
+
+  if ((req as any).file.mimetype.startsWith('image/')) {
+    dimensions = getImageDimensions((req as any).file.buffer);
+  }
+
+  if ((req as any).file.mimetype.startsWith('video/')) {
+    dimensions = await getVideoDimensions(Readable.from((req as any).file.buffer));
+  }
 
   const media = await mediaRepository.create({
     path: path,
     mimetype: (req as any).file.mimetype,
+    height: dimensions.height,
+    width: dimensions.width,
     size: (req as any).file.size
   });
 
   const messageData = {
     mediaId: media.id,
     mimetype: media.mimetype,
+    height: dimensions.height,
+    width: dimensions.width,
   }
 
   const message = {

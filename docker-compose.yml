@@ -113,12 +113,31 @@ services:
   upload:
     image: node:16-alpine
     working_dir: /home/node
-    command: sh -c "yarn install && yarn start"
+    command: sh -c "apk add --no-cache ffmpeg && yarn install && yarn start"
     depends_on:
       - mysql_upload
     restart: unless-stopped
     ports:
       - 3012:3010
+    environment:
+      - DATABASE_HOST=mysql_upload
+      - DATABASE_NAME=zdielajsi_upload
+      - DATABASE_USER=zdielajsi_upload
+      - DATABASE_PASSWORD=password
+      - DATABASE_PORT=3306
+    links:
+      - mysql_upload
+    volumes:
+      - "./upload:/home/node"
+
+  upload_worker:
+    image: node:16-alpine
+    working_dir: /home/node
+    command: sh -c "apk add --no-cache ffmpeg && yarn start:worker"
+    depends_on:
+      - mysql_upload
+      - upload
+    restart: unless-stopped
     environment:
       - DATABASE_HOST=mysql_upload
       - DATABASE_NAME=zdielajsi_upload

@@ -9,10 +9,16 @@ interface GetMediaResponse {
       mimetype: string,
       size: number,
       location: string,
+      thumbnails?: {
+        mediaId: number,
+        mimetype: string,
+        size: number,
+        location: string,
+      }
     },
   },
 }
 
-export async function getMedia(id: string): Promise<GetMediaResponse> {
+export async function getMedia(id: number): Promise<GetMediaResponse> {
   return get(`${config.services.upload.url}/media/${id}`);
 }

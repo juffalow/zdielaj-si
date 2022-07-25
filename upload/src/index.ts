@@ -35,7 +35,6 @@ async function start(): Promise<void> {
       logger.info(`Database migrated to version ${currentVersion}!`);
     }
 
-    
     app.listen(config.port, () => {
       logger.info(`Server started at http://localhost:${ config.port }`);
     });

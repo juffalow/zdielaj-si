@@ -26,7 +26,7 @@ const Album: React.FC = () => {
         return response;
       })
       .then(res => res.json())
-      .then((json) => setFiles(json.data.photos))
+      .then((json) => setFiles(json.data.album.media))
       .catch(() => setHasError(true));
   }, []);
 
@@ -43,6 +43,8 @@ const Album: React.FC = () => {
     return false;
   }
 
+  console.log(files);
+
   return (
     <SEO title="" description="">
       <Container>
@@ -58,9 +60,16 @@ const Album: React.FC = () => {
             <Row>
               <Col>
                 <ImageGallery items={files.map((file) => {
+                  if (file.mimetype.startsWith('image/')) {
+                    return {
+                      original: file.location,
+                      thumbnail: file.thumbnails[0].location,
+                    };
+                  }                  
+
                   return {
-                    original: file.mimetype.startsWith('video/') ? VideoPlaceholder : file.location,
-                    thumbnail: file.mimetype.startsWith('video/') ? VideoPlaceholder : file.thumbnail.location,
+                    original: file.thumbnails.find((thumbnail: any) => thumbnail.width > 400).location,
+                    thumbnail: file.thumbnails.find((thumbnail: any) => thumbnail.width <= 400).location,
                   };
                 })}
                 ref={ref}

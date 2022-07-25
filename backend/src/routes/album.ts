@@ -22,13 +22,14 @@ router.get('/:id', async (req: express.Request, res: express.Response) => {
   }
 
   const fullMedia = await Promise.all(media.map(async (single) => {
-    const response = await getMedia(single.id);
+    const response = await getMedia(single.mediaId);
 
     return {
       ...single,
       mimetype: response.data.media.mimetype,
       size: response.data.media.size,
       location: response.data.media.location,
+      thumbnails: response.data.media.thumbnails,
     }
   }));
 

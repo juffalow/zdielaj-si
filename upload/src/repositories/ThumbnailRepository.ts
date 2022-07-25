@@ -1,4 +1,5 @@
 export interface CreateParameters {
+  mediaId: string;
   path: string;
   mimetype: string;
   height: number | undefined;
@@ -6,7 +7,7 @@ export interface CreateParameters {
   size: number;
 }
 
-export default interface MediaRepository {
+export default interface ThumbnailRepository {
   create(params: CreateParameters): Promise<Media>;
 
   get(id: string): Promise<Media | undefined>;

@@ -2,6 +2,8 @@ import { Readable } from 'stream';
 import crypto from 'crypto';
 import path from 'path';
 import { Request } from 'express';
+import sizeOf from 'image-size';
+import ffmpeg from 'fluent-ffmpeg';
 import S3Storage from '../storage/S3Storage';
 
 export const base64encode = (str: string): string => {
@@ -55,4 +57,57 @@ export const processVideoFile = async (storage: S3Storage, directory: string, fi
   await storage.store(original, `${directory}/${hash}${extname}`);
 
   return `${directory}/${hash}${extname}`;
+}
+
+export const getDimensions = (height: number, width: number, maxHeight: number, maxWidth: number): { height: number, width: number } => {
+  if (typeof height === 'undefined' || typeof width === 'undefined') {
+    return {
+      width: maxWidth,
+      height: maxHeight
+    };
+  }
+  
+  if (height > width && height > maxHeight) {
+    return {
+      height: maxHeight,
+      width: width * Math.ceil(maxHeight / height),
+    };
+  }
+
+  if (width > height && width > maxWidth) {
+    return {
+      height: height * Math.ceil(maxWidth / width),
+      width: maxWidth,
+    };
+  }
+
+  return {
+    height,
+    width,
+  };
+}
+
+export const getImageDimensions = (buffer: Buffer): { height: number, width: number } => {
+  const dimensions = sizeOf(buffer);
+
+  return dimensions;
+}
+
+export const getVideoDimensions = async (stream: Readable): Promise<{ height: number, width: number }> => {
+  return new Promise((resolve) => {
+    ffmpeg.ffprobe(stream, function(err, metadata) {
+      if (err !== null) {
+        return resolve({ height: undefined, width: undefined });
+      }
+
+      const stream = metadata.streams.find(stream => {
+        return 'height' in stream && 'width' in stream;
+      });
+
+      resolve({
+        height: typeof stream === 'undefined' ? undefined : stream.height,
+        width: typeof stream === 'undefined' ? undefined : stream.width,
+      });
+    });
+  });
 }

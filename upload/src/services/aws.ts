@@ -12,8 +12,18 @@ const sqs = new AWS.SQS({
     secretAccessKey: config.services.aws.secretAccessKey,
   }
 });
+const mc = new AWS.MediaConvert({
+  apiVersion: '2017-08-29',
+  region: config.services.aws.region,
+  endpoint: 'https://6qbvwvyqc.mediaconvert.eu-central-1.amazonaws.com',
+  credentials: {
+    accessKeyId: config.services.aws.accessKeyId,
+    secretAccessKey: config.services.aws.secretAccessKey,
+  }
+});
 
 export default {
   s3,
   sqs,
+  mc,
 };
