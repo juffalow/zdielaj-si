@@ -70,13 +70,13 @@ const Login: React.FC<Props> = ({ onSuccess }: Props) => {
                 <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group controlId="loginPassword">
+              <Form.Group controlId="loginPassword" className="mt-3">
                 <Form.Label>Heslo</Form.Label>
                 <Form.Control required type="password" placeholder="Zadaj heslo" value={password} onChange={onPasswordChange} />
                 <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
               </Form.Group>
 
-              <p>Ešte tu nemáš účet? Môžeš si ho vytvoriť <Link to="/registracia">tu</Link>.</p>
+              <p className="mt-3">Ešte tu nemáš účet? Môžeš si ho vytvoriť <Link to="/registracia">tu</Link>.</p>
 
               <Button variant="primary" type="submit">
                 Prihlásiť sa

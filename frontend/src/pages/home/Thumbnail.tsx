@@ -1,9 +1,24 @@
 import React from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 import './Thumbnail.css';
 
-const Thumbnail: React.FC<any> = ({ file }: any) => (
+interface ThumbnailParameters {
+  file: any;
+  isUploading?: boolean;
+}
+
+const Thumbnail: React.FC<ThumbnailParameters> = ({ file, isUploading }: ThumbnailParameters) => (
   <div className="thumbnail-container">
     <img src={file.preview} className="thumbnail-image" alt="" />
+    {
+      isUploading === true && (
+        <div className="thumbnail-shadow">
+          <div className="spinner-container">
+            <Spinner animation="border" variant="secondary" />
+          </div>
+        </div>
+      )
+    }
   </div>
 )
 

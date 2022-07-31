@@ -77,12 +77,9 @@ const RegisterForm: React.FC<Props> = ({ onSuccess }: Props) => {
           <Form.Label>Meno</Form.Label>
           <Form.Control required type="text" placeholder="Zadaj meno" value={name} onChange={onNameChange} />
           <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
-          <Form.Text className="text-muted">
-            Postačuje zadať iba meno bez priezviska.
-          </Form.Text>
         </Form.Group>
 
-        <Form.Group controlId="loginEmail">
+        <Form.Group controlId="loginEmail" className="mt-3">
           <Form.Label>E-mailová adresa</Form.Label>
           <Form.Control required type="email" placeholder="Zadaj e-mail" value={email} onChange={onEmailChange} />
           <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
@@ -91,19 +88,19 @@ const RegisterForm: React.FC<Props> = ({ onSuccess }: Props) => {
           </Form.Text>
         </Form.Group>
 
-        <Form.Group controlId="loginPassword">
+        <Form.Group controlId="loginPassword" className="mt-3">
           <Form.Label>Heslo</Form.Label>
           <Form.Control required type="password" placeholder="Zadaj heslo" value={password} onChange={onPasswordChange} />
           <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group controlId="loginConfirmPassword">
+        <Form.Group controlId="loginConfirmPassword" className="mt-3">
           <Form.Label>Zopakuj heslo</Form.Label>
           <Form.Control required type="password" placeholder="" value={confirmPassword} onChange={onConfirmPasswordChange} />
           <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="mt-4">
           Registrovať sa
         </Button>
       </Form>

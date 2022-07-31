@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import Thumbnail from './home/Thumbnail';
 import AddPhotoCard from './home/AddPhotoCard';
 import FeaturesList from './home/FeaturesList';
@@ -20,18 +21,27 @@ const Home: React.FC = () => {
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     setFiles(acceptedFiles.map((file: File) => {
-      return { ...file, preview: URL.createObjectURL(file) };
+      return { ...file, preview: URL.createObjectURL(file), isUploading: true };
     }));
 
     const album = await createAlbum();
-
-    console.log('album', album);
 
     setAlbumId(album.id);
 
     for (const file of acceptedFiles) {
       const media = await uploadPhoto(file);
       await addMedia(album.id, media.id);
+
+      setFiles((fs) => fs.map(f => {
+        if (f.preview === f.preview) {
+          return {
+            ...f,
+            isUploading: false,
+          };
+        }
+
+        return f;
+      }));
     }
   }, []);
 
@@ -39,12 +49,27 @@ const Home: React.FC = () => {
     setFiles([
       ...files,
       ...acceptedFiles.map((file: File) => {
-        return { ...file, preview: URL.createObjectURL(file) };
+        return {
+          ...file,
+          preview: URL.createObjectURL(file),
+          isUploading: true,
+        };
       }),
     ]);
 
     for (const file of acceptedFiles) {
       await uploadPhoto(file);
+
+      setFiles((fs) => fs.map(f => {
+        if (f.preview === f.preview) {
+          return {
+            ...f,
+            isUploading: false,
+          };
+        }
+
+        return f;
+      }));
     }
   }, [ files, albumId ]);
 
@@ -102,7 +127,7 @@ const Home: React.FC = () => {
                 {
                   files.map((file: any, index: number) => (
                     <Col lg={2} md={2} sm={3} xs={files.length === 1 ? true : 6} key={`${index}-${file.path}`}>
-                      <Thumbnail file={file} />
+                      <Thumbnail file={file} isUploading={file.isUploading} />
                     </Col>
                   ))
                 }
@@ -132,11 +157,7 @@ const Home: React.FC = () => {
               <li>fotky budú po 24h automaticky zmazané</li>
               <li>môžeš vidieť zoznam svojich pridaných fotiek</li>
             </FeaturesList>
-            <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Čoskoro:</p>
-            <ul>
-              <li>nové formáty (text, ?)</li>
-              <li>zaheslovať prístup</li>
-            </ul>
+            <p><Link to="/registracia" style={{ color: 'rgb(33, 37, 41)' }}>Registrácia</Link> je jednoduchá a zaberie len pár sekúnd.</p>
           </Col>
           <Col lg="4" md="4" sm="4" xs="12">
             <p style={{ marginBottom: '0.2em', fontWeight: 'bold' }}>Stiahni si mobilnú aplikáciu:</p>
