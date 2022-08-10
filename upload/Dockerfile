@@ -9,7 +9,7 @@ RUN yarn install --frozen-lockfile && yarn build
 
 FROM node:16-alpine3.12
 
-RUN apt-get install ffmpeg
+RUN apk add --no-cache ffmpeg
 
 RUN addgroup --gid 3000 --system juffgroup \
   && adduser  --uid 2000 --system --ingroup juffgroup juffuser
