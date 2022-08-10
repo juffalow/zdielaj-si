@@ -1,6 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+import config from '../config';
 import UserRepository from '../repositories/KnexUserRepository';
 import { notify } from '../services/notifications';
 
@@ -19,15 +20,14 @@ router.post('/register', async (req: express.Request, res: express.Response) => 
     }).end();
   }
 
-  let user = null;
+  let user: User = null;
+  const userRepository = new UserRepository();
+  const passwordHash = bcrypt.hashSync(data.password, 10);
+  const token = uuidv4();
 
   try {
-    const userRepository = new UserRepository();
-    const passwordHash = bcrypt.hashSync(data.password, 10);
-    const token = uuidv4();
     user = await userRepository.create({ name: data.name, email: data.email, password: passwordHash, token });
   } catch (err) {
-    console.error(err);
     if (err.code === 'ER_DUP_ENTRY' || err.sqlMessage.toLowerCase().indexOf('duplicate') > -1) {
       return res.status(400).json({
         error: {
@@ -47,14 +47,12 @@ router.post('/register', async (req: express.Request, res: express.Response) => 
   }
 
   await notify({
-    event: {
-      name: 'register',
-    },
+    name: 'register',
     parameters: {
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: user.name,
       email: user.email,
-      token: user.token,
+      validateEmailLink: `${config.services.frontend.url}/validacia?id=${user.id}&token=${token}`,
+      unsubscribeUrl: `${config.services.frontend.url}/notifikacie`,
     },
   });
 

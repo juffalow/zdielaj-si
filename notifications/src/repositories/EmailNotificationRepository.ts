@@ -1,12 +1,12 @@
 export interface CreateParameters {
   email: string;
-  event: string;
+  notification: string;
   isEnabled: boolean;
 }
 
 export interface FindParameters {
   email?: string;
-  event?: string;
+  notification?: string;
 }
 
 export default interface EmailNotificationRepository {

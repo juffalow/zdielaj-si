@@ -1,18 +1,14 @@
 import express from 'express';
-import registerTemplate from '../templates/email/register';
+import templates from '../templates/email';
 
 const router = express.Router();
 
-router.get('/:name', async (req: express.Request, res: express.Response) => {
+router.get('/email/:name', async (req: express.Request, res: express.Response) => {
   const name = req.params.name;
-  let body = null;
+  const template = templates(name);
 
-  switch (name) {
-    case 'register':
-      body = registerTemplate('Registracia', 'Meno', 'https://zdielaj.si');
-      break;
-  }
-
+  const body = template.render(req.query);
+  
   res.status(200).send(body).end();
 });
 

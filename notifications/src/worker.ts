@@ -2,7 +2,7 @@ import { Consumer } from 'sqs-consumer';
 import aws from './services/aws';
 import config from './config';
 import logger from './logger';
-import events from './events';
+import getNotifications from './notifications';
 
 const app = Consumer.create({
   queueUrl: config.services.aws.queueUrl,
@@ -11,7 +11,7 @@ const app = Consumer.create({
 
     logger.debug('Received message from queue!', { body });
 
-    await events(body.event.name).call(null, body.parameters);
+    await getNotifications(body.name).notify(body.parameters);
   },
   sqs: aws.sqs,
 });

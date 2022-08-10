@@ -15,7 +15,7 @@ const Menu = ({ isLogged, onLogout }: MenuProps) => (
       <Navbar.Brand as={Link} to="/">Zdielaj.si</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav className="me-auto">
         {/*
           <Nav.Link as={Link} to="/obrazky">Obrazky</Nav.Link>
           <Nav.Link as={Link} to="/video">Video</Nav.Link>

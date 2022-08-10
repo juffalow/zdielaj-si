@@ -26,4 +26,8 @@ declare global {
     meta: unknown;
     createdAt: string;
   }
+
+  type Template = {
+    render: (parameters: unknown) => string;
+  }
 }

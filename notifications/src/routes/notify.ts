@@ -1,26 +1,21 @@
 import express from 'express';
-import Joi from 'joi';
 import aws from '../services/aws';
 import config from '../config';
 import logger from '../logger';
+import getNotifications from '../notifications';
 import onlyServer from '../middlewares/onlyServer';
 
 const router = express.Router();
 
-const schema = Joi.object({ 
-  event: Joi.object({
-    name: Joi.string().required(),
-  }).required(),
-  parameters: Joi.object().required().unknown(),
-});
-
-const validate = (req, res, next) => {
-  const { error } = schema.validate(req.body);
+const validate = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  const { error } = getNotifications(req.body.name).validateParameters(req.body.parameters);
 
   if (typeof error !== 'undefined') {
+    logger.warn('Template parameters are not valid!', { error });
+    
     return res.status(400).json({
       data: null,
-      error,
+      error: 'Template parameters are not valid!',
     });
   }
 

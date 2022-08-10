@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "tsc -w --preserveWatchOutput & nodemon -q -w dist dist/index.js",
-    "start:worker": "nodemon -q -w dist/worker.js",
+    "start:worker": "nodemon -q -w dist dist/worker.js",
     "build": "ENV=PRODUCTION tsc",
     "lint": "eslint . --ext .ts",
     "migrate:latest": "knex migrate:latest",

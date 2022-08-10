@@ -5,7 +5,7 @@ export function up(knex: Knex): Promise<any> {
     table.comment('User mail subscription to events');
     table.increments('id').primary();
     table.string('email', 128).notNullable();
-    table.string('event', 64).notNullable();
+    table.string('notification', 64).notNullable();
     table.boolean('isEnabled').notNullable();
     table.timestamp('createdAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     table.timestamp('updatedAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

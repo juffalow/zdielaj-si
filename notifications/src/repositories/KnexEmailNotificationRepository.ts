@@ -3,14 +3,14 @@ import database from '../database';
 import logger from '../logger';
 
 class KnexEmailNotificationRepository implements EmailNotificationRepository {
-  public async get(email: string, event: string): Promise<EmailNotification | undefined> {
-    logger.debug('KnexEmailNotificationRepository.get', { email, event });
+  public async get(email: string, notification: string): Promise<EmailNotification | undefined> {
+    logger.debug('KnexEmailNotificationRepository.get', { email, notification });
 
     return new Promise((resolve, reject) => {
       database.select()
         .from('email_notification')
         .where('email', email)
-        .where('event', event)
+        .where('notification', notification)
         .first()
         .then(emailNotification => {
           if (typeof emailNotification === 'undefined') {
@@ -30,7 +30,7 @@ class KnexEmailNotificationRepository implements EmailNotificationRepository {
       database.insert(params)
         .into('email_notification')
         .then(() => {
-          resolve(this.get(params.email, params.event));
+          resolve(this.get(params.email, params.notification));
         })
         .catch(err => reject(err));
     });

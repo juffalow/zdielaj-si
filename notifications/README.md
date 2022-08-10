@@ -7,28 +7,11 @@
 
 ## Suggested architecture
 
-```
-********               ~~~~~~~~~
-* Core * ------------> ~ Queue ~
-********               ~~~~~~~~~
-                           |
-           **********      |
-           * Worker * <-----
-           **********
-                |
-                V
-    _________________________
-    |           |           |
-    V           V           V
-*********    *******    *********
-* Email *    * SMS *    * Other *
-*********    *******    *********
-```
-
 ```mermaid
 graph TD
-    A[Core] --> B(Queue)
-    B --> C{Worker}
+    A[Core] --> B(Notifications)
+    B --> Q(Queue)
+    Q --> C{Worker}
     C --> D[Email]
     C --> E[SMS]
     C --> F[Other]
@@ -38,7 +21,7 @@ graph TD
 
 URL:
 ```
-/notifications/notify
+/notifications
 ```
 
 Type:
@@ -49,11 +32,11 @@ POST
 Data:
 ```json
 {
-  "event": {
-    "name": ""
-  },
+  "name": "register",
   "parameters": {
-
+    "email": "name.surname@domain",
+    "firstName": "Name",
+    "lastName": "Surname"
   }
 }
 ```
@@ -86,3 +69,11 @@ Returns:
   }
 }
 ```
+
+## Templates
+
+New templates can be created in [./templates](templates) folder based on the type, e. g. email template are in [./templates/email](templates/email) folder. Every template needs to have two methods: `isValid` and `render`.
+
+## License
+
+[MIT license](../LICENSE)

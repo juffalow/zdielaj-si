@@ -4,7 +4,7 @@ import template from './template';
 
 const router = express.Router();
 
-router.use('/notify', notify);
+router.use('/notifications', notify);
 router.use('/template', template);
 
 export default router;

@@ -12,7 +12,6 @@ export default function auth(req, res, next): void {
       const user = jwt.verify(token, config.jwt.secret);
       req.user = user;
     } catch (err) {
-      console.error(err);
       return res.status(401).json({ error: 'Unauthorized!' });
     }
   }

@@ -8,6 +8,7 @@ import Album from './pages/Album';
 import Register from './pages/Register';
 import Validation from './pages/Validation';
 import Login from './pages/Login';
+import Notifications from './pages/Notifications';
 import { setUserToken, refreshUserToken, getUserToken } from './api/token';
 import './App.css';
 
@@ -43,6 +44,7 @@ const App: React.FC = () => {
             <Route path="/registracia" element={<Register />} />
             <Route path="/validacia" element={<Validation />} />
             <Route path="/prihlasit-sa" element={<Login onSuccess={onLogin} />} />
+            <Route path="/notifikacie" element={<Notifications />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </main>
