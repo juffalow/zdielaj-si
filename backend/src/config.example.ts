@@ -24,6 +24,9 @@ export default {
     level: process.env.LOGGER_LEVEL || 'info',
   },
   services: {
+    frontend: {
+      url: process.env.SERVICES_FRONTEND_URL || 'http://localhost:3000',
+    },
     upload: {
       url: process.env.SERVICES_UPLOAD_URL || 'http://upload:3010',
     },
