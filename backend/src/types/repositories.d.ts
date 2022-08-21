@@ -55,4 +55,6 @@ interface UserRepository {
   create(params: UserRepository.CreateParameters): Promise<User>;
 
   update(params: UserRepository.UpdateParameters): Promise<User>;
+
+  detele(id: number): Promise<boolean>;
 }
