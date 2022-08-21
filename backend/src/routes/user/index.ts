@@ -13,6 +13,6 @@ router.get('/logout', logout);
 router.get('/refreshToken', refreshToken);
 router.post('/register', register);
 router.post('/login', login);
-router.delete('/:id', deleteUser);
+router.delete('/', deleteUser);
 
 export default router;
