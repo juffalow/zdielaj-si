@@ -57,6 +57,17 @@ class KnexUserRepository implements UserRepository {
         }).catch(err => reject(err));
     });
   }
+
+  public async detele(id: number): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      database.table('user')
+        .where('id', id)
+        .del()
+        .then(() => {
+          resolve(true)
+        }).catch(err => reject(err))
+    })
+  }
 }
 
 export default KnexUserRepository;
