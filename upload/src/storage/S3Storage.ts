@@ -10,7 +10,7 @@ export default class S3Storage implements Storage {
       const params = {
         // ACL: 'authenticated-read',
         serverSideEncryption: 'AES256',
-        Bucket: config.services.aws.bucket,
+        Bucket: config.services.aws.s3.bucket,
         Body: body,
         Key: path,
       };
@@ -27,18 +27,19 @@ export default class S3Storage implements Storage {
 
   getUrl(path: string): string {
     const signedUrl = aws.s3.getSignedUrl('getObject', {
-      Bucket: config.services.aws.bucket,
+      Bucket: config.services.aws.s3.bucket,
       Key: path,
       Expires: 60 * 10,
     });
 
-    console.log(signedUrl);
-
-    return signedUrl;
+    if (typeof config.services.aws.cf.url === 'undefined') {
+      logger.warn('CloudFront URL is missing!');
+      return signedUrl;
+    }
 
     /*
      * Signed URL is in form https://<bucket name>.<region>.<domain>
      */
-    // return signedUrl.replace(config.storage.originalUrl, config.storage.url);
+    return signedUrl.replace(`https://${config.services.aws.s3.bucket}.s3.${config.services.aws.region}.amazonaws.com`, config.services.aws.cf.url);
   }
 }

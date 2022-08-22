@@ -28,8 +28,19 @@ export default {
       accessKeyId: process.env.SERVICES_AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.SERVICES_AWS_SECRET_ACCESS_KEY,
       region: process.env.SERVICES_AWS_REGION,
-      bucket: process.env.SERVICES_AWS_BUCKET,
-      queueUrl: process.env.SERVICES_AWS_QUEUE_URL,
+      s3: {
+        bucket: process.env.SERVICES_AWS_S3_BUCKET,
+      },
+      sqs: {
+        url: process.env.SERVICES_AWS_SQS_URL,
+      },
+      mc: {
+        queue: process.env.SERVICES_AWS_MC_QUEUE,
+        role: process.env.SERVICES_AWS_MC_ROLE,
+      },
+      cf: {
+        url: process.env.SERVICES_AWS_CF_URL,
+      },
     },
   },
 }

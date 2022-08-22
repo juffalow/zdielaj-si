@@ -51,7 +51,7 @@ router.post('/', upload.single('image'), async (req: express.Request, res: expre
 
   const message = {
     MessageBody: JSON.stringify(messageData),
-    QueueUrl: config.services.aws.queueUrl,
+    QueueUrl: config.services.aws.sqs.url,
   };
   
   try {

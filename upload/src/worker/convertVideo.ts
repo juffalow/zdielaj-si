@@ -3,6 +3,7 @@ import KnexMediaRepository from '../repositories/KnexMediaRepository';
 import MediaConvertJobRepository from '../repositories/MediaConvertJobRepository';
 import KnexMediaConvertJobRepository from '../repositories/KnexMediaConvertJobRepository';
 import aws from '../services/aws';
+import config from '../config';
 
 class ResizeImage {
 
@@ -19,8 +20,8 @@ class ResizeImage {
     const media = await this.getMedia(mediaId);
 
     const job = await aws.mc.createJob({
-      Queue: "arn:aws:mediaconvert:eu-central-1:309832898636:queues/Default",
-      Role: "arn:aws:iam::309832898636:role/aws-mc-zdielaj-si-role",
+      Queue: config.services.aws.mc.queue,
+      Role: config.services.aws.mc.role,
       Settings: {
         "TimecodeConfig": {
           "Source": "ZEROBASED"
@@ -100,7 +101,7 @@ class ResizeImage {
             "OutputGroupSettings": {
               "Type": "FILE_GROUP_SETTINGS",
               "FileGroupSettings": {
-                Destination: `s3://zdielajsi/${media.path.split('.')[0]}`
+                Destination: `s3://${config.services.aws.s3.bucket}/${media.path.split('.')[0]}`
               }
             }
           }
@@ -114,7 +115,7 @@ class ResizeImage {
             },
             "VideoSelector": {},
             "TimecodeSource": "ZEROBASED",
-            FileInput: `s3://zdielajsi/${media.path}`
+            FileInput: `s3://${config.services.aws.s3.bucket}/${media.path}`
           }
         ]
       },

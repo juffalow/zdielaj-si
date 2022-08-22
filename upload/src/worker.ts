@@ -1,4 +1,5 @@
 import { Consumer } from 'sqs-consumer';
+import cls from 'cls-hooked';
 import aws from './services/aws';
 import config from './config';
 import logger from './logger';
@@ -8,11 +9,18 @@ import mediaConvertJob from './worker/mediaConvertJob';
 import { getDimensions } from './utils/functions';
 
 const app = Consumer.create({
-  queueUrl: config.services.aws.queueUrl,
+  queueUrl: config.services.aws.sqs.url,
   handleMessage: async (message) => {
     const body = JSON.parse(message.Body);
 
     logger.debug('Received message from queue!', { body });
+
+    if ('traceId' in body) {
+      const namespace = cls.getNamespace('upload');
+      namespace.set('traceId', body.traceId);
+    } else {
+      logger.warn('Trace ID is not present in message body!');
+    }
 
     if ('mimetype' in body && body.mimetype.startsWith('image/')) {
       const { width, height } = getDimensions(body.height, body.width, 320, 320);

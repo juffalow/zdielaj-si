@@ -28,7 +28,7 @@ class MediaConvertJob {
       await this.thumbnailRepository.create({
         mediaId: job.mediaId,
         mimetype: 'image/jpeg',
-        path: fullPath.replace(`s3://${config.services.aws.bucket}/`, ''),
+        path: fullPath.replace(`s3://${config.services.aws.s3.bucket}/`, ''),
         height: payload.detail.outputGroupDetails[0].outputDetails[1].videoDetails.heightInPx,
         width: payload.detail.outputGroupDetails[0].outputDetails[1].videoDetails.widthInPx,
         size: 0,
@@ -39,7 +39,7 @@ class MediaConvertJob {
       await this.thumbnailRepository.create({
         mediaId: job.mediaId,
         mimetype: 'image/jpeg',
-        path: fullPath.replace(`s3://${config.services.aws.bucket}/`, ''),
+        path: fullPath.replace(`s3://${config.services.aws.s3.bucket}/`, ''),
         height: payload.detail.outputGroupDetails[0].outputDetails[2].videoDetails.heightInPx,
         width: payload.detail.outputGroupDetails[0].outputDetails[2].videoDetails.widthInPx,
         size: 0,
