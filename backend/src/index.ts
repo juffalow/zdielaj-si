@@ -5,6 +5,7 @@ import routes from './routes';
 import database from './database';
 import cors from './middlewares/cors';
 import auth from './middlewares/auth';
+import trace from './middlewares/trace';
 import logger from './logger';
 
 const app = express();
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(trace);
 app.use(cors);
 app.use(auth);
 app.use((err, req, res, next) => {

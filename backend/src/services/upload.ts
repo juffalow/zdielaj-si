@@ -1,3 +1,4 @@
+import cls from 'cls-hooked';
 import { get } from './client';
 import config from '../config';
 
@@ -20,5 +21,13 @@ interface GetMediaResponse {
 }
 
 export async function getMedia(id: number): Promise<GetMediaResponse> {
-  return get(`${config.services.upload.url}/media/${id}`);
+  const namespace = cls.getNamespace('core');
+  const traceId = namespace.get('traceId');
+  const searchParameters = new URLSearchParams();
+
+  if (typeof traceId !== 'undefined') {
+    searchParameters.append('traceId', traceId);
+  }
+  
+  return get(`${config.services.upload.url}/media/${id}${searchParameters}`);
 }
