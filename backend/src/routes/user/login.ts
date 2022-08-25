@@ -8,7 +8,7 @@ import {
 } from '../../repositories';
 import { generateToken } from '../../utils/functions';
 
-export const login = async (req: express.Request, res: express.Response) => {
+const login = async (req: express.Request, res: express.Response) => {
   const data = req.body;
 
   if (!('email' in data) || !('password' in data)) {
@@ -61,3 +61,5 @@ export const login = async (req: express.Request, res: express.Response) => {
     },
   });
 };
+
+export default login;

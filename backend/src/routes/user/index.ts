@@ -1,10 +1,10 @@
 import express from 'express';
-import { register } from './register';
-import { login } from './login';
-import { emailValidation } from './emailValidation';
-import { deleteUser } from './deleteUser';
-import { logout } from './logout';
-import { refreshToken } from './refreshToken';
+import register from './register';
+import login from './login';
+import emailValidation from './emailValidation';
+import deleteUser from './deleteUser';
+import logout from './logout';
+import refreshToken from './refreshToken';
 
 const router = express.Router();
 

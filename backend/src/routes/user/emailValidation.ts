@@ -3,7 +3,7 @@ import {
   User as UserRepository,
 } from '../../repositories';
 
-export const emailValidation = async (req: Request, res: Response) => {
+const emailValidation = async (req: Request, res: Response) => {
   console.log(req.query)
   if ('id' in req.query === false || 'token' in req.query === false && parseInt(req.query.id as string) === parseInt(req.query.id as string)) {
     return res.status(401)
@@ -39,3 +39,5 @@ export const emailValidation = async (req: Request, res: Response) => {
     data: null,
   });
 };
+
+export default emailValidation;

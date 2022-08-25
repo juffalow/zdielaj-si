@@ -3,7 +3,7 @@ import {
   RefreshToken as RefreshTokenRepository,
 } from '../../repositories';
 
-export const logout = async (req: Request, res: Response) => {
+const logout = async (req: Request, res: Response) => {
   if (!('refreshToken' in req.cookies) || req.cookies.refreshToken.indexOf('.') === -1) {
     res.status(401);
     res.json({
@@ -41,3 +41,5 @@ export const logout = async (req: Request, res: Response) => {
     data: null,
   });
 };
+
+export default logout;

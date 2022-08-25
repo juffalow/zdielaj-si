@@ -3,7 +3,7 @@ import {
   User as UserRepository,
 } from '../../repositories';
 
-export const deleteUser = async (req: Request, res: Response) => {
+const deleteUser = async (req: Request, res: Response) => {
   const user = 'user' in req ? (req as any).user : null;
 
   if (!user || !('id' in user)) {
@@ -34,3 +34,5 @@ export const deleteUser = async (req: Request, res: Response) => {
     data: true,
   }).end();
 };
+
+export default deleteUser;
