@@ -7,7 +7,7 @@ import {
 } from '../../repositories';
 import { notify } from '../../services/notifications';
 
-export const register = async (req: express.Request, res: express.Response) => {
+const register = async (req: express.Request, res: express.Response) => {
   const data = req.body;
 
   if (!('name' in data) || !('email' in data) || !('password' in data)) {
@@ -65,3 +65,5 @@ export const register = async (req: express.Request, res: express.Response) => {
     },
   }).end();
 };
+
+export default register;
