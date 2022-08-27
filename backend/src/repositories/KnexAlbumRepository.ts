@@ -20,7 +20,7 @@ class KnexAlbumRepository implements AlbumRepository {
   public async create(userId: number = null): Promise<Album> {
     logger.debug(`${this.constructor.name}.create`, { userId });
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const id = crypto.randomBytes(4).toString('hex');
       database.insert({
         id,
@@ -31,7 +31,7 @@ class KnexAlbumRepository implements AlbumRepository {
         resolve({ id, userId });
       }).catch(err => {
         logger.error('Cannot create album!', { error: { message: err.message, stack: err.stack } });
-        return this.create();
+        return this.create(userId);
       });
     });
   }
