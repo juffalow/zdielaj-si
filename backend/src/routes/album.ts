@@ -77,8 +77,7 @@ router.post('/:id/media', async (req: express.Request, res: express.Response) =>
         data: null,
       }).end();
     }
-
-    if (count === 0 || count > 50) {
+    if (typeof album === 'undefined' || count > 50) {
       return res.status(400).json({
         error: {
           message: 'Album does not exist or album is full!',
