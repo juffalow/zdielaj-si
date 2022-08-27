@@ -1,8 +1,6 @@
 import winston, { format } from 'winston';
-import cls from 'cls-hooked';
+import namespace from '../services/cls';
 import config from '../config';
-
-const namespace = cls.createNamespace('upload');
 
 const hookedFormat = format((info) => {
   const traceId = namespace.get('traceId');
@@ -21,7 +19,6 @@ const logger = winston.createLogger({
       level: config.logger.level.toLowerCase(),
       format: winston.format.combine(
         hookedFormat(),
-        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss', alias: '@timestamp' }),
         winston.format.json(),
         winston.format.errors({ stack: true }),
       ),

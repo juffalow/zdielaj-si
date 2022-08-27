@@ -17,12 +17,10 @@ router.get('/:id', onlyServer, async (req: express.Request, res: express.Respons
 
   const location = storage.getUrl(media.path);
 
-  const thumbnailsWithLocation = thumbnails.map(thumbnail => {
-    return {
-      ...thumbnail,
-      location: storage.getUrl(thumbnail.path),
-    };
-  });
+  const thumbnailsWithLocation = thumbnails.map(thumbnail => ({
+    ...thumbnail,
+    location: storage.getUrl(thumbnail.path),
+  }));
 
   res.status(200).json({
     error: null,

@@ -1,5 +1,4 @@
 import { Consumer } from 'sqs-consumer';
-import cls from 'cls-hooked';
 import aws from './services/aws';
 import config from './config';
 import logger from './logger';
@@ -7,6 +6,7 @@ import resizeImage from './worker/resizeImage';
 import convertVideo from './worker/convertVideo';
 import mediaConvertJob from './worker/mediaConvertJob';
 import { getDimensions } from './utils/functions';
+import namespace from './services/cls';
 
 const app = Consumer.create({
   queueUrl: config.services.aws.sqs.url,
@@ -16,7 +16,6 @@ const app = Consumer.create({
     logger.debug('Received message from queue!', { body });
 
     if ('traceId' in body) {
-      const namespace = cls.getNamespace('upload');
       namespace.set('traceId', body.traceId);
     } else {
       logger.warn('Trace ID is not present in message body!');

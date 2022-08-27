@@ -13,6 +13,7 @@ import S3Storage from '../storage/S3Storage';
 import logger from '../logger';
 import config from '../config';
 import aws from '../services/aws';
+import namespace from '../services/cls';
 
 const upload = multer({ fileFilter });
 
@@ -47,6 +48,7 @@ router.post('/', upload.single('image'), async (req: express.Request, res: expre
     mimetype: media.mimetype,
     height: dimensions.height,
     width: dimensions.width,
+    traceId: namespace.get('traceId'),
   }
 
   const message = {
