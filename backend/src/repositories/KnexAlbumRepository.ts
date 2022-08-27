@@ -21,7 +21,7 @@ class KnexAlbumRepository implements AlbumRepository {
     logger.debug(`${this.constructor.name}.create`, { userId });
 
     return new Promise((resolve, reject) => {
-      const id = crypto.randomBytes(8).toString('hex');
+      const id = crypto.randomBytes(4).toString('hex');
       database.insert({
         id,
         userId,
