@@ -1,13 +1,16 @@
-import ThumbnailRepository, { CreateParameters } from './ThumbnailRepository';
-import database from '../database';
+import { Knex } from 'knex';
 import logger from '../logger';
 
 class KnexThumbnailRepository implements ThumbnailRepository {
-  public async create(params: CreateParameters): Promise<Thumbnail> {
+  constructor(
+    protected database: Knex
+  ) {}
+
+  public async create(params: ThumbnailRepository.CreateParameters): Promise<Thumbnail> {
     logger.debug(`${this.constructor.name}.create`, params);
 
     return new Promise((resolve, reject) => {
-      database.insert(params)
+      this.database.insert(params)
         .into('thumbnail')
         .then((ids) => {
           resolve(this.get(String(ids[0])));
@@ -20,7 +23,7 @@ class KnexThumbnailRepository implements ThumbnailRepository {
     logger.debug(`${this.constructor.name}.get`, { id });
 
     return new Promise((resolve, reject) => {
-      database.select()
+      this.database.select()
         .from('thumbnail')
         .where('id', id)
         .first()
@@ -33,7 +36,7 @@ class KnexThumbnailRepository implements ThumbnailRepository {
     logger.debug(`${this.constructor.name}.getAll`, { mediaId });
 
     return new Promise((resolve, reject) => {
-      database.select()
+      this.database.select()
         .from('thumbnail')
         .where('mediaId', mediaId)
         .then(thumbnails => resolve(thumbnails))

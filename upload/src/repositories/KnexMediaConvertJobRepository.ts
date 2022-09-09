@@ -1,13 +1,16 @@
-import MediaConvertJobRepository, { CreateParameters } from './MediaConvertJobRepository';
-import database from '../database';
+import { Knex } from 'knex';
 import logger from '../logger';
 
 class KnexMediaRepository implements MediaConvertJobRepository {
-  public async create(params: CreateParameters): Promise<{ id: string, mediaId: string }> {
+  constructor(
+    protected database: Knex
+  ) {}
+
+  public async create(params: MediaConvertJobRepository.CreateParameters): Promise<{ id: string, mediaId: string }> {
     logger.debug(`${this.constructor.name}.create`, params);
 
     return new Promise((resolve, reject) => {
-      database.insert(params)
+      this.database.insert(params)
         .into('media_convert_job')
         .then(() => {
           resolve(this.get(params.mediaId));
@@ -20,7 +23,7 @@ class KnexMediaRepository implements MediaConvertJobRepository {
     logger.debug(`${this.constructor.name}.get`, { id });
 
     return new Promise((resolve, reject) => {
-      database.select()
+      this.database.select()
         .from('media_convert_job')
         .where('id', id)
         .first()

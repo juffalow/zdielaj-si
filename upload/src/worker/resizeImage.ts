@@ -1,25 +1,13 @@
 import sharp from 'sharp';
 import fetch from 'node-fetch';
-import MediaRepository from '../repositories/MediaRepository';
-import KnexMediaRepository from '../repositories/KnexMediaRepository';
-import ThumbnailRepository from '../repositories/ThumbnailRepository';
-import KnexThumbnailRepository from '../repositories/KnexThumbnailRepository';
-import Storage from '../storage/Storage';
-import S3Storage from '../storage/S3Storage';
+import container from '../container';
 
 class ResizeImage {
-
-  private mediaRepository: MediaRepository;
-
-  private thumbnailRepository: ThumbnailRepository;
-
-  private storage: Storage;
-
-  public constructor(mediaRepository: MediaRepository, thumbnailRepository: ThumbnailRepository, storage: Storage) {
-    this.mediaRepository = mediaRepository;
-    this.thumbnailRepository = thumbnailRepository;
-    this.storage = storage;
-  }
+  constructor(
+    protected mediaRepository: MediaRepository,
+    protected thumbnailRepository: ThumbnailRepository,
+    protected storage: Services.Storage
+  ) {}
 
   public async resize(mediaId: number, width: number, height: number): Promise<void> {
     const media = await this.getMedia(mediaId);
@@ -54,4 +42,8 @@ class ResizeImage {
   }
 }
 
-export default new ResizeImage(new KnexMediaRepository(), new KnexThumbnailRepository(), new S3Storage());
+export default new ResizeImage(
+  container.get('repository.media'),
+  container.get('repository.thumbnail'),
+  container.get('service.storage')
+);

@@ -1,20 +1,12 @@
 import config from '../config';
-import MediaConvertJobRepository from '../repositories/MediaConvertJobRepository';
-import KnexMediaConvertJobRepository from '../repositories/KnexMediaConvertJobRepository';
-import ThumbnailRepository from '../repositories/ThumbnailRepository';
-import KnexThumbnailRepository from '../repositories/KnexThumbnailRepository';
 import logger from '../logger';
+import container from '../container';
 
 class MediaConvertJob {
-
-  private mediaConvertJobRepository: MediaConvertJobRepository;
-
-  private thumbnailRepository: ThumbnailRepository;
-
-  public constructor(mediaConvertJobRepository: MediaConvertJobRepository, thumbnailRepository: ThumbnailRepository) {
-    this.mediaConvertJobRepository = mediaConvertJobRepository;
-    this.thumbnailRepository = thumbnailRepository;
-  }
+  constructor(
+    protected mediaConvertJobRepository: MediaConvertJobRepository,
+    protected thumbnailRepository: ThumbnailRepository
+  ) {}
 
   public async complete(payload: any): Promise<any> {
     const job = await this.mediaConvertJobRepository.get(payload.detail.jobId);
@@ -48,4 +40,7 @@ class MediaConvertJob {
   }
 }
 
-export default new MediaConvertJob(new KnexMediaConvertJobRepository(), new KnexThumbnailRepository());
+export default new MediaConvertJob(
+  container.get('repository.mediaConvertJob'),
+  container.get('repository.thumbnail')
+);

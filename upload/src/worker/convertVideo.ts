@@ -1,20 +1,12 @@
-import MediaRepository from '../repositories/MediaRepository';
-import KnexMediaRepository from '../repositories/KnexMediaRepository';
-import MediaConvertJobRepository from '../repositories/MediaConvertJobRepository';
-import KnexMediaConvertJobRepository from '../repositories/KnexMediaConvertJobRepository';
 import aws from '../services/aws';
 import config from '../config';
+import container from '../container';
 
 class ResizeImage {
-
-  private mediaRepository: MediaRepository;
-
-  private mediaConvertJobRepository: MediaConvertJobRepository;
-
-  public constructor(mediaRepository: MediaRepository, mediaConvertJobRepository: KnexMediaConvertJobRepository) {
-    this.mediaRepository = mediaRepository;
-    this.mediaConvertJobRepository = mediaConvertJobRepository;
-  }
+  constructor(
+    protected mediaRepository: MediaRepository,
+    protected mediaConvertJobRepository: MediaConvertJobRepository,
+  ) {}
 
   public async convert(mediaId: number, height: number, width: number, thumbnailHeight: number, thumbnailWidth: number): Promise<any> {
     const media = await this.getMedia(mediaId);
@@ -139,4 +131,7 @@ class ResizeImage {
   }
 }
 
-export default new ResizeImage(new KnexMediaRepository(), new KnexMediaConvertJobRepository());
+export default new ResizeImage(
+  container.get('repository.media'),
+  container.get('repository.mediaConvertJob')
+);

@@ -4,7 +4,6 @@ import path from 'path';
 import { Request } from 'express';
 import sizeOf from 'image-size';
 import ffmpeg from 'fluent-ffmpeg';
-import S3Storage from '../storage/S3Storage';
 
 export const base64encode = (str: string): string => {
   return Buffer.from(str).toString('base64')
@@ -29,7 +28,7 @@ export const fileFilter = (req: Request, file: any, cb: (err: unknown, isAccepte
   }
 }
 
-export const processFile = async (storage: S3Storage, directory: string, file: any): Promise<string> => {
+export const processFile = async (storage: Services.Storage, directory: string, file: any): Promise<string> => {
   if (file.mimetype.startsWith('image/')) {
     return processImageFile(storage, directory, file);
   }
@@ -39,7 +38,7 @@ export const processFile = async (storage: S3Storage, directory: string, file: a
   }
 }
 
-export const processImageFile = async (storage: S3Storage, directory: string, file: any): Promise<string> => {
+export const processImageFile = async (storage: Services.Storage, directory: string, file: any): Promise<string> => {
   const hash = crypto.createHash('sha1').update(`${file.originalname}${Date.now()}`).digest('hex');
   const extname = path.extname(file.originalname);
   const original = bufferToStream(file.buffer);
@@ -49,7 +48,7 @@ export const processImageFile = async (storage: S3Storage, directory: string, fi
   return `${directory}/${hash}${extname}`;
 }
 
-export const processVideoFile = async (storage: S3Storage, directory: string, file: any): Promise<string> => {
+export const processVideoFile = async (storage: Services.Storage, directory: string, file: any): Promise<string> => {
   const hash = crypto.createHash('sha1').update(`${file.originalname}${Date.now()}`).digest('hex');
   const extname = path.extname(file.originalname);
   const original = bufferToStream(file.buffer);
