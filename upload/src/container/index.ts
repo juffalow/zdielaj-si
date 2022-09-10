@@ -5,6 +5,7 @@ import KnexThumbnailRepository from '../repositories/KnexThumbnailRepository';
 import KnexMediaConvertJobRepository from '../repositories/KnexMediaConvertJobRepository';
 import aws from '../services/aws';
 import S3Storage from '../services/storage/S3Storage';
+import Disk from '../services/storage/Disk';
 import AWSQueue from '../services/queue/AWSQueue';
 import database from '../database';
 import config from '../config';
@@ -47,12 +48,21 @@ container.register('service.database', () => {
 container.register('service.storage', () => {
   logger.debug('Creating S3Storage object...');
 
-  return new S3Storage(
-    aws.s3,
-    config.services.aws.s3.bucket,
-    config.services.aws.region,
-    config.services.aws.cf.url
-  );
+  if (config.services.storage.type === 'DISK') {
+    return new Disk(
+      config.services.storage.directory,
+      'http://localhost:3012'
+    );
+  }
+
+  if (config.services.storage.type === 'S3') {
+    return new S3Storage(
+      aws.s3,
+      config.services.aws.s3.bucket,
+      config.services.aws.region,
+      config.services.aws.cf.url
+    );
+  }
 });
 
 container.register('service.queue', () => {

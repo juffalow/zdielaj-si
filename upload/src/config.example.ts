@@ -23,6 +23,11 @@ export default {
   logger: {
     level: process.env.LOGGER_LEVEL || 'info',
   },
+  upload: {
+    storage: {
+      type: 'S3',
+    }
+  },
   services: {
     aws: {
       accessKeyId: process.env.SERVICES_AWS_ACCESS_KEY_ID,
@@ -41,6 +46,12 @@ export default {
       cf: {
         url: process.env.SERVICES_AWS_CF_URL,
       },
+    },
+    storage: {
+      type: 'S3',
+    },
+    queue: {
+      type: 'SQS',
     },
   },
 }

@@ -24,6 +24,7 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.use(express.static(config.services.storage.directory));
 app.use(routes);
 
 async function start(): Promise<void> {
