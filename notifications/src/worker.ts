@@ -3,6 +3,7 @@ import aws from './services/aws';
 import config from './config';
 import logger from './logger';
 import getNotifications from './notifications';
+import namespace from './services/cls';
 
 const app = Consumer.create({
   queueUrl: config.services.aws.queueUrl,
@@ -11,7 +12,17 @@ const app = Consumer.create({
 
     logger.debug('Received message from queue!', { body });
 
-    await getNotifications(body.name).notify(body.parameters);
+    if ('traceId' in body) {
+      namespace.set('traceId', body.traceId);
+    } else {
+      logger.warn('Trace ID is not present in message body!');
+    }
+
+    try {
+      await getNotifications(body.name).notify(body.parameters);
+    } catch (err) {
+      logger.error('Could not sent notification!', err);
+    }
   },
   sqs: aws.sqs,
 });

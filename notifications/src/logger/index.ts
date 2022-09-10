@@ -1,5 +1,16 @@
-import winston from 'winston';
+import winston, { format } from 'winston';
+import namespace from '../services/cls';
 import config from '../config';
+
+const hookedFormat = format((info) => {
+  const traceId = namespace.get('traceId');
+
+  if (typeof traceId !== 'undefined') {
+    info.traceId = traceId;
+  }
+
+  return info;
+});
 
 const logger = winston.createLogger({
   level: config.logger.level.toLowerCase(),
@@ -7,7 +18,7 @@ const logger = winston.createLogger({
     new winston.transports.Console({
       level: config.logger.level.toLowerCase(),
       format: winston.format.combine(
-        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss', alias: '@timestamp' }),
+        hookedFormat(),
         winston.format.json(),
         winston.format.errors({ stack: true }),
       ),
