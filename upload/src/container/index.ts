@@ -4,7 +4,9 @@ import KnexMediaRepository from '../repositories/KnexMediaRepository';
 import KnexThumbnailRepository from '../repositories/KnexThumbnailRepository';
 import KnexMediaConvertJobRepository from '../repositories/KnexMediaConvertJobRepository';
 import aws from '../services/aws';
+import digitalocean from '../services/do';
 import S3Storage from '../services/storage/S3Storage';
+import Spaces from '../services/storage/Spaces';
 import Disk from '../services/storage/Disk';
 import AWSQueue from '../services/queue/AWSQueue';
 import database from '../database';
@@ -52,6 +54,14 @@ container.register('service.storage', () => {
     return new Disk(
       config.services.storage.directory,
       'http://localhost:3012'
+    );
+  }
+
+  if (config.services.storage.type === 'SPACES') {
+    return new Spaces(
+      digitalocean.s3,
+      config.services.do.spaces.bucket,
+      config.services.do.spaces.region,
     );
   }
 

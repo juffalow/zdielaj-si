@@ -2,19 +2,18 @@ import { Readable } from 'stream';
 import { S3 } from 'aws-sdk';
 import logger from '../../logger';
 
-class S3Storage implements Services.Storage {
+class Spaces implements Services.Storage {
   constructor(
     protected s3: S3,
     protected bucket: string,
     protected region: string,
-    protected cloudFrontUrl?: string
+    protected url?: string
   ) {}
 
   public store(body: Readable, path: string): Promise<void> {
     return new Promise((resolve, reject) => {
       const params = {
-        // ACL: 'authenticated-read',
-        serverSideEncryption: 'AES256',
+        ACL: 'public-read',
         Bucket: this.bucket,
         Body: body,
         Key: path,
@@ -37,16 +36,16 @@ class S3Storage implements Services.Storage {
       Expires: 60 * 10,
     });
 
-    if (typeof this.cloudFrontUrl === 'undefined') {
-      logger.warn('CloudFront URL is missing!');
+    if (typeof this.url === 'undefined') {
+      logger.warn('URL is missing!');
       return signedUrl;
     }
 
     /*
      * Signed URL is in form https://<bucket name>.<region>.<domain>
      */
-    return signedUrl.replace(`https://${this.bucket}.s3.${this.region}.amazonaws.com`, this.cloudFrontUrl);
+    return signedUrl.replace(`https://${this.bucket}.${this.region}.digitaloceanspaces.com`, this.url);
   }
 }
 
-export default S3Storage;
+export default Spaces;
