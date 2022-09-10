@@ -1,6 +1,6 @@
-import cls from 'cls-hooked';
 import { get } from './client';
 import config from '../config';
+import namespace from '../services/cls';
 
 interface GetMediaResponse {
   error: unknown,
@@ -21,7 +21,6 @@ interface GetMediaResponse {
 }
 
 export async function getMedia(id: number): Promise<GetMediaResponse> {
-  const namespace = cls.getNamespace('core');
   const traceId = namespace.get('traceId');
   const searchParameters = new URLSearchParams();
 
@@ -29,5 +28,5 @@ export async function getMedia(id: number): Promise<GetMediaResponse> {
     searchParameters.append('traceId', traceId);
   }
   
-  return get(`${config.services.upload.url}/media/${id}${searchParameters}`);
+  return get(`${config.services.upload.url}/media/${id}?${searchParameters}`);
 }
