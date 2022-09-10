@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { Readable } from 'stream';
-import Queue from '../services/queue/Queue';
 import {
   base64encode,
   processFile,
@@ -14,7 +13,7 @@ class UploadController {
   constructor(
     protected mediaRepository: MediaRepository,
     protected storage: Services.Storage,
-    protected queue: Queue
+    protected queue: Services.Queue
   ) {}
 
   public async process(req: Request, res: Response): Promise<unknown> {

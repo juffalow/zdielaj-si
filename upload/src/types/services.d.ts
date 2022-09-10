@@ -4,4 +4,8 @@ declare namespace Services {
 
     getUrl(path: string): string;
   }
+
+  interface Queue {
+    sendMessage(message: unknown): Promise<unknown>;
+  }
 }

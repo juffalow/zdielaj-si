@@ -1,7 +1,6 @@
 import { SQS } from 'aws-sdk';
-import Queue from './Queue';
 
-class AWSQueue implements Queue {
+class AWSQueue implements Services.Queue {
   constructor(
     protected sqs: SQS,
     protected queueUrl: string
