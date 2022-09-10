@@ -1,9 +1,8 @@
 import winston, { format } from 'winston';
-import cls from 'cls-hooked';
+import namespace from '../services/cls';
 import config from '../config';
 
 const hookedFormat = format((info) => {
-  const namespace = cls.getNamespace('core');
   const traceId = namespace.get('traceId');
 
   if (typeof traceId !== 'undefined') {
@@ -19,7 +18,8 @@ const redactedFormat = format((info) => {
   }
 
   if (typeof info['email'] !== 'undefined') {
-    info.email = info.email.substring(0, 2) + '***@******';
+    const [ name, domain ] = info.email.split('@');
+    info.email = `${name.substring(0, 2)}${'*'.repeat(name.length - 2)}@${'*'.repeat(domain.length - 2)}${domain.substring(domain.length - 2)}`;
   }
 
   return info;
@@ -33,7 +33,6 @@ const logger = winston.createLogger({
       format: winston.format.combine(
         hookedFormat(),
         redactedFormat(),
-        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss', alias: '@timestamp' }),
         winston.format.json(),
         winston.format.errors({ stack: true }),
       ),
