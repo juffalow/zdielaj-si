@@ -51,8 +51,13 @@ container.register('service.storage', () => {
   logger.debug('Creating S3Storage object...');
 
   if (config.services.storage.type === 'DISK') {
+    if ('directory' in config.services.storage === false) {
+      logger.error('Storage directory is not specified!');
+      throw new Error('Storage directory is not specified!');
+    }
+
     return new Disk(
-      config.services.storage.directory,
+      (config.services.storage as any).directory,
       'http://localhost:3012'
     );
   }
