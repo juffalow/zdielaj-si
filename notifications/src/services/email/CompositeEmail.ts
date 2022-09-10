@@ -1,11 +1,10 @@
-import EmailService from './EmailService';
 import logger from '../../logger';
 
-class CompositeEmail implements EmailService {
+class CompositeEmail implements Services.Email {
 
-  protected emailServices: EmailService[];
+  protected emailServices:Services.Email[];
 
-  public constructor(emailServices: EmailService[]) {
+  public constructor(emailServices: Services.Email[]) {
     this.emailServices = emailServices;
   }
 

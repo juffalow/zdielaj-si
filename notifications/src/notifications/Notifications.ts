@@ -1,6 +1,4 @@
 import { ValidationResult } from 'joi';
-import EmailNotificationRepository from '../repositories/EmailNotificationRepository';
-import EmailLogRepository from '../repositories/EmailLogRepository';
 
 abstract class Notifications {
   protected emailNotificationRepository: EmailNotificationRepository;

@@ -28,7 +28,12 @@ export default {
       accessKeyId: process.env.SERVICES_AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.SERVICES_AWS_SECRET_ACCESS_KEY,
       region: process.env.SERVICES_AWS_REGION,
-      queueUrl: process.env.SERVICES_AWS_QUEUE_URL,
+      sqs: {
+        url: process.env.SERVICES_AWS_SQS_URL,
+      },
     },
+    email: {
+      unsubscribeUrl: process.env.SERVICES_EMAIL_UNSUBSCRIBE_URL,
+    }
   },
 }

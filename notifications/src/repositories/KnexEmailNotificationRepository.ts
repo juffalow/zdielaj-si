@@ -1,13 +1,16 @@
-import EmailNotificationRepository, { CreateParameters, FindParameters } from './EmailNotificationRepository';
-import database from '../database';
+import { Knex } from 'knex';
 import logger from '../logger';
 
 class KnexEmailNotificationRepository implements EmailNotificationRepository {
+  constructor(
+    protected database: Knex
+  ) {}
+
   public async get(email: string, notification: string): Promise<EmailNotification | undefined> {
-    logger.debug('KnexEmailNotificationRepository.get', { email, notification });
+    logger.debug(`${this.constructor.name}.get`, { email, notification });
 
     return new Promise((resolve, reject) => {
-      database.select()
+      this.database.select()
         .from('email_notification')
         .where('email', email)
         .where('notification', notification)
@@ -23,11 +26,11 @@ class KnexEmailNotificationRepository implements EmailNotificationRepository {
     });
   }
 
-  public async create(params: CreateParameters): Promise<EmailNotification> {
-    logger.debug('KnexEmailNotificationRepository.create', params);
+  public async create(params: EmailNotificationRepository.CreateParameters): Promise<EmailNotification> {
+    logger.debug(`${this.constructor.name}.create`, params);
 
     return new Promise((resolve, reject) => {
-      database.insert(params)
+      this.database.insert(params)
         .into('email_notification')
         .then(() => {
           resolve(this.get(params.email, params.notification));
@@ -36,11 +39,11 @@ class KnexEmailNotificationRepository implements EmailNotificationRepository {
     });
   }
 
-  public async find(params: FindParameters): Promise<EmailNotification[]> {
-    logger.debug('KnexEmailNotificationRepository.find', params);
+  public async find(params: EmailNotificationRepository.FindParameters): Promise<EmailNotification[]> {
+    logger.debug(`${this.constructor.name}.find`, params);
 
     return new Promise((resolve, reject) => {
-      database.select()
+      this.database.select()
         .from('email_notification')
         .then(emailNotifications => resolve(emailNotifications))
         .catch(err => reject(err));

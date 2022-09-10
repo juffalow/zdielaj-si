@@ -27,7 +27,7 @@ router.post('/', onlyServer, validate, async (req: express.Request, res: express
 
   const message = {
     MessageBody: JSON.stringify(data),
-    QueueUrl: config.services.aws.queueUrl,
+    QueueUrl: config.services.aws.sqs.url,
   };
   
   try {

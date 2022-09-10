@@ -1,8 +1,6 @@
-import EmailService from './EmailService';
 import logger from '../../logger';
-import EmailLogRepository from '../../repositories/EmailLogRepository';
 
-class DBEmail implements EmailService {
+class DBEmail implements Services.Email {
   protected emailLogRepository: EmailLogRepository;
 
   public constructor(emailLogRepository: EmailLogRepository) {

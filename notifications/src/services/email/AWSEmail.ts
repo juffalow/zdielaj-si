@@ -1,14 +1,18 @@
 import nodemailer from 'nodemailer';
-import aws from '../aws';
+import { SES } from 'aws-sdk';
 import logger from '../../logger';
 
-class AWSEmail {
+class AWSEmail implements Services.Email {
   protected transporter: nodemailer.Transporter<unknown>;
 
-  public constructor() {
+  protected unsubscribeUrl: string;
+
+  public constructor(ses: SES, unsubscribeUrl: string) {
     this.transporter = nodemailer.createTransport({
-      SES: aws.ses,
+      SES: ses,
     });
+
+    this.unsubscribeUrl = unsubscribeUrl;
   }
 
   public async sendMail(email: string, subject: string, body: string, from: string): Promise<void> {
@@ -21,7 +25,7 @@ class AWSEmail {
       html: body,
       list: {
         unsubscribe: {
-          url: 'https://zdielaj.si/notifikacie',
+          url: this.unsubscribeUrl,
           comment: 'Unsubscribe from this notification.',
         },
       }

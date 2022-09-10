@@ -6,7 +6,7 @@ import getNotifications from './notifications';
 import namespace from './services/cls';
 
 const app = Consumer.create({
-  queueUrl: config.services.aws.queueUrl,
+  queueUrl: config.services.aws.sqs.url,
   handleMessage: async (message) => {
     const body = JSON.parse(message.Body);
 
