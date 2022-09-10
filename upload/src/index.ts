@@ -24,7 +24,10 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.use(express.static(config.services.storage.directory));
+if (config.services.storage.type === 'DISK') {
+  app.use(express.static((config.services.storage as any).directory));
+}
+
 app.use(routes);
 
 async function start(): Promise<void> {
