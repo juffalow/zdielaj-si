@@ -1,13 +1,16 @@
-import UserRepository, { CreateParameters, UpdateParameters } from './UserRepository';
-import database from '../database';
+import { Knex } from 'knex';
 import logger from '../logger';
 
 class KnexUserRepository implements UserRepository {
-  public async get(id: number): Promise<User> {
-    return new Promise((resolve, reject) => {
-      logger.debug(`${this.constructor.name}.get`, { id });
+  constructor(
+    protected database: Knex
+  ) {}
 
-      database.select()
+  public async get(id: number): Promise<User> {
+    logger.debug(`${this.constructor.name}.get`, { id });
+
+    return new Promise((resolve, reject) => {
+      this. database.select()
         .from('user')
         .where('id', id)
         .first()
@@ -20,7 +23,7 @@ class KnexUserRepository implements UserRepository {
     logger.debug(`${this.constructor.name}.getByEmail`, { email });
 
     return new Promise((resolve, reject) => {
-      database.select()
+      this.database.select()
         .from('user')
         .where('email', email)
         .first()
@@ -29,11 +32,11 @@ class KnexUserRepository implements UserRepository {
     });
   }
 
-  public async create(params: CreateParameters): Promise<User> {
+  public async create(params: UserRepository.CreateParameters): Promise<User> {
     logger.debug(`${this.constructor.name}.create`, { params });
 
     return new Promise((resolve, reject) => {
-      database.insert(params)
+      this.database.insert(params)
         .into('user')
         .then(() => {
           resolve(this.getByEmail(params.email));
@@ -41,12 +44,12 @@ class KnexUserRepository implements UserRepository {
     });
   }
 
-  public async update(params: UpdateParameters): Promise<User> {
+  public async update(params: UserRepository.UpdateParameters): Promise<User> {
     logger.debug(`${this.constructor.name}.update`, { params });
 
     const { id, ...data } = params;
     return new Promise((resolve, reject) => {
-      database.table('user')
+      this.database.table('user')
         .update(data)
         .where('id', id)
         .then(() => {

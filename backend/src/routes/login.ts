@@ -2,8 +2,10 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import config from '../config';
-import UserRepository from '../repositories/KnexUserRepository';
-import RefreshTokenRepository from '../repositories/KnexRefreshTokenRepository';
+import {
+  User as UserRepository,
+  RefreshToken as RefreshTokenRepository,
+} from '../repositories';
 import { generateToken } from '../utils/functions';
 
 const router = express.Router();
@@ -21,7 +23,7 @@ router.post('/login', async (req: express.Request, res: express.Response) => {
     }).end();
   }
 
-  const userRepository = new UserRepository();
+  const userRepository = UserRepository;
   const user = await userRepository.getByEmail(data.email);
 
   const isCorrect = typeof user === 'undefined' || user === null ? false : await bcrypt.compare(data.password, user.password);
@@ -36,7 +38,7 @@ router.post('/login', async (req: express.Request, res: express.Response) => {
     }).end();
   }
 
-  const refreshTokenRepository = new RefreshTokenRepository();
+  const refreshTokenRepository = RefreshTokenRepository;
 
   const token = generateToken({ id: user.id });
   const refreshToken: string = uuidv4();

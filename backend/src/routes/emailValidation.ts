@@ -1,5 +1,7 @@
 import express from 'express';
-import UserRepository from '../repositories/KnexUserRepository';
+import {
+  User as UserRepository,
+} from '../repositories';
 
 const router = express.Router();
 
@@ -17,7 +19,7 @@ router.get('/emailValidation', async (req, res) => {
       .end();
   }
 
-  const userRepository = new UserRepository();
+  const userRepository = UserRepository;
   const user = await userRepository.get(parseInt(req.query.id as string));
 
   if(typeof user === 'undefined') {

@@ -1,13 +1,16 @@
-import MediaRepository from './MediaRepository';
-import database from '../database';
+import { Knex } from 'knex';
 import logger from '../logger';
 
 class KnexMediaRepository implements MediaRepository {
+  constructor(
+    protected database: Knex
+  ) {}
+
   public async find(albumId: string): Promise<Array<Media>> {
     logger.debug(`${this.constructor.name}.find`, { albumId });
 
     return new Promise((resolve, reject) => {
-      database.select()
+      this.database.select()
         .from('media')
         .where('albumId', albumId)
         .then(media => resolve(media))
@@ -19,7 +22,7 @@ class KnexMediaRepository implements MediaRepository {
     logger.debug(`${this.constructor.name}.count`, { albumId });
 
     return new Promise((resolve, reject) => {
-      database.count({ count: '*' })
+      this.database.count({ count: '*' })
         .from('media')
         .where('albumId', albumId)
         .first()
@@ -32,14 +35,14 @@ class KnexMediaRepository implements MediaRepository {
     logger.debug(`${this.constructor.name}.create`, { albumId, mediaId });
 
     return new Promise((resolve, reject) => {
-      database.insert({
+      this.database.insert({
         albumId,
         mediaId,
       })
       .into('media')
       .then((ids) => {
         resolve({
-          id: String(ids[0]),
+          id: ids[0],
           albumId,
           mediaId,
         });

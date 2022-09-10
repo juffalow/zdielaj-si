@@ -1,14 +1,16 @@
 import express from 'express';
-import AlbumRepository from '../repositories/KnexAlbumRepository';
-import MediaRepository from '../repositories/KnexMediaRepository';
+import {
+  Album as AlbumRepository,
+  Media as MediaRepository,
+} from '../repositories';
 import { generateToken } from '../utils/functions';
 import { getMedia } from '../services/upload';
 
 const router = express.Router();
 
 router.get('/:id', async (req: express.Request, res: express.Response) => {
-  const albumRepository = new AlbumRepository();
-  const mediaRepository = new MediaRepository();
+  const albumRepository = AlbumRepository;
+  const mediaRepository = MediaRepository;
 
   const album = await albumRepository.get(req.params.id);
   const media = await mediaRepository.find(req.params.id);
@@ -45,7 +47,7 @@ router.get('/:id', async (req: express.Request, res: express.Response) => {
 });
 
 router.post('/', async (req: express.Request, res: express.Response) => {
-  const albumRepository = new AlbumRepository();
+  const albumRepository = AlbumRepository;
   const userId = 'user' in req ? (req as any).user.id : null;
 
   const album = await albumRepository.create(userId);
@@ -62,8 +64,8 @@ router.post('/', async (req: express.Request, res: express.Response) => {
 });
 
 router.post('/:id/media', async (req: express.Request, res: express.Response) => {
-  const albumRepository = new AlbumRepository();
-  const mediaRepository = new MediaRepository();
+  const albumRepository = AlbumRepository;
+  const mediaRepository = MediaRepository;
   const user = 'user' in req ? (req as any).user : null;
   const album = await albumRepository.get(req.params.id);
   const count = await mediaRepository.count(req.params.id);

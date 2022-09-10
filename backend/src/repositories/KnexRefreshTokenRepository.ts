@@ -1,10 +1,13 @@
-import RefreshTokenRepository from './RefreshTokenRepository';
-import database from '../database';
+import { Knex } from 'knex';
 
 class KnexRefreshTokenRepository implements RefreshTokenRepository {
+  constructor(
+    protected database: Knex
+  ) {}
+
   public async get(userId: number, token: string): Promise<RefreshToken> {
     return new Promise((resolve, reject) => {
-      database.select()
+      this.database.select()
         .from('refreshToken')
         .where('userId', userId)
         .where('token', token)
@@ -16,10 +19,10 @@ class KnexRefreshTokenRepository implements RefreshTokenRepository {
   
   public async create(userId: number, token: string, expiresAt: number): Promise<RefreshToken> {
     return new Promise((resolve, reject) => {
-      database.insert({
+      this.database.insert({
         userId,
         token,
-        expiresAt: database.raw('DATE_ADD(?, INTERVAL ? SECOND)', [database.fn.now(), expiresAt]),
+        expiresAt: this.database.raw('DATE_ADD(?, INTERVAL ? SECOND)', [this.database.fn.now(), expiresAt]),
       })
       .into('refreshToken')
       .then(() => {
@@ -30,7 +33,7 @@ class KnexRefreshTokenRepository implements RefreshTokenRepository {
 
   public async delete(userId: number, token: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      database.table('refreshToken')
+      this.database.table('refreshToken')
       .where('userId', userId)
       .where('token', token)
       .delete()

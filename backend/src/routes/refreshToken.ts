@@ -1,7 +1,9 @@
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import config from '../config';
-import RefreshTokenRepository from '../repositories/KnexRefreshTokenRepository';
+import {
+  RefreshToken as RefreshTokenRepository,
+} from '../repositories';
 import { generateToken } from '../utils/functions';
 
 const router = express.Router();
@@ -19,7 +21,7 @@ router.get('/refreshToken', async (req, res) => {
     return;
   }
 
-  const refreshTokenRepository = new RefreshTokenRepository();
+  const refreshTokenRepository = RefreshTokenRepository;
   const [ userId, userRefreshToken ] = req.cookies.refreshToken.split('.');
   const refreshToken = await refreshTokenRepository.get(userId, userRefreshToken);
 

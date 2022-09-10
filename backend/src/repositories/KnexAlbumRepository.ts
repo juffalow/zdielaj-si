@@ -1,14 +1,17 @@
 import crypto from 'crypto';
-import AlbumRepository from './AlbumRepository';
-import database from '../database';
+import { Knex } from 'knex';
 import logger from '../logger';
 
 class KnexAlbumRepository implements AlbumRepository {
+  constructor(
+    protected database: Knex
+  ) {}
+
   public async get(id: string): Promise<Album> {
     logger.debug(`${this.constructor.name}.get`, { id });
 
     return new Promise((resolve, reject) => {
-      database.select()
+      this.database.select()
         .from('album')
         .where('id', id)
         .first()
@@ -22,7 +25,7 @@ class KnexAlbumRepository implements AlbumRepository {
 
     return new Promise((resolve) => {
       const id = crypto.randomBytes(4).toString('hex');
-      database.insert({
+      this.database.insert({
         id,
         userId,
       })
