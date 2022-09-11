@@ -1,0 +1,3 @@
+# DigitalOcean Setup
+
+* Spaces
