@@ -18,21 +18,21 @@ After a file is uploaded, there is a post-processing generating *thumbnails* or 
 ```mermaid
 flowchart TD
     U((User)) --> UC
-    UC["UploadController"] -->|store media| S[Storage]
+    UC["UploadController"] -->|store file| S[Storage]
     subgraph S["Storage"]
         Disk[(Disk)]
         S3[(AWS S3)]
-        Spaces[(DigitalOcean Spacces)]
+        Spaces[(DigitalOcean Spaces)]
     end
     subgraph DB["Database"]
         MySQL[(MySQL)]
         PostgreSQL[(PostgreSQL)]
     end
-    S --> DB
+    S -->|save reference and metadata| DB
     subgraph Q["Queue"]
-        SQS([AWS SQS])
+        SQS{{AWS SQS}}
     end
-    DB --> Q
+    DB -->|"inform worker(s)"| Q
     Q --> R((Response))
 ```
 
@@ -43,21 +43,24 @@ flowchart TD
     Q((Queue)) --> W
     subgraph W["Worker"]
         N1["
-            Resize image.fdsaf fdsa fdwa fdsa
+            Processing video or image can take more time
+            and user doesn't need to wait for it, therefore
+            such processes are done in an async way.
         "]
         style N1 fill:#fff,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
         N1 -.- I
         N1 -.- V
         subgraph I["Image"]
             N2["
-                Resize image.
+                Create thumbnail from original image.
             "]
-            Sharp
+            Sharp{{Sharp}}
             style N2 fill:#fff,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
         end
         subgraph V["Video"]
             N3["
-                Convert video to mp4 file.
+                Convert video to mp4 file and generate
+                preview image(s) and thumbnail(s).
             "]
             MC{{AWS MediaConvert}}
             FF{{FFmpeg}}
