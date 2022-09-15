@@ -4,7 +4,6 @@ import {
 } from '../../repositories';
 
 const emailValidation = async (req: Request, res: Response) => {
-  console.log(req.query)
   if ('id' in req.query === false || 'token' in req.query === false && parseInt(req.query.id as string) === parseInt(req.query.id as string)) {
     return res.status(401)
       .json({

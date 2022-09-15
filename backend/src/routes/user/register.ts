@@ -1,4 +1,4 @@
-import express from 'express';
+import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import config from '../../config';
@@ -7,7 +7,7 @@ import {
 } from '../../repositories';
 import { notify } from '../../services/notifications';
 
-const register = async (req: express.Request, res: express.Response) => {
+const register = async (req: Request, res: Response) => {
   const data = req.body;
 
   if (!('name' in data) || !('email' in data) || !('password' in data)) {
