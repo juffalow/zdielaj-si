@@ -58,13 +58,15 @@ class KnexUserRepository implements UserRepository {
     });
   }
 
-  public async detele(id: number): Promise<boolean> {
+  public async detele(id: number): Promise<User> {
+    const user = this.get(id);
+
     return new Promise((resolve, reject) => {
       this.database.table('user')
         .where('id', id)
         .del()
         .then(() => {
-          resolve(true)
+          resolve(user)
         }).catch(err => reject(err))
     })
   }
