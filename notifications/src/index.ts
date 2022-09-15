@@ -1,30 +1,31 @@
-import express from 'express';
+import http from 'http';
+import { createTerminus } from '@godaddy/terminus';
 import config from './config';
-import routes from './routes';
 import database from './database';
-import cors from './middlewares/cors';
-import auth from './middlewares/auth';
-import trace from './middlewares/trace';
 import logger from './logger';
+import app from './app';
 
-const app = express();
+const server = http.createServer(app);
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(trace);
-app.use(cors);
-app.use(auth);
-app.use((err, req, res, next) => {
-  logger.error('Something went wrong!', { error: { message: err.message, stack: err.stack } });
-  return res.status(500).json({
-    error: {
-      message: 'Something went wrong!',
-    },
-    data: null,
-  });
+async function onSignal(): Promise<void> {
+  logger.warn('Server is going to shut down! Starting cleanup...');
+}
+
+async function onShutdown (): Promise<void> {
+  logger.warn('Server is shutting down!');
+}
+
+async function onHealthCheck(): Promise<void> {
+  return;
+}
+
+createTerminus(server, {
+  healthChecks: {
+    '/health/liveness': onHealthCheck,
+  },
+  onSignal,
+  onShutdown,
 });
-
-app.use(routes);
 
 async function start(): Promise<void> {
   try {
@@ -37,7 +38,7 @@ async function start(): Promise<void> {
       logger.info(`Database migrated to version ${currentVersion}!`);
     }
 
-    app.listen(config.port, () => {
+    server.listen(config.port, () => {
       logger.info(`Server started at http://localhost:${ config.port }`);
     });
   } catch(err) {
