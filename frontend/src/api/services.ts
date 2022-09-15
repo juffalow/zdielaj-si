@@ -27,7 +27,7 @@ export async function uploadPhoto(file: File): Promise<Media> {
 interface RefreshTokenResponse {
   error: unknown;
   data: {
-    id: string;
+    id: number;
     expiresAt: string;
     token: string;
   };

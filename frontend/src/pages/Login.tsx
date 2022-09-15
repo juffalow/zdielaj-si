@@ -7,14 +7,11 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { Link, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { login } from '../api/services';
+import useAuth from '../utils/useAuth';
 
-interface Props {
-  onSuccess: (user: any) => void;
-}
-
-const Login: React.FC<Props> = ({ onSuccess }: Props) => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { signIn } = useAuth();
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
@@ -38,9 +35,8 @@ const Login: React.FC<Props> = ({ onSuccess }: Props) => {
     const form = event.currentTarget;
 
     if (form.checkValidity()) {
-      login(email, password)
-        .then((response: any) => {
-          onSuccess(response.data.user);
+      signIn(email, password)
+        .then(() => {
           navigate('/');
         })
         .catch(() => {
