@@ -1,4 +1,4 @@
-import express from 'express';
+import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import config from '../../config';
@@ -8,7 +8,7 @@ import {
 } from '../../repositories';
 import { generateToken } from '../../utils/functions';
 
-const login = async (req: express.Request, res: express.Response) => {
+const login = async (req: Request, res: Response) => {
   const data = req.body;
 
   if (!('email' in data) || !('password' in data)) {

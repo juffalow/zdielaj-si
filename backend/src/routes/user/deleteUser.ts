@@ -4,22 +4,10 @@ import {
 } from '../../repositories';
 
 const deleteUser = async (req: Request, res: Response) => {
-  const user = 'user' in req ? (req as any).user : null;
-
-  if (!user || !('id' in user)) {
-    return res.status(400).json({
-      error: {
-        message: 'Missing authorization token!',
-        code: 1
-      },
-      data: null,
-    }).end();
-  }
-
   const userRepository = UserRepository;
-  const deletedUser = await userRepository.detele(user.id);
+  const user = await userRepository.detele((req as any).user.id);
 
-  if (typeof deletedUser === 'undefined') {
+  if (typeof user === 'undefined') {
     return res.status(400).json({
       error: {
         message: 'Unable to delete user!',
@@ -31,7 +19,9 @@ const deleteUser = async (req: Request, res: Response) => {
 
   res.status(200).json({
     error: null,
-    data: deletedUser,
+    data: { 
+      user,
+    },
   }).end();
 };
 

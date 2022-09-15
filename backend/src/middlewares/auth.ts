@@ -1,7 +1,8 @@
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import config from '../config';
 
-export default function auth(req, res, next): void {
+export default function auth(req: Request, res: Response, next: NextFunction): void {
   if (req.method === 'OPTIONS') {
     next();
   }
@@ -10,9 +11,10 @@ export default function auth(req, res, next): void {
     const token = req.headers.authorization.replace('Bearer ', '');
     try {
       const user = jwt.verify(token, config.jwt.secret);
-      req.user = user;
+      req['user'] = user;
     } catch (err) {
-      return res.status(401).json({ error: 'Unauthorized!' });
+      res.status(401).json({ error: 'Unauthorized!' });
+      return;
     }
   }
 
