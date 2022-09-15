@@ -58,7 +58,8 @@ const Home: React.FC = () => {
     ]);
 
     for (const file of acceptedFiles) {
-      await uploadPhoto(file);
+      const media = await uploadPhoto(file);
+      await addMedia(albumId, media.id);
 
       setFiles((fs) => fs.map(f => {
         if (f.preview === f.preview) {
