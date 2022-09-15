@@ -3,15 +3,14 @@ import multer from 'multer';
 import {
   fileFilter,
 } from '../utils/functions';
-import container from '../container';
-import UploadController from '../controllers/Upload';
+import controllers from '../controllers';
 
 const upload = multer({ fileFilter });
 
 const router = express.Router();
 
 router.post('/', upload.single('image'), async (req: express.Request, res: express.Response) => {
-  const uploadController = container.get<UploadController>('controller.upload');
+  const uploadController = controllers.Upload;
 
   return uploadController.process(req, res);
 });

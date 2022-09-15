@@ -1,6 +1,6 @@
 import config from '../config';
 import logger from '../logger';
-import container from '../container';
+import repositories from '../repositories';
 
 class MediaConvertJob {
   constructor(
@@ -41,6 +41,6 @@ class MediaConvertJob {
 }
 
 export default new MediaConvertJob(
-  container.get('repository.mediaConvertJob'),
-  container.get('repository.thumbnail')
+  repositories.MediaConvertJob,
+  repositories.Thumbnail
 );

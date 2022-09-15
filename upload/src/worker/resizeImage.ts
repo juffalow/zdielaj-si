@@ -1,6 +1,7 @@
 import sharp from 'sharp';
 import fetch from 'node-fetch';
-import container from '../container';
+import repositories from '../repositories';
+import services from '../services';
 
 class ResizeImage {
   constructor(
@@ -43,7 +44,7 @@ class ResizeImage {
 }
 
 export default new ResizeImage(
-  container.get('repository.media'),
-  container.get('repository.thumbnail'),
-  container.get('service.storage')
+  repositories.Media,
+  repositories.Thumbnail,
+  services.Storage
 );

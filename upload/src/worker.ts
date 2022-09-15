@@ -1,5 +1,5 @@
 import { Consumer } from 'sqs-consumer';
-import aws from './services/aws';
+import services from './services';
 import config from './config';
 import logger from './logger';
 import resizeImage from './worker/resizeImage';
@@ -38,7 +38,7 @@ const app = Consumer.create({
       }
     }
   },
-  sqs: aws.sqs,
+  sqs: services.AWS.sqs,
 });
 
 app.on('error', (err) => {

@@ -1,6 +1,6 @@
-import aws from '../services/aws';
 import config from '../config';
-import container from '../container';
+import services from '../services';
+import repositories from '../repositories';
 
 class ResizeImage {
   constructor(
@@ -11,7 +11,7 @@ class ResizeImage {
   public async convert(mediaId: number, height: number, width: number, thumbnailHeight: number, thumbnailWidth: number): Promise<any> {
     const media = await this.getMedia(mediaId);
 
-    const job = await aws.mc.createJob({
+    const job = await services.AWS.mc.createJob({
       Queue: config.services.aws.mc.queue,
       Role: config.services.aws.mc.role,
       Settings: {
@@ -132,6 +132,6 @@ class ResizeImage {
 }
 
 export default new ResizeImage(
-  container.get('repository.media'),
-  container.get('repository.mediaConvertJob')
+  repositories.Media,
+  repositories.MediaConvertJob
 );
