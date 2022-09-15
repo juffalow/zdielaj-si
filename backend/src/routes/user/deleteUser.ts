@@ -9,7 +9,7 @@ const deleteUser = async (req: Request, res: Response) => {
   if (!user || !('id' in user)) {
     return res.status(400).json({
       error: {
-        message: 'Missing authorization token',
+        message: 'Missing authorization token!',
         code: 1
       },
       data: null,
@@ -17,12 +17,12 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 
   const userRepository = UserRepository;
-  const deleteStatus = await userRepository.detele(user.id);
+  const deletedUser = await userRepository.detele(user.id);
 
-  if (!deleteStatus) {
+  if (typeof deletedUser === 'undefined') {
     return res.status(400).json({
       error: {
-        message: 'Can not delete user',
+        message: 'Unable to delete user!',
         code: 2,
       },
       data: null,
@@ -31,7 +31,7 @@ const deleteUser = async (req: Request, res: Response) => {
 
   res.status(200).json({
     error: null,
-    data: user,
+    data: deletedUser,
   }).end();
 };
 

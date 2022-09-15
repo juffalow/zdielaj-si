@@ -56,5 +56,5 @@ interface UserRepository {
 
   update(params: UserRepository.UpdateParameters): Promise<User>;
 
-  detele(id: number): Promise<boolean>;
+  detele(id: number): Promise<User>;
 }
