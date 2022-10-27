@@ -7,6 +7,8 @@ import {
   RefreshToken as RefreshTokenRepository,
 } from '../../repositories';
 import { generateToken } from '../../utils/functions';
+import { notify } from '../../services/notifications';
+import logger from '../../logger';
 
 const login = async (req: Request, res: Response) => {
   const data = req.body;
@@ -35,6 +37,15 @@ const login = async (req: Request, res: Response) => {
       data: null,
     }).end();
   }
+
+  logger.debug('Notifying user about login from new device!');
+  await notify({
+    name: 'login',
+    parameters: {
+      email: user.email,
+      firstName: user.name,
+    },
+  });
 
   const refreshTokenRepository = RefreshTokenRepository;
 
