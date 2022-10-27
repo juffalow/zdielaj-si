@@ -1,8 +1,14 @@
 {
   "name": "upload",
+  "description": "Upload service to store various types of files.",
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
+  "author": {
+    "name": "Matej Jellus",
+    "email": "juffalow@juffalow.com",
+    "url": "https://juffalow.com"
+  },
   "devDependencies": {
     "@types/express": "^4.17.8",
     "@types/jsonwebtoken": "^8.5.0",
@@ -38,5 +44,15 @@
     "lint": "eslint . --ext .ts",
     "migrate:latest": "knex migrate:latest",
     "migrate:down": "knex migrate:down"
-  }
+  },
+  "keywords": [
+    "upload",
+    "multer",
+    "aws",
+    "aws-s3",
+    "aws-sqs",
+    "aws-mediaconvert",
+    "digitalocean",
+    "digitalocean-spaces"
+  ]
 }
