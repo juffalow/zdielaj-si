@@ -2,9 +2,8 @@ import { Consumer } from 'sqs-consumer';
 import services from './services';
 import config from './config';
 import logger from './logger';
-import resizeImage from './worker/resizeImage';
-import convertVideo from './worker/convertVideo';
-import mediaConvertJob from './worker/mediaConvertJob';
+import jobs from './jobs';
+import repositories from './repositories';
 import { getDimensions } from './utils/functions';
 import namespace from './services/cls';
 
@@ -23,18 +22,26 @@ const app = Consumer.create({
 
     if ('mimetype' in body && body.mimetype.startsWith('image/')) {
       const { width, height } = getDimensions(body.height, body.width, 320, 320);
-      await resizeImage.resize(body.mediaId, width, height);
+      const media = await repositories.Media.get(body.mediaId);
+
+      await jobs.Image.resize(media, width, height);
     }
 
     if ('mimetype' in body && body.mimetype.startsWith('video/')) {
       const { width: previewWidth, height: previewHeight } = getDimensions(body.height, body.width, 720, 1280);
       const { width: thumbnailWidth, height: thumbnailHeight } = getDimensions(body.height, body.width, 180, 320);
-      await convertVideo.convert(body.mediaId, previewHeight, previewWidth, thumbnailHeight, thumbnailWidth);
+      const media = await repositories.Media.get(body.mediaId);
+      
+      await jobs.Video.convert(media, previewHeight, previewWidth, thumbnailHeight, thumbnailWidth);
     }
 
     if ('detail' in body && 'jobId' in body.detail) {
       if (body.detail.status === 'COMPLETE') {
-        await mediaConvertJob.complete(body);
+        await jobs.Video.complete(body);
+      }
+
+      if (body.detail.status === 'ERROR') {
+        logger.error('Media convert job ended with error!', body);
       }
     }
   },

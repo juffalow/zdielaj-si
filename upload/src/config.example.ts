@@ -21,7 +21,24 @@ export default {
     runMigrations: true,
   },
   logger: {
+    /*
+     * debug | info | warn | error
+     */
     level: process.env.LOGGER_LEVEL || 'info',
+  },
+  jobs: {
+    image: {
+      /*
+       * SHARP
+       */
+      type: '',
+    },
+    video: {
+      /*
+       * AWS
+       */
+      type: '',
+    },
   },
   services: {
     aws: {
@@ -37,6 +54,7 @@ export default {
       mc: {
         queue: process.env.SERVICES_AWS_MC_QUEUE,
         role: process.env.SERVICES_AWS_MC_ROLE,
+        endpoint: process.env.SERVICES_AWS_MC_ENDPOINT,
       },
       cf: {
         url: process.env.SERVICES_AWS_CF_URL,
@@ -52,9 +70,15 @@ export default {
       },
     },
     storage: {
+      /*
+       * S3 | SPACES | DISK
+       */
       type: process.env.SERVICES_STORAGE_TYPE || 'S3',
     },
     queue: {
+      /*
+       * SQS
+       */
       type: process.env.SERVICES_QUEUE_TYPE || 'SQS',
     },
   },

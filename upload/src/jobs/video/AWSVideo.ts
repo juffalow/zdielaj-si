@@ -1,19 +1,24 @@
-import config from '../config';
-import services from '../services';
-import repositories from '../repositories';
+import logger from '../../logger';
 
-class ResizeImage {
+/**
+ * 
+ * @see https://aws.amazon.com/mediaconvert/
+ * @see https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/emc-examples.html
+ */
+class AWSVideo implements Jobs.Video {
   constructor(
-    protected mediaRepository: MediaRepository,
+    protected queue: string,
+    protected role: string,
+    protected bucket: string,
+    protected mediaConvert: AWS.MediaConvert,
     protected mediaConvertJobRepository: MediaConvertJobRepository,
+    protected thumbnailRepository: ThumbnailRepository
   ) {}
 
-  public async convert(mediaId: number, height: number, width: number, thumbnailHeight: number, thumbnailWidth: number): Promise<any> {
-    const media = await this.getMedia(mediaId);
-
-    const job = await services.AWS.mc.createJob({
-      Queue: config.services.aws.mc.queue,
-      Role: config.services.aws.mc.role,
+  public async convert(media: Media, height: number, width: number, thumbnailHeight: number, thumbnailWidth: number): Promise<void> {
+    const job = await this.mediaConvert.createJob({
+      Queue: this.queue,
+      Role: this.role,
       Settings: {
         "TimecodeConfig": {
           "Source": "ZEROBASED"
@@ -93,7 +98,7 @@ class ResizeImage {
             "OutputGroupSettings": {
               "Type": "FILE_GROUP_SETTINGS",
               "FileGroupSettings": {
-                Destination: `s3://${config.services.aws.s3.bucket}/${media.path.split('.')[0]}`
+                Destination: `s3://${this.bucket}/${media.path.split('.')[0]}`
               }
             }
           }
@@ -107,7 +112,7 @@ class ResizeImage {
             },
             "VideoSelector": {},
             "TimecodeSource": "ZEROBASED",
-            FileInput: `s3://${config.services.aws.s3.bucket}/${media.path}`
+            FileInput: `s3://${this.bucket}/${media.path}`
           }
         ]
       },
@@ -120,18 +125,40 @@ class ResizeImage {
 
     await this.mediaConvertJobRepository.create({
       id: job.Job.Id,
-      mediaId: String(mediaId),
+      mediaId: String(media.id),
     });
   }
 
-  private async getMedia(id: number): Promise<Media> {
-    const media = await this.mediaRepository.get(String(id));
-  
-    return media;
+  public async complete(payload: any): Promise<void> {
+    const job = await this.mediaConvertJobRepository.get(payload.detail.jobId);
+
+    if (typeof job === 'undefined') {
+      logger.warn('Job not found!', { payload });
+      return;
+    }
+
+    await Promise.all(payload.detail.outputGroupDetails[0].outputDetails[1].outputFilePaths.map(async (fullPath: string) => {
+      await this.thumbnailRepository.create({
+        mediaId: job.mediaId,
+        mimetype: 'image/jpeg',
+        path: fullPath.replace(`s3://${this.bucket}/`, ''),
+        height: payload.detail.outputGroupDetails[0].outputDetails[1].videoDetails.heightInPx,
+        width: payload.detail.outputGroupDetails[0].outputDetails[1].videoDetails.widthInPx,
+        size: 0,
+      });
+    }));
+
+    await Promise.all(payload.detail.outputGroupDetails[0].outputDetails[2].outputFilePaths.map(async (fullPath: string) => {
+      await this.thumbnailRepository.create({
+        mediaId: job.mediaId,
+        mimetype: 'image/jpeg',
+        path: fullPath.replace(`s3://${this.bucket}/`, ''),
+        height: payload.detail.outputGroupDetails[0].outputDetails[2].videoDetails.heightInPx,
+        width: payload.detail.outputGroupDetails[0].outputDetails[2].videoDetails.widthInPx,
+        size: 0,
+      });
+    }));
   }
 }
 
-export default new ResizeImage(
-  repositories.Media,
-  repositories.MediaConvertJob
-);
+export default AWSVideo;
