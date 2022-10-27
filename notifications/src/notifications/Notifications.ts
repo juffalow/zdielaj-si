@@ -1,13 +1,11 @@
 import { ValidationResult } from 'joi';
 
 abstract class Notifications {
-  protected emailNotificationRepository: EmailNotificationRepository;
-  protected emailLogRepository: EmailLogRepository;
-
-  public constructor(emailNotificationRepository: EmailNotificationRepository, emailLogRepository: EmailLogRepository) {
-    this.emailNotificationRepository = emailNotificationRepository;
-    this.emailLogRepository = emailLogRepository;
-  }
+  public constructor(
+    protected unsubscribeUrl: string,
+    protected emailNotificationRepository: EmailNotificationRepository,
+    protected emailLogRepository: EmailLogRepository
+  ) {}
 
   protected async canNotifyWithEmail(email: string, notification: string): Promise<boolean> {
     const emaiLNotification = await this.emailNotificationRepository.get(email, notification);

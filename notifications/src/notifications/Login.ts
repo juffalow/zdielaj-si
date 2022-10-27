@@ -1,20 +1,19 @@
 import Joi from 'joi';
 import Notificatons from './Notifications';
 import logger from '../logger';
-import RegisterTemplate from '../templates/email/register';
+import LoginTemplate from '../templates/email/login';
 import emailService from '../services/email';
 
 interface Parameters {
   email: string;
   firstName: string;
-  validateEmailLink: string;
 }
 
-class RegisterNotifications extends Notificatons {
+class LoginNotification extends Notificatons {
   public async notify(parameters: Parameters): Promise<void> {
     logger.debug(`${this.constructor.name}.notify`, { parameters });
 
-    const isEnabled = await this.canNotifyWithEmail(parameters.email, 'register');
+    const isEnabled = await this.canNotifyWithEmail(parameters.email, 'login');
 
     if (isEnabled === false) {
       logger.warn('User unsubscribed from this event or exceeded limit!!');
@@ -23,11 +22,11 @@ class RegisterNotifications extends Notificatons {
 
     await emailService.sendMail(
       parameters.email,
-      'Registrácia | Zdielaj.si',
-      RegisterTemplate.render({
-        title: 'Registrácia | Zdielaj.si',
+      'Nové prihlásenie | Zdielaj.si',
+      LoginTemplate.render({
+        title: 'Nové prihlásenie | Zdielaj.si',
         unsubscribeUrl: this.unsubscribeUrl,
-        ...parameters
+        ...parameters,
       }),
       '"Zdielaj.si" <no-reply@zdielaj.si>',
     );
@@ -37,11 +36,10 @@ class RegisterNotifications extends Notificatons {
     const schema = Joi.object({
       email: Joi.string().required(),
       firstName: Joi.string().required(),
-      validateEmailLink: Joi.string().required(),
     });
   
     return schema.validate(parameters);
   }
 }
 
-export default RegisterNotifications;
+export default LoginNotification;

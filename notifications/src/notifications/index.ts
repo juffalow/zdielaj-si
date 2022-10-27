@@ -1,15 +1,18 @@
 import Notifications from './Notifications';
 import Register from './Register';
+import Login from './Login';
 import {
   EmailNotification,
   EmailLog,
 } from '../repositories';
+import config from '../config';
 
 const getNotifications = (name: string): Notifications => {
   switch (name) {
-    case 'register': return new Register(EmailNotification(), EmailLog());
+    case 'register': return new Register(config.services.email.unsubscribeUrl, EmailNotification(), EmailLog());
+    case 'login': return new Login(config.services.email.unsubscribeUrl, EmailNotification(), EmailLog());
     default:
-      throw 'Template does not exist!';
+      throw `Notification ${name} does not exist!`;
   }
 }
 
