@@ -1,7 +1,8 @@
-html, body {
-  height: 100%;
+html, body, #root {
+  min-height: 100vh;
 }
 
 .main-container {
   padding-bottom: 50px;
+  min-height: calc(100vh - 162px);
 }
