@@ -1,10 +1,9 @@
-import { ValidationResult } from 'joi';
-
 abstract class Notifications {
   public constructor(
     protected unsubscribeUrl: string,
     protected emailNotificationRepository: EmailNotificationRepository,
-    protected emailLogRepository: EmailLogRepository
+    protected emailLogRepository: EmailLogRepository,
+    protected emailService: Services.Email
   ) {}
 
   protected async canNotifyWithEmail(email: string, notification: string): Promise<boolean> {
@@ -23,9 +22,18 @@ abstract class Notifications {
     return false;
   }
 
+  protected async sendEmail(email: string, subject: string, body: string, from: string): Promise<void> {
+    await this.emailService.sendMail(
+      email,
+      subject,
+      body,
+      from
+    );
+  }
+
   public abstract notify(parameters: unknown): Promise<void>;
 
-  public abstract validateParameters(parameters: unknown): ValidationResult<any>;
+  public abstract validateParameters(parameters: unknown): void;
 }
 
 export default Notifications;

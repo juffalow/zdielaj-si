@@ -1,8 +1,8 @@
 import { Consumer } from 'sqs-consumer';
-import aws from './services/aws';
 import config from './config';
 import logger from './logger';
-import getNotifications from './notifications';
+import getNotification from './notifications';
+import services from './services';
 import namespace from './services/cls';
 
 const app = Consumer.create({
@@ -19,12 +19,13 @@ const app = Consumer.create({
     }
 
     try {
-      await getNotifications(body.name).notify(body.parameters);
+      const notification = await getNotification(body.name);
+      notification.notify(body.parameters);
     } catch (err) {
       logger.error('Could not sent notification!', err);
     }
   },
-  sqs: aws.sqs,
+  sqs: services.AWS.sqs,
 });
 
 app.on('error', (err) => {

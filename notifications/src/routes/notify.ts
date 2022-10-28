@@ -1,21 +1,23 @@
 import express from 'express';
-import aws from '../services/aws';
 import config from '../config';
 import logger from '../logger';
-import getNotifications from '../notifications';
+import getNotification from '../notifications';
+import services from '../services';
 import onlyServer from '../middlewares/onlyServer';
 
 const router = express.Router();
 
-const validate = (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  const { error } = getNotifications(req.body.name).validateParameters(req.body.parameters);
+const validate = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const notification = await getNotification(req.body.name);
 
-  if (typeof error !== 'undefined') {
-    logger.warn('Template parameters are not valid!', { error });
+    notification.validateParameters(req.body.parameters);
+  } catch (error) {
+    logger.warn('Notification parameters are not valid!', { error });
     
     return res.status(400).json({
       data: null,
-      error: 'Template parameters are not valid!',
+      error: 'Notification parameters are not valid!',
     });
   }
 
@@ -31,7 +33,7 @@ router.post('/', onlyServer, validate, async (req: express.Request, res: express
   };
   
   try {
-    await aws.sqs.sendMessage(message).promise();
+    await services.Queue.sendMessage(message);
   } catch (error) {
     logger.error('Could not send message to the queue!', error);
     return res.status(503).json({

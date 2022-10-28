@@ -1,11 +1,22 @@
 import AWSEmail from './AWSEmail';
 import CompositeEmail from './CompositeEmail';
 import DBEmail from './DBEmail';
-import aws from '../aws';
+import services from '../';
 import config from '../../config';
-import { EmailLog } from '../../repositories';
+import repositories from '../../repositories';
 
-const awsEmail = new AWSEmail(aws.ses, config.services.email.unsubscribeUrl);
-const dbEmail = new DBEmail(EmailLog());
+const container = {
+  get AWSEmail() {
+    return new AWSEmail(services.AWS.ses, config.services.email.unsubscribeUrl);
+  },
 
-export default new CompositeEmail([awsEmail, dbEmail]);
+  get DBEmail() {
+    return  new DBEmail(repositories.EmailLog);
+  },
+
+  get CompositeEmail() {
+    return  new CompositeEmail();
+  },
+};
+
+export default container;

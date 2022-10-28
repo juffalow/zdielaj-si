@@ -2,7 +2,6 @@ import Joi from 'joi';
 import Notificatons from './Notifications';
 import logger from '../logger';
 import RegisterTemplate from '../templates/email/register';
-import emailService from '../services/email';
 
 interface Parameters {
   email: string;
@@ -21,7 +20,7 @@ class RegisterNotifications extends Notificatons {
       return;
     }
 
-    await emailService.sendMail(
+    this.sendEmail(
       parameters.email,
       'Registrácia | Zdielaj.si',
       RegisterTemplate.render({
@@ -33,14 +32,18 @@ class RegisterNotifications extends Notificatons {
     );
   }
 
-  public validateParameters(parameters: unknown): Joi.ValidationResult<any> {
+  public validateParameters(parameters: unknown): void {
     const schema = Joi.object({
       email: Joi.string().required(),
       firstName: Joi.string().required(),
       validateEmailLink: Joi.string().required(),
     });
   
-    return schema.validate(parameters);
+    const { error } = schema.validate(parameters);
+  
+    if (error) {
+      throw 'Parameters are not valid!';
+    }
   }
 }
 

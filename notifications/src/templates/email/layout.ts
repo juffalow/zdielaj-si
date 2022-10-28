@@ -44,7 +44,7 @@ export default function layout({ title, content, email, unsubscribeUrl }: Parame
             </table>
           </td>
         </tr>
-        <tr style="background: #fff; font-size: 14px;">
+        <tr style="background: #fff; font-size: 12px;">
           <td align="center">
             E-mail bol odoslaný na <a href="mailto:${email}">${email}</a>. Odosielané notifikácie môžeš kedykoľvek <a href="${unsubscribeUrl}">zmeniť</a>.
           </td>

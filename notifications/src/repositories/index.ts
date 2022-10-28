@@ -2,15 +2,14 @@ import KnexEmailNotificationRepository from './KnexEmailNotificationRepository';
 import KnexEmailLogRepository from './KnexEmailLogRepository';
 import database from '../database';
 
-const EmailNotification = (): EmailNotificationRepository => {
-  return new KnexEmailNotificationRepository(database);
-}
+const container = {
+  get EmailNotification(): EmailNotificationRepository {
+    return new KnexEmailNotificationRepository(database);
+  },
 
-const EmailLog = (): EmailLogRepository => {
-  return new KnexEmailLogRepository(database);
-}
+  get EmailLog(): EmailLogRepository {
+    return new KnexEmailLogRepository(database);
+  },
+};
 
-export {
-  EmailNotification,
-  EmailLog,
-}
+export default container;

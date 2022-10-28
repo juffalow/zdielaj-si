@@ -1,19 +1,19 @@
 import Notifications from './Notifications';
-import Register from './Register';
-import Login from './Login';
-import {
-  EmailNotification,
-  EmailLog,
-} from '../repositories';
+import repositories from '../repositories';
+import services from '../services';
 import config from '../config';
+import logger from '../logger';
 
-const getNotifications = (name: string): Notifications => {
-  switch (name) {
-    case 'register': return new Register(config.services.email.unsubscribeUrl, EmailNotification(), EmailLog());
-    case 'login': return new Login(config.services.email.unsubscribeUrl, EmailNotification(), EmailLog());
-    default:
+const getNotification = async (name: string): Promise<Notifications> => {
+  const filename = './' + name.charAt(0).toUpperCase() + name.slice(1) + '.js';
+  
+  return import(filename)
+    .then(module => module.default)
+    .then(ClassDefinition => new ClassDefinition(config.services.email.unsubscribeUrl, repositories.EmailNotification, repositories.EmailLog, services.Email))
+    .catch(() => {
+      logger.error(`Notification ${name} does not exist!`);
       throw `Notification ${name} does not exist!`;
-  }
+    });
 }
 
-export default getNotifications;
+export default getNotification;
