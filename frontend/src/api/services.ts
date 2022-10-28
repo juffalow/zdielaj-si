@@ -52,3 +52,24 @@ export async function refreshToken(): Promise<RefreshTokenResponse> {
 export async function validateEmail(id: number, token: string): Promise<RefreshTokenResponse> {
   return get(`${process.env.REACT_APP_CORE_URL}/user/emailValidation?id=${id}&token=${token}`);
 }
+
+interface GetAlbumResponse {
+  data: {
+    album: {
+      createdAt: string;
+      id: string;
+      media: [{
+        id: number;
+        location: string;
+        mimetype: string;
+        thumbnails: Array<{
+          location: string;
+        }>;
+      }];
+    }
+  }
+}
+
+export async function loadAlbum(albumId: string): Promise<GetAlbumResponse> {
+  return get(`${process.env.REACT_APP_CORE_URL}/album/${albumId}`);
+}
