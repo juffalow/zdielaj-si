@@ -42,7 +42,7 @@ services:
         - 'mysql_upload_data:/data/db'
 
   core:
-    image: node:16-alpine
+    image: node:18-alpine
     working_dir: /home/node
     command: sh -c "yarn install && yarn start"
     depends_on:
@@ -62,7 +62,7 @@ services:
       - "./backend:/home/node"
 
   notifications:
-    image: node:16-alpine
+    image: node:18-alpine
     working_dir: /home/node
     command: sh -c "yarn install && yarn start"
     depends_on:
@@ -82,7 +82,7 @@ services:
       - "./notifications:/home/node"
 
   notifications_worker:
-    image: node:16-alpine
+    image: node:18-alpine
     working_dir: /home/node
     command: sh -c "yarn start:worker"
     depends_on:
@@ -101,7 +101,7 @@ services:
       - "./notifications:/home/node"
 
   frontend:
-    image: node:16-alpine
+    image: node:18-alpine
     working_dir: /home/node
     command: sh -c "yarn start"
     restart: unless-stopped
@@ -111,7 +111,7 @@ services:
       - 3000:3000
 
   upload:
-    image: node:16-alpine
+    image: node:18-alpine
     working_dir: /home/node
     command: sh -c "apk add --no-cache ffmpeg && yarn install && yarn start"
     depends_on:
@@ -131,7 +131,7 @@ services:
       - "./upload:/home/node"
 
   upload_worker:
-    image: node:16-alpine
+    image: node:18-alpine
     working_dir: /home/node
     command: sh -c "apk add --no-cache ffmpeg && yarn start:worker"
     depends_on:
