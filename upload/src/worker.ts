@@ -21,15 +21,15 @@ const app = Consumer.create({
     }
 
     if ('mimetype' in body && body.mimetype.startsWith('image/')) {
-      const { width, height } = getDimensions(body.height, body.width, 320, 320);
+      const { width, height } = getDimensions(body.metadata.height, body.metadata.width, 320, 320);
       const media = await repositories.Media.get(body.mediaId);
 
       await jobs.Image.resize(media, width, height);
     }
 
     if ('mimetype' in body && body.mimetype.startsWith('video/')) {
-      const { width: previewWidth, height: previewHeight } = getDimensions(body.height, body.width, 720, 1280);
-      const { width: thumbnailWidth, height: thumbnailHeight } = getDimensions(body.height, body.width, 180, 320);
+      const { width: previewWidth, height: previewHeight } = getDimensions(body.metadata.height, body.metadata.width, 720, 1280);
+      const { width: thumbnailWidth, height: thumbnailHeight } = getDimensions(body.metadata.height, body.metadata.width, 180, 320);
       const media = await repositories.Media.get(body.mediaId);
       
       await jobs.Video.convert(media, previewHeight, previewWidth, thumbnailHeight, thumbnailWidth);
@@ -57,4 +57,7 @@ app.on('processing_error', (err) => {
 });
 
 logger.info('Upload worker is running');
-app.start();
+
+namespace.run(() => {
+  app.start();
+});

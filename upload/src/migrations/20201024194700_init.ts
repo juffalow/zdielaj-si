@@ -3,11 +3,13 @@ import { Knex } from 'knex';
 export function up(knex: Knex): Promise<any> {
   return knex.schema.createTable('media', (table) => {
     table.increments('id').primary();
+    table.integer('userId').nullable().defaultTo(null).index();
     table.string('path').notNullable();
     table.string('mimetype', 32).notNullable();
     table.integer('height').notNullable().defaultTo(0);
     table.integer('width').notNullable().defaultTo(0);
     table.integer('size').notNullable().defaultTo(0);
+    table.json('metadata').nullable().defaultTo(null);
     table.timestamp('createdAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
   })
   .createTable('thumbnail', (table) => {

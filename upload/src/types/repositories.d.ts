@@ -1,10 +1,12 @@
 declare namespace MediaRepository {
   interface CreateParameters {
+    userId?: number;
     path: string;
     mimetype: string;
     height: number | undefined;
     width: number | undefined;
     size: number;
+    metadata?: unknown;
   }
 }
 
@@ -26,9 +28,9 @@ declare namespace ThumbnailRepository {
 }
 
 interface ThumbnailRepository {
-  create(params: ThumbnailRepository.CreateParameters): Promise<Media>;
+  create(params: ThumbnailRepository.CreateParameters): Promise<Thumbnail>;
 
-  get(id: string): Promise<Media | undefined>;
+  get(id: string): Promise<Thumbnail | undefined>;
 
   getAll(mediaId: string): Promise<Thumbnail[] | undefined>;
 }
