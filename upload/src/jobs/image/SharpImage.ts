@@ -35,9 +35,11 @@ class SharpImage implements Jobs.Image {
       mediaId: media.id,
       mimetype: media.mimetype,
       path: `${media.path.split('.')[0]}_thumbnail.${media.path.split('.')[1]}`,
-      height,
-      width,
       size: imageCloneBuffer.length,
+      metadata: {
+        height,
+        width,
+      },
     });
   }
 

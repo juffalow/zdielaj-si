@@ -3,8 +3,6 @@ declare namespace MediaRepository {
     userId?: number;
     path: string;
     mimetype: string;
-    height: number | undefined;
-    width: number | undefined;
     size: number;
     metadata?: unknown;
   }
@@ -21,9 +19,8 @@ declare namespace ThumbnailRepository {
     mediaId: string;
     path: string;
     mimetype: string;
-    height: number | undefined;
-    width: number | undefined;
     size: number;
+    metadata?: unknown;
   }
 }
 

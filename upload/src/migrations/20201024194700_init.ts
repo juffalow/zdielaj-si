@@ -6,8 +6,6 @@ export function up(knex: Knex): Promise<any> {
     table.integer('userId').nullable().defaultTo(null).index();
     table.string('path').notNullable();
     table.string('mimetype', 32).notNullable();
-    table.integer('height').notNullable().defaultTo(0);
-    table.integer('width').notNullable().defaultTo(0);
     table.integer('size').notNullable().defaultTo(0);
     table.json('metadata').nullable().defaultTo(null);
     table.timestamp('createdAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
@@ -17,9 +15,8 @@ export function up(knex: Knex): Promise<any> {
     table.integer('mediaId').unsigned().notNullable().references('id').inTable('media');
     table.string('path').notNullable();
     table.string('mimetype', 32).notNullable();
-    table.integer('height').notNullable().defaultTo(0);
-    table.integer('width').notNullable().defaultTo(0);
     table.integer('size').notNullable().defaultTo(0);
+    table.json('metadata').nullable().defaultTo(null);
     table.timestamp('createdAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
   })
   .createTable('media_convert_job', (table) => {

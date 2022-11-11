@@ -34,8 +34,6 @@ class UploadController {
       userId: typeof req['user'] !== 'undefined' && typeof req['user'].id !== 'undefined' ? req['user'].id : null,
       path: path,
       mimetype: req['file'].mimetype,
-      height: dimensions.height,
-      width: dimensions.width,
       size: req['file'].size,
       metadata: {
         height: dimensions.height,

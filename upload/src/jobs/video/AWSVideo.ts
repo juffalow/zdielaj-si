@@ -16,6 +16,8 @@ class AWSVideo implements Jobs.Video {
   ) {}
 
   public async convert(media: Media, height: number, width: number, thumbnailHeight: number, thumbnailWidth: number): Promise<void> {
+    logger.debug(`${this.constructor.name}.convert`, { media });
+
     const job = await this.mediaConvert.createJob({
       Queue: this.queue,
       Role: this.role,
@@ -130,6 +132,8 @@ class AWSVideo implements Jobs.Video {
   }
 
   public async complete(payload: any): Promise<void> {
+    logger.debug(`${this.constructor.name}.complete`, { payload });
+
     const job = await this.mediaConvertJobRepository.get(payload.detail.jobId);
 
     if (typeof job === 'undefined') {
@@ -142,9 +146,11 @@ class AWSVideo implements Jobs.Video {
         mediaId: job.mediaId,
         mimetype: 'image/jpeg',
         path: fullPath.replace(`s3://${this.bucket}/`, ''),
-        height: payload.detail.outputGroupDetails[0].outputDetails[1].videoDetails.heightInPx,
-        width: payload.detail.outputGroupDetails[0].outputDetails[1].videoDetails.widthInPx,
         size: 0,
+        metadata: {
+          height: payload.detail.outputGroupDetails[0].outputDetails[1].videoDetails.heightInPx,
+          width: payload.detail.outputGroupDetails[0].outputDetails[1].videoDetails.widthInPx,
+        },
       });
     }));
 
@@ -153,9 +159,11 @@ class AWSVideo implements Jobs.Video {
         mediaId: job.mediaId,
         mimetype: 'image/jpeg',
         path: fullPath.replace(`s3://${this.bucket}/`, ''),
-        height: payload.detail.outputGroupDetails[0].outputDetails[2].videoDetails.heightInPx,
-        width: payload.detail.outputGroupDetails[0].outputDetails[2].videoDetails.widthInPx,
         size: 0,
+        metadata: {
+          height: payload.detail.outputGroupDetails[0].outputDetails[2].videoDetails.heightInPx,
+          width: payload.detail.outputGroupDetails[0].outputDetails[2].videoDetails.widthInPx,
+        },
       });
     }));
   }
