@@ -1,4 +1,4 @@
-FROM node:16-alpine AS build
+FROM node:18-alpine AS build
 
 USER node
 RUN mkdir /home/node/zdielaj-si-upload/ && chown -R node:node /home/node/zdielaj-si-upload
@@ -7,7 +7,7 @@ WORKDIR /home/node/zdielaj-si-upload
 COPY --chown=node:node . .
 RUN yarn install --frozen-lockfile && yarn build
 
-FROM node:16-alpine
+FROM node:18-alpine
 
 RUN apk add --no-cache ffmpeg
 

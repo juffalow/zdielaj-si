@@ -1,4 +1,4 @@
-FROM node:16-alpine as build
+FROM node:18-alpine as build
 
 RUN mkdir /home/node/zdielaj-si-frontend/ && chown -R node:node /home/node/zdielaj-si-frontend
 WORKDIR /home/node/zdielaj-si-frontend
