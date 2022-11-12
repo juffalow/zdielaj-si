@@ -12,7 +12,7 @@ declare global {
   type EmailNotification = {
     id: string;
     email: string;
-    event: string;
+    notification: string;
     isEnabled: boolean;
     createdAt: string;
     updatedAt: string;

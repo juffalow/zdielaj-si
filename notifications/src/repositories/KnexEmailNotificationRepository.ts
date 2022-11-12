@@ -39,12 +39,41 @@ class KnexEmailNotificationRepository implements EmailNotificationRepository {
     });
   }
 
+  public async update(params: EmailNotificationRepository.UpdateParameters): Promise<EmailNotification> {
+    logger.debug(`${this.constructor.name}.update`, params);
+
+    return new Promise((resolve, reject) => {
+      this.database.table('email_notification')
+        .where('email', params.email)
+        .where('notification', params.notification)
+        .update({ isEnabled: params.isEnabled })
+        .then(() => {
+          resolve(this.get(params.email, params.notification));
+        })
+        .catch(err => reject(err));
+    });
+  }
+
   public async find(params: EmailNotificationRepository.FindParameters): Promise<EmailNotification[]> {
     logger.debug(`${this.constructor.name}.find`, params);
+
+    const {
+      email,
+      notification,
+    } = params;
 
     return new Promise((resolve, reject) => {
       this.database.select()
         .from('email_notification')
+        .modify((queryBuilder) => {
+          if (typeof email !== 'undefined' && email !== null) {
+            queryBuilder.where('email', email);
+          }
+  
+          if (typeof notification !== 'undefined' && notification !== null) {
+            queryBuilder.where('notification', notification);
+          }
+        })
         .then(emailNotifications => resolve(emailNotifications))
         .catch(err => reject(err));
     });

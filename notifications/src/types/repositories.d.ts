@@ -4,6 +4,12 @@ declare namespace EmailNotificationRepository {
     notification: string;
     isEnabled: boolean;
   }
+
+  interface UpdateParameters {
+    email: string;
+    notification: string;
+    isEnabled: boolean;
+  }
   
   interface FindParameters {
     email?: string;
@@ -16,18 +22,9 @@ interface EmailNotificationRepository {
 
   create(params: EmailNotificationRepository.CreateParameters): Promise<EmailNotification>;
 
-  find(params: EmailNotificationRepository.FindParameters): Promise<EmailNotification[]>;
-}
+  update(params: EmailNotificationRepository.UpdateParameters): Promise<EmailNotification>;
 
-declare namespace ThumbnailRepository {
-  interface CreateParameters {
-    mediaId: string;
-    path: string;
-    mimetype: string;
-    height: number | undefined;
-    width: number | undefined;
-    size: number;
-  }
+  find(params: EmailNotificationRepository.FindParameters): Promise<EmailNotification[]>;
 }
 
 declare namespace EmailLogRepository {
@@ -41,11 +38,19 @@ declare namespace EmailLogRepository {
   interface FindParameters {
     email?: string;
     subject?: string;
+    createdAt? : string | {
+      from?: string;
+      to?: string;
+    };
   }
   
   interface CountParameters {
     email?: string;
     subject?: string;
+    createdAt? : string | {
+      from?: string;
+      to?: string;
+    };
   }
 }
 
