@@ -1,5 +1,4 @@
 import express from 'express';
-import config from '../config';
 import logger from '../logger';
 import getNotification from '../notifications';
 import services from '../services';
@@ -24,16 +23,9 @@ const validate = async (req: express.Request, res: express.Response, next: expre
   next();
 }
 
-router.post('/', onlyServer, validate, async (req: express.Request, res: express.Response) => {
-  const data = req.body;
-
-  const message = {
-    MessageBody: JSON.stringify(data),
-    QueueUrl: config.services.aws.sqs.url,
-  };
-  
+router.post('/', onlyServer, validate, async (req: express.Request, res: express.Response) => { 
   try {
-    await services.Queue.sendMessage(message);
+    await services.Queue.sendMessage(req.body);
   } catch (error) {
     logger.error('Could not send message to the queue!', error);
     return res.status(503).json({

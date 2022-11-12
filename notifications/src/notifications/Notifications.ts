@@ -1,3 +1,5 @@
+import { generateToken } from '../utils/functions';
+
 abstract class Notifications {
   public constructor(
     protected unsubscribeUrl: string,
@@ -7,9 +9,9 @@ abstract class Notifications {
   ) {}
 
   protected async canNotifyWithEmail(email: string, notification: string): Promise<boolean> {
-    const emaiLNotification = await this.emailNotificationRepository.get(email, notification);
+    const emailNotification = await this.emailNotificationRepository.get(email, notification);
 
-    if (typeof emaiLNotification !== 'undefined' && emaiLNotification.isEnabled === false) {
+    if (typeof emailNotification !== 'undefined' && emailNotification.isEnabled === false) {
       return false;
     }
 
@@ -27,8 +29,13 @@ abstract class Notifications {
       email,
       subject,
       body,
-      from
+      from,
+      this.getUnsubscribeUrl(email),
     );
+  }
+
+  public getUnsubscribeUrl(email: string): string {
+    return `${this.unsubscribeUrl}?email=${email}&token=${generateToken({ email })}`;
   }
 
   public abstract notify(parameters: unknown): Promise<void>;

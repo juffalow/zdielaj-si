@@ -25,7 +25,7 @@ class RegisterNotifications extends Notificatons {
       'Registrácia | Zdielaj.si',
       RegisterTemplate.render({
         title: 'Registrácia | Zdielaj.si',
-        unsubscribeUrl: this.unsubscribeUrl,
+        unsubscribeUrl: this.getUnsubscribeUrl(parameters.email),
         ...parameters
       }),
       '"Zdielaj.si" <no-reply@zdielaj.si>',

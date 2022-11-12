@@ -20,7 +20,7 @@ class KnexEmailNotificationRepository implements EmailNotificationRepository {
             resolve(undefined);
           }
 
-          resolve({ ...emailNotification, isEnabled: emailNotification === 1 })
+          resolve({ ...emailNotification, isEnabled: Boolean(emailNotification.isEnabled) })
         })
         .catch(err => reject(err));
     });

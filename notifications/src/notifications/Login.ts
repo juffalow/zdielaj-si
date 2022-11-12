@@ -24,7 +24,7 @@ class LoginNotification extends Notificatons {
       'Nové prihlásenie | Zdielaj.si',
       LoginTemplate.render({
         title: 'Nové prihlásenie | Zdielaj.si',
-        unsubscribeUrl: this.unsubscribeUrl,
+        unsubscribeUrl: this.getUnsubscribeUrl(parameters.email),
         ...parameters,
       }),
       '"Zdielaj.si" <no-reply@zdielaj.si>',

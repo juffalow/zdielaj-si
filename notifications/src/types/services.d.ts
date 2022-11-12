@@ -4,6 +4,6 @@ declare namespace Services {
   }
 
   interface Email {
-    sendMail(email: string, subject: string, body: string, from: string): Promise<void>;
+    sendMail(email: string, subject: string, body: string, from: string, unsubscribeUrl?: string): Promise<void>;
   }
 }

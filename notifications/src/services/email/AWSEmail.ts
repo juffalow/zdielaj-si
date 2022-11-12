@@ -5,17 +5,13 @@ import logger from '../../logger';
 class AWSEmail implements Services.Email {
   protected transporter: nodemailer.Transporter<unknown>;
 
-  protected unsubscribeUrl: string;
-
-  public constructor(ses: SES, unsubscribeUrl: string) {
+  public constructor(ses: SES) {
     this.transporter = nodemailer.createTransport({
       SES: ses,
     });
-
-    this.unsubscribeUrl = unsubscribeUrl;
   }
 
-  public async sendMail(email: string, subject: string, body: string, from: string): Promise<void> {
+  public async sendMail(email: string, subject: string, body: string, from: string, unsubscribeUrl: string): Promise<void> {
     logger.debug(`${this.constructor.name}.sendMail`, { email, subject, body, from });
     
     const info = await this.transporter.sendMail({
@@ -25,7 +21,7 @@ class AWSEmail implements Services.Email {
       html: body,
       list: {
         unsubscribe: {
-          url: this.unsubscribeUrl,
+          url: unsubscribeUrl,
           comment: 'Unsubscribe from this notification.',
         },
       }
