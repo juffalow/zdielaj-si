@@ -8,13 +8,8 @@ import SEO from '../components/SEO';
 import {getQueryParameter} from '../utils/functions';
 import {setNotificationSettings} from '../api/services';
 
-type NotificationType =
-  'login' |
-  'product' |
-  'register';
-
 const Notifications: React.FC = () => {
-  const [hasLogin, setLogin] = useState(false);
+  const [settings, setSettingsState] = useState<Setting[]>([]);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -31,19 +26,18 @@ const Notifications: React.FC = () => {
       })
       .then(res => res.json())
       .then(json => {
-        const loginNotification = json.data.notifications.find((n: any) => n.notification === 'login');
-        setLogin(typeof loginNotification !== 'undefined' && loginNotification.isEnabled);
+        setSettingsState(json.data.notifications);
       })
       .catch(() => setHasError(true));
   }, []);
 
-  const setSetting = (settingType: NotificationType) => {
+  const setSetting = (setting: Setting) => {
     setNotificationSettings(
       getQueryParameter('email'),
-      [{notification: settingType, isEnabled: !hasLogin}],
+      [{notification: setting.notification, isEnabled: setting.isEnabled}],
       getQueryParameter('token')
-    ).then(() => {
-      setLogin(!hasLogin);
+    ).then(json => {
+      setSettingsState(json.data.notifications);
     }).catch(e => {
       setHasError(true);
       alert(e.message);
@@ -81,8 +75,11 @@ const Notifications: React.FC = () => {
                       type="switch"
                       id="custom-switch"
                       label="Prihlásenie do účtu"
-                      checked={hasLogin}
-                      onClick={() => setSetting('login')}
+                      checked={settings.find(setting => setting.notification === 'login')?.isEnabled ?? false}
+                      onClick={() => setSetting({
+                        notification: 'login',
+                        isEnabled: !settings.find(setting => setting.notification === 'login')?.isEnabled
+                      })}
                     />
                     <Form.Text className="text-muted">
                       Úspešné prihlásenie do účtu z nového zariadenia.
