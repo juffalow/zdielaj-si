@@ -9,6 +9,7 @@ export function up(knex: Knex): Promise<any> {
     table.boolean('isEnabled').notNullable();
     table.timestamp('createdAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     table.timestamp('updatedAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+    table.unique([ 'email', 'notification' ]);
   }).createTable('email_log', (table) => {
     table.comment('List of sent emails');
     table.increments('id').primary();
