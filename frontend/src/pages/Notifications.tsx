@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import SEO from '../components/SEO';
-import { getQueryParameter } from '../utils/functions';
+import {getQueryParameter} from '../utils/functions';
+import {setNotificationSettings} from '../api/services';
+
+type NotificationType =
+  'login' |
+  'product' |
+  'register';
 
 const Notifications: React.FC = () => {
-  const [ hasLogin, setLogin ] = useState(false);
-  const [ hasError, setHasError ] = useState(false);
+  const [hasLogin, setLogin] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_CORE_URL}/notifications?email=${getQueryParameter('email')}`, {
@@ -31,6 +37,19 @@ const Notifications: React.FC = () => {
       .catch(() => setHasError(true));
   }, []);
 
+  const setSetting = (settingType: NotificationType) => {
+    setNotificationSettings(
+      getQueryParameter('email'),
+      [{notification: settingType, isEnabled: !hasLogin}],
+      getQueryParameter('token')
+    ).then(() => {
+      setLogin(!hasLogin);
+    }).catch(e => {
+      setHasError(true);
+      alert(e.message);
+    });
+  };
+
   return (
     <SEO title="Notifikácie" description="">
       <Container>
@@ -45,7 +64,7 @@ const Notifications: React.FC = () => {
                 <Form>
                   <h3 className="mt-4">Informácie o účte</h3>
                   <Form.Group className="mb-3" controlId="notificationGeneral">
-                    <Form.Check 
+                    <Form.Check
                       disabled
                       type="switch"
                       id="custom-switch"
@@ -53,15 +72,17 @@ const Notifications: React.FC = () => {
                       checked={true}
                     />
                     <Form.Text className="text-muted">
-                      Upozornenia týkajúce sa účtu obsahujú dôležité informácie, ako sú aktualizácie a zmeny týkajúce sa vášho účtu.
+                      Upozornenia týkajúce sa účtu obsahujú dôležité informácie, ako sú aktualizácie a zmeny týkajúce sa
+                      vášho účtu.
                     </Form.Text>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="notificationLogin">
-                    <Form.Check 
+                    <Form.Check
                       type="switch"
                       id="custom-switch"
                       label="Prihlásenie do účtu"
                       checked={hasLogin}
+                      onClick={() => setSetting('login')}
                     />
                     <Form.Text className="text-muted">
                       Úspešné prihlásenie do účtu z nového zariadenia.
@@ -69,7 +90,7 @@ const Notifications: React.FC = () => {
                   </Form.Group>
                   <h3 className="mt-4">Produktové informácie</h3>
                   <Form.Group className="mb-3" controlId="notificationNewFeature">
-                    <Form.Check 
+                    <Form.Check
                       disabled
                       type="switch"
                       id="custom-switch"
@@ -88,6 +109,6 @@ const Notifications: React.FC = () => {
       </Container>
     </SEO>
   );
-}
+};
 
 export default Notifications;

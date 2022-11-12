@@ -7,6 +7,9 @@ import logger from './logger';
 
 const server = http.createServer(app);
 
+
+
+
 async function onSignal(): Promise<void> {
   logger.warn('Server is going to shut down! Starting cleanup...');
 }

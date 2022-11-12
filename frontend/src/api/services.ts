@@ -1,6 +1,11 @@
 import { post, postMultipart, get } from './client';
 import { setAlbumToken } from './token';
 
+type Setting = {
+  notification: string,
+  isEnabled: boolean,
+}
+
 export async function register(name: string, email: string, password: string): Promise<any> {
   return post(`${process.env.REACT_APP_CORE_URL}/user/register`, { name, email, password });
 }
@@ -51,4 +56,8 @@ export async function refreshToken(): Promise<RefreshTokenResponse> {
 
 export async function validateEmail(id: number, token: string): Promise<RefreshTokenResponse> {
   return get(`${process.env.REACT_APP_CORE_URL}/user/emailValidation?id=${id}&token=${token}`);
+}
+
+export async function setNotificationSettings(email: string, settings: Setting[], token: string): Promise<any> {
+  return post(`${process.env.REACT_APP_CORE_URL}/notifications?token=${token}`, {email, notifications: settings})
 }
