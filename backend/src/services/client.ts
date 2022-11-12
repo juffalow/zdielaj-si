@@ -22,8 +22,15 @@ async function handleErrors(response: any): Promise<any> {
     if (response.headers.get('Content-Type').startsWith('application/json')) {
       const json = await response.json();
       if ('error' in json && json.error !== null) {
-        throw new BaseError(json.error);
+        if (typeof json.error === 'object' && 'message' in json.error) {
+          throw new BaseError(json.error);
+        }
 
+        if (typeof json.error === 'string') {
+          throw new BaseError({ message: json.error, code: -1 });
+        }
+
+        throw new BaseError({ message: 'Unknown error!', code: -1 });
       }
     }
 
@@ -42,11 +49,11 @@ function handleSuccess(response: any) {
 
 export async function get(endpoint: string, options?: RequestInit): Promise<any> {
   return fetch(endpoint, {
-      ...options,
       method: 'GET',
       headers: {
         'Authorization': generateToken({ role: 'server', service: 'core' }),
       },
+      ...options,
     })
     .then(handleErrors)
     .then(handleSuccess);
@@ -64,6 +71,6 @@ export async function post(endpoint: string, data: unknown, options: RequestInit
       body: JSON.stringify(data),
     }
   })
-    .then(handleErrors)
-    .then(handleSuccess);
+  .then(handleErrors)
+  .then(handleSuccess);
 }
