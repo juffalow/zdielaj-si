@@ -42,6 +42,8 @@ class RegisterNotifications extends Notificatons {
     const { error } = schema.validate(parameters);
   
     if (error) {
+      logger.error('Parameters are not valid!', error);
+      
       throw 'Parameters are not valid!';
     }
   }
