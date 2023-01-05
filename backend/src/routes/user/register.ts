@@ -52,7 +52,6 @@ const register = async (req: Request, res: Response) => {
       firstName: user.name,
       email: user.email,
       validateEmailLink: `${config.services.frontend.url}/validacia?id=${user.id}&token=${token}`,
-      unsubscribeUrl: `${config.services.frontend.url}/notifikacie`,
     },
   });
 
