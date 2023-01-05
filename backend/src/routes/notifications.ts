@@ -1,20 +1,35 @@
 import express from 'express';
 import logger from '../logger';
-import { getNotifications } from '../services/notifications';
+import {getNotificationSettings, setNotificationSettings} from '../services/notifications';
 
 const router = express.Router();
 
 router.get('/', async (req: express.Request, res: express.Response) => {
   try {
-    const response = await getNotifications(String(req.query.email), req.headers.authorization);
+    const response = await getNotificationSettings(String(req.query.email), req.headers.authorization);
 
     return res.status(200).json(response);
   } catch (error) {
-    logger.error('Canot get email notifications!', { error });
+    logger.error('Cannot get email notification settings!', {error});
 
     return res.status(400).json({
-      error: 'Canot get email notifications!',
+      error: 'Cannot get email notification settings!',
       data: null,
+    });
+  }
+});
+
+router.post('/', async (req: express.Request, res: express.Response) => {
+  try {
+    const response = await setNotificationSettings(req.body, req.headers.authorization);
+
+    return res.status(200).json(response);
+  } catch (error) {
+    logger.error('Cannot set notification settings!', {error});
+
+    return res.status(400).json({
+      error: 'Cannot set notifications settings!',
+      data: req.body
     });
   }
 });

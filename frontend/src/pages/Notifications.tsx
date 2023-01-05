@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import SEO from '../components/SEO';
-import { getQueryParameter } from '../utils/functions';
+import {getQueryParameter} from '../utils/functions';
+import {setNotificationSettings} from '../api/services';
 
 const Notifications: React.FC = () => {
-  const [ hasLogin, setLogin ] = useState(false);
-  const [ hasError, setHasError ] = useState(false);
+  const [settings, setSettingsState] = useState<Setting[]>([]);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_CORE_URL}/notifications?email=${getQueryParameter('email')}`, {
@@ -25,11 +26,23 @@ const Notifications: React.FC = () => {
       })
       .then(res => res.json())
       .then(json => {
-        const loginNotification = json.data.notifications.find((n: any) => n.notification === 'login');
-        setLogin(typeof loginNotification !== 'undefined' && loginNotification.isEnabled);
+        setSettingsState(json.data.notifications);
       })
       .catch(() => setHasError(true));
   }, []);
+
+  const setSetting = (setting: Setting) => {
+    setNotificationSettings(
+      getQueryParameter('email'),
+      [{notification: setting.notification, isEnabled: setting.isEnabled}],
+      getQueryParameter('token')
+    ).then(json => {
+      setSettingsState(json.data.notifications);
+    }).catch(e => {
+      setHasError(true);
+      alert(e.message);
+    });
+  };
 
   return (
     <SEO title="Notifikácie" description="">
@@ -45,7 +58,7 @@ const Notifications: React.FC = () => {
                 <Form>
                   <h3 className="mt-4">Informácie o účte</h3>
                   <Form.Group className="mb-3" controlId="notificationGeneral">
-                    <Form.Check 
+                    <Form.Check
                       disabled
                       type="switch"
                       id="custom-switch"
@@ -53,15 +66,20 @@ const Notifications: React.FC = () => {
                       checked={true}
                     />
                     <Form.Text className="text-muted">
-                      Upozornenia týkajúce sa účtu obsahujú dôležité informácie, ako sú aktualizácie a zmeny týkajúce sa vášho účtu.
+                      Upozornenia týkajúce sa účtu obsahujú dôležité informácie, ako sú aktualizácie a zmeny týkajúce sa
+                      vášho účtu.
                     </Form.Text>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="notificationLogin">
-                    <Form.Check 
+                    <Form.Check
                       type="switch"
                       id="custom-switch"
                       label="Prihlásenie do účtu"
-                      checked={hasLogin}
+                      checked={settings.find(setting => setting.notification === 'login')?.isEnabled ?? false}
+                      onClick={() => setSetting({
+                        notification: 'login',
+                        isEnabled: !settings.find(setting => setting.notification === 'login')?.isEnabled
+                      })}
                     />
                     <Form.Text className="text-muted">
                       Úspešné prihlásenie do účtu z nového zariadenia.
@@ -69,7 +87,7 @@ const Notifications: React.FC = () => {
                   </Form.Group>
                   <h3 className="mt-4">Produktové informácie</h3>
                   <Form.Group className="mb-3" controlId="notificationNewFeature">
-                    <Form.Check 
+                    <Form.Check
                       disabled
                       type="switch"
                       id="custom-switch"
@@ -88,6 +106,6 @@ const Notifications: React.FC = () => {
       </Container>
     </SEO>
   );
-}
+};
 
 export default Notifications;
