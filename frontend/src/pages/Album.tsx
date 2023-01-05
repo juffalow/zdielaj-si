@@ -68,8 +68,8 @@ const Album: React.FC = () => {
                   }                  
 
                   return {
-                    original: file.thumbnails.find((thumbnail: any) => thumbnail.width > 400).location,
-                    thumbnail: file.thumbnails.find((thumbnail: any) => thumbnail.width <= 400).location,
+                    original: file.thumbnails.find((thumbnail: any) => thumbnail.metadata.width > 400).location,
+                    thumbnail: file.thumbnails.find((thumbnail: any) => thumbnail.metadata.width <= 400).location,
                   };
                 })}
                 ref={ref}
