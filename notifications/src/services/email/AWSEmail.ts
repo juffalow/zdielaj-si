@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { SES } from 'aws-sdk';
+import { SES, SendRawEmailCommand } from '@aws-sdk/client-ses';
 import logger from '../../logger';
 
 class AWSEmail implements Services.Email {
@@ -7,7 +7,10 @@ class AWSEmail implements Services.Email {
 
   public constructor(ses: SES) {
     this.transporter = nodemailer.createTransport({
-      SES: ses,
+      SES: {
+        ses,
+        aws: { SendRawEmailCommand },
+      },
     });
   }
 

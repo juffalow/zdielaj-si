@@ -1,18 +1,18 @@
-import { SQS } from 'aws-sdk';
+import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
 
 class AWSQueue implements Services.Queue {
   constructor(
-    protected sqs: SQS,
+    protected sqs: SQSClient,
     protected queueUrl: string
   ) {}
 
   public sendMessage(data: unknown): Promise<unknown> {
-    const message = {
+    const params = {
       MessageBody: JSON.stringify(data),
       QueueUrl: this.queueUrl,
     };
 
-    return this.sqs.sendMessage(message).promise();
+    return this.sqs.send(new SendMessageCommand(params));
   }
 }
 
