@@ -41,9 +41,8 @@ export const processFile = async (storage: Services.Storage, directory: string, 
 export const processImageFile = async (storage: Services.Storage, directory: string, file: any): Promise<string> => {
   const hash = crypto.createHash('sha1').update(`${file.originalname}${Date.now()}`).digest('hex');
   const extname = path.extname(file.originalname);
-  const original = bufferToStream(file.buffer);
 
-  await storage.store(original, `${directory}/${hash}${extname}`);
+  await storage.store(file.buffer, `${directory}/${hash}${extname}`);
 
   return `${directory}/${hash}${extname}`;
 }
@@ -51,9 +50,8 @@ export const processImageFile = async (storage: Services.Storage, directory: str
 export const processVideoFile = async (storage: Services.Storage, directory: string, file: any): Promise<string> => {
   const hash = crypto.createHash('sha1').update(`${file.originalname}${Date.now()}`).digest('hex');
   const extname = path.extname(file.originalname);
-  const original = bufferToStream(file.buffer);
 
-  await storage.store(original, `${directory}/${hash}${extname}`);
+  await storage.store(file.buffer, `${directory}/${hash}${extname}`);
 
   return `${directory}/${hash}${extname}`;
 }

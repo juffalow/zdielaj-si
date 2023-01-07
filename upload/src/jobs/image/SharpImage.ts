@@ -14,28 +14,18 @@ class SharpImage implements Jobs.Image {
   ) {}
 
   public async resize(media: Media, width: number, height: number): Promise<void> {
-    const imageUrl = this.storage.getUrl(media.path);
+    const imageUrl = await this.storage.getUrl(media.path);
     const imageBuffer = await this.loadImage(imageUrl);
   
-    const image = sharp(imageBuffer).resize(width, height);
-    /*
-     * This cost me a looot of time...
-     * Readable stream is read during upload (line right after the next one - store).
-     * That means it will read the whole stream and then the stream is empty.
-     * So you cannot get a buffer and size from it after the image is uploaded.
-     * That's why you need to clone the image / stream.
-     */
-    const imageClone = image.clone();
+    const image = await sharp(imageBuffer).resize(width, height).toBuffer();
   
     await this.storage.store(image, `${media.path.split('.')[0]}_thumbnail.${media.path.split('.')[1]}`);
-
-    const imageCloneBuffer = await imageClone.toBuffer();
 
     await this.thumbnailRepository.create({
       mediaId: media.id,
       mimetype: media.mimetype,
       path: `${media.path.split('.')[0]}_thumbnail.${media.path.split('.')[1]}`,
-      size: imageCloneBuffer.length,
+      size: image.length,
       metadata: {
         height,
         width,

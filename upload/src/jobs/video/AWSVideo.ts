@@ -1,3 +1,4 @@
+import { MediaConvertClient, CreateJobCommand } from '@aws-sdk/client-mediaconvert';
 import logger from '../../logger';
 
 /**
@@ -10,7 +11,7 @@ class AWSVideo implements Jobs.Video {
     protected queue: string,
     protected role: string,
     protected bucket: string,
-    protected mediaConvert: AWS.MediaConvert,
+    protected mediaConvert: MediaConvertClient,
     protected mediaConvertJobRepository: MediaConvertJobRepository,
     protected thumbnailRepository: ThumbnailRepository
   ) {}
@@ -18,7 +19,7 @@ class AWSVideo implements Jobs.Video {
   public async convert(media: Media, height: number, width: number, thumbnailHeight: number, thumbnailWidth: number): Promise<void> {
     logger.debug(`${this.constructor.name}.convert`, { media });
 
-    const job = await this.mediaConvert.createJob({
+    const params = {
       Queue: this.queue,
       Role: this.role,
       Settings: {
@@ -123,10 +124,12 @@ class AWSVideo implements Jobs.Video {
       },
       "StatusUpdateInterval": "SECONDS_60",
       "Priority": 0
-    }).promise();
+    };
+
+    const data = await this.mediaConvert.send(new CreateJobCommand(params));
 
     await this.mediaConvertJobRepository.create({
-      id: job.Job.Id,
+      id: data.Job.Id,
       mediaId: String(media.id),
     });
   }

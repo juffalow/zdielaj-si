@@ -1,11 +1,10 @@
-import AWS from 'aws-sdk';
+import { S3 } from '@aws-sdk/client-s3';
 import config from '../config';
 
 export default () => {
-  const spacesEndpoint = new AWS.Endpoint((config as any).services.do.spaces.endpoint);
-
-  const s3 = new AWS.S3({
-    endpoint: spacesEndpoint,
+  const s3 = new S3({
+    endpoint: config.services.do.spaces.endpoint,
+    region: config.services.do.spaces.region,
     credentials: {
       accessKeyId: (config as any).services.do.accessKeyId,
       secretAccessKey: (config as any).services.do.secretAccessKey,

@@ -14,12 +14,12 @@ router.get('/:id', onlyServer, async (req: express.Request, res: express.Respons
   const media = await mediaRepository.get(req.params.id);
   const thumbnails = await thumbnailRepository.getAll(req.params.id);
 
-  const location = storage.getUrl(media.path);
+  const location = await storage.getUrl(media.path);
 
-  const thumbnailsWithLocation = thumbnails.map(thumbnail => ({
+  const thumbnailsWithLocation = await Promise.all(thumbnails.map(async (thumbnail) => ({
     ...thumbnail,
-    location: storage.getUrl(thumbnail.path),
-  }));
+    location: await storage.getUrl(thumbnail.path),
+  })));
 
   res.status(200).json({
     error: null,

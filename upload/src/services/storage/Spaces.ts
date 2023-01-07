@@ -1,5 +1,6 @@
 import { Readable } from 'stream';
-import { S3 } from 'aws-sdk';
+import { S3, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import logger from '../../logger';
 
 class Spaces implements Services.Storage {
@@ -10,30 +11,31 @@ class Spaces implements Services.Storage {
     protected url?: string
   ) {}
 
-  public store(body: Readable, path: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const params = {
-        ACL: 'public-read',
-        Bucket: this.bucket,
-        Body: body,
-        Key: path,
-      };
-      this.s3.upload(params, (err) => {
-        if (err) {
-          logger.error('Unable to store file!', { error: { message: err.message, stack: err.stack } });
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
-    });
+  public async store(body: Readable, path: string): Promise<void> {
+    const params = {
+      // ACL: 'authenticated-read',
+      // serverSideEncryption: 'AES256',
+      Bucket: this.bucket,
+      Body: body,
+      Key: path,
+    };
+
+    try {
+      await this.s3.send(new PutObjectCommand(params));
+    } catch (err) {
+      logger.error('Unable to store file!', { error: { message: err.message, stack: err.stack } });
+      throw err;
+    }
   }
 
-  public getUrl(path: string): string {
-    const signedUrl = this.s3.getSignedUrl('getObject', {
+  public async getUrl(path: string): Promise<string> {
+    const command = new GetObjectCommand({
       Bucket: this.bucket,
       Key: path,
-      Expires: 60 * 10,
+    });
+
+    const signedUrl = await getSignedUrl(this.s3, command, {
+      expiresIn: 60 * 10,
     });
 
     if (typeof this.url === 'undefined') {

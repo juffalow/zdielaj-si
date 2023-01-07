@@ -33,7 +33,7 @@ class Disk implements Services.Storage {
     });
   } 
 
-  public getUrl(path: string): string {
+  public async getUrl(path: string): Promise<string> {
     return `${this.url}${path}`;
   }
 }

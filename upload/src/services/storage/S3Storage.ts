@@ -1,40 +1,53 @@
 import { Readable } from 'stream';
-import { S3 } from 'aws-sdk';
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
+import { Upload } from '@aws-sdk/lib-storage';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import logger from '../../logger';
 
 class S3Storage implements Services.Storage {
   constructor(
-    protected s3: S3,
+    protected s3: S3Client,
     protected bucket: string,
     protected region: string,
     protected cloudFrontUrl?: string
   ) {}
 
-  public store(body: Readable, path: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const params = {
-        // ACL: 'authenticated-read',
-        serverSideEncryption: 'AES256',
-        Bucket: this.bucket,
-        Body: body,
-        Key: path,
-      };
-      this.s3.upload(params, (err) => {
-        if (err) {
-          logger.error('Unable to store file!', { error: { message: err.message, stack: err.stack } });
-          reject(err);
-        } else {
-          resolve();
-        }
+  public async store(body: Readable, path: string): Promise<void> {
+    const params = {
+      // ACL: 'authenticated-read',
+      // serverSideEncryption: 'AES256',
+      Bucket: this.bucket,
+      Body: body,
+      Key: path,
+    };
+
+    try {
+      const parallelUploads3 = new Upload({
+        client: this.s3,
+        params,
+        tags: [],
+        leavePartsOnError: false,
       });
-    });
+    
+      parallelUploads3.on('httpUploadProgress', (progress) => {
+        logger.debug('Upload processing...', { process });
+      });
+    
+      await parallelUploads3.done();
+    } catch (err) {
+      logger.error('Unable to store file!', { error: { message: err.message, stack: err.stack } });
+      throw err;
+    }
   }
 
-  public getUrl(path: string): string {
-    const signedUrl = this.s3.getSignedUrl('getObject', {
+  public async getUrl(path: string): Promise<string> {
+    const command = new GetObjectCommand({
       Bucket: this.bucket,
       Key: path,
-      Expires: 60 * 10,
+    });
+
+    const signedUrl = await getSignedUrl(this.s3, command, {
+      expiresIn: 60 * 10,
     });
 
     if (typeof this.cloudFrontUrl === 'undefined') {
