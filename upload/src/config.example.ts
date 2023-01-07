@@ -1,5 +1,5 @@
 export default {
-  port: 3010,
+  port: process.env.PORT || 3010,
   env: process.env.ENV || 'DEVELOPMENT',
   domain: process.env.DOMAIN || 'localhost',
   allowedOrigins: [
