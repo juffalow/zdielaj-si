@@ -6,6 +6,8 @@ class FeedbackController {
   ) {}
 
   public async bounce(email: string, meta: unknown): Promise<void> {
+    logger.warn('Email bounce feedback received!', { meta });
+
     await this.emailNotificationRepository.create({
       email,
       notification: '*',
@@ -15,6 +17,8 @@ class FeedbackController {
   }
 
   public async complaint(email: string, meta: unknown): Promise<void> {
+    logger.warn('Email complaint feedback received!', { meta });
+
     await this.emailNotificationRepository.create({
       email,
       notification: '*',
@@ -24,6 +28,8 @@ class FeedbackController {
   }
 
   public async delivery(email: string, meta: unknown): Promise<void> {
+    logger.warn('Email delivery feedback received!', { meta });
+
     /* not implemented */
   }
 }

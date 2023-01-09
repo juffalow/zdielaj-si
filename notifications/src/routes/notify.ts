@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from '../logger';
 import getNotification from '../notifications';
-import services from '../services';
+import controllers from '../controllers';
 import onlyServer from '../middlewares/onlyServer';
 
 const router = express.Router();
@@ -24,20 +24,9 @@ const validate = async (req: express.Request, res: express.Response, next: expre
 }
 
 router.post('/', onlyServer, validate, async (req: express.Request, res: express.Response) => { 
-  try {
-    await services.Queue.sendMessage(req.body);
-  } catch (error) {
-    logger.error('Could not send message to the queue!', error);
-    return res.status(503).json({
-      data: null,
-      error: 'Could not send message to the queue!',
-    });
-  }
+  const notificationController = controllers.Notification;
 
-  res.status(200).json({
-    error: null,
-    data: null,
-  }).end();
+  return notificationController.create(req, res);
 });
 
 export default router;
