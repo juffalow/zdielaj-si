@@ -1,3 +1,4 @@
+import logger from '../logger';
 import { generateToken } from '../utils/functions';
 
 abstract class Notifications {
@@ -12,6 +13,16 @@ abstract class Notifications {
     const emailNotification = await this.emailNotificationRepository.get(email, notification);
 
     if (typeof emailNotification !== 'undefined' && emailNotification.isEnabled === false) {
+      logger.warning('Notification is disabled for this email!', { email, notification });
+
+      return false;
+    }
+
+    const isEmailEnabled = await this.emailNotificationRepository.get(email, '');
+
+    if (typeof isEmailEnabled !== 'undefined' && isEmailEnabled.isEnabled === false) {
+      logger.warning('Not authorized to notify this email!', { email, notification });
+
       return false;
     }
 
@@ -24,8 +35,8 @@ abstract class Notifications {
     return false;
   }
 
-  protected async sendEmail(email: string, subject: string, body: string, from: string): Promise<void> {
-    await this.emailService.sendMail(
+  protected async sendEmail(email: string, subject: string, body: string, from: string): Promise<unknown> {
+    return this.emailService.sendMail(
       email,
       subject,
       body,
@@ -38,7 +49,7 @@ abstract class Notifications {
     return `${this.unsubscribeUrl}?email=${email}&token=${generateToken({ email })}`;
   }
 
-  public abstract notify(parameters: unknown): Promise<void>;
+  public abstract notify(parameters: unknown): Promise<unknown>;
 
   public abstract validateParameters(parameters: unknown): void;
 }

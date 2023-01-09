@@ -7,6 +7,7 @@ export function up(knex: Knex): Promise<any> {
     table.string('email', 128).notNullable();
     table.string('notification', 64).notNullable();
     table.boolean('isEnabled').notNullable();
+    table.json('meta').nullable();
     table.timestamp('createdAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     table.timestamp('updatedAt').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
     table.unique([ 'email', 'notification' ]);

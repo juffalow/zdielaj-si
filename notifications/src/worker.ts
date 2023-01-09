@@ -1,8 +1,8 @@
 import { Consumer } from 'sqs-consumer';
 import config from './config';
 import logger from './logger';
-import getNotification from './notifications';
 import services from './services';
+import controllers from './controllers';
 import namespace from './services/cls';
 
 const app = Consumer.create({
@@ -18,11 +18,28 @@ const app = Consumer.create({
       logger.warn('Trace ID is not present in message body!');
     }
 
-    try {
-      const notification = await getNotification(body.name);
-      notification.notify(body.parameters);
-    } catch (err) {
-      logger.error('Could not sent notification!', err);
+    if ('email' in body) {
+      await controllers.Notification.send(body.name, body.parameters);
+    }
+
+    if ('Message' in body && 'TopicArn' in body) {
+      const feedback = JSON.parse(body.Message);
+      const feedbackType = feedback.notificationType;
+
+      switch (feedbackType) {
+        case 'Bounce':
+          for (const mail of feedback.mail.destination) {
+            await controllers.Feedback.bounce(mail, feedback.bounce);
+          }
+          
+          break;
+        case 'Complaint':
+          for (const mail of feedback.mail.destination) {
+            await controllers.Feedback.complaint(mail, feedback.complaint);
+          }
+          
+          break;
+      }
     }
   },
   sqs: services.AWS.sqs,

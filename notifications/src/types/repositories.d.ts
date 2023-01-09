@@ -3,12 +3,14 @@ declare namespace EmailNotificationRepository {
     email: string;
     notification: string;
     isEnabled: boolean;
+    meta?: unknown | null;
   }
 
   interface UpdateParameters {
     email: string;
     notification: string;
     isEnabled: boolean;
+    meta?: unknown | null;
   }
   
   interface FindParameters {

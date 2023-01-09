@@ -10,7 +10,7 @@ interface Parameters {
 }
 
 class RegisterNotifications extends Notificatons {
-  public async notify(parameters: Parameters): Promise<void> {
+  public async notify(parameters: Parameters): Promise<unknown> {
     logger.debug(`${this.constructor.name}.notify`, { parameters });
 
     const isEnabled = await this.canNotifyWithEmail(parameters.email, 'register');
@@ -20,7 +20,7 @@ class RegisterNotifications extends Notificatons {
       return;
     }
 
-    this.sendEmail(
+    return this.sendEmail(
       parameters.email,
       'Registrácia | Zdielaj.si',
       RegisterTemplate.render({
