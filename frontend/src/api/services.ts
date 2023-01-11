@@ -23,9 +23,9 @@ export async function uploadPhoto(file: File): Promise<Media> {
 
   formData.append('image', file);
 
-  return postMultipart(`${process.env.REACT_APP_UPLOAD_URL}/upload`, formData)
+  return postMultipart(`${process.env.REACT_APP_UPLOAD_URL}/upload/files`, formData)
     .then(res => {
-      return res.data.media;
+      return res.data.file;
     });
 }
 
