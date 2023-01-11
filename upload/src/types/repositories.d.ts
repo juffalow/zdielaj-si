@@ -35,12 +35,12 @@ interface ThumbnailRepository {
 declare namespace MediaConvertJobRepository {
   interface CreateParameters {
     id: string;
-    mediaId: string;
+    fileId: string;
   }
 }
 
 interface MediaConvertJobRepository {
-  create(params: MediaConvertJobRepository.CreateParameters): Promise<{ id: string, mediaId: string }>;
+  create(params: MediaConvertJobRepository.CreateParameters): Promise<{ id: string, fileId: string }>;
 
-  get(mediaId: string): Promise<{ id: string, mediaId: string } | undefined>;
+  get(fileId: string): Promise<{ id: string, fileId: string } | undefined>;
 }

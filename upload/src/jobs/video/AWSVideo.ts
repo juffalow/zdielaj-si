@@ -130,7 +130,7 @@ class AWSVideo implements Jobs.Video {
 
     await this.mediaConvertJobRepository.create({
       id: data.Job.Id,
-      mediaId: String(file.id),
+      fileId: String(file.id),
     });
   }
 
@@ -146,7 +146,7 @@ class AWSVideo implements Jobs.Video {
 
     await Promise.all(payload.detail.outputGroupDetails[0].outputDetails[1].outputFilePaths.map(async (fullPath: string) => {
       await this.thumbnailRepository.create({
-        fileId: job.mediaId,
+        fileId: job.fileId,
         mimetype: 'image/jpeg',
         path: fullPath.replace(`s3://${this.bucket}/`, ''),
         size: 0,
@@ -159,7 +159,7 @@ class AWSVideo implements Jobs.Video {
 
     await Promise.all(payload.detail.outputGroupDetails[0].outputDetails[2].outputFilePaths.map(async (fullPath: string) => {
       await this.thumbnailRepository.create({
-        fileId: job.mediaId,
+        fileId: job.fileId,
         mimetype: 'image/jpeg',
         path: fullPath.replace(`s3://${this.bucket}/`, ''),
         size: 0,
