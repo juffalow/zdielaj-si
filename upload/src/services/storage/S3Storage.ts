@@ -30,7 +30,7 @@ class S3Storage implements Services.Storage {
       });
     
       parallelUploads3.on('httpUploadProgress', (progress) => {
-        logger.debug('Upload processing...', { process });
+        logger.debug('Upload processing...', { progress });
       });
     
       await parallelUploads3.done();
