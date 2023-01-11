@@ -23,13 +23,10 @@ class AlbumController {
   
     const fullMedia = await Promise.all(media.map(async (single) => {
       const response = await this.uploadService.getFile(single.mediaId);
-  
+      
       return {
         ...single,
-        mimetype: response.data.media.mimetype,
-        size: response.data.media.size,
-        location: response.data.media.location,
-        thumbnails: response.data.media.thumbnails,
+        ...response.data.file,
       }
     }));
 

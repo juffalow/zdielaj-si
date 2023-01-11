@@ -3,16 +3,16 @@ type Setting = [
   isEnabled: boolean,
 ]
 
-interface GetMediaResponse {
+interface GetFileResponse {
   error: unknown,
   data: {
-    media: {
+    file: {
       id: number,
       mimetype: string,
       size: number,
       location: string,
       thumbnails?: {
-        mediaId: number,
+        fileId: number,
         mimetype: string,
         size: number,
         location: string,
@@ -31,6 +31,6 @@ declare namespace Services {
   }
 
   interface Upload {
-    getFile(id: number): Promise<GetMediaResponse>;
+    getFile(id: number): Promise<GetFileResponse>;
   }
 }
