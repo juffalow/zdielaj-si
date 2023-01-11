@@ -16,6 +16,7 @@ interface Photo {
 interface Album {
   id: string;
   userId?: number;
+  media?: Media[];
   createdAt?: string;
 }
 

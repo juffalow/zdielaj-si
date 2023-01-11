@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  RefreshToken as RefreshTokenRepository,
-} from '../../repositories';
+import repositories from '../../repositories';
 
 const logout = async (req: Request, res: Response) => {
   if (!('refreshToken' in req.cookies) || req.cookies.refreshToken.indexOf('.') === -1) {
@@ -16,7 +14,7 @@ const logout = async (req: Request, res: Response) => {
     return;
   }
 
-  const refreshTokenRepository = RefreshTokenRepository;
+  const refreshTokenRepository = repositories.RefreshToken;
   const [ userId, userRefreshToken ] = req.cookies.refreshToken.split('.');
   const refreshToken = await refreshTokenRepository.get(userId, userRefreshToken);
 

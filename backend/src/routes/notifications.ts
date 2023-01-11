@@ -1,36 +1,25 @@
 import express from 'express';
-import logger from '../logger';
-import {getNotificationSettings, setNotificationSettings} from '../services/notifications';
+import controllers from '../controllers';
 
 const router = express.Router();
 
-router.get('/', async (req: express.Request, res: express.Response) => {
+router.get('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const response = await getNotificationSettings(String(req.query.email), req.headers.authorization);
+    const response = await controllers.Notifications.getSettings(String(req.query.email),  req.headers.authorization);
 
     return res.status(200).json(response);
-  } catch (error) {
-    logger.error('Cannot get email notification settings!', {error});
-
-    return res.status(400).json({
-      error: 'Cannot get email notification settings!',
-      data: null,
-    });
+  } catch (err) {
+    next(err);
   }
 });
 
-router.post('/', async (req: express.Request, res: express.Response) => {
+router.post('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const response = await setNotificationSettings(req.body, req.headers.authorization);
+    const response = await controllers.Notifications.updateSettings(req.body, req.headers.authorization);
 
     return res.status(200).json(response);
-  } catch (error) {
-    logger.error('Cannot set notification settings!', {error});
-
-    return res.status(400).json({
-      error: 'Cannot set notifications settings!',
-      data: req.body
-    });
+  } catch (err) {
+    next(err);
   }
 });
 

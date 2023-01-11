@@ -1,29 +1,28 @@
-import { post, get } from './client';
-import config from '../config';
+class Notifications implements Services.Notifications {
+  constructor(
+    protected httpClient: Utils.HTTPClient,
+    protected url: string,
+  ) {}
 
-type Setting = [
-  notification: string,
-  isEnabled: boolean,
-]
+  public async notify(data: unknown): Promise<unknown> {
+    return this.httpClient.post(`${this.url}/notifications`, data);
+  }
 
-export async function notify(data: unknown): Promise<any> {
-  return post(`${config.services.notifications.url}/notifications`, data);
+  public async setSettings(params: { email: string, notifications: Setting[] }, token: string): Promise<unknown> {
+    return this.httpClient.get(`${this.url}/email`, { ...params }, {
+      headers: {
+        'Authorization': token,
+      },
+    });
+  }
+
+  public async getSettings(email: string, token: string): Promise<unknown> {
+    return this.httpClient.get(`${this.url}/email`, { email }, {
+      headers: {
+        'Authorization': token,
+      },
+    });
+  }
 }
 
-export function getNotificationSettings(email: string, token: string): Promise<any> {
-  return get(`${config.services.notifications.url}/email?email=${email}`, {
-    headers: {
-      'Authorization': token,
-    },
-  });
-}
-
-export function setNotificationSettings(params: { email: string, notifications: Setting[] }, token: string): Promise<any> {
-  return post(`${config.services.notifications.url}/email`, {
-    headers: {
-      Authorization: token,
-    },
-    email: params.email,
-    notifications: params.notifications,
-  })
-}
+export default Notifications;

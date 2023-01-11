@@ -1,23 +1,22 @@
+import { Request, Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import cls from 'cls-hooked';
+import namespace from '../services/cls';
 
-const clsNamespace = cls.createNamespace('core');
-
-export default function trace(req, res, next): void {
+export default function trace(req: Request, res: Response, next: NextFunction): void {
   if (req.method === 'OPTIONS') {
     next();
     return;
   }
 
-  clsNamespace.bind(req);
-  clsNamespace.bind(res);
+  namespace.bind(req);
+  namespace.bind(res);
 
   const traceId = uuidv4();
 
-  req.traceId = traceId;
+  req['traceId'] = traceId;
 
-  clsNamespace.run(() => {
-    clsNamespace.set('traceId', traceId);
+  namespace.run(() => {
+    namespace.set('traceId', traceId);
 
     next();
   });

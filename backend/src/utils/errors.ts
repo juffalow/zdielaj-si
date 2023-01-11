@@ -3,7 +3,7 @@ interface BaseErrorConstructor {
   code: number;
 }
 
-export default class BaseError extends Error {
+export class BaseError extends Error {
   public message: string;
   public code: number;
 

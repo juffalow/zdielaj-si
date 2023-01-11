@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  User as UserRepository,
-} from '../../repositories';
+import repositories from '../../repositories';
 
 const emailValidation = async (req: Request, res: Response) => {
   if ('id' in req.query === false || 'token' in req.query === false && parseInt(req.query.id as string) === parseInt(req.query.id as string)) {
@@ -16,7 +14,7 @@ const emailValidation = async (req: Request, res: Response) => {
       .end();
   }
 
-  const userRepository = UserRepository;
+  const userRepository = repositories.User;
   const user = await userRepository.get(parseInt(req.query.id as string));
 
   if(typeof user === 'undefined') {

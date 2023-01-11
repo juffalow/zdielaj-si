@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import config from '../../config';
-import {
-  RefreshToken as RefreshTokenRepository,
-} from '../../repositories';
+import repositories from '../../repositories';
 import { generateToken } from '../../utils/functions';
 
 const refreshToken = async (req: Request, res: Response) => {
@@ -19,7 +17,7 @@ const refreshToken = async (req: Request, res: Response) => {
     return;
   }
 
-  const refreshTokenRepository = RefreshTokenRepository;
+  const refreshTokenRepository = repositories.RefreshToken;
   const [ userId, userRefreshToken ] = req.cookies.refreshToken.split('.');
   const refreshToken = await refreshTokenRepository.get(userId, userRefreshToken);
 

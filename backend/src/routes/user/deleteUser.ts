@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import {
-  User as UserRepository,
-} from '../../repositories';
+import repositories from '../../repositories';
 
 const deleteUser = async (req: Request, res: Response) => {
-  const userRepository = UserRepository;
+  const userRepository = repositories.User;
   const user = await userRepository.detele((req as any).user.id);
 
   if (typeof user === 'undefined') {

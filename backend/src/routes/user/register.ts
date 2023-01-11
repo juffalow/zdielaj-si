@@ -2,10 +2,8 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import config from '../../config';
-import {
-  User as UserRepository,
-} from '../../repositories';
-import { notify } from '../../services/notifications';
+import repositories from '../../repositories';
+import services from '../../services';
 
 const register = async (req: Request, res: Response) => {
   const data = req.body;
@@ -21,7 +19,7 @@ const register = async (req: Request, res: Response) => {
   }
 
   let user: User = null;
-  const userRepository = UserRepository;
+  const userRepository = repositories.User;
   const passwordHash = bcrypt.hashSync(data.password, 10);
   const token = uuidv4();
 
@@ -46,7 +44,7 @@ const register = async (req: Request, res: Response) => {
     }).end();
   }
 
-  await notify({
+  await services.Notifications.notify({
     name: 'register',
     parameters: {
       firstName: user.name,

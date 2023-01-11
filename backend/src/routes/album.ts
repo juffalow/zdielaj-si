@@ -1,56 +1,27 @@
 import express from 'express';
-import {
-  Album as AlbumRepository,
-  Media as MediaRepository,
-} from '../repositories';
+import repositories from '../repositories';
 import { generateToken } from '../utils/functions';
-import { getMedia } from '../services/upload';
+import controllers from '../controllers';
 
 const router = express.Router();
 
-router.get('/:id', async (req: express.Request, res: express.Response) => {
-  const albumRepository = AlbumRepository;
-  const mediaRepository = MediaRepository;
-
-  const album = await albumRepository.get(req.params.id);
-  const media = await mediaRepository.find(req.params.id);
-
-  if (typeof media === 'undefined' || media.length === 0) {
-    res.status(404).json({
-      error: 'Album not found!',
-      data: null,
+router.get('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const album = await controllers.Album.getAlbum(req.params.id);
+    
+    res.status(200).json({
+      error: null,
+      data: {
+        album,
+      }
     }).end();
-    return;
+  } catch (err) {
+    next(err);
   }
-
-  const fullMedia = await Promise.all(media.map(async (single) => {
-    const response = await getMedia(single.mediaId);
-
-    return {
-      ...single,
-      mimetype: response.data.media.mimetype,
-      size: response.data.media.size,
-      location: response.data.media.location,
-      thumbnails: response.data.media.thumbnails,
-    }
-  }));
-
-  res.status(200).json({
-    error: null,
-    data: {
-      album: {
-        ...album,
-        media: fullMedia,
-      },
-    }
-  }).end();
 });
 
 router.post('/', async (req: express.Request, res: express.Response) => {
-  const albumRepository = AlbumRepository;
-  const userId = 'user' in req ? (req as any).user.id : null;
-
-  const album = await albumRepository.create(userId);
+  const album = await controllers.Album.createAlbum(req['user']);
 
   res.status(200).json({
     error: null,
@@ -64,8 +35,8 @@ router.post('/', async (req: express.Request, res: express.Response) => {
 });
 
 router.post('/:id/media', async (req: express.Request, res: express.Response) => {
-  const albumRepository = AlbumRepository;
-  const mediaRepository = MediaRepository;
+  const albumRepository = repositories.Album;
+  const mediaRepository = repositories.Media;
   const user = 'user' in req ? (req as any).user : null;
   const album = await albumRepository.get(req.params.id);
   const count = await mediaRepository.count(req.params.id);

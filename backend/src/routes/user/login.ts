@@ -2,12 +2,9 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import config from '../../config';
-import {
-  User as UserRepository,
-  RefreshToken as RefreshTokenRepository,
-} from '../../repositories';
+import repositories from '../../repositories';
 import { generateToken } from '../../utils/functions';
-import { notify } from '../../services/notifications';
+import services from '../../services';
 import logger from '../../logger';
 
 const login = async (req: Request, res: Response) => {
@@ -23,7 +20,7 @@ const login = async (req: Request, res: Response) => {
     }).end();
   }
 
-  const userRepository = UserRepository;
+  const userRepository = repositories.User;
   const user = await userRepository.getByEmail(data.email);
 
   const isCorrect = typeof user === 'undefined' || user === null ? false : await bcrypt.compare(data.password, user.password);
@@ -39,7 +36,7 @@ const login = async (req: Request, res: Response) => {
   }
 
   logger.debug('Notifying user about login from new device!');
-  await notify({
+  await services.Notifications.notify({
     name: 'login',
     parameters: {
       email: user.email,
@@ -47,7 +44,7 @@ const login = async (req: Request, res: Response) => {
     },
   });
 
-  const refreshTokenRepository = RefreshTokenRepository;
+  const refreshTokenRepository = repositories.RefreshToken;
 
   const token = generateToken({ id: user.id });
   const refreshToken: string = uuidv4();

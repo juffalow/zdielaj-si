@@ -1,32 +1,17 @@
-import { get } from './client';
-import config from '../config';
-import namespace from '../services/cls';
+class Upload implements Services.Upload {
+  constructor(
+    protected httpClient: Utils.HTTPClient,
+    protected url: string,
+  ) {}
 
-interface GetMediaResponse {
-  error: unknown,
-  data: {
-    media: {
-      id: number,
-      mimetype: string,
-      size: number,
-      location: string,
-      thumbnails?: {
-        mediaId: number,
-        mimetype: string,
-        size: number,
-        location: string,
-      }
-    },
-  },
-}
-
-export async function getMedia(id: number): Promise<GetMediaResponse> {
-  const traceId = namespace.get('traceId');
-  const searchParameters = new URLSearchParams();
-
-  if (typeof traceId !== 'undefined') {
-    searchParameters.append('traceId', traceId);
+  /**
+   * Retrieves detail of a single file from upload service.
+   * @param id 
+   * @returns 
+   */
+  public async getFile(id: number): Promise<GetMediaResponse> {    
+    return this.httpClient.get(`${this.url}/media/${id}`) as Promise<GetMediaResponse>;
   }
-  
-  return get(`${config.services.upload.url}/media/${id}?${searchParameters}`);
 }
+
+export default Upload;

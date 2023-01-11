@@ -7,6 +7,7 @@ import cors from './middlewares/cors';
 import auth from './middlewares/auth';
 import responseTime from './middlewares/responseTime';
 import trace from './middlewares/trace';
+import errorHandler from './middlewares/errorHandler';
 import logger from './logger';
 
 const app = express();
@@ -18,17 +19,10 @@ app.use(trace);
 app.use(responseTime);
 app.use(cors);
 app.use(auth);
-app.use((err, req, res, next) => {
-  logger.error('Something went wrong!', { error: { message: err.message, stack: err.stack } });
-  return res.status(500).json({
-    error: {
-      message: 'Something went wrong!',
-    },
-    data: null,
-  });
-});
 
 app.use(routes);
+
+app.use(errorHandler);
 
 async function start(): Promise<void> {
   try {

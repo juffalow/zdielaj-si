@@ -22,7 +22,6 @@
     "jsonwebtoken": "^9.0.0",
     "knex": "^2.0.0",
     "mysql2": "^2.2.5",
-    "node-fetch": "^2.6.7",
     "uuid": "^8.3.2",
     "winston": "^3.3.3"
   },
