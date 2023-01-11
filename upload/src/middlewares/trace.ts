@@ -11,7 +11,7 @@ export default function trace(req: Request, res: Response, next: NextFunction): 
   namespace.bind(req);
   namespace.bind(res);
 
-  const traceId = req.query.traceId ? req.params.traceId : uuidv4();
+  const traceId = req.query.traceId ? req.query.traceId : uuidv4();
 
   req['traceId'] = traceId;
 
