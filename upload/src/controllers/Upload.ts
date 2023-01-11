@@ -20,25 +20,14 @@ class UploadController {
     const directory = base64encode((new Date).toISOString().split('T')[0]);
   
     const path = await processFile(this.storage, directory, req['file']);
-    let dimensions = null;
-  
-    if (req['file'].mimetype.startsWith('image/')) {
-      dimensions = getImageDimensions(req['file'].buffer);
-    }
-  
-    if (req['file'].mimetype.startsWith('video/')) {
-      dimensions = await getVideoDimensions(Readable.from(req['file'].buffer));
-    }
+    const metadata = await this.getMetadata(req['file']);
   
     const file = await this.fileRepository.create({
       userId: typeof req['user'] !== 'undefined' && typeof req['user'].id !== 'undefined' ? req['user'].id : null,
       path: path,
       mimetype: req['file'].mimetype,
       size: req['file'].size,
-      metadata: {
-        height: dimensions.height,
-        width: dimensions.width,
-      },
+      metadata,
     });
   
     await this.informWorker(file);
@@ -49,6 +38,20 @@ class UploadController {
         file,
       },
     }).end();
+  }
+
+  protected async getMetadata(file: any): Promise<object> {
+    let metadata = {};
+
+    if (file.mimetype.startsWith('image/')) {
+      metadata = getImageDimensions(file.buffer);
+    }
+  
+    if (file.mimetype.startsWith('video/')) {
+      metadata = await getVideoDimensions(Readable.from(file.buffer));
+    }
+
+    return metadata;
   }
 
   protected async informWorker(file: File): Promise<void> {
