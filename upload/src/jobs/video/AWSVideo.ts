@@ -16,8 +16,8 @@ class AWSVideo implements Jobs.Video {
     protected thumbnailRepository: ThumbnailRepository
   ) {}
 
-  public async convert(media: Media, height: number, width: number, thumbnailHeight: number, thumbnailWidth: number): Promise<void> {
-    logger.debug(`${this.constructor.name}.convert`, { media });
+  public async convert(file: File, height: number, width: number, thumbnailHeight: number, thumbnailWidth: number): Promise<void> {
+    logger.debug(`${this.constructor.name}.convert`, { file });
 
     const params = {
       Queue: this.queue,
@@ -101,7 +101,7 @@ class AWSVideo implements Jobs.Video {
             "OutputGroupSettings": {
               "Type": "FILE_GROUP_SETTINGS",
               "FileGroupSettings": {
-                Destination: `s3://${this.bucket}/${media.path.split('.')[0]}`
+                Destination: `s3://${this.bucket}/${file.path.split('.')[0]}`
               }
             }
           }
@@ -115,7 +115,7 @@ class AWSVideo implements Jobs.Video {
             },
             "VideoSelector": {},
             "TimecodeSource": "ZEROBASED",
-            FileInput: `s3://${this.bucket}/${media.path}`
+            FileInput: `s3://${this.bucket}/${file.path}`
           }
         ]
       },
@@ -130,7 +130,7 @@ class AWSVideo implements Jobs.Video {
 
     await this.mediaConvertJobRepository.create({
       id: data.Job.Id,
-      mediaId: String(media.id),
+      mediaId: String(file.id),
     });
   }
 
@@ -146,7 +146,7 @@ class AWSVideo implements Jobs.Video {
 
     await Promise.all(payload.detail.outputGroupDetails[0].outputDetails[1].outputFilePaths.map(async (fullPath: string) => {
       await this.thumbnailRepository.create({
-        mediaId: job.mediaId,
+        fileId: job.mediaId,
         mimetype: 'image/jpeg',
         path: fullPath.replace(`s3://${this.bucket}/`, ''),
         size: 0,
@@ -159,7 +159,7 @@ class AWSVideo implements Jobs.Video {
 
     await Promise.all(payload.detail.outputGroupDetails[0].outputDetails[2].outputFilePaths.map(async (fullPath: string) => {
       await this.thumbnailRepository.create({
-        mediaId: job.mediaId,
+        fileId: job.mediaId,
         mimetype: 'image/jpeg',
         path: fullPath.replace(`s3://${this.bucket}/`, ''),
         size: 0,

@@ -1,4 +1,4 @@
-declare namespace MediaRepository {
+declare namespace FileRepository {
   interface CreateParameters {
     userId?: number;
     path: string;
@@ -8,15 +8,15 @@ declare namespace MediaRepository {
   }
 }
 
-interface MediaRepository {
-  create(params: MediaRepository.CreateParameters): Promise<Media>;
+interface FileRepository {
+  create(params: FileRepository.CreateParameters): Promise<File>;
 
-  get(id: string): Promise<Media | undefined>;
+  get(id: string): Promise<File | undefined>;
 }
 
 declare namespace ThumbnailRepository {
   interface CreateParameters {
-    mediaId: string;
+    fileId: string;
     path: string;
     mimetype: string;
     size: number;
@@ -29,7 +29,7 @@ interface ThumbnailRepository {
 
   get(id: string): Promise<Thumbnail | undefined>;
 
-  getAll(mediaId: string): Promise<Thumbnail[] | undefined>;
+  getAll(fileId: string): Promise<Thumbnail[] | undefined>;
 }
 
 declare namespace MediaConvertJobRepository {

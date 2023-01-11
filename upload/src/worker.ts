@@ -22,17 +22,17 @@ const app = Consumer.create({
 
     if ('mimetype' in body && body.mimetype.startsWith('image/')) {
       const { width, height } = getDimensions(body.metadata.height, body.metadata.width, 320, 320);
-      const media = await repositories.Media.get(body.mediaId);
+      const file = await repositories.File.get(body.fileId);
 
-      await jobs.Image.resize(media, width, height);
+      await jobs.Image.resize(file, width, height);
     }
 
     if ('mimetype' in body && body.mimetype.startsWith('video/')) {
       const { width: previewWidth, height: previewHeight } = getDimensions(body.metadata.height, body.metadata.width, 720, 1280);
       const { width: thumbnailWidth, height: thumbnailHeight } = getDimensions(body.metadata.height, body.metadata.width, 180, 320);
-      const media = await repositories.Media.get(body.mediaId);
+      const file = await repositories.File.get(body.fileId);
       
-      await jobs.Video.convert(media, previewHeight, previewWidth, thumbnailHeight, thumbnailWidth);
+      await jobs.Video.convert(file, previewHeight, previewWidth, thumbnailHeight, thumbnailWidth);
     }
 
     if ('detail' in body && 'jobId' in body.detail) {

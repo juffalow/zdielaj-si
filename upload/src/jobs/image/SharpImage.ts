@@ -13,18 +13,18 @@ class SharpImage implements Jobs.Image {
     protected thumbnailRepository: ThumbnailRepository
   ) {}
 
-  public async resize(media: Media, width: number, height: number): Promise<void> {
-    const imageUrl = await this.storage.getUrl(media.path);
+  public async resize(file: File, width: number, height: number): Promise<void> {
+    const imageUrl = await this.storage.getUrl(file.path);
     const imageBuffer = await this.loadImage(imageUrl);
   
     const image = await sharp(imageBuffer).resize(width, height).toBuffer();
   
-    await this.storage.store(image, `${media.path.split('.')[0]}_thumbnail.${media.path.split('.')[1]}`);
+    await this.storage.store(image, `${file.path.split('.')[0]}_thumbnail.${file.path.split('.')[1]}`);
 
     await this.thumbnailRepository.create({
-      mediaId: media.id,
-      mimetype: media.mimetype,
-      path: `${media.path.split('.')[0]}_thumbnail.${media.path.split('.')[1]}`,
+      fileId: file.id,
+      mimetype: file.mimetype,
+      path: `${file.path.split('.')[0]}_thumbnail.${file.path.split('.')[1]}`,
       size: image.length,
       metadata: {
         height,

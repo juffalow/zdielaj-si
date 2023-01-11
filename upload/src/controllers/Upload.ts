@@ -11,7 +11,7 @@ import logger from '../logger';
 
 class UploadController {
   constructor(
-    protected mediaRepository: MediaRepository,
+    protected fileRepository: FileRepository,
     protected storage: Services.Storage,
     protected queue: Services.Queue
   ) {}
@@ -30,7 +30,7 @@ class UploadController {
       dimensions = await getVideoDimensions(Readable.from(req['file'].buffer));
     }
   
-    const media = await this.mediaRepository.create({
+    const file = await this.fileRepository.create({
       userId: typeof req['user'] !== 'undefined' && typeof req['user'].id !== 'undefined' ? req['user'].id : null,
       path: path,
       mimetype: req['file'].mimetype,
@@ -41,21 +41,21 @@ class UploadController {
       },
     });
   
-    await this.informWorker(media);
+    await this.informWorker(file);
   
     res.status(200).json({
       error: null,
       data: {
-        media,
+        file,
       },
     }).end();
   }
 
-  protected async informWorker(media: Media): Promise<void> {
+  protected async informWorker(file: File): Promise<void> {
     const messageData = {
-      mediaId: media.id,
-      mimetype: media.mimetype,
-      metadata: media.metadata,
+      fileId: file.id,
+      mimetype: file.mimetype,
+      metadata: file.metadata,
       traceId: namespace.get('traceId'),
     }
     

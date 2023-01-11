@@ -32,13 +32,13 @@ class KnexThumbnailRepository implements ThumbnailRepository {
     });
   }
 
-  public async getAll(mediaId: string): Promise<Thumbnail[] | undefined> {
-    logger.debug(`${this.constructor.name}.getAll`, { mediaId });
+  public async getAll(fileId: string): Promise<Thumbnail[] | undefined> {
+    logger.debug(`${this.constructor.name}.getAll`, { fileId });
 
     return new Promise((resolve, reject) => {
       this.database.select()
         .from('thumbnail')
-        .where('mediaId', mediaId)
+        .where('fileId', fileId)
         .then(thumbnails => resolve(thumbnails))
         .catch(err => reject(err));
     });

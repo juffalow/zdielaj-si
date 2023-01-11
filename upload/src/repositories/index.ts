@@ -1,5 +1,5 @@
 import KnexMediaConvertJobRepository from './KnexMediaConvertJobRepository';
-import KnexMediaRepository from './KnexMediaRepository';
+import KnexFileRepository from './KnexFileRepository';
 import KnexThumbnailRepository from './KnexThumbnailRepository';
 import database from '../database';
 
@@ -8,8 +8,8 @@ const container = {
     return new KnexMediaConvertJobRepository(database);
   },
 
-  get Media(): MediaRepository {
-    return new KnexMediaRepository(database);
+  get File(): FileRepository {
+    return new KnexFileRepository(database);
   },
 
   get Thumbnail(): ThumbnailRepository {

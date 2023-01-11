@@ -1,17 +1,17 @@
 import { Knex } from 'knex';
 import logger from '../logger';
 
-class KnexMediaRepository implements MediaRepository {
+class KnexFileRepository implements FileRepository {
   constructor(
     protected database: Knex
   ) {}
 
-  public async create(params: MediaRepository.CreateParameters): Promise<Media> {
+  public async create(params: FileRepository.CreateParameters): Promise<File> {
     logger.debug(`${this.constructor.name}.create`, params);
 
     return new Promise((resolve, reject) => {
       this.database.insert(params)
-        .into('media')
+        .into('file')
         .then((ids) => {
           resolve(this.get(String(ids[0])));
         })
@@ -19,18 +19,18 @@ class KnexMediaRepository implements MediaRepository {
     });
   }
 
-  public async get(id: string): Promise<Media | undefined> {
+  public async get(id: string): Promise<File | undefined> {
     logger.debug(`${this.constructor.name}.get`, { id });
 
     return new Promise((resolve, reject) => {
       this.database.select()
-        .from('media')
+        .from('file')
         .where('id', id)
         .first()
-        .then(media => resolve(media))
+        .then(file => resolve(file))
         .catch(err => reject(err));
     });
   }
 }
 
-export default KnexMediaRepository;
+export default KnexFileRepository;

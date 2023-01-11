@@ -1,4 +1,4 @@
-type Media = {
+type File = {
   id: string;
   userId: number | null;
   path: string;
@@ -9,7 +9,7 @@ type Media = {
 
 type Thumbnail = {
   id: string;
-  mediaId: string;
+  fileId: string;
   path: string;
   mimetype: string;
   size: number;
