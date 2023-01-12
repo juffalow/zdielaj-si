@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import APIError from '../errors/APIError';
 import logger from '../logger';
 import getNotification from '../notifications';
 
@@ -8,22 +8,28 @@ class NotificationController {
     protected emailNotificationRepository: EmailNotificationRepository,
   ) {}
 
-  public async create(req: Request, res: Response): Promise<unknown> {
-    try {
-      await this.queue.sendMessage(req.body);
+  public async create(notification: object): Promise<void> {
+    await this.validate(notification['name'], notification['parameters']);
+
+    try {  
+      await this.queue.sendMessage(notification);
     } catch (error) {
       logger.error('Could not send message to the queue!', error);
 
-      return res.status(503).json({
-        data: null,
-        error: 'Could not send message to the queue!',
-      });
+      throw new APIError({ message: 'Could not send message to the queue!', code: 503 });
     }
+  }
+
+  protected async validate(name: string, parameters: object): Promise<void> {
+    try {
+      const notification = await getNotification(name);
   
-    res.status(200).json({
-      error: null,
-      data: null,
-    }).end();
+      notification.validateParameters(parameters);
+    } catch (error) {
+      logger.warn('Notification parameters are not valid!', { error });
+
+      throw new APIError({ message: 'Notification parameters are not valid!', code: 400 });
+    }
   }
 
   public async send(name: string, parameters: {[x: string]: string}): Promise<void> {
