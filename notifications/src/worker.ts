@@ -18,7 +18,7 @@ const app = Consumer.create({
       logger.warn('Trace ID is not present in message body!');
     }
 
-    if ('email' in body) {
+    if ('name' in body && 'parameters' in body) {
       await controllers.Notification.send(body.name, body.parameters);
     }
 
