@@ -1,6 +1,7 @@
 import aws from './aws';
 import email from './email';
 import queue from './queue';
+import worker from './worker';
 import config from '../config';
 
 const container = {
@@ -24,6 +25,13 @@ const container = {
   get Queue(): Services.Queue {
     return queue.AWSQueue;
   },
+
+  get Worker(): Services.Worker {
+    switch (config.services.worker.type) {
+      case 'SQS':
+        return worker.SQSWorker;
+    }
+  }
 };
 
 export default container;
