@@ -23,10 +23,10 @@ const validate = async (req: express.Request, res: express.Response, next: expre
   next();
 }
 
-router.post('/', onlyServer, validate, async (req: express.Request, res: express.Response) => { 
-  const notificationController = controllers.Notification;
+router.post('/', onlyServer, validate, async (req: express.Request, res: express.Response) => {
+  logger.debug('POST /notifications/notify', { ...req.body });
 
-  return notificationController.create(req, res);
+  return controllers.Notification.create(req, res);
 });
 
 export default router;
