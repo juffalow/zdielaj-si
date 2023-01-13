@@ -35,6 +35,11 @@ class LoginNotification extends Notificatons {
     const schema = Joi.object({
       email: Joi.string().required(),
       firstName: Joi.string().required(),
+      city: Joi.string().optional(),
+      country: Joi.string().optional(),
+      os: Joi.string().optional(),
+      browser: Joi.string().optional(),
+      version: Joi.string().optional(),
     });
 
     const { error } = schema.validate(parameters);
