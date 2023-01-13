@@ -36,11 +36,17 @@ const login = async (req: Request, res: Response) => {
   }
 
   logger.debug('Notifying user about login from new device!');
+  const geolocation = await services.Geolocation.getLocation('84.47.15.160');
   await services.Notifications.notify({
     name: 'login',
     parameters: {
       email: user.email,
       firstName: user.name,
+      os: req['useragent'].os,
+      browser: req['useragent'].browser,
+      version: req['useragent'].version,
+      city: geolocation.city,
+      country: geolocation.country,
     },
   });
 

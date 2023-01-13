@@ -33,4 +33,8 @@ declare namespace Services {
   interface Upload {
     getFile(id: number): Promise<GetFileResponse>;
   }
+
+  interface Geolocation {
+    getLocation(ip: string): Promise<{ city: string, country: string }>;
+  }
 }
