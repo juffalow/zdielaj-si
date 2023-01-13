@@ -10,7 +10,7 @@ const container = {
   },
 
   get DBEmail() {
-    return  new DBEmail(repositories.EmailLog);
+    return  new DBEmail(repositories.User, repositories.Notification);
   },
 
   get CompositeEmail() {

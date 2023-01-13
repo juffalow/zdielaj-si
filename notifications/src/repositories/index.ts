@@ -1,14 +1,19 @@
-import KnexEmailNotificationRepository from './KnexEmailNotificationRepository';
-import KnexEmailLogRepository from './KnexEmailLogRepository';
+import KnexUserRepository from './KnexUserRepository';
+import KnexUserNotificationSettingRepository from './KnexUserNotificationSettingRepository';
+import KnexNotificationRepository from './KnexNotificationRepository';
 import database from '../database';
 
 const container = {
-  get EmailNotification(): EmailNotificationRepository {
-    return new KnexEmailNotificationRepository(database);
+  get User(): Repositories.UserRepository {
+    return new KnexUserRepository(database);
   },
 
-  get EmailLog(): EmailLogRepository {
-    return new KnexEmailLogRepository(database);
+  get UserNotificationSetting(): Repositories.UserNotificationSettingRepository {
+    return new KnexUserNotificationSettingRepository(database);
+  },
+
+  get Notification(): Repositories.NotificationRepository {
+    return new KnexNotificationRepository(database);
   },
 };
 

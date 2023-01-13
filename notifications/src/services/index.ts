@@ -16,8 +16,8 @@ const container = {
     //   compositeEmail.add(email.DBEmail);
     // }
 
+    // compositeEmail.add(email.AWSEmail);
     compositeEmail.add(email.DBEmail);
-    compositeEmail.add(email.AWSEmail);
 
     return compositeEmail;
   },

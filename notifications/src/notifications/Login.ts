@@ -9,10 +9,10 @@ interface Parameters {
 }
 
 class LoginNotification extends Notificatons {
-  public async notify(parameters: Parameters): Promise<unknown> {
+  public async notify(user: User, parameters: Parameters): Promise<unknown> {
     logger.debug(`${this.constructor.name}.notify`, { parameters });
 
-    const isEnabled = await this.canNotifyWithEmail(parameters.email, 'login');
+    const isEnabled = await this.canNotifyWithEmail(user, 'login');
 
     if (isEnabled === false) {
       logger.warn('User unsubscribed from this event or exceeded limit!!');
@@ -42,7 +42,7 @@ class LoginNotification extends Notificatons {
     if (error) {
       logger.error('Parameters are not valid!', error);
 
-      throw 'Parameters are not valid!';
+      throw new Error('Parameters are not valid!');
     }
   }
 }

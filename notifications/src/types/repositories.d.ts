@@ -1,67 +1,108 @@
-declare namespace EmailNotificationRepository {
-  interface CreateParameters {
-    email: string;
-    notification: string;
-    isEnabled: boolean;
-    meta?: unknown | null;
+declare namespace Repositories {
+  namespace UserNotificationSettingRepository {
+    interface CreateParameters {
+      userId: number;
+      notification: string;
+      type: string;
+      isEnabled: boolean;
+    }
+
+    interface FindParameters {
+      user?: {
+        id?: number;
+        email?: string;
+      };
+      type?: string;
+      notification?: string;
+      isEnabled?: boolean;
+      createdAt? : {
+        from?: string;
+        to?: string;
+      };
+    }
   }
 
-  interface UpdateParameters {
-    email: string;
-    notification: string;
-    isEnabled: boolean;
-    meta?: unknown | null;
+  interface UserNotificationSettingRepository {
+    get(id: number): Promise<UserNotificationSetting>;
+    
+    create(params: UserNotificationSettingRepository.CreateParameters): Promise<UserNotificationSetting>;
+
+    find(params: UserNotificationSettingRepository.FindParameters): Promise<UserNotificationSetting[]>;
   }
+
+  namespace UserRepository {
+    interface CreateParameters {
+      email: string;
+      isDeliverable?: boolean;
+      meta?: unknown;
+    }
+
+    interface FindParameters {
+      email: string;
+    }
+
+    interface UpdateParameters {
+      isDeliverable: boolean;
+      meta: unknown;
+    }
+  }
+
+  interface UserRepository {
+    get(id: number): Promise<User>;
   
-  interface FindParameters {
-    email?: string;
-    notification?: string;
+    create(params: UserRepository.CreateParameters): Promise<User>;
+
+    find(params: UserRepository.FindParameters): Promise<User[]>
+
+    update(params: UserRepository.UpdateParameters, where: { id: number }): Promise<User>;
   }
-}
 
-interface EmailNotificationRepository {
-  get(email: string, event: string): Promise<EmailNotification>;
-
-  create(params: EmailNotificationRepository.CreateParameters): Promise<EmailNotification>;
-
-  update(params: EmailNotificationRepository.UpdateParameters): Promise<EmailNotification>;
-
-  find(params: EmailNotificationRepository.FindParameters): Promise<EmailNotification[]>;
-}
-
-declare namespace EmailLogRepository {
-  interface CreateParameters {
-    email: string;
-    subject: string;
-    body: string;
-    meta: unknown;
+  namespace NotificationRepository {
+    interface CreateParameters {
+      userId: number;
+      type: string;
+      subject: string;
+      body: string;
+      meta?: unknown;
+      status: string;
+    }
+    
+    interface FindParameters {
+      user?: {
+        id?: number;
+        email?: string;
+      };
+      type?: string;
+      subject?: string;
+      status?: string;
+      createdAt? : {
+        from?: string;
+        to?: string;
+      };
+    }
+    
+    interface CountParameters {
+      user?: {
+        id?: number;
+        email?: string;
+      };
+      type?: string;
+      subject?: string;
+      status?: string;
+      createdAt? : {
+        from?: string;
+        to?: string;
+      };
+    }
   }
+
+  interface NotificationRepository {
+    get(id: number): Promise<UserNotification>;
   
-  interface FindParameters {
-    email?: string;
-    subject?: string;
-    createdAt? : string | {
-      from?: string;
-      to?: string;
-    };
-  }
+    create(params: NotificationRepository.CreateParameters): Promise<UserNotification>;
   
-  interface CountParameters {
-    email?: string;
-    subject?: string;
-    createdAt? : string | {
-      from?: string;
-      to?: string;
-    };
+    find(params: NotificationRepository.FindParameters): Promise<UserNotification[]>;
+  
+    count(params: NotificationRepository.CountParameters): Promise<number>;
   }
-}
-
-interface EmailLogRepository {
-  get(id: string): Promise<EmailLog>;
-
-  create(params: EmailLogRepository.CreateParameters): Promise<EmailLog>;
-
-  find(params: EmailLogRepository.FindParameters): Promise<EmailLog[]>;
-
-  count(params: EmailLogRepository.CountParameters): Promise<number>;
 }

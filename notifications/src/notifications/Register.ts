@@ -10,10 +10,10 @@ interface Parameters {
 }
 
 class RegisterNotifications extends Notificatons {
-  public async notify(parameters: Parameters): Promise<unknown> {
-    logger.debug(`${this.constructor.name}.notify`, { parameters });
+  public async notify(user: User, parameters: Parameters): Promise<unknown> {
+    logger.debug(`${this.constructor.name}.notify`, { user, parameters });
 
-    const isEnabled = await this.canNotifyWithEmail(parameters.email, 'register');
+    const isEnabled = await this.canNotifyWithEmail(user, 'register');
 
     if (isEnabled === false) {
       logger.warn('User unsubscribed from this event or exceeded limit!!');

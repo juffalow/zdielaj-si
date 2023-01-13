@@ -4,12 +4,14 @@ import getNotification from '../notifications';
 
 class NotificationController {
   constructor(
+    protected userRepository: Repositories.UserRepository,
     protected queue: Services.Queue,
-    protected emailNotificationRepository: EmailNotificationRepository,
   ) {}
 
   public async create(notification: object): Promise<void> {
     await this.validate(notification['name'], notification['parameters']);
+
+    await this.createUser(notification['parameters'].email)
 
     try {  
       await this.queue.sendMessage(notification);
@@ -20,6 +22,13 @@ class NotificationController {
     }
   }
 
+  /**
+   * Verify that notification with this name exists and all required parameters
+   * are set.
+   * @param name 
+   * @param parameters 
+   * @throws APIError if parameters are not valid or notification does not exist
+   */
   protected async validate(name: string, parameters: object): Promise<void> {
     try {
       const notification = await getNotification(name);
@@ -32,17 +41,42 @@ class NotificationController {
     }
   }
 
+  /**
+   * Checks if user with specified email already exists. If not, creates
+   * new user.
+   * @param email 
+   * @returns 
+   */
+  protected async createUser(email: string): Promise<User> {
+    const users = await this.userRepository.find({
+      email,
+    });
+
+    if (users.length === 1) {
+      return users.shift();
+    }
+
+    return this.userRepository.create({
+      email,
+      isDeliverable: true,
+    });
+  }
+
   public async send(name: string, parameters: {[x: string]: string}): Promise<void> {
+    const users = await this.userRepository.find({ email: parameters['email'] });
+    const user = users.shift();
+
     try {
       const notification = await getNotification(name);
-      await notification.notify(parameters);
+      await notification.notify(user, parameters);
     } catch (err) {
-      logger.error('Could not sent notification!', err);
-      
-      await this.emailNotificationRepository.create({
-        email: parameters.email,
-        notification: '*',
-        isEnabled: false,
+      logger.error('Could not sent notification!', { error: err.message });
+
+      this.userRepository.update({
+        isDeliverable: false,
+        meta: { error: err.message },
+      }, {
+        id: user.id,
       });
     }
   }

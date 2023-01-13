@@ -3,15 +3,18 @@ export {};
 
 declare global {
   type User = {
-    id: string;
-    firstName: string;
+    id: number;
     email: string;
-    token: string;
+    isDeliverable: boolean;
+    meta: unknown;
+    createdAt: string;
+    updatedAt: string;
   }
   
-  type EmailNotification = {
-    id: string;
-    email: string;
+  type UserNotificationSetting = {
+    id: number;
+    userId: number;
+    type: string;
     notification: string;
     isEnabled: boolean;
     createdAt: string;
@@ -24,6 +27,17 @@ declare global {
     subject: string;
     body: string;
     meta: unknown;
+    createdAt: string;
+  }
+
+  type UserNotification = {
+    id: string;
+    userId: string;
+    type: string;
+    subject: string;
+    body: string;
+    meta: unknown;
+    status: string;
     createdAt: string;
   }
 

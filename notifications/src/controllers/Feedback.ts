@@ -2,28 +2,44 @@ import logger from '../logger';
 
 class FeedbackController {
   constructor(
-    protected emailNotificationRepository: EmailNotificationRepository,
+    protected userRepository: Repositories.UserRepository,
   ) {}
 
   public async bounce(email: string, meta: unknown): Promise<void> {
     logger.warn('Email bounce feedback received!', { meta });
 
-    await this.emailNotificationRepository.create({
-      email,
-      notification: '*',
-      isEnabled: false,
+    const users = await this.userRepository.find({ email });
+
+    if (users.length === 0) {
+      return;
+    }
+
+    const user = users.shift();
+
+    await this.userRepository.update({
+      isDeliverable: false,
       meta,
+    }, {
+      id: user.id,
     });
   }
 
   public async complaint(email: string, meta: unknown): Promise<void> {
     logger.warn('Email complaint feedback received!', { meta });
 
-    await this.emailNotificationRepository.create({
-      email,
-      notification: '*',
-      isEnabled: false,
+    const users = await this.userRepository.find({ email });
+
+    if (users.length === 0) {
+      return;
+    }
+
+    const user = users.shift();
+
+    await this.userRepository.update({
+      isDeliverable: false,
       meta,
+    }, {
+      id: user.id,
     });
   }
 

@@ -6,7 +6,7 @@ import email from './email';
 const router = express.Router();
 
 router.use('/notifications', notify);
-router.use('/template', template);
-router.use('/email', email);
+router.use('/notifications/template', template);
+router.use('/notifications/email', email);
 
 export default router;

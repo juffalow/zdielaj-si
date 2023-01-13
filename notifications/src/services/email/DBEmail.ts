@@ -1,22 +1,26 @@
 import logger from '../../logger';
 
 class DBEmail implements Services.Email {
-  protected emailLogRepository: EmailLogRepository;
-
-  public constructor(emailLogRepository: EmailLogRepository) {
-    this.emailLogRepository = emailLogRepository;
-  }
+  public constructor(
+    protected userRepository: Repositories.UserRepository,
+    protected notificationRepository: Repositories.NotificationRepository,
+  ) {}
 
   public async sendMail(email: string, subject: string, body: string, from: string): Promise<void> {
     logger.debug(`${this.constructor.name}.sendMail`, { email, subject, body, from });
 
-    await this.emailLogRepository.create({
-      email,
+    const users = await this.userRepository.find({ email });
+    const user = users.shift();
+
+    await this.notificationRepository.create({
+      userId: user.id,
+      type: 'email',
       subject,
       body,
       meta: {
         from,
       },
+      status: 'sent',
     });
   }
 }
