@@ -12,12 +12,13 @@ const container = {
   get Email(): Services.Email {
     const compositeEmail = email.CompositeEmail;
 
-    // if (config.services.email.db.enabled) {
-    //   compositeEmail.add(email.DBEmail);
-    // }
+    if (config.services.email.aws.enabled) {
+      compositeEmail.add(email.AWSEmail);
+    }
 
-    // compositeEmail.add(email.AWSEmail);
-    compositeEmail.add(email.DBEmail);
+    if (config.services.email.database.enabled) {
+      compositeEmail.add(email.DBEmail);
+    }
 
     return compositeEmail;
   },

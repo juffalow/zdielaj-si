@@ -33,15 +33,21 @@ export default {
       },
     },
     email: {
+      unsubscribeUrl: process.env.SERVICES_EMAIL_UNSUBSCRIBE_URL,
       from: {
         email: process.env.SERVICES_EMAIL_FROM_EMAIL,
         name: process.env.SERVICES_EMAIL_FROM_NAME,
       },
-      unsubscribeUrl: process.env.SERVICES_EMAIL_UNSUBSCRIBE_URL,
       limit: {
         hour: process.env.SERVICES_EMAIL_LIMIT_HOUR || 25,
         day: process.env.SERVICES_EMAIL_LIMIT_DAY || 200,
-      }
+      },
+      database: {
+        enabled: process.env.SERVICES_EMAIL_DATABASE === 'true',
+      },
+      aws: {
+        enabled: process.env.SERVICES_EMAIL_AWS === 'true',
+      },
     },
     worker: {
       type: 'SQS',
