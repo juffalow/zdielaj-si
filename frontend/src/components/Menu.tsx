@@ -15,6 +15,11 @@ const Menu = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+          {
+            user !== undefined ? (
+              <Nav.Link as={Link} to="/albumy">Albumy</Nav.Link>
+            ) : null
+          }
           {/*
             <Nav.Link as={Link} to="/obrazky">Obrazky</Nav.Link>
             <Nav.Link as={Link} to="/video">Video</Nav.Link>
@@ -29,7 +34,6 @@ const Menu = () => {
                 <Nav.Link as={Link} to="/prihlasit-sa">Prihlásiť sa</Nav.Link>
               )
             }
-
             <Nav.Link as={Link} to="/o-aplikacii">O aplikácii</Nav.Link>
           </Nav>
         </Navbar.Collapse>

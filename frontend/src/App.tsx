@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Album from './pages/Album';
+import Albums from './pages/Albums';
 import Register from './pages/Register';
 import Validation from './pages/Validation';
 import Login from './pages/Login';
@@ -21,6 +22,7 @@ const App: React.FC = () => (
           <Routes>
             <Route path="/o-aplikacii" element={<About />} />
             <Route path="/album/:id" element={<Album />} />
+            <Route path="/albumy" element={<Albums />} />
             <Route path="/registracia" element={<Register />} />
             <Route path="/validacia" element={<Validation />} />
             <Route path="/prihlasit-sa" element={<Login />} />

@@ -38,6 +38,14 @@ interface RefreshTokenResponse {
   };
 }
 
+export async function getAlbum(id: string): Promise<any> {
+  return get(`${process.env.REACT_APP_CORE_URL}/albums/${id}`, { credentials: 'include' });
+}
+
+export async function getAlbums(): Promise<any> {
+  return get(`${process.env.REACT_APP_CORE_URL}/albums`, { credentials: 'include' });
+}
+
 export async function createAlbum(): Promise<Album> {
   return post(`${process.env.REACT_APP_CORE_URL}/album`, {})
     .then((response) => {

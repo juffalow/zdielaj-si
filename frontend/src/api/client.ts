@@ -40,7 +40,18 @@ function handleSuccess(response: any) {
 }
 
 export async function get(endpoint: string, options?: RequestInit): Promise<any> {
-  return fetch(endpoint, options)
+  const headers = new Headers();
+  const userToken = getUserToken();
+
+  if (userToken !== null) {
+    headers.set('Authorization', userToken);
+  }
+
+  return fetch(endpoint, {
+    ...options,
+    method: 'GET',
+    headers,
+  })
     .then(handleErrors)
     .then(handleSuccess);
 }
