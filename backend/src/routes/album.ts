@@ -20,6 +20,21 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
   }
 });
 
+router.get('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const albums = await controllers.Album.getAlbums(req['user']);
+    
+    res.status(200).json({
+      error: null,
+      data: {
+        albums,
+      }
+    }).end();
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post('/', async (req: express.Request, res: express.Response) => {
   const album = await controllers.Album.createAlbum(req['user']);
 
@@ -39,7 +54,7 @@ router.post('/:id/media', async (req: express.Request, res: express.Response) =>
   const mediaRepository = repositories.Media;
   const user = 'user' in req ? (req as any).user : null;
   const album = await albumRepository.get(req.params.id);
-  const count = await mediaRepository.count(req.params.id);
+  const count = await mediaRepository.count({ album: { id: req.params.id } });
 
   if (user !== null && 'id' in user) {
     if (album.userId !== user.id) {
@@ -86,7 +101,7 @@ router.post('/:id/media', async (req: express.Request, res: express.Response) =>
   }
 
   await mediaRepository.create(album.id, req.body.mediaId);
-  const media = await mediaRepository.find(album.id);
+  const media = await mediaRepository.find({ album: { id: album.id } });
 
   res.status(200).json({
     error: null,

@@ -15,7 +15,7 @@ class AlbumController {
    */
   public async getAlbum(id: string): Promise<Album> {
     const album = await this.albumRepository.get(id);
-    const media = await this.mediaRepository.find(id);
+    const media = await this.mediaRepository.find({ album: { id } });
   
     if (typeof media === 'undefined' || media.length === 0) {
       throw new BaseError({message: 'Album not found!', code: 404 });
@@ -42,7 +42,23 @@ class AlbumController {
    * @returns 
    */
   public async getAlbums(user: User): Promise<Album[]> {
-    return null;
+    const albums = await this.albumRepository.find({ user: { id: user.id } });
+
+    const albumsWithThumbnails = await Promise.all(albums.map(async (album) => {
+      const media = await this.mediaRepository.find({ album: { id: album.id }, first: 1 });
+      const response = await this.uploadService.getFile(media[0].mediaId);
+
+      return {
+        ...album,
+        media: [{
+          ...media,
+          ...response.data.file,
+        }],
+      } as any;
+
+    }));
+
+    return albumsWithThumbnails;
   }
 
   /**
