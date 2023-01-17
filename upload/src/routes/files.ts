@@ -4,15 +4,19 @@ import onlyServer from '../middlewares/onlyServer';
 
 const router = express.Router();
 
-router.get('/:id', onlyServer, async (req: express.Request, res: express.Response) => {
-  const file = await controllers.Files.getFile(req.params.id);
+router.get('/:id', onlyServer, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const file = await controllers.Files.getFile(req.params.id);
 
-  res.status(200).json({
-    error: null,
-    data: {
-      file,
-    }
-  }).end();
+    res.status(200).json({
+      error: null,
+      data: {
+        file,
+      }
+    }).end();
+  } catch (err) {
+    next(err);
+  }
 });
 
 export default router;
