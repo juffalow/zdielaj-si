@@ -5,7 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 import { register } from '../../api/services';
 
 interface Props {
-  onSuccess: (user: any) => void;
+  onSuccess: (user: User) => void;
 }
 
 const RegisterForm: React.FC<Props> = ({ onSuccess }: Props) => {
@@ -48,8 +48,8 @@ const RegisterForm: React.FC<Props> = ({ onSuccess }: Props) => {
         return;
       }
       register(name, email, password)
-        .then((response: any) => {
-          onSuccess(response.data.user);
+        .then(user => {
+          onSuccess(user);
         })
         .catch((error) => {
           setHasError(true);

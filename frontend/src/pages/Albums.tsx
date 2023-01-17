@@ -7,13 +7,13 @@ import Preview from './albums/Preview';
 import { getAlbums } from '../api/services';
 import SEO from '../components/SEO';
 
-const Album: React.FC = () => {
-  const [ albums, setAlbums ] = useState([] as Array<any>);
+const Albums: React.FC = () => {
+  const [ albums, setAlbums ] = useState([] as Array<Album>);
   const [ hasError, setHasError ] = useState(false);
 
   useEffect(() => {
     getAlbums()
-      .then((response) => setAlbums(response.data.albums))
+      .then((albums) => setAlbums(albums))
       .catch(() => setHasError(true));
   }, []);
 
@@ -45,4 +45,4 @@ const Album: React.FC = () => {
   );
 }
 
-export default Album;
+export default Albums;

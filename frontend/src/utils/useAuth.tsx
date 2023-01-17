@@ -67,9 +67,9 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     setLoading(true);
 
     return login(email, password)
-      .then((response) => {
-        setUser(response.data.user);
-        setUserToken(response.data.user.token);
+      .then((user) => {
+        setUser(user);
+        setUserToken(user.token);
         autoRefresh();
       })
       .finally(() => setLoading(false));
@@ -81,8 +81,8 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     setLoading(true);
 
     return register(name, email, password)
-      .then((response) => {
-        setUser(response.data);
+      .then((user) => {
+        setUser(user);
       })
       .finally(() => setLoading(false));
   }

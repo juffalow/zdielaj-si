@@ -1,3 +1,0 @@
-interface Album {
-  id: string;
-}

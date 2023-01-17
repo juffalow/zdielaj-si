@@ -6,15 +6,17 @@ type Setting = {
   isEnabled: boolean,
 }
 
-export async function register(name: string, email: string, password: string): Promise<any> {
-  return post(`${process.env.REACT_APP_CORE_URL}/user/register`, { name, email, password });
+export async function register(name: string, email: string, password: string): Promise<User> {
+  return post(`${process.env.REACT_APP_CORE_URL}/user/register`, { name, email, password })
+    .then(response => response.data.user);
 }
 
-export async function login(email: string, password: string): Promise<any> {
-  return post(`${process.env.REACT_APP_CORE_URL}/user/login`, { email, password }, { credentials: 'include' });
+export async function login(email: string, password: string): Promise<User> {
+  return post(`${process.env.REACT_APP_CORE_URL}/user/login`, { email, password }, { credentials: 'include' })
+    .then(response => response.data.user);
 }
 
-export async function logout(): Promise<RefreshTokenResponse> {
+export async function logout(): Promise<unknown> {
   return get(`${process.env.REACT_APP_CORE_URL}/user/logout`, { credentials: 'include' });
 }
 
@@ -29,21 +31,14 @@ export async function uploadPhoto(file: File): Promise<Media> {
     });
 }
 
-interface RefreshTokenResponse {
-  error: unknown;
-  data: {
-    id: number;
-    expiresAt: string;
-    token: string;
-  };
+export async function getAlbum(id: string): Promise<Album> {
+  return get(`${process.env.REACT_APP_CORE_URL}/albums/${id}`, { credentials: 'include' })
+    .then(response => response.data.album);
 }
 
-export async function getAlbum(id: string): Promise<any> {
-  return get(`${process.env.REACT_APP_CORE_URL}/albums/${id}`, { credentials: 'include' });
-}
-
-export async function getAlbums(): Promise<any> {
-  return get(`${process.env.REACT_APP_CORE_URL}/albums`, { credentials: 'include' });
+export async function getAlbums(): Promise<Album[]> {
+  return get(`${process.env.REACT_APP_CORE_URL}/albums`, { credentials: 'include' })
+    .then(response => response.data.albums);
 }
 
 export async function createAlbum(): Promise<Album> {
@@ -56,6 +51,15 @@ export async function createAlbum(): Promise<Album> {
 
 export async function addMedia(albumId: string, mediaId: number): Promise<any> {
   return post(`${process.env.REACT_APP_CORE_URL}/album/${albumId}/media`, { mediaId });
+}
+
+interface RefreshTokenResponse {
+  error: unknown;
+  data: {
+    id: number;
+    expiresAt: string;
+    token: string;
+  };
 }
 
 export async function refreshToken(): Promise<RefreshTokenResponse> {
