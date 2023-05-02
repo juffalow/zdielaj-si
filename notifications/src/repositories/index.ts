@@ -1,15 +1,15 @@
-import KnexUserRepository from './KnexUserRepository';
-import KnexUserNotificationSettingRepository from './KnexUserNotificationSettingRepository';
+import KnexUserChannelRepository from './KnexUserChannelRepository';
+import KnexSettingRepository from './KnexSettingRepository';
 import KnexNotificationRepository from './KnexNotificationRepository';
 import database from '../database';
 
 const container = {
-  get User(): Repositories.UserRepository {
-    return new KnexUserRepository(database);
+  get UserChannel(): Repositories.UserChannelRepository {
+    return new KnexUserChannelRepository(database);
   },
 
-  get UserNotificationSetting(): Repositories.UserNotificationSettingRepository {
-    return new KnexUserNotificationSettingRepository(database);
+  get Setting(): Repositories.SettingRepository {
+    return new KnexSettingRepository(database);
   },
 
   get Notification(): Repositories.NotificationRepository {

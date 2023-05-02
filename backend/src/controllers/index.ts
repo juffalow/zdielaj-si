@@ -10,7 +10,7 @@ const container = {
 
   get Notifications() {
     return new NotificationsController(services.Notifications);
-  }
+  },
 };
 
 export default container;

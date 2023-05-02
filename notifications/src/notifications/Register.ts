@@ -1,11 +1,12 @@
 import Joi from 'joi';
 import Notificatons from './Notifications';
+import config from '../config';
 import logger from '../logger';
 import RegisterTemplate from '../templates/email/register';
 
 interface Parameters {
-  email: string;
   firstName: string;
+  token: string;
   validateEmailLink: string;
 }
 
@@ -16,16 +17,18 @@ class RegisterNotifications extends Notificatons {
     const isEnabled = await this.canNotifyWithEmail(user, 'register');
 
     if (isEnabled === false) {
-      logger.warn('User unsubscribed from this event or exceeded limit!!');
+      logger.warn('User unsubscribed from this event or exceeded limit!');
       return;
     }
 
     return this.sendEmail(
-      parameters.email,
+      user.email,
       'Registrácia | Zdielaj.si',
       RegisterTemplate.render({
+        email: user.email,
         title: 'Registrácia | Zdielaj.si',
-        unsubscribeUrl: this.getUnsubscribeUrl(parameters.email),
+        unsubscribeUrl: this.getUnsubscribeUrl(user.email),
+        validateEmailLink: `${config.services.frontend.url}/validacia?id=${user.id}&token=${parameters.token}`,
         ...parameters
       }),
       '"Zdielaj.si" <no-reply@zdielaj.si>',
@@ -34,8 +37,8 @@ class RegisterNotifications extends Notificatons {
 
   public validateParameters(parameters: unknown): void {
     const schema = Joi.object({
-      email: Joi.string().required(),
       firstName: Joi.string().required(),
+      token: Joi.string().required(),
       validateEmailLink: Joi.string().required(),
     });
   

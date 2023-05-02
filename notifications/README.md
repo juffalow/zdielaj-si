@@ -4,6 +4,7 @@
 
 * AWS Queue
 * AWS Email service
+* AWS Simple Notification Service
 
 ## Suggested architecture
 

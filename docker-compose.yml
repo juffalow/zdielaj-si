@@ -27,19 +27,25 @@ services:
       volumes:
         - 'mysql_notifications_data:/data/db'
 
-  mysql_upload:
-      container_name: zdielaj_si_db_upload
+  mysql_user_service:
+      container_name: zdielaj_si_db_user_service
       image: mysql
-      environment:
-        - MYSQL_DATABASE=zdielajsi_upload
-        - MYSQL_USER=zdielajsi_upload
-        - MYSQL_PASSWORD=password
-        - MYSQL_ROOT_PASSWORD=password
-        - MYSQL_PORT=3306
+      env_file:
+        - ./.env.user
       ports:
-        - 3308:3306
+        - 3309:3306
       volumes:
-        - 'mysql_upload_data:/data/db'
+        - 'mysql_user_service_data:/data/db'
+
+  mysql_upload_service:
+      container_name: zdielaj_si_db_upload_service
+      image: mysql
+      env_file:
+        - ./.env.upload
+      ports:
+        - 3310:3306
+      volumes:
+        - 'mysql_upload_service_data:/data/db'
 
   core:
     image: node:18-alpine
@@ -110,46 +116,44 @@ services:
     ports:
       - 3000:3000
 
-  upload:
-    image: node:18-alpine
-    working_dir: /home/node
-    command: sh -c "apk add --no-cache ffmpeg && yarn install && yarn start"
+  user_service:
+    image: juffalow/user-service:latest
     depends_on:
-      - mysql_upload
+      - mysql_user_service
     restart: unless-stopped
+    env_file:
+      - ./.env.user
     ports:
-      - 3012:3010
-    environment:
-      - DATABASE_HOST=mysql_upload
-      - DATABASE_NAME=zdielajsi_upload
-      - DATABASE_USER=zdielajsi_upload
-      - DATABASE_PASSWORD=password
-      - DATABASE_PORT=3306
+      - 3013:3010
     links:
-      - mysql_upload
-    volumes:
-      - "./upload:/home/node"
+      - mysql_user_service
 
-  upload_worker:
-    image: node:18-alpine
-    working_dir: /home/node
-    command: sh -c "apk add --no-cache ffmpeg && yarn start:worker"
+  upload_service:
+    image: juffalow/upload-service:latest
     depends_on:
-      - mysql_upload
-      - upload
+      - mysql_upload_service
     restart: unless-stopped
-    environment:
-      - DATABASE_HOST=mysql_upload
-      - DATABASE_NAME=zdielajsi_upload
-      - DATABASE_USER=zdielajsi_upload
-      - DATABASE_PASSWORD=password
-      - DATABASE_PORT=3306
+    env_file:
+      - ./.env.upload
+    ports:
+      - 3014:3010
     links:
-      - mysql_upload
-    volumes:
-      - "./upload:/home/node"
+      - mysql_upload_service
+
+  upload_service_worker:
+    image: juffalow/upload-service:latest
+    working_dir: /home/juffuser/upload-service
+    command: sh -c "node ./dist/worker.js"
+    depends_on:
+      - mysql_upload_service
+    restart: unless-stopped
+    env_file:
+      - ./.env.upload
+    links:
+      - mysql_upload_service
 
 volumes:
   mysql_core_data:
   mysql_notifications_data:
-  mysql_upload_data:
+  mysql_user_service_data:
+  mysql_upload_service_data:

@@ -1,4 +1,3 @@
-import crypto from 'crypto';
 import { Knex } from 'knex';
 import logger from '../logger';
 import { shouldFilterBy } from '../utils/functions';
@@ -8,7 +7,7 @@ class KnexAlbumRepository implements AlbumRepository {
     protected database: Knex
   ) {}
 
-  public async get(id: string): Promise<Album> {
+  public async get(id: number): Promise<Album> {
     logger.debug(`${this.constructor.name}.get`, { id });
 
     return new Promise((resolve, reject) => {
@@ -21,21 +20,19 @@ class KnexAlbumRepository implements AlbumRepository {
     });
   }
 
-  public async create(userId: number = null): Promise<Album> {
+  public async create(userId: number = null, hash: string): Promise<Album> {
     logger.debug(`${this.constructor.name}.create`, { userId });
 
-    return new Promise((resolve) => {
-      const id = crypto.randomBytes(4).toString('hex');
+    return new Promise((resolve, reject) => {
       this.database.insert({
-        id,
         userId,
+        hash,
       })
       .into('album')
-      .then(() => {
-        resolve({ id, userId });
+      .then((ids) => {
+        resolve(this.get(ids[0]));
       }).catch(err => {
-        logger.error('Cannot create album!', { error: { message: err.message, stack: err.stack } });
-        return this.create(userId);
+        reject(err);
       });
     });
   }
@@ -45,6 +42,7 @@ class KnexAlbumRepository implements AlbumRepository {
 
     const {
       user,
+      hash,
     } = params;
 
     return new Promise((resolve, reject) => {
@@ -53,6 +51,10 @@ class KnexAlbumRepository implements AlbumRepository {
         .modify((queryBuilder) => {
           if (shouldFilterBy(user) && shouldFilterBy(user.id)) {
             queryBuilder.where('album.userId', user.id);
+          }
+
+          if (shouldFilterBy(hash)) {
+            queryBuilder.where('album.hash', hash);
           }
         })
         .then(albums => resolve(albums))

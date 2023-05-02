@@ -5,28 +5,17 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import SEO from '../components/SEO';
-import {getQueryParameter} from '../utils/functions';
-import {setNotificationSettings} from '../api/services';
+import { getQueryParameter } from '../utils/functions';
+import { getNotificationSettings, setNotificationSettings} from '../api/services';
 
 const Notifications: React.FC = () => {
   const [settings, setSettingsState] = useState<Setting[]>([]);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_CORE_URL}/notifications?email=${getQueryParameter('email')}`, {
-      headers: {
-        'Authorization': getQueryParameter('token'),
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error();
-        }
-        return response;
-      })
-      .then(res => res.json())
-      .then(json => {
-        setSettingsState(json.data.notifications);
+    getNotificationSettings(getQueryParameter('email'))
+      .then(settings => {
+        setSettingsState(settings);
       })
       .catch(() => setHasError(true));
   }, []);
@@ -44,6 +33,27 @@ const Notifications: React.FC = () => {
     });
   };
 
+  const onSettingChange = (event: any) => {
+    console.log(event);
+
+    console.log('name', event.target.name);
+    console.log('value', event.target.checked);
+
+    const notification = event.target.name;
+    const isEnabled = event.target.checked;
+
+    setNotificationSettings(
+      getQueryParameter('email'),
+      [{ notification, isEnabled }],
+      getQueryParameter('token')
+    ).then(json => {
+      setSettingsState(json.data.notifications);
+    }).catch(e => {
+      setHasError(true);
+      alert(e.message);
+    });
+  }
+
   return (
     <SEO title="Notifikácie" description="">
       <Container>
@@ -60,6 +70,7 @@ const Notifications: React.FC = () => {
                   <Form.Group className="mb-3" controlId="notificationGeneral">
                     <Form.Check
                       disabled
+                      readOnly
                       type="switch"
                       id="custom-switch"
                       label="Notifikácie (povinné)"
@@ -75,11 +86,13 @@ const Notifications: React.FC = () => {
                       type="switch"
                       id="custom-switch"
                       label="Prihlásenie do účtu"
+                      name="login"
                       checked={settings.find(setting => setting.notification === 'login')?.isEnabled ?? false}
-                      onClick={() => setSetting({
-                        notification: 'login',
-                        isEnabled: !settings.find(setting => setting.notification === 'login')?.isEnabled
-                      })}
+                      onChange={onSettingChange}
+                      // onClick={() => setSetting({
+                      //   notification: 'login',
+                      //   isEnabled: !settings.find(setting => setting.notification === 'login')?.isEnabled
+                      // })}
                     />
                     <Form.Text className="text-muted">
                       Úspešné prihlásenie do účtu z nového zariadenia.
@@ -89,6 +102,7 @@ const Notifications: React.FC = () => {
                   <Form.Group className="mb-3" controlId="notificationNewFeature">
                     <Form.Check
                       disabled
+                      readOnly
                       type="switch"
                       id="custom-switch"
                       label="Oznámenie o aktualizácii"

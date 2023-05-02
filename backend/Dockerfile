@@ -17,8 +17,8 @@ USER 2000:3000
 RUN mkdir /home/juffuser/zdielaj-si-backend/
 WORKDIR /home/juffuser/zdielaj-si-backend
 
-COPY --from=build /home/node/zdielaj-si-backend/dist ./dist
-COPY --from=build /home/node/zdielaj-si-backend/package.json /home/node/zdielaj-si-backend/yarn.lock ./
+COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-backend/dist ./dist
+COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-backend/package.json /home/node/zdielaj-si-backend/yarn.lock ./
 RUN yarn install --frozen-lockfile --production
 
 EXPOSE 3010

@@ -11,22 +11,34 @@ function Gallery({ files }: any) {
   const [container, setContainer] = useState(null);
 
   const elements = files.map((file: any) => {
+    console.log(file);
+    const srcset = file.thumbnails.map((t: any) => `${t.location} ${t.metadata.width}w`)
+      .concat(`${file.location} ${file.metadata.width}w`).join(',');
+
+    console.log('srcset', srcset);
     if (file.mimetype.startsWith('image/')) {
       return {
         id: file.id,
         src: file.location,
+        srcset,
+        // srcset: file.thumbnails.map((t: any) => `${t.location} ${t.metadata.width}w`).join(','),
+        // responsive: file.thumbnails.map((t: any) => `${t.location} ${t.metadata.width}w`).join(','),
+        // sizes: file.thumbnails.map((t: any) => `${t.location} ${t.metadata.width}`).join(','),
         thumb: file.thumbnails[0].location,
         downloadUrl: file.location,
       };
     }
 
     if (file.mimetype.startsWith('video/')) {
+      console.log('images', file.thumbnails.filter((thumbnail: any) => thumbnail.mimetype.startsWith('image/')))
+      console.log(file.thumbnails.filter((thumbnail: any) => thumbnail.mimetype.startsWith('image/')).find((thumbnail: any) => thumbnail.metadata.width > 400))
+      console.log(file.thumbnails.filter((thumbnail: any) => thumbnail.mimetype.startsWith('image/')).find((thumbnail: any) => thumbnail.metadata.width <= 400))
       return {
         id: file.id,
         video: {
           source: [{
-            src: file.playable.location,
-            type: "video/mp4",
+            src: file.thumbnails[0].location,
+            type: 'video/mp4',
           }],
           attributes: {
             preload: false,
@@ -34,8 +46,8 @@ function Gallery({ files }: any) {
           },
           tracks: [],
         },
-        poster: file.thumbnails.find((thumbnail: any) => thumbnail.metadata.width > 400).location,
-        thumb: file.thumbnails.find((thumbnail: any) => thumbnail.metadata.width <= 400).location,
+        poster: file.thumbnails.filter((thumbnail: any) => thumbnail.mimetype.startsWith('image/')).find((thumbnail: any) => thumbnail.metadata.width > 400).location,
+        thumb: file.thumbnails.filter((thumbnail: any) => thumbnail.mimetype.startsWith('image/')).find((thumbnail: any) => thumbnail.metadata.width <= 400).location,
         downloadUrl: file.location,
       };
     }

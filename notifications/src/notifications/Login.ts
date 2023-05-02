@@ -33,7 +33,6 @@ class LoginNotification extends Notificatons {
 
   public validateParameters(parameters: unknown): void {
     const schema = Joi.object({
-      email: Joi.string().required(),
       firstName: Joi.string().required(),
       city: Joi.string().optional(),
       country: Joi.string().optional(),

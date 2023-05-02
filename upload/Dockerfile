@@ -19,10 +19,11 @@ USER 2000:3000
 RUN mkdir /home/juffuser/zdielaj-si-upload/
 WORKDIR /home/juffuser/zdielaj-si-upload
 
-COPY --from=build /home/node/zdielaj-si-upload/dist ./dist
-COPY --from=build /home/node/zdielaj-si-upload/package.json /home/node/zdielaj-si-upload/yarn.lock ./
+COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-upload/dist ./dist
+COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-upload/package.json /home/node/zdielaj-si-upload/yarn.lock ./
 RUN yarn install --frozen-lockfile --production
 
-EXPOSE 3010
+ARG PORT=3010
+EXPOSE $PORT
 
 CMD [ "node", "dist/index.js" ]

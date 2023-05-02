@@ -4,7 +4,7 @@ import { generateToken } from '../utils/functions';
 abstract class Notifications {
   public constructor(
     protected unsubscribeUrl: string,
-    protected userNotificationSettingRepository: Repositories.UserNotificationSettingRepository,
+    protected settingRepository: Repositories.SettingRepository,
     protected emailService: Services.Email
   ) {}
 
@@ -15,7 +15,7 @@ abstract class Notifications {
       return false;
     }
 
-    const userNotificationSettings = await this.userNotificationSettingRepository.find({
+    const settings = await this.settingRepository.find({
       user: {
         id: user.id,
       },
@@ -23,7 +23,7 @@ abstract class Notifications {
       isEnabled: false,
     });
 
-    if (userNotificationSettings.length > 0) {
+    if (settings.length > 0) {
       logger.warning('Notification is disabled for this email!', { user, notification });
 
       return false;

@@ -39,14 +39,16 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     // console.log('useEffect.loadingInitial', loadingInitial)
     refreshToken()
       .then((response) => {
-        setUser(response.data);
-        setUserToken(response.data.token);
+        setUser(response.data.user);
+        setUserToken(response.data.user.token);
       })
       .catch(() => {
         setUser(undefined);
         setUserToken(null);
       })
-      .finally(() => setLoadingInitial(false));
+      .finally(() => {
+        setLoadingInitial(false)
+      });
   }, []);
 
   // window.addEventListener('storage', (event) => {
@@ -97,7 +99,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     setTimeout(async () => {
       refreshToken()
         .then((response) => {
-          setUserToken(response.data.token);
+          setUserToken(response.data.user.token);
         })
         .catch(() => {
           setUser(undefined);
@@ -132,7 +134,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   return (
     <AuthContext.Provider value={memoedValue}>
       {
-        loadingInitial ? ( null) : children
+        loadingInitial ? ( null ) : children
       }
     </AuthContext.Provider>
   );

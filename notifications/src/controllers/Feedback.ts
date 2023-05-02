@@ -2,44 +2,50 @@ import logger from '../logger';
 
 class FeedbackController {
   constructor(
-    protected userRepository: Repositories.UserRepository,
+    protected userChannelRepository: Repositories.UserChannelRepository,
   ) {}
 
   public async bounce(email: string, meta: unknown): Promise<void> {
     logger.warn('Email bounce feedback received!', { meta });
 
-    const users = await this.userRepository.find({ email });
+    const userChannels = await this.userChannelRepository.find({
+      meta: {
+        email,
+      },
+    });
 
-    if (users.length === 0) {
+    if (userChannels.length === 0) {
       return;
     }
 
-    const user = users.shift();
+    const userChannel = userChannels.shift();
 
-    await this.userRepository.update({
-      isDeliverable: false,
-      meta,
+    await this.userChannelRepository.update({
+      isEnabled: false,
     }, {
-      id: user.id,
+      id: userChannel.id,
     });
   }
 
   public async complaint(email: string, meta: unknown): Promise<void> {
     logger.warn('Email complaint feedback received!', { meta });
 
-    const users = await this.userRepository.find({ email });
+    const userChannels = await this.userChannelRepository.find({
+      meta: {
+        email,
+      },
+    });
 
-    if (users.length === 0) {
+    if (userChannels.length === 0) {
       return;
     }
 
-    const user = users.shift();
+    const userChannel = userChannels.shift();
 
-    await this.userRepository.update({
-      isDeliverable: false,
-      meta,
+    await this.userChannelRepository.update({
+      isEnabled: false,
     }, {
-      id: user.id,
+      id: userChannel.id,
     });
   }
 

@@ -1,5 +1,5 @@
 declare namespace Repositories {
-  namespace UserNotificationSettingRepository {
+  namespace SettingRepository {
     interface CreateParameters {
       userId: number;
       notification: string;
@@ -20,41 +20,58 @@ declare namespace Repositories {
         to?: string;
       };
     }
+
+    interface UpdateParameters {
+      type: string;
+      notification: string;
+      isEnabled: boolean;
+    }
   }
 
-  interface UserNotificationSettingRepository {
-    get(id: number): Promise<UserNotificationSetting>;
+  interface SettingRepository {
+    get(id: number): Promise<Setting>;
     
-    create(params: UserNotificationSettingRepository.CreateParameters): Promise<UserNotificationSetting>;
+    create(params: SettingRepository.CreateParameters): Promise<Setting>;
 
-    find(params: UserNotificationSettingRepository.FindParameters): Promise<UserNotificationSetting[]>;
+    find(params: SettingRepository.FindParameters): Promise<Setting[]>;
+
+    update(params: SettingRepository.UpdateParameters, where: { user: { id: number } }): Promise<Setting>;
   }
 
-  namespace UserRepository {
+  namespace UserChannelRepository {
     interface CreateParameters {
-      email: string;
-      isDeliverable?: boolean;
-      meta?: unknown;
+      userId: number;
+      type: string;
+      meta: unknown;
+      isEnabled: boolean;
     }
 
     interface FindParameters {
-      email: string;
+      id?: number;
+      user?: {
+        id: number;
+      };
+      type?: string;
+      meta?: {
+        [x: string]: unknown;
+      };
+      isEnabled?: boolean;
     }
 
     interface UpdateParameters {
-      isDeliverable: boolean;
-      meta: unknown;
+      meta?: unknown;
+      isEnabled?: boolean;
     }
   }
 
-  interface UserRepository {
-    get(id: number): Promise<User>;
+  interface UserChannelRepository {
+    get(id: number): Promise<UserChannel>;
   
-    create(params: UserRepository.CreateParameters): Promise<User>;
+    create(params: UserChannelRepository.CreateParameters): Promise<UserChannel>;
 
-    find(params: UserRepository.FindParameters): Promise<User[]>
+    find(params: UserChannelRepository.FindParameters): Promise<UserChannel[]>
 
-    update(params: UserRepository.UpdateParameters, where: { id: number }): Promise<User>;
+    update(params: UserChannelRepository.UpdateParameters, where: { id: number } | { userId: number, type: string }): Promise<UserChannel>;
   }
 
   namespace NotificationRepository {

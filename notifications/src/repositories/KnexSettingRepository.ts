@@ -2,12 +2,12 @@ import { Knex } from 'knex';
 import logger from '../logger';
 import { shouldFilterBy } from '../utils/functions';
 
-class KnexUserNotificationSettingRepository implements Repositories.UserNotificationSettingRepository {
+class KnexSettingRepository implements Repositories.SettingRepository {
   constructor(
     protected database: Knex
   ) {}
 
-  public async get(id: number): Promise<UserNotificationSetting> {
+  public async get(id: number): Promise<Setting> {
     logger.debug(`${this.constructor.name}.get`, { id });
 
     return new Promise((resolve, reject) => {
@@ -15,12 +15,12 @@ class KnexUserNotificationSettingRepository implements Repositories.UserNotifica
         .from('user_notification_notification')
         .where('id', id)
         .first()
-        .then(userNotificationSetting => resolve(userNotificationSetting))
+        .then(setting => resolve(setting))
         .catch(err => reject(err));
     });
   }
 
-  public async create(params: Repositories.UserNotificationSettingRepository.CreateParameters): Promise<UserNotificationSetting> {
+  public async create(params: Repositories.SettingRepository.CreateParameters): Promise<Setting> {
     logger.debug(`${this.constructor.name}.create`, params);
 
     return new Promise((resolve, reject) => {
@@ -33,7 +33,7 @@ class KnexUserNotificationSettingRepository implements Repositories.UserNotifica
     });
   }
 
-  public async find(params: Repositories.UserNotificationSettingRepository.FindParameters): Promise<UserNotificationSetting[]> {
+  public async find(params: Repositories.SettingRepository.FindParameters): Promise<Setting[]> {
     logger.debug(`${this.constructor.name}.find`, params);
 
     const {
@@ -77,10 +77,26 @@ class KnexUserNotificationSettingRepository implements Repositories.UserNotifica
             queryBuilder.where('user_notification_setting.createdAt', '<=', createdAt.to);
           }
         })
-        .then(userNotificationSettings => resolve(userNotificationSettings))
+        .then(settings => resolve(settings))
         .catch(err => reject(err));
+    });
+  }
+
+  public async update(params: Repositories.SettingRepository.UpdateParameters, where: { user: { id: number } }): Promise<Setting> {
+    logger.debug(`${this.constructor.name}.update`, params);
+
+    return new Promise((resolve, reject) => {
+      this.database.table('user_notification_setting')
+        .where('userId', where.user.id)
+        .update({
+          ...params,
+        })
+        .then(() => {
+          resolve(null);
+        })
+        .catch((error) => reject(error));
     });
   }
 }
 
-export default KnexUserNotificationSettingRepository;
+export default KnexSettingRepository;

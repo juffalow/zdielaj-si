@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { BaseError } from '../utils/errors';
 
 class AlbumController {
@@ -13,16 +14,46 @@ class AlbumController {
    * @returns 
    * @throws BaseError if album not found or empty
    */
-  public async getAlbum(id: string): Promise<Album> {
+  public async getAlbum(id: number): Promise<Album> {
     const album = await this.albumRepository.get(id);
-    const media = await this.mediaRepository.find({ album: { id } });
+    const media = await this.mediaRepository.find({ album: { id: album.id } });
   
     if (typeof media === 'undefined' || media.length === 0) {
       throw new BaseError({message: 'Album not found!', code: 404 });
     }
   
     const fullMedia = await Promise.all(media.map(async (single) => {
-      const response = await this.uploadService.getFile(single.mediaId);
+      const response = await this.uploadService.getFile(single.fileId);
+      
+      return {
+        ...single,
+        ...response.data.file,
+      }
+    }));
+
+    return {
+      ...album,
+      media: fullMedia,
+    };
+  }
+
+  /**
+   * Retrieves single album with specified hash.
+   * @param hash 
+   * @returns 
+   * @throws BaseError if album not found or empty
+   */
+  public async getAlbumByHash(hash: string): Promise<Album> {
+    const albums = await this.albumRepository.find({ hash, first: 1 });
+    const album = albums.shift();
+    const media = await this.mediaRepository.find({ album: { id: album.id } });
+  
+    if (typeof media === 'undefined' || media.length === 0) {
+      throw new BaseError({message: 'Album not found!', code: 404 });
+    }
+  
+    const fullMedia = await Promise.all(media.map(async (single) => {
+      const response = await this.uploadService.getFile(single.fileId);
       
       return {
         ...single,
@@ -46,7 +77,12 @@ class AlbumController {
 
     const albumsWithThumbnails = await Promise.all(albums.map(async (album) => {
       const media = await this.mediaRepository.find({ album: { id: album.id }, first: 1 });
-      const response = await this.uploadService.getFile(media[0].mediaId);
+
+      if (media.length === 0) {
+        return undefined;
+      }
+
+      const response = await this.uploadService.getFile(media[0].fileId);
 
       return {
         ...album,
@@ -58,7 +94,7 @@ class AlbumController {
 
     }));
 
-    return albumsWithThumbnails;
+    return albumsWithThumbnails.filter(album => typeof album !== 'undefined');
   }
 
   /**
@@ -66,8 +102,23 @@ class AlbumController {
    * @param user 
    * @returns 
    */
-  public async createAlbum(user: User | null): Promise<Album> {  
-    const album = await this.albumRepository.create(user !== null && typeof user !== 'undefined' ? user.id : null);
+  public async createAlbum(user: User | null): Promise<Album> {
+    let attempt = 0;
+    let album = null;
+
+    do {
+      try {
+        const hash = crypto.randomBytes(4).toString('hex');
+        album = await this.albumRepository.create(user !== null && typeof user !== 'undefined' ? user.id : null, hash);
+        break;
+      } catch (err) {
+        attempt++;
+      }
+    } while (attempt < 10);
+
+    if (album === null) {
+      throw new BaseError({ message: 'Unable to create album!', code: 500 });
+    }
 
     return album;
   }

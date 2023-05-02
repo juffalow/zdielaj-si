@@ -47,7 +47,7 @@ const RegisterForm: React.FC<Props> = ({ onSuccess }: Props) => {
         setErrorMessage('Zadané heslá sa nezhodujú!');
         return;
       }
-      register(name, email, password)
+      register(email, password, { name })
         .then(user => {
           onSuccess(user);
         })

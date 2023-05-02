@@ -5,12 +5,16 @@ const router = express.Router();
 
 router.get('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const settings = await controllers.Settings.getEmailSettings(req.query.email as string, req['user']);
+    const user = {
+      ...req['user'],
+      email: req.query.email,
+    };
+    const settings = await controllers.Settings.getSettings(user, req.query.type as string);
 
     res.status(200).json({
       error: null,
       data: {
-        ...settings,
+        settings,
       },
     }).end();
   } catch (err) {
@@ -20,12 +24,16 @@ router.get('/', async (req: express.Request, res: express.Response, next: expres
 
 router.post('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const settings = await controllers.Settings.setEmailSettings(req.body.email, req.body.notifications, req['user']);
+    const user = {
+      ...req['user'],
+      email: req.query.email,
+    };
+    const settings = await controllers.Settings.setSettings(user, req.body.type, req.body.notifications);
 
     res.status(200).json({
       error: null,
       data: {
-        ...settings,
+        settings,
       },
     }).end();
   } catch (err) {

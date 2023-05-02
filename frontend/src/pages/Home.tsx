@@ -16,7 +16,7 @@ import APP_STORE_LOGO from '../img/app_store_logo.png';
 
 const Home: React.FC = () => {
   const [ files, setFiles ] = useState([] as Array<any>);
-  const [ albumId, setAlbumId ] = useState('');
+  const [ album, setAlbum ] = useState<Album | null>(null);
   const [ hasError, setHasError ] = useState(false);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
@@ -26,7 +26,7 @@ const Home: React.FC = () => {
 
     const album = await createAlbum();
 
-    setAlbumId(album.id);
+    setAlbum(album);
 
     for (const file of acceptedFiles) {
       const media = await uploadPhoto(file);
@@ -57,9 +57,13 @@ const Home: React.FC = () => {
       }),
     ]);
 
+    if (album === null) {
+      return;
+    }
+
     for (const file of acceptedFiles) {
       const media = await uploadPhoto(file);
-      await addMedia(albumId, media.id);
+      await addMedia(album.id, media.id);
 
       setFiles((fs) => fs.map(f => {
         if (f.preview === f.preview) {
@@ -72,7 +76,7 @@ const Home: React.FC = () => {
         return f;
       }));
     }
-  }, [ files, albumId ]);
+  }, [ files, album ]);
 
   const {
     getRootProps,
@@ -111,7 +115,7 @@ const Home: React.FC = () => {
           </Col>
         </Row>
         {
-          files.length > 0 ? (
+          album !== null && files.length > 0 ? (
             <>
               <Row style={{ marginTop: 50 }}>
                 <Col>
@@ -121,7 +125,7 @@ const Home: React.FC = () => {
               </Row>
               <Row>
                 <Col>
-                  <ShareableLink albumId={albumId} />
+                  <ShareableLink albumId={album.hash} />
                 </Col>
               </Row>
               <Row style={{ marginTop: 30 }}>

@@ -9,7 +9,7 @@ const getNotification = async (name: string): Promise<Notifications> => {
   
   return import(filename)
     .then(module => module.default)
-    .then(ClassDefinition => new ClassDefinition(config.services.email.unsubscribeUrl, repositories.UserNotificationSetting, services.Email))
+    .then(ClassDefinition => new ClassDefinition(config.services.email.unsubscribeUrl, repositories.Setting, services.Email))
     .catch(() => {
       logger.error(`Notification ${name} does not exist!`);
       throw `Notification ${name} does not exist!`;

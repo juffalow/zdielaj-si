@@ -63,6 +63,9 @@ export async function post(endpoint: string, data: unknown, options: RequestInit
 
   headers.set('Content-Type', 'application/json');
 
+  console.log('userToken', userToken);
+  console.log('ablumToken', albumToken);
+
   if (userToken !== null) {
     headers.set('Authorization', userToken);
   } else if (albumToken !== null) {

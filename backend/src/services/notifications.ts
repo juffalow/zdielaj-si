@@ -15,7 +15,7 @@ class Notifications implements Services.Notifications {
   public async setSettings(params: { email: string, notifications: Setting[] }, token: string): Promise<unknown> {
     logger.debug(`${this.constructor.name}.setSettings`, { params });
 
-    return this.httpClient.post(`${this.url}/email`, { ...params }, {
+    return this.httpClient.post(`${this.url}/notifications/settings`, { ...params, type: 'email' }, {
       headers: {
         'Authorization': token,
       },
@@ -25,7 +25,7 @@ class Notifications implements Services.Notifications {
   public async getSettings(email: string, token: string): Promise<unknown> {
     logger.debug(`${this.constructor.name}.getSettings`);
 
-    return this.httpClient.get(`${this.url}/email`, { email }, {
+    return this.httpClient.get(`${this.url}/notifications/settings`, { email, type: 'email' }, {
       headers: {
         'Authorization': token,
       },

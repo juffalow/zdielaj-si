@@ -17,8 +17,8 @@ USER 2000:3000
 RUN mkdir /home/juffuser/zdielaj-si-notifications/
 WORKDIR /home/juffuser/zdielaj-si-notifications
 
-COPY --from=build /home/node/zdielaj-si-notifications/dist ./dist
-COPY --from=build /home/node/zdielaj-si-notifications/package.json /home/node/zdielaj-si-notifications/yarn.lock ./
+COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-notifications/dist ./dist
+COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-notifications/package.json /home/node/zdielaj-si-notifications/yarn.lock ./
 RUN yarn install --frozen-lockfile --production
 
 EXPOSE 3010

@@ -7,7 +7,13 @@ const router = express.Router();
 
 router.get('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const album = await controllers.Album.getAlbum(req.params.id);
+    let album = null;
+
+    if (isNaN(req.params.id as any)) {
+      album = await controllers.Album.getAlbumByHash(req.params.id);
+    } else {
+      album = await controllers.Album.getAlbum(parseInt(req.params.id));
+    }
     
     res.status(200).json({
       error: null,
@@ -53,7 +59,7 @@ router.post('/:id/media', async (req: express.Request, res: express.Response) =>
   const albumRepository = repositories.Album;
   const mediaRepository = repositories.Media;
   const user = 'user' in req ? (req as any).user : null;
-  const album = await albumRepository.get(req.params.id);
+  const album = await albumRepository.get(parseInt(req.params.id));
   const count = await mediaRepository.count({ album: { id: req.params.id } });
 
   if (user !== null && 'id' in user) {
@@ -100,7 +106,7 @@ router.post('/:id/media', async (req: express.Request, res: express.Response) =>
     }).end();
   }
 
-  await mediaRepository.create(album.id, req.body.mediaId);
+  await mediaRepository.create(album.id, req.body.fileId);
   const media = await mediaRepository.find({ album: { id: album.id } });
 
   res.status(200).json({

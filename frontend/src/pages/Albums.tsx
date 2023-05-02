@@ -8,7 +8,7 @@ import { getAlbums } from '../api/services';
 import SEO from '../components/SEO';
 
 const Albums: React.FC = () => {
-  const [ albums, setAlbums ] = useState([] as Array<Album>);
+  const [ albums, setAlbums ] = useState<Array<Album> | null>(null);
   const [ hasError, setHasError ] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,14 @@ const Albums: React.FC = () => {
           ) : null
         }
         {
-          albums.length > 0 ? (
+          albums !== null && albums.length === 0 ? (
+            <Alert variant="info">
+              Nemáš vytvorené žiadne albumy.
+            </Alert>
+          ) : null
+        }
+        {
+          albums !== null && albums.length > 0 ? (
             <Row>                
             {
               albums.map((album) => (
