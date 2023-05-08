@@ -12,12 +12,12 @@ export async function register(email: string, password: string, meta: unknown): 
 }
 
 export async function login(email: string, password: string): Promise<User> {
-  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/auth/login`, { email, password }, { credentials: 'include' })
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/login`, { email, password }, { credentials: 'include' })
     .then(response => response.data.user);
 }
 
 export async function refreshToken(): Promise<RefreshTokenResponse> {
-  return get(`${process.env.REACT_APP_USER_SERVICE_URL}/auth/refresh-token`, { credentials: 'include' });
+  return get(`${process.env.REACT_APP_USER_SERVICE_URL}/user/refresh-token`, { credentials: 'include' });
 }
 
 export async function logout(): Promise<unknown> {
