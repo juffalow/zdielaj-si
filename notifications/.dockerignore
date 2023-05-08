@@ -1,7 +1,0 @@
-node_modules
-dist
-coverage
-.git
-README.md
-DATABASE.md
-Dockerfile

@@ -13,27 +13,13 @@ services:
       volumes:
         - 'mysql_core_data:/data/db'
 
-  mysql_notifications:
-      container_name: zdielaj_si_db_notifications
-      image: mysql
-      environment:
-        - MYSQL_DATABASE=zdielajsi_notifications
-        - MYSQL_USER=zdielajsi_notifications
-        - MYSQL_PASSWORD=password
-        - MYSQL_ROOT_PASSWORD=password
-        - MYSQL_PORT=3306
-      ports:
-        - 3307:3306
-      volumes:
-        - 'mysql_notifications_data:/data/db'
-
   mysql_user_service:
       container_name: zdielaj_si_db_user_service
       image: mysql
       env_file:
         - ./.env.user
       ports:
-        - 3309:3306
+        - 3307:3306
       volumes:
         - 'mysql_user_service_data:/data/db'
 
@@ -43,9 +29,19 @@ services:
       env_file:
         - ./.env.upload
       ports:
-        - 3310:3306
+        - 3308:3306
       volumes:
         - 'mysql_upload_service_data:/data/db'
+
+  mysql_notification_service:
+      container_name: zdielaj_si_db_notification_service
+      image: mysql
+      env_file:
+        - ./.env.notification
+      ports:
+        - 3309:3306
+      volumes:
+        - 'mysql_notification_service_data:/data/db'
 
   core:
     image: node:18-alpine
@@ -66,45 +62,6 @@ services:
       - mysql_core
     volumes:
       - "./backend:/home/node"
-
-  notifications:
-    image: node:18-alpine
-    working_dir: /home/node
-    command: sh -c "yarn install && yarn start"
-    depends_on:
-      - mysql_notifications
-    restart: unless-stopped
-    ports:
-      - 3011:3010
-    environment:
-      - DATABASE_HOST=mysql_notifications
-      - DATABASE_NAME=zdielajsi_notifications
-      - DATABASE_USER=zdielajsi_notifications
-      - DATABASE_PASSWORD=password
-      - DATABASE_PORT=3306
-    links:
-      - mysql_notifications
-    volumes:
-      - "./notifications:/home/node"
-
-  notifications_worker:
-    image: node:18-alpine
-    working_dir: /home/node
-    command: sh -c "yarn start:worker"
-    depends_on:
-      - mysql_notifications
-      - notifications
-    restart: unless-stopped
-    environment:
-      - DATABASE_HOST=mysql_notifications
-      - DATABASE_NAME=zdielajsi_notifications
-      - DATABASE_USER=zdielajsi_notifications
-      - DATABASE_PASSWORD=password
-      - DATABASE_PORT=3306
-    links:
-      - mysql_notifications
-    volumes:
-      - "./notifications:/home/node"
 
   frontend:
     image: node:18-alpine
@@ -152,8 +109,32 @@ services:
     links:
       - mysql_upload_service
 
+  notification_service:
+    image: juffalow/notification-service:latest
+    depends_on:
+      - mysql_notification_service
+    restart: unless-stopped
+    env_file:
+      - ./.env.notification
+    ports:
+      - 3015:3010
+    links:
+      - mysql_notification_service
+
+  notification_service_worker:
+    image: juffalow/notification-service:latest
+    working_dir: /home/juffuser/notification-service
+    command: sh -c "node ./dist/worker.js"
+    depends_on:
+      - mysql_notification_service
+    restart: unless-stopped
+    env_file:
+      - ./.env.notification
+    links:
+      - mysql_notification_service
+
 volumes:
   mysql_core_data:
-  mysql_notifications_data:
   mysql_user_service_data:
   mysql_upload_service_data:
+  mysql_notification_service_data:
