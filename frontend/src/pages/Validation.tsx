@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { validateEmail } from '../api/services';
+import { verifyEmail } from '../api/services';
 import { getQueryParameter } from '../utils/functions';
 
 const Validation: React.FC = () => {
@@ -15,7 +15,7 @@ const Validation: React.FC = () => {
       try {
         const id = parseInt(getQueryParameter('id'));
         const token = getQueryParameter('token');
-        await validateEmail(id, token);
+        await verifyEmail(id, token);
         setIsValid(true);
       } catch (error) {
         setIsValid(false);
@@ -33,7 +33,7 @@ const Validation: React.FC = () => {
               isValid === false ? (
                 <>
                   <h1>Overenie sa nepodarilo</h1>
-                  <p className="lead">Nebolo mozne</p>
+                  <p className="lead">Nebolo možné overiť tvoju e-mailovú adresu.</p>
                 </>
               ) : null
             }

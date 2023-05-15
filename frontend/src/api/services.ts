@@ -21,7 +21,11 @@ export async function refreshToken(): Promise<RefreshTokenResponse> {
 }
 
 export async function logout(): Promise<unknown> {
-  return get(`${process.env.REACT_APP_CORE_URL}/user/logout`, { credentials: 'include' });
+  return get(`${process.env.REACT_APP_USER_SERVICE_URL}/user/logout`, { credentials: 'include' });
+}
+
+export async function verifyEmail(id: number, token: string): Promise<RefreshTokenResponse> {
+  return get(`${process.env.REACT_APP_USER_SERVICE_URL}/user/verify/email?id=${id}&token=${token}`);
 }
 
 export async function uploadPhoto(file: File): Promise<Media> {
@@ -65,10 +69,6 @@ interface RefreshTokenResponse {
       token: string;
     }
   };
-}
-
-export async function validateEmail(id: number, token: string): Promise<RefreshTokenResponse> {
-  return get(`${process.env.REACT_APP_CORE_URL}/user/emailValidation?id=${id}&token=${token}`);
 }
 
 export async function getNotificationSettings(email: string): Promise<any> {
