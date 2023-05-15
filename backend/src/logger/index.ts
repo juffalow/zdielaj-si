@@ -33,6 +33,7 @@ const logger = winston.createLogger({
       format: winston.format.combine(
         hookedFormat(),
         redactedFormat(),
+        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         winston.format.json(),
         winston.format.errors({ stack: true }),
       ),
