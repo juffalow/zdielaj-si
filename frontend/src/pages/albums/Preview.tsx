@@ -28,7 +28,7 @@ const Preview: React.FC<Props> = ({ album }: Props) => (
       }
       <Card.Title>{album.hash}</Card.Title>
       <Card.Subtitle className="mb-2 text-muted">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</Card.Subtitle>
-      <Link className="btn btn-primary" role="button" to={`/album/${album.id}`}>Zobrazit</Link>
+      <Link className="btn btn-primary" role="button" to={`/album/${album.id}`}>Zobraziť</Link>
     </Card.Body>
   </Card>
 );
