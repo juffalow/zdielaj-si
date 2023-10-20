@@ -95,12 +95,12 @@ const Home: React.FC = () => {
   }, [files]);
 
   return (
-    <SEO title="" description="Tiež máš problém, že ti Messenger zníži kvalitu fotiek? Tu ich môžeš zdielať bez problémov v plnej kvalite!">
+    <SEO title="" description="Tiež máš problém, že ti niektoré aplikácie znížujú kvalitu fotiek a videí? Tu ich môžeš zdielať bez problémov v plnej kvalite!">
       <Container>
         <Row>
           <Col>
-            <h1>Zdieľaj si fotky v plnej kvalite</h1>
-            <p className="lead">Tiež máš problém, že ti Messenger zníži kvalitu fotiek? Tu ich môžeš zdielať bez problémov v plnej kvalite!</p>
+            <h1>Zdieľaj fotky a videá v plnej kvalite</h1>
+            <p className="lead">Tiež máš problém, že ti niektoré aplikácie znížujú kvalitu fotiek a videí? Tu ich môžeš zdielať bez problémov v plnej kvalite!</p>
             <div {...getRootProps()} style={{ border: '1px #28a745 dashed', padding: '40px', borderRadius: '20px', textAlign: 'center', marginTop: 50 }}>
               <input {...getInputProps()} />
               {
