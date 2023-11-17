@@ -11,11 +11,9 @@ function Gallery({ files }: any) {
   const [container, setContainer] = useState(null);
 
   const elements = files.map((file: any) => {
-    console.log(file);
     const srcset = file.thumbnails.map((t: any) => `${t.location} ${t.metadata.width}w`)
       .concat(`${file.location} ${file.metadata.width}w`).join(',');
 
-    console.log('srcset', srcset);
     if (file.mimetype.startsWith('image/')) {
       return {
         id: file.id,
@@ -30,9 +28,6 @@ function Gallery({ files }: any) {
     }
 
     if (file.mimetype.startsWith('video/')) {
-      console.log('images', file.thumbnails.filter((thumbnail: any) => thumbnail.mimetype.startsWith('image/')))
-      console.log(file.thumbnails.filter((thumbnail: any) => thumbnail.mimetype.startsWith('image/')).find((thumbnail: any) => thumbnail.metadata.width > 400))
-      console.log(file.thumbnails.filter((thumbnail: any) => thumbnail.mimetype.startsWith('image/')).find((thumbnail: any) => thumbnail.metadata.width <= 400))
       return {
         id: file.id,
         video: {
@@ -65,6 +60,8 @@ function Gallery({ files }: any) {
         <LightGallery
           plugins={[lgThumbnail, lgVideo]}
           closable={false}
+          download={true}
+          mobileSettings={{download: true}}
           thumbnail={true}
           showMaximizeIcon={true}
           dynamic={true}
