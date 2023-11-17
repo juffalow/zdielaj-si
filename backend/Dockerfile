@@ -1,4 +1,4 @@
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
 
 USER node
 RUN mkdir /home/node/zdielaj-si-backend/ && chown -R node:node /home/node/zdielaj-si-backend
@@ -7,7 +7,7 @@ WORKDIR /home/node/zdielaj-si-backend
 COPY --chown=node:node . .
 RUN yarn install --frozen-lockfile && yarn build
 
-FROM node:18-alpine
+FROM node:20-alpine
 
 RUN addgroup --gid 3000 --system juffgroup \
   && adduser  --uid 2000 --system --ingroup juffgroup juffuser

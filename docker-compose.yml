@@ -44,7 +44,7 @@ services:
         - 'mysql_notification_service_data:/data/db'
 
   core:
-    image: node:18-alpine
+    image: node:20-alpine
     working_dir: /home/node
     command: sh -c "yarn install && yarn start"
     depends_on:
@@ -64,7 +64,7 @@ services:
       - "./backend:/home/node"
 
   frontend:
-    image: node:18-alpine
+    image: node:20-alpine
     working_dir: /home/node
     command: sh -c "yarn install && yarn start"
     restart: unless-stopped
