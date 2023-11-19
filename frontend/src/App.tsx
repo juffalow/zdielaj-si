@@ -11,27 +11,30 @@ import Validation from './pages/Validation';
 import Login from './pages/Login';
 import Notifications from './pages/Notifications';
 import { AuthProvider } from './utils/useAuth';
+import { UploadProvider } from './utils/useUpload';
 import './App.css';
 
 const App: React.FC = () => (
   <BrowserRouter>
     <AuthProvider>
-      <>
-        <Menu />
-        <main role="main" className="flex-shrink-0 main-container" style={{ marginTop: 25, marginBottom: 25 }}>
-          <Routes>
-            <Route path="/o-aplikacii" element={<About />} />
-            <Route path="/album/:id" element={<Album />} />
-            <Route path="/albumy" element={<Albums />} />
-            <Route path="/registracia" element={<Register />} />
-            <Route path="/validacia" element={<Validation />} />
-            <Route path="/prihlasit-sa" element={<Login />} />
-            <Route path="/notifikacie" element={<Notifications />} />
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </main>
-        <Footer />
-      </>
+      <UploadProvider>
+        <>
+          <Menu />
+          <main role="main" className="flex-shrink-0 main-container" style={{ marginTop: 25, marginBottom: 25 }}>
+            <Routes>
+              <Route path="/o-aplikacii" element={<About />} />
+              <Route path="/album/:id" element={<Album />} />
+              <Route path="/albumy" element={<Albums />} />
+              <Route path="/registracia" element={<Register />} />
+              <Route path="/validacia" element={<Validation />} />
+              <Route path="/prihlasit-sa" element={<Login />} />
+              <Route path="/notifikacie" element={<Notifications />} />
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </main>
+          <Footer />
+        </>
+      </UploadProvider>
     </AuthProvider>
   </BrowserRouter>
 );
