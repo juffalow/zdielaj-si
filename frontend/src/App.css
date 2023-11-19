@@ -4,5 +4,5 @@ html, body, #root {
 
 .main-container {
   padding-bottom: 50px;
-  min-height: calc(100vh - 162px);
+  min-height: calc(100vh - 251px);
 }
