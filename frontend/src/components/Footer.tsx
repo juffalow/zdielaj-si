@@ -10,7 +10,7 @@ const Footer = () => (
         {/* <li className="nav-item"><Link className="nav-link px-2 text-light" to="/">Kontakt</Link></li> */}
         <li className="nav-item"><Link className="nav-link px-2 text-light" to="/o-aplikacii">O aplikácii</Link></li>
       </ul>
-      <p className="text-center text-light" style={{color: '#000'}}><a href="https://juffalow.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none' }}>Matej <span style={{ color: 'red' }}>'juffalow'</span> Jelluš</a> | 2021 - 2023</p>
+      <p className="text-center text-light" style={{color: '#000'}}><a href="https://juffalow.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none' }}>Matej <span style={{ color: 'red' }}>'juffalow'</span> Jelluš</a> | 2021 - 2024</p>
     </footer>
   </Container>
 );
