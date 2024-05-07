@@ -23,7 +23,7 @@ jobs:
     name: Run lint on Frontend
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
       with:
         fetch-depth: 1
     - uses: actions/setup-node@v2
@@ -48,7 +48,7 @@ jobs:
         fetch-depth: 1
     - uses: actions/setup-node@v2
       with:
-        node-version: 18
+        node-version: 20
         cache: 'yarn'
         cache-dependency-path: './frontend/yarn.lock'
     - name: Install dependencies
