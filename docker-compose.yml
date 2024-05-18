@@ -73,6 +73,16 @@ services:
     ports:
       - 3000:3000
 
+  frontend_new:
+    image: node:20-alpine
+    working_dir: /home/node
+    command: sh -c "yarn install && yarn start"
+    restart: unless-stopped
+    volumes:
+      - "./frontend-new:/home/node"
+    ports:
+      - 3001:3000
+
   user_service:
     image: juffalow/user-service:latest
     depends_on:
