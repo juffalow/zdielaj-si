@@ -44,7 +44,7 @@ export async function get(endpoint: string, options?: RequestInit): Promise<any>
   const userToken = getUserToken();
 
   if (userToken !== null) {
-    headers.set('Authorization', userToken);
+    headers.set('Authorization',  `Bearer ${userToken}`);
   }
 
   return fetch(endpoint, {
@@ -63,13 +63,10 @@ export async function post(endpoint: string, data: unknown, options: RequestInit
 
   headers.set('Content-Type', 'application/json');
 
-  console.log('userToken', userToken);
-  console.log('ablumToken', albumToken);
-
   if (userToken !== null) {
-    headers.set('Authorization', userToken);
+    headers.set('Authorization', `Bearer ${userToken}`);
   } else if (albumToken !== null) {
-    headers.set('Authorization', albumToken);
+    headers.set('X-Album-Token', albumToken);
   }
 
   return fetch(endpoint, {
@@ -90,9 +87,9 @@ export async function postMultipart(endpoint: string, data: FormData): Promise<a
   const albumToken = getAlbumToken();
 
   if (userToken !== null) {
-    headers.set('Authorization', userToken);
+    headers.set('Authorization',  `Bearer ${userToken}`);
   } else if (albumToken !== null) {
-    headers.set('Authorization', albumToken);
+    // headers.set('X-Album-Token', albumToken);
   }
 
   return fetch(endpoint, {
