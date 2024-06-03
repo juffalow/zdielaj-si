@@ -14,10 +14,6 @@ export default function Tracking() {
   }, [location]);
 
   useEffect(() => {
-    if ('gtag' in window === false) {
-      return;
-    }
-
     const clickHandler = (event: any) => {
       const analyticsId = event.target.getAttribute('data-tracking-id');
 
@@ -25,7 +21,7 @@ export default function Tracking() {
         return;
       }
 
-      (window as any).gtag('event', analyticsId);
+      'gtag' in window && (window as any).gtag('event', analyticsId);
     };
 
     document.body.addEventListener('click', clickHandler);
