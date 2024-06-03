@@ -6,6 +6,7 @@ import Alert from 'react-bootstrap/Alert';
 import { useParams, useLocation } from 'react-router-dom';
 import SEO from '../components/SEO';
 import Gallery from './album/Gallery';
+import GalleryNew from './album/GalleryNew';
 import { getAlbum } from '../api/services';
 import useUpload from '../utils/useUpload';
 import UploadedFiles from '../components/UploadedFiles';
@@ -32,7 +33,7 @@ const Album: React.FC = () => {
 
   return (
     <SEO title="" description="">
-      <Container>
+      <Container fluid="xl">
         {
           uploadedFiles.length > 0 ? (
             <UploadedFiles album={album as Album} />
@@ -49,7 +50,7 @@ const Album: React.FC = () => {
           files.length > 0 ? (
             <Row>
               <Col>
-                <Gallery files={files} />
+                <GalleryNew files={files} />
               </Col>
             </Row>
           ) : null

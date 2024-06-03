@@ -1,5 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import ImageLoader from '../../components/ImageLoader';
 import { formatDate } from '../../utils/functions';
 
 interface Props {
@@ -8,27 +9,34 @@ interface Props {
 
 const Preview: React.FC<Props> = ({ album }: Props) => (
   <Card>
-    <Card.Body>
       {
         album.media.length > 0 && album.media[0].thumbnails.length > 0 ? (
-          <div style={{ paddingBottom: '100%', position: 'relative' }}>
-            <Card.Img
-              variant="top"
-              src={album.media[0].thumbnails.filter(thumbnail => thumbnail.mimetype.startsWith('image/'))[0].location}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                maxHeight: '100%',
-                objectFit: 'contain',
-              }} />
+          <div style={{ paddingBottom: '80%', position: 'relative' }}>
+            <ImageLoader src={album.media[0].thumbnails.filter(thumbnail => thumbnail.mimetype.startsWith('image/'))[0].location} style={{
+              position: 'absolute',
+              maxHeight: '100%',
+              minHeight: '100%',
+              minWidth: '100%',
+            }}>
+              <Card.Img
+                variant="top"
+                src={album.media[0].thumbnails.filter(thumbnail => thumbnail.mimetype.startsWith('image/'))[0].location}
+                style={{
+                  position: 'absolute',
+                  maxHeight: '100%',
+                  minHeight: '100%',
+                  objectFit: 'cover',
+                }} />
+            </ImageLoader>
           </div>
         ) : null
       }
+    <Card.Body>
       <Card.Title>{album.hash}</Card.Title>
       <Card.Subtitle className="mb-2 text-muted">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</Card.Subtitle>
-      <Link className="btn btn-primary" role="button" to={`/album/${album.id}`}>Zobraziť</Link>
+      <div className="d-grid">
+        <Link className="btn btn-outline-secondary" role="button" to={`/album/${album.hash}`}>Zobraziť</Link>
+      </div>
     </Card.Body>
   </Card>
 );

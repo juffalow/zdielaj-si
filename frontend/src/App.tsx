@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Notifications from './pages/Notifications';
 import { AuthProvider } from './utils/useAuth';
 import { UploadProvider } from './utils/useUpload';
+import Tracking from './utils/Tracking';
 import './App.css';
 
 const App: React.FC = () => (
@@ -33,6 +34,8 @@ const App: React.FC = () => (
             </Routes>
           </main>
           <Footer />
+
+          <Tracking />
         </>
       </UploadProvider>
     </AuthProvider>

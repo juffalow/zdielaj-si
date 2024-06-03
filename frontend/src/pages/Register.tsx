@@ -1,32 +1,48 @@
 import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import RegisterForm from './register/Form';
+import RegisterForm from './register/RegisterForm';
+import ConfirmForm from  './register/ConfirmForm';
 import ThankYou from './register/ThankYou';
 import SEO from '../components/SEO';
+import { register, confirmRegister } from '../api/services';
 
 const Register: React.FC = () => {
-  const [ isSuccess, setIsSuccess ] = useState(false);
+  const [ step, setStep ] = useState(0);
+  const [ username, setUsername ] = useState('');
+  
+  const onRegisterSubmit = (username: string, password: string, meta: Record<string, string | number | boolean>) => {
+    return register(username, password, meta)
+      .then(() => {
+        setStep(1);
+        setUsername(username);
+      });
+  };
 
-  const onSuccess = () => {
-    setIsSuccess(true);
-  }
+  const onConfirmSubmit = (code: string) => {
+    return confirmRegister(username, code)
+      .then(() => {
+        setStep(2);
+      });
+  };
 
   return (
     <SEO title="Registrácia" description="">
       <Container className="main" style={{ marginTop: 50 }}>
-        <Row>
-          <Col md={{ span: 6, offset: 3 }}>
-            {
-              isSuccess ? (
-                <ThankYou />
-              ) : (
-                <RegisterForm onSuccess={onSuccess} />
-              )
-            }
-          </Col>
-        </Row>
+        {
+          step === 0 ? (
+            <RegisterForm onRegisterSubmit={onRegisterSubmit} />
+          ) : null
+        }
+        {
+          step === 1 ? (
+            <ConfirmForm onConfirmSubmit={onConfirmSubmit} />
+          ) : null
+        }
+        {
+          step === 2 ? (
+            <ThankYou />
+          ) : null
+        }
       </Container>
     </SEO>
   );

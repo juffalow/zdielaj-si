@@ -6,13 +6,17 @@ type Setting = {
   isEnabled: boolean,
 }
 
-export async function register(email: string, password: string, meta: unknown): Promise<User> {
-  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/register`, { email, password, meta })
+export async function register(username: string, password: string, meta: unknown): Promise<User> {
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/register`, { username, password, meta })
     .then(response => response.data.user);
 }
 
-export async function login(email: string, password: string): Promise<User> {
-  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/login`, { email, password }, { credentials: 'include' })
+export async function confirmRegister(username: string, code: string): Promise<RefreshTokenResponse> {
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/confirm`, { username, code });
+}
+
+export async function login(username: string, password: string): Promise<User> {
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/login`, { username, password }, { credentials: 'include' })
     .then(response => response.data.user);
 }
 
@@ -21,7 +25,7 @@ export async function refreshToken(): Promise<RefreshTokenResponse> {
 }
 
 export async function logout(): Promise<unknown> {
-  return get(`${process.env.REACT_APP_USER_SERVICE_URL}/user/logout`, { credentials: 'include' });
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/logout`, {}, { credentials: 'include' });
 }
 
 export async function verifyEmail(id: number, token: string): Promise<RefreshTokenResponse> {
@@ -65,8 +69,7 @@ interface RefreshTokenResponse {
   error: unknown;
   data: {
     user: {      
-      id: number;
-      token: string;
+      accessToken: string;
     }
   };
 }

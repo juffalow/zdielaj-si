@@ -3,24 +3,52 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SEO from '../components/SEO';
-import lake from './about/jazero.jpg';
+import awsCognito from './about/aws-cognito.svg';
+import awsS3 from './about/aws-s3.svg';
+import awsMC from './about/aws-mc.svg';
+import awsSQS from './about/aws-sqs.svg';
+import awsSES from './about/aws-ses.svg';
+import awsCF from './about/aws-cf.svg';
 
 const About: React.FC = () => (
   <SEO title="O aplikácii" description="">
     <Container>
       <Row>
         <Col>
-          <h1>O aplikácii</h1>
-          <p className="lead">Bola streda, 21. október a my sme sa ako každú stredu boli otužovať ráno pred prácou v jazere. Hanka, náša hlavná fotografka, spravila pár fotiek ešte kým sme boli vo vode aby nám kamaráti verili.</p>
-          <div className="text-center" style={{ margin: '2em 0' }}>
-            <img src={lake} width="400" style={{ maxWidth: '100%' }} />
-          </div>
-          <p>Samozrejme, neskôr chcel každý z nás zdielať tieto fotky či už v aktivite na Strave, alebo v storieske na Instagrame. Dostupné boli v spoločnom chate v Slacku, ale kvalita fotky už bola značne znížená. Poslať si fotky medzi sebou, keď sme o miestnosť vedľa nie je problém v prípade, že všetci majú buď iPhone alebo Android. Ale nemajú... A niekto už sedel pekne doma pod perinkou na home office.</p>
-          <p>A tu, v týchto zlých, závislákom a zdielačom neprajných časoch sme si povedali, že prídeme s riešením.</p>
-          <blockquote className="blockquote text-right mt-4">
-            <p className="mb-0">Čo keby spravíme nejakú appku, kde sa budú dať zdielať fotky bez znižovania kvality?</p>
-            <footer className="blockquote-footer"><cite title="Filip">Filip</cite></footer>
-          </blockquote>
+          <h1 className="text-center">O aplikácii</h1>
+          <p className="lead">Aplikácia pomáha užívateľom rýchlo a ľahko zdielať fotografie a videá bez zníženia kvality. Všetky dáta sú uložené v šifrovanej forme.</p>
+        </Col>
+      </Row>
+      <Row className="mt-5">
+        <Col className="mb-4" lg={4}>
+          <img src={awsCognito} style={{ height: '3rem', marginBottom: '1rem' }} />
+          <h4>AWS Cognito</h4>
+          <p>Pomáha spravovať autentifikáciu, autorizáciu a správu používateľov pre webové a mobilné aplikácie. Poskytuje silné bezpečnostné opatrenia, vrátane šifrovania dát, multi-faktorovej autentifikácie a možnosti blokovania účtov po niekoľkých neúspešných pokusoch o prihlásenie.</p>
+        </Col>
+        <Col className="mb-4" lg={4}>
+          <img src={awsS3} style={{ height: '3rem', marginBottom: '1rem' }} />
+          <h4>AWS S3</h4>
+          <p>Poskytuje úložisko pre ukladanie a načítavanie dát. Má silné bezpečnostné opatrenia, vrátane šifrovania dát, kontrolu prístupu a sledovanie aktivity. Automaticky replikuje dáta na viacerých fyzických miestach, čo znižuje riziko stráty dát.</p>
+        </Col>
+        <Col className="mb-4" lg={4}>
+          <img src={awsSQS} style={{ width: '3rem', marginBottom: '1rem' }} />
+          <h4>AWS Simple Queue Service</h4>
+          <p>Umožňuje bezproblémové spracovanie veľkého množstva správ. Je navrhnutá tak, aby pomáhala vývojárom vytvárať škálovateľné aplikácie.</p>
+        </Col>
+        <Col className="mb-4" lg={4}>
+          <img src={awsSES} style={{ width: '3rem', marginBottom: '1rem' }} />
+          <h4>AWS Simple Email Service</h4>
+          <p>Umožňuje odosielať a prijímať e-maily. Je navrhnutá tak, aby pomáhala digitálnym marketérom a vývojárom aplikácií odosielať marketingové, upozorňovacie a transakčné e-maily.</p>
+        </Col>
+        <Col className="mb-4" lg={4}>
+          <img src={awsCF} style={{ width: '3rem', marginBottom: '1rem' }} />
+          <h4>AWS CloudFront</h4>
+          <p>Používa globálnu sieť distribučných bodov, ktoré sú geograficky blízko koncovým používateľom, čo znižuje latenciu a zvyšuje rýchlosť načítania obsahu.</p>
+        </Col>
+        <Col lg={4}>
+          <img src={awsMC} style={{ width: '3rem', marginBottom: '1rem' }} />
+          <h4>AWS MediaConvert</h4>
+          <p>Umožňuje prevádzať mediálne súbory z jedného formátu do druhého. Podporuje širokú škálu vstupných a výstupných formátov, čo umožňuje prevádzať takmer akýkoľvek typ mediálneho súboru.</p>
         </Col>
       </Row>
     </Container>

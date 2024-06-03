@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import Spinner from 'react-bootstrap/Spinner';
+import { useState, useEffect } from 'react';
+import styles from './ImageLoader.module.css';
 
 interface ImageLoaderProps {
+  children: JSX.Element | null;
   src: string;
   alt?: string;
   alternativeImage?: string;
-  [x:string]: any;
+  [x:string]: unknown;
 }
 
-const ImageLoader: React.FC<ImageLoaderProps> = ({ src, alt, alternativeImage, ...rest }: ImageLoaderProps) => {
+const ImageLoader = ({ children, src, alt, alternativeImage, ...rest }: ImageLoaderProps) => {
   const [ isLoading, setIsLoading ] = useState(true);
 
   useEffect(() => {
@@ -28,7 +29,11 @@ const ImageLoader: React.FC<ImageLoaderProps> = ({ src, alt, alternativeImage, .
   }, []);
 
   if (isLoading) {
-    return <Spinner animation="border" />;
+    return <div className={styles.loader} {...rest} />;
+  }
+
+  if (children) {
+    return (<>{ children }</>);
   }
 
   return (

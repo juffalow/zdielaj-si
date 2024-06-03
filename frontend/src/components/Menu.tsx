@@ -20,11 +20,6 @@ const Menu = () => {
               <Nav.Link as={Link} to="/albumy">Albumy</Nav.Link>
             ) : null
           }
-          {/*
-            <Nav.Link as={Link} to="/obrazky">Obrazky</Nav.Link>
-            <Nav.Link as={Link} to="/video">Video</Nav.Link>
-            <Nav.Link as={Link} to="/text">Text</Nav.Link>
-          */}
           </Nav>
           <Nav>
             {

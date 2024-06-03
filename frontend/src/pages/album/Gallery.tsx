@@ -22,7 +22,8 @@ function Gallery({ files }: any) {
         // srcset: file.thumbnails.map((t: any) => `${t.location} ${t.metadata.width}w`).join(','),
         // responsive: file.thumbnails.map((t: any) => `${t.location} ${t.metadata.width}w`).join(','),
         // sizes: file.thumbnails.map((t: any) => `${t.location} ${t.metadata.width}`).join(','),
-        thumb: file.thumbnails[0].location,
+        // thumb: file.thumbnails[0].location,
+        thumb: file.location,
         downloadUrl: file.location,
       };
     }

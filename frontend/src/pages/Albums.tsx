@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import Preview from './albums/Preview';
+import PreviewLoader from './albums/PreviewLoader';
 import { getAlbums } from '../api/services';
 import SEO from '../components/SEO';
 
@@ -19,7 +20,7 @@ const Albums: React.FC = () => {
 
   return (
     <SEO title="" description="">
-      <Container>
+      <Container fluid="xl">
         {
           hasError ? (
             <Alert variant="danger">
@@ -32,6 +33,20 @@ const Albums: React.FC = () => {
             <Alert variant="info">
               Nemáš vytvorené žiadne albumy.
             </Alert>
+          ) : null
+        }
+        { albums === null ? (
+            <Row>
+              <Col lg={3} md={4} sm={4} xs={6} className="mb-4">
+                <PreviewLoader />
+              </Col>
+              <Col lg={3} md={4} sm={4} xs={6} className="mb-4" style={{ opacity: 0.4 }}>
+                <PreviewLoader />
+              </Col>
+              <Col lg={3} md={4} sm={4} xs={6} className="mb-4" style={{ opacity: 0.2 }}>
+                <PreviewLoader />
+              </Col>
+            </Row>
           ) : null
         }
         {

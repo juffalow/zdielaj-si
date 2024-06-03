@@ -14,7 +14,7 @@ interface AuthContextType {
   user?: User;
   loading: boolean;
   error?: any;
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (username: string, password: string) => Promise<void>;
   signUp: (firstName: string, lastName: string, email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
 }
@@ -36,11 +36,10 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   // Finally, just signal the component that the initial load
   // is over.
   useEffect(() => {
-    // console.log('useEffect.loadingInitial', loadingInitial)
     refreshToken()
       .then((response) => {
         setUser(response.data.user);
-        setUserToken(response.data.user.token);
+        setUserToken(response.data.user.accessToken);
       })
       .catch(() => {
         setUser(undefined);
@@ -65,13 +64,13 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   //
   // Finally, just signal the component that loading the
   // loading state is over.
-  function signIn(email: string, password: string): Promise<void> {
+  function signIn(username: string, password: string): Promise<void> {
     setLoading(true);
 
-    return login(email, password)
+    return login(username, password)
       .then((user) => {
         setUser(user);
-        setUserToken(user.token);
+        setUserToken(user.accessToken);
         autoRefresh();
       })
       .finally(() => setLoading(false));
@@ -99,7 +98,8 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     setTimeout(async () => {
       refreshToken()
         .then((response) => {
-          setUserToken(response.data.user.token);
+          setUser(response.data.user);
+          setUserToken(response.data.user.accessToken);
         })
         .catch(() => {
           setUser(undefined);

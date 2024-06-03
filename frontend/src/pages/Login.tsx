@@ -15,15 +15,18 @@ const Login: React.FC = () => {
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword  ] = useState('');
+  const [values, setValues] = React.useState({
+    email: '',
+    password: '',
+  });
 
-  const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
 
-  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
+    setValues({
+      ...values,
+      [event.target.name]: value
+    });
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,7 +38,7 @@ const Login: React.FC = () => {
     const form = event.currentTarget;
 
     if (form.checkValidity()) {
-      signIn(email, password)
+      signIn(values.email, values.password)
         .then(() => {
           navigate('/');
         })
@@ -51,7 +54,7 @@ const Login: React.FC = () => {
     <SEO title="Prihlásiť sa" description="">
       <Container className="main" style={{ marginTop: 50 }}>
         <Row>
-          <Col md={{ span: 4, offset: 4 }}>
+          <Col xs={{ span: 10, offset: 1 }} md={{ span: 6, offset: 3 }} lg={{ span: 4, offset: 4 }}>
             {
               hasError ? (
                 <Alert variant={'danger'}>
@@ -59,24 +62,27 @@ const Login: React.FC = () => {
                 </Alert>
               ) : null
             }
+            <h1 className="text-center">Prihlásiť sa</h1>
+            <p className="text-center mb-5">Ešte nemáš už účet? <Link to="/registracia">Registrovať sa</Link></p>
+
             <Form noValidate validated={isValidated} onSubmit={onSubmit}>
               <Form.Group controlId="loginEmail">
                 <Form.Label>E-mailová adresa</Form.Label>
-                <Form.Control required type="email" placeholder="Zadaj e-mail" value={email} onChange={onEmailChange} />
+                <Form.Control required type="email" name="email" placeholder="meno.priezvisko@priklad.sk" value={values.email} onChange={onChange} />
                 <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group controlId="loginPassword" className="mt-3">
                 <Form.Label>Heslo</Form.Label>
-                <Form.Control required type="password" placeholder="Zadaj heslo" value={password} onChange={onPasswordChange} />
+                <Form.Control required type="password" name="password" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
                 <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
               </Form.Group>
 
-              <p className="mt-3">Ešte tu nemáš účet? Môžeš si ho vytvoriť <Link to="/registracia">tu</Link>.</p>
-
-              <Button variant="primary" type="submit">
-                Prihlásiť sa
-              </Button>
+              <Form.Group className="text-center mt-4">
+                <Button variant="primary" type="submit">
+                  Prihlásiť sa
+                </Button>
+              </Form.Group>
             </Form>
           </Col>
         </Row>
