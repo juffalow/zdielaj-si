@@ -2,12 +2,15 @@ services:
   mysql_core:
       container_name: zdielaj_si_db_core
       image: mysql
+      env_file:
+        - ./backend/.env.local
+        - ./backend/.env.development
       environment:
-        - MYSQL_DATABASE=zdielajsi_core
-        - MYSQL_USER=zdielajsi_core
-        - MYSQL_PASSWORD=password
-        - MYSQL_ROOT_PASSWORD=password
-        - MYSQL_PORT=3306
+        - MYSQL_DATABASE=${DATABASE_NAME}
+        - MYSQL_USER=${DATABASE_USER}
+        - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
+        - MYSQL_PORT=${DATABASE_PORT}
       ports:
         - 3306:3306
       volumes:
@@ -52,12 +55,8 @@ services:
     restart: unless-stopped
     ports:
       - 3010:3010
-    environment:
-      - DATABASE_HOST=mysql_core
-      - DATABASE_NAME=zdielajsi_core
-      - DATABASE_USER=zdielajsi_core
-      - DATABASE_PASSWORD=password
-      - DATABASE_PORT=3306
+    env_file:
+      - ./backend/.env.local
     links:
       - mysql_core
     volumes:
@@ -72,16 +71,6 @@ services:
       - "./frontend:/home/node"
     ports:
       - 3000:3000
-
-  frontend_new:
-    image: node:20-alpine
-    working_dir: /home/node
-    command: sh -c "yarn install && yarn start"
-    restart: unless-stopped
-    volumes:
-      - "./frontend-new:/home/node"
-    ports:
-      - 3001:3000
 
   user_service:
     image: juffalow/user-service:latest
