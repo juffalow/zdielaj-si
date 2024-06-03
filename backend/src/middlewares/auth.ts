@@ -1,21 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-import config from '../config';
+import services from '../services';
 
-export default function auth(req: Request, res: Response, next: NextFunction): void {
-  if (req.method === 'OPTIONS') {
-    next();
+export default async function auth(req: Request, res: Response, next: NextFunction): Promise<unknown> {
+  if (req.method === 'OPTIONS' || ('authorization' in req.headers === false)) {
+    return next();
   }
 
-  if ('authorization' in req.headers) {
-    const token = req.headers.authorization.replace('Bearer ', '');
-    try {
-      const user = jwt.verify(token, config.jwt.secret);
-      req['user'] = user;
-    } catch (err) {
-      res.status(401).json({ error: 'Unauthorized!' });
-      return;
-    }
+  const token = req.headers.authorization.replace('Bearer ', '');
+
+  try {
+    const payload = services.Token.verify(token);
+
+    const data = payload instanceof Promise ? await payload : payload;
+
+    req['user'] = services.Token.getUserId(data);
+  } catch (err) {
+    return res.status(401).json({ error: 'Unauthorized!' });
   }
 
   next();

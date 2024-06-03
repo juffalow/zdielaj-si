@@ -1,6 +1,7 @@
 import express from 'express';
 import repositories from '../repositories';
 import { generateToken } from '../utils/functions';
+import requireAuth from '../middlewares/requireAuth';
 import controllers from '../controllers';
 
 const router = express.Router();
@@ -26,7 +27,7 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
   }
 });
 
-router.get('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+router.get('/', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const albums = await controllers.Album.getAlbums(req['user']);
     

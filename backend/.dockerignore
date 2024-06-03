@@ -2,5 +2,8 @@ node_modules
 dist
 coverage
 .git
+.gitignore
+.eslintrc.js
 README.md
-DATABASE.md
+Dockerfile
+jest.config.js

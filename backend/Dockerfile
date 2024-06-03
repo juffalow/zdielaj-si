@@ -9,6 +9,8 @@ RUN yarn install --frozen-lockfile && yarn build
 
 FROM node:20-alpine
 
+RUN apk update && apk upgrade --no-cache
+
 RUN addgroup --gid 3000 --system juffgroup \
   && adduser  --uid 2000 --system --ingroup juffgroup juffuser
 

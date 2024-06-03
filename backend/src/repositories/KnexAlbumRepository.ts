@@ -7,34 +7,24 @@ class KnexAlbumRepository implements AlbumRepository {
     protected database: Knex
   ) {}
 
-  public async get(id: number): Promise<Album> {
+  public async get(id: ID): Promise<Album> {
     logger.debug(`${this.constructor.name}.get`, { id });
 
-    return new Promise((resolve, reject) => {
-      this.database.select()
-        .from('album')
-        .where('id', id)
-        .first()
-        .then(album => resolve(album))
-        .catch(err => reject(err));
-    });
+    return this.database.select()
+      .from('album')
+      .where('id', id)
+      .first();
   }
 
-  public async create(userId: number = null, hash: string): Promise<Album> {
+  public async create(userId: ID = null, hash: string): Promise<Album> {
     logger.debug(`${this.constructor.name}.create`, { userId });
 
-    return new Promise((resolve, reject) => {
-      this.database.insert({
+    return this.database.insert({
         userId,
         hash,
       })
       .into('album')
-      .then((ids) => {
-        resolve(this.get(ids[0]));
-      }).catch(err => {
-        reject(err);
-      });
-    });
+      .then((ids) => this.get(ids[0]));
   }
 
   public async find(params: AlbumRepository.FindParameters): Promise<Album[]> {
@@ -45,21 +35,17 @@ class KnexAlbumRepository implements AlbumRepository {
       hash,
     } = params;
 
-    return new Promise((resolve, reject) => {
-      this.database.select()
-        .from('album')
-        .modify((queryBuilder) => {
-          if (shouldFilterBy(user) && shouldFilterBy(user.id)) {
-            queryBuilder.where('album.userId', user.id);
-          }
+    return this.database.select()
+      .from('album')
+      .modify((queryBuilder) => {
+        if (shouldFilterBy(user) && shouldFilterBy(user.id)) {
+          queryBuilder.where('album.userId', user.id);
+        }
 
-          if (shouldFilterBy(hash)) {
-            queryBuilder.where('album.hash', hash);
-          }
-        })
-        .then(albums => resolve(albums))
-        .catch(err => reject(err));
-    });
+        if (shouldFilterBy(hash)) {
+          queryBuilder.where('album.hash', hash);
+        }
+      });
   }
 }
 

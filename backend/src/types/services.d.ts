@@ -31,10 +31,20 @@ declare namespace Services {
   }
 
   interface Upload {
-    getFile(id: number): Promise<GetFileResponse>;
+    getFile(id: ID): Promise<GetFileResponse>;
   }
 
   interface Geolocation {
     getLocation(ip: string): Promise<{ city: string, country: string }>;
+  }
+
+  interface Token {
+    generate(data: Record<string, unknown>, expiresIn?: number): string;
+
+    verify(token: string): Record<string, unknown> | Promise<Record<string, unknown>>;
+
+    decode(token: string): unknown;
+
+    getUserId(data: Record<string, unknown>): { id: number | string };
   }
 }

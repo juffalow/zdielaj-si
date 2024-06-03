@@ -1,17 +1,23 @@
-interface Media {
-  id: number;
-  albumId: string;
-  fileId: number;
+/**
+ * Based on `primaryKeyType` config the primary key ID is either
+ * number (unsigned INT) or string (UUID).
+ */
+type ID = string | number;
+
+type Media = {
+  id: ID;
+  albumId: ID;
+  fileId: ID;
 }
 
-interface Album {
-  id: string;
-  userId?: number;
+type Album = {
+  id: ID;
+  userId?: ID;
   hash: string;
   media?: Media[];
   createdAt?: string;
 }
 
 type User = {
-  id: number;
+  id: ID;
 }

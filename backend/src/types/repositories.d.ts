@@ -1,7 +1,7 @@
 declare namespace AlbumRepository {
   interface FindParameters {
     user?: {
-      id: number;
+      id: ID;
     },
     hash?: string;
     first?: number;
@@ -10,9 +10,9 @@ declare namespace AlbumRepository {
 }
 
 interface AlbumRepository {
-  get(id: number): Promise<Album>;
+  get(id: ID): Promise<Album>;
 
-  create(userId: number, hash: string): Promise<Album>;
+  create(userId: ID, hash: string): Promise<Album>;
 
   find(params: AlbumRepository.FindParameters): Promise<Album[]>;
 }
@@ -20,7 +20,7 @@ interface AlbumRepository {
 declare namespace MediaRepository {
   interface FindParameters {
     album: {
-      id: string;
+      id: ID;
     },
     first?: number;
     after?: number;
@@ -28,13 +28,13 @@ declare namespace MediaRepository {
 
   interface CountParameters {
     album: {
-      id: string;
+      id: ID;
     },
   }
 }
 
 interface MediaRepository {
-  create(albumId: string, fileId: number): Promise<Media>;
+  create(albumId: ID, fileId: ID): Promise<Media>;
 
   find(params: MediaRepository.FindParameters): Promise<Array<Media>>;
 

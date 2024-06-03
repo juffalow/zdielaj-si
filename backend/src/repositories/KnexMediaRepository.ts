@@ -16,25 +16,21 @@ class KnexMediaRepository implements MediaRepository {
       after,
     } = params;
 
-    return new Promise((resolve, reject) => {
-      this.database.select()
-        .from('album_media')
-        .modify((queryBuilder) => {
-          if (shouldFilterBy(album) && shouldFilterBy(album.id)) {
-            queryBuilder.where('album_media.albumId', album.id);
-          }
+    return this.database.select()
+      .from('album_media')
+      .modify((queryBuilder) => {
+        if (shouldFilterBy(album) && shouldFilterBy(album.id)) {
+          queryBuilder.where('album_media.albumId', album.id);
+        }
 
-          if (shouldFilterBy(first)) {
-            queryBuilder.limit(first);
-          }
+        if (shouldFilterBy(first)) {
+          queryBuilder.limit(first);
+        }
 
-          if (shouldFilterBy(after)) {
-            queryBuilder.offset(after);
-          }
-        })
-        .then(media => resolve(media))
-        .catch(err => reject(err));
-    });
+        if (shouldFilterBy(after)) {
+          queryBuilder.offset(after);
+        }
+      });
   }
 
   public async count(params: MediaRepository.CountParameters): Promise<number> {
@@ -44,38 +40,30 @@ class KnexMediaRepository implements MediaRepository {
       album,
     } = params;
 
-    return new Promise((resolve, reject) => {
-      this.database.count({ count: '*' })
-        .from('album_media')
-        .modify((queryBuilder) => {
-          if (shouldFilterBy(album) && shouldFilterBy(album.id)) {
-            queryBuilder.where('album_media.albumId', album.id);
-          }
-        })
-        .first()
-        .then((result: any) => resolve(result.count))
-        .catch(err => reject(err));
-    });
+    return this.database.count({ count: '*' })
+      .from('album_media')
+      .modify((queryBuilder) => {
+        if (shouldFilterBy(album) && shouldFilterBy(album.id)) {
+          queryBuilder.where('album_media.albumId', album.id);
+        }
+      })
+      .first()
+      .then((result: any) => result.count);
   }
 
-  public async create(albumId: string, fileId: number): Promise<Media> {
+  public async create(albumId: ID, fileId: ID): Promise<Media> {
     logger.debug(`${this.constructor.name}.create`, { albumId, fileId });
 
-    return new Promise((resolve, reject) => {
-      this.database.insert({
-        albumId,
-        fileId,
-      })
-      .into('album_media')
-      .then((ids) => {
-        resolve({
-          id: ids[0],
-          albumId,
-          fileId,
-        });
-      })
-      .catch(err => reject(err));
-    });
+    return this.database.insert({
+      albumId,
+      fileId,
+    })
+    .into('album_media')
+    .then((ids) => ({
+      id: ids[0],
+      albumId,
+      fileId,
+    }));
   }
 }
 

@@ -1,5 +1,6 @@
 import Notifications from './notifications';
 import Upload from './upload';
+import token from './token';
 import IPLocation from './geolocation/IPLocation';
 import FetchClient from '../utils/http';
 import config from '../config';
@@ -15,6 +16,15 @@ const container = {
 
   get Geolocation(): Services.Geolocation {
     return new IPLocation();
+  },
+
+  get Token(): Services.Token {
+    switch (config.services.token.type) {
+      case 'JWT':
+        return token.JWT;
+      case 'AWS_COGNITO':
+        return token.AWSCognito;
+    }
   },
 };
 

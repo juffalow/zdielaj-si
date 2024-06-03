@@ -9,8 +9,8 @@ class Upload implements Services.Upload {
    * @param id 
    * @returns 
    */
-  public async getFile(id: number): Promise<GetFileResponse> {    
-    return this.httpClient.get(`${this.url}/upload/file/${id}`) as Promise<GetFileResponse>;
+  public async getFile(id: ID): Promise<GetFileResponse> {    
+    return this.httpClient.get(`${this.url}/upload/admin/file/${id}`) as Promise<GetFileResponse>;
   }
 }
 
