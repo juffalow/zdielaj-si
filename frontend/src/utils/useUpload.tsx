@@ -22,6 +22,8 @@ export function UploadProvider({ children }: { children: ReactNode }): JSX.Eleme
   const [ files, setFiles ] = useState<FileWithPath[]>([]);
 
   const onDrop = async (acceptedFiles: FileWithPath[], onUpload?: (media: Media) => Promise<void> | void): Promise<unknown> => {
+    const startTime = performance.now()
+
     setFiles([
       ...files,
       ...acceptedFiles.map(file => ({
@@ -31,32 +33,46 @@ export function UploadProvider({ children }: { children: ReactNode }): JSX.Eleme
       })),
     ]);
 
-    const mediaList = [];
+    const mediaList: any = [];
 
-    for (const file of acceptedFiles) {
-      const media = await uploadPhoto(file as File);
-      mediaList.push(media);
+    const uploadOne = async () => {
+      while (acceptedFiles.length > 0) {
+        const file = acceptedFiles.shift();
 
-      setFiles((fs) => fs.map(f => {
-        if (f.path === file.path) {
-          return {
-            ...f,
-            media,
-            isUploading: false,
-          };
+        if (typeof file === 'undefined') {
+          return;
         }
 
-        return f;
-      }));
+        const media = await uploadPhoto(file as File);
+        mediaList.push(media);
 
-      if (typeof onUpload === 'function' && onUpload.constructor.name === 'AsyncFunction') {
-        await onUpload(media);
-      }
+        setFiles((fs) => fs.map(f => {
+          if (f.path === file.path) {
+            return {
+              ...f,
+              media,
+              isUploading: false,
+            };
+          }
 
-      if (typeof onUpload === 'function' && onUpload.constructor.name === 'Function') {
-        onUpload(media);
+          return f;
+        }));
+
+        if (typeof onUpload === 'function' && onUpload.constructor.name === 'AsyncFunction') {
+          await onUpload(media);
+        }
+
+        if (typeof onUpload === 'function' && onUpload.constructor.name === 'Function') {
+          onUpload(media);
+        }
       }
-    }
+    };
+
+    await Promise.all(Array.from({ length: 3 }, () => uploadOne()));
+
+    const endTime = performance.now();
+    console.log(`Upload took ${endTime - startTime} milliseconds`);
+    console.log(`Upload took ${(endTime - startTime) / 1000} seconds`);
 
     return mediaList;
   };
