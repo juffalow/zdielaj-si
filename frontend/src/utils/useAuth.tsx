@@ -128,7 +128,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       signUp,
       signOut,
     }),
-    [ user, loading ]
+    [ user, loading, hasInitialized ]
   );
 
   // We only want to render the underlying app after we
