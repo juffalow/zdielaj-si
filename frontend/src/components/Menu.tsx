@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../utils/useAuth';
 
 const Menu = () => {
-  const { user, signOut } = useAuth();
+  const { user, hasInitialized, signOut } = useAuth();
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -23,7 +23,9 @@ const Menu = () => {
           </Nav>
           <Nav>
             {
-              user !== undefined ? (
+              hasInitialized === false ? (
+                <></>
+              ) : user !== undefined ? (
                 <Nav.Link onClick={signOut} href="#">Odhlásiť sa</Nav.Link>
               ) : (
                 <Nav.Link as={Link} to="/prihlasit-sa">Prihlásiť sa</Nav.Link>

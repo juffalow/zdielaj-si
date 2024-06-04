@@ -12,6 +12,7 @@ import { setUserToken } from '../api/token';
 
 interface AuthContextType {
   user?: User;
+  hasInitialized: boolean;
   loading: boolean;
   error?: any;
   signIn: (username: string, password: string) => Promise<void>;
@@ -26,7 +27,7 @@ const AuthContext = createContext<AuthContextType>(
 export function AuthProvider({ children }: { children: ReactNode }): JSX.Element {
   const [ user, setUser ] = useState<User>();
   const [ loading, setLoading ] = useState<boolean>(false);
-  const [ loadingInitial, setLoadingInitial ] = useState<boolean>(true);
+  const [ hasInitialized, setHasInitialized ] = useState<boolean>(false);
 
   // Check if there is a currently active session
   // when the provider is mounted for the first time.
@@ -46,7 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         setUserToken(null);
       })
       .finally(() => {
-        setLoadingInitial(false)
+        setHasInitialized(true);
       });
   }, []);
 
@@ -121,6 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   const memoedValue = useMemo(
     () => ({
       user,
+      hasInitialized,
       loading,
       signIn,
       signUp,
@@ -133,9 +135,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   // assert for the presence of a current user.
   return (
     <AuthContext.Provider value={memoedValue}>
-      {
-        loadingInitial ? ( null ) : children
-      }
+      { children }
     </AuthContext.Provider>
   );
 }
