@@ -2,6 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import useAuth from '../utils/useAuth';
 
@@ -26,7 +27,12 @@ const Menu = () => {
               hasInitialized === false ? (
                 <></>
               ) : user !== undefined ? (
-                <Nav.Link onClick={signOut} href="#">Odhlásiť sa</Nav.Link>
+                <NavDropdown title={user?.meta?.name || 'Užívateľ'} id="basic-nav-dropdown">
+                  <NavDropdown.Item as={Link} to="/profil">Profil</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/predplatne">Predplatné</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={signOut}>Odhlásiť sa</NavDropdown.Item>
+                </NavDropdown>
               ) : (
                 <Nav.Link as={Link} to="/prihlasit-sa">Prihlásiť sa</Nav.Link>
               )

@@ -10,7 +10,9 @@ import Register from './pages/Register';
 import Validation from './pages/Validation';
 import Login from './pages/Login';
 import Notifications from './pages/Notifications';
-import { AuthProvider } from './utils/useAuth';
+import Subscription from './pages/Subscription';
+import Profile from './pages/Profile';
+import { AuthProvider, RequireAuth } from './utils/useAuth';
 import { UploadProvider } from './utils/useUpload';
 import Tracking from './utils/Tracking';
 import './App.css';
@@ -25,11 +27,13 @@ const App: React.FC = () => (
             <Routes>
               <Route path="/o-aplikacii" element={<About />} />
               <Route path="/album/:id" element={<Album />} />
-              <Route path="/albumy" element={<Albums />} />
+              <Route path="/albumy" element={<RequireAuth><Albums /></RequireAuth>} />
               <Route path="/registracia" element={<Register />} />
               <Route path="/validacia" element={<Validation />} />
               <Route path="/prihlasit-sa" element={<Login />} />
               <Route path="/notifikacie" element={<Notifications />} />
+              <Route path="/predplatne" element={<RequireAuth><Subscription /></RequireAuth>} />
+              <Route path="/profil" element={<RequireAuth><Profile /></RequireAuth>} />
               <Route path="/" element={<Home />} />
             </Routes>
           </main>

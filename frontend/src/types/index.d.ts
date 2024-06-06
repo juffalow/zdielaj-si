@@ -1,3 +1,5 @@
+type ID = string | number;
+
 type Thumbnail = {
   id: number;
   path: string;
@@ -28,7 +30,7 @@ type Album = {
 }
 
 type User = {
-  id?: number;
+  id?: ID;
   accessToken: string;
   meta?: Record<string, string | number | boolean>;
 }
@@ -43,4 +45,10 @@ type NotificationSetting = {
   type: 'email' | 'inapp';
   notification: string;
   isEnabled: boolean,
+}
+
+namespace JSX {
+  interface IntrinsicElements {
+    'stripe-pricing-table': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+  }
 }

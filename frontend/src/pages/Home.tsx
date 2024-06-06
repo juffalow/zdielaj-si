@@ -91,7 +91,7 @@ const Home: React.FC = () => {
                 <FeaturesList>
                   <li>maximálne <b>1GB</b> <small className="text-body-secondary">(≈ 300 fotiek)</small></li>
                   <li>video</li>
-                  <li>zoznam pridaných fotiek</li>
+                  <li>zoznam vytvorených albumov</li>
                   <li>súbory budú po <b>7 dňoch</b> automaticky zmazané</li>
                 </FeaturesList>
                 <div className={`${styles.pricingCardFooter} text-center`}>
@@ -110,7 +110,7 @@ const Home: React.FC = () => {
                 <FeaturesList>
                   <li>maximálne <b>10GB</b> <small className="text-body-secondary">(≈ 3000 fotiek)</small></li>
                   <li>video</li>
-                  <li>zoznam pridaných fotiek</li>
+                  <li>zoznam vytvorených albumov</li>
                   <li>zaheslovať prístup</li>
                   <li>súbory sa <b>nemažú</b></li>
                 </FeaturesList>
