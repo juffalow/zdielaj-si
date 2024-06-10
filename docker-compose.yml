@@ -49,7 +49,7 @@ services:
   core:
     image: node:20-alpine
     working_dir: /home/node
-    command: sh -c "yarn install && yarn start"
+    command: sh -c "corepack enable && yarn set version berry && yarn install && yarn start"
     depends_on:
       - mysql_core
     restart: unless-stopped

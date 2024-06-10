@@ -37,5 +37,6 @@
     "test": "jest",
     "migrate:latest": "knex migrate:latest",
     "migrate:down": "knex migrate:down"
-  }
+  },
+  "packageManager": "yarn@4.2.2"
 }
