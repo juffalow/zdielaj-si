@@ -10,7 +10,7 @@ const Menu = () => {
   const { user, hasInitialized, signOut } = useAuth();
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect={true}>
       <Container fluid>
         <Navbar.Brand as={Link} to="/">Zdielaj.si</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
