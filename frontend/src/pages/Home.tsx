@@ -106,7 +106,7 @@ const Home: React.FC = () => {
                 <h4 className="text-center my-0">Štandard</h4>
               </Card.Header>
               <Card.Body style={{ paddingBottom: '4rem' }}>
-                <p className="text-center" style={{ fontSize: '2.5rem' }}>5€ / <small className="text-body-secondary">mesačne</small></p>
+                <p className="text-center" style={{ fontSize: '2.5rem' }}>3€ / <small className="text-body-secondary">mesačne</small></p>
                 <FeaturesList>
                   <li>maximálne <b>10GB</b> <small className="text-body-secondary">(≈ 3000 fotiek)</small></li>
                   <li>video</li>
@@ -115,7 +115,7 @@ const Home: React.FC = () => {
                   <li>súbory sa <b>nemažú</b></li>
                 </FeaturesList>
                 <div className={`${styles.pricingCardFooter} text-center`}>
-                  <Link to="/registracia" className="btn btn-outline-primary w-100" role="button" data-tracking-id="">Kontaktovať</Link>
+                  <Link to="/registracia" className="btn btn-outline-primary w-100" role="button" data-tracking-id="standard_register_click">Registrácia</Link>
                 </div>
               </Card.Body>
             </Card>
