@@ -19,6 +19,30 @@ const About: React.FC = () => (
           <p className="lead">Aplikácia pomáha užívateľom rýchlo a ľahko zdielať fotografie a videá bez zníženia kvality. Všetky dáta sú uložené v šifrovanej forme.</p>
         </Col>
       </Row>
+      <Row>
+        <Col>
+          <h2 className="text-center">Funkcie</h2>
+        </Col>
+      </Row>
+      <Row className="mt-5">
+        <Col className="mb-4" lg={4}>
+          <h4>Album</h4>
+          <p>Možnosť vytvárať albumy pre fotky a videá. Každý album môže obsahovať ľubovolný počet médií. Všetky nahrané videá sa transkódujú na formát <i>mp4</i>, aby boli spätne prehrateľné v prehliadači. Pri sťahovaní sa vždy sťahuje originál.</p>
+        </Col>
+        <Col className="mb-4" lg={4}>
+          <h4>Zaheslovať prístup</h4>
+          <p>Vlastník albumu môže svoj album chrániť heslom, ktoré bude vyžadované pre načítanie obsahu.</p>
+        </Col>
+        <Col className="mb-4" lg={4}>
+          <h4>Zdieľať album</h4>
+          <p>Do albumu možu pridávať fotky a videá aj iní používatelia. Album sa dá zdieľať pomocou špeciálneho odkazu, alebo s konkrétnymi registrovanými používateľmi.</p>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h2 className="text-center">Technológie</h2>
+        </Col>
+      </Row>
       <Row className="mt-5">
         <Col className="mb-4" lg={4}>
           <img src={awsCognito} style={{ height: '3rem', marginBottom: '1rem' }} />
