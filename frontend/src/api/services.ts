@@ -20,6 +20,16 @@ export async function login(username: string, password: string): Promise<User> {
     .then(response => response.data.user);
 }
 
+export async function requestPasswordReset(username: string): Promise<unknown> {
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/password-reset-request`, { username })
+    .then(response => response.data);
+}
+
+export async function resetPassword(username: string, password: string, code: string): Promise<unknown> {
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/password-reset`, { username, password, code })
+    .then(response => response.data);
+}
+
 export async function refreshToken(): Promise<RefreshTokenResponse> {
   return get(`${process.env.REACT_APP_USER_SERVICE_URL}/user/refresh-token`, { credentials: 'include' });
 }

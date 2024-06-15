@@ -9,6 +9,7 @@ import Albums from './pages/Albums';
 import Register from './pages/Register';
 import Validation from './pages/Validation';
 import Login from './pages/Login';
+import PasswordReset from './pages/PasswordReset';
 import Notifications from './pages/Notifications';
 import Subscription from './pages/Subscription';
 import Profile from './pages/Profile';
@@ -31,6 +32,7 @@ const App: React.FC = () => (
               <Route path="/registracia" element={<Register />} />
               <Route path="/validacia" element={<Validation />} />
               <Route path="/prihlasit-sa" element={<Login />} />
+              <Route path="/reset-hesla" element={<PasswordReset />} />
               <Route path="/notifikacie" element={<Notifications />} />
               <Route path="/predplatne" element={<RequireAuth><Subscription /></RequireAuth>} />
               <Route path="/profil" element={<RequireAuth><Profile /></RequireAuth>} />
