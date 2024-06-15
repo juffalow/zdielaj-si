@@ -38,10 +38,6 @@ export async function logout(): Promise<unknown> {
   return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/logout`, {}, { credentials: 'include' });
 }
 
-export async function verifyEmail(id: number, token: string): Promise<RefreshTokenResponse> {
-  return get(`${process.env.REACT_APP_USER_SERVICE_URL}/user/verify/email?id=${id}&token=${token}`);
-}
-
 export async function uploadPhoto(file: File): Promise<Media> {
   const formData = new FormData();
 

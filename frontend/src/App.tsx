@@ -7,7 +7,6 @@ import About from './pages/About';
 import Album from './pages/Album';
 import Albums from './pages/Albums';
 import Register from './pages/Register';
-import Validation from './pages/Validation';
 import Login from './pages/Login';
 import PasswordReset from './pages/PasswordReset';
 import Notifications from './pages/Notifications';
@@ -30,7 +29,6 @@ const App: React.FC = () => (
               <Route path="/album/:id" element={<Album />} />
               <Route path="/albumy" element={<RequireAuth><Albums /></RequireAuth>} />
               <Route path="/registracia" element={<Register />} />
-              <Route path="/validacia" element={<Validation />} />
               <Route path="/prihlasit-sa" element={<Login />} />
               <Route path="/reset-hesla" element={<PasswordReset />} />
               <Route path="/notifikacie" element={<Notifications />} />
