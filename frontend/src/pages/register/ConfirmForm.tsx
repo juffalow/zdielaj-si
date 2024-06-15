@@ -65,9 +65,9 @@ const ConfirmForm: React.FC<Props> = ({ onConfirmSubmit }: Props) => {
             ) : null
           }
           <Form noValidate validated={isValidated} onSubmit={onSubmit}>
-            <Form.Group controlId="name">
+            <Form.Group controlId="confirmCode">
               <Form.Label>Overovací kód</Form.Label>
-              <Form.Control required type="text" name="code" placeholder="123456" value={values.code} onChange={onChange} />
+              <Form.Control required type="text" name="code" id="confirmCode" placeholder="123456" value={values.code} onChange={onChange} />
               <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
             </Form.Group>
 

@@ -70,21 +70,21 @@ const RegisterForm: React.FC<Props> = ({ onRegisterSubmit }: Props) => {
             ) : null
           }
           <Form noValidate validated={isValidated} onSubmit={onSubmit}>
-            <Form.Group controlId="name">
+            <Form.Group controlId="registerName">
               <Form.Label>Meno</Form.Label>
-              <Form.Control required type="text" name="name" placeholder="Meno (Priezvisko)" value={values.name} onChange={onChange} />
+              <Form.Control required type="text" name="name" id="registerName" placeholder="Meno (Priezvisko)" value={values.name} onChange={onChange} />
               <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group controlId="email" className="mt-3">
+            <Form.Group controlId="registerEmail" className="mt-3">
               <Form.Label>E-mailová adresa</Form.Label>
-              <Form.Control required type="email" name="email" placeholder="meno.priezvisko@priklad.sk" value={values.email} onChange={onChange} />
+              <Form.Control required type="email" name="email" id="registerEmail" placeholder="meno.priezvisko@priklad.sk" value={values.email} onChange={onChange} />
               <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group controlId="password" className="mt-3">
+            <Form.Group controlId="registerPassword" className="mt-3">
               <Form.Label>Heslo</Form.Label>
-              <Form.Control required type="password" name="password" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
+              <Form.Control required type="password" name="password" id="registerPassword" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
               <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
             </Form.Group>
 
