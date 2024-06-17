@@ -54,6 +54,12 @@ const Login: React.FC = () => {
     <SEO title="Prihlásiť sa" description="">
       <Container className="main" style={{ marginTop: 50 }}>
         <Row>
+          <Col>
+            <h1 className="text-center">Prihlásiť sa</h1>
+            <p className="text-center mb-5">Ešte nemáš už účet? <Link to="/registracia">Registrovať sa</Link></p>
+          </Col>
+        </Row>
+        <Row>
           <Col xs={{ span: 10, offset: 1 }} md={{ span: 6, offset: 3 }} lg={{ span: 4, offset: 4 }}>
             {
               hasError ? (
@@ -62,9 +68,6 @@ const Login: React.FC = () => {
                 </Alert>
               ) : null
             }
-            <h1 className="text-center">Prihlásiť sa</h1>
-            <p className="text-center mb-5">Ešte nemáš už účet? <Link to="/registracia">Registrovať sa</Link></p>
-
             <Form noValidate validated={isValidated} onSubmit={onSubmit}>
               <Form.Group controlId="loginUsername">
                 <Form.Label>E-mailová adresa</Form.Label>
