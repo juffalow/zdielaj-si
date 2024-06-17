@@ -86,6 +86,15 @@ const RegisterForm: React.FC<Props> = ({ onRegisterSubmit }: Props) => {
               <Form.Label>Heslo</Form.Label>
               <Form.Control required type="password" name="password" id="registerPassword" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
               <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
+              <Form.Text className="text-muted mt-4">
+                <ul>
+                  <li>Minimálne 8 znakov { values.password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>Aspoň jedno veľké písmeno { values.password.toLowerCase() !== values.password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>Aspoň jedno malé písmeno { values.password.toUpperCase() !== values.password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>Aspoň jeden špeciálny znak { values.password.match(/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>Aspoň jedno číslo { values.password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                </ul>
+              </Form.Text>
             </Form.Group>
 
             <Form.Group className="text-center mt-4 mb-2">
