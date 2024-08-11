@@ -4,6 +4,7 @@ import Menu from './components/Menu';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import Album from './pages/Album';
 import Albums from './pages/Albums';
 import Register from './pages/Register';
@@ -26,6 +27,7 @@ const App: React.FC = () => (
           <main role="main" className="flex-shrink-0 main-container" style={{ marginTop: 25, marginBottom: 25 }}>
             <Routes>
               <Route path="/o-aplikacii" element={<About />} />
+              <Route path="/zasady-ochrany-osobnych-udajov" element={<PrivacyPolicy />} />
               <Route path="/album/:id" element={<Album />} />
               <Route path="/albumy" element={<RequireAuth><Albums /></RequireAuth>} />
               <Route path="/registracia" element={<Register />} />
