@@ -5,12 +5,12 @@ import BlockLoader from '../../components/BlockLoader';
 
 export default function GalleryLoader() {  
   const innerWidth = window.innerWidth;
-  const [cols, setCols] = useState(innerWidth < 768 ? 1 : innerWidth < 992 ? 2 : innerWidth < 1200 ? 3 : innerWidth < 1600 ? 4 : 5);
+  const [cols, setCols] = useState(innerWidth < 768 ? 2 : innerWidth < 992 ? 4 : innerWidth < 1200 ? 6 : innerWidth < 1600 ? 6 : 6);
 
   useLayoutEffect(() => {
     function updateSize() {
       const innerWidth = window.innerWidth;
-      setCols(innerWidth < 768 ? 1 : innerWidth < 992 ? 2 : innerWidth < 1200 ? 3 : innerWidth < 1600 ? 4 : 5);
+      setCols(innerWidth < 768 ? 2 : innerWidth < 992 ? 4 : innerWidth < 1200 ? 6 : innerWidth < 1600 ? 6 : 6);
     }
     window.addEventListener('resize', updateSize);
 
