@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import { useParams, useLocation } from 'react-router-dom';
 import SEO from '../components/SEO';
-import Gallery from './album/Gallery';
+import GalleryLoader from './album/GalleryLoader';
 import GalleryNew from './album/GalleryNew';
 import { getAlbum } from '../api/services';
 import useUpload from '../utils/useUpload';
@@ -44,6 +44,11 @@ const Album: React.FC = () => {
             <Alert variant="danger">
               Tento album už nie je dostupný.
             </Alert>
+          ) : null
+        }
+        {
+          uploadedFiles.length === 0 && files.length === 0? (
+            <GalleryLoader />
           ) : null
         }
         {
