@@ -12,7 +12,13 @@ class FetchClient implements Utils.HTTPClient {
     }
 
     for (const key in params) {
-      searchParameters.append(key, params[key]);
+      if (Array.isArray(params[key])) {
+        for (const value of params[key]) {
+          searchParameters.append(key, value);
+        }
+      } else {
+        searchParameters.append(key, params[key]);
+      }
     }
 
     return fetch(`${url}?${searchParameters}`, {

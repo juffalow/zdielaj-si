@@ -21,6 +21,24 @@ interface GetFileResponse {
   },
 }
 
+interface ListFilesResponse {
+  error: unknown,
+  data: {
+    files: {
+      id: number,
+      mimetype: string,
+      size: number,
+      location: string,
+      thumbnails?: {
+        fileId: number,
+        mimetype: string,
+        size: number,
+        location: string,
+      }
+    }[],
+  },
+}
+
 declare namespace Services {
   interface Notifications {
     notify(data: unknown): Promise<unknown>;
@@ -32,6 +50,8 @@ declare namespace Services {
 
   interface Upload {
     getFile(id: ID): Promise<GetFileResponse>;
+    
+    listFiles(ids: ID[]): Promise<ListFilesResponse>;
   }
 
   interface Geolocation {

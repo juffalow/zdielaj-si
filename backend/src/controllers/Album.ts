@@ -21,13 +21,15 @@ class AlbumController {
     if (typeof media === 'undefined' || media.length === 0) {
       throw new BaseError({message: 'Album not found!', code: 404 });
     }
+
+    const response = await this.uploadService.listFiles(media.map(single => single.fileId));
   
     const fullMedia = await Promise.all(media.map(async (single) => {
-      const response = await this.uploadService.getFile(single.fileId);
+      const file = response.data.files.find(file => file.id === single.fileId);
       
       return {
         ...single,
-        ...response.data.file,
+        ...file,
       }
     }));
 
@@ -51,13 +53,15 @@ class AlbumController {
     if (typeof media === 'undefined' || media.length === 0) {
       throw new BaseError({message: 'Album not found!', code: 404 });
     }
+    
+    const response = await this.uploadService.listFiles(media.map(single => single.fileId));
   
     const fullMedia = await Promise.all(media.map(async (single) => {
-      const response = await this.uploadService.getFile(single.fileId);
+      const file = response.data.files.find(file => file.id === single.fileId);
       
       return {
         ...single,
-        ...response.data.file,
+        ...file,
       }
     }));
 
