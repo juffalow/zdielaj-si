@@ -9,13 +9,7 @@ const router = express.Router();
 
 router.get('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    let album = null;
-
-    if (isNaN(req.params.id as any)) {
-      album = await controllers.Album.getAlbumByHash(req.params.id);
-    } else {
-      album = await controllers.Album.getAlbum(parseInt(req.params.id));
-    }
+    const album = await controllers.Album.getAlbum(req.params.id);
     
     res.status(200).json({
       error: null,
@@ -126,6 +120,21 @@ router.post('/:id/media', optionalAlbum, async (req: express.Request, res: expre
       },
     },
   }).end();
+});
+
+router.delete('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const album = await controllers.Album.getAlbum(req.params.id);
+    
+    res.status(200).json({
+      error: null,
+      data: {
+        album,
+      }
+    }).end();
+  } catch (err) {
+    next(err);
+  }
 });
 
 export default router;

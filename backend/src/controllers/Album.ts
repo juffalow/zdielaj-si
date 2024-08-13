@@ -14,46 +14,16 @@ class AlbumController {
    * @returns 
    * @throws BaseError if album not found or empty
    */
-  public async getAlbum(id: number): Promise<Album> {
-    const album = await this.albumRepository.get(id);
-    const media = await this.mediaRepository.find({ album: { id: album.id } });
-  
-    if (typeof media === 'undefined' || media.length === 0) {
+  public async getAlbum(id: number | string): Promise<Album> {
+    const albums = await this.albumRepository.find({ hash: String(id), first: 1 });
+    const album = albums.length === 1 ? albums.shift() : await this.albumRepository.get(id);
+
+    if (typeof album === 'undefined') {
       throw new BaseError({message: 'Album not found!', code: 404 });
     }
 
-    const response = await this.uploadService.listFiles(media.map(single => single.fileId));
-  
-    const fullMedia = await Promise.all(media.map(async (single) => {
-      const file = response.data.files.find(file => file.id === single.fileId);
-      
-      return {
-        ...single,
-        ...file,
-      }
-    }));
-
-    return {
-      ...album,
-      media: fullMedia,
-    };
-  }
-
-  /**
-   * Retrieves single album with specified hash.
-   * @param hash 
-   * @returns 
-   * @throws BaseError if album not found or empty
-   */
-  public async getAlbumByHash(hash: string): Promise<Album> {
-    const albums = await this.albumRepository.find({ hash, first: 1 });
-    const album = albums.shift();
     const media = await this.mediaRepository.find({ album: { id: album.id } });
-  
-    if (typeof media === 'undefined' || media.length === 0) {
-      throw new BaseError({message: 'Album not found!', code: 404 });
-    }
-    
+
     const response = await this.uploadService.listFiles(media.map(single => single.fileId));
   
     const fullMedia = await Promise.all(media.map(async (single) => {
