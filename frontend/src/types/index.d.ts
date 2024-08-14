@@ -31,6 +31,7 @@ type Album = {
 
 type User = {
   id?: ID;
+  username?: string;
   accessToken: string;
   meta?: Record<string, string | number | boolean>;
 }
