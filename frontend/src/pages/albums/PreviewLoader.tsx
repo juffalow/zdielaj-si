@@ -8,7 +8,8 @@ const Preview: React.FC = () => (
     <Card.Body>
       <Card.Title className={`${styles.loader} mb-2`}>&nbsp;</Card.Title>
       <Card.Subtitle className={`${styles.loader} mb-2`}>&nbsp;</Card.Subtitle>
-      <Button className={styles.loader} style={{ border: 'none', width: '100%' }}>&nbsp;</Button>
+      <Button className={`${styles.loader} w-100`}>&nbsp;</Button>
+      <Button className={`${styles.loader} mt-2 w-100`}>&nbsp;</Button>
     </Card.Body>
   </Card>
 );
