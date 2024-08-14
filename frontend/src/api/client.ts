@@ -100,3 +100,20 @@ export async function postMultipart(endpoint: string, data: FormData): Promise<a
     .then(handleErrors)
     .then(handleSuccess);
 }
+
+export async function httpDelete(endpoint: string, options?: RequestInit): Promise<any> {
+  const headers = new Headers();
+  const userToken = getUserToken();
+
+  if (userToken !== null) {
+    headers.set('Authorization',  `Bearer ${userToken}`);
+  }
+
+  return fetch(endpoint, {
+    ...options,
+    method: 'DELETE',
+    headers,
+  })
+    .then(handleErrors)
+    .then(handleSuccess);
+}

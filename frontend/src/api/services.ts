@@ -1,4 +1,4 @@
-import { post, postMultipart, get } from './client';
+import { post, postMultipart, get, httpDelete } from './client';
 import { setAlbumToken } from './token';
 
 type Setting = {
@@ -58,6 +58,12 @@ export async function getAlbums(): Promise<Album[]> {
   return get(`${process.env.REACT_APP_CORE_URL}/album`, { credentials: 'include' })
     .then(response => response.data.albums);
 }
+
+export async function deleteAlbum(id: number): Promise<Album> {
+  return httpDelete(`${process.env.REACT_APP_CORE_URL}/album/${id}`, { credentials: 'include' })
+    .then(response => response.data.album);
+}
+
 
 export async function createAlbum(): Promise<Album> {
   return post(`${process.env.REACT_APP_CORE_URL}/album`, {})
