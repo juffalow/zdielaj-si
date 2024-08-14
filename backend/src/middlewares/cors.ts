@@ -5,7 +5,7 @@ export default function cors(req, res, next): void {
   if (config.allowedOrigins.filter(allowedOrigin => allowedOrigin === origin)) {
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Album-Token');
     res.header('Access-Control-Max-Age', '600');
   }

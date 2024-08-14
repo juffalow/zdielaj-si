@@ -13,9 +13,9 @@ class FetchClient implements Utils.HTTPClient {
 
     for (const key in params) {
       if (Array.isArray(params[key])) {
-        for (const value of params[key]) {
-          searchParameters.append(key, value);
-        }
+        Object.keys(params[key]).forEach((index) => {
+          searchParameters.append(`${key}[${index}]`, params[key][index]);
+        });
       } else {
         searchParameters.append(key, params[key]);
       }
@@ -43,6 +43,35 @@ class FetchClient implements Utils.HTTPClient {
         },
         body: JSON.stringify(data),
       }
+    })
+    .then(this.handleErrors)
+    .then(this.handleSuccess);
+  }
+
+  public async delete(url: string, params: object = {}, options: RequestInit = {}): Promise<unknown> {
+    const traceId = namespace.get('traceId');
+    const searchParameters = new URLSearchParams();
+  
+    if (typeof traceId !== 'undefined') {
+      searchParameters.append('traceId', traceId);
+    }
+
+    for (const key in params) {
+      if (Array.isArray(params[key])) {
+        Object.keys(params[key]).forEach((index) => {
+          searchParameters.append(`${key}[${index}]`, params[key][index]);
+        });
+      } else {
+        searchParameters.append(key, params[key]);
+      }
+    }
+
+    return fetch(`${url}?${searchParameters}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': generateToken({ role: 'server', service: 'core' }),
+      },
+      ...options,
     })
     .then(this.handleErrors)
     .then(this.handleSuccess);

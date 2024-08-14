@@ -47,6 +47,16 @@ class KnexAlbumRepository implements AlbumRepository {
         }
       });
   }
+
+  public async delete(id: ID): Promise<Album> {
+    logger.debug(`${this.constructor.name}.delete`, { id });
+
+    const album = await this.get(id);
+
+    await this.database.table('album').where('id', id).delete();
+      
+    return album;  
+  }
 }
 
 export default KnexAlbumRepository;

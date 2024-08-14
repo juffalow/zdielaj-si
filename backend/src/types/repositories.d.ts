@@ -15,6 +15,8 @@ interface AlbumRepository {
   create(userId: ID, hash: string): Promise<Album>;
 
   find(params: AlbumRepository.FindParameters): Promise<Album[]>;
+
+  delete(id: ID): Promise<Album>;
 }
 
 declare namespace MediaRepository {

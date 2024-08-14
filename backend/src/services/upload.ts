@@ -16,6 +16,10 @@ class Upload implements Services.Upload {
   public async listFiles(ids: ID[]): Promise<ListFilesResponse> {
     return this.httpClient.get(`${this.url}/upload/admin/file`, { ids }) as Promise<ListFilesResponse>;
   }
+
+  public async deleteFile(id: ID): Promise<any> {
+    return this.httpClient.delete(`${this.url}/upload/admin/file/${id}`);
+  }
 }
 
 export default Upload;

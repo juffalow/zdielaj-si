@@ -124,7 +124,7 @@ router.post('/:id/media', optionalAlbum, async (req: express.Request, res: expre
 
 router.delete('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const album = await controllers.Album.getAlbum(req.params.id);
+    const album = await controllers.Album.deleteAlbum(parseInt(req.params.id));
     
     res.status(200).json({
       error: null,

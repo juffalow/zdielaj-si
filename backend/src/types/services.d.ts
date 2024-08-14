@@ -52,6 +52,8 @@ declare namespace Services {
     getFile(id: ID): Promise<GetFileResponse>;
     
     listFiles(ids: ID[]): Promise<ListFilesResponse>;
+
+    deleteFile(id: ID): Promise<unknown>;
   }
 
   interface Geolocation {

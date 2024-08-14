@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import { BaseError } from '../utils/errors';
+import logger from '../logger';
 
 class AlbumController {
   constructor(
@@ -92,6 +93,25 @@ class AlbumController {
 
     if (album === null) {
       throw new BaseError({ message: 'Unable to create album!', code: 500 });
+    }
+
+    return album;
+  }
+
+  public async deleteAlbum(id: number): Promise<Album> {
+    const media = await this.mediaRepository.find({ album: { id } });
+
+    setImmediate(async () => {
+      for(const single of media) {
+        logger.info(`Deleting media ${single.fileId}...`);
+        await this.uploadService.deleteFile(single.fileId);
+      }
+    });
+
+    const album = await this.albumRepository.delete(id);
+
+    if (typeof album === 'undefined') {
+      throw new BaseError({message: 'Album not found!', code: 404 });
     }
 
     return album;
