@@ -17,6 +17,10 @@ export default function Tracking() {
     const clickHandler = (event: any) => {
       const analyticsId = event.target.getAttribute('data-tracking-id');
 
+      if (event.target.getAttribute('aria-label') === 'Download' && event.target.getAttribute('class').includes('lg-download')) {
+        'gtag' in window && (window as any).gtag('event', 'album_download_button_click');
+      }
+
       if (analyticsId === null) {
         return;
       }
