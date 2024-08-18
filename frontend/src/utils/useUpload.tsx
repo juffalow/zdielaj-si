@@ -10,6 +10,7 @@ import { uploadPhoto } from '../api/services';
 
 interface UploadContextType {
   files: FileWithPath[];
+  uploadSpeed: number;
   clear: () => void,
   onDrop: (acceptedFiles: FileWithPath[], onUpload?: (media: Media) => Promise<void> | void) => Promise<unknown>;
 }
@@ -20,18 +21,20 @@ const UploadContext = createContext<UploadContextType>(
 
 export function UploadProvider({ children }: { children: ReactNode }): JSX.Element {
   const [ files, setFiles ] = useState<FileWithPath[]>([]);
+  const [ uploadSpeed, setUploadSpeed ] = useState(0);
 
   const onDrop = async (acceptedFiles: FileWithPath[], onUpload?: (media: Media) => Promise<void> | void): Promise<unknown> => {
-    const startTime = performance.now()
+    const startTime = performance.now();
 
-    setFiles([
-      ...files,
-      ...acceptedFiles.map(file => ({
+    setFiles(files.concat(acceptedFiles.map(file => ({
         ...file,
+        name: file.name,
+        type: file.type,
+        size: file.size,
         preview: URL.createObjectURL(file),
         isUploading: true,
       })),
-    ]);
+    ));
 
     const mediaList: any = [];
 
@@ -43,7 +46,12 @@ export function UploadProvider({ children }: { children: ReactNode }): JSX.Eleme
           return;
         }
 
+        const start = performance.now();
+        
         const media = await uploadPhoto(file as File);
+
+        setUploadSpeed((file.size / ((performance.now() - start) / 1000)) * 3);
+
         mediaList.push(media);
 
         setFiles((fs) => fs.map(f => {
@@ -84,6 +92,7 @@ export function UploadProvider({ children }: { children: ReactNode }): JSX.Eleme
   const memoedValue = useMemo(
     () => ({
       files,
+      uploadSpeed,
       clear,
       onDrop,
     }),
