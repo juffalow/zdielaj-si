@@ -6705,12 +6705,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"file-selector@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "file-selector@npm:0.6.0"
+"file-selector@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "file-selector@npm:0.4.0"
   dependencies:
-    tslib: "npm:^2.4.0"
-  checksum: 10c0/477ca1b56274db9fee1a8a623c4bfef580389726a5fef843af8c1f2f17f70ec2d1e41b29115777c92e120a15f1cca734c6ef36bb48bfa2ee027c68da16cd0d28
+    tslib: "npm:^2.0.3"
+  checksum: 10c0/2c55019ea5db84c0c27a5337028604d8a9fe9a53551eb20f4ad44541dfdfdda6bb576e950ac51d11fc3791247c9407734043a9c68a7fe473925631ffc03442e4
   languageName: node
   linkType: hard
 
@@ -6924,7 +6924,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-bootstrap: "npm:^2.10.4"
     react-dom: "npm:^18.3.1"
-    react-dropzone: "npm:^14.2.3"
+    react-dropzone: "npm:^11.7.1"
     react-helmet: "npm:^6.1.0"
     react-router: "npm:^6.26.1"
     react-router-dom: "npm:^6.26.1"
@@ -11371,16 +11371,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dropzone@npm:^14.2.3":
-  version: 14.2.3
-  resolution: "react-dropzone@npm:14.2.3"
+"react-dropzone@npm:^11.7.1":
+  version: 11.7.1
+  resolution: "react-dropzone@npm:11.7.1"
   dependencies:
     attr-accept: "npm:^2.2.2"
-    file-selector: "npm:^0.6.0"
+    file-selector: "npm:^0.4.0"
     prop-types: "npm:^15.8.1"
   peerDependencies:
-    react: ">= 16.8 || 18.0.0"
-  checksum: 10c0/6433517c53309aca1bb4f4a535aeee297345ca1e11b123676f46c7682ffab34a3428cbda106448fc92b5c9a5e0fa5d225bc188adebcd4d302366bf6b1f9c3fc1
+    react: ">= 16.8"
+  checksum: 10c0/81443f64dad24592f64ac804128df8e8875a54b10497b7690e8bae4525478e61b707e0a31129f0199829bc6ab05ff1c52070883e19cbf6f96e18ffc22d57da4c
   languageName: node
   linkType: hard
 
