@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import { BaseError } from '../utils/errors';
 import logger from '../logger';
 
-class AlbumController {
+class AlbumsController {
   constructor(
     protected albumRepository: AlbumRepository,
     protected mediaRepository: MediaRepository,
@@ -118,4 +118,4 @@ class AlbumController {
   }
 }
 
-export default AlbumController;
+export default AlbumsController;

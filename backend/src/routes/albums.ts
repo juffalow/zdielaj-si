@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const album = await controllers.Album.getAlbum(req.params.id);
+    const album = await controllers.Albums.getAlbum(req.params.id);
     
     res.status(200).json({
       error: null,
@@ -24,7 +24,7 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
 
 router.get('/', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const albums = await controllers.Album.getAlbums(req['user']);
+    const albums = await controllers.Albums.getAlbums(req['user']);
     
     res.status(200).json({
       error: null,
@@ -38,7 +38,7 @@ router.get('/', requireAuth, async (req: express.Request, res: express.Response,
 });
 
 router.post('/', async (req: express.Request, res: express.Response) => {
-  const album = await controllers.Album.createAlbum(req['user']);
+  const album = await controllers.Albums.createAlbum(req['user']);
 
   res.status(200).json({
     error: null,
@@ -124,7 +124,7 @@ router.post('/:id/media', optionalAlbum, async (req: express.Request, res: expre
 
 router.delete('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const album = await controllers.Album.deleteAlbum(parseInt(req.params.id));
+    const album = await controllers.Albums.deleteAlbum(parseInt(req.params.id));
     
     res.status(200).json({
       error: null,

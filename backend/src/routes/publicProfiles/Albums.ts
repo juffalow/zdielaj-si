@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/:publicProfileId/albums/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const album = await controllers.Album.getAlbum(req.params.id);
+    const album = await controllers.Albums.getAlbum(req.params.id);
 
     if (album.publicProfileId != req.params.publicProfileId) {
       throw new Error('Album not found');
@@ -24,7 +24,7 @@ router.get('/:publicProfileId/albums/:id', async (req: express.Request, res: exp
 
 router.get('/:publicProfileId/albums', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const albums = await controllers.Album.getAlbums({
+    const albums = await controllers.Albums.getAlbums({
       publicProfile: {
         id: req.params.publicProfileId,
       } as PublicProfile,

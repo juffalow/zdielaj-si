@@ -1,12 +1,12 @@
-import AlbumController from './Album';
+import AlbumsController from './Albums';
 import NotificationsController from './Notifications';
-import PublicProfileController from './PublicProfile';
+import PublicProfilesController from './PublicProfiles';
 import repositories from '../repositories';
 import services from '../services';
 
 const container = {
-  get Album() {
-    return new AlbumController(repositories.Album, repositories.Media, services.Upload);
+  get Albums() {
+    return new AlbumsController(repositories.Album, repositories.Media, services.Upload);
   },
 
   get Notifications() {
@@ -14,7 +14,7 @@ const container = {
   },
 
   get PublicProfile() {
-    return new PublicProfileController(repositories.PublicProfile);
+    return new PublicProfilesController(repositories.PublicProfile);
   }
 };
 

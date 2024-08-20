@@ -1,7 +1,7 @@
 import { BaseError } from '../utils/errors';
 import logger from '../logger';
 
-class PublicProfileController {
+class PublicProfilesController {
   constructor(
     protected publicProfileRepository: PublicProfileRepository,
   ) {}
@@ -48,4 +48,4 @@ class PublicProfileController {
   }
 }
 
-export default PublicProfileController;
+export default PublicProfilesController;
