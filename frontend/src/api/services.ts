@@ -59,23 +59,23 @@ export async function uploadPhoto(file: File): Promise<Media> {
 }
 
 export async function getAlbum(id: string): Promise<Album> {
-  return get(`${process.env.REACT_APP_CORE_URL}/album/${id}`, { credentials: 'include' })
+  return get(`${process.env.REACT_APP_CORE_URL}/albums/${id}`, { credentials: 'include' })
     .then(response => response.data.album);
 }
 
 export async function getAlbums(): Promise<Album[]> {
-  return get(`${process.env.REACT_APP_CORE_URL}/album`, { credentials: 'include' })
+  return get(`${process.env.REACT_APP_CORE_URL}/albums`, { credentials: 'include' })
     .then(response => response.data.albums);
 }
 
 export async function deleteAlbum(id: number): Promise<Album> {
-  return httpDelete(`${process.env.REACT_APP_CORE_URL}/album/${id}`, { credentials: 'include' })
+  return httpDelete(`${process.env.REACT_APP_CORE_URL}/albums/${id}`, { credentials: 'include' })
     .then(response => response.data.album);
 }
 
 
 export async function createAlbum(): Promise<Album> {
-  return post(`${process.env.REACT_APP_CORE_URL}/album`, {})
+  return post(`${process.env.REACT_APP_CORE_URL}/albums`, {})
     .then((response) => {
       setAlbumToken(response.data.user.token);
       return response.data.album;
@@ -83,7 +83,7 @@ export async function createAlbum(): Promise<Album> {
 }
 
 export async function addMedia(albumId: string, fileId: number): Promise<any> {
-  return post(`${process.env.REACT_APP_CORE_URL}/album/${albumId}/media`, { fileId });
+  return post(`${process.env.REACT_APP_CORE_URL}/albums/${albumId}/media`, { fileId });
 }
 
 export async function getNotificationSettings(email: string): Promise<any> {
@@ -114,5 +114,5 @@ export async function getPublicProfiles(params: { name?: string, slug?: string }
     searchParams.append(key, (params as any)[key] as string);
   });
   
-  return get(`${process.env.REACT_APP_CORE_URL}/publicprofile/?${searchParams}`);
+  return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/?${searchParams}`);
 }
