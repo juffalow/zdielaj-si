@@ -24,7 +24,7 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
 
 router.get('/', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const albums = await controllers.Albums.getAlbums(req['user']);
+    const albums = await controllers.Albums.getAlbums({ user: req['user'] });
     
     res.status(200).json({
       error: null,
