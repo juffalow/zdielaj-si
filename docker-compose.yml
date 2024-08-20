@@ -47,7 +47,7 @@ services:
         - 'mysql_notification_service_data:/data/db'
 
   core:
-    image: node:20-alpine
+    image: node:22-alpine
     working_dir: /home/node
     command: sh -c "corepack enable && yarn set version berry && yarn install && yarn start"
     depends_on:
@@ -63,7 +63,7 @@ services:
       - "./backend:/home/node"
 
   frontend:
-    image: node:20-alpine
+    image: node:22-alpine
     working_dir: /home/node
     command: sh -c "corepack enable && yarn set version berry && yarn install && yarn start"
     restart: unless-stopped

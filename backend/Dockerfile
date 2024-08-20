@@ -1,4 +1,4 @@
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 
 RUN corepack enable
 RUN yarn set version berry
@@ -11,7 +11,7 @@ WORKDIR /home/node/zdielaj-si-backend
 COPY --chown=node:node . .
 RUN yarn install --immutable && yarn build
 
-FROM node:20-alpine
+FROM node:22-alpine
 
 ENV NODE_ENV production
 
