@@ -10,12 +10,12 @@ import 'lightgallery/css/lg-video.css';
 
 export default function Gallery({ files }: { files: Array<Media> }) {  
   const innerWidth = window.innerWidth;
-  const [cols, setCols] = useState(innerWidth < 768 ? 2 : innerWidth < 992 ? 4 : innerWidth < 1200 ? 6 : innerWidth < 1600 ? 6 : 6);
+  const [cols, setCols] = useState(innerWidth < 768 ? 2 : innerWidth < 992 ? 2 : innerWidth < 1200 ? 4 : innerWidth < 1600 ? 6 : 6);
 
   useLayoutEffect(() => {
     function updateSize() {
       const innerWidth = window.innerWidth;
-      setCols(innerWidth < 768 ? 2 : innerWidth < 992 ? 4 : innerWidth < 1200 ? 6 : innerWidth < 1600 ? 6 : 6);
+      setCols(innerWidth < 768 ? 2 : innerWidth < 992 ? 2 : innerWidth < 1200 ? 4 : innerWidth < 1600 ? 6 : 6);
     }
     window.addEventListener('resize', updateSize);
 
@@ -31,10 +31,10 @@ export default function Gallery({ files }: { files: Array<Media> }) {
           mobileSettings={{download: true}}
           selector=".gallery-item"
         >
-          <Row>
+          <Row className="justify-content-center">
             {
-              Array(cols).fill(undefined).map((_, index) => (
-                <Col key={index}>
+              Array(cols <= files.length ? cols : files.length).fill(undefined).map((_, index) => (
+                <Col key={index} lg={{ span: 12 / cols }} md={{span: 12 / cols }} sm={{ span: 12 / cols }} xs={{ span: 12 / cols }}>
                   {
                     files.filter((v, i) => ((i - index) % cols) === 0).map(file => (
                       <div key={file.id} className="gallery-item mb-4" data-src={file.location}>
