@@ -42,3 +42,44 @@ interface MediaRepository {
 
   count(params: MediaRepository.FindParameters): Promise<number>;
 }
+
+declare namespace PublicProfileRepository {
+  interface CreateParameters {
+    user?: {
+      id: ID;
+    };
+    name: string;
+    slug: string;
+    description: string;
+  }
+
+  interface FindParameters {
+    user?: {
+      id: ID;
+    };
+    name?: string;
+    slug?: string;
+    first?: number;
+    after?: number;
+  }
+
+  interface CountParameters {
+    user?: {
+      id: ID;
+    };
+    name?: string;
+    slug?: string;
+  }
+}
+
+interface PublicProfileRepository {
+  get(id: ID): Promise<PublicProfile>;
+
+  create(params: PublicProfileRepository.CreateParameters): Promise<PublicProfile>;
+
+  find(params: PublicProfileRepository.FindParameters): Promise<PublicProfile[]>;
+
+  count(params: PublicProfileRepository.CountParameters): Promise<number>;
+
+  delete(id: ID): Promise<PublicProfile>;
+}

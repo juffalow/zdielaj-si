@@ -1,5 +1,6 @@
 import KnexAlbumRepository from './KnexAlbumRepository';
 import KnexMediaRepository from './KnexMediaRepository';
+import KnexPublicProfileRepository from './KnexPublicProfileRepository';
 import database from '../database';
 
 const container = {
@@ -10,6 +11,10 @@ const container = {
   get Media(): MediaRepository {
     return new KnexMediaRepository(database);
   },
+
+  get PublicProfile(): PublicProfileRepository {
+    return new KnexPublicProfileRepository(database);
+  }
 };
 
 export default container;

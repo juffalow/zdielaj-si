@@ -21,3 +21,13 @@ type Album = {
 type User = {
   id: ID;
 }
+
+type PublicProfile = {
+  id: ID;
+  userId: ID;
+  name: string;
+  slug: string;
+  description: string;
+  createdAt?: string;
+  updatedAt?: string;
+}

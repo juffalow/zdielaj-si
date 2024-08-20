@@ -1,5 +1,6 @@
 import AlbumController from './Album';
 import NotificationsController from './Notifications';
+import PublicProfileController from './PublicProfile';
 import repositories from '../repositories';
 import services from '../services';
 
@@ -11,6 +12,10 @@ const container = {
   get Notifications() {
     return new NotificationsController(services.Notifications);
   },
+
+  get PublicProfile() {
+    return new PublicProfileController(repositories.PublicProfile);
+  }
 };
 
 export default container;
