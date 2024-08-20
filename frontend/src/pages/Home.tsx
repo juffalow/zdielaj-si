@@ -112,6 +112,7 @@ const Home: React.FC = () => {
                   <li>video</li>
                   <li>zoznam vytvorených albumov</li>
                   <li>zaheslovať prístup</li>
+                  <li>jeden verejný profil</li>
                   <li>súbory sa <b>nemažú</b></li>
                 </FeaturesList>
                 <div className={`${styles.pricingCardFooter} text-center`}>

@@ -13,6 +13,7 @@ import PasswordReset from './pages/PasswordReset';
 import Notifications from './pages/Notifications';
 import Subscription from './pages/Subscription';
 import Profile from './pages/Profile';
+import PublicProfile from './pages/PublicProfile';
 import { AuthProvider, RequireAuth } from './utils/useAuth';
 import { UploadProvider } from './utils/useUpload';
 import Tracking from './utils/Tracking';
@@ -36,6 +37,7 @@ const App: React.FC = () => (
               <Route path="/notifikacie" element={<Notifications />} />
               <Route path="/predplatne" element={<RequireAuth><Subscription /></RequireAuth>} />
               <Route path="/profil" element={<RequireAuth><Profile /></RequireAuth>} />
+              <Route path="/:id" element={<PublicProfile />} />
               <Route path="/" element={<Home />} />
             </Routes>
           </main>

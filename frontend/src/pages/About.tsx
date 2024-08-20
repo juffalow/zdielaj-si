@@ -37,6 +37,10 @@ const About: React.FC = () => (
           <h4>Zdieľať album</h4>
           <p>Do albumu možu pridávať fotky a videá aj iní používatelia. Album sa dá zdieľať pomocou špeciálneho odkazu, alebo s konkrétnymi registrovanými používateľmi.</p>
         </Col>
+        <Col className="mb-4" lg={4}>
+          <h4>Verejný profil</h4>
+          <p>Na unikátnom odkaze (<code>/tvojemeno/</code>) vidia iní používatelia tvoje albumy, ktoré patria do daného verejného profilu.</p>
+        </Col>
       </Row>
       <Row>
         <Col>

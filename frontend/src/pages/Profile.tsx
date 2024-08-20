@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Statistics from './profile/Statistics';
+import PublicProfiles from './profile/PublicProfiles';
 import ProfileForm from './profile/ProfileForm';
 import SEO from '../components/SEO';
 import useAuth from '../utils/useAuth';
@@ -22,6 +23,8 @@ const Profile: React.FC = () => {
             <h2>{ user?.meta?.name || 'Meno Priezvisko' }</h2>
             <hr />
             <ProfileForm user={user as User} />
+            <hr />
+            <PublicProfiles />
             <hr />
             <Statistics />
             <hr />

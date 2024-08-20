@@ -36,6 +36,16 @@ type User = {
   meta?: Record<string, string | number | boolean>;
 }
 
+type PublicProfile = {
+  id: ID;
+  userId: ID;
+  name: string;
+  slug: string;
+  description: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 type NotificationType =
   'login' |
   'product' |

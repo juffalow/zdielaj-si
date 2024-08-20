@@ -30,6 +30,15 @@ export async function resetPassword(username: string, password: string, code: st
     .then(response => response.data);
 }
 
+interface RefreshTokenResponse {
+  error: unknown;
+  data: {
+    user: {      
+      accessToken: string;
+    }
+  };
+}
+
 export async function refreshToken(): Promise<RefreshTokenResponse> {
   return get(`${process.env.REACT_APP_USER_SERVICE_URL}/user/refresh-token`, { credentials: 'include' });
 }
@@ -77,15 +86,6 @@ export async function addMedia(albumId: string, fileId: number): Promise<any> {
   return post(`${process.env.REACT_APP_CORE_URL}/album/${albumId}/media`, { fileId });
 }
 
-interface RefreshTokenResponse {
-  error: unknown;
-  data: {
-    user: {      
-      accessToken: string;
-    }
-  };
-}
-
 export async function getNotificationSettings(email: string): Promise<any> {
   return get(`${process.env.REACT_APP_CORE_URL}/notifications?email=${email}&type=email`)
     .then(response => response.data.settings);
@@ -93,4 +93,26 @@ export async function getNotificationSettings(email: string): Promise<any> {
 
 export async function setNotificationSettings(email: string, settings: Setting[], token: string): Promise<any> {
   return post(`${process.env.REACT_APP_CORE_URL}/notifications?token=${token}`, {email, notifications: settings})
+}
+
+export async function getPublicProfile(id: ID): Promise<PublicProfile> {
+  return get(`${process.env.REACT_APP_CORE_URL}/publicprofile/${id}`)
+    .then(response => response.data.publicProfile);
+}
+
+interface PublicProfilesResponse {
+  error: unknown;
+  data: {
+    publicProfiles: PublicProfile[];
+  };
+}
+
+export async function getPublicProfiles(params: { name?: string, slug?: string }): Promise<PublicProfilesResponse> {
+  const searchParams = new URLSearchParams();
+
+  Object.keys(params).forEach(key => {
+    searchParams.append(key, (params as any)[key] as string);
+  });
+  
+  return get(`${process.env.REACT_APP_CORE_URL}/publicprofile/?${searchParams}`);
 }
