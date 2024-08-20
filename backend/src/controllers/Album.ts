@@ -15,7 +15,7 @@ class AlbumController {
    * @returns 
    * @throws BaseError if album not found or empty
    */
-  public async getAlbum(id: number | string): Promise<Album> {
+  public async getAlbum(id: ID): Promise<Album> {
     const albums = await this.albumRepository.find({ hash: String(id), first: 1 });
     const album = albums.length === 1 ? albums.shift() : await this.albumRepository.get(id);
 
@@ -47,8 +47,8 @@ class AlbumController {
    * @param user 
    * @returns 
    */
-  public async getAlbums(user: User): Promise<Album[]> {
-    const albums = await this.albumRepository.find({ user: { id: user.id } });
+  public async getAlbums(params: { user?: User, publicProfile?: PublicProfile, first?: number, after?: number }): Promise<Album[]> {
+    const albums = await this.albumRepository.find(params);
 
     const albumsWithThumbnails = await Promise.all(albums.map(async (album) => {
       const media = await this.mediaRepository.find({ album: { id: album.id }, first: 1 });

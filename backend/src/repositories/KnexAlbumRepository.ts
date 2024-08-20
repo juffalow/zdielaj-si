@@ -32,6 +32,7 @@ class KnexAlbumRepository implements AlbumRepository {
 
     const {
       user,
+      publicProfile,
       hash,
     } = params;
 
@@ -42,10 +43,42 @@ class KnexAlbumRepository implements AlbumRepository {
           queryBuilder.where('album.userId', user.id);
         }
 
+        if (shouldFilterBy(publicProfile) && shouldFilterBy(publicProfile.id)) {
+          queryBuilder.where('album.publicProfileId', publicProfile.id);
+        }
+
         if (shouldFilterBy(hash)) {
           queryBuilder.where('album.hash', hash);
         }
       });
+  }
+
+  public async count(params: AlbumRepository.CountParameters): Promise<number> {
+    logger.debug(`${this.constructor.name}.find`, params);
+
+    const {
+      user,
+      publicProfile,
+      hash,
+    } = params;
+
+    return this.database.count()
+      .from('album')
+      .modify((queryBuilder) => {
+        if (shouldFilterBy(user) && shouldFilterBy(user.id)) {
+          queryBuilder.where('album.userId', user.id);
+        }
+
+        if (shouldFilterBy(publicProfile) && shouldFilterBy(publicProfile.id)) {
+          queryBuilder.where('album.publicProfileId', publicProfile.id);
+        }
+
+        if (shouldFilterBy(hash)) {
+          queryBuilder.where('album.hash', hash);
+        }
+      })
+      .first()
+      .then((result: { count: number }) => result.count);
   }
 
   public async delete(id: ID): Promise<Album> {

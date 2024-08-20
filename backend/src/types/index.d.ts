@@ -13,6 +13,7 @@ type Media = {
 type Album = {
   id: ID;
   userId?: ID;
+  publicProfileId?: ID;
   hash: string;
   media?: Media[];
   createdAt?: string;
@@ -31,3 +32,7 @@ type PublicProfile = {
   createdAt?: string;
   updatedAt?: string;
 }
+
+type PageInfo = {
+  totalCount: number;
+};

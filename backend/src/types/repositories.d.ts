@@ -3,9 +3,22 @@ declare namespace AlbumRepository {
     user?: {
       id: ID;
     },
+    publicProfile?: {
+      id: ID;
+    };
     hash?: string;
     first?: number;
     after?: number;
+  }
+
+  interface CountParameters {
+    user?: {
+      id: ID;
+    };
+    publicProfile?: {
+      id: ID;
+    };
+    hash?: string;
   }
 }
 
@@ -15,6 +28,8 @@ interface AlbumRepository {
   create(userId: ID, hash: string): Promise<Album>;
 
   find(params: AlbumRepository.FindParameters): Promise<Album[]>;
+
+  count(params: AlbumRepository.CountParameters): Promise<number>;
 
   delete(id: ID): Promise<Album>;
 }
