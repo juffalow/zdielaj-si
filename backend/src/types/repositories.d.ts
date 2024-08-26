@@ -7,7 +7,7 @@ declare namespace AlbumRepository {
       id: ID;
     };
     hash?: string;
-    orderBy: OrderBy[];
+    orderBy?: OrderBy[];
     first?: number;
     after?: number;
   }
