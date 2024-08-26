@@ -1,8 +1,8 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import styles from './PreviewLoader.module.css';
+import styles from './AlbumPreviewLoader.module.css';
 
-const Preview: React.FC = () => (
+const AlbumPreviewLoader: React.FC = () => (
   <Card>
     <div style={{ paddingBottom: '80%', position: 'relative'}} className={styles.loader}></div>
     <Card.Body>
@@ -14,4 +14,4 @@ const Preview: React.FC = () => (
   </Card>
 );
 
-export default Preview;
+export default AlbumPreviewLoader;

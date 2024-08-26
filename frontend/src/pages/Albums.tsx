@@ -5,8 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Preview from './albums/Preview';
-import PreviewLoader from './albums/PreviewLoader';
+import AlbumPreview from '../components/AlbumPreview';
+import AlbumPreviewLoader from '../components/AlbumPreviewLoader';
 import { getAlbums, deleteAlbum } from '../api/services';
 import SEO from '../components/SEO';
 
@@ -71,13 +71,13 @@ const Albums: React.FC = () => {
         { albums === null ? (
             <Row>
               <Col lg={3} md={4} sm={4} xs={6} className="mb-4">
-                <PreviewLoader />
+                <AlbumPreviewLoader />
               </Col>
               <Col lg={3} md={4} sm={4} xs={6} className="mb-4" style={{ opacity: 0.4 }}>
-                <PreviewLoader />
+                <AlbumPreviewLoader />
               </Col>
               <Col lg={3} md={4} sm={4} xs={6} className="mb-4" style={{ opacity: 0.2 }}>
-                <PreviewLoader />
+                <AlbumPreviewLoader />
               </Col>
             </Row>
           ) : null
@@ -88,7 +88,7 @@ const Albums: React.FC = () => {
             {
               albums.map((album) => (
                 <Col key={album.id} lg={3} md={4} sm={4} xs={6} className="mb-4">
-                  <Preview album={album} onDelete={onDelete} />
+                  <AlbumPreview album={album} onDelete={onDelete} />
                 </Col>
               ))
             }

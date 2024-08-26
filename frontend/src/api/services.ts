@@ -116,3 +116,14 @@ export async function getPublicProfiles(params: { name?: string, slug?: string }
   
   return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/?${searchParams}`);
 }
+
+export async function getPublicProfileAlbums(params: { publicProfileId: number }): Promise<any> {
+  const searchParams = new URLSearchParams();
+  const { publicProfileId, ...rest } = params;
+
+  Object.keys(rest).forEach(key => {
+    searchParams.append(key, (params as any)[key] as string);
+  });
+  
+  return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${publicProfileId}/albums`);
+}

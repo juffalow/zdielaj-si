@@ -1,15 +1,15 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import ImageLoader from '../../components/ImageLoader';
-import { formatDate } from '../../utils/functions';
+import ImageLoader from '../components/ImageLoader';
+import { formatDate } from '../utils/functions';
 
 interface Props {
   album: Album;
   onDelete?: (album: Album) => void;
 }
 
-const Preview: React.FC<Props> = ({ album, onDelete }: Props) => (
+const AlbumPreview: React.FC<Props> = ({ album, onDelete }: Props) => (
   <Card>
       {
         album.media.length > 0 && album.media[0].thumbnails.length > 0 ? (
@@ -38,10 +38,14 @@ const Preview: React.FC<Props> = ({ album, onDelete }: Props) => (
       <Card.Subtitle className="mb-2 text-muted">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</Card.Subtitle>
       <div className="d-grid">
         <Link className="btn btn-outline-secondary" role="button" to={`/album/${album.hash}`}>Zobraziť</Link>
-        <Button variant="outline-danger" className="mt-2" onClick={() => onDelete && onDelete(album)}>Vymazať</Button>
+        {
+          typeof onDelete === 'function' ? (
+            <Button variant="outline-danger" className="mt-2" onClick={() => onDelete && onDelete(album)}>Vymazať</Button>
+          ) : null
+        }
       </div>
     </Card.Body>
   </Card>
 );
 
-export default Preview;
+export default AlbumPreview;
