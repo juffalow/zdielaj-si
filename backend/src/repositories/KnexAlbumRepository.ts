@@ -34,6 +34,7 @@ class KnexAlbumRepository implements AlbumRepository {
       user,
       publicProfile,
       hash,
+      orderBy,
     } = params;
 
     return this.database.select()
@@ -49,6 +50,10 @@ class KnexAlbumRepository implements AlbumRepository {
 
         if (shouldFilterBy(hash)) {
           queryBuilder.where('album.hash', hash);
+        }
+
+        if (shouldFilterBy(orderBy) && Array.isArray(orderBy)) {
+          orderBy.forEach(ob => queryBuilder.orderBy(ob.field, ob.direction));
         }
       });
   }

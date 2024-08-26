@@ -36,3 +36,8 @@ type PublicProfile = {
 type PageInfo = {
   totalCount: number;
 };
+
+type OrderBy = {
+  field: string;
+  direction: string;
+};
