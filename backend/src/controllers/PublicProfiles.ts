@@ -1,5 +1,4 @@
 import { BaseError } from '../utils/errors';
-import logger from '../logger';
 
 class PublicProfilesController {
   constructor(

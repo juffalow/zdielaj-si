@@ -15,7 +15,7 @@ import logger from './logger';
 const app = express();
 
 app.disable('x-powered-by');
-typeof process.env.SENTRY_DSN === 'string' && Sentry.setupExpressErrorHandler(app);
+if (typeof process.env.SENTRY_DSN === 'string') Sentry.setupExpressErrorHandler(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(useragent.express());

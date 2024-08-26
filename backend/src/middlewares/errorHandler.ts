@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { BaseError } from '../utils/errors';
 import logger from '../logger';
 
-export default function error(err: Error, req: Request, res: Response, next: NextFunction): void {
+export default function error(err: Error, req: Request, res: Response): void {
   if (err instanceof BaseError) {
     res.status(err.code).json({
       error: {

@@ -86,7 +86,7 @@ class AlbumsController {
         const hash = crypto.randomBytes(4).toString('hex');
         album = await this.albumRepository.create(user !== null && typeof user !== 'undefined' ? user.id : null, hash);
         break;
-      } catch (err) {
+      } catch {
         attempt++;
       }
     } while (attempt < 10);

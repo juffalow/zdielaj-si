@@ -12,7 +12,7 @@ export default async function auth(req: Request, res: Response, next: NextFuncti
     const payload = tokenService.JWT.verify(token);
 
     req['album'] = payload;
-  } catch (err) {
+  } catch {
     return res.status(401).json({ error: 'Unauthorized!' });
   }
 
