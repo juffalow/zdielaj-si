@@ -117,13 +117,25 @@ export async function getPublicProfiles(params: { name?: string, slug?: string }
   return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/?${searchParams}`);
 }
 
-export async function getPublicProfileAlbums(params: { publicProfileId: number }): Promise<any> {
+export async function getPublicProfileAlbums(params: { publicProfileId: number, orderBy: { field: string, direction: 'ASC' | 'DESC' }[] }): Promise<any> {
   const searchParams = new URLSearchParams();
-  const { publicProfileId, ...rest } = params;
+  const { publicProfileId, ...rest } = params as any;
 
-  Object.keys(rest).forEach(key => {
-    searchParams.append(key, (params as any)[key] as string);
-  });
+  for (const key in rest) {
+    if (Array.isArray(rest[key])) {
+      Object.keys(rest[key]).forEach((value, index) => {
+        if (typeof rest[key][index] === 'object') {
+          Object.keys(rest[key][index]).forEach((subKey) => {
+            searchParams.append(`${key}[${index}][${subKey}]`, rest[key][index][subKey]);
+          });
+        } else {
+          searchParams.append(`${key}[${index}]`, rest[key][index]);
+        }
+      });
+    } else {
+      searchParams.append(key, rest[key]);
+    }
+  }
   
-  return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${publicProfileId}/albums`);
+  return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${publicProfileId}/albums?${searchParams}`);
 }

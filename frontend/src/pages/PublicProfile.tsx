@@ -22,7 +22,7 @@ const PublicProfile: React.FC = () => {
         const publicProfile = response.data.publicProfiles.pop();
         setPublicProfile(publicProfile);
         return publicProfile?.id as number || 0;
-      }).then((id: number) => getPublicProfileAlbums({ publicProfileId: id }))
+      }).then((id: number) => getPublicProfileAlbums({ publicProfileId: id, orderBy: [{ field: 'id', direction: 'DESC' }] }))
       .then((response) => {
         const albums = response.data.albums;
         setAlbums(albums);
