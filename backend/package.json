@@ -18,6 +18,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@sentry/node": "^8.26.0",
     "bcrypt": "^5.1.1",
     "cls-hooked": "^4.2.2",
     "cookie-parser": "^1.4.6",
@@ -38,5 +39,5 @@
     "migrate:latest": "knex migrate:latest",
     "migrate:down": "knex migrate:down"
   },
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@4.4.1"
 }
