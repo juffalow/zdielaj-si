@@ -33,7 +33,7 @@ const Album: React.FC = () => {
 
   return (
     <SEO title="" description="">
-      <Container fluid="xl">
+      <Container fluid>
         {
           uploadedFiles.length > 0 ? (
             <UploadedFiles album={album as Album} />
