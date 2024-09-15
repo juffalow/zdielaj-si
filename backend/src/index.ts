@@ -1,6 +1,4 @@
 import express from 'express';
-import useragent from 'express-useragent';
-import cookieParser from 'cookie-parser';
 import * as Sentry from '@sentry/node';
 import config from './config';
 import routes from './routes';
@@ -17,8 +15,6 @@ app.disable('x-powered-by');
 if (typeof process.env.SENTRY_DSN === 'string') Sentry.setupExpressErrorHandler(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(useragent.express());
-app.use(cookieParser());
 app.use(trace);
 app.use(responseTime);
 app.use(cors);

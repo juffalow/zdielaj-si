@@ -4,7 +4,6 @@
   "main": "dist/index.js",
   "license": "MIT",
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^9.0.6",
@@ -21,16 +20,11 @@
     "@aws-sdk/client-dynamodb": "^3.651.1",
     "@aws-sdk/util-dynamodb": "^3.651.1",
     "@sentry/node": "^8.26.0",
-    "bcrypt": "^5.1.1",
     "cls-hooked": "^4.2.2",
-    "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
-    "express-useragent": "^1.0.15",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
-    "knex": "^3.1.0",
     "lru-cache": "^11.0.1",
-    "mysql2": "^3.11.0",
     "uuid": "^10.0.0",
     "winston": "^3.14.2"
   },
@@ -38,9 +32,7 @@
     "start": "tsc -w --preserveWatchOutput & nodemon -q -w dist dist/index.js",
     "build": "ENV=PRODUCTION tsc",
     "lint": "eslint . --ext .ts",
-    "test": "jest",
-    "migrate:latest": "knex migrate:latest",
-    "migrate:down": "knex migrate:down"
+    "test": "jest"
   },
   "packageManager": "yarn@4.5.0"
 }
