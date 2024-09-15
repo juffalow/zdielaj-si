@@ -4,6 +4,7 @@ import { generateToken } from '../utils/functions';
 import requireAuth from '../middlewares/requireAuth';
 import optionalAlbum from '../middlewares/optionalAlbum';
 import controllers from '../controllers';
+import APIError from '../errors/APIError';
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
 
 router.get('/', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const albums = await controllers.Albums.getAlbums({ user: req['user'] });
+    const albums = await controllers.Albums.getAlbums(/* { user: req['user'] } */);
     
     res.status(200).json({
       error: null,
@@ -52,69 +53,38 @@ router.post('/', async (req: express.Request, res: express.Response) => {
 });
 
 router.post('/:id/media', optionalAlbum, async (req: express.Request, res: express.Response) => {
-  const albumRepository = repositories.Album;
-  const mediaRepository = repositories.Media;
-
   const user: User | { albumId: number } = 'album' in req ? req['album'] as { albumId: number } : 'user' in req ? req['user'] as User : null;
 
-  const album = await albumRepository.get(parseInt(req.params.id));
-  const count = await mediaRepository.count({ album: { id: req.params.id } });
+  const album = await repositories.Album.get(req.params.id);
 
   if (album === null || typeof album === 'undefined') {
-    return res.status(400).json({
-      error: {
-        message: 'Specified album does not exist!',
-      },
-      data: null,
-    }).end();
+    throw new APIError({ message: 'Specified album does not exist!', code: 400, http: { status: 400 } });
   }
 
-  if (user !== null && 'id' in user && album.userId !== user.id) {
-    return res.status(400).json({
-      error: {
-        message: 'Specified album does not belong to you!',
-      },
-      data: null,
-    }).end();
+  if (user !== null && 'id' in user && album.user.id !== user.id) {
+    throw new APIError({ message: 'Specified album does not belong to you!', code: 400, http: { status: 400 } });
   }
 
-  if (user !== null && 'albumId' in user && album.id !== user.albumId) {
-    return res.status(400).json({
-      error: {
-        message: 'Specified album does not belong to you!',
-      },
-      data: null,
-    }).end();
+  // if (user !== null && 'albumId' in user && album.id !== user.albumId) {
+  //   throw new APIError({ message: 'Specified album does not belong to you!', code: 400, http: { status: 400 } });
+  // }
+
+  if (album.user.id === null && album.files.length >= 10) {
+    throw new APIError({ message: 'Specified album cannot add additional media!', code: 400, http: { status: 400 } });
   }
 
-  if (album.userId === null && count >= 10) {
-    return res.status(400).json({
-      error: {
-        message: 'Specified album cannot add additional media!',
-      },
-      data: null,
-    }).end();
+  if (album.user.id !== null && album.files.length >= 50) {
+    throw new APIError({ message: 'Specified album cannot add additional media!', code: 400, http: { status: 400 } });
   }
 
-  if (album.userId !== null && count >= 50) {
-    return res.status(400).json({
-      error: {
-        message: 'Specified album cannot add additional media!',
-      },
-      data: null,
-    }).end();
-  }
+  const files = [ ...album.files, req.body.fileId ];
 
-  await mediaRepository.create(album.id, req.body.fileId);
-  const media = await mediaRepository.find({ album: { id: album.id } });
+  const updatedAlbum = await repositories.Album.update({ files }, { id: album.id });
 
   res.status(200).json({
     error: null,
     data: {
-      album: {
-        ...album,
-        media,
-      },
+      album: updatedAlbum,
       user: {
         token: generateToken({ albumId: album.id }),
       },
@@ -124,7 +94,7 @@ router.post('/:id/media', optionalAlbum, async (req: express.Request, res: expre
 
 router.delete('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const album = await controllers.Albums.deleteAlbum(parseInt(req.params.id));
+    const album = await controllers.Albums.deleteAlbum(req.params.id);
     
     res.status(200).json({
       error: null,

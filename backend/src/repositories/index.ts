@@ -1,20 +1,19 @@
-import KnexAlbumRepository from './KnexAlbumRepository';
-import KnexMediaRepository from './KnexMediaRepository';
-import KnexPublicProfileRepository from './KnexPublicProfileRepository';
-import database from '../database';
+import album from './album';
+import publicProfile from './publicProfile';
+import user from './user';
 
 const container = {
   get Album(): AlbumRepository {
-    return new KnexAlbumRepository(database);
-  },
-
-  get Media(): MediaRepository {
-    return new KnexMediaRepository(database);
+    return album.Composite;
   },
 
   get PublicProfile(): PublicProfileRepository {
-    return new KnexPublicProfileRepository(database);
-  }
+    return publicProfile.DynamoDB;
+  },
+
+  get User(): UserRepository {
+    return user.Composite;
+  },
 };
 
 export default container;

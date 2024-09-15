@@ -1,41 +1,4 @@
 services:
-  mysql_core:
-      container_name: zdielaj_si_db_core
-      image: mysql
-      env_file:
-        - ./backend/.env.local
-        - ./backend/.env.development
-      environment:
-        - MYSQL_DATABASE=${DATABASE_NAME}
-        - MYSQL_USER=${DATABASE_USER}
-        - MYSQL_PASSWORD=${DATABASE_PASSWORD}
-        - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
-        - MYSQL_PORT=${DATABASE_PORT}
-      ports:
-        - 3306:3306
-      volumes:
-        - 'mysql_core_data:/data/db'
-
-  mysql_user_service:
-      container_name: zdielaj_si_db_user_service
-      image: mysql
-      env_file:
-        - ./.env.user
-      ports:
-        - 3307:3306
-      volumes:
-        - 'mysql_user_service_data:/data/db'
-
-  mysql_upload_service:
-      container_name: zdielaj_si_db_upload_service
-      image: mysql
-      env_file:
-        - ./.env.upload
-      ports:
-        - 3308:3306
-      volumes:
-        - 'mysql_upload_service_data:/data/db'
-
   mysql_notification_service:
       container_name: zdielaj_si_db_notification_service
       image: mysql
@@ -46,19 +9,40 @@ services:
       volumes:
         - 'mysql_notification_service_data:/data/db'
 
+  dynamodb-zdielajsi:
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-zdielajsi
+    ports:
+      - 8000:8000
+    restart: always
+    volumes:
+      - './data:/home/dynamodblocal/data'
+    working_dir: /home/dynamodblocal
+
+  dynamodb-zdielajsi-admin: 
+    image: "aaronshaf/dynamodb-admin"
+    container_name: dynamodb-zdielajsi-admin
+    depends_on:
+      - dynamodb-zdielajsi
+    restart: always
+    ports:
+      - "8001:8001"
+    environment:
+      - DYNAMO_ENDPOINT=http://dynamodb-zdielajsi:8000
+      - AWS_REGION=local
+
   core:
     image: node:22-alpine
     working_dir: /home/node
     command: sh -c "corepack enable && yarn set version berry && yarn install && yarn start"
     depends_on:
-      - mysql_core
+      - dynamodb-zdielajsi
     restart: unless-stopped
     ports:
       - 3010:3010
     env_file:
       - ./backend/.env.local
-    links:
-      - mysql_core
     volumes:
       - "./backend:/home/node"
 
@@ -74,39 +58,30 @@ services:
 
   user_service:
     image: juffalow/user-service:latest
-    depends_on:
-      - mysql_user_service
     restart: unless-stopped
     env_file:
       - ./.env.user
     ports:
       - 3013:3010
-    links:
-      - mysql_user_service
 
   upload_service:
-    image: juffalow/upload-service:latest
+    image: openservicesdev/aws-upload-service:latest
     depends_on:
-      - mysql_upload_service
+      - dynamodb-zdielajsi
     restart: unless-stopped
     env_file:
       - ./.env.upload
     ports:
       - 3014:3010
-    links:
-      - mysql_upload_service
 
   upload_service_worker:
-    image: juffalow/upload-service:latest
-    working_dir: /home/juffuser/upload-service
+    image: openservicesdev/aws-upload-service:latest
     command: sh -c "node ./dist/worker.js"
     depends_on:
-      - mysql_upload_service
+      - dynamodb-zdielajsi
     restart: unless-stopped
     env_file:
       - ./.env.upload
-    links:
-      - mysql_upload_service
 
   notification_service:
     image: juffalow/notification-service:latest
@@ -117,8 +92,6 @@ services:
       - ./.env.notification
     ports:
       - 3015:3010
-    links:
-      - mysql_notification_service
 
   notification_service_worker:
     image: juffalow/notification-service:latest
@@ -129,11 +102,6 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env.notification
-    links:
-      - mysql_notification_service
 
 volumes:
-  mysql_core_data:
-  mysql_user_service_data:
-  mysql_upload_service_data:
   mysql_notification_service_data:

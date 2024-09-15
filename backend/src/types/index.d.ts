@@ -2,30 +2,29 @@
  * Based on `primaryKeyType` config the primary key ID is either
  * number (unsigned INT) or string (UUID).
  */
-type ID = string | number;
-
-type Media = {
-  id: ID;
-  albumId: ID;
-  fileId: ID;
-}
+type ID = string;
 
 type Album = {
   id: ID;
-  userId?: ID;
+  user: {
+    id: ID;
+  };
   publicProfileId?: ID;
-  hash: string;
-  media?: Media[];
+  files?: ID[];
   createdAt?: string;
 }
 
 type User = {
   id: ID;
+  albums?: ID[];
+  publicProfiles?: ID[];
 }
 
 type PublicProfile = {
   id: ID;
-  userId: ID;
+  user: {
+    id: ID;
+  };
   name: string;
   slug: string;
   description: string;

@@ -6,7 +6,7 @@ import services from '../services';
 
 const container = {
   get Albums() {
-    return new AlbumsController(repositories.Album, repositories.Media, services.Upload);
+    return new AlbumsController(repositories.Album, repositories.User, services.Upload);
   },
 
   get Notifications() {

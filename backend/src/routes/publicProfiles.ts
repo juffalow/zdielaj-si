@@ -21,12 +21,11 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
 
 router.get('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const publicProfiles = await controllers.PublicProfile.find(req.query);
     
     res.status(200).json({
       error: null,
       data: {
-        publicProfiles,
+        publicProfiles: [],
       }
     }).end();
   } catch (err) {

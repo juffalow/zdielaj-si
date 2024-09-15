@@ -21,64 +21,6 @@ export default {
     secret: process.env.JWT_SECRET || '',
     ttl: 15 * 60,
   },
-  database: {
-    connection: {
-      /**
-       * @type {string}
-       */
-      database: process.env.DATABASE_NAME,
-      /**
-       * @type {string}
-       */
-      host: process.env.DATABASE_HOST,
-      /**
-       * @type {string}
-       */
-      password: process.env.DATABASE_PASSWORD,
-      /**
-       * @type {string}
-       */
-      user: process.env.DATABASE_USER,
-      /**
-       * @type {number}
-       */
-      port: process.env.DATABASE_PORT,
-    },
-    /**
-     * @type {boolean}
-     */
-    runMigrations: true,
-    /**
-     * Set primary key type globally for the whole application
-     * @type {string="INT", "UUID"}
-     */
-    primaryKeyType: process.env.DATABASE_PRIMARY_KEY_TYPE,
-    services: {
-      user: {
-        /**
-         * User service uses either local user management where it can handle
-         * both INT and UUID primary keys or it supports 3rd party user management
-         * systems like AWS Cognito which uses UUID primary keys.
-         * 
-         * Upload service is not dependend on this user service and it can be used
-         * without it.
-         * 
-         * @link https://github.com/juffalow/user-service
-         * @type {string="INT", "UUID"}
-         * @default INT
-         */
-        primaryKeyType: process.env.DATABASE_SERVICES_USER_PRIMARY_KEY_TYPE || 'INT',
-      },
-      upload: {
-        /**
-         * @link https://github.com/juffalow/upload-service
-         * @type {string="INT", "UUID"}
-         * @default INT
-         */
-        primaryKeyType: process.env.DATABASE_SERVICES_UPLOAD_PRIMARY_KEY_TYPE || 'INT',
-      },
-    },
-  },
   logger: {
     /**
      * Supported values:
@@ -98,6 +40,22 @@ export default {
         clientId: process.env.SERVICES_AWS_COGNITO_CLIENT_ID,
         clientSecret: process.env.SERVICES_AWS_COGNITO_CLIENT_SECRET,
       },
+    },
+    database: {
+      tableName: process.env.SERVICES_DATABASE_TABLE_NAME,
+      accessKeyId: process.env.SERVICES_DATABASE_ACCESS_KEY_ID,
+      secretAccessKey: process.env.SERVICES_DATABASE_SECRET_ACCESS_KEY,
+      /**
+       * @type {string}
+       * @example eu-central-1
+       */
+      region: process.env.SERVICES_DATABASE_REGION,
+      /**
+       * This value is used for development purposes.
+       * @type {string}
+       * @example http://dynamodb-zdielajsi:8000
+       */
+      endpoint: process.env.SERVICES_DATABASE_ENDPOINT,
     },
     /**
      * Access token is used to authorize user to do some actions.

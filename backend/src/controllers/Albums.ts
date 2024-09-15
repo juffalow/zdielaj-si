@@ -1,11 +1,10 @@
-import crypto from 'crypto';
 import { BaseError } from '../utils/errors';
 import logger from '../logger';
 
-class AlbumsController {
+class Albums implements AlbumsController {
   constructor(
     protected albumRepository: AlbumRepository,
-    protected mediaRepository: MediaRepository,
+    protected userRepository: UserRepository,
     protected uploadService: Services.Upload,
   ) {}
 
@@ -15,29 +14,38 @@ class AlbumsController {
    * @returns 
    * @throws BaseError if album not found or empty
    */
-  public async getAlbum(id: ID): Promise<Album> {
-    const albums = await this.albumRepository.find({ hash: String(id), first: 1 });
-    const album = albums.length === 1 ? albums.shift() : await this.albumRepository.get(id);
+  public async getAlbum(id: ID): Promise<GetAlbumResponse> {
+    const album = await this.albumRepository.get(id);
 
     if (typeof album === 'undefined') {
-      throw new BaseError({message: 'Album not found!', code: 404 });
+      throw new BaseError({ message: 'Album not found!', code: 404 });
     }
 
-    const media = await this.mediaRepository.find({ album: { id: album.id } });
-
-    const response = await this.uploadService.listFiles(media.map(single => single.fileId));
+    const response = await this.uploadService.listFiles(album.files);
   
-    const fullMedia = await Promise.all(media.map(async (single) => {
-      const file = response.data.files.find(file => file.id === single.fileId);
+    const fullMedia = await Promise.all(album.files.map(async (id) => {
+      const file = response.data.files.find(file => file.id === id);
+
+      console.log();
+      console.log('file', file);
+      console.log();
       
       return {
-        ...single,
-        ...file,
+        id,
+        location: file.location,
+        mimetype: file.mimetype,
+        metadata: {
+          width: file.metadata.width,
+          height: file.metadata.height,
+        },
+        thumbnails: [{
+          location: 'https://d1zcbk2j8t91y7.cloudfront.net/generated/400x400/' + file['path'],
+        }]
       }
     }));
 
     return {
-      ...album,
+      id: album.id,
       media: fullMedia,
     };
   }
@@ -47,29 +55,32 @@ class AlbumsController {
    * @param user 
    * @returns 
    */
-  public async getAlbums(params: { user?: User, publicProfile?: PublicProfile, first?: number, after?: number }): Promise<Album[]> {
-    const albums = await this.albumRepository.find(params);
+  // public async getAlbums(params: { user?: User, publicProfile?: PublicProfile, first?: number, after?: number }): Promise<Album[]> {
+  public async getAlbums(): Promise<Album[]> {
+    // const albums = await this.albumRepository.find(params);
 
-    const albumsWithThumbnails = await Promise.all(albums.map(async (album) => {
-      const media = await this.mediaRepository.find({ album: { id: album.id }, first: 1 });
+    // const albumsWithThumbnails = await Promise.all(albums.map(async (album) => {
+    //   const media = await this.mediaRepository.find({ album: { id: album.id }, first: 1 });
 
-      if (media.length === 0) {
-        return undefined;
-      }
+    //   if (media.length === 0) {
+    //     return undefined;
+    //   }
 
-      const response = await this.uploadService.getFile(media[0].fileId);
+    //   const response = await this.uploadService.getFile(media[0].fileId);
 
-      return {
-        ...album,
-        media: [{
-          ...media,
-          ...response.data.file,
-        }],
-      } as any;
+    //   return {
+    //     ...album,
+    //     media: [{
+    //       ...media,
+    //       ...response.data.file,
+    //     }],
+    //   } as any;
 
-    }));
+    // }));
 
-    return albumsWithThumbnails.filter(album => typeof album !== 'undefined');
+    // return albumsWithThumbnails.filter(album => typeof album !== 'undefined');
+
+    return [];
   }
 
   /**
@@ -77,45 +88,40 @@ class AlbumsController {
    * @param user 
    * @returns 
    */
-  public async createAlbum(user: User | null): Promise<Album> {
-    let attempt = 0;
-    let album = null;
+  public async createAlbum(user: User | undefined): Promise<Album> {
+    logger.debug(`${this.constructor.name}.create`, { user });
 
-    do {
-      try {
-        const hash = crypto.randomBytes(4).toString('hex');
-        album = await this.albumRepository.create(user !== null && typeof user !== 'undefined' ? user.id : null, hash);
-        break;
-      } catch {
-        attempt++;
-      }
-    } while (attempt < 10);
+    const album = await this.albumRepository.create({ user });
 
-    if (album === null) {
-      throw new BaseError({ message: 'Unable to create album!', code: 500 });
+    if (typeof user !== 'undefined') {
+      const u = await this.userRepository.get(user.id);
+
+      const albums = typeof u === 'undefined' ? [ album.id ] : [ ...u.albums, album.id ];
+
+      await this.userRepository.update({ albums }, { id: user.id });
     }
 
     return album;
   }
 
-  public async deleteAlbum(id: number): Promise<Album> {
-    const media = await this.mediaRepository.find({ album: { id } });
-
-    setImmediate(async () => {
-      for(const single of media) {
-        logger.info(`Deleting media ${single.fileId}...`);
-        await this.uploadService.deleteFile(single.fileId);
-      }
-    });
-
-    const album = await this.albumRepository.delete(id);
+  public async deleteAlbum(id: ID): Promise<Album> {
+    const album = await this.albumRepository.get(id);
 
     if (typeof album === 'undefined') {
       throw new BaseError({message: 'Album not found!', code: 404 });
     }
 
+    setImmediate(async () => {
+      for(const id of album.files) {
+        logger.info(`Deleting file ${id}...`);
+        await this.uploadService.deleteFile(id);
+      }
+    });
+
+    await this.albumRepository.delete(id);
+
     return album;
   }
 }
 
-export default AlbumsController;
+export default Albums;

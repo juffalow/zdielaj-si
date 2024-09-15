@@ -15,16 +15,10 @@ class PublicProfilesController {
     const publicProfile = await this.publicProfileRepository.get(id);
 
     if (typeof publicProfile === 'undefined') {
-      throw new BaseError({message: 'Public profile not found!', code: 404 });
+      throw new BaseError({ message: 'Public profile not found!', code: 404 });
     }
 
     return publicProfile;
-  }
-
-  public async find(params: any): Promise<PublicProfile[]> {
-    const publicProfiles = await this.publicProfileRepository.find(params);
-
-    return publicProfiles;
   }
 
   public async create(params: any, user: User): Promise<PublicProfile> {

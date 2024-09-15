@@ -1,4 +1,15 @@
 declare namespace AlbumRepository {
+  interface CreateParameters {
+    id?: ID;
+    user?:{
+      id: ID;
+    };
+  }
+
+  interface UpdateParameters {
+    files: ID[];
+  }
+
   interface FindParameters {
     user?: {
       id: ID;
@@ -26,37 +37,11 @@ declare namespace AlbumRepository {
 interface AlbumRepository {
   get(id: ID): Promise<Album>;
 
-  create(userId: ID, hash: string): Promise<Album>;
+  create(params: AlbumRepository.CreateParameters): Promise<Album>;
 
-  find(params: AlbumRepository.FindParameters): Promise<Album[]>;
-
-  count(params: AlbumRepository.CountParameters): Promise<number>;
+  update(params: AlbumRepository.UpdateParameters, where: { id: ID }): Promise<Album>;
 
   delete(id: ID): Promise<Album>;
-}
-
-declare namespace MediaRepository {
-  interface FindParameters {
-    album: {
-      id: ID;
-    },
-    first?: number;
-    after?: number;
-  }
-
-  interface CountParameters {
-    album: {
-      id: ID;
-    },
-  }
-}
-
-interface MediaRepository {
-  create(albumId: ID, fileId: ID): Promise<Media>;
-
-  find(params: MediaRepository.FindParameters): Promise<Array<Media>>;
-
-  count(params: MediaRepository.FindParameters): Promise<number>;
 }
 
 declare namespace PublicProfileRepository {
@@ -68,24 +53,6 @@ declare namespace PublicProfileRepository {
     slug: string;
     description: string;
   }
-
-  interface FindParameters {
-    user?: {
-      id: ID;
-    };
-    name?: string;
-    slug?: string;
-    first?: number;
-    after?: number;
-  }
-
-  interface CountParameters {
-    user?: {
-      id: ID;
-    };
-    name?: string;
-    slug?: string;
-  }
 }
 
 interface PublicProfileRepository {
@@ -93,9 +60,31 @@ interface PublicProfileRepository {
 
   create(params: PublicProfileRepository.CreateParameters): Promise<PublicProfile>;
 
-  find(params: PublicProfileRepository.FindParameters): Promise<PublicProfile[]>;
-
-  count(params: PublicProfileRepository.CountParameters): Promise<number>;
-
   delete(id: ID): Promise<PublicProfile>;
+}
+
+declare namespace UserRepository {
+  interface CreateParameters {
+    id: ID;
+    albums?: ID[];
+    publicProfiles?: ID[];
+  }
+
+  interface UpdateParameters {
+    user?: {
+      id: ID;
+    };
+    albums?: ID[];
+    publicProfiles?: ID[];
+  }
+}
+
+interface UserRepository {
+  get(id: ID): Promise<User | undefined>;
+
+  create(params: UserRepository.CreateParameters): Promise<User>;
+
+  update(params: UserRepository.UpdateParameters, where: { id: ID }): Promise<User>;
+
+  delete(id: ID): Promise<User>;
 }

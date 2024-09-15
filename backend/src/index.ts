@@ -4,7 +4,6 @@ import cookieParser from 'cookie-parser';
 import * as Sentry from '@sentry/node';
 import config from './config';
 import routes from './routes';
-import database from './database';
 import cors from './middlewares/cors';
 import auth from './middlewares/auth';
 import responseTime from './middlewares/responseTime';
@@ -31,15 +30,6 @@ app.use(errorHandler);
 
 async function start(): Promise<void> {
   try {
-    // check database connection
-    await database.raw('SELECT 1 + 1 AS result');
-
-    if (config.database.runMigrations) {
-      await database.migrate.latest();
-      const currentVersion = await database.migrate.currentVersion();
-      logger.info(`Database migrated to version ${currentVersion}!`);
-    }
-
     app.listen(config.port, () => {
       logger.info(`Server started at http://localhost:${ config.port }`);
     });

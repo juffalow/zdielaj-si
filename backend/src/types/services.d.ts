@@ -25,10 +25,15 @@ interface ListFilesResponse {
   error: unknown,
   data: {
     files: {
-      id: number,
+      id: string,
       mimetype: string,
       size: number,
       location: string,
+      metadata: {
+        width: number,
+        height: number,
+        [key: string]: string | number | boolean,
+      }
       thumbnails?: {
         fileId: number,
         mimetype: string,
@@ -40,6 +45,8 @@ interface ListFilesResponse {
 }
 
 declare namespace Services {
+  type Database = import ('@aws-sdk/client-dynamodb').DynamoDBClient;
+  
   interface Notifications {
     notify(data: unknown): Promise<unknown>;
 
@@ -55,11 +62,7 @@ declare namespace Services {
 
     deleteFile(id: ID): Promise<unknown>;
   }
-
-  interface Geolocation {
-    getLocation(ip: string): Promise<{ city: string, country: string }>;
-  }
-
+  
   interface Token {
     generate(data: Record<string, unknown>, expiresIn?: number): string;
 
