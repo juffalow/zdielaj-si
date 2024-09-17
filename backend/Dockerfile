@@ -9,29 +9,26 @@ RUN mkdir /home/node/zdielaj-si-backend/ && chown -R node:node /home/node/zdiela
 WORKDIR /home/node/zdielaj-si-backend
 
 COPY --chown=node:node . .
-RUN yarn install --immutable && yarn build
+RUN yarn install --immutable
+RUN yarn build
 
 FROM node:22-alpine
 
 ENV NODE_ENV production
 
-RUN apk update && apk upgrade --no-cache
-
-RUN corepack enable
-RUN yarn set version berry
-
-RUN addgroup --gid 3000 --system juffgroup \
-  && adduser  --uid 2000 --system --ingroup juffgroup juffuser
+RUN apk update && apk upgrade --no-cache && \
+  corepack enable && \
+  yarn set version berry && \
+  addgroup --gid 3000 --system juffgroup && \
+  adduser  --uid 2000 --system --ingroup juffgroup juffuser && \
+  mkdir /home/juffuser/zdielaj-si-backend/
 
 USER 2000:3000
 
-RUN mkdir /home/juffuser/zdielaj-si-backend/
 WORKDIR /home/juffuser/zdielaj-si-backend
 
 COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-backend/dist ./dist
-COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-backend/package.json /home/node/zdielaj-si-backend/yarn.lock /home/node/zdielaj-si-backend/.yarnrc.yml ./
-
-RUN yarn install --immutable
+COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-backend/node_modules ./node_modules
 
 EXPOSE 3010
 
