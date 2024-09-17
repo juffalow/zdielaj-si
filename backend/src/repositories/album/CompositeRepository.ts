@@ -14,6 +14,10 @@ class AlbumCompositeRepository implements AlbumRepository {
     if (typeof album === 'undefined') {
       album = await this.dynamoDBRepository.get(id);
 
+      if (typeof album === 'undefined') {
+        return undefined;
+      }
+
       await this.cacheRepository.create(album);
     }
 

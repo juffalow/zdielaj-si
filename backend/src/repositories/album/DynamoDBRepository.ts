@@ -31,6 +31,10 @@ class AlbumDynamoDBRepository implements AlbumRepository {
   
     const result = await this.dynamoDB.send(command);
 
+    if ('Item' in result === false) {
+      return undefined;
+    }
+
     const item = unmarshall(result.Item);
 
     return item as Album;
