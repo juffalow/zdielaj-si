@@ -54,11 +54,11 @@ router.post('/:id/media', optionalAlbum, async (req: express.Request, res: expre
   //   throw new APIError({ message: 'Specified album does not belong to you!', code: 400, http: { status: 400 } });
   // }
 
-  if (album.user.id === null && album.files.length >= 10) {
+  if (album.user === null && album.files.length >= 10) {
     throw new APIError({ message: 'Specified album cannot add additional media!', code: 400, http: { status: 400 } });
   }
 
-  if (album.user.id !== null && album.files.length >= 50) {
+  if (album.user !== null && album.files.length >= 50) {
     throw new APIError({ message: 'Specified album cannot add additional media!', code: 400, http: { status: 400 } });
   }
 

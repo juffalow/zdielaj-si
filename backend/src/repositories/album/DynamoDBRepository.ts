@@ -42,6 +42,7 @@ class AlbumDynamoDBRepository implements AlbumRepository {
     const item = {
       id: uuidv4(),
       files: [],
+      user: null,
       ...params,
       createdAt: new Date().toISOString(),
     };
