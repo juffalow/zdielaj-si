@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { BaseError } from '../utils/errors';
 import APIError from '../errors/APIError';
 import logger from '../logger';
 
-export default function error(err: Error, req: Request, res: Response): void {
+/* eslint-disable  @typescript-eslint/no-unused-vars */
+export default function error(err: Error, req: Request, res: Response, next: NextFunction): void {
   if (err instanceof BaseError) {
     res.status(err.code).json({
       error: {
