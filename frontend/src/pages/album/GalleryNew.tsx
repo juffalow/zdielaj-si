@@ -47,13 +47,13 @@ export default function Gallery({ files }: { files: Array<Media> }) {
 
       const element = (
         <div key={file.id} className="gallery-item mb-4" data-src={file.location} style={{ position: 'absolute', left, top: top[index % cols], width }}>
-          <ImageLoader src={file.thumbnails[0]?.location || file.location} onVisible={true}>
-            <Image key={file.id} src={file.thumbnails[0]?.location || file.location} alt="" width="100%" fluid />
+          <ImageLoader src={file.thumbnails[0] || file.location} onVisible={true}>
+            <Image key={file.id} src={file.thumbnails[0] || file.location} alt="" width="100%" fluid />
           </ImageLoader>
         </div>
       );
 
-      { top[index % cols] += (((file.thumbnails[0].metadata as { width: number, height: number}).height * (width / (file.thumbnails[0].metadata as { width: number, height: number}).width))) + 20 }
+      { top[index % cols] += ((file.metadata.height * (width / file.metadata.width))) + 20 }
 
       return element;
     });

@@ -7,7 +7,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import AlbumPreview from '../components/AlbumPreview';
 import AlbumPreviewLoader from '../components/AlbumPreviewLoader';
-import { getAlbums, deleteAlbum } from '../api/services';
+import { getUserAlbums, deleteAlbum } from '../api/services';
+import useAuth from '../utils/useAuth';
 import SEO from '../components/SEO';
 
 const Albums: React.FC = () => {
@@ -15,9 +16,12 @@ const Albums: React.FC = () => {
   const [ albums, setAlbums ] = useState<Array<Album> | null>(null);
   const [ hasError, setHasError ] = useState(false);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
-    getAlbums()
+    if (typeof user === 'undefined') return;
+    
+    getUserAlbums(user.id as string)
       .then((albums) => setAlbums(albums))
       .catch(() => setHasError(true));
   }, []);

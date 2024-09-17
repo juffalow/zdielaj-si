@@ -1,30 +1,25 @@
 type ID = string | number;
 
-type Thumbnail = {
-  id: number;
-  path: string;
-  location: string;
-  mimetype: string;
-  metadata: unknown;
-  size: number;
-  createdAt: string;
-}
-
 type Media = {
   id: number;
   path: string;
   location: string;
   mimetype: string;
   size: number;
-  metadata: unknown;
-  thumbnails: Thumbnail[];
+  metadata: {
+    width: number;
+    height: number
+    [key: string]: unknown;
+  };
+  thumbnails: string[];
   createdAt: string;
 }
 
 type Album = {
   id: string;
-  userId?: number;
-  hash: string;
+  user: {
+    id: ID;
+  };
   media: Media[];
   createdAt: string;
 }

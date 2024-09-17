@@ -63,9 +63,9 @@ export async function getAlbum(id: string): Promise<Album> {
     .then(response => response.data.album);
 }
 
-export async function getAlbums(): Promise<Album[]> {
-  return get(`${process.env.REACT_APP_CORE_URL}/albums`, { credentials: 'include' })
-    .then(response => response.data.albums);
+export async function getUserAlbums(id: string): Promise<Album[]> {
+  return get(`${process.env.REACT_APP_CORE_URL}/me/${id}`, { credentials: 'include' })
+    .then(response => response.data.user.albums);
 }
 
 export async function deleteAlbum(id: number): Promise<Album> {
