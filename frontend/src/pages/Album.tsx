@@ -15,7 +15,6 @@ const Album: React.FC = () => {
   const params = useParams();
   const location = useLocation();
   const [ album, setAlbum ] = useState<Album | undefined>(location.state?.album);
-  const [ files, setFiles ] = useState([] as Array<Media>);
   const [ hasError, setHasError ] = useState(false);
   const {
     files: uploadedFiles
@@ -27,7 +26,7 @@ const Album: React.FC = () => {
     }
 
     getAlbum(params.id as string)
-      .then((album) => setFiles(album.media))
+      .then(album => { setAlbum(album); return album; })
       .catch(() => setHasError(true));
   }, []);
 
@@ -41,21 +40,25 @@ const Album: React.FC = () => {
         }
         {
           hasError ? (
-            <Alert variant="danger">
-              Tento album už nie je dostupný.
-            </Alert>
+            <Row>
+              <Col md={{ span: 6, offset: 3 }}>
+                <Alert variant="danger" className="text-center">
+                  Tento album už nie je dostupný.
+                </Alert>
+              </Col>
+            </Row>
           ) : null
         }
         {
-          uploadedFiles.length === 0 && files.length === 0? (
+          typeof album === 'undefined' && hasError === false ? (
             <GalleryLoader />
           ) : null
         }
         {
-          files.length > 0 ? (
+          typeof album !== 'undefined' && 'media' in album && album.media.length > 0 ? (
             <Row>
               <Col>
-                <GalleryNew files={files} />
+                <GalleryNew files={album.media} />
               </Col>
             </Row>
           ) : null
