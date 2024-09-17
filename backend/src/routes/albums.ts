@@ -23,21 +23,6 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
   }
 });
 
-router.get('/', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  try {
-    const albums = await controllers.Albums.getAlbums(/* { user: req['user'] } */);
-    
-    res.status(200).json({
-      error: null,
-      data: {
-        albums,
-      }
-    }).end();
-  } catch (err) {
-    next(err);
-  }
-});
-
 router.post('/', async (req: express.Request, res: express.Response) => {
   const album = await controllers.Albums.createAlbum(req['user']);
 
@@ -92,7 +77,7 @@ router.post('/:id/media', optionalAlbum, async (req: express.Request, res: expre
   }).end();
 });
 
-router.delete('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+router.delete('/:id', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const album = await controllers.Albums.deleteAlbum(req.params.id);
     

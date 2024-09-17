@@ -2,6 +2,7 @@ import { LRUCache } from 'lru-cache';
 import CacheRepository from './CacheRepository';
 import CompositeRepository from './CompositeRepository';
 import DynamoDBRepository from './DynamoDBRepository';
+import config from '../../config';
 import services from '../../services';
 
 const container = {
@@ -15,7 +16,7 @@ const container = {
 
   get Composite(): AlbumRepository {
     if (typeof this._composite === 'undefined') {
-      this._compositeRepository = new CompositeRepository(
+      this._composite = new CompositeRepository(
         this.DynamoDB,
         this.Cache,
       );
@@ -26,7 +27,7 @@ const container = {
 
   get DynamoDB(): AlbumRepository {
     if (typeof this._dynamoDB === 'undefined') {
-      this._dynamoDB = new DynamoDBRepository(services.Database, 'zdielaj-si');
+      this._dynamoDB = new DynamoDBRepository(services.Database, config.services.database.tableName);
     }
 
     return this._dynamoDB;

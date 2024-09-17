@@ -25,10 +25,6 @@ class Albums implements AlbumsController {
   
     const fullMedia = await Promise.all(album.files.map(async (id) => {
       const file = response.data.files.find(file => file.id === id);
-
-      console.log();
-      console.log('file', file);
-      console.log();
       
       return {
         id,
@@ -38,9 +34,7 @@ class Albums implements AlbumsController {
           width: file.metadata.width,
           height: file.metadata.height,
         },
-        thumbnails: [{
-          location: 'https://d1zcbk2j8t91y7.cloudfront.net/generated/400x400/' + file['path'],
-        }]
+        thumbnails: file.thumbnails,
       }
     }));
 
@@ -48,39 +42,6 @@ class Albums implements AlbumsController {
       id: album.id,
       media: fullMedia,
     };
-  }
-
-  /**
-   * Retrieves albums owned by user.
-   * @param user 
-   * @returns 
-   */
-  // public async getAlbums(params: { user?: User, publicProfile?: PublicProfile, first?: number, after?: number }): Promise<Album[]> {
-  public async getAlbums(): Promise<Album[]> {
-    // const albums = await this.albumRepository.find(params);
-
-    // const albumsWithThumbnails = await Promise.all(albums.map(async (album) => {
-    //   const media = await this.mediaRepository.find({ album: { id: album.id }, first: 1 });
-
-    //   if (media.length === 0) {
-    //     return undefined;
-    //   }
-
-    //   const response = await this.uploadService.getFile(media[0].fileId);
-
-    //   return {
-    //     ...album,
-    //     media: [{
-    //       ...media,
-    //       ...response.data.file,
-    //     }],
-    //   } as any;
-
-    // }));
-
-    // return albumsWithThumbnails.filter(album => typeof album !== 'undefined');
-
-    return [];
   }
 
   /**
