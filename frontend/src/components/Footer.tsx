@@ -20,6 +20,7 @@ const Footer = () => (
           <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }}></hr>
           <p><Link className="nav-link text-light" to="/">Domov</Link></p>
           <p><Link className="nav-link text-light" to="/registracia">Registrácia</Link></p>
+          <p><Link className="nav-link text-light" to="https://status.zdielaj.si/">Status</Link></p>
           <p><Link className="nav-link text-light" to="/o-aplikacii">O aplikácii</Link></p>
         </Col>
         <Col xs={{ span: 6 }} sm={{ span: 6 }} md={{ span: 3 }} lg={{ span: 2 }}>
