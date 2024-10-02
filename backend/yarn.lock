@@ -1076,6 +1076,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@godaddy/terminus@npm:^4.12.1":
+  version: 4.12.1
+  resolution: "@godaddy/terminus@npm:4.12.1"
+  dependencies:
+    stoppable: "npm:^1.1.0"
+  checksum: 10c0/89a3567418d261baed4942b9433696acafc78287efd9e25c258304cdddedb619cac571c02ebff84149bf1edba0995f438d7051a48c254414e6d7abc13d65c375
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.13.0":
   version: 0.13.0
   resolution: "@humanwhocodes/config-array@npm:0.13.0"
@@ -3118,6 +3127,7 @@ __metadata:
   dependencies:
     "@aws-sdk/client-dynamodb": "npm:^3.651.1"
     "@aws-sdk/util-dynamodb": "npm:^3.651.1"
+    "@godaddy/terminus": "npm:^4.12.1"
     "@sentry/node": "npm:^8.26.0"
     "@types/express": "npm:^4.17.21"
     "@types/jest": "npm:^29.5.12"
@@ -6948,6 +6958,13 @@ __metadata:
   version: 2.0.1
   resolution: "statuses@npm:2.0.1"
   checksum: 10c0/34378b207a1620a24804ce8b5d230fea0c279f00b18a7209646d5d47e419d1cc23e7cbf33a25a1e51ac38973dc2ac2e1e9c647a8e481ef365f77668d72becfd0
+  languageName: node
+  linkType: hard
+
+"stoppable@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "stoppable@npm:1.1.0"
+  checksum: 10c0/ba91b65e6442bf6f01ce837a727ece597a977ed92a05cb9aea6bf446c5e0dcbccc28f31b793afa8aedd8f34baaf3335398d35f903938d5493f7fbe386a1e090e
   languageName: node
   linkType: hard
 

@@ -1,32 +1,34 @@
-import express from 'express';
-import * as Sentry from '@sentry/node';
+import http from 'http';
+import { createTerminus } from '@godaddy/terminus';
+import app from './app';
 import config from './config';
-import routes from './routes';
-import cors from './middlewares/cors';
-import auth from './middlewares/auth';
-import responseTime from './middlewares/responseTime';
-import trace from './middlewares/trace';
-import errorHandler from './middlewares/errorHandler';
 import logger from './logger';
 
-const app = express();
+const server = http.createServer(app);
 
-app.disable('x-powered-by');
-if (typeof process.env.SENTRY_DSN === 'string') Sentry.setupExpressErrorHandler(app);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(trace);
-app.use(responseTime);
-app.use(cors);
-app.use(auth);
+async function onSignal(): Promise<void> {
+  logger.warn('Server is going to shut down! Starting cleanup...');
+}
 
-app.use(routes);
+async function onShutdown (): Promise<void> {
+  logger.warn('Server is shutting down!');
+}
 
-app.use(errorHandler);
+async function onHealthCheck(): Promise<void> {
+  return;
+}
+
+createTerminus(server, {
+  healthChecks: {
+    '/health/liveness': onHealthCheck,
+  },
+  onSignal,
+  onShutdown,
+});
 
 async function start(): Promise<void> {
   try {
-    app.listen(config.port, () => {
+    server.listen(config.port, () => {
       logger.info(`Server started at http://localhost:${ config.port }`);
     });
   } catch(err) {
