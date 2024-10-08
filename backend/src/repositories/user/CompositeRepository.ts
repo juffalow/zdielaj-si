@@ -14,7 +14,9 @@ class UserCompositeRepository implements UserRepository {
     if (typeof user === 'undefined') {
       user = await this.dynamoDBRepository.get(id);
 
-      await this.cacheRepository.create(user);
+      if (typeof user !== 'undefined') {
+        await this.cacheRepository.create(user);
+      }
     }
 
     return user;
