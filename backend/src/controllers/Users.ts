@@ -1,5 +1,5 @@
 import { BaseError } from '../utils/errors';
-// import logger from '../logger';
+import logger from '../logger';
 
 class Users {
   constructor(
@@ -16,25 +16,31 @@ class Users {
     }
   
     const albums = await Promise.all(user.albums.map(async (id) => {
-      const album = await this.albumRepository.get(id);
+      try {
+        const album = await this.albumRepository.get(id);
 
-      const response = await this.uploadService.getFile(album.files[0]);
-      
-      return {
-        id,
-        media:[{
-          id: response.data.file.id,
-          location: response.data.file.location,
-          mimetype: response.data.file.mimetype,
-          thumbnails: response.data.file.thumbnails,
-        }],
-        createdAt: album.createdAt,
+        const response = await this.uploadService.getFile(album.files[0]);
+        
+        return {
+          id,
+          media:[{
+            id: response.data.file.id,
+            location: response.data.file.location,
+            mimetype: response.data.file.mimetype,
+            thumbnails: response.data.file.thumbnails,
+          }],
+          createdAt: album.createdAt,
+        };
+      } catch (error) {
+        logger.warn('Error while fetching album', { id, error });
+
+        return null;
       }
     }));
 
     return {
       id: user.id,
-      albums,
+      albums: albums.filter((album) => album !== null),
     };
   }
 }
