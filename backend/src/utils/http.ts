@@ -106,10 +106,10 @@ class FetchClient implements Utils.HTTPClient {
           }
   
           if (typeof json.error === 'string') {
-            throw new BaseError({ message: json.error, code: -1 });
+            throw new BaseError({ message: json.error, code: response.status });
           }
   
-          throw new BaseError({ message: 'Unknown error!', code: -1 });
+          throw new BaseError({ message: 'Unknown error!', code: response.status });
         }
       }
   
