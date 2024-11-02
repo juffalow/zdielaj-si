@@ -43,8 +43,12 @@ class AlbumDynamoDBRepository implements AlbumRepository {
   public async create(params: AlbumRepository.CreateParameters): Promise<Album> {
     logger.debug(`${this.constructor.name}.create`, { params });
 
+    const id = uuidv4();
+    const compressedId = Buffer.from(id.replace(/-/g, ''), 'hex').toString('base64url');
+
     const item = {
-      id: uuidv4(),
+      id,
+      compressedId,
       files: [],
       user: null,
       ...params,

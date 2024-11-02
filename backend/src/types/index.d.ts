@@ -6,6 +6,7 @@ type ID = string;
 
 type Album = {
   id: ID;
+  compressedId?: string;
   user: {
     id: ID;
   };

@@ -10,7 +10,14 @@ const router = express.Router();
 
 router.get('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const album = await controllers.Albums.getAlbum(req.params.id);
+    let id = req.params.id;
+
+    if (id.length !== 36) {
+      const hex = Buffer.from(id, 'base64url').toString('hex');
+      id = `${hex.substring(0, 8)}-${hex.substring(8, 12)}-${hex.substring(12, 16)}-${hex.substring(16, 20)}-${hex.substring(20)}`;
+    }
+
+    const album = await controllers.Albums.getAlbum(id);
     
     res.status(200).json({
       error: null,
