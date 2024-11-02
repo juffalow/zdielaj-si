@@ -71,13 +71,13 @@ const Login: React.FC = () => {
             <Form noValidate validated={isValidated} onSubmit={onSubmit}>
               <Form.Group controlId="loginUsername">
                 <Form.Label>E-mailová adresa</Form.Label>
-                <Form.Control required type="email" name="email" id="loginUsername" placeholder="meno.priezvisko@priklad.sk" value={values.email} onChange={onChange} />
+                <Form.Control required type="email" name="email" placeholder="meno.priezvisko@priklad.sk" value={values.email} onChange={onChange} />
                 <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group controlId="loginPassword" className="mt-3">
                 <Form.Label>Heslo</Form.Label>
-                <Form.Control required type="password" name="password" id="loginPassword" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
+                <Form.Control required type="password" name="password" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
                 <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
               </Form.Group>
 
