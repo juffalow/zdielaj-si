@@ -21,7 +21,7 @@ const Albums: React.FC = () => {
   useEffect(() => {
     if (typeof user === 'undefined') return;
     
-    getUserAlbums(user.id as string)
+    getUserAlbums()
       .then((albums) => setAlbums(albums))
       .catch(() => setHasError(true));
   }, []);

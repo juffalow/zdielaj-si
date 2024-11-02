@@ -117,3 +117,28 @@ export async function httpDelete(endpoint: string, options?: RequestInit): Promi
     .then(handleErrors)
     .then(handleSuccess);
 }
+
+export async function put(endpoint: string, data: unknown, options: RequestInit = {}): Promise<any> {
+  const headers = new Headers();
+  const userToken = getUserToken();
+  const albumToken = getAlbumToken();
+
+  headers.set('Content-Type', 'application/json');
+
+  if (userToken !== null) {
+    headers.set('Authorization', `Bearer ${userToken}`);
+  } else if (albumToken !== null) {
+    headers.set('X-Album-Token', albumToken);
+  }
+
+  return fetch(endpoint, {
+    ...options,
+    ...{
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(data),
+    }
+  })
+    .then(handleErrors)
+    .then(handleSuccess);
+}

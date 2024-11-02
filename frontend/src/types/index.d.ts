@@ -1,4 +1,4 @@
-type ID = string | number;
+type ID = string;
 
 type Media = {
   id: number;
@@ -30,13 +30,15 @@ type User = {
   username?: string;
   accessToken: string;
   meta?: Record<string, string | number | boolean>;
+  publicProfileId?: ID;
 }
 
 type PublicProfile = {
   id: ID;
-  userId: ID;
+  user?: {
+    id: ID;
+  };
   name: string;
-  slug: string;
   description: string;
   createdAt?: string;
   updatedAt?: string;

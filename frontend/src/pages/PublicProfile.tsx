@@ -8,7 +8,7 @@ import AlbumPreview from '../components/AlbumPreview';
 import AlbumPreviewLoader from '../components/AlbumPreviewLoader';
 import BarLoader from '../components/BarLoader';
 import SEO from '../components/SEO';
-import { getPublicProfiles, getPublicProfileAlbums } from '../api/services';
+import { getPublicProfile, getPublicProfileAlbums } from '../api/services';
 
 const PublicProfile: React.FC = () => {
   const params = useParams();
@@ -17,12 +17,11 @@ const PublicProfile: React.FC = () => {
   const [ hasError, setHasError ] = useState(false);
 
   useEffect(() => {
-    getPublicProfiles({ slug: params.id })
-      .then((response) => {
-        const publicProfile = response.data.publicProfiles.pop();
+    getPublicProfile(params.id as string)
+      .then((publicProfile) => {
         setPublicProfile(publicProfile);
-        return publicProfile?.id as number || 0;
-      }).then((id: number) => getPublicProfileAlbums({ publicProfileId: id, orderBy: [{ field: 'id', direction: 'DESC' }] }))
+        return publicProfile?.id;
+      }).then((id: ID) => getPublicProfileAlbums({ publicProfileId: id }))
       .then((response) => {
         const albums = response.data.albums;
         setAlbums(albums);

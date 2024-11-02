@@ -1,4 +1,4 @@
-import { post, postMultipart, get, httpDelete } from './client';
+import { post, postMultipart, put, get, httpDelete } from './client';
 import { setAlbumToken } from './token';
 
 type Setting = {
@@ -63,8 +63,13 @@ export async function getAlbum(id: string): Promise<Album> {
     .then(response => response.data.album);
 }
 
-export async function getUserAlbums(id: string): Promise<Album[]> {
-  return get(`${process.env.REACT_APP_CORE_URL}/me/${id}`, { credentials: 'include' })
+export async function getCurrentUser(): Promise<User> {
+  return get(`${process.env.REACT_APP_CORE_URL}/me`, { credentials: 'include' })
+    .then(response => response.data.user);
+}
+
+export async function getUserAlbums(): Promise<Album[]> {
+  return get(`${process.env.REACT_APP_CORE_URL}/me`, { credentials: 'include' })
     .then(response => response.data.user.albums);
 }
 
@@ -95,46 +100,27 @@ export async function setNotificationSettings(email: string, settings: Setting[]
   return post(`${process.env.REACT_APP_CORE_URL}/notifications?token=${token}`, {email, notifications: settings})
 }
 
-export async function getPublicProfile(id: ID): Promise<PublicProfile> {
-  return get(`${process.env.REACT_APP_CORE_URL}/publicprofile/${id}`)
+export async function createPublicProfile(id: string, name: string, description: string): Promise<any> {
+  return post(`${process.env.REACT_APP_CORE_URL}/publicprofiles/`, { id, name, description })
     .then(response => response.data.publicProfile);
 }
 
-interface PublicProfilesResponse {
-  error: unknown;
-  data: {
-    publicProfiles: PublicProfile[];
-  };
+export async function updatePublicProfile(id: ID, params: { name?: string, description?: string }): Promise<any> {
+  return put(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${id}`, params)
+    .then(response => response.data.publicProfile);
 }
 
-export async function getPublicProfiles(params: { name?: string, slug?: string }): Promise<PublicProfilesResponse> {
-  const searchParams = new URLSearchParams();
-
-  Object.keys(params).forEach(key => {
-    searchParams.append(key, (params as any)[key] as string);
-  });
-  
-  return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/?${searchParams}`);
+export async function getPublicProfile(id: ID): Promise<PublicProfile> {
+  return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${id}`)
+    .then(response => response.data.publicProfile);
 }
 
-export async function getPublicProfileAlbums(params: { publicProfileId: number, orderBy: { field: string, direction: 'ASC' | 'DESC' }[] }): Promise<any> {
+export async function getPublicProfileAlbums(params: { publicProfileId: ID, first?: number, after?: number }): Promise<any> {
   const searchParams = new URLSearchParams();
   const { publicProfileId, ...rest } = params as any;
 
   for (const key in rest) {
-    if (Array.isArray(rest[key])) {
-      Object.keys(rest[key]).forEach((value, index) => {
-        if (typeof rest[key][index] === 'object') {
-          Object.keys(rest[key][index]).forEach((subKey) => {
-            searchParams.append(`${key}[${index}][${subKey}]`, rest[key][index][subKey]);
-          });
-        } else {
-          searchParams.append(`${key}[${index}]`, rest[key][index]);
-        }
-      });
-    } else {
-      searchParams.append(key, rest[key]);
-    }
+    searchParams.append(key, rest[key]);
   }
   
   return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${publicProfileId}/albums?${searchParams}`);

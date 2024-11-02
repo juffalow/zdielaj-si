@@ -37,7 +37,7 @@ const App: React.FC = () => (
               <Route path="/notifikacie" element={<Notifications />} />
               <Route path="/predplatne" element={<RequireAuth><Subscription /></RequireAuth>} />
               <Route path="/profil" element={<RequireAuth><Profile /></RequireAuth>} />
-              <Route path="/:id" element={<PublicProfile />} />
+              <Route path="/profil/:id" element={<PublicProfile />} />
               <Route path="/" element={<Home />} />
             </Routes>
           </main>
