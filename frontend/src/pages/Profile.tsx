@@ -18,7 +18,7 @@ const Profile: React.FC = () => {
   }, []);
 
   return (
-    <SEO title={user?.meta?.name as string || 'Profil'} description="">
+    <SEO title={user?.name as string || 'Profil'} description="">
       <Container>
         {
           user === null ? <p>Načítavam...</p> : null
@@ -31,7 +31,7 @@ const Profile: React.FC = () => {
                 <img src={ImagePlaceholder} width="100%" />
               </Col>
               <Col lg={6}>
-                <h2>{ user?.meta?.name || 'Meno Priezvisko' }</h2>
+                <h2>{ user?.name || 'Meno Priezvisko' }</h2>
                 <hr />
                 <ProfileForm user={user} />
                 <hr />

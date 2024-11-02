@@ -28,6 +28,8 @@ type Album = {
 type User = {
   id?: ID;
   username?: string;
+  email?: string;
+  name?: string;
   accessToken: string;
   meta?: Record<string, string | number | boolean>;
   publicProfileId?: ID;

@@ -11,7 +11,7 @@ const ProfileForm: React.FC<Props> = ({ user }: Props) => {
       <Form noValidate>
         <Form.Group>
           <Form.Label>E-mailová adresa</Form.Label>
-          <Form.Control type="email" name="email" placeholder="meno.priezvisko@priklad.sk" value={user.username} readOnly disabled />
+          <Form.Control type="email" name="email" placeholder="meno.priezvisko@priklad.sk" value={user.email} readOnly disabled />
         </Form.Group>
       </Form>
     </>
