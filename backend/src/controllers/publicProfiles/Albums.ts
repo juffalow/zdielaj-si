@@ -1,21 +1,23 @@
-import { BaseError } from '../utils/errors';
-import logger from '../logger';
+import { BaseError } from '../../utils/errors';
+import logger from '../../logger';
 
-class Users {
+class Albums {
   constructor(
     protected userRepository: UserRepository,
+    protected publicProfileRepository: PublicProfileRepository,
     protected albumRepository: AlbumRepository,
     protected uploadService: Services.Upload,
   ) {}
 
-  public async get(id: ID): Promise<unknown> {
-    const user = await this.userRepository.get(id);
+  public async list(publicProfileId: ID, first: number, after: number): Promise<{ albums: any[] }> {
+    const publicProfile = await this.publicProfileRepository.get(publicProfileId);
+    const user = await this.userRepository.get(publicProfile.user.id);
 
     if (typeof user === 'undefined') {
       throw new BaseError({ message: 'User not found!', code: 404 });
     }
-  
-    const albums = await Promise.all(user.albums.map(async (id) => {
+
+    const albums = await Promise.all(user.albums.slice(after, first > user.albums.length ? user.albums.length : first).map(async (id) => {
       try {
         const album = await this.albumRepository.get(id);
 
@@ -39,10 +41,9 @@ class Users {
     }));
 
     return {
-      ...user,
       albums: albums.filter((album) => album !== null),
     };
   }
 }
 
-export default Users;
+export default Albums;

@@ -4,9 +4,9 @@ import controllers from '../controllers';
 
 const router = express.Router();
 
-router.get('/:id', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+router.get('/', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const user = await controllers.Users.get(req.params.id);
+    const user = await controllers.Users.get(req['user'].id);
     
     res.status(200).json({
       error: null,

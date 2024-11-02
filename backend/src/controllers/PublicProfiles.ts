@@ -3,6 +3,7 @@ import { BaseError } from '../utils/errors';
 class PublicProfilesController {
   constructor(
     protected publicProfileRepository: PublicProfileRepository,
+    protected userRepository: UserRepository,
   ) {}
 
   /**
@@ -17,15 +18,39 @@ class PublicProfilesController {
     if (typeof publicProfile === 'undefined') {
       throw new BaseError({ message: 'Public profile not found!', code: 404 });
     }
-
+    
     return publicProfile;
   }
 
   public async create(params: any, user: User): Promise<PublicProfile> {
+    const u = await this.userRepository.get(user.id);
+
+    if (typeof u.publicProfileId !== 'undefined' && u.publicProfileId !== null) {
+      throw new BaseError({ message: 'User already has a public profile!', code: 400 });
+    }
+
     const publicProfile = await this.publicProfileRepository.create({
-      userId: user.id,
+      user: {
+        id: user.id,
+      },
       ...params,
     });
+
+    await this.userRepository.update({
+      publicProfileId: publicProfile.id,
+    }, { id: user.id });
+
+    return publicProfile;
+  }
+
+  public async update(id: ID, params: any, user: User): Promise<PublicProfile> {
+    const u = await this.userRepository.get(user.id);
+
+    if (u.publicProfileId !== id) {
+      throw new BaseError({ message: 'Cannot update specific public profile!', code: 403 });
+    }
+
+    const publicProfile = await this.publicProfileRepository.update(params, { id });
 
     return publicProfile;
   }

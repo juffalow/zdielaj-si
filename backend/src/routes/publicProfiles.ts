@@ -19,30 +19,34 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
   }
 });
 
-router.get('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+router.post('/', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    
+    const publicProfile = await controllers.PublicProfile.create(req.body, req['user']);
+
     res.status(200).json({
       error: null,
       data: {
-        publicProfiles: [],
-      }
+        publicProfile,
+      },
     }).end();
   } catch (err) {
     next(err);
   }
 });
 
-router.post('/', requireAuth, async (req: express.Request, res: express.Response) => {
-  console.log('req.body', req.body)
-  const publicProfile = await controllers.PublicProfile.create(req.body, req['user']);
-
-  res.status(200).json({
-    error: null,
-    data: {
-      publicProfile,
-    },
-  }).end();
+router.put('/:id', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const publicProfile = await controllers.PublicProfile.update(req.params.id, req.body, req['user']);
+    
+    res.status(200).json({
+      error: null,
+      data: {
+        publicProfile,
+      }
+    }).end();
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.delete('/:id', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {

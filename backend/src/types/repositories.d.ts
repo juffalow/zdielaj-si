@@ -46,11 +46,16 @@ interface AlbumRepository {
 
 declare namespace PublicProfileRepository {
   interface CreateParameters {
-    user?: {
+    id: ID;
+    user: {
       id: ID;
     };
     name: string;
-    slug: string;
+    description: string;
+  }
+
+  interface UpdateParameters {
+    name: string;
     description: string;
   }
 }
@@ -59,6 +64,8 @@ interface PublicProfileRepository {
   get(id: ID): Promise<PublicProfile>;
 
   create(params: PublicProfileRepository.CreateParameters): Promise<PublicProfile>;
+
+  update(params: PublicProfileRepository.UpdateParameters, where: { id: ID }): Promise<PublicProfile>;
 
   delete(id: ID): Promise<PublicProfile>;
 }
@@ -75,7 +82,7 @@ declare namespace UserRepository {
       id: ID;
     };
     albums?: ID[];
-    publicProfiles?: ID[];
+    publicProfileId?: ID;
   }
 }
 

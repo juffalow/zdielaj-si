@@ -2,6 +2,7 @@ import AlbumsController from './Albums';
 import NotificationsController from './Notifications';
 import PublicProfilesController from './PublicProfiles';
 import Users from './Users';
+import publicProfiles from './publicProfiles/index';
 import repositories from '../repositories';
 import services from '../services';
 
@@ -15,12 +16,16 @@ const container = {
   },
 
   get PublicProfile() {
-    return new PublicProfilesController(repositories.PublicProfile);
+    return new PublicProfilesController(repositories.PublicProfile, repositories.User);
   },
 
   get Users() {
     return new Users(repositories.User, repositories.Album, services.Upload);
-  }
+  },
+
+  get publicProfiles() {
+    return publicProfiles;
+  },
 };
 
 export default container;

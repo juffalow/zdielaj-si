@@ -69,7 +69,7 @@ class UserDynamoDBRepository implements UserRepository {
     const attributeValues = {};
 
     Object.keys(params).forEach(key => {
-      if (['albums'].includes(key) === false) return;
+      if (['albums', 'publicProfileId'].includes(key) === false) return;
 
       updateExpression.push(`#${key} = :${key}`);
       attributeNames[`#${key}`] = key;

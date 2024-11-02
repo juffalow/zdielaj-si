@@ -18,7 +18,7 @@ type Album = {
 type User = {
   id: ID;
   albums?: ID[];
-  publicProfiles?: ID[];
+  publicProfileId?: ID;
 }
 
 type PublicProfile = {
@@ -27,7 +27,6 @@ type PublicProfile = {
     id: ID;
   };
   name: string;
-  slug: string;
   description: string;
   createdAt?: string;
   updatedAt?: string;
