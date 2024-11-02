@@ -39,7 +39,7 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
       </Row>
       <Row className="mt-4">
         <Col lg={{ span: 6, offset: 3 }} sm={{ span: 8, offset: 2 }}>
-          <ShareableLink albumId={album.compressedId} />
+          <ShareableLink albumId={'compressedId' in album ? album.compressedId as string : album.id as string} />
           <p className="ps-2 pe-2 mt-1">
             {
               uploadSpeed > 0 ? `Odahovaný čas: ${Math.ceil(uploadingSizeSum / uploadSpeed)} sekúnd` : 'Prepočitavanie odhadovaného času...'

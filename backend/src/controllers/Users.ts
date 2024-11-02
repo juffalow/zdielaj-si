@@ -23,6 +23,7 @@ class Users {
         
         return {
           id,
+          compressedId: album.compressedId,
           media:[{
             id: response.data.file.id,
             location: response.data.file.location,

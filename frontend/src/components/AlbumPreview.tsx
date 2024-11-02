@@ -34,10 +34,10 @@ const AlbumPreview: React.FC<Props> = ({ album, onDelete }: Props) => (
         ) : null
       }
     <Card.Body>
-      <Card.Title>{album.id}</Card.Title>
+      <Card.Title>{'compressedId' in album ? album.compressedId : album.id}</Card.Title>
       <Card.Subtitle className="mb-2 text-muted">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</Card.Subtitle>
       <div className="d-grid">
-        <Link className="btn btn-outline-secondary" role="button" to={`/album/${album.id}`}>Zobraziť</Link>
+        <Link className="btn btn-outline-secondary" role="button" to={`/album/${'compressedId' in album ? album.compressedId : album.id}`}>Zobraziť</Link>
         {
           typeof onDelete === 'function' ? (
             <Button variant="outline-danger" className="mt-2" onClick={() => onDelete && onDelete(album)}>Vymazať</Button>
