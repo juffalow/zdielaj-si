@@ -87,6 +87,15 @@ export default {
        */
       url: process.env.SERVICES_UPLOAD_URL || 'http://upload:3010',
     },
+    user: {
+      /**
+       * User service URL.
+       * Recommended: create docker network and use private URL for direct and faster communication.
+       * @type {string}
+       * @example http://upload:3010
+       */
+      url: process.env.SERVICES_USER_URL || 'http://user:3010',
+    },
     notifications: {
       /**
        * Notifications service URL.

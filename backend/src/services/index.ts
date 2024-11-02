@@ -29,7 +29,7 @@ const container = {
   },
 
   get User(): Services.User {
-    return new User(new FetchClient(), 'http://user_service:3010');
+    return new User(new FetchClient(), config.services.user.url);
   },
 };
 
