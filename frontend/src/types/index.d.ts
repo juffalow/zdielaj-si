@@ -17,6 +17,7 @@ type Media = {
 
 type Album = {
   id: string;
+  compressedId: string;
   user: {
     id: ID;
   };

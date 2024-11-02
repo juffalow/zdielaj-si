@@ -29,7 +29,7 @@ const Home: React.FC = () => {
       await addMedia(album.id, media.id);
     });
 
-    navigate(`/album/${album.id}`, { state: { album } });    
+    navigate(`/album/${album.compressedId}`, { state: { album } });    
   };
 
   const {
