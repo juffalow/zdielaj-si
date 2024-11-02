@@ -95,9 +95,12 @@ class PublicProfileDynamoDBRepository implements PublicProfileRepository {
       ExpressionAttributeNames: attributeNames,
       ExpressionAttributeValues: attributeValues,
       ReturnValues: 'ALL_NEW',
+      ReturnConsumedCapacity: process.env.ENV === 'DEVELOPMENT' ? 'TOTAL' : 'NONE',
     });
 
     const response = await this.dynamoDB.send(command);
+
+    logger.debug('response', response);
 
     const item = unmarshall(response.Attributes);
 

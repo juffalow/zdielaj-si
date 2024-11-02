@@ -8,7 +8,7 @@ const container = {
   },
 
   get PublicProfile(): PublicProfileRepository {
-    return publicProfile.DynamoDB;
+    return publicProfile.Composite;
   },
 
   get User(): UserRepository {
