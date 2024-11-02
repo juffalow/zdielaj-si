@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const user = await controllers.Users.get(req['user'].id);
+    const user = await controllers.Users.get(req['user'].id, req.headers.authorization.replace('Bearer ', ''));
     
     res.status(200).json({
       error: null,

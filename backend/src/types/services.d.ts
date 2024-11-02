@@ -72,4 +72,8 @@ declare namespace Services {
 
     getUserId(data: Record<string, unknown>): { id: number | string };
   }
+
+  interface User {
+    get(token: string): Promise<{ id: string, username: string, email: string, name: string }>;
+  }
 }

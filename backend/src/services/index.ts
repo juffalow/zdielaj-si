@@ -1,5 +1,6 @@
 import Notifications from './notifications';
 import Upload from './upload';
+import User from './user';
 import token from './token';
 import Database from './database';
 import FetchClient from '../utils/http';
@@ -25,6 +26,10 @@ const container = {
 
   get Database(): Services.Database {
     return Database.DynamoDB;
+  },
+
+  get User(): Services.User {
+    return new User(new FetchClient(), 'http://user_service:3010');
   },
 };
 

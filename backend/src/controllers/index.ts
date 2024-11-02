@@ -20,7 +20,7 @@ const container = {
   },
 
   get Users() {
-    return new Users(repositories.User, repositories.Album, services.Upload);
+    return new Users(repositories.User, repositories.Album, services.Upload, services.User);
   },
 
   get publicProfiles() {
