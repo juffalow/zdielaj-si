@@ -2,6 +2,7 @@ import {
   DynamoDBClient,
   GetItemCommand,
   PutItemCommand,
+  DeleteItemCommand,
   UpdateItemCommand,
 } from '@aws-sdk/client-dynamodb';
 import {
@@ -107,7 +108,27 @@ class AlbumDynamoDBRepository implements AlbumRepository {
   public async delete(id: ID): Promise<Album> {
     logger.debug(`${this.constructor.name}.delete`, { id });
 
-    throw new Error('Method not implemented!');
+    const command = new DeleteItemCommand({
+      TableName: this.tableName,
+      Key: {
+        id: {
+          S: id as ID,
+        }
+      },
+      ReturnValues: "ALL_OLD",
+    });
+  
+    const result = await this.dynamoDB.send(command);
+
+    logger.debug('result', result);
+
+    if ('Item' in result === false) {
+      return undefined;
+    }
+
+    const item = unmarshall(result.Item as any);
+
+    return item as Album;
   }
 }
 

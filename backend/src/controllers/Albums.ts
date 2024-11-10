@@ -75,9 +75,16 @@ class Albums implements AlbumsController {
     setImmediate(async () => {
       for(const id of album.files) {
         logger.info(`Deleting file ${id}...`);
-        await this.uploadService.deleteFile(id);
+        await this.uploadService.deleteFile(id).catch((error: Error) => {
+          logger.error(`Error deleting file ${id}!`, { message: error.message, stack: error.stack });
+        });
       }
     });
+
+    const user = await this.userRepository.get(album.user.id);
+    const albums = user.albums.filter(a => a !== album.id);
+
+    await this.userRepository.update({ albums }, { id: user.id });
 
     await this.albumRepository.delete(id);
 
