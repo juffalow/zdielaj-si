@@ -73,7 +73,7 @@ export async function getUserAlbums(): Promise<Album[]> {
     .then(response => response.data.user.albums);
 }
 
-export async function deleteAlbum(id: number): Promise<Album> {
+export async function deleteAlbum(id: ID): Promise<Album> {
   return httpDelete(`${process.env.REACT_APP_CORE_URL}/albums/${id}`, { credentials: 'include' })
     .then(response => response.data.album);
 }

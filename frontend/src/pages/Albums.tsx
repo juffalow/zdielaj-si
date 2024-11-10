@@ -42,7 +42,7 @@ const Albums: React.FC = () => {
       return;
     }
 
-    await deleteAlbum(parseInt(album.id)).then(() => {
+    await deleteAlbum(album.id).then(() => {
       setAlbum(null);
       setIsModalOpen(false);
 
