@@ -16,7 +16,6 @@ class BaseError extends Error {
   }
 }
 
-
 async function handleErrors(response: any): Promise<any> {
   if (!response.ok) {
     if (response.headers.get('Content-Type').startsWith('application/json')) {
@@ -39,7 +38,27 @@ function handleSuccess(response: any) {
   }
 }
 
-export async function get(endpoint: string, options?: RequestInit): Promise<any> {
+function handleResponse(response: Response) {
+  if (response.headers.get('Content-Type')?.startsWith('application/json')) {
+    return response.json();
+  } else {
+    return response.text();
+  }
+}
+
+function getBackoffWithJitter(attempt: number, baseDelay = 500) {
+  const jitter = Math.random() * baseDelay;
+
+  return Math.min(((2 ** attempt) * baseDelay) + jitter, 16_000);
+}
+
+function wait(delay: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+}
+
+export async function get(endpoint: string, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
   const headers = new Headers();
   const userToken = getUserToken();
 
@@ -47,16 +66,29 @@ export async function get(endpoint: string, options?: RequestInit): Promise<any>
     headers.set('Authorization',  `Bearer ${userToken}`);
   }
 
+  const { retries = 3, _attempt = 0, ...requestOptions } = options;
+
   return fetch(endpoint, {
-    ...options,
+    ...requestOptions,
     method: 'GET',
     headers,
   })
+    .then((response: Response) => {
+      if (response.ok) {
+        return response;
+      }
+
+      if (response.status >= 500 || response.status === 408 || response.status === 429) {
+        return wait(getBackoffWithJitter(_attempt)).then(() => get(endpoint, { ...options, retries: retries - 1, _attempt: _attempt + 1 }));
+      }
+
+      return response;
+    })
     .then(handleErrors)
-    .then(handleSuccess);
+    .then(handleResponse);
 }
 
-export async function post(endpoint: string, data: unknown, options: RequestInit = {}): Promise<any> {
+export async function post(endpoint: string, data: unknown, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
   const headers = new Headers();
   const userToken = getUserToken();
   const albumToken = getAlbumToken();
@@ -69,34 +101,59 @@ export async function post(endpoint: string, data: unknown, options: RequestInit
     headers.set('X-Album-Token', albumToken);
   }
 
+  const { retries = 3, _attempt = 0, ...requestOptions } = options;
+
   return fetch(endpoint, {
-    ...options,
+    ...requestOptions,
     ...{
       method: 'POST',
       headers,
       body: JSON.stringify(data),
     }
   })
+    .then((response: Response) => {
+      if (response.ok) {
+        return response;
+      }
+
+      if (response.status >= 500 || response.status === 408 || response.status === 429) {
+        return wait(getBackoffWithJitter(_attempt)).then(() => get(endpoint, { ...options, retries: retries - 1, _attempt: _attempt + 1 }));
+      }
+
+      return response;
+    })
     .then(handleErrors)
-    .then(handleSuccess);
+    .then(handleResponse);
 }
 
-export async function postMultipart(endpoint: string, data: FormData): Promise<any> {
+export async function postMultipart(endpoint: string, data: FormData, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
   const headers = new Headers();
   const userToken = getUserToken();
   const albumToken = getAlbumToken();
 
   if (userToken !== null) {
     headers.set('Authorization',  `Bearer ${userToken}`);
-  } else if (albumToken !== null) {
-    // headers.set('X-Album-Token', albumToken);
   }
 
+  const { retries = 3, _attempt = 0, ...requestOptions } = options;
+
   return fetch(endpoint, {
+    ...requestOptions,
     method: 'POST',
     headers,
     body: data,
   })
+    .then((response: Response) => {
+      if (response.ok) {
+        return response;
+      }
+
+      if (response.status >= 500 || response.status === 408 || response.status === 429) {
+        return wait(getBackoffWithJitter(_attempt)).then(() => get(endpoint, { ...options, retries: retries - 1, _attempt: _attempt + 1 }));
+      }
+
+      return response;
+    })
     .then(handleErrors)
     .then(handleSuccess);
 }
