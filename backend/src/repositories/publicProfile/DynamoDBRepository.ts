@@ -14,6 +14,7 @@ class PublicProfileDynamoDBRepository implements PublicProfileRepository {
   constructor(
     protected dynamoDB: DynamoDBClient,
     protected tableName: string,
+    protected isDebugModeEnabled: boolean = false,
   ) {}
 
   public async get(id: ID): Promise<PublicProfile> {
@@ -24,13 +25,20 @@ class PublicProfileDynamoDBRepository implements PublicProfileRepository {
       Key: {
         id: {
           S: `publicprofile#${id}`,
-        }
-      }
+        },
+      },
+      ReturnConsumedCapacity: this.isDebugModeEnabled ? 'TOTAL' : 'NONE',
     });
   
-    const result = await this.dynamoDB.send(command);
+    const response = await this.dynamoDB.send(command);
 
-    const item = unmarshall(result.Item);
+    logger.silly(`${this.constructor.name}.get.response`, response);
+
+    if ('Item' in response === false) {
+      return undefined;
+    }
+
+    const item = unmarshall(response.Item);
 
     return {
       ...item,
@@ -55,11 +63,12 @@ class PublicProfileDynamoDBRepository implements PublicProfileRepository {
       TableName: this.tableName,
       Item: marshall(item, { removeUndefinedValues: true }),
       ConditionExpression: 'attribute_not_exists(id)',
+      ReturnConsumedCapacity: this.isDebugModeEnabled ? 'TOTAL' : 'NONE',
     });
 
-    const result = await this.dynamoDB.send(command);
+    const response = await this.dynamoDB.send(command);
 
-    logger.debug('result', result);
+    logger.silly(`${this.constructor.name}.create.result`, response);
 
     return {
       ...item,
@@ -95,12 +104,13 @@ class PublicProfileDynamoDBRepository implements PublicProfileRepository {
       ExpressionAttributeNames: attributeNames,
       ExpressionAttributeValues: attributeValues,
       ReturnValues: 'ALL_NEW',
-      ReturnConsumedCapacity: process.env.ENV === 'DEVELOPMENT' ? 'TOTAL' : 'NONE',
+      ConditionExpression: 'attribute_exists(id)',
+      ReturnConsumedCapacity: this.isDebugModeEnabled ? 'TOTAL' : 'NONE',
     });
 
     const response = await this.dynamoDB.send(command);
 
-    logger.debug('response', response);
+    logger.silly(`${this.constructor.name}.update.response`, response);
 
     const item = unmarshall(response.Attributes);
 
