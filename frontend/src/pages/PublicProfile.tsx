@@ -35,12 +35,12 @@ const PublicProfile: React.FC = () => {
         {
           hasError ? (
             <Alert variant="danger">
-              Tento album už nie je dostupný.
+              Verejný profil neexistuje.
             </Alert>
           ) : null
         }
         {
-          typeof publicProfile === 'undefined' ? (
+          typeof publicProfile === 'undefined' && hasError === false ? (
             <>
               <BarLoader As="h1">&nbsp;</BarLoader>
               <BarLoader As="p">&nbsp;</BarLoader>
@@ -55,7 +55,8 @@ const PublicProfile: React.FC = () => {
             </>
           ) : null
         }
-        { albums === null ? (
+        {
+          albums === null && hasError === false ? (
             <Row>
               <Col lg={3} md={4} sm={4} xs={6} className="mb-4">
                 <AlbumPreviewLoader />
