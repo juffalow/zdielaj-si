@@ -47,8 +47,8 @@ export default function Gallery({ files }: { files: Array<Media> }) {
 
       const element = (
         <div key={file.id} className="gallery-item mb-4" data-src={file.location} style={{ position: 'absolute', left, top: top[index % cols], width }}>
-          <ImageLoader src={file.thumbnails[0] || file.location} onVisible={true}>
-            <Image key={file.id} src={file.thumbnails[0] || file.location} alt="" width="100%" fluid />
+          <ImageLoader src={file.thumbnails[1] || file.location} onVisible={true}>
+            <Image key={file.id} src={file.thumbnails[1] || file.thumbnails[0] || file.location} alt="" width="100%" fluid />
           </ImageLoader>
         </div>
       );
