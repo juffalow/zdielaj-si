@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import styles from './ImageLoader.module.css';
 
 interface ImageLoaderProps {
-  children: JSX.Element | null;
+  children?: JSX.Element | null;
   src: string;
   alt?: string;
   alternativeImage?: string;

@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function Tracking() {
   const location = useLocation();
 
   useEffect(() => {
     setTimeout(() => {
-      'gtag' in window && (window as any).gtag('event', 'page_view', {
+      'gtag' in window && (window as Window & { gtag: any }).gtag('event', 'page_view', {
         page_title: document.title,
         page_path: location.pathname + location.search,
       });
@@ -14,10 +14,10 @@ export default function Tracking() {
   }, [location]);
 
   useEffect(() => {
-    const clickHandler = (event: any) => {
-      const analyticsId = event.target.getAttribute('data-tracking-id');
+    const clickHandler = (event: Event) => {
+      const analyticsId = (event.target as HTMLElement).getAttribute('data-tracking-id');
 
-      if (event.target.getAttribute('aria-label') === 'Download' && event.target.getAttribute('class').includes('lg-download')) {
+      if ((event.target as HTMLElement).getAttribute('aria-label') === 'Download' && (event.target as HTMLElement).getAttribute('class')?.includes('lg-download')) {
         'gtag' in window && (window as any).gtag('event', 'album_download_button_click');
       }
 

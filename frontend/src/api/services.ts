@@ -11,7 +11,7 @@ export async function register(username: string, password: string, meta: unknown
     .then(response => response.data.user);
 }
 
-export async function confirmRegister(username: string, code: string): Promise<RefreshTokenResponse> {
+export async function confirmRegister(username: string, code: string): Promise<any> {
   return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/confirm`, { username, code });
 }
 
@@ -30,16 +30,7 @@ export async function resetPassword(username: string, password: string, code: st
     .then(response => response.data);
 }
 
-interface RefreshTokenResponse {
-  error: unknown;
-  data: {
-    user: {      
-      accessToken: string;
-    }
-  };
-}
-
-export async function refreshToken(): Promise<RefreshTokenResponse> {
+export async function refreshToken(): Promise<API.GetRefreshTokenResponse> {
   return get(`${process.env.REACT_APP_USER_SERVICE_URL}/user/refresh-token`, { credentials: 'include' });
 }
 
@@ -59,17 +50,17 @@ export async function uploadPhoto(file: File): Promise<Media> {
 }
 
 export async function getAlbum(id: string): Promise<Album> {
-  return get(`${process.env.REACT_APP_CORE_URL}/albums/${id}`, { credentials: 'include' })
+  return get<API.GetAlbumResponse>(`${process.env.REACT_APP_CORE_URL}/albums/${id}`, { credentials: 'include' })
     .then(response => response.data.album);
 }
 
 export async function getCurrentUser(): Promise<User> {
-  return get(`${process.env.REACT_APP_CORE_URL}/me`, { credentials: 'include' })
+  return get<API.GetCurrentUserResponse>(`${process.env.REACT_APP_CORE_URL}/me`, { credentials: 'include' })
     .then(response => response.data.user);
 }
 
 export async function getUserAlbums(): Promise<Album[]> {
-  return get(`${process.env.REACT_APP_CORE_URL}/me`, { credentials: 'include' })
+  return get<API.GetCurrentUserResponse>(`${process.env.REACT_APP_CORE_URL}/me`, { credentials: 'include' })
     .then(response => response.data.user.albums);
 }
 
@@ -92,7 +83,7 @@ export async function addMedia(albumId: string, fileId: number): Promise<any> {
 }
 
 export async function getNotificationSettings(email: string): Promise<any> {
-  return get(`${process.env.REACT_APP_CORE_URL}/notifications?email=${email}&type=email`)
+  return get<any>(`${process.env.REACT_APP_CORE_URL}/notifications?email=${email}&type=email`)
     .then(response => response.data.settings);
 }
 
@@ -111,7 +102,7 @@ export async function updatePublicProfile(id: ID, params: { name?: string, descr
 }
 
 export async function getPublicProfile(id: ID): Promise<PublicProfile> {
-  return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${id}`)
+  return get<API.GetPublicProfileResponse>(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${id}`)
     .then(response => response.data.publicProfile);
 }
 

@@ -3,7 +3,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import './Thumbnail.css';
 
 interface ThumbnailParameters {
-  file: any;
+  file: UploadedFile;
   isUploading?: boolean;
 }
 

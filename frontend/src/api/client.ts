@@ -16,9 +16,13 @@ class BaseError extends Error {
   }
 }
 
-async function handleErrors(response: any): Promise<any> {
+async function handleErrors(response: Response | unknown): Promise<Response> {
+  if (response instanceof Response === false) {
+    throw new BaseError({ message: 'Unknown error', code: 0 });
+  }
+
   if (!response.ok) {
-    if (response.headers.get('Content-Type').startsWith('application/json')) {
+    if (response.headers.get('Content-Type')?.startsWith('application/json')) {
       const json = await response.json();
       if ('error' in json && json.error !== null) {
         throw new BaseError(json.error);
@@ -27,15 +31,16 @@ async function handleErrors(response: any): Promise<any> {
 
     throw new BaseError({ message: response.statusText, code: response.status });
   }
+
   return response;
 }
 
-function handleSuccess(response: any) {
-  if (response.headers.get('Content-Type').startsWith('application/json')) {
-    return response.json();
-  } else {
-    return response.text();
+function handleSuccess<T>(response: Response): Promise<T> {
+  if (response.headers.get('Content-Type')?.startsWith('application/json') === false) {
+    throw new BaseError({ message: 'Unsupported content type!', code: 0 });
   }
+
+  return response.json();
 }
 
 function handleResponse(response: Response) {
@@ -58,7 +63,7 @@ function wait(delay: number): Promise<void> {
   });
 }
 
-export async function get(endpoint: string, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
+export async function get<T>(endpoint: string, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<T> {
   const headers = new Headers();
   const userToken = getUserToken();
 
@@ -85,7 +90,7 @@ export async function get(endpoint: string, options = {} as { retries?: number, 
       return response;
     })
     .then(handleErrors)
-    .then(handleResponse);
+    .then(handleSuccess<T>);
 }
 
 export async function post(endpoint: string, data: unknown, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
@@ -129,7 +134,6 @@ export async function post(endpoint: string, data: unknown, options = {} as { re
 export async function postMultipart(endpoint: string, data: FormData, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
   const headers = new Headers();
   const userToken = getUserToken();
-  const albumToken = getAlbumToken();
 
   if (userToken !== null) {
     headers.set('Authorization',  `Bearer ${userToken}`);

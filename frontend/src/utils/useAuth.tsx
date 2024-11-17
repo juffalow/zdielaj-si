@@ -14,7 +14,7 @@ interface AuthContextType {
   user?: User;
   hasInitialized: boolean;
   loading: boolean;
-  error?: any;
+  error?: Error;
   signIn: (username: string, password: string) => Promise<void>;
   signUp: (firstName: string, lastName: string, email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;

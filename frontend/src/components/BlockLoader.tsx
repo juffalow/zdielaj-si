@@ -1,6 +1,6 @@
 import styles from './BlockLoader.module.css';
 
-const BlockLoader = (props: any) => {
+const BlockLoader = (props: React.HTMLAttributes<HTMLDivElement>) => {
   return <div className={styles.loader} {...props} />;
 }
 

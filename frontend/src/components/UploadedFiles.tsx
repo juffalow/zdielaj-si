@@ -26,8 +26,8 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
     getInputProps: getSingleInputProps,
   } = useDropzone({ onDrop: onSingleDrop, accept: 'image/*, video/*', maxFiles: 50 });
 
-  const uploadingCount = files.filter((file: any) => file.isUploading === false).length;
-  const uploadingSizeSum = files.filter((file: any) => file.isUploading).reduce((sum, file) => sum + file.size, 0);
+  const uploadingCount = files.filter(file => file.isUploading === false).length;
+  const uploadingSizeSum = files.filter(file => file.isUploading).reduce((sum, file) => sum + file.size, 0);
 
   return (
     <>
@@ -50,7 +50,7 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
       </Row>
       <Row className="mt-4">
         {
-          files.map((file: any, index: number) => (
+          files.map((file: UploadedFile, index: number) => (
             <Col lg={2} md={2} sm={3} xs={files.length === 1 ? true : 6} key={`${index}-${file.path}`} className="mb-2">
               <Thumbnail file={file} isUploading={file.isUploading} />
             </Col>

@@ -5,11 +5,11 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { FileWithPath } from 'react-dropzone';
+import type { FileWithPath } from 'react-dropzone';
 import { uploadPhoto } from '../api/services';
 
 interface UploadContextType {
-  files: FileWithPath[];
+  files: UploadedFile[];
   uploadSpeed: number;
   clear: () => void,
   onDrop: (acceptedFiles: FileWithPath[], onUpload?: (media: Media) => Promise<void> | void) => Promise<unknown>;
@@ -20,7 +20,7 @@ const UploadContext = createContext<UploadContextType>(
 );
 
 export function UploadProvider({ children }: { children: ReactNode }): JSX.Element {
-  const [ files, setFiles ] = useState<FileWithPath[]>([]);
+  const [ files, setFiles ] = useState<UploadedFile[]>([]);
   const [ uploadSpeed, setUploadSpeed ] = useState(0);
 
   const onDrop = async (acceptedFiles: FileWithPath[], onUpload?: (media: Media) => Promise<void> | void): Promise<unknown> => {
@@ -36,7 +36,7 @@ export function UploadProvider({ children }: { children: ReactNode }): JSX.Eleme
       })),
     ));
 
-    const mediaList: any = [];
+    const mediaList: Media[] = [];
 
     const uploadOne = async () => {
       while (acceptedFiles.length > 0) {
