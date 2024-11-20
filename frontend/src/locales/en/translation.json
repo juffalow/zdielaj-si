@@ -1,0 +1,99 @@
+{
+  "home": {
+    "title": "Share photos and videos in full quality",
+    "subtitle": "Do you also have a problem that some applications reduce the quality of your photos and videos? Here you can share them without any problems in full quality!",
+    "uploadAreaText": "Move photos here or select them by clicking",
+    "uploadAreaButton": "Upload photos",
+    "pricing": {
+      "default": {
+        "title": "Without registration",
+        "monthly": "monthly",
+        "maxTenPhotos": "max <strong>10</strong> photos",
+        "deletedAfter24Hours": "files will be automatically deleted after <strong>24 hours</strong>",
+        "register": "Register"
+      },
+      "free": {
+        "title": "Free",
+        "monthly": "monthly",
+        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 photos)</small>",
+        "video": "video",
+        "listOfAlbums": "list of albums",
+        "filesWillBeDeletedAfter7Days": "files will be automatically deleted after <strong>7 days</strong>",
+        "register": "Register"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "monthly",
+        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 photos)</small>",
+        "video": "video",
+        "listOfAlbums": "list of albums",
+        "passwordProtect": "password protect",
+        "publicProfile": "public profile",
+        "filesWillNotBeDeleted": "files are <strong>not deleted</strong>",
+        "register": "Register"
+      }
+    }
+  },
+  "login": {
+    "title": "Sign in",
+    "subtitle": "Don't have an account yet?",
+    "subtitleLink": "Sign up",
+    "form": {
+      "email": "E-mail address",
+      "requiredField": "This field is required.",
+      "password": "Password",
+      "forgotPassword": "Forgot your password?",
+      "signInButton": "Sign in"
+    }
+  },
+  "register": {
+    "title": "Sign up",
+    "subtitle": "Already have an account?",
+    "subtitleLink": "Sign in",
+    "error": {
+      "userAlreadyExists": "User with this email address already exists!",
+      "userNotCreated": "Failed to create user!"
+    },
+    "form": {
+      "name": "Name",
+      "email": "E-mail address",
+      "password": "Password",
+      "requiredField": "This field is required.",
+      "minEightCharacters": "At least 8 characters",
+      "atLeastOneUppercase": "At least one capital letter",
+      "atLeastOneLowercase": "At least one lowercase letter",
+      "atLeastOneSpecialCharacter": "At least one special character",
+      "atLeastOneNumber": "At least one number",
+      "signUpButton": "Sing up"
+    },
+    "confirmForm": {
+      "title": "Email address verification",
+      "subtitle": "A verification code has been sent to your email.",
+      "code": "Verification code",
+      "requiredField": "This field is required.",
+      "submitButton": "Complete registration"
+    },
+    "thankYou": {
+      "title": "Thank you for registration!",
+      "subtitle": "Your email address has been verified. You can continue by logging into your account",
+      "subtitleLink": "here"
+    }
+  },
+  "menu": {
+    "albums": "Albums",
+    "about": "About",
+    "profile": "Profile",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "subscription": "Subscription"
+  },
+  "footer": {
+    "about": "About",
+    "contact": "Contact",
+    "description": "The application helps users quickly and easily share photos and videos without reducing quality.",
+    "home": "Home",
+    "links": "Links",
+    "register": "Register",
+    "status": "Status"
+  }
+}

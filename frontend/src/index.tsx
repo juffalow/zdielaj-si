@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import * as Sentry from '@sentry/react';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './i18n';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 Sentry.init({

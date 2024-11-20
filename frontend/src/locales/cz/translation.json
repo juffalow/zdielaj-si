@@ -1,0 +1,99 @@
+{
+  "home": {
+    "title": "Sdílej fotky a videa v plné kvalitě",
+    "subtitle": "Také máš problém, že ti některé aplikace snižují kvalitu fotek a videí? Tady je můžeš sdílet bez problémů v plné kvalitě!",
+    "uploadAreaText": "Přesuň sem fotky nebo je vyber kliknutím",
+    "uploadAreaButton": "Nahrát fotky",
+    "pricing": {
+      "default": {
+        "title": "Bez registrace",
+        "monthly": "měsíčně",
+        "maxTenPhotos": "maximálně <strong>10</strong> fotek",
+        "deletedAfter24Hours": "fotky budou po <strong>24 hodinách</strong> automaticky smazány",
+        "register": "Registrace"
+      },
+      "free": {
+        "title": "Zdarma",
+        "monthly": "mměsíčně",
+        "maxOneGB": "maximálně <strong>1GB</strong> <small>(≈ 300 fotek)</small>",
+        "video": "video",
+        "listOfAlbums": "seznam vytvořených alb",
+        "filesWillBeDeletedAfter7Days": "soubory budou po <strong>7 dnech</strong> automaticky smazány",
+        "register": "Registrace"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "měsíčně",
+        "maxTenGB": "maximálně <strong>10GB</strong> <small>(≈ 3000 fotek)</small>",
+        "video": "video",
+        "listOfAlbums": "seznam vytvořených alb",
+        "passwordProtect": "zaheslovat přístup",
+        "publicProfile": "veřejný profil",
+        "filesWillNotBeDeleted": "soubory se <strong>nemažou</strong>",
+        "register": "Registrace"
+      }
+    }
+  },
+  "login": {
+    "title": "Přihlásit se",
+    "subtitle": "Ještě nemáš účet?",
+    "subtitleLink": "Registrovat se",
+    "form": {
+      "email": "E-mailová adresa",
+      "requiredField": "Toto pole je povinné.",
+      "password": "Heslo",
+      "forgotPassword": "Zapomenuté heslo?",
+      "signInButton": "Přihlásit se"
+    }
+  },
+  "register": {
+    "title": "Registrace",
+    "subtitle": "Máš už účet?",
+    "subtitleLink": "Přihlásit se",
+    "error": {
+      "userAlreadyExists": "Uživatel s touto e-mailovou adresou již existuje!",
+      "userNotCreated": "Nepodařilo se vytvořit uživatele!"
+    },
+    "form": {
+      "name": "Jméno",
+      "email": "E-mailová adresa",
+      "password": "Heslo",
+      "requiredField": "Toto pole je povinné.",
+      "minEightCharacters": "Minimálně 8 znaků",
+      "atLeastOneUppercase": "Alespoň jedno velké písmeno",
+      "atLeastOneLowercase": "Alespoň jedno malé písmeno",
+      "atLeastOneSpecialCharacter": "Alespoň jeden speciální znak",
+      "atLeastOneNumber": "Alespoň jedno číslo",
+      "signUpButton": "Registrovat se"
+    },
+    "confirmForm": {
+      "title": "Ověření e-mailové adresy",
+      "subtitle": "Na tvůj e-mail byl odeslán ověřovací kód.",
+      "code": "Ověřovací kód",
+      "requiredField": "Toto pole je povinné.",
+      "submitButton": "Dokončit registraci"
+    },
+    "thankYou": {
+      "title": "Děkuji za registraci!",
+      "subtitle": "Tvoje e-mailová adresa byla ověřena. Můžeš pokračovat přihlášením se do svého účtu",
+      "subtitleLink": "zde"
+    }
+  },
+  "menu": {
+    "albums": "Alba",
+    "about": "O aplikaci",
+    "profile": "Profil",
+    "signIn": "Přihlásit se",
+    "signOut": "Ohlásit se",
+    "subscription": "Předplatné"
+  },
+  "footer": {
+    "about": "O aplikaci",
+    "contact": "Kontakt",
+    "description": "Aplikace pomáhá uživatelům rychle a snadno sdílet fotografie a videa bez snížení kvality.",
+    "home": "Domů",
+    "links": "Odkazy",
+    "register": "Registrace",
+    "status": "Status"
+  }
+}

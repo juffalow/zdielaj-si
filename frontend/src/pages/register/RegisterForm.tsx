@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const RegisterForm: React.FC<Props> = ({ onRegisterSubmit }: Props) => {
+  const { t } = useTranslation();
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
@@ -43,9 +45,9 @@ const RegisterForm: React.FC<Props> = ({ onRegisterSubmit }: Props) => {
         .catch((error) => {
           setHasError(true);
           if (error.code === 2) {
-            setErrorMessage('Užívateľ s touto e-mailovou adresou už existuje!');
+            setErrorMessage(t("register.error.userAlreadyExists"));
           } else {
-            setErrorMessage('Nepodarilo sa vytvoriť užívateľa!');
+            setErrorMessage(t("register.error.userNotCreated"));
           }
           setIsValidated(false);
         });
@@ -56,8 +58,8 @@ const RegisterForm: React.FC<Props> = ({ onRegisterSubmit }: Props) => {
     <>
       <Row>
         <Col>
-          <h1 className="text-center">Vytvor si účet</h1>
-          <p className="text-center mb-5">Máš už účet? <Link to="/prihlasit-sa">Prihlásiť sa</Link></p>
+          <h1 className="text-center">{t("register.title")}</h1>
+          <p className="text-center mb-5">{t("register.subtitle")} <Link to="/prihlasit-sa">{t("register.subtitleLink")}</Link></p>
         </Col>
       </Row>
       <Row>
@@ -71,35 +73,35 @@ const RegisterForm: React.FC<Props> = ({ onRegisterSubmit }: Props) => {
           }
           <Form noValidate validated={isValidated} onSubmit={onSubmit}>
             <Form.Group controlId="registerName">
-              <Form.Label>Meno</Form.Label>
+              <Form.Label>{t("register.form.name")}</Form.Label>
               <Form.Control required type="text" name="name" id="registerName" placeholder="Meno (Priezvisko)" value={values.name} onChange={onChange} />
-              <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{t("register.form.requiredField")}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="registerEmail" className="mt-3">
-              <Form.Label>E-mailová adresa</Form.Label>
+              <Form.Label>{t("register.form.email")}</Form.Label>
               <Form.Control required type="email" name="email" id="registerEmail" placeholder="meno.priezvisko@priklad.sk" value={values.email} onChange={onChange} />
-              <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{t("register.form.requiredField")}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="registerPassword" className="mt-3">
-              <Form.Label>Heslo</Form.Label>
+              <Form.Label>{t("register.form.password")}</Form.Label>
               <Form.Control required type="password" name="password" id="registerPassword" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
-              <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{t("register.form.requiredField")}</Form.Control.Feedback>
               <Form.Text className="text-muted mt-4">
                 <ul>
-                  <li>Minimálne 8 znakov { values.password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-                  <li>Aspoň jedno veľké písmeno { values.password.toLowerCase() !== values.password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-                  <li>Aspoň jedno malé písmeno { values.password.toUpperCase() !== values.password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-                  <li>Aspoň jeden špeciálny znak { values.password.match(/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-                  <li>Aspoň jedno číslo { values.password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.minEightCharacters")} { values.password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.atLeastOneUppercase")} { values.password.toLowerCase() !== values.password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.atLeastOneLowercase")} { values.password.toUpperCase() !== values.password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.atLeastOneSpecialCharacter")} { values.password.match(/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.atLeastOneNumber")} { values.password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
                 </ul>
               </Form.Text>
             </Form.Group>
 
             <Form.Group className="text-center mt-4 mb-2">
               <Button variant="primary" type="submit">
-                Registrovať sa
+                {t("register.form.signUpButton")}
               </Button>
             </Form.Group>
             <Form.Text className="text-muted mt-4">

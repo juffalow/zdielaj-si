@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const ConfirmForm: React.FC<Props> = ({ onConfirmSubmit }: Props) => {
+  const { t } = useTranslation();
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
@@ -51,8 +53,8 @@ const ConfirmForm: React.FC<Props> = ({ onConfirmSubmit }: Props) => {
     <>
       <Row>
         <Col>
-          <h1 className="text-center">Overenie e-mailovej adresy</h1>
-          <p className="text-center mb-5">Na tvoj e-mail bol odoslaný overovací kód.</p>
+          <h1 className="text-center">{t("login.confirmForm.title")}</h1>
+          <p className="text-center mb-5">{t("login.confirmForm.subtitle")}</p>
         </Col>
       </Row>
       <Row>
@@ -66,14 +68,14 @@ const ConfirmForm: React.FC<Props> = ({ onConfirmSubmit }: Props) => {
           }
           <Form noValidate validated={isValidated} onSubmit={onSubmit}>
             <Form.Group controlId="confirmCode">
-              <Form.Label>Overovací kód</Form.Label>
+              <Form.Label>{t("login.confirmForm.code")}</Form.Label>
               <Form.Control required type="text" name="code" id="confirmCode" placeholder="123456" value={values.code} onChange={onChange} />
-              <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{t("login.confirmForm.requiredField")}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="text-center mt-4 mb-2">
               <Button variant="primary" type="submit">
-                Dokončiť registráciu
+              {t("login.confirmForm.submitButton")}
               </Button>
             </Form.Group>
           </Form>

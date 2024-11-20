@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,6 +11,7 @@ import SEO from '../components/SEO';
 import useAuth from '../utils/useAuth';
 
 const Login: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const [ isValidated, setIsValidated ] = useState(false);
@@ -51,12 +53,12 @@ const Login: React.FC = () => {
   };
 
   return (
-    <SEO title="Prihlásiť sa" description="">
+    <SEO title={t("login.title")} description="">
       <Container className="main" style={{ marginTop: 50 }}>
         <Row>
           <Col>
-            <h1 className="text-center">Prihlásiť sa</h1>
-            <p className="text-center mb-5">Ešte nemáš už účet? <Link to="/registracia">Registrovať sa</Link></p>
+            <h1 className="text-center">{t("login.title")}</h1>
+            <p className="text-center mb-5">{t("login.subtitle")} <Link to="/registracia">{t("login.subtitleLink")}</Link></p>
           </Col>
         </Row>
         <Row>
@@ -70,22 +72,22 @@ const Login: React.FC = () => {
             }
             <Form noValidate validated={isValidated} onSubmit={onSubmit}>
               <Form.Group controlId="loginUsername">
-                <Form.Label>E-mailová adresa</Form.Label>
+                <Form.Label>{t("login.form.email")}</Form.Label>
                 <Form.Control required type="email" name="email" placeholder="meno.priezvisko@priklad.sk" value={values.email} onChange={onChange} />
-                <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">{t("login.form.requiredField")}</Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group controlId="loginPassword" className="mt-3">
-                <Form.Label>Heslo</Form.Label>
+                <Form.Label>{t("login.form.password")}</Form.Label>
                 <Form.Control required type="password" name="password" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
-                <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">{t("login.form.requiredField")}</Form.Control.Feedback>
               </Form.Group>
 
-              <p className="text-center mt-3"><Link to="/reset-hesla">Zabudnuté heslo?</Link></p>
+              <p className="text-center mt-3"><Link to="/reset-hesla">{t("login.form.forgotPassword")}</Link></p>
 
               <Form.Group className="text-center mt-4">
                 <Button variant="primary" type="submit">
-                  Prihlásiť sa
+                  {t("login.form.signInButton")}
                 </Button>
               </Form.Group>
             </Form>
