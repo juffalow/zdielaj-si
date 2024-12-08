@@ -1,0 +1,99 @@
+{
+  "home": {
+    "title": "Teilen Sie Fotos und Videos in voller Qualität",
+    "subtitle": "Haben Sie auch das Problem, dass einige Anwendungen die Qualität Ihrer Fotos und Videos reduzieren? Hier können Sie sie problemlos in voller Qualität teilen!",
+    "uploadAreaText": "Fotos hierher ziehen oder durch Klicken auswählen",
+    "uploadAreaButton": "Fotos hochladen",
+    "pricing": {
+      "default": {
+        "title": "Ohne Registrierung",
+        "monthly": "monatlich",
+        "maxTenPhotos": "max <strong>10</strong> Fotos",
+        "deletedAfter24Hours": "Dateien werden nach <strong>24 Stunden</strong> automatisch gelöscht",
+        "register": "Registrieren"
+      },
+      "free": {
+        "title": "Kostenlos",
+        "monthly": "monatlich",
+        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 Fotos)</small>",
+        "video": "Video",
+        "listOfAlbums": "Liste der Alben",
+        "filesWillBeDeletedAfter7Days": "Dateien werden nach <strong>7 Tagen</strong> automatisch gelöscht",
+        "register": "Registrieren"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "monatlich",
+        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 Fotos)</small>",
+        "video": "Video",
+        "listOfAlbums": "Liste der Alben",
+        "passwordProtect": "Passwortschutz",
+        "publicProfile": "Öffentliches Profil",
+        "filesWillNotBeDeleted": "Dateien werden <strong>nicht gelöscht</strong>",
+        "register": "Registrieren"
+      }
+    }
+  },
+  "login": {
+    "title": "Anmelden",
+    "subtitle": "Noch kein Konto?",
+    "subtitleLink": "Registrieren",
+    "form": {
+      "email": "E-Mail-Adresse",
+      "requiredField": "Dieses Feld ist erforderlich.",
+      "password": "Passwort",
+      "forgotPassword": "Passwort vergessen?",
+      "signInButton": "Anmelden"
+    }
+  },
+  "register": {
+    "title": "Registrieren",
+    "subtitle": "Bereits ein Konto?",
+    "subtitleLink": "Anmelden",
+    "error": {
+      "userAlreadyExists": "Ein Benutzer mit dieser E-Mail-Adresse existiert bereits!",
+      "userNotCreated": "Benutzer konnte nicht erstellt werden!"
+    },
+    "form": {
+      "name": "Name",
+      "email": "E-Mail-Adresse",
+      "password": "Passwort",
+      "requiredField": "Dieses Feld ist erforderlich.",
+      "minEightCharacters": "Mindestens 8 Zeichen",
+      "atLeastOneUppercase": "Mindestens ein Großbuchstabe",
+      "atLeastOneLowercase": "Mindestens ein Kleinbuchstabe",
+      "atLeastOneSpecialCharacter": "Mindestens ein Sonderzeichen",
+      "atLeastOneNumber": "Mindestens eine Zahl",
+      "signUpButton": "Registrieren"
+    },
+    "confirmForm": {
+      "title": "E-Mail-Adresse verifizieren",
+      "subtitle": "Ein Bestätigungscode wurde an Ihre E-Mail gesendet.",
+      "code": "Bestätigungscode",
+      "requiredField": "Dieses Feld ist erforderlich.",
+      "submitButton": "Registrierung abschließen"
+    },
+    "thankYou": {
+      "title": "Danke für Ihre Registrierung!",
+      "subtitle": "Ihre E-Mail-Adresse wurde verifiziert. Sie können fortfahren, indem Sie sich in Ihr Konto einloggen",
+      "subtitleLink": "hier"
+    }
+  },
+  "menu": {
+    "albums": "Alben",
+    "about": "Über",
+    "profile": "Profil",
+    "signIn": "Anmelden",
+    "signOut": "Abmelden",
+    "subscription": "Abonnement"
+  },
+  "footer": {
+    "about": "Über",
+    "contact": "Kontakt",
+    "description": "Die Anwendung hilft Benutzern, Fotos und Videos schnell und einfach zu teilen, ohne die Qualität zu reduzieren.",
+    "home": "Startseite",
+    "links": "Links",
+    "register": "Registrieren",
+    "status": "Status"
+  }
+}

@@ -16,7 +16,13 @@ const Menu = () => {
     i18n.changeLanguage(code);
   };
 
-  const lang = i18n.language === 'sk' ? (<>&#x1F1F8;&#x1F1F0; SK</>) : i18n.language === 'en' ? (<>&#x1F1EC;&#x1F1E7; EN</>) : i18n.language === 'cz' ? (<>&#x1F1E8;&#x1F1FF; CZ</>) : (<>&#x1F1F8;&#x1F1F0; SK</>);
+  const lang = i18n.language === 'sk' ? (<>&#x1F1F8;&#x1F1F0; SK</>)
+    : i18n.language === 'en' ? (<>&#x1F1EC;&#x1F1E7; EN</>)
+    : i18n.language === 'cz' ? (<>&#x1F1E8;&#x1F1FF; CZ</>)
+    : i18n.language === 'de' ? (<>&#x1F1E9;&#x1F1EA; DE</>)
+    : i18n.language === 'es' ? (<>&#x1F1EA;&#x1F1F8; ES</>)
+    : i18n.language === 'fr' ? (<>&#x1F1EB;&#x1F1F7; FR</>)
+    : (<>&#x1F1F8;&#x1F1F0; SK</>);
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect={true}>
@@ -51,7 +57,8 @@ const Menu = () => {
               <NavDropdown.Item onClick={onChangeLang} data-lang="sk">&#x1F1F8;&#x1F1F0; SK</NavDropdown.Item>
               <NavDropdown.Item onClick={onChangeLang} data-lang="cz">&#x1F1E8;&#x1F1FF; CZ</NavDropdown.Item>
               <NavDropdown.Item onClick={onChangeLang} data-lang="en">&#x1F1EC;&#x1F1E7; EN</NavDropdown.Item>
-              <NavDropdown.Item onClick={onChangeLang} data-lang="de" disabled>&#x1F1E9;&#x1F1EA; DE</NavDropdown.Item>
+              <NavDropdown.Item onClick={onChangeLang} data-lang="de">&#x1F1E9;&#x1F1EA; DE</NavDropdown.Item>
+              <NavDropdown.Item onClick={onChangeLang} data-lang="es">&#x1F1EA;&#x1F1F8; ES</NavDropdown.Item>
               <NavDropdown.Item onClick={onChangeLang} data-lang="fr" disabled>&#x1F1EB;&#x1F1F7; FR</NavDropdown.Item>
             </NavDropdown>
           </Nav>
