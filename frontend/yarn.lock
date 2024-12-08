@@ -7100,6 +7100,7 @@ __metadata:
     bootstrap: "npm:^5.3.3"
     eslint: "npm:^8.57.0"
     i18next: "npm:^23.16.6"
+    i18next-browser-languagedetector: "npm:^8.0.1"
     lightgallery: "npm:^2.7.2"
     react: "npm:^18.3.1"
     react-bootstrap: "npm:^2.10.4"
@@ -7730,6 +7731,15 @@ __metadata:
   version: 2.1.0
   resolution: "human-signals@npm:2.1.0"
   checksum: 10c0/695edb3edfcfe9c8b52a76926cd31b36978782062c0ed9b1192b36bebc75c4c87c82e178dfcb0ed0fc27ca59d434198aac0bd0be18f5781ded775604db22304a
+  languageName: node
+  linkType: hard
+
+"i18next-browser-languagedetector@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "i18next-browser-languagedetector@npm:8.0.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.2"
+  checksum: 10c0/159c362ab816b02e805cdb99131de5fa898124a7671e162a79497618b7ca36d2def06e855d30944304c5a75bb1fe285ad06a126c708e574142d1563d7092c63e
   languageName: node
   linkType: hard
 
