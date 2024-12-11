@@ -35,7 +35,7 @@ class Albums implements AlbumsController {
           height: file.metadata.height,
         },
         thumbnails: file.thumbnails,
-        conversions: 'conversions' in file ? file.conversions.map(c => 'https://d1zcbk2j8t91y7.cloudfront.net/' + c) : undefined,
+        conversions: file.conversions,
       }
     }));
 
