@@ -16,7 +16,8 @@ interface GetFileResponse {
         mimetype: string,
         size: number,
         location: string,
-      }
+      },
+      conversions?: string[],
     },
   },
 }
@@ -39,7 +40,8 @@ interface ListFilesResponse {
         mimetype: string,
         size: number,
         location: string,
-      }
+      },
+      conversions?: string[],
     }[],
   },
 }
