@@ -6,6 +6,7 @@ import translationEN from "./locales/en/translation.json";
 import translationCZ from "./locales/cz/translation.json";
 import translationDE from "./locales/de/translation.json";
 import translationES from "./locales/es/translation.json";
+import translationFR from "./locales/fr/translation.json";
 
 i18n.use(detector).use(initReactI18next).init({
   lng: 'sk',
@@ -28,6 +29,9 @@ i18n.use(detector).use(initReactI18next).init({
     },
     es: {
       translation: translationES,
+    },
+    fr: {
+      translation: translationFR,
     },
   },
   cache: ['localStorage'],

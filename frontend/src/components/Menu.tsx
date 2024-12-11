@@ -59,7 +59,7 @@ const Menu = () => {
               <NavDropdown.Item onClick={onChangeLang} data-lang="en">&#x1F1EC;&#x1F1E7; EN</NavDropdown.Item>
               <NavDropdown.Item onClick={onChangeLang} data-lang="de">&#x1F1E9;&#x1F1EA; DE</NavDropdown.Item>
               <NavDropdown.Item onClick={onChangeLang} data-lang="es">&#x1F1EA;&#x1F1F8; ES</NavDropdown.Item>
-              <NavDropdown.Item onClick={onChangeLang} data-lang="fr" disabled>&#x1F1EB;&#x1F1F7; FR</NavDropdown.Item>
+              <NavDropdown.Item onClick={onChangeLang} data-lang="fr">&#x1F1EB;&#x1F1F7; FR</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
