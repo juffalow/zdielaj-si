@@ -30,7 +30,7 @@ jobs:
       run: corepack enable
     - uses: actions/setup-node@v4
       env:
-        yarn: 4.4.0
+        yarn: 4.5.3
       with:
         node-version: 22
         cache: 'yarn'
@@ -54,7 +54,7 @@ jobs:
       run: corepack enable
     - uses: actions/setup-node@v4
       env:
-        yarn: 4.4.0
+        yarn: 4.5.3
       with:
         node-version: 22
         cache: 'yarn'
