@@ -32,7 +32,7 @@ const Footer = ({ t }: WithTranslation) => (
       <Row className="mt-3">
         <Col>
           <hr />
-          <p className="text-center text-light mb-0" style={{color: '#000', fontSize: '0.7rem'}}><a href="https://juffalow.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none' }}>Matej <span style={{ color: 'red' }}>'juffalow'</span> Jelluš</a> | 2021 - 2024</p>
+          <p className="text-center text-light mb-0" style={{color: '#000', fontSize: '0.7rem'}}><a href="https://juffalow.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'none' }}>Matej <span style={{ color: 'red' }}>'juffalow'</span> Jelluš</a> | 2021 - 2025</p>
         </Col>
       </Row>      
     </footer>
