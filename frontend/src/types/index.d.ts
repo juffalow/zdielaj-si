@@ -57,9 +57,3 @@ type NotificationSetting = {
   notification: string;
   isEnabled: boolean,
 }
-
-namespace JSX {
-  interface IntrinsicElements {
-    'stripe-pricing-table': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-  }
-}
