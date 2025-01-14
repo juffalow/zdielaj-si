@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { v4 as uuidv4 } from 'uuid';
+import { v7 as uuidv7 } from 'uuid';
 import namespace from '../services/cls';
 
 export default function trace(req: Request, res: Response, next: NextFunction): void {
@@ -11,7 +11,7 @@ export default function trace(req: Request, res: Response, next: NextFunction): 
   namespace.bind(req);
   namespace.bind(res);
 
-  const traceId = uuidv4();
+  const traceId = uuidv7();
 
   req['traceId'] = traceId;
 
