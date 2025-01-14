@@ -13,7 +13,7 @@ const container = {
         endpoint: config.services.database.endpoint,
         region: config.services.database.region,
       });
-      this._dynamoDB = AWSXRay.captureAWSClient(dynamoDB);
+      this._dynamoDB = AWSXRay.captureAWSv3Client(dynamoDB);
     }
 
     return this._dynamoDB;
