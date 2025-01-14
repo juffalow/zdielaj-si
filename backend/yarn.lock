@@ -497,6 +497,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aws-sdk/types@npm:^3.4.1":
+  version: 3.723.0
+  resolution: "@aws-sdk/types@npm:3.723.0"
+  dependencies:
+    "@smithy/types": "npm:^4.0.0"
+    tslib: "npm:^2.6.2"
+  checksum: 10c0/b13f2ef66a0de96df9a6ff227531579483b0d7a735ca3a936ba881d528ccae8b36d568f69914c343c972c0b84057366947980ed2ab60c642443564c2ad3739fe
+  languageName: node
+  linkType: hard
+
 "@aws-sdk/util-dynamodb@npm:^3.651.1":
   version: 3.651.1
   resolution: "@aws-sdk/util-dynamodb@npm:3.651.1"
@@ -2182,6 +2192,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@smithy/service-error-classification@npm:^2.0.4":
+  version: 2.1.5
+  resolution: "@smithy/service-error-classification@npm:2.1.5"
+  dependencies:
+    "@smithy/types": "npm:^2.12.0"
+  checksum: 10c0/e3fb24af5a3a60bf6479bc057bc832f89a0b427650ea2f262220a9627d60d2ab455ad766a2fcceb55fba1b15eddb82b25775fb781c254d2031768f5f8e131e15
+  languageName: node
+  linkType: hard
+
 "@smithy/service-error-classification@npm:^3.0.6":
   version: 3.0.6
   resolution: "@smithy/service-error-classification@npm:3.0.6"
@@ -2231,12 +2250,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@smithy/types@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "@smithy/types@npm:2.12.0"
+  dependencies:
+    tslib: "npm:^2.6.2"
+  checksum: 10c0/3530ba5b4f4e52a4028679f73e133af928cf6ea22a16d29669b8c67ea540ed46ab15dc6d391598fbdfd476884cdc57881c480168e2dbe7c5bb007f5afad01531
+  languageName: node
+  linkType: hard
+
 "@smithy/types@npm:^3.4.0, @smithy/types@npm:^3.4.2":
   version: 3.4.2
   resolution: "@smithy/types@npm:3.4.2"
   dependencies:
     tslib: "npm:^2.6.2"
   checksum: 10c0/b3a583c3c9116952008b0227be1b1513447ed08e8f65c7b82c0c8299b2520b6e0544de0225d6baf3afe65db4fe5a37c4ed5622bac3d516058bc4a3d4bbad0ec6
+  languageName: node
+  linkType: hard
+
+"@smithy/types@npm:^4.0.0":
+  version: 4.1.0
+  resolution: "@smithy/types@npm:4.1.0"
+  dependencies:
+    tslib: "npm:^2.6.2"
+  checksum: 10c0/d8817145ea043c5b29783df747ed47c3a1c584fd9d02bbdb609d38b7cb4dded1197ac214ae112744c86abe0537a314dae0edbc0e752bb639ef2d9fb84c67a9d9
   languageName: node
   linkType: hard
 
@@ -2485,6 +2522,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/cls-hooked@npm:^4.3.3":
+  version: 4.3.9
+  resolution: "@types/cls-hooked@npm:4.3.9"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/fd531903b2cd7fa76d36ec81142ac55f0ea8702f6d76238a1ca5c773b8e35889cf528198a8a83b5e551f928f47bdfad947e29d9ebbe0df712cbf14510f7ae713
+  languageName: node
+  linkType: hard
+
 "@types/connect@npm:*":
   version: 3.4.38
   resolution: "@types/connect@npm:3.4.38"
@@ -2512,6 +2558,30 @@ __metadata:
     "@types/range-parser": "npm:*"
     "@types/send": "npm:*"
   checksum: 10c0/5d2a1fb96a17a8e0e8c59325dfeb6d454bbc5c9b9b6796eec0397ddf9dbd262892040d5da3d72b5d7148f34bb3fcd438faf1b37fcba8c5a03e75fae491ad1edf
+  languageName: node
+  linkType: hard
+
+"@types/express-serve-static-core@npm:^5.0.0":
+  version: 5.0.4
+  resolution: "@types/express-serve-static-core@npm:5.0.4"
+  dependencies:
+    "@types/node": "npm:*"
+    "@types/qs": "npm:*"
+    "@types/range-parser": "npm:*"
+    "@types/send": "npm:*"
+  checksum: 10c0/e469d179a8815703f0be495f400713394ddccaf37d1fab90907d2ec0b19b03df4db20a6bbde026ba0d218a817ed22c3ef3934d429649b1ce66d26084f5105eae
+  languageName: node
+  linkType: hard
+
+"@types/express@npm:*":
+  version: 5.0.0
+  resolution: "@types/express@npm:5.0.0"
+  dependencies:
+    "@types/body-parser": "npm:*"
+    "@types/express-serve-static-core": "npm:^5.0.0"
+    "@types/qs": "npm:*"
+    "@types/serve-static": "npm:*"
+  checksum: 10c0/0d74b53aefa69c3b3817ee9b5145fd50d7dbac52a8986afc2d7500085c446656d0b6dc13158c04e2d9f18f4324d4d93b0452337c5ff73dd086dca3e4ff11f47b
   languageName: node
   linkType: hard
 
@@ -2591,6 +2661,15 @@ __metadata:
   version: 1.3.5
   resolution: "@types/mime@npm:1.3.5"
   checksum: 10c0/c2ee31cd9b993804df33a694d5aa3fa536511a49f2e06eeab0b484fef59b4483777dbb9e42a4198a0809ffbf698081fdbca1e5c2218b82b91603dfab10a10fbc
+  languageName: node
+  linkType: hard
+
+"@types/mysql@npm:*":
+  version: 2.15.26
+  resolution: "@types/mysql@npm:2.15.26"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/3cf279e7db05d56c0544532a4380b9079f579092379a04c8138bd5cf88dda5b31208ac2d23ce7dbf4e3a3f43aaeed44e72f9f19f726518f308efe95a7435619a
   languageName: node
   linkType: hard
 
@@ -3030,6 +3109,72 @@ __metadata:
   languageName: node
   linkType: hard
 
+"atomic-batcher@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "atomic-batcher@npm:1.0.2"
+  checksum: 10c0/6511385b61eca9ba1feedd85b78ba601818aba6fffc65ba3ba1b361d32f4a36b2e735c4d65a316568163beeb76bae7a21d3b043c1a1e5e2b5fa116048f5f7d2b
+  languageName: node
+  linkType: hard
+
+"aws-xray-sdk-core@npm:3.10.2":
+  version: 3.10.2
+  resolution: "aws-xray-sdk-core@npm:3.10.2"
+  dependencies:
+    "@aws-sdk/types": "npm:^3.4.1"
+    "@smithy/service-error-classification": "npm:^2.0.4"
+    "@types/cls-hooked": "npm:^4.3.3"
+    atomic-batcher: "npm:^1.0.2"
+    cls-hooked: "npm:^4.2.2"
+    semver: "npm:^7.5.3"
+  checksum: 10c0/0d47b13687f841092e927c919085d0570aca67ad9a12251f1d8395c9628f6fcc738d962897032b993c3cf1a94e11cdbe64d23cfbd6106adde732bb46495d5c9e
+  languageName: node
+  linkType: hard
+
+"aws-xray-sdk-express@npm:3.10.2":
+  version: 3.10.2
+  resolution: "aws-xray-sdk-express@npm:3.10.2"
+  dependencies:
+    "@types/express": "npm:*"
+  peerDependencies:
+    aws-xray-sdk-core: ^3.10.2
+  checksum: 10c0/8bc5846394eadf9ea2f89e5d28e2219cde88d9390a8b83b23ad4983efcd85d037f17deb9d627b1784205aae25d54a759532c17f027ef0cd492f4e927ccfc5379
+  languageName: node
+  linkType: hard
+
+"aws-xray-sdk-mysql@npm:3.10.2":
+  version: 3.10.2
+  resolution: "aws-xray-sdk-mysql@npm:3.10.2"
+  dependencies:
+    "@types/mysql": "npm:*"
+  peerDependencies:
+    aws-xray-sdk-core: ^3.10.2
+  checksum: 10c0/b612825a3140a8b9c28262758dfe5184e15c6d0652fe46254d64728ed1183883059e16e506baac19d109e170e65b683acc1a4a5bbc5fd69ea3329691c086cc14
+  languageName: node
+  linkType: hard
+
+"aws-xray-sdk-postgres@npm:3.10.2":
+  version: 3.10.2
+  resolution: "aws-xray-sdk-postgres@npm:3.10.2"
+  dependencies:
+    "@types/pg": "npm:*"
+  peerDependencies:
+    aws-xray-sdk-core: ^3.10.2
+  checksum: 10c0/190dde93c458f712fd42946c172ac0dca1290ff3a5ce781273d22bb0a5992d5689b08bd96f0c541ca2870bf79a7e900b883399cc2ab1d08daac114b3ae3c6618
+  languageName: node
+  linkType: hard
+
+"aws-xray-sdk@npm:^3.10.2":
+  version: 3.10.2
+  resolution: "aws-xray-sdk@npm:3.10.2"
+  dependencies:
+    aws-xray-sdk-core: "npm:3.10.2"
+    aws-xray-sdk-express: "npm:3.10.2"
+    aws-xray-sdk-mysql: "npm:3.10.2"
+    aws-xray-sdk-postgres: "npm:3.10.2"
+  checksum: 10c0/7bd956d893ac23d48b7a569117c7c9aa62ed55d538ec288cbf22ea588829e0f5cffefe59a9e865b20ac2c8ad54711fc940291c0baa58138c541bec461992276b
+  languageName: node
+  linkType: hard
+
 "babel-jest@npm:^29.7.0":
   version: 29.7.0
   resolution: "babel-jest@npm:29.7.0"
@@ -3123,6 +3268,7 @@ __metadata:
     "@types/node": "npm:^22.5.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.2.0"
     "@typescript-eslint/parser": "npm:^8.2.0"
+    aws-xray-sdk: "npm:^3.10.2"
     cls-hooked: "npm:^4.2.2"
     eslint: "npm:^8.57.0"
     express: "npm:^4.19.2"

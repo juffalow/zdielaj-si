@@ -6,6 +6,7 @@ import auth from './middlewares/auth';
 import responseTime from './middlewares/responseTime';
 import trace from './middlewares/trace';
 import errorHandler from './middlewares/errorHandler';
+import AWSXRay from './logger/XRay';
 
 const app = express();
 
@@ -18,7 +19,9 @@ app.use(responseTime);
 app.use(cors);
 app.use(auth);
 
+app.use(AWSXRay.express.openSegment('zdielaj-si-core'));
 app.use(routes);
+app.use(AWSXRay.express.closeSegment());
 
 app.use(errorHandler);
 

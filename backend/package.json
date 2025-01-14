@@ -21,6 +21,7 @@
     "@aws-sdk/util-dynamodb": "^3.651.1",
     "@godaddy/terminus": "^4.12.1",
     "@sentry/node": "^8.26.0",
+    "aws-xray-sdk": "^3.10.2",
     "cls-hooked": "^4.2.2",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
