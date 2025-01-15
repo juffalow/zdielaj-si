@@ -21,6 +21,12 @@ class Users {
       try {
         const album = await this.albumRepository.get(id);
 
+        if (album.files.length === 0) {
+          logger.warn('Album has no files!', { album: { id: album.id }, user: { id} });
+
+          return null;
+        }
+
         const response = await this.uploadService.getFile(album.files[0]);
         
         return {
@@ -35,7 +41,7 @@ class Users {
           createdAt: album.createdAt,
         };
       } catch (error) {
-        logger.warn('Error while fetching album', { id, error });
+        logger.error('Error while fetching album or its files!', { id, error });
 
         return null;
       }
