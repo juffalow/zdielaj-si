@@ -1,5 +1,5 @@
 import { generateToken } from './functions';
-import { BaseError } from './errors';
+import { BaseError, HTTPError } from './errors';
 import namespace from '../services/cls';
 
 class FetchClient implements Utils.HTTPClient {
@@ -100,17 +100,21 @@ class FetchClient implements Utils.HTTPClient {
     if (!response.ok) {
       if (response.headers.get('Content-Type').startsWith('application/json')) {
         const json = await response.json();
-        if ('error' in json && json.error !== null) {
-          if (typeof json.error === 'object' && 'message' in json.error) {
-            throw new BaseError(json.error);
-          }
-  
-          if (typeof json.error === 'string') {
-            throw new BaseError({ message: json.error, code: response.status });
-          }
-  
-          throw new BaseError({ message: 'Unknown error!', code: response.status });
-        }
+
+        const code = typeof json.error === 'object' && 'code' in json.error ? json.error.code : response.status;
+        const message = typeof json.error === 'object' && 'message' in json.error ? json.error.message : typeof json.error === 'string' ? json.error : response.statusText;
+
+        throw new HTTPError({
+          message,
+          code,
+          request: {
+            url: response.url,
+          },
+          response: {
+            status: response.status,
+            body: json,
+          },
+        });
       }
   
       throw new BaseError({ message: response.statusText, code: response.status });
