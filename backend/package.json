@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.651.1",
+    "@aws-sdk/client-servicediscovery": "^3.731.1",
     "@aws-sdk/util-dynamodb": "^3.651.1",
     "@godaddy/terminus": "^4.12.1",
     "@sentry/node": "^8.26.0",
