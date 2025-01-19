@@ -17,9 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(trace);
 app.use(responseTime);
 app.use(cors);
-app.use(auth);
 
 app.use(AWSXRay.express.openSegment('zdielaj-si-core'));
+app.use(auth);
+
 app.use(routes);
 app.use(AWSXRay.express.closeSegment());
 
