@@ -9,7 +9,7 @@ AWSXRay.config([AWSXRay.plugins.ECSPlugin]);
 
 if (typeof process.env.AWS_XRAY_SERVICE_NAMESPACE === 'string' && typeof process.env.AWS_XRAY_SERVICE_NAME === 'string') {
   const setDaemonAddress = async () => {
-    const client = new ServiceDiscoveryClient();
+    const client = new ServiceDiscoveryClient({ region: process.env.AWS_XRAY_REGION });
 
     const input = {
       NamespaceName: process.env.AWS_XRAY_SERVICE_NAMESPACE,
