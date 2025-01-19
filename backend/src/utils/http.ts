@@ -1,10 +1,18 @@
 import { generateToken } from './functions';
 import { BaseError, HTTPError } from './errors';
 import namespace from '../services/cls';
+import AWSXRay from '../logger/XRay';
 
 class FetchClient implements Utils.HTTPClient {
   public async get(url: string, params: object = {}, options: RequestInit = {}): Promise<unknown> {
     const traceId = namespace.get('traceId');
+
+    const segment = AWSXRay.getSegment();
+    const xrayNamespace = AWSXRay.getNamespace();
+
+    console.log('segment', segment);
+    console.log('xrayNamespace', xrayNamespace);
+
     const searchParameters = new URLSearchParams();
   
     if (typeof traceId !== 'undefined') {

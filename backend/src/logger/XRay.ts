@@ -5,8 +5,8 @@ import https from 'https';
 
 AWSXRay.config([AWSXRay.plugins.ECSPlugin]);
 
-AWSXRay.captureHTTPsGlobal(http);
-AWSXRay.captureHTTPsGlobal(https);
+AWSXRay.captureHTTPsGlobal(http, true);
+AWSXRay.captureHTTPsGlobal(https, true);
 
 if (typeof process.env.AWS_XRAY_SERVICE_NAMESPACE === 'string' && typeof process.env.AWS_XRAY_SERVICE_NAME === 'string') {
   const setDaemonAddress = async () => {
