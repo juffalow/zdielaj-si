@@ -10,8 +10,8 @@ class FetchClient implements Utils.HTTPClient {
     const segment = AWSXRay.getSegment();
     const xrayNamespace = AWSXRay.getNamespace();
 
-    console.log('segment', segment);
-    console.log('xrayNamespace', xrayNamespace);
+    console.log('segment', JSON.stringify(segment));
+    console.log('xrayNamespace', JSON.stringify(xrayNamespace));
 
     const searchParameters = new URLSearchParams();
   
