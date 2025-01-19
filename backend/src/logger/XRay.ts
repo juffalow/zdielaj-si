@@ -1,4 +1,5 @@
 import AWSXRay from 'aws-xray-sdk';
+import { captureFetchGlobal } from 'aws-xray-sdk-fetch';
 import { ServiceDiscoveryClient, DiscoverInstancesCommand, HealthStatusFilter } from '@aws-sdk/client-servicediscovery';
 import http from 'http';
 import https from 'https';
@@ -7,6 +8,7 @@ AWSXRay.config([AWSXRay.plugins.ECSPlugin]);
 
 AWSXRay.captureHTTPsGlobal(http, true);
 AWSXRay.captureHTTPsGlobal(https, true);
+captureFetchGlobal();
 
 if (typeof process.env.AWS_XRAY_SERVICE_NAMESPACE === 'string' && typeof process.env.AWS_XRAY_SERVICE_NAME === 'string') {
   const setDaemonAddress = async () => {

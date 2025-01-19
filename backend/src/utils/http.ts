@@ -7,7 +7,7 @@ class FetchClient implements Utils.HTTPClient {
   public async get(url: string, params: object = {}, options: RequestInit = {}): Promise<unknown> {
     const traceId = namespace.get('traceId');
 
-    const segment = AWSXRay.getSegment();
+    const segment: any = AWSXRay.getSegment();
     const xrayNamespace = AWSXRay.getNamespace();
 
     console.log('segment', JSON.stringify(segment));
@@ -34,7 +34,8 @@ class FetchClient implements Utils.HTTPClient {
       method: 'GET',
       headers: {
         'Authorization': generateToken({ role: 'server', service: 'core' }),
-        'X-Amzn-Trace-Id': (segment as any).trace_id,
+        // 'X-Amzn-Trace-Id': (segment as any).trace_id,
+        // 'X-Amzn-Trace-Id': `Root=${segment.trace_id};Parent=${subsegment.id};Sampled=${subsegment.notTraced ? '0' : '1'}`;
       },
       ...options,
     })
