@@ -11,6 +11,7 @@ class FetchClient implements Utils.HTTPClient {
     const xrayNamespace = AWSXRay.getNamespace();
 
     console.log('segment', JSON.stringify(segment));
+    console.log('segment.id', (segment as any).trace_id);
     console.log('xrayNamespace', JSON.stringify(xrayNamespace));
 
     const searchParameters = new URLSearchParams();
@@ -33,6 +34,7 @@ class FetchClient implements Utils.HTTPClient {
       method: 'GET',
       headers: {
         'Authorization': generateToken({ role: 'server', service: 'core' }),
+        'X-Amzn-Trace-Id': (segment as any).trace_id,
       },
       ...options,
     })
