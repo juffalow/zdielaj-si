@@ -26,11 +26,11 @@ class CLSHooked implements Services.Trace {
     }
   }
 
-  public createSegment(name: string): unknown {
+  public createSegment(): unknown {
     return null;
   }
 
-  public setSegment(segment: unknown): void {
+  public setSegment(): void {
     return;
   }
 
