@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import AWSXRay from '../../logger/XRay';
+import services from '../';
 import config from '../../config';
 
 const container = {
@@ -13,7 +13,7 @@ const container = {
         endpoint: config.services.database.endpoint,
         region: config.services.database.region,
       });
-      this._dynamoDB = AWSXRay.captureAWSv3Client(dynamoDB);
+      this._dynamoDB = services.Trace.captureAWSv3Client(dynamoDB);
     }
 
     return this._dynamoDB;

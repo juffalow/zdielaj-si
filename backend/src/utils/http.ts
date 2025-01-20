@@ -1,18 +1,10 @@
 import { generateToken } from './functions';
 import { BaseError, HTTPError } from './errors';
-import namespace from '../services/cls';
-import AWSXRay from '../logger/XRay';
+import services from '../services';
 
 class FetchClient implements Utils.HTTPClient {
   public async get(url: string, params: object = {}, options: RequestInit = {}): Promise<unknown> {
-    const traceId = namespace.get('traceId');
-
-    const segment: any = AWSXRay.getSegment();
-    const xrayNamespace = AWSXRay.getNamespace();
-
-    console.log('segment', JSON.stringify(segment));
-    console.log('segment.id', (segment as any).trace_id);
-    console.log('xrayNamespace', JSON.stringify(xrayNamespace));
+    const traceId = services.Trace.getTraceId();
 
     const searchParameters = new URLSearchParams();
   
@@ -34,8 +26,7 @@ class FetchClient implements Utils.HTTPClient {
       method: 'GET',
       headers: {
         'Authorization': generateToken({ role: 'server', service: 'core' }),
-        // 'X-Amzn-Trace-Id': (segment as any).trace_id,
-        // 'X-Amzn-Trace-Id': `Root=${segment.trace_id};Parent=${subsegment.id};Sampled=${subsegment.notTraced ? '0' : '1'}`;
+        'X-Trace-Id': traceId,
       },
       ...options,
     })
@@ -60,7 +51,7 @@ class FetchClient implements Utils.HTTPClient {
   }
 
   public async delete(url: string, params: object = {}, options: RequestInit = {}): Promise<unknown> {
-    const traceId = namespace.get('traceId');
+    const traceId = services.Trace.getTraceId();
     const searchParameters = new URLSearchParams();
   
     if (typeof traceId !== 'undefined') {
@@ -81,6 +72,7 @@ class FetchClient implements Utils.HTTPClient {
       method: 'DELETE',
       headers: {
         'Authorization': generateToken({ role: 'server', service: 'core' }),
+        'X-Trace-Id': traceId,
       },
       ...options,
     })

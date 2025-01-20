@@ -11,6 +11,11 @@ export default {
   env: process.env.ENV || 'DEVELOPMENT',
   /**
    * @type {string}
+   * @default upload-service
+   */
+  serviceName: process.env.SERVICE_NAME || 'zdielaj-si-api',
+  /**
+   * @type {string}
    */
   domain: process.env.DOMAIN || 'localhost',
   allowedOrigins: [
@@ -104,6 +109,34 @@ export default {
        * @example http://notifications:3010
        */
       url: process.env.SERVICES_NOTIFICATIONS_URL || 'http://notifications:3010',
+    },
+    trace: {
+      /**
+       * @type {string="AWS_XRAY", "CLS_HOOKED"}
+       * @default CLS_HOOKED
+       */
+      type: process.env.SERVICES_TRACE_TYPE || 'AWS_XRAY',
+      /**
+       * If using Service Discovery to find the daemon address.
+       * @type {string}
+       * @requires SERVICES_TRACE_TYPE=AWS_XRAY
+       */
+      daemonAddressNamespace: process.env.SERVICES_TRACE_DAEMON_ADDRESS_NAMESPACE,
+      /**
+       * If using Service Discovery to find the daemon address.
+       * @type {string}
+       * @requires SERVICES_TRACE_TYPE=AWS_XRAY
+       */
+      daemonAddressName: process.env.SERVICES_TRACE_DAEMON_ADDRESS_NAME,
+      /**
+       * Supported values:
+       * * ECS
+       * * EC2
+       * * BEANSTALK
+       * @type {string}
+       * @requires SERVICES_TRACE_TYPE=AWS_XRAY
+       */
+      plugins: process.env.SERVICES_TRACE_PLUGINS,
     },
   },
 }

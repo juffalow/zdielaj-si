@@ -78,4 +78,24 @@ declare namespace Services {
   interface User {
     get(token: string): Promise<{ id: string, username: string, email: string, name: string }>;
   }
+
+  interface Trace {
+    openSegment(defaultName: string): unknown;
+
+    closeSegment(): unknown;
+
+    createSegment(name: string, rootId?: string | null, parentId?: string | null): unknown;
+
+    setSegment(segment: unknown): void;
+
+    getTraceId(): string;
+
+    getNamespace(): unknown;
+
+    captureAWSv3Client<T>(client: T): T;
+
+    captureHTTPRequests(): void;
+
+    processTraceData(data: string): { [key: string]: string };
+  }
 }
