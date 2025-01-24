@@ -1,5 +1,7 @@
 FROM node:22-alpine AS build
 
+RUN apk add dumb-init
+
 RUN corepack enable
 RUN yarn set version berry
 
@@ -15,6 +17,8 @@ RUN yarn build
 FROM node:22-alpine
 
 ENV NODE_ENV production
+
+COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 
 RUN apk update && apk upgrade --no-cache && \
   corepack enable && \
@@ -32,4 +36,4 @@ COPY --chown=juffuser:juffgroup --from=build /home/node/zdielaj-si-backend/node_
 
 EXPOSE 3010
 
-CMD [ "node", "dist/index.js" ]
+CMD [ "dumb-init", "node", "dist/index.js" ]
