@@ -66,7 +66,9 @@ class Albums implements AlbumsController {
     return album;
   }
 
-  public async deleteAlbum(id: ID): Promise<Album> {
+  public async deleteAlbum(id: ID, user: User): Promise<Album> {
+    logger.debug(`${this.constructor.name}.delete`, { id, user });
+
     const album = await this.albumRepository.get(id);
 
     if (typeof album === 'undefined') {
@@ -76,16 +78,15 @@ class Albums implements AlbumsController {
     setImmediate(async () => {
       for(const id of album.files) {
         logger.info(`Deleting file ${id}...`);
-        await this.uploadService.deleteFile(id).catch((error: Error) => {
+        await this.uploadService.deleteFile(id, user.token).catch((error: Error) => {
           logger.error(`Error deleting file ${id}!`, { message: error.message, stack: error.stack });
         });
       }
     });
 
-    const user = await this.userRepository.get(album.user.id);
-    const albums = user.albums.filter(a => a !== album.id);
+    const { albums } = await this.userRepository.get(album.user.id);
 
-    await this.userRepository.update({ albums }, { id: user.id });
+    await this.userRepository.update({ albums: albums.filter(a => a !== album.id) }, { id: user.id });
 
     await this.albumRepository.delete(id);
 

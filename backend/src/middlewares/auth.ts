@@ -14,6 +14,7 @@ export default async function auth(req: Request, res: Response, next: NextFuncti
     const data = payload instanceof Promise ? await payload : payload;
 
     req['user'] = services.Token.getUserId(data);
+    req['user']['token'] = token;
   } catch {
     return res.status(401).json({ error: 'Unauthorized!' });
   }

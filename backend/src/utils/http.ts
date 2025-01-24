@@ -68,13 +68,16 @@ class FetchClient implements Utils.HTTPClient {
       }
     }
 
+    const { headers, ...restOptions } = options;
+
     return fetch(`${url}?${searchParameters}`, {
       method: 'DELETE',
       headers: {
         'Authorization': generateToken({ role: 'server', service: 'core' }),
         'X-Trace-Id': traceId,
+        ...headers,
       },
-      ...options,
+      ...restOptions,
     })
     .then(this.handleErrors)
     .then(this.handleSuccess);

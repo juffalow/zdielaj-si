@@ -19,6 +19,7 @@ type User = {
   id: ID;
   albums?: ID[];
   publicProfileId?: ID;
+  token?: string;
 }
 
 type PublicProfile = {

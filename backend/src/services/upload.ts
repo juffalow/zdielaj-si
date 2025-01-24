@@ -17,8 +17,8 @@ class Upload implements Services.Upload {
     return this.httpClient.get(`${this.url}/upload/admin/file`, { ids }) as Promise<ListFilesResponse>;
   }
 
-  public async deleteFile(id: ID): Promise<any> {
-    return this.httpClient.delete(`${this.url}/upload/admin/file/${id}`);
+  public async deleteFile(id: ID, token: string): Promise<any> {
+    return this.httpClient.delete(`${this.url}/upload/admin/file/${id}`, {}, { headers: { Authorization: `Bearer ${token}` } });
   }
 }
 

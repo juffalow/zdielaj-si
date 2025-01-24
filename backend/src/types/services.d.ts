@@ -62,7 +62,7 @@ declare namespace Services {
     
     listFiles(ids: ID[]): Promise<ListFilesResponse>;
 
-    deleteFile(id: ID): Promise<unknown>;
+    deleteFile(id: ID, token: string): Promise<unknown>;
   }
   
   interface Token {
