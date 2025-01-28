@@ -7,10 +7,6 @@ class FetchClient implements Utils.HTTPClient {
     const traceId = services.Trace.getTraceId();
 
     const searchParameters = new URLSearchParams();
-  
-    if (typeof traceId !== 'undefined') {
-      searchParameters.append('traceId', traceId);
-    }
 
     for (const key in params) {
       if (Array.isArray(params[key])) {
@@ -26,7 +22,7 @@ class FetchClient implements Utils.HTTPClient {
       method: 'GET',
       headers: {
         'Authorization': generateToken({ role: 'server', service: 'core' }),
-        'X-Trace-Id': traceId,
+        'X-Request-Id': traceId,
       },
       ...options,
     })
@@ -53,10 +49,6 @@ class FetchClient implements Utils.HTTPClient {
   public async delete(url: string, params: object = {}, options: RequestInit = {}): Promise<unknown> {
     const traceId = services.Trace.getTraceId();
     const searchParameters = new URLSearchParams();
-  
-    if (typeof traceId !== 'undefined') {
-      searchParameters.append('traceId', traceId);
-    }
 
     for (const key in params) {
       if (Array.isArray(params[key])) {
@@ -74,7 +66,7 @@ class FetchClient implements Utils.HTTPClient {
       method: 'DELETE',
       headers: {
         'Authorization': generateToken({ role: 'server', service: 'core' }),
-        'X-Trace-Id': traceId,
+        'X-Request-Id': traceId,
         ...headers,
       },
       ...restOptions,
