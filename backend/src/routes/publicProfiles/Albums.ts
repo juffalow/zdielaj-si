@@ -13,6 +13,8 @@ router.get('/:publicProfileId/albums', async (req: express.Request, res: express
         albums,
       }
     }).end();
+
+    next();
   } catch (err) {
     next(err);
   }

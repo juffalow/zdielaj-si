@@ -1,7 +1,7 @@
 interface APIErrorConstructor {
   message: string;
   code: number;
-  http: {
+  response: {
     status: number;
   };
 }
@@ -19,14 +19,65 @@ export default class APIError extends Error {
    */
   public code: number;
   /**
-   * HTTP status code
+   * 
    */
-  public http: { status: number };
+  public response: {
+    status: number;
+  };
 
-  constructor({ message, code, http }: APIErrorConstructor) {
-    super();
+  constructor({ message, code, response }: APIErrorConstructor) {
+    super(message);
+    this.name = this.constructor.name;
     this.message = message;
     this.code = code;
-    this.http = http;
+    this.response = response;
+  }
+}
+
+export class BadRequestError extends APIError {
+  constructor(message: string, code: number) {
+    super({
+      message,
+      code,
+      response: {
+        status: 400,
+      },
+    });
+  }
+}
+
+export class UnauthorizedError extends APIError {
+  constructor(message: string, code: number) {
+    super({
+      message,
+      code,
+      response: {
+        status: 401,
+      },
+    });
+  }
+}
+
+export class ForbiddenError extends APIError {
+  constructor(message: string, code: number) {
+    super({
+      message,
+      code,
+      response: {
+        status: 403,
+      },
+    });
+  }
+}
+
+export class NotFoundError extends APIError {
+  constructor(message: string, code: number) {
+    super({
+      message,
+      code,
+      response: {
+        status: 404,
+      },
+    });
   }
 }

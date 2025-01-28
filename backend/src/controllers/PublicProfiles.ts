@@ -1,4 +1,4 @@
-import { BaseError } from '../utils/errors';
+import { BadRequestError, ForbiddenError, NotFoundError } from '../errors/APIError';
 
 class PublicProfilesController {
   constructor(
@@ -16,7 +16,7 @@ class PublicProfilesController {
     const publicProfile = await this.publicProfileRepository.get(id);
 
     if (typeof publicProfile === 'undefined') {
-      throw new BaseError({ message: 'Public profile not found!', code: 404 });
+      throw new NotFoundError('Public profile not found!', 404);
     }
     
     return publicProfile;
@@ -26,7 +26,7 @@ class PublicProfilesController {
     const u = await this.userRepository.get(user.id);
 
     if (typeof u.publicProfileId !== 'undefined' && u.publicProfileId !== null) {
-      throw new BaseError({ message: 'User already has a public profile!', code: 400 });
+      throw new BadRequestError('User already has a public profile!', 400);
     }
 
     const publicProfile = await this.publicProfileRepository.create({
@@ -47,7 +47,7 @@ class PublicProfilesController {
     const u = await this.userRepository.get(user.id);
 
     if (u.publicProfileId !== id) {
-      throw new BaseError({ message: 'Cannot update specific public profile!', code: 403 });
+      throw new ForbiddenError('Cannot update specific public profile!', 403);
     }
 
     const publicProfile = await this.publicProfileRepository.update(params, { id });
@@ -59,7 +59,7 @@ class PublicProfilesController {
     const publicProfile = await this.publicProfileRepository.delete(id);
 
     if (typeof publicProfile === 'undefined') {
-      throw new BaseError({message: 'Public profile not found!', code: 404 });
+      throw new NotFoundError('Public profile not found!', 404);
     }
 
     return publicProfile;

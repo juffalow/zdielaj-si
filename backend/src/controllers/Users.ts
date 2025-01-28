@@ -1,4 +1,4 @@
-import { BaseError } from '../utils/errors';
+import { NotFoundError } from '../errors/APIError';
 import logger from '../logger';
 
 class Users {
@@ -14,7 +14,7 @@ class Users {
     const user = await this.userRepository.get(id);
 
     if (typeof user === 'undefined') {
-      throw new BaseError({ message: 'User not found!', code: 404 });
+      throw new NotFoundError('User not found!', 404);
     }
   
     const albums = await Promise.all(user.albums.map(async (id) => {

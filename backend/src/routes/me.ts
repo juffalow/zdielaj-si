@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const user = await controllers.Users.get(req['user'].id, req.headers.authorization.replace('Bearer ', ''));
+    const user = await controllers.Users.get(req['user'].id, req['user'].token);
     
     res.status(200).json({
       error: null,
@@ -14,6 +14,8 @@ router.get('/', requireAuth, async (req: express.Request, res: express.Response,
         user,
       }
     }).end();
+
+    next();
   } catch (err) {
     next(err);
   }

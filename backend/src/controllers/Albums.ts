@@ -1,4 +1,4 @@
-import { BaseError } from '../utils/errors';
+import { NotFoundError } from '../errors/APIError';
 import logger from '../logger';
 
 class Albums implements AlbumsController {
@@ -12,13 +12,13 @@ class Albums implements AlbumsController {
    * Retrieves single album with specified ID.
    * @param id 
    * @returns 
-   * @throws BaseError if album not found or empty
+   * @throws NotFoundError if album not found or empty
    */
   public async getAlbum(id: ID): Promise<GetAlbumResponse> {
     const album = await this.albumRepository.get(id);
 
     if (typeof album === 'undefined') {
-      throw new BaseError({ message: 'Album not found!', code: 404 });
+      throw new NotFoundError('Album not found!', 404);
     }
 
     const response = await this.uploadService.listFiles(album.files);
@@ -72,7 +72,7 @@ class Albums implements AlbumsController {
     const album = await this.albumRepository.get(id);
 
     if (typeof album === 'undefined') {
-      throw new BaseError({message: 'Album not found!', code: 404 });
+      throw new NotFoundError('Album not found!', 404);
     }
 
     setImmediate(async () => {

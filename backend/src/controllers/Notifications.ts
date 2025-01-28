@@ -1,4 +1,4 @@
-import { BaseError } from '../utils/errors';
+import { BadRequestError } from '../errors/APIError';
 import logger from '../logger';
 
 class NotificationsController {
@@ -20,7 +20,7 @@ class NotificationsController {
     } catch (error) {
       logger.error('Cannot get email notification settings!', {error});
 
-      throw new BaseError({ message: 'Cannot get email notification settings!', code: 400 });
+      throw new BadRequestError('Cannot get email notification settings!', 400);
     }
   }
 
@@ -37,7 +37,7 @@ class NotificationsController {
     } catch (error) {
       logger.error('Cannot set notification settings!', {error});
 
-      throw new BaseError({ message: 'Cannot set notifications settings!', code: 400 });
+      throw new BadRequestError('Cannot set notifications settings!', 400);
     }
   }
 }

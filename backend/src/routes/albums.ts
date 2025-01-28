@@ -4,7 +4,7 @@ import { generateToken } from '../utils/functions';
 import requireAuth from '../middlewares/requireAuth';
 import optionalAlbum from '../middlewares/optionalAlbum';
 import controllers from '../controllers';
-import APIError from '../errors/APIError';
+import { BadRequestError } from '../errors/APIError';
 
 const router = express.Router();
 
@@ -25,12 +25,14 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
         album,
       }
     }).end();
+
+    next();
   } catch (err) {
     next(err);
   }
 });
 
-router.post('/', async (req: express.Request, res: express.Response) => {
+router.post('/', async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   const album = await controllers.Albums.createAlbum(req['user']);
 
   res.status(200).json({
@@ -42,31 +44,29 @@ router.post('/', async (req: express.Request, res: express.Response) => {
       },
     },
   }).end();
+
+  next();
 });
 
-router.post('/:id/media', optionalAlbum, async (req: express.Request, res: express.Response) => {
+router.post('/:id/media', optionalAlbum, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   const user: User | { albumId: number } = 'album' in req ? req['album'] as { albumId: number } : 'user' in req ? req['user'] as User : null;
 
   const album = await repositories.Album.get(req.params.id);
 
   if (album === null || typeof album === 'undefined') {
-    throw new APIError({ message: 'Specified album does not exist!', code: 400, http: { status: 400 } });
+    throw new BadRequestError('Specified album does not exist!', 400);
   }
 
   if (user !== null && 'id' in user && album.user.id !== user.id) {
-    throw new APIError({ message: 'Specified album does not belong to you!', code: 400, http: { status: 400 } });
+    throw new BadRequestError('Specified album does not belong to you!', 400);
   }
 
-  // if (user !== null && 'albumId' in user && album.id !== user.albumId) {
-  //   throw new APIError({ message: 'Specified album does not belong to you!', code: 400, http: { status: 400 } });
-  // }
-
   if (album.user === null && album.files.length >= 10) {
-    throw new APIError({ message: 'Specified album cannot add additional media!', code: 400, http: { status: 400 } });
+    throw new BadRequestError('Specified album cannot add additional media!', 400);
   }
 
   if (album.user !== null && album.files.length >= 50) {
-    throw new APIError({ message: 'Specified album cannot add additional media!', code: 400, http: { status: 400 } });
+    throw new BadRequestError('Specified album cannot add additional media!', 400);
   }
 
   const files = [ ...album.files, req.body.fileId ];
@@ -82,6 +82,8 @@ router.post('/:id/media', optionalAlbum, async (req: express.Request, res: expre
       },
     },
   }).end();
+
+  next();
 });
 
 router.delete('/:id', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -94,6 +96,8 @@ router.delete('/:id', requireAuth, async (req: express.Request, res: express.Res
         album,
       }
     }).end();
+
+    next();
   } catch (err) {
     next(err);
   }

@@ -14,6 +14,8 @@ router.get('/:id', async (req: express.Request, res: express.Response, next: exp
         publicProfile,
       }
     }).end();
+
+    next();
   } catch (err) {
     next(err);
   }
@@ -29,6 +31,8 @@ router.post('/', requireAuth, async (req: express.Request, res: express.Response
         publicProfile,
       },
     }).end();
+
+    next();
   } catch (err) {
     next(err);
   }
@@ -44,6 +48,8 @@ router.put('/:id', async (req: express.Request, res: express.Response, next: exp
         publicProfile,
       }
     }).end();
+
+    next();
   } catch (err) {
     next(err);
   }
@@ -59,6 +65,8 @@ router.delete('/:id', requireAuth, async (req: express.Request, res: express.Res
         publicProfile,
       }
     }).end();
+
+    next();
   } catch (err) {
     next(err);
   }
