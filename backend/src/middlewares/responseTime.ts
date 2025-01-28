@@ -1,7 +1,8 @@
+import type { Request, Response, NextFunction } from 'express';
 import config from '../config';
 import logger from '../logger';
 
-export default function logResponseTime(req, res, next): void {
+export default function logResponseTime(req: Request, res: Response, next: NextFunction): void {
   if (config.logger.level === 'debug') {
     const startHrTime = process.hrtime();
 
