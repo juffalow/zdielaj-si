@@ -17,11 +17,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(responseTime);
 app.use(cors);
 
-app.use(services.Trace.openSegment(config.serviceName) as any);
+app.use(services.Trace.openSegment(config.serviceName));
 app.use(auth);
 
 app.use(routes);
-app.use(services.Trace.closeSegment() as any);
+app.use(services.Trace.closeSegment());
 
 app.use(errorHandler);
 
