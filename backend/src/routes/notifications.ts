@@ -7,7 +7,9 @@ router.get('/', async (req: express.Request, res: express.Response, next: expres
   try {
     const response = await controllers.Notifications.getSettings(String(req.query.email),  req.headers.authorization);
 
-    return res.status(200).json(response);
+    res.status(200).json(response);
+
+    next();
   } catch (err) {
     next(err);
   }
@@ -17,7 +19,9 @@ router.post('/', async (req: express.Request, res: express.Response, next: expre
   try {
     const response = await controllers.Notifications.updateSettings(req.body, req.headers.authorization);
 
-    return res.status(200).json(response);
+    res.status(200).json(response);
+
+    next();
   } catch (err) {
     next(err);
   }
