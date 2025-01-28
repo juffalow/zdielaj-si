@@ -1,5 +1,5 @@
 import { generateToken } from './functions';
-import { BaseError, HTTPError } from './errors';
+import { HTTPError } from '../errors/HTTP';
 import services from '../services';
 
 class FetchClient implements Utils.HTTPClient {
@@ -99,23 +99,20 @@ class FetchClient implements Utils.HTTPClient {
       if (response.headers.get('Content-Type').startsWith('application/json')) {
         const json = await response.json();
 
-        const code = typeof json.error === 'object' && 'code' in json.error ? json.error.code : response.status;
         const message = typeof json.error === 'object' && 'message' in json.error ? json.error.message : typeof json.error === 'string' ? json.error : response.statusText;
 
-        throw new HTTPError({
+        throw new HTTPError(
           message,
-          code,
-          request: {
+          {
             url: response.url,
-          },
-          response: {
+          }, {
             status: response.status,
             body: json,
           },
-        });
+        );
       }
   
-      throw new BaseError({ message: response.statusText, code: response.status });
+      throw new Error(response.statusText);
     }
 
     return response;
