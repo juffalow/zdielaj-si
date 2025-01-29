@@ -9,6 +9,7 @@ export default function cors(req: Request, res: Response, next: NextFunction): v
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Album-Token');
+    res.header('Access-Control-Expose-Headers', 'X-Request-Id');
     res.header('Access-Control-Max-Age', '600');
   }
 
