@@ -1,4 +1,5 @@
 import { getUserToken, getAlbumToken } from './token';
+import { APIError } from './errors';
 
 interface BaseErrorConstructor {
   message: string;
@@ -10,7 +11,7 @@ class BaseError extends Error {
   public code: number;
 
   constructor({ message, code }: BaseErrorConstructor) {
-    super();
+    super(message);
     this.message = message;
     this.code = code;
   }
@@ -24,8 +25,8 @@ async function handleErrors(response: Response | unknown): Promise<Response> {
   if (!response.ok) {
     if (response.headers.get('Content-Type')?.startsWith('application/json')) {
       const json = await response.json();
-      if ('error' in json && json.error !== null) {
-        throw new BaseError(json.error);
+      if ('error' in json && json.error !== null) {        
+        throw new APIError(json.error.message, json.error.code, { url: response.url, status: response.status, headers: { 'X-Request-Id': response.headers.get('X-Request-Id') } });
       }
     }
 
