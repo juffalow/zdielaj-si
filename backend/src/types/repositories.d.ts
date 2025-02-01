@@ -7,7 +7,9 @@ declare namespace AlbumRepository {
   }
 
   interface UpdateParameters {
-    files: ID[];
+    files?: ID[];
+    name?: string;
+    description?: string;
   }
 
   interface FindParameters {

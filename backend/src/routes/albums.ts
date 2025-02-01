@@ -48,6 +48,23 @@ router.post('/', async (req: express.Request, res: express.Response, next: expre
   next();
 });
 
+router.put('/:id', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const album = await controllers.Albums.updateAlbum(req.params.id, req['user'], req.body);
+    
+    res.status(200).json({
+      error: null,
+      data: {
+        album,
+      }
+    }).end();
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post('/:id/media', optionalAlbum, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   const user: User | { albumId: number } = 'album' in req ? req['album'] as { albumId: number } : 'user' in req ? req['user'] as User : null;
 

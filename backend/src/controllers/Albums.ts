@@ -1,4 +1,4 @@
-import { NotFoundError } from '../errors/APIError';
+import { NotFoundError, ForbiddenError } from '../errors/APIError';
 import logger from '../logger';
 
 class Albums implements AlbumsController {
@@ -53,7 +53,7 @@ class Albums implements AlbumsController {
   public async createAlbum(user: User | undefined): Promise<Album> {
     logger.debug(`${this.constructor.name}.create`, { user });
 
-    const album = await this.albumRepository.create({ user });
+    const album = await this.albumRepository.create({ user: { id: user.id } });
 
     if (typeof user !== 'undefined') {
       const u = await this.userRepository.get(user.id);
@@ -91,6 +91,24 @@ class Albums implements AlbumsController {
     await this.albumRepository.delete(id);
 
     return album;
+  }
+
+  public async updateAlbum(id: ID, user: User, params: { files?: ID[], name?: string, description?: string }): Promise<Album> {
+    logger.debug(`${this.constructor.name}.update`, { id, user, params });
+
+    const album = await this.albumRepository.get(id);
+
+    if (typeof album === 'undefined') {
+      throw new NotFoundError('Album not found!', 404);
+    }
+
+    if (album.user.id !== user.id) {
+      throw new ForbiddenError('Album does not belong to you!', 403);
+    }
+
+    const updated = await this.albumRepository.update(params, { id });
+
+    return updated;
   }
 }
 

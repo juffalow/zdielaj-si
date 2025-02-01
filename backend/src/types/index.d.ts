@@ -12,6 +12,8 @@ type Album = {
   };
   publicProfileId?: ID;
   files?: ID[];
+  name?: string;
+  description?: string;
   createdAt?: string;
 }
 
