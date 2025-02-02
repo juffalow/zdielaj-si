@@ -10,7 +10,9 @@ type Album = {
   user: {
     id: ID;
   };
-  publicProfileId?: ID;
+  publicProfile?: {
+    id: ID;
+  };
   files?: ID[];
   name?: string;
   description?: string;
@@ -29,6 +31,7 @@ type PublicProfile = {
   user: {
     id: ID;
   };
+  albums?: ID[];
   name: string;
   description: string;
   createdAt?: string;

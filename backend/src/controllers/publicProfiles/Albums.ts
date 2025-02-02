@@ -1,4 +1,4 @@
-import { NotFoundError } from '../../errors/APIError';
+import { NotFoundError, ForbiddenError } from '../../errors/APIError';
 import logger from '../../logger';
 
 class Albums {
@@ -11,13 +11,12 @@ class Albums {
 
   public async list(publicProfileId: ID, first: number, after: number): Promise<{ albums: any[] }> {
     const publicProfile = await this.publicProfileRepository.get(publicProfileId);
-    const user = await this.userRepository.get(publicProfile.user.id);
 
-    if (typeof user === 'undefined') {
-      throw new NotFoundError('User not found!', 404);
+    if (typeof publicProfile === 'undefined') {
+      throw new NotFoundError('Public profile not found!', 404);
     }
 
-    const albums = await Promise.all(user.albums.slice(after, first > user.albums.length ? user.albums.length : first).map(async (id) => {
+    const albums = await Promise.all(publicProfile.albums.slice(after, first > publicProfile.albums.length ? publicProfile.albums.length : first).map(async (id) => {
       try {
         const album = await this.albumRepository.get(id);
 
@@ -44,6 +43,63 @@ class Albums {
     return {
       albums: albums.filter((album) => album !== null),
     };
+  }
+
+  public async add(user: User, publicProfileId: ID, albumId: ID): Promise<boolean> {
+    const publicProfile = await this.publicProfileRepository.get(publicProfileId);
+    const album = await this.albumRepository.get(albumId);
+
+    if (typeof publicProfile === 'undefined') {
+      throw new NotFoundError('Public profile not found!', 404);
+    }
+
+    if (typeof album === 'undefined') {
+      throw new NotFoundError('Album not found!', 404);
+    }
+
+    if (publicProfile.user.id !== user.id) {
+      throw new ForbiddenError('Public profile does not belong to you!', 403);
+    }
+
+    if (album.user.id !== publicProfile.user.id) {
+      throw new ForbiddenError('Album does not belong to you!', 403);
+    }
+
+    if (publicProfile.albums instanceof Array === false) {
+      publicProfile.albums = [];
+    }
+
+    const albums = Array.from((new Set(publicProfile.albums)).add(albumId));
+
+    if (publicProfile.albums.length === albums.length) {
+      return false;
+    }
+
+    await this.publicProfileRepository.update({ albums }, { id: publicProfile.id });
+
+    return true;
+  }
+
+  public async remove(user: User, publicProfileId: ID, albumId: ID): Promise<boolean> {
+    const publicProfile = await this.publicProfileRepository.get(publicProfileId);
+
+    if (typeof publicProfile === 'undefined') {
+      throw new NotFoundError('Public profile not found!', 404);
+    }
+
+    if (publicProfile.user.id !== user.id) {
+      throw new ForbiddenError('Public profile does not belong to you!', 403);
+    }
+
+    const albums = publicProfile.albums.filter((id) => id !== albumId);
+
+    if (publicProfile.albums.length === albums.length) {
+      return false;
+    }
+
+    await this.publicProfileRepository.update({ albums }, { id: publicProfile.id });
+
+    return true;
   }
 }
 

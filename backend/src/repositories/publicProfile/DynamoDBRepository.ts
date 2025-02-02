@@ -84,7 +84,7 @@ class PublicProfileDynamoDBRepository implements PublicProfileRepository {
     const attributeValues = {};
 
     Object.keys(params).forEach(key => {
-      if (['name', 'description'].includes(key) === false) return;
+      if (['name', 'description', 'albums'].includes(key) === false) return;
 
       updateExpression.push(`#${key} = :${key}`);
       attributeNames[`#${key}`] = key;
@@ -114,7 +114,10 @@ class PublicProfileDynamoDBRepository implements PublicProfileRepository {
 
     const item = unmarshall(response.Attributes);
 
-    return item as PublicProfile;
+    return {
+      ...item,
+      id: item.id.replace('publicprofile#', ''),
+    } as PublicProfile;
   }
 
   public async delete(id: ID): Promise<PublicProfile> {

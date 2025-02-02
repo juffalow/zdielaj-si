@@ -57,8 +57,9 @@ declare namespace PublicProfileRepository {
   }
 
   interface UpdateParameters {
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
+    albums?: ID[];
   }
 }
 

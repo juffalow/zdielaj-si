@@ -4,6 +4,7 @@ import logger from '../logger';
 class Users {
   constructor(
     protected userRepository: UserRepository,
+    protected publicProfileRepository: PublicProfileRepository,
     protected albumRepository: AlbumRepository,
     protected uploadService: Services.Upload,
     protected userService: Services.User,
@@ -12,6 +13,7 @@ class Users {
   public async get(id: ID, token?: string): Promise<unknown> {
     const remoteUser = await this.userService.get(token);
     const user = await this.userRepository.get(id);
+    const publicProfile = typeof user.publicProfileId === 'string' ? await this.publicProfileRepository.get(user.publicProfileId) : { id: null, albums: [] };
 
     if (typeof user === 'undefined') {
       throw new NotFoundError('User not found!', 404);
@@ -32,6 +34,7 @@ class Users {
         return {
           id,
           compressedId: album.compressedId,
+          publicProfile: publicProfile.albums.includes(album.id) ? { id: publicProfile.id } : null,
           media:[{
             id: response.data.file.id,
             location: response.data.file.location,
