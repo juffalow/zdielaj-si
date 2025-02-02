@@ -14,6 +14,7 @@ import Notifications from './pages/Notifications';
 import Subscription from './pages/Subscription';
 import Profile from './pages/Profile';
 import PublicProfile from './pages/PublicProfile';
+import ShortLinkRedirect from './pages/ShortLink';
 import { AuthProvider, RequireAuth } from './utils/useAuth';
 import { UploadProvider } from './utils/useUpload';
 import Tracking from './utils/Tracking';
@@ -38,6 +39,7 @@ const App: React.FC = () => (
               <Route path="/predplatne" element={<RequireAuth><Subscription /></RequireAuth>} />
               <Route path="/profil" element={<RequireAuth><Profile /></RequireAuth>} />
               <Route path="/profil/:id" element={<PublicProfile />} />
+              <Route path="/:path" element={<ShortLinkRedirect />} />
               <Route path="/" element={<Home />} />
             </Routes>
           </main>

@@ -24,6 +24,9 @@ type Album = {
   publicProfile: {
     id: ID;
   } | null;
+  shortLink?: {
+    path: string;
+  };
   name?: string;
   description?: string;
   media: Media[];

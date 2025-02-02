@@ -26,7 +26,7 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
   };
 
   const onCopyClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/album/${'compressedId' in album ? album.compressedId as string : album.id}`);
+    navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`);
 
     (event.target as HTMLButtonElement).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10003;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 
@@ -53,7 +53,7 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
       </Row>
       <Row className="mt-4">
         <Col lg={{ span: 6, offset: 3 }} sm={{ span: 8, offset: 2 }}>
-          <ShareableLink url={`${window.location.protocol}//${window.location.host}/album/${'compressedId' in album ? album.compressedId as string : album.id}`} onClick={onCopyClick} />
+          <ShareableLink url={`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`} onClick={onCopyClick} />
           <p className="ps-2 pe-2 mt-1">
             {
               uploadSpeed > 0 ? `Odahovaný čas: ${Math.ceil(uploadingSizeSum / uploadSpeed)} sekúnd` : 'Prepočitavanie odhadovaného času...'

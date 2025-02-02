@@ -82,6 +82,16 @@ export async function addMedia(albumId: string, fileId: number): Promise<any> {
   return post(`${process.env.REACT_APP_CORE_URL}/albums/${albumId}/media`, { fileId });
 }
 
+export async function createShortLink(album: Album): Promise<{ path: string; albumId: ID }> {
+  return post(`${process.env.REACT_APP_CORE_URL}/shortlinks`, { albumId: album.id })
+    .then(response => response.data.shortLink);
+}
+
+export async function getShortLink(path: string): Promise<{ albumId: ID }> {
+  return get<any>(`${process.env.REACT_APP_CORE_URL}/shortlinks/${path}`)
+    .then(response => response.data.shortLink);
+}
+
 export async function getNotificationSettings(email: string): Promise<any> {
   return get<any>(`${process.env.REACT_APP_CORE_URL}/notifications?email=${email}&type=email`)
     .then(response => response.data.settings);

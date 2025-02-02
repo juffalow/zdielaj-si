@@ -9,7 +9,7 @@ import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import FeaturesList from './home/FeaturesList';
 import SEO from '../components/SEO';
-import { createAlbum, addMedia } from '../api/services';
+import { createAlbum, createShortLink, addMedia } from '../api/services';
 import useUpload from '../utils/useUpload';
 import GOOGLE_PLAY_LOGO from '../img/google_play_logo.png';
 import APP_STORE_LOGO from '../img/app_store_logo.png';
@@ -26,12 +26,13 @@ const Home: React.FC = () => {
 
   const onDrop = async (acceptedFiles: File[]) => {
     const album = await createAlbum();
+    const shortLink = await createShortLink(album);
     
     onUploadDrop(acceptedFiles, async (media) => {
       await addMedia(album.id, media.id);
     });
 
-    navigate(`/album/${album.compressedId}`, { state: { album } });    
+    navigate(`/album/${album.id}`, { state: { album: { ...album, shortLink } } });    
   };
 
   const {

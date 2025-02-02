@@ -46,7 +46,7 @@ const AlbumPreview: React.FC<Props> = ({ album, onPublicProfileToggle, onDelete 
           label="Zobrazit vo verejnom profile"
         />
       <div className="d-grid">
-        <Link className="btn btn-outline-secondary" role="button" to={`/album/${'compressedId' in album ? album.compressedId : album.id}`}>Zobraziť</Link>
+        <Link className="btn btn-outline-secondary" role="button" to={`/album/${album.id}`}>Zobraziť</Link>
         {
           typeof onDelete === 'function' ? (
             <Button variant="outline-danger" className="mt-2" onClick={() => onDelete && onDelete(album)}>Vymazať</Button>
