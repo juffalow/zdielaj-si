@@ -13,6 +13,9 @@ type Album = {
   publicProfile?: {
     id: ID;
   };
+  shortLink?: {
+    path: string;
+  };
   files?: ID[];
   name?: string;
   description?: string;
@@ -45,4 +48,9 @@ type PageInfo = {
 type OrderBy = {
   field: string;
   direction: string;
+};
+
+type ShortLink = {
+  path: string;
+  albumId: ID;
 };

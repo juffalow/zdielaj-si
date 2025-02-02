@@ -4,6 +4,7 @@ import notifications from './notifications';
 import publicProfiles from './publicProfiles';
 import publicProfilesAlbums from './publicProfiles/Albums';
 import me from './me';
+import shortLinks from './shortLinks';
 
 const router = express.Router();
 
@@ -12,5 +13,6 @@ router.use('/notifications', notifications);
 router.use('/publicprofiles', publicProfiles);
 router.use('/publicprofiles', publicProfilesAlbums);
 router.use('/me', me);
+router.use('/shortlinks', shortLinks);
 
 export default router;

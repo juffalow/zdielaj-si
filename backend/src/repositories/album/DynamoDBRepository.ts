@@ -76,7 +76,7 @@ class AlbumDynamoDBRepository implements AlbumRepository {
     const attributeValues = {};
 
     Object.keys(params).forEach(key => {
-      if (['files', 'name', 'description'].includes(key) === false) return;
+      if (['files', 'name', 'description', 'shortLink'].includes(key) === false) return;
 
       updateExpression.push(`#${key} = :${key}`);
       attributeNames[`#${key}`] = key;

@@ -10,6 +10,9 @@ declare namespace AlbumRepository {
     files?: ID[];
     name?: string;
     description?: string;
+    shortLink?: {
+      path: string;
+    };
   }
 
   interface FindParameters {
@@ -97,4 +100,12 @@ interface UserRepository {
   update(params: UserRepository.UpdateParameters, where: { id: ID }): Promise<User>;
 
   delete(id: ID): Promise<User>;
+}
+
+interface ShortLinkRepository {
+  get(path: string): Promise<ShortLink>;
+
+  create(params: { path: string, albumId: ID }): Promise<ShortLink>;
+
+  delete(path: string): Promise<ShortLink>;
 }

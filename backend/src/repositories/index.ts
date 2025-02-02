@@ -1,6 +1,7 @@
 import album from './album';
 import publicProfile from './publicProfile';
 import user from './user';
+import shortLink from './shortLink';
 
 const container = {
   get Album(): AlbumRepository {
@@ -13,6 +14,10 @@ const container = {
 
   get User(): UserRepository {
     return user.Composite;
+  },
+
+  get ShortLink(): ShortLinkRepository {
+    return shortLink.Composite;
   },
 };
 
