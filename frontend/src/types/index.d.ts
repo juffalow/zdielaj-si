@@ -21,6 +21,11 @@ type Album = {
   user: {
     id: ID;
   };
+  publicProfile: {
+    id: ID;
+  } | null;
+  name?: string;
+  description?: string;
   media: Media[];
   createdAt: string;
 }

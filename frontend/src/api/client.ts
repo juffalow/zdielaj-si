@@ -41,11 +41,17 @@ function handleSuccess<T>(response: Response): Promise<T> {
     throw new BaseError({ message: 'Unsupported content type!', code: 0 });
   }
 
+  if (response.status === 204) {
+    return Promise.resolve({} as T);
+  }
+
   return response.json();
 }
 
 function handleResponse(response: Response) {
-  if (response.headers.get('Content-Type')?.startsWith('application/json')) {
+  if (response.status === 204) {
+    return {};
+  } else if (response.headers.get('Content-Type')?.startsWith('application/json')) {
     return response.json();
   } else {
     return response.text();

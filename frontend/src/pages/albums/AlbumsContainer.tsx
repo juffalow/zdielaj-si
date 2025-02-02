@@ -3,15 +3,32 @@ import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import AlbumsList from './AlbumsList';
-import { deleteAlbum } from '../../api/services';
+import { deleteAlbum, addAlbumToPublicProfile, removeAlbumFromPublicProfile } from '../../api/services';
 
 const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => {
   const albums = use(fetchAlbums);
+
+  const [ allAlbums, setAllAlbums ] = useState<Album[]>(albums);
+
   const [ album, setAlbum ] = useState<Album | null>(null);
-  const [ deletedAlbums, setDeletedAlbums ] = useState<Album[]>([]);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
-  const [ optimisticAlbums, deleteOptimisticAlbum ] = useOptimistic(albums.filter(album => !deletedAlbums.some(da => da.id === album.id)), (optimisticAlbums: Album[], deletedAlbum: Album) => {
-    return optimisticAlbums.filter(a => a.id !== deletedAlbum.id);
+  const [ optimisticAlbums, updateOptimisticAlbums ] = useOptimistic(allAlbums, (optimisticAlbums: Album[], action: { album: Album, type: string }): any => {
+    if (action.type === 'delete') {
+      return optimisticAlbums.filter(a => a.id !== action.album.id);
+    }
+
+    if (action.type === 'publish' || action.type === 'unpublish') {
+      return optimisticAlbums.map(a => {
+        if (a.id === action.album.id) {
+          return {
+            ...a,
+            publicProfile: action.type === 'publish' ? { id: 'public-profile-1' } : null,
+          };
+        }
+
+        return a;
+      });
+    }
   });
 
   const onDeleteClick = async (album: Album) => {
@@ -33,10 +50,51 @@ const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => 
       return;
     }
 
-    deleteOptimisticAlbum(album);
+    updateOptimisticAlbums({ album, type: 'delete' });
 
     await deleteAlbum(album.id);
-    setDeletedAlbums((deletedAlbums) => [...deletedAlbums, album]);
+    setAllAlbums((allAlbums) => allAlbums.filter(a => a.id !== album.id));
+  }
+
+  const onPublicProfileToggle = async (album: Album) => {
+    startTransition(async () => {
+      console.log('onPublicProfileToggle', album);
+
+      if (album.publicProfile === null) {
+        console.log('publishing');
+        updateOptimisticAlbums({ album, type: 'publish' });
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        await addAlbumToPublicProfile('public-profile-1', album.id);
+        setAllAlbums((allAlbums) => allAlbums.map(a => {
+          if (a.id === album.id) {
+            return {
+              ...a,
+              publicProfile: { id: 'public-profile-1' },
+            };
+          }
+
+          return a;
+        }));
+      } else {
+        console.log('unpublishing');
+        updateOptimisticAlbums({ album, type: 'unpublish' });
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        await removeAlbumFromPublicProfile('public-profile-1', album.id);
+
+        setAllAlbums((allAlbums) => allAlbums.map(a => {
+          if (a.id === album.id) {
+            return {
+              ...a,
+              publicProfile: null,
+            };
+          }
+
+          return a;
+        }));
+      }
+  
+      console.log('done');
+    });
   }
 
   return (
@@ -48,7 +106,7 @@ const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => 
           </Alert>
         ) : null
       }
-      <AlbumsList albums={optimisticAlbums} onDelete={onDeleteClick} />
+      <AlbumsList albums={optimisticAlbums} onPublicProfileToggle={onPublicProfileToggle} onDelete={onDeleteClick} />
 
       <Modal show={isModalOpen} onHide={onModalClose} onExited={() => startTransition(() => onModalExit())}>
         <Modal.Header closeButton>

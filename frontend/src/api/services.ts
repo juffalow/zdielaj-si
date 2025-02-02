@@ -116,3 +116,11 @@ export async function getPublicProfileAlbums(params: { publicProfileId: ID, firs
   
   return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${publicProfileId}/albums?${searchParams}`);
 }
+
+export async function addAlbumToPublicProfile(publicProfileId: ID, albumId: ID): Promise<unknown> {
+  return post(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${publicProfileId}/albums`, { id: albumId });
+}
+
+export async function removeAlbumFromPublicProfile(publicProfileId: ID, albumId: ID): Promise<unknown> {
+  return httpDelete(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${publicProfileId}/albums/${albumId}`);
+}
