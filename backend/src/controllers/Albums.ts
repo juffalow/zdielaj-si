@@ -58,7 +58,7 @@ class Albums implements AlbumsController {
     if (typeof user !== 'undefined') {
       const u = await this.userRepository.get(user.id);
 
-      const albums = typeof u === 'undefined' ? [ album.id ] : [ ...u.albums, album.id ];
+      const albums = typeof u === 'undefined' ? [ album.id ] : [ album.id, ...u.albums ];
 
       await this.userRepository.update({ albums }, { id: user.id });
     }
