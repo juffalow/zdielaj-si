@@ -1,4 +1,5 @@
 import { use, useState, useOptimistic, startTransition } from 'react';
+import { useTranslation } from 'react-i18next';
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -6,6 +7,7 @@ import AlbumsList from './AlbumsList';
 import { deleteAlbum, addAlbumToPublicProfile, removeAlbumFromPublicProfile } from '../../api/services';
 
 const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => {
+  const { t } = useTranslation();
   const albums = use(fetchAlbums);
 
   const [ allAlbums, setAllAlbums ] = useState<Album[]>(albums);
@@ -102,7 +104,7 @@ const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => 
       {
         optimisticAlbums !== null && optimisticAlbums.length === 0 ? (
           <Alert variant="info">
-            Nemáš vytvorené žiadne albumy.
+            {t("albums.albumsContainer.noAlbumsAlert")}
           </Alert>
         ) : null
       }
@@ -110,15 +112,15 @@ const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => 
 
       <Modal show={isModalOpen} onHide={onModalClose} onExited={() => startTransition(() => onModalExit())}>
         <Modal.Header closeButton>
-          <Modal.Title>Vymazať album</Modal.Title>
+          <Modal.Title>{t("albums.albumsContainer.modalTitle")}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Naozaj chcete vymazať tento album?</Modal.Body>
+        <Modal.Body>{t("albums.albumsContainer.modalBody")}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onModalClose}>
-            Zatvoriť
+            {t("albums.albumsContainer.modalCloseButton")}
           </Button>
           <Button variant="danger" onClick={() => startTransition(() => onModalConfirm())}>
-            Vymazať
+            {t("albums.albumsContainer.modalSubmitButton")}
           </Button>
         </Modal.Footer>
       </Modal>

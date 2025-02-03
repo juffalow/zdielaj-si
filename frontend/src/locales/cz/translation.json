@@ -79,6 +79,28 @@
       "subtitleLink": "zde"
     }
   },
+  "album": {
+    "userAlbum": {
+      "formName": "Název alba",
+      "formDescription": "Popis alba",
+      "formSubmitButton": "Uložit",
+      "copyButton": "Kopírovat"
+    }
+  },
+  "albums": {
+    "albumPreview": {
+      "publicProfileToggle": "Zobrazit ve veřejném profilu",
+      "show": "Zobrazit",
+      "delete": "Smazat"
+    },
+    "albumsContainer": {
+      "noAlbumsAlert": "Nemáš žádná alba",
+      "modalTitle": "Smazat album",
+      "modalBody": "Opravdu chceš smazat toto album?",
+      "modalCloseButton": "Zavřít",
+      "modalSubmitButton": "Smazat"
+    }
+  },
   "menu": {
     "albums": "Alba",
     "about": "O aplikaci",

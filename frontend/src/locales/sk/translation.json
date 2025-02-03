@@ -79,6 +79,28 @@
       "subtitleLink": "tu"
     }
   },
+  "album": {
+    "userAlbum": {
+      "formName": "Názov albumu",
+      "formDescription": "Popis albumu",
+      "formSubmitButton": "Uložiť",
+      "copyButton": "Kopírovať"
+    }
+  },
+  "albums": {
+    "albumPreview": {
+      "publicProfileToggle": "Zobraziť vo verejnom profile",
+      "show": "Zobraziť",
+      "delete": "Vymazať"
+    },
+    "albumsContainer": {
+      "noAlbumsAlert": "Nemáš žiadne albumy",
+      "modalTitle": "Vymazať album",
+      "modalBody": "Naozaj chceš vymazať tento album?",
+      "modalCloseButton": "Zatvoriť",
+      "modalSubmitButton": "Vymazať"
+    }
+  },
   "menu": {
     "albums": "Albumy",
     "about": "O aplikácii",

@@ -79,6 +79,28 @@
       "subtitleLink": "hier"
     }
   },
+  "album": {
+    "userAlbum": {
+      "formName": "Albumname",
+      "formDescription": "Albenbeschreibung",
+      "formSubmitButton": "Speichern",
+      "copyButton": "Kopieren"
+    }
+  },
+  "albums": {
+    "albumPreview": {
+      "publicProfileToggle": "Im öffentlichen Profil anzeigen",
+      "show": "Anzeigen",
+      "delete": "Löschen"
+    },
+    "albumsContainer": {
+      "noAlbumsAlert": "Du hast keine Alben",
+      "modalTitle": "Album löschen",
+      "modalBody": "Möchtest du dieses Album wirklich löschen?",
+      "modalCloseButton": "Schließen",
+      "modalSubmitButton": "Löschen"
+    }
+  },
   "menu": {
     "albums": "Alben",
     "about": "Über",

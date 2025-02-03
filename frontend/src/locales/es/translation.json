@@ -79,6 +79,28 @@
       "subtitleLink": "aquí"
     }
   },
+  "album": {
+    "userAlbum": {
+      "formName": "Nombre del álbum",
+      "formDescription": "Descripción del álbum",
+      "formSubmitButton": "Guardar",
+      "copyButton": "Copiar"
+    }
+  },
+  "albums": {
+    "albumPreview": {
+      "publicProfileToggle": "Mostrar en el perfil público",
+      "show": "Mostrar",
+      "delete": "Eliminar"
+    },
+    "albumsContainer": {
+      "noAlbumsAlert": "No tienes álbumes",
+      "modalTitle": "Eliminar álbum",
+      "modalBody": "¿Realmente quieres eliminar este álbum?",
+      "modalCloseButton": "Cerrar",
+      "modalSubmitButton": "Eliminar"
+    }
+  },
   "menu": {
     "albums": "Álbumes",
     "about": "Acerca de",

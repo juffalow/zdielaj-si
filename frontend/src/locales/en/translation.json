@@ -79,6 +79,28 @@
       "subtitleLink": "here"
     }
   },
+  "album": {
+    "userAlbum": {
+      "formName": "Name",
+      "formDescription": "Description",
+      "formSubmitButton": "Save",
+      "copyButton": "Copy"
+    }
+  },
+  "albums": {
+    "albumPreview": {
+      "publicProfileToggle": "Show in public profile",
+      "show": "Show",
+      "delete": "Delete"
+    },
+    "albumsContainer": {
+      "noAlbumsAlert": "You have no albums",
+      "modalTitle": "Delete album",
+      "modalBody": "Do you really want to delete this album?",
+      "modalCloseButton": "Close",
+      "modalSubmitButton": "Delete"
+    }
+  },
   "menu": {
     "albums": "Albums",
     "about": "About",
