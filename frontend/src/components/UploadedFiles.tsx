@@ -2,14 +2,10 @@ import { useDropzone } from 'react-dropzone';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { addMedia } from '../api/services';
-import MobileBottomButton from '../components/MobileBottomButton';
 import Thumbnail from '../pages/home/Thumbnail';
 import useUpload from '../utils/useUpload';
 
 const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
-  const userAgent = navigator.userAgent.toLowerCase();
-  const isMobile = /iphone|ipad|ipod|android|windows phone/g.test(userAgent);
-
   const {
     files,
     onDrop,
@@ -19,16 +15,6 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
     onDrop(acceptedFiles, async (media) => {
       await addMedia(album.id, media.id);
     });  
-  };
-
-  const onCopyClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`);
-
-    (event.target as HTMLButtonElement).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10003;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-
-    setTimeout(() => {
-      (event.target as HTMLButtonElement).innerHTML = 'Kopírovať';
-    }, 2000);
   };
 
   const {
@@ -55,9 +41,6 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
           ))
         }
       </Row>
-      {
-        isMobile ? <MobileBottomButton onClick={onCopyClick}>Kopírovať</MobileBottomButton> : null
-      }
     </>
   );
 }

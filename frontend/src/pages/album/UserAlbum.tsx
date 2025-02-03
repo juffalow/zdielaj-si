@@ -5,9 +5,22 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import UploadedFiles from "../../components/UploadedFiles";
 import ShareableLink from '../home/ShareableLink';
+import MobileBottomButton from '../../components/MobileBottomButton';
 
 export default function UserAlbum({ album, updateAlbum }: { album: Album, updateAlbum: any }) {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isMobile = /iphone|ipad|ipod|android|windows phone/g.test(userAgent);
   const [state, formAction, isPending] = useActionState(updateAlbum, { name: album.name, description: album.description });
+
+  const onCopyClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`);
+
+    (event.target as HTMLButtonElement).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10003;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+
+    setTimeout(() => {
+      (event.target as HTMLButtonElement).innerHTML = 'Kopírovať';
+    }, 2000);
+  };
 
   return (
     <Row>
@@ -31,11 +44,15 @@ export default function UserAlbum({ album, updateAlbum }: { album: Album, update
         </Form>
 
         <hr className="mt-5 mb-3" />
-        <ShareableLink url={`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`} onClick={() => { console.log('copy') }} />
+        <ShareableLink url={`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`} onClick={onCopyClick} />
       </Col>
       <Col lg={8} md={6}>
         <UploadedFiles album={album} />
       </Col>
+
+      {
+        isMobile ? <MobileBottomButton onClick={onCopyClick}>Kopírovať</MobileBottomButton> : null
+      }
     </Row>
   );
 }

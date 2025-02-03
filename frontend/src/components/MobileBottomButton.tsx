@@ -11,10 +11,10 @@ const MobileButton: React.FC<Props> = ({ children, onClick }: Props) => (
   <>
     {
       createPortal(
-      <div className="relative" style={{ height: 68 }}>
-        <div style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'var(--bs-body-bg)' }}>
+      <div className="relative">
+        <div style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'rgba(153, 153, 153, 0.6)' }}>
           <hr className="border border-3 opacity-100 mt-0 mb-0" />
-          <Col className="d-flex justify-content-center pt-2 pb-2" xs={{  span: 10, offset: 1 }} sm={{ span: 8, offset: 2  }}>
+          <Col className="d-flex justify-content-center pt-4 pb-4" xs={{  span: 10, offset: 1 }} sm={{ span: 8, offset: 2  }}>
             <Button onClick={onClick} className="w-100" size="lg">{children}</Button>
           </Col>
         </div>
