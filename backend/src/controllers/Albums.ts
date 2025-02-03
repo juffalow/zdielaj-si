@@ -56,7 +56,7 @@ class Albums implements AlbumsController {
   public async createAlbum(user: User | undefined): Promise<Album> {
     logger.debug(`${this.constructor.name}.create`, { user });
 
-    const album = await this.albumRepository.create({ user: { id: user.id } });
+    const album = await this.albumRepository.create({ user: { id: user?.id } });
 
     if (typeof user !== 'undefined') {
       const u = await this.userRepository.get(user.id);
