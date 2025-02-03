@@ -10,6 +10,7 @@ interface ShareableLinkProps {
 
 const ShareableLink: React.FC<ShareableLinkProps> = ({ url, onClick }: ShareableLinkProps) => (
   <InputGroup>
+    <InputGroup.Text>Kátky odkaz</InputGroup.Text>
     <FormControl type="text" value={url} readOnly />
     <Button variant="outline-secondary" onClick={onClick}>Kopírovať</Button>
   </InputGroup>

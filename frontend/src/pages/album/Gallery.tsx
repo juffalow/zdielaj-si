@@ -1,11 +1,13 @@
-import { useLayoutEffect, useState, useRef, useEffect } from 'react'
+import { useLayoutEffect, useState, useRef, useEffect, use } from 'react';
 import LightGallery from 'lightgallery/react';
 import lgVideo from 'lightgallery/plugins/video';
 import GalleryItems from './GalleryItems';
 import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-video.css';
 
-export default function Gallery({ files }: { files: Array<Media> }) {
+export default function Gallery({ albumPromise }: { albumPromise: Promise<Album> }) {
+  const album = use(albumPromise);
+
   const galleryRef = useRef<HTMLDivElement | null>(null);
   const [innerWidth, setInnderWidth] = useState(window.document.getElementById("zdielaj-si-gallery")?.clientWidth || window.innerWidth);
   const [cols, setCols] = useState(innerWidth < 768 ? 2 : innerWidth < 992 ? 2 : innerWidth < 1200 ? 4 : innerWidth < 1600 ? 6 : 6);
@@ -32,13 +34,14 @@ export default function Gallery({ files }: { files: Array<Media> }) {
 
   return (
     <div id="zdielaj-si-gallery" ref={galleryRef}>
+      <title>{album.name || 'Album'}</title>
       <LightGallery
         plugins={[lgVideo]}
         download={true}
         mobileSettings={{download: true}}
         selector=".gallery-item"
       >
-        <GalleryItems files={files} cols={cols} innerWidth={innerWidth} />
+        <GalleryItems files={album.media} cols={cols} innerWidth={innerWidth} />
       </LightGallery>
     </div>
   );

@@ -78,6 +78,11 @@ export async function createAlbum(): Promise<Album> {
     });
 }
 
+export async function updateAlbum(id: ID, params: { name?: string, description?: string }): Promise<Album> {
+  return put(`${process.env.REACT_APP_CORE_URL}/albums/${id}`, params)
+    .then(response => response.data.album);
+}
+
 export async function addMedia(albumId: string, fileId: number): Promise<any> {
   return post(`${process.env.REACT_APP_CORE_URL}/albums/${albumId}/media`, { fileId });
 }

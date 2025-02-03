@@ -32,7 +32,7 @@ const Home: React.FC = () => {
       await addMedia(album.id, media.id);
     });
 
-    navigate(`/album/${album.id}`, { state: { album: { ...album, shortLink } } });    
+    navigate(`/album/${album.id}`, { state: { album: { ...album, shortLink }, isNew: true } });    
   };
 
   const {
