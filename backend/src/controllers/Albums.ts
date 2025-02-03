@@ -23,7 +23,7 @@ class Albums implements AlbumsController {
 
     const response = await this.uploadService.listFiles(album.files);
   
-    const fullMedia = await Promise.all(album.files.map(async (id) => {
+    const fullMedia = album.files.map((id) => {
       const file = response.data.files.find(file => file.id === id);
       
       return {
@@ -37,13 +37,14 @@ class Albums implements AlbumsController {
         thumbnails: file.thumbnails,
         conversions: file.conversions,
       }
-    }));
+    });
 
     return {
       id: album.id,
       name: album.name || '',
       description: album.description || '',
       media: fullMedia,
+      shortLink: album.shortLink,
     };
   }
 

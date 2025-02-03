@@ -14,6 +14,9 @@ interface GetAlbumResponse {
       height: number;
     };
   }[];
+  shortLink: {
+    path: string;
+  };
 }
 
 interface AlbumsController {
