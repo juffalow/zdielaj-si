@@ -41,6 +41,8 @@ class Albums implements AlbumsController {
 
     return {
       id: album.id,
+      name: album.name || '',
+      description: album.description || '',
       media: fullMedia,
     };
   }

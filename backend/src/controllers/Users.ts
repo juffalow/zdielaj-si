@@ -34,6 +34,7 @@ class Users {
         return {
           id,
           compressedId: album.compressedId,
+          name: album.name,
           publicProfile: publicProfile.albums.includes(album.id) ? { id: publicProfile.id } : null,
           media:[{
             id: response.data.file.id,

@@ -3,6 +3,8 @@ interface GetAlbumResponse {
   user?: {
     id: ID;
   };
+  name: string;
+  description: string;
   media: {
     id: ID;
     location: string;
