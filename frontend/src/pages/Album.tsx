@@ -13,8 +13,7 @@ const Album: React.FC = () => {
   const location = useLocation();
   const params = useParams();
   const [album, setAlbum] = useState(location.state?.album);
-  const albumPromise = getAlbum(params.id as string);
-
+  
   const updateAlbumAction = async (prevState: unknown, state: FormData): Promise<{ name: string, description: string }> => {
     const name = state.get('name') as string;
     const description = state.get('description') as string;
@@ -33,6 +32,8 @@ const Album: React.FC = () => {
       </Container>
     );
   }
+
+  const albumPromise = getAlbum(params.id as string);
 
   return (
     <Container fluid>
