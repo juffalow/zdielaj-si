@@ -31,6 +31,7 @@ class Albums {
             mimetype: response.data.file.mimetype,
             thumbnails: response.data.file.thumbnails,
           }],
+          name: album.name,
           createdAt: album.createdAt,
         };
       } catch (error) {
