@@ -2676,9 +2676,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@restart/ui@npm:^1.9.3":
-  version: 1.9.3
-  resolution: "@restart/ui@npm:1.9.3"
+"@restart/ui@npm:^1.9.4":
+  version: 1.9.4
+  resolution: "@restart/ui@npm:1.9.4"
   dependencies:
     "@babel/runtime": "npm:^7.26.0"
     "@popperjs/core": "npm:^2.11.8"
@@ -2692,7 +2692,7 @@ __metadata:
   peerDependencies:
     react: ">=16.14.0"
     react-dom: ">=16.14.0"
-  checksum: 10c0/75cba52bb8a63fc1bfe44fda773a35f93fa79159750a99bd48e0b43f10b533c084ba4e48786aa1499c6e0728ab051aa56b976f9e7e72d670ac0af116809fc173
+  checksum: 10c0/98370e9dc6af55810bd099963799dcbf371fe8518e815ff5066d424ad7ef93517b3fa3baf3d271d175600c40ca4bac06198a6fb85b09c20755af8e45027c51e3
   languageName: node
   linkType: hard
 
@@ -4855,9 +4855,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001646, caniuse-lite@npm:^1.0.30001688":
-  version: 1.0.30001695
-  resolution: "caniuse-lite@npm:1.0.30001695"
-  checksum: 10c0/acf90a767051fdd8083711b3ff9f07a28149c55e394115d8f874f149aa4f130e6bc50cea1dd94fe03035b9ebbe13b64f446518a6d2e19f72650962bdff44b2c5
+  version: 1.0.30001696
+  resolution: "caniuse-lite@npm:1.0.30001696"
+  checksum: 10c0/8060584c612b2bc232995a6e31153432de7946b5417d3b3505a3ab76e632e5568ccc7bae38f1a977f21d4fc214f9e64be829213f810694172c9109e258cb5be8
   languageName: node
   linkType: hard
 
@@ -4961,9 +4961,9 @@ __metadata:
   linkType: hard
 
 "cjs-module-lexer@npm:^1.0.0":
-  version: 1.4.1
-  resolution: "cjs-module-lexer@npm:1.4.1"
-  checksum: 10c0/5a7d8279629c9ba8ccf38078c2fed75b7737973ced22b9b5a54180efa57fb2fe2bb7bec6aec55e3b8f3f5044f5d7b240347ad9bd285e7c3d0ee5b0a1d0504dfc
+  version: 1.4.3
+  resolution: "cjs-module-lexer@npm:1.4.3"
+  checksum: 10c0/076b3af85adc4d65dbdab1b5b240fe5b45d44fcf0ef9d429044dd94d19be5589376805c44fb2d4b3e684e5fe6a9b7cf3e426476a6507c45283c5fc6ff95240be
   languageName: node
   linkType: hard
 
@@ -6011,9 +6011,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.73":
-  version: 1.5.87
-  resolution: "electron-to-chromium@npm:1.5.87"
-  checksum: 10c0/e1b06a19df9f281477bee8afeb74494ba8f136f867f522d0907c703935f12b59b17581748933a6b86df4886a4ab7a5da88ab3ee029bbfc97dbc75dcf83ad4d5a
+  version: 1.5.90
+  resolution: "electron-to-chromium@npm:1.5.90"
+  checksum: 10c0/864715adfebb5932a78f776c99f28a50942884302b42ee6de0ab64ca135891a5a43af3a7c719a7335687c0ee201561011e37d4994558a795f67b9e44f20fc6ee
   languageName: node
   linkType: hard
 
@@ -6861,11 +6861,11 @@ __metadata:
   linkType: hard
 
 "fastq@npm:^1.6.0":
-  version: 1.18.0
-  resolution: "fastq@npm:1.18.0"
+  version: 1.19.0
+  resolution: "fastq@npm:1.19.0"
   dependencies:
     reusify: "npm:^1.0.4"
-  checksum: 10c0/7be87ecc41762adbddf558d24182f50a4b1a3ef3ee807d33b7623da7aee5faecdcc94fce5aa13fe91df93e269f383232bbcdb2dc5338cd1826503d6063221f36
+  checksum: 10c0/d6a001638f1574a696660fcbba5300d017760432372c801632c325ca7c16819604841c92fd3ccadcdacec0966ca336363a5ff57bc5f0be335d8ea7ac6087b98f
   languageName: node
   linkType: hard
 
@@ -7847,12 +7847,12 @@ __metadata:
   linkType: hard
 
 "import-fresh@npm:^3.1.0, import-fresh@npm:^3.2.1":
-  version: 3.3.0
-  resolution: "import-fresh@npm:3.3.0"
+  version: 3.3.1
+  resolution: "import-fresh@npm:3.3.1"
   dependencies:
     parent-module: "npm:^1.0.0"
     resolve-from: "npm:^4.0.0"
-  checksum: 10c0/7f882953aa6b740d1f0e384d0547158bc86efbf2eea0f1483b8900a6f65c5a5123c2cf09b0d542cc419d0b98a759ecaeb394237e97ea427f2da221dc3cd80cc3
+  checksum: 10c0/bf8cc494872fef783249709385ae883b447e3eb09db0ebd15dcead7d9afe7224dad7bd7591c6b73b0b19b3c0f9640eb8ee884f01cfaf2887ab995b0b36a0cbec
   languageName: node
   linkType: hard
 
@@ -11581,12 +11581,12 @@ __metadata:
   linkType: hard
 
 "react-bootstrap@npm:^2.10.4":
-  version: 2.10.8
-  resolution: "react-bootstrap@npm:2.10.8"
+  version: 2.10.9
+  resolution: "react-bootstrap@npm:2.10.9"
   dependencies:
     "@babel/runtime": "npm:^7.24.7"
     "@restart/hooks": "npm:^0.4.9"
-    "@restart/ui": "npm:^1.9.3"
+    "@restart/ui": "npm:^1.9.4"
     "@types/prop-types": "npm:^15.7.12"
     "@types/react-transition-group": "npm:^4.4.6"
     classnames: "npm:^2.3.2"
@@ -11604,7 +11604,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10c0/1bd2672d58f9fbde629df5798d45cf9f566f6b1ea69bcc47adba7b18f602d242ab7e82b8b5a5fe023551cfc9d2b5e7337dfd4974b9e6ccb350ade582508e4edc
+  checksum: 10c0/96a198ee97fc6f8f1cbd68bd97daae3509561fd4613b53a55eeb170d138a8dd78cc336c679fee4adb146427d5cc92cd03256793099431984e8f91fd20210a8c8
   languageName: node
   linkType: hard
 
@@ -12413,11 +12413,11 @@ __metadata:
   linkType: hard
 
 "semver@npm:^7.3.2, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.3, semver@npm:^7.5.4":
-  version: 7.6.3
-  resolution: "semver@npm:7.6.3"
+  version: 7.7.0
+  resolution: "semver@npm:7.7.0"
   bin:
     semver: bin/semver.js
-  checksum: 10c0/88f33e148b210c153873cb08cfe1e281d518aaa9a666d4d148add6560db5cd3c582f3a08ccb91f38d5f379ead256da9931234ed122057f40bb5766e65e58adaf
+  checksum: 10c0/bcd1c03209b4be7d8ca86c976a0410beba7d4ec1d49d846a4be154b958db1ff5eaee50760c1d4f4070b19dee3236b8672d3e09642c53ea23740398bba2538a2d
   languageName: node
   linkType: hard
 
