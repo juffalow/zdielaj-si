@@ -5,10 +5,12 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import AlbumsList from './AlbumsList';
 import { deleteAlbum, addAlbumToPublicProfile, removeAlbumFromPublicProfile } from '../../api/services';
+import useAuth from '../../utils/useAuth';
 
 const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => {
   const { t } = useTranslation();
   const albums = use(fetchAlbums);
+  const { user } = useAuth();
 
   const [ allAlbums, setAllAlbums ] = useState<Album[]>(albums);
 
@@ -24,7 +26,7 @@ const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => 
         if (a.id === action.album.id) {
           return {
             ...a,
-            publicProfile: action.type === 'publish' ? { id: 'public-profile-1' } : null,
+            publicProfile: action.type === 'publish' ? { id: user?.publicProfileId } : null,
           };
         }
 
@@ -60,28 +62,24 @@ const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => 
 
   const onPublicProfileToggle = async (album: Album) => {
     startTransition(async () => {
-      console.log('onPublicProfileToggle', album);
-
       if (album.publicProfile === null) {
-        console.log('publishing');
         updateOptimisticAlbums({ album, type: 'publish' });
         await new Promise(resolve => setTimeout(resolve, 2000));
-        await addAlbumToPublicProfile('public-profile-1', album.id);
+        await addAlbumToPublicProfile(user?.publicProfileId as string, album.id);
         setAllAlbums((allAlbums) => allAlbums.map(a => {
           if (a.id === album.id) {
             return {
               ...a,
-              publicProfile: { id: 'public-profile-1' },
+              publicProfile: { id: user?.publicProfileId as string },
             };
           }
 
           return a;
         }));
       } else {
-        console.log('unpublishing');
         updateOptimisticAlbums({ album, type: 'unpublish' });
         await new Promise(resolve => setTimeout(resolve, 2000));
-        await removeAlbumFromPublicProfile('public-profile-1', album.id);
+        await removeAlbumFromPublicProfile(user?.publicProfileId as string, album.id);
 
         setAllAlbums((allAlbums) => allAlbums.map(a => {
           if (a.id === album.id) {
@@ -94,8 +92,6 @@ const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => 
           return a;
         }));
       }
-  
-      console.log('done');
     });
   }
 
