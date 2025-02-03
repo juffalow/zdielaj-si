@@ -2,6 +2,7 @@ import { useLayoutEffect, useState, useRef, useEffect, use } from 'react';
 import LightGallery from 'lightgallery/react';
 import lgVideo from 'lightgallery/plugins/video';
 import GalleryItems from './GalleryItems';
+import ShareButton from '../../components/ShareButton';
 import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-video.css';
 
@@ -43,6 +44,8 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
       >
         <GalleryItems files={album.media} cols={cols} innerWidth={innerWidth} />
       </LightGallery>
+
+      <ShareButton link={`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`} />
     </div>
   );
 }

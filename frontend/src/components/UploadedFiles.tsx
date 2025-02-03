@@ -1,4 +1,5 @@
 import { useDropzone } from 'react-dropzone';
+import { useTranslation } from 'react-i18next';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { addMedia } from '../api/services';
@@ -6,6 +7,8 @@ import Thumbnail from '../pages/home/Thumbnail';
 import useUpload from '../utils/useUpload';
 
 const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
+  const { t } = useTranslation();
+
   const {
     files,
     onDrop,
@@ -28,7 +31,7 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
         <Col className="ps-5 pe-5 pb-4 mt-4">
           <div {...getSingleRootProps()} style={{ border: '1px #28a745 dashed', borderRadius: '20px', textAlign: 'center', padding: 40 }}>
             <input {...getSingleInputProps()} />
-            <p>Presuň sem fotky alebo ich vyber kliknutím</p>
+            <p className="mb-0">{t("components.uploadFiles.dropzoneTitle")}</p>
           </div>
         </Col>
       </Row>

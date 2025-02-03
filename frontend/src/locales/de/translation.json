@@ -83,8 +83,9 @@
     "userAlbum": {
       "formName": "Albumname",
       "formDescription": "Albenbeschreibung",
+      "formLink": "Albumlink",
       "formSubmitButton": "Speichern",
-      "copyButton": "Kopieren"
+      "copyButton": "Link kopieren"
     }
   },
   "albums": {
@@ -99,6 +100,14 @@
       "modalBody": "Möchtest du dieses Album wirklich löschen?",
       "modalCloseButton": "Schließen",
       "modalSubmitButton": "Löschen"
+    }
+  },
+  "components": {
+    "shareButton": {
+      "copyLink": "Link kopieren"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Ziehe Fotos hierher oder wähle sie durch Klicken aus"
     }
   },
   "menu": {

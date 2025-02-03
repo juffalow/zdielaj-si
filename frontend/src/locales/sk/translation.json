@@ -83,8 +83,9 @@
     "userAlbum": {
       "formName": "Názov albumu",
       "formDescription": "Popis albumu",
+      "formLink": "Odkaz na album",
       "formSubmitButton": "Uložiť",
-      "copyButton": "Kopírovať"
+      "copyButton": "Kopírovať odkaz"
     }
   },
   "albums": {
@@ -99,6 +100,14 @@
       "modalBody": "Naozaj chceš vymazať tento album?",
       "modalCloseButton": "Zatvoriť",
       "modalSubmitButton": "Vymazať"
+    }
+  },
+  "components": {
+    "shareButton": {
+      "copyLink": "Kopírovať odkaz"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Presuň sem fotky alebo ich vyber kliknutím"
     }
   },
   "menu": {
