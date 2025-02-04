@@ -45,7 +45,7 @@ class Users {
           createdAt: album.createdAt,
         };
       } catch (error) {
-        logger.error('Error while fetching album or its files!', { id, error });
+        logger.error('Error while fetching album or its files!', { id, error: { message: error.message, stack: error.stack } });
 
         return null;
       }
