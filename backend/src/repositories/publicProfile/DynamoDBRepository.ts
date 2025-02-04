@@ -55,6 +55,7 @@ class PublicProfileDynamoDBRepository implements PublicProfileRepository {
       id: `publicprofile#${id}`,
       name: '',
       description: '',
+      albums: [],
       ...rest,
       createdAt: new Date().toISOString(),
     };
