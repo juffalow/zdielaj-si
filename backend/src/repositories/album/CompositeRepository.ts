@@ -41,7 +41,7 @@ class AlbumCompositeRepository implements AlbumRepository {
       return albums.concat(missingAlbums);
     }
 
-    return albums;
+    return albums.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
   }
 
   public async create(params: AlbumRepository.CreateParameters): Promise<Album> {

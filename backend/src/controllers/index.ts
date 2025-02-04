@@ -3,6 +3,7 @@ import NotificationsController from './Notifications';
 import PublicProfilesController from './PublicProfiles';
 import Users from './Users';
 import publicProfiles from './publicProfiles/index';
+import users from './users/index';
 import repositories from '../repositories';
 import services from '../services';
 
@@ -25,6 +26,10 @@ const container = {
 
   get publicProfiles() {
     return publicProfiles;
+  },
+
+  get users() {
+    return users;
   },
 };
 
