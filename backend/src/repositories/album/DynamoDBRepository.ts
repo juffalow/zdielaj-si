@@ -5,6 +5,7 @@ import {
   PutItemCommand,
   DeleteItemCommand,
   UpdateItemCommand,
+  AttributeValue,
 } from '@aws-sdk/client-dynamodb';
 import {
   marshall,
@@ -28,17 +29,21 @@ class AlbumDynamoDBRepository implements AlbumRepository {
       Key: {
         id: {
           S: id as string,
-        }
-      }
+        },
+      },
+      ReturnConsumedCapacity: this.isDebugModeEnabled ? 'TOTAL' : 'NONE',
     });
   
-    const result = await this.dynamoDB.send(command);
+    const response = await this.dynamoDB.send(command);
 
-    if ('Item' in result === false) {
+    logger.silly(`${this.constructor.name}.getMany.response`, response);
+    logger.debug(`${this.constructor.name}.getMany.consumedCapacity`, response.ConsumedCapacity);
+
+    if ('Item' in response === false) {
       return undefined;
     }
 
-    const item = unmarshall(result.Item);
+    const item = unmarshall(response.Item);
 
     return item as Album;
   }
@@ -87,11 +92,14 @@ class AlbumDynamoDBRepository implements AlbumRepository {
     const command = new PutItemCommand({
       TableName: this.tableName,
       Item: marshall(item, { removeUndefinedValues: true }),
+      ConditionExpression: 'attribute_not_exists(id)',
+      ReturnConsumedCapacity: this.isDebugModeEnabled ? 'TOTAL' : 'NONE',
     });
 
-    const result = await this.dynamoDB.send(command);
+    const response = await this.dynamoDB.send(command);
 
-    logger.debug('result', result);
+    logger.silly(`${this.constructor.name}.create.result`, response);
+    logger.debug(`${this.constructor.name}.getMany.consumedCapacity`, response.ConsumedCapacity);
 
     return item as Album;
   }
@@ -124,9 +132,14 @@ class AlbumDynamoDBRepository implements AlbumRepository {
       ExpressionAttributeNames: attributeNames,
       ExpressionAttributeValues: attributeValues,
       ReturnValues: 'ALL_NEW',
+      ConditionExpression: 'attribute_exists(id)',
+      ReturnConsumedCapacity: this.isDebugModeEnabled ? 'TOTAL' : 'NONE',
     });
 
     const response = await this.dynamoDB.send(command);
+
+    logger.silly(`${this.constructor.name}.update.response`, response);
+    logger.debug(`${this.constructor.name}.getMany.consumedCapacity`, response.ConsumedCapacity);
 
     const item = unmarshall(response.Attributes);
 
@@ -146,15 +159,16 @@ class AlbumDynamoDBRepository implements AlbumRepository {
       ReturnValues: "ALL_OLD",
     });
   
-    const result = await this.dynamoDB.send(command);
+    const response = await this.dynamoDB.send(command);
 
-    logger.debug('result', result);
+    logger.silly(`${this.constructor.name}.update.response`, response);
+    logger.debug(`${this.constructor.name}.getMany.consumedCapacity`, response.ConsumedCapacity);
 
-    if ('Item' in result === false) {
+    if ('Item' in response === false) {
       return undefined;
     }
 
-    const item = unmarshall(result.Item as any);
+    const item = unmarshall(response.Item as Record<string, AttributeValue>);
 
     return item as Album;
   }
