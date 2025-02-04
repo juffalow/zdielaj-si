@@ -5,12 +5,11 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import AlbumsList from './AlbumsList';
 import { deleteAlbum, addAlbumToPublicProfile, removeAlbumFromPublicProfile } from '../../api/services';
-import useAuth from '../../utils/useAuth';
 
-const AlbumsContainer = ({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) => {
+const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Album[]>, fetchUser: Promise<User> }) => {
   const { t } = useTranslation();
   const albums = use(fetchAlbums);
-  const { user } = useAuth();
+  const user = use(fetchUser);
 
   const [ allAlbums, setAllAlbums ] = useState<Album[]>(albums);
 
