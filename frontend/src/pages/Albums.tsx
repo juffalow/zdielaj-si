@@ -5,9 +5,11 @@ import Loader from './albums/Loader';
 import AlbumsContainer from './albums/AlbumsContainer';
 import SEO from '../components/SEO';
 import ErrorBoundary from '../components/ErrorBoundary';
+import useAuth from '../utils/useAuth';
 
 const Albums: React.FC = () => {
-  const albumsPromise = getUserAlbums();
+  const { user } = useAuth();
+  const albumsPromise = getUserAlbums(user as User);
   const userPromise = getCurrentUser();
 
   return (

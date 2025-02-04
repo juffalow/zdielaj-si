@@ -44,7 +44,7 @@ const AlbumPreview: React.FC<Props> = ({ album, onPublicProfileToggle, onDelete 
         <Card.Subtitle className="mb-2 text-muted">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</Card.Subtitle>
           <Form.Switch
             type="switch"
-            checked={album.publicProfile !== null && typeof album.publicProfile.id === 'string'}
+            checked={'publicProfile' in album && album.publicProfile !== null && typeof album.publicProfile.id === 'string'}
             onChange={() => onPublicProfileToggle?.call(this, album)}
             id="custom-switch"
             label={t("albums.albumPreview.publicProfileToggle")}

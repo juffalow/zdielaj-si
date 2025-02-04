@@ -31,6 +31,13 @@ namespace API {
     };
   }
 
+  interface GetUserAlbumsResponse {
+    error: unknown;
+    data: {
+      albums: Album[];
+    };
+  }
+
   interface GetPublicProfileResponse {
     error: unknown;
     data: {

@@ -59,9 +59,9 @@ export async function getCurrentUser(): Promise<User> {
     .then(response => response.data.user);
 }
 
-export async function getUserAlbums(): Promise<Album[]> {
-  return get<API.GetCurrentUserResponse>(`${process.env.REACT_APP_CORE_URL}/me`, { credentials: 'include' })
-    .then(response => response.data.user.albums);
+export async function getUserAlbums(user: User): Promise<Album[]> {
+  return get<API.GetUserAlbumsResponse>(`${process.env.REACT_APP_CORE_URL}/users/${user.id}/albums`)
+    .then(response => response.data.albums);
 }
 
 export async function deleteAlbum(id: ID): Promise<Album> {
