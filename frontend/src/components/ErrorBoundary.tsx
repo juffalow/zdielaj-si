@@ -2,6 +2,7 @@ import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
+import type { APIError } from '../api/errors'
 
 interface Props {
   children: React.ReactNode;
@@ -9,19 +10,19 @@ interface Props {
 }
 
 interface State {
-  error: Error | null;
+  error: Error | APIError | null;
   hasError: boolean;
   isOpen: boolean;
 }
 
 class ErrorBoundary extends React.Component<Props, State> {
-  state = {
+  state: State = {
     hasError: false,
     error: null,
     isOpen: false,
   };
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error | Error & { response: { url: string, headers: { 'X-Request-Id': string } } }, errorInfo: React.ErrorInfo) {
     this.setState({ error, hasError: true });
   }
 
@@ -34,7 +35,7 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   render() {
-    if (this.state.hasError) {
+    if (this.state.hasError && this.state.error !== null) {
       if (this.props.fallback) {
         return this.props.fallback;
       }
@@ -49,17 +50,29 @@ class ErrorBoundary extends React.Component<Props, State> {
           </div>
           <Collapse in={this.state.isOpen}>
             <div>
-              <p className="mb-0"><b>URL:</b></p>
-              <pre>
-                {(this.state.error as any).response.url}
-              </pre>
-              <p className="mb-0"><b>X-Request-Id:</b></p>
-              <pre>
-                {(this.state.error as any).response.headers['X-Request-Id']}
-              </pre>
+              {
+                'response' in this.state.error && 'url' in this.state.error.response ? (
+                  <>
+                    <p className="mb-0"><b>URL:</b></p>
+                    <pre>
+                      {(this.state.error as APIError).response.url}
+                    </pre>
+                  </>
+                ) : null
+              }
+              {
+                'response' in this.state.error && 'headers' in this.state.error.response ? (
+                  <>
+                    <p className="mb-0"><b>X-Request-Id:</b></p>
+                    <pre>
+                      {(this.state.error as APIError).response.headers['X-Request-Id']}
+                    </pre>
+                  </>
+                ) : null
+              }
               <p className="mb-0"><b>Stack:</b></p>
               <pre>
-                {(this.state.error as any).stack}
+                {this.state.error.stack}
               </pre>
             </div>
           </Collapse>
