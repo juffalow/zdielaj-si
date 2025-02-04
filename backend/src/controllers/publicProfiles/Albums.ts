@@ -1,5 +1,4 @@
 import { NotFoundError, ForbiddenError } from '../../errors/APIError';
-import logger from '../../logger';
 
 class Albums {
   constructor(
@@ -16,29 +15,23 @@ class Albums {
       throw new NotFoundError('Public profile not found!', 404);
     }
 
-    const albs = await this.albumRepository.getMany(publicProfile.albums.slice(after, first > publicProfile.albums.length ? publicProfile.albums.length : first));
+    const albums = await this.albumRepository.getMany(publicProfile.albums.slice(after, first > publicProfile.albums.length ? publicProfile.albums.length : first));
 
-    const albumsWithFile = await Promise.all(albs.map(async (album: Album) => {
-      try {
-        const response = await this.uploadService.getFile(album.files[0]);
-        
-        return {
-          id: album.id,
-          compressedId: album.compressedId,
-          media:[{
-            id: response.data.file.id,
-            location: response.data.file.location,
-            mimetype: response.data.file.mimetype,
-            thumbnails: response.data.file.thumbnails,
-          }],
-          name: album.name,
-          createdAt: album.createdAt,
-        };
-      } catch (error) {
-        logger.warn('Error while fetching album', { album, error });
+    const files = await this.uploadService.listFiles(albums.filter(album => album.files.length > 0).map((album) => album.files[0]));
 
-        return null;
-      }
+    const albumsWithFile = await Promise.all(albums.filter(album => album.files.length > 0).map(async (album: Album) => {        
+      return {
+        id: album.id,
+        compressedId: album.compressedId,
+        media: files.data.files.filter(file => file.id === album.files[0]).map((file) => ({
+          id: file.id,
+          location: file.location,
+          mimetype: file.mimetype,
+          thumbnails: file.thumbnails,
+        })),
+        name: album.name,
+        createdAt: album.createdAt,
+      };
     }));
 
     return {
