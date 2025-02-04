@@ -12,7 +12,7 @@ type Album = {
   };
   publicProfile?: {
     id: ID;
-  };
+  } | null;
   shortLink?: {
     path: string;
   };

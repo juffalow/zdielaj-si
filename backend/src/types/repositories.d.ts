@@ -13,19 +13,9 @@ declare namespace AlbumRepository {
     shortLink?: {
       path: string;
     };
-  }
-
-  interface FindParameters {
-    user?: {
-      id: ID;
-    },
     publicProfile?: {
       id: ID;
     };
-    hash?: string;
-    orderBy?: OrderBy[];
-    first?: number;
-    after?: number;
   }
 
   interface CountParameters {

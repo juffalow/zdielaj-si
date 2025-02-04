@@ -77,6 +77,7 @@ class Albums {
     }
 
     await this.publicProfileRepository.update({ albums }, { id: publicProfile.id });
+    await this.albumRepository.update({ publicProfile: { id: publicProfile.id } }, { id: album.id });
 
     return true;
   }
@@ -99,6 +100,7 @@ class Albums {
     }
 
     await this.publicProfileRepository.update({ albums }, { id: publicProfile.id });
+    await this.albumRepository.update({ publicProfile: null }, { id: albumId });
 
     return true;
   }

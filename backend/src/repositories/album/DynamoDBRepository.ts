@@ -112,13 +112,14 @@ class AlbumDynamoDBRepository implements AlbumRepository {
     const attributeValues = {};
 
     Object.keys(params).forEach(key => {
-      if (['files', 'name', 'description', 'shortLink'].includes(key) === false) return;
+      if (['files', 'name', 'description', 'shortLink', 'publicProfile'].includes(key) === false) return;
 
       updateExpression.push(`#${key} = :${key}`);
       attributeNames[`#${key}`] = key;
       if (typeof params[key] === 'string') attributeValues[`:${key}`] = { S: params[key] };
       if (typeof params[key] === 'object' && Array.isArray(params[key]) === false) attributeValues[`:${key}`] = { M: marshall(params[key]) };
       if (typeof params[key] === 'object' && Array.isArray(params[key])) attributeValues[`:${key}`] = { L: marshall(params[key]) };
+      if (typeof params[key] === 'object' && params[key] === null) attributeValues[`:${key}`] = { NULL: true };
     });
 
     const command = new UpdateItemCommand({
