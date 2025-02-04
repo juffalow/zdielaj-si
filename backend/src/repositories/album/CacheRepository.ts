@@ -16,6 +16,14 @@ class AlbumCacheRepository implements AlbumRepository {
     return this.cache.get(id);
   }
 
+  public async getMany(ids: ID[]): Promise<Album[]> {
+    logger.debug(`${this.constructor.name}.getMany`, { ids });
+
+    const albums = ids.map((id) => this.cache.get(id));
+
+    return albums.filter((album) => album !== undefined);
+  }
+
   public async create(params: AlbumRepository.CreateParameters): Promise<Album> {
     logger.debug(`${this.constructor.name}.create`, { params });
 

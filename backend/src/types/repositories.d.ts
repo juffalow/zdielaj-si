@@ -42,6 +42,8 @@ declare namespace AlbumRepository {
 interface AlbumRepository {
   get(id: ID): Promise<Album>;
 
+  getMany(ids: ID[]): Promise<Album[]>;
+
   create(params: AlbumRepository.CreateParameters): Promise<Album>;
 
   update(params: AlbumRepository.UpdateParameters, where: { id: ID }): Promise<Album>;

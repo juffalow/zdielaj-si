@@ -16,14 +16,14 @@ class Albums {
       throw new NotFoundError('Public profile not found!', 404);
     }
 
-    const albums = await Promise.all(publicProfile.albums.slice(after, first > publicProfile.albums.length ? publicProfile.albums.length : first).map(async (id) => {
-      try {
-        const album = await this.albumRepository.get(id);
+    const albs = await this.albumRepository.getMany(publicProfile.albums.slice(after, first > publicProfile.albums.length ? publicProfile.albums.length : first));
 
+    const albumsWithFile = await Promise.all(albs.map(async (album: Album) => {
+      try {
         const response = await this.uploadService.getFile(album.files[0]);
         
         return {
-          id,
+          id: album.id,
           compressedId: album.compressedId,
           media:[{
             id: response.data.file.id,
@@ -35,14 +35,14 @@ class Albums {
           createdAt: album.createdAt,
         };
       } catch (error) {
-        logger.warn('Error while fetching album', { id, error });
+        logger.warn('Error while fetching album', { album, error });
 
         return null;
       }
     }));
 
     return {
-      albums: albums.filter((album) => album !== null),
+      albums: albumsWithFile.filter((album) => album !== null),
     };
   }
 

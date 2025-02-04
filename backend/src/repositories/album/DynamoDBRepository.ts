@@ -1,5 +1,6 @@
 import {
   DynamoDBClient,
+  BatchGetItemCommand,
   GetItemCommand,
   PutItemCommand,
   DeleteItemCommand,
@@ -16,6 +17,7 @@ class AlbumDynamoDBRepository implements AlbumRepository {
   constructor(
     protected dynamoDB: DynamoDBClient,
     protected tableName: string,
+    protected isDebugModeEnabled: boolean = false,
   ) {}
 
   public async get(id: ID): Promise<Album> {
@@ -39,6 +41,32 @@ class AlbumDynamoDBRepository implements AlbumRepository {
     const item = unmarshall(result.Item);
 
     return item as Album;
+  }
+
+  public async getMany(ids: ID[]): Promise<Album[]> {
+    logger.debug(`${this.constructor.name}.getMany`, { ids });
+
+    const command = new BatchGetItemCommand({
+      RequestItems: {
+        [this.tableName]: {
+          Keys: ids.map(id => ({
+            id: {
+              S: id as string,
+            }
+          })),
+        },
+      },
+      ReturnConsumedCapacity: this.isDebugModeEnabled ? 'TOTAL' : 'NONE',
+    });
+
+    const response = await this.dynamoDB.send(command);
+
+    logger.silly(`${this.constructor.name}.getMany.response`, response);
+    logger.debug(`${this.constructor.name}.getMany.consumedCapacity`, response.ConsumedCapacity);
+
+    const items = response.Responses[this.tableName].map(album => unmarshall(album));
+
+    return items as Album[];
   }
 
   public async create(params: AlbumRepository.CreateParameters): Promise<Album> {

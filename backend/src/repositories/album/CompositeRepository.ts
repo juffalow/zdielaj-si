@@ -24,6 +24,26 @@ class AlbumCompositeRepository implements AlbumRepository {
     return album;
   }
 
+  public async getMany(ids: ID[]): Promise<Album[]> {
+    logger.debug(`${this.constructor.name}.getMany`, { ids });
+
+    const albums = await this.cacheRepository.getMany(ids);
+
+    const missingIds = ids.filter((id) => albums.some((album) => album.id === id) === false);
+
+    if (missingIds.length > 0) {
+      const missingAlbums = await this.dynamoDBRepository.getMany(missingIds);
+
+      for (const album of missingAlbums) {
+        await this.cacheRepository.create(album);
+      }
+
+      return albums.concat(missingAlbums);
+    }
+
+    return albums;
+  }
+
   public async create(params: AlbumRepository.CreateParameters): Promise<Album> {
     logger.debug(`${this.constructor.name}.create`, { params });
 
