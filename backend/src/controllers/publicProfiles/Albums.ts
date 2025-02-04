@@ -41,6 +41,7 @@ class Albums {
 
   public async add(user: User, publicProfileId: ID, albumId: ID): Promise<boolean> {
     const publicProfile = await this.publicProfileRepository.get(publicProfileId);
+    const dbUser = await this.userRepository.get(user.id);
     const album = await this.albumRepository.get(albumId);
 
     if (typeof publicProfile === 'undefined') {
@@ -63,7 +64,7 @@ class Albums {
       publicProfile.albums = [];
     }
 
-    const albums = Array.from((new Set(publicProfile.albums)).add(albumId));
+    const albums = Array.from((new Set(publicProfile.albums)).add(albumId)).sort((a, b) => dbUser.albums.indexOf(a) - dbUser.albums.indexOf(b));
 
     if (publicProfile.albums.length === albums.length) {
       return false;
