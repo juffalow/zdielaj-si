@@ -38,7 +38,7 @@ class AlbumCompositeRepository implements AlbumRepository {
         await this.cacheRepository.create(album);
       }
 
-      return albums.concat(missingAlbums);
+      albums.push(...missingAlbums);
     }
 
     return albums.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));

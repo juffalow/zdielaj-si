@@ -6,7 +6,9 @@ const router = express.Router();
 
 router.get('/:id/albums', requireAuth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-    const { albums } = await controllers.users.Albums.list(req['user'], 10, 0);
+    const first = req.query.first ? parseInt(req.query.first as string) : 10;
+    const after = req.query.after ? parseInt(req.query.after as string) : 0;
+    const { albums } = await controllers.users.Albums.list(req['user'], first, after);
     
     res.status(200).json({
       error: null,
