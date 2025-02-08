@@ -1,11 +1,11 @@
-import React from 'react';
+import type { FunctionComponent } from 'react';
 import Form from 'react-bootstrap/Form';
 
 interface Props {
   user: User;
 }
 
-const ProfileForm: React.FC<Props> = ({ user }: Props) => {
+const ProfileForm: FunctionComponent<Props> = ({ user }: Props) => {
   return (
     <>
       <Form noValidate>

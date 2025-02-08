@@ -1,16 +1,16 @@
-import React from 'react';
+import type { FunctionComponent, ReactNode, MouseEvent } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 
 interface ShareableLinkProps {
-  children: React.ReactNode;
+  children: ReactNode;
   url: string;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => unknown;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => unknown;
 }
 
-const ShareableLink: React.FC<ShareableLinkProps> = ({ children, url }: ShareableLinkProps) => {
-  const onCopyClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+const ShareableLink: FunctionComponent<ShareableLinkProps> = ({ children, url }: ShareableLinkProps) => {
+  const onCopyClick = (event: MouseEvent<HTMLButtonElement>) => {
     navigator.clipboard.writeText(url);
 
     const innerHTML = (event.target as HTMLButtonElement).innerHTML;

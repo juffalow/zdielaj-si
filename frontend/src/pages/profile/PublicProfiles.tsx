@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import type { FunctionComponent, ChangeEvent, FormEvent } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -12,7 +13,7 @@ interface Props {
   user: User;
 }
 
-const PublicProfiles: React.FC<Props> = ({ user }: Props) => {
+const PublicProfiles: FunctionComponent<Props> = ({ user }: Props) => {
   const [ formType, setFormType ] = useState<string>('create');
   const [ publicProfile, setPublicProfile ] = useState<PublicProfile | null>(null);
   const [ error, setError ] = useState<string | null>(null);
@@ -45,7 +46,7 @@ const PublicProfiles: React.FC<Props> = ({ user }: Props) => {
     setPublicProfile(null);
   }
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
     setPublicProfile({
@@ -54,7 +55,7 @@ const PublicProfiles: React.FC<Props> = ({ user }: Props) => {
     });
   };
 
-  const onCreateSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onCreateSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -76,7 +77,7 @@ const PublicProfiles: React.FC<Props> = ({ user }: Props) => {
     }
   };
 
-  const onUpdateSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onUpdateSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -111,7 +112,7 @@ const PublicProfiles: React.FC<Props> = ({ user }: Props) => {
           <>
             <Alert variant="info">Nemáš aktivovaný verejný profil.</Alert>
             <Button onClick={handleActivate}>Aktivovať</Button>
-            <p><small>Po aktivácii verejného profilu ti bude vygenerovaná unikátna URL adresa pre tvoj profil, ktorú si budeš môcť zmeniť a na ktorej budú mocť iní užívatelia vidiet tvoje albumy.</small></p>
+            <p><small>Po aktivácii verejného profilu ti bude vygenerovaná unikátna URL adresa pre tvoj profil, na ktorej budú mocť iní užívatelia vidiet tvoje albumy.</small></p>
           </>
         ) : null
       }

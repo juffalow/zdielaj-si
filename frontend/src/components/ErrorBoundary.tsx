@@ -1,12 +1,13 @@
-import React from 'react';
+import { Component } from 'react';
+import type { ReactNode, ErrorInfo } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import type { APIError } from '../api/errors'
 
 interface Props {
-  children: React.ReactNode;
-  fallback?: React.ReactNode;
+  children: ReactNode;
+  fallback?: ReactNode;
 }
 
 interface State {
@@ -15,14 +16,14 @@ interface State {
   isOpen: boolean;
 }
 
-class ErrorBoundary extends React.Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
   state: State = {
     hasError: false,
     error: null,
     isOpen: false,
   };
 
-  componentDidCatch(error: Error | Error & { response: { url: string, headers: { 'X-Request-Id': string } } }, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error | Error & { response: { url: string, headers: { 'X-Request-Id': string } } }, errorInfo: ErrorInfo) {
     this.setState({ error, hasError: true });
   }
 

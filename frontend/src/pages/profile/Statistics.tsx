@@ -1,11 +1,11 @@
-import React from 'react';
+import type { FunctionComponent } from 'react';
 import Badge from 'react-bootstrap/Badge';
 
 interface Props {
   albumsCount?: number;
 }
 
-const Statistics: React.FC<Props> = () => {
+const Statistics: FunctionComponent<Props> = () => {
   return (
     <>
       <h4>Štatistika</h4>

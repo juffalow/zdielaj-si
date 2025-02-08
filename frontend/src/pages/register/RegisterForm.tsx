@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { FunctionComponent, ChangeEvent, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -11,18 +12,18 @@ interface Props {
   onRegisterSubmit: (username: string, password: string, meta: Record<string, string | number | boolean>) => Promise<void>;
 }
 
-const RegisterForm: React.FC<Props> = ({ onRegisterSubmit }: Props) => {
+const RegisterForm: FunctionComponent<Props> = ({ onRegisterSubmit }: Props) => {
   const { t } = useTranslation();
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     name: '',
     email: '',
     password: '',
   });
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
     setValues({
@@ -31,7 +32,7 @@ const RegisterForm: React.FC<Props> = ({ onRegisterSubmit }: Props) => {
     });
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 

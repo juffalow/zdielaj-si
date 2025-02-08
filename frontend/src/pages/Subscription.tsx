@@ -1,11 +1,11 @@
-import React from 'react';
+import type { FunctionComponent } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SEO from '../components/SEO';
 import PricingTable from './subscription/PricingTable';
 
-const About: React.FC = () => (
+const Subscription: FunctionComponent = () => (
   <SEO title="Predplatné" description="">
     <Container>
       <Row>
@@ -23,4 +23,4 @@ const About: React.FC = () => (
   </SEO>
 );
 
-export default About;
+export default Subscription;

@@ -1,10 +1,10 @@
-import React from 'react';
+import type { FunctionComponent } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SEO from '../components/SEO';
 
-const PrivacyPolicy: React.FC = () => (
+const PrivacyPolicy: FunctionComponent = () => (
   <SEO title="Zásady ochrany osobných údajov" description="">
     <Container>
       <Row>

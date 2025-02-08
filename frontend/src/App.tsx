@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FunctionComponent } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
@@ -20,7 +20,7 @@ import { UploadProvider } from './utils/useUpload';
 import Tracking from './utils/Tracking';
 import './App.css';
 
-const App: React.FC = () => (
+const App: FunctionComponent = () => (
   <BrowserRouter>
     <AuthProvider>
       <UploadProvider>

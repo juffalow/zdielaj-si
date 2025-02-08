@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import type { FunctionComponent } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,7 +11,7 @@ import ImagePlaceholder from './profile/image-placeholder.png';
 import SEO from '../components/SEO';
 import { getCurrentUser } from '../api/services';
 
-const Profile: React.FC = () => {
+const Profile: FunctionComponent = () => {
   const [ user, setUser ] = useState<User | null>(null);
 
   useEffect(() => {

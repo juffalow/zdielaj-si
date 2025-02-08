@@ -1,12 +1,12 @@
-import React from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 
 interface Props {
   title: string;
   description: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const SEO: React.FC<Props> = (props) => (
+const SEO: FunctionComponent<Props> = (props) => (
   <>
     {
       props.title.length === 0 ? (

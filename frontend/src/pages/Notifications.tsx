@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
+import type { FunctionComponent } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,7 +9,7 @@ import SEO from '../components/SEO';
 import { getQueryParameter } from '../utils/functions';
 import { getNotificationSettings, setNotificationSettings} from '../api/services';
 
-const Notifications: React.FC = () => {
+const Notifications: FunctionComponent = () => {
   const [settings, setSettingsState] = useState<Setting[]>([]);
   const [hasError, setHasError] = useState(false);
 

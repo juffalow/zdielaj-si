@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import type { FunctionComponent } from 'react'; 
 import { useTranslation, Trans } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import { useDropzone } from 'react-dropzone';
@@ -15,7 +16,7 @@ import GOOGLE_PLAY_LOGO from '../img/google_play_logo.png';
 import APP_STORE_LOGO from '../img/app_store_logo.png';
 import styles from './home/Home.module.css';
 
-const Home: React.FC = () => {
+const Home: FunctionComponent = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 

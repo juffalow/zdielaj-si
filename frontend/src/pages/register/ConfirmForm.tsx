@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { FunctionComponent, ChangeEvent, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -10,14 +11,14 @@ interface Props {
   onConfirmSubmit: (code: string) => Promise<void>;
 }
 
-const ConfirmForm: React.FC<Props> = ({ onConfirmSubmit }: Props) => {
+const ConfirmForm: FunctionComponent<Props> = ({ onConfirmSubmit }: Props) => {
   const { t } = useTranslation();
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
-  const [values, setValues] = React.useState({ code: '' });
+  const [values, setValues] = useState({ code: '' });
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
     setValues({
@@ -26,7 +27,7 @@ const ConfirmForm: React.FC<Props> = ({ onConfirmSubmit }: Props) => {
     });
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 

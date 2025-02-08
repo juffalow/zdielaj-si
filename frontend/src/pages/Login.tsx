@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { FunctionComponent, ChangeEvent, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,19 +11,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
 import useAuth from '../utils/useAuth';
 
-const Login: React.FC = () => {
+const Login: FunctionComponent = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     email: '',
     password: '',
   });
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
     setValues({
@@ -31,7 +32,7 @@ const Login: React.FC = () => {
     });
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 

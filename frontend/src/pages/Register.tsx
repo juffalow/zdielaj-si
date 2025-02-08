@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { FunctionComponent } from 'react';
 import Container from 'react-bootstrap/Container';
 import RegisterForm from './register/RegisterForm';
 import ConfirmForm from  './register/ConfirmForm';
@@ -6,7 +7,7 @@ import ThankYou from './register/ThankYou';
 import SEO from '../components/SEO';
 import { register, confirmRegister } from '../api/services';
 
-const Register: React.FC = () => {
+const Register: FunctionComponent = () => {
   const [ step, setStep ] = useState(0);
   const [ username, setUsername ] = useState('');
   

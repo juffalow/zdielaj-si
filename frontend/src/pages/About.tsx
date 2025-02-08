@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FunctionComponent } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,7 +10,7 @@ import awsSQS from './about/aws-sqs.svg';
 import awsSES from './about/aws-ses.svg';
 import awsCF from './about/aws-cf.svg';
 
-const About: React.FC = () => (
+const About: FunctionComponent = () => (
   <SEO title="O aplikácii" description="">
     <Container>
       <Row>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { FunctionComponent, ChangeEvent, FormEvent } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -9,15 +10,15 @@ interface Props {
   onRequestSubmit: (username: string) => Promise<void>;
 }
 
-const RequestResetForm: React.FC<Props> = ({ onRequestSubmit }: Props) => {
+const RequestResetForm: FunctionComponent<Props> = ({ onRequestSubmit }: Props) => {
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     email: '',
   });
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
     setValues({
@@ -26,7 +27,7 @@ const RequestResetForm: React.FC<Props> = ({ onRequestSubmit }: Props) => {
     });
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 

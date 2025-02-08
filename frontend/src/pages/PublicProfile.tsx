@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import type { FunctionComponent } from 'react';
 import Container from 'react-bootstrap/Container';
 import Alert from 'react-bootstrap/Alert';
 import Row from 'react-bootstrap/Row';
@@ -10,7 +11,7 @@ import BarLoader from '../components/BarLoader';
 import SEO from '../components/SEO';
 import { getPublicProfile, getPublicProfileAlbums } from '../api/services';
 
-const PublicProfile: React.FC = () => {
+const PublicProfile: FunctionComponent = () => {
   const params = useParams();
   const [ publicProfile, setPublicProfile ] = useState<PublicProfile | undefined>();
   const [ albums, setAlbums ] = useState<Album[] | null>(null);

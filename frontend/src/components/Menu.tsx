@@ -1,4 +1,4 @@
-import React from 'react';
+import type { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,7 +11,7 @@ const Menu = () => {
   const { user, hasInitialized, signOut } = useAuth();
   const { i18n, t } = useTranslation();
 
-  const onChangeLang = (e: React.MouseEvent<HTMLElement>) => {
+  const onChangeLang = (e: MouseEvent<HTMLElement>) => {
     const code = (e.target as HTMLElement).getAttribute('data-lang') || 'sk';
     i18n.changeLanguage(code);
   };
@@ -68,4 +68,4 @@ const Menu = () => {
   );
 }
 
-export default React.memo(Menu);
+export default Menu;

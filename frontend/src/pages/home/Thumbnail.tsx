@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FunctionComponent } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import './Thumbnail.css';
 
@@ -7,7 +7,7 @@ interface ThumbnailParameters {
   isUploading?: boolean;
 }
 
-const Thumbnail: React.FC<ThumbnailParameters> = ({ file, isUploading }: ThumbnailParameters) => (
+const Thumbnail: FunctionComponent<ThumbnailParameters> = ({ file, isUploading }: ThumbnailParameters) => (
   <div className="thumbnail-container">
     <img src={file.preview} className="thumbnail-image" alt="" />
     {

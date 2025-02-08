@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { FunctionComponent } from 'react';
 import Container from 'react-bootstrap/Container';
 import { useNavigate } from 'react-router-dom';
 import RequestResetForm from './passwordReset/RequestResetForm';
@@ -6,7 +7,7 @@ import ResetForm from './passwordReset/ResetForm';
 import SEO from '../components/SEO';
 import { requestPasswordReset, resetPassword } from '../api/services';
 
-const PasswordReset: React.FC = () => {
+const PasswordReset: FunctionComponent = () => {
   const navigate = useNavigate();
   const [ step, setStep ] = useState(0);
   const [ username, setUsername ] = useState('');

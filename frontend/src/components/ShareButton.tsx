@@ -1,4 +1,5 @@
-import React from 'react';
+import { forwardRef } from 'react';
+import type { FunctionComponent, MouseEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -9,7 +10,7 @@ interface Props {
   link: string;
 }
 
-const CustomToggle = React.forwardRef(({ onClick }: any, ref: any) => (
+const CustomToggle = forwardRef(({ onClick }: any, ref: any) => (
   <img
     src={ShareImage}
     ref={ref}
@@ -21,7 +22,7 @@ const CustomToggle = React.forwardRef(({ onClick }: any, ref: any) => (
   />
 ));
 
-const CustomMenu = React.forwardRef(
+const CustomMenu = forwardRef(
   ({ children, style, className, 'aria-labelledby': labeledBy }: any, ref: any) => {
 
     return (
@@ -39,10 +40,10 @@ const CustomMenu = React.forwardRef(
   },
 );
 
-const ShareButton: React.FC<Props> = ({ link }: Props) => {
+const ShareButton: FunctionComponent<Props> = ({ link }: Props) => {
   const { t } = useTranslation();
 
-  const onCopyClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onCopyClick = (event: MouseEvent<HTMLButtonElement>) => {
     navigator.clipboard.writeText(link);
 
     (event.target as HTMLButtonElement).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10003;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
