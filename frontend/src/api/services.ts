@@ -7,35 +7,35 @@ type Setting = {
 }
 
 export async function register(username: string, password: string, meta: unknown): Promise<User> {
-  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/register`, { username, password, meta })
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/users/register`, { username, password, meta })
     .then(response => response.data.user);
 }
 
 export async function confirmRegister(username: string, code: string): Promise<any> {
-  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/confirm`, { username, code });
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/users/confirm`, { username, code });
 }
 
 export async function login(username: string, password: string): Promise<User> {
-  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/login`, { username, password }, { credentials: 'include' })
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/users/login`, { username, password }, { credentials: 'include' })
     .then(response => response.data.user);
 }
 
 export async function requestPasswordReset(username: string): Promise<unknown> {
-  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/password-reset-request`, { username })
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/users/password-reset-request`, { username })
     .then(response => response.data);
 }
 
 export async function resetPassword(username: string, password: string, code: string): Promise<unknown> {
-  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/password-reset`, { username, password, code })
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/users/password-reset`, { username, password, code })
     .then(response => response.data);
 }
 
 export async function refreshToken(): Promise<API.GetRefreshTokenResponse> {
-  return get(`${process.env.REACT_APP_USER_SERVICE_URL}/user/refresh-token`, { credentials: 'include' });
+  return get(`${process.env.REACT_APP_USER_SERVICE_URL}/users/refresh-token`, { credentials: 'include' });
 }
 
 export async function logout(): Promise<unknown> {
-  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/user/logout`, {}, { credentials: 'include' });
+  return post(`${process.env.REACT_APP_USER_SERVICE_URL}/users/logout`, {}, { credentials: 'include' });
 }
 
 export async function uploadPhoto(file: File): Promise<Media> {
