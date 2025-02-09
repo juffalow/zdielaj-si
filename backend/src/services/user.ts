@@ -10,7 +10,7 @@ class User implements Services.User {
    * @returns 
    */
   public async get(token: string): Promise<{ id: string, username: string, email: string, name: string }> {    
-    return this.httpClient.get(`${this.url}/user/me`, {}, { headers: { 'Authorization': `Bearer ${token}` } })
+    return this.httpClient.get(`${this.url}/users/me`, {}, { headers: { 'Authorization': `Bearer ${token}` } })
       .then((response) => (response as any).data.user);
   }
 }
