@@ -60,7 +60,7 @@ export async function getCurrentUser(): Promise<User> {
 }
 
 export async function getUserAlbums(user: User, first = 10, after = 0): Promise<Album[]> {
-  return get<API.GetUserAlbumsResponse>(`${process.env.REACT_APP_CORE_URL}/users/${user.id}/albums?first=${first}&after=${after}`)
+  return get<API.GetUserAlbumsResponse>(`${process.env.REACT_APP_CORE_URL}/me/albums?first=${first}&after=${after}`)
     .then(response => response.data.albums);
 }
 
