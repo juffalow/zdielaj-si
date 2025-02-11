@@ -9,7 +9,7 @@ import useAuth from '../utils/useAuth';
 
 const Albums: React.FC = () => {
   const { user } = useAuth();
-  const albumsPromise = getUserAlbums(user as User);
+  const albumsPromise = getUserAlbums(user as User, 8);
   const userPromise = getCurrentUser();
 
   return (

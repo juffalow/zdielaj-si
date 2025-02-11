@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -61,4 +62,4 @@ const AlbumPreview: React.FC<Props> = ({ album, onPublicProfileToggle, onDelete 
   );
 }
 
-export default AlbumPreview;
+export default memo(AlbumPreview);

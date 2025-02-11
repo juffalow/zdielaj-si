@@ -7,11 +7,12 @@ import useOnScreen from '../../utils/useOnScreen';
 interface Props {
   albums: Album[];
   loadMore: () => Promise<void>;
+  hasMore: boolean;
   onPublicProfileToggle?: (album: Album) => void;
   onDelete?: (album: Album) => void;
 }
 
-const AlbumsList = ({ albums, loadMore, onPublicProfileToggle, onDelete }: Props) => {
+const AlbumsList = ({ albums, loadMore, hasMore, onPublicProfileToggle, onDelete }: Props) => {
   const { measureRef, isIntersecting, observer } = useOnScreen();
 
   useEffect(() => {
@@ -19,13 +20,13 @@ const AlbumsList = ({ albums, loadMore, onPublicProfileToggle, onDelete }: Props
       loadMore();
       observer?.disconnect();
     }
-  }, [isIntersecting, loadMore]);
+  }, [isIntersecting, observer, loadMore]);
 
   return (
     <Row>                
       {
         albums.map((album, index) => {
-          if (index === albums.length - 1) {
+          if (index === albums.length - 1 && hasMore) {
             return (
               <Col key={album.id} lg={3} md={4} sm={4} xs={6} className="mb-4" ref={measureRef}>
                 <AlbumPreview album={album} onPublicProfileToggle={onPublicProfileToggle} onDelete={onDelete} />

@@ -1,4 +1,4 @@
-import { use, useState, useOptimistic, startTransition } from 'react';
+import { use, useState, useCallback, useOptimistic, startTransition, useTransition } from 'react';
 import { useTranslation } from 'react-i18next';
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
@@ -17,8 +17,10 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
   const user = use(fetchUser);
 
   const [ page, setPage ] = useState(1);
-  const [ hasMore, setHasMore ] = useState(albums.length === 10);
+  const [ hasMore, setHasMore ] = useState(albums.length === 8);
   const [ allAlbums, setAllAlbums ] = useState<Album[]>(albums);
+
+  const [ isLoadingAlbums, startLoadingTransition] = useTransition();
 
   const [ album, setAlbum ] = useState<Album | null>(null);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -32,10 +34,10 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
     }
   });
 
-  const onDeleteClick = async (album: Album) => {
+  const onDeleteClick = useCallback((album: Album) => {
     setIsModalOpen(true);
     setAlbum(album);
-  }
+  }, []);
 
   const onModalClose = () => {
     setAlbum(null);
@@ -57,7 +59,7 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
     setAllAlbums((allAlbums) => allAlbums.filter(a => a.id !== album.id));
   }
 
-  const onPublicProfileToggle = async (album: Album) => {
+  const onPublicProfileToggle = useCallback(async (album: Album) => {
     startTransition(async () => {
       if (album.publicProfile === null) {
         updateOptimisticAlbums({ album, type: 'publish' });
@@ -70,20 +72,24 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
         setAllAlbums((allAlbums) => allAlbums.map(a => a.id === album.id ? { ...a, publicProfile: null } : a));
       }
     });
-  }
+  }, []);
 
-  const loadMore = async (): Promise<void> => {
-    if (!hasMore) {
+  const loadMore = useCallback(async (): Promise<void> => {
+    if (!hasMore || isLoadingAlbums) {
       return;
     }
-    
-    const moreAlbums = await getUserAlbums(user, 10, page * 10);
 
-    setAllAlbums((allAlbums) => [  ...allAlbums, ...moreAlbums ]);
+    startLoadingTransition(async () => {
+      
+      const moreAlbums = await getUserAlbums(user, 8, page * 8);
+      
+      setAllAlbums((allAlbums) => [  ...allAlbums, ...moreAlbums ]);
+      
+      setPage(page + 1);
 
-    setPage(page + 1);
-    setHasMore(moreAlbums.length === 10);
-  }
+      setHasMore(moreAlbums.length === 8);
+    });
+  }, [ page, hasMore, isLoadingAlbums ]);
 
   return (
     <>
@@ -94,7 +100,7 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
           </Alert>
         ) : null
       }
-      <AlbumsList albums={optimisticAlbums} loadMore={loadMore} onPublicProfileToggle={onPublicProfileToggle} onDelete={onDeleteClick} />
+      <AlbumsList albums={optimisticAlbums} loadMore={loadMore} hasMore={hasMore} onPublicProfileToggle={onPublicProfileToggle} onDelete={onDeleteClick} />
 
       <Modal show={isModalOpen} onHide={onModalClose} onExited={() => startTransition(() => onModalExit())}>
         <Modal.Header closeButton>
