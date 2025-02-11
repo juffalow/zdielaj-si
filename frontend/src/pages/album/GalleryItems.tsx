@@ -13,8 +13,8 @@ export default function GalleryItems({ files, cols, innerWidth }: { files: Array
     { left += width + 20 }
     { index % cols === 0 && (left = 0) }
 
-    const element = file.mimetype.startsWith('video') ? <GalleryVideo file={file} style={{ position: 'absolute', left, top: top[index % cols], width }} />
-      : <GalleryImage file={file} style={{ position: 'absolute', left, top: top[index % cols], width }} />;
+    const element = file.mimetype.startsWith('video') ? <GalleryVideo key={file.id} file={file} style={{ position: 'absolute', left, top: top[index % cols], width }} />
+      : <GalleryImage key={file.id} file={file} style={{ position: 'absolute', left, top: top[index % cols], width }} />;
 
     { top[index % cols] += ((file.metadata.height * (width / file.metadata.width))) + 20 }
 
