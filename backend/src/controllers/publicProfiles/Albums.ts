@@ -15,11 +15,11 @@ class Albums {
       throw new NotFoundError('Public profile not found!', 404);
     }
 
-    const albums = await this.albumRepository.getMany(publicProfile.albums.slice(after, first > publicProfile.albums.length ? publicProfile.albums.length : first));
+    const albums = await this.albumRepository.getMany(publicProfile.albums.slice(after, after + (first > publicProfile.albums.length ? publicProfile.albums.length : first)));
 
     const files = await this.uploadService.listFiles(albums.filter(album => album.files.length > 0).map((album) => album.files[0]));
 
-    const albumsWithFile = await Promise.all(albums.filter(album => album.files.length > 0).map(async (album: Album) => {        
+    const albumsWithFile = albums.filter(album => album.files.length > 0).map((album: Album) => {        
       return {
         id: album.id,
         compressedId: album.compressedId,
@@ -32,7 +32,7 @@ class Albums {
         name: album.name,
         createdAt: album.createdAt,
       };
-    }));
+    });
 
     return {
       albums: albumsWithFile.filter((album) => album !== null),
