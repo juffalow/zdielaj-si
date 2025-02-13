@@ -90,6 +90,7 @@
   },
   "albums": {
     "albumPreview": {
+      "noFiles": "Žádné soubory",
       "publicProfileToggle": "Zobrazit ve veřejném profilu",
       "show": "Zobrazit",
       "delete": "Smazat"

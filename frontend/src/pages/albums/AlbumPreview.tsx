@@ -18,9 +18,9 @@ const AlbumPreview: React.FC<Props> = ({ album, onPublicProfileToggle, onDelete 
 
   return (
     <Card>
-      {
-        album.media.length > 0 && album.media[0].thumbnails.length > 0 ? (
-          <div style={{ paddingBottom: '80%', position: 'relative' }}>
+      <div style={{ paddingBottom: '80%', position: 'relative' }}>
+        {
+          album.media.length > 0 && album.media[0].thumbnails.length > 0 ? (
             <ImageLoader src={album.media[0].thumbnails[0]} style={{
               position: 'absolute',
               maxHeight: '100%',
@@ -37,9 +37,11 @@ const AlbumPreview: React.FC<Props> = ({ album, onPublicProfileToggle, onDelete 
                   objectFit: 'cover',
                 }} />
             </ImageLoader>
-          </div>
-        ) : null
-      }
+          ) : (
+            <p style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>{t("albums.albumPreview.noFiles")}</p>
+          )
+        }
+      </div>
       <Card.Body>
         <Card.Title className="text-truncate">{'name' in album ? album.name : album.id}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</Card.Subtitle>

@@ -90,6 +90,7 @@
   },
   "albums": {
     "albumPreview": {
+      "noFiles": "Keine Dateien",
       "publicProfileToggle": "Im öffentlichen Profil anzeigen",
       "show": "Anzeigen",
       "delete": "Löschen"
