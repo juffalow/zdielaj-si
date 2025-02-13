@@ -54,8 +54,8 @@ const ConfirmForm: FunctionComponent<Props> = ({ onConfirmSubmit }: Props) => {
     <>
       <Row>
         <Col>
-          <h1 className="text-center">{t("login.confirmForm.title")}</h1>
-          <p className="text-center mb-5">{t("login.confirmForm.subtitle")}</p>
+          <h1 className="text-center">{t("register.confirmForm.title")}</h1>
+          <p className="text-center mb-5">{t("register.confirmForm.subtitle")}</p>
         </Col>
       </Row>
       <Row>
@@ -69,14 +69,14 @@ const ConfirmForm: FunctionComponent<Props> = ({ onConfirmSubmit }: Props) => {
           }
           <Form noValidate validated={isValidated} onSubmit={onSubmit}>
             <Form.Group controlId="confirmCode">
-              <Form.Label>{t("login.confirmForm.code")}</Form.Label>
+              <Form.Label>{t("register.confirmForm.code")}</Form.Label>
               <Form.Control required type="text" name="code" id="confirmCode" placeholder="123456" value={values.code} onChange={onChange} />
-              <Form.Control.Feedback type="invalid">{t("login.confirmForm.requiredField")}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">{t("register.confirmForm.requiredField")}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="text-center mt-4 mb-2">
               <Button variant="primary" type="submit">
-              {t("login.confirmForm.submitButton")}
+              {t("register.confirmForm.submitButton")}
               </Button>
             </Form.Group>
           </Form>
