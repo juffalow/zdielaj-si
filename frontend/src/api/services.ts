@@ -129,7 +129,8 @@ export async function getPublicProfileAlbums(params: { publicProfileId: ID, firs
     searchParams.append(key, rest[key]);
   }
   
-  return get(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${publicProfileId}/albums?${searchParams}`);
+  return get<API.GetPublicProfileAlbumsResponse>(`${process.env.REACT_APP_CORE_URL}/publicprofiles/${publicProfileId}/albums?${searchParams}`)
+    .then(response => response.data.albums);
 }
 
 export async function addAlbumToPublicProfile(publicProfileId: ID, albumId: ID): Promise<unknown> {

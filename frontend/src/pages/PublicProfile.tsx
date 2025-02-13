@@ -1,89 +1,27 @@
-import { useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import type { FunctionComponent } from 'react';
 import Container from 'react-bootstrap/Container';
-import Alert from 'react-bootstrap/Alert';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { useParams } from 'react-router-dom';
-import AlbumPreview from '../components/AlbumPreview';
-import AlbumPreviewLoader from '../components/AlbumPreviewLoader';
-import BarLoader from '../components/BarLoader';
+import ErrorBoundary from '../components/ErrorBoundary';
 import SEO from '../components/SEO';
 import { getPublicProfile, getPublicProfileAlbums } from '../api/services';
 
+import PublicProfileLoader from './publicProfile/PublicProfileLoader';
+import PublicProfileContainer from './publicProfile/PublicProfileContainer';
+
 const PublicProfile: FunctionComponent = () => {
   const params = useParams();
-  const [ publicProfile, setPublicProfile ] = useState<PublicProfile | undefined>();
-  const [ albums, setAlbums ] = useState<Album[] | null>(null);
-  const [ hasError, setHasError ] = useState(false);
-
-  useEffect(() => {
-    getPublicProfile(params.id as string)
-      .then((publicProfile) => {
-        setPublicProfile(publicProfile);
-        return publicProfile?.id;
-      }).then((id: ID) => getPublicProfileAlbums({ publicProfileId: id }))
-      .then((response) => {
-        const albums = response.data.albums;
-        setAlbums(albums);
-      })
-      .catch(() => setHasError(true));
-  }, []);
+  const albumsPromise = getPublicProfileAlbums({ publicProfileId: params.id as string, first: 8 });
+  const publicProfilePromise = getPublicProfile(params.id as string);
 
   return (
     <SEO title="" description="">
       <Container fluid="xl">
-        {
-          hasError ? (
-            <Alert variant="danger">
-              Verejný profil neexistuje.
-            </Alert>
-          ) : null
-        }
-        {
-          typeof publicProfile === 'undefined' && hasError === false ? (
-            <>
-              <BarLoader As="h1">&nbsp;</BarLoader>
-              <BarLoader As="p">&nbsp;</BarLoader>
-            </>
-          ) : null
-        }
-        {
-          typeof publicProfile !== 'undefined' ? (
-            <>
-              <h1 className="text-center">{publicProfile.name}</h1>
-              <p className="text-center lead">{publicProfile.description}</p>
-            </>
-          ) : null
-        }
-        {
-          albums === null && hasError === false ? (
-            <Row>
-              <Col lg={3} md={4} sm={4} xs={6} className="mb-4">
-                <AlbumPreviewLoader />
-              </Col>
-              <Col lg={3} md={4} sm={4} xs={6} className="mb-4" style={{ opacity: 0.4 }}>
-                <AlbumPreviewLoader />
-              </Col>
-              <Col lg={3} md={4} sm={4} xs={6} className="mb-4" style={{ opacity: 0.2 }}>
-                <AlbumPreviewLoader />
-              </Col>
-            </Row>
-          ) : null
-        }
-        {
-          albums !== null && albums.length > 0 ? (
-            <Row>                
-            {
-              albums.map((album) => (
-                <Col key={album.id} lg={3} md={4} sm={4} xs={6} className="mb-4">
-                  <AlbumPreview album={album} />
-                </Col>
-              ))
-            }
-            </Row>
-          ) : null
-        }
+        <ErrorBoundary>
+          <Suspense fallback = {<PublicProfileLoader />}>
+            <PublicProfileContainer fetchAlbums={albumsPromise} fetchPublicProfile={publicProfilePromise} />
+          </Suspense>
+        </ErrorBoundary>
       </Container>
     </SEO>
   );

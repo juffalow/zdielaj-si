@@ -44,4 +44,11 @@ namespace API {
       publicProfile: PublicProfile;
     };
   }
+
+  interface GetPublicProfileAlbumsResponse {
+    error: unknown;
+    data: {
+      albums: Album[];
+    };
+  }
 }
