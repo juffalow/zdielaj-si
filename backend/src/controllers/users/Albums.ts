@@ -18,7 +18,7 @@ class Albums {
 
     const files = await this.uploadService.listFiles(albums.filter(album => album.files.length > 0).map((album) => album.files[0]));
 
-    const albumsWithFile = albums.filter(album => album.files.length > 0).map((album: Album) => {        
+    const albumsWithFile = albums.map((album: Album) => {        
       return {
         id: album.id,
         compressedId: album.compressedId,
