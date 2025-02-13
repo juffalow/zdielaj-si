@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import type { FunctionComponent, ChangeEvent, FormEvent } from 'react';
+import { useState, useActionState } from 'react';
+import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -18,40 +18,25 @@ const Login: FunctionComponent = () => {
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-  });
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+  const onSubmit = async (prevState: unknown, state: FormData): Promise<{ email: string, password: string }> => {
+    const email = state.get('email') as string;
+    const password = state.get('password') as string;
 
-    setValues({
-      ...values,
-      [event.target.name]: value
-    });
-  };
+    await signIn(email, password)
+      .then(() => {
+        setTimeout(() => navigate('/'), 100);
+      })
+      .catch(() => {
+        setErrorMessage('Nesprávne prihlasovacie meno alebo heslo!');
+        setHasError(true);
+        setIsValidated(false);
+      });
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+    return { email, password };
+  }
 
-    setIsValidated(true);
-
-    const form = event.currentTarget;
-
-    if (form.checkValidity()) {
-      signIn(values.email, values.password)
-        .then(() => {
-          navigate('/');
-        })
-        .catch(() => {
-          setErrorMessage('Nesprávne prihlasovacie meno alebo heslo!');
-          setHasError(true);
-          setIsValidated(false);
-        });
-    }
-  };
+  const [state, formAction, isPending] = useActionState(onSubmit, { email: '', password: '' });
 
   return (
     <SEO title={t("login.title")} description="">
@@ -71,23 +56,23 @@ const Login: FunctionComponent = () => {
                 </Alert>
               ) : null
             }
-            <Form noValidate validated={isValidated} onSubmit={onSubmit}>
+            <Form noValidate validated={isValidated} action={formAction}>
               <Form.Group controlId="loginUsername">
                 <Form.Label>{t("login.form.email")}</Form.Label>
-                <Form.Control required type="email" name="email" placeholder="meno.priezvisko@priklad.sk" value={values.email} onChange={onChange} />
+                <Form.Control required type="email" name="email" placeholder="meno.priezvisko@priklad.sk" defaultValue={state.email} />
                 <Form.Control.Feedback type="invalid">{t("login.form.requiredField")}</Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group controlId="loginPassword" className="mt-3">
                 <Form.Label>{t("login.form.password")}</Form.Label>
-                <Form.Control required type="password" name="password" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
+                <Form.Control required type="password" name="password" placeholder="Ozaj1TazkeHeslo!" defaultValue={state.password} />
                 <Form.Control.Feedback type="invalid">{t("login.form.requiredField")}</Form.Control.Feedback>
               </Form.Group>
 
               <p className="text-center mt-3"><Link to="/reset-hesla">{t("login.form.forgotPassword")}</Link></p>
 
               <Form.Group className="text-center mt-4">
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" disabled={isPending}>
                   {t("login.form.signInButton")}
                 </Button>
               </Form.Group>
