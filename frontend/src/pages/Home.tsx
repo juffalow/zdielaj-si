@@ -126,17 +126,6 @@ const Home: FunctionComponent = () => {
             </Card>
           </Col>
         </Row>
-        <Row style={{ marginTop: 50 }}>
-          <Col className="text-center">
-            <h5>Aplikácia je dostupná aj pre iPhone a Android:</h5>
-            <a href="https://play.google.com/store/apps/details?id=si.zdielaj" target="_blank" rel="noopener noreferrer" className="me-2">
-              <img style={{ width: 155 }} src={GOOGLE_PLAY_LOGO} alt="Google play" className="img-responsive" />
-            </a>
-            <a href="https://apps.apple.com/sk/app/zdie%C4%BEaj-si-cloud/id1554659147?l=sk" target="_blank" rel="noopener noreferrer">
-              <img style={{ width: 155 }} src={APP_STORE_LOGO} alt="App store" className="img-responsive" />
-            </a>
-          </Col>
-        </Row>
       </Container>
     </SEO>
   );
