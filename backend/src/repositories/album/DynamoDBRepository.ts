@@ -85,6 +85,7 @@ class AlbumDynamoDBRepository implements AlbumRepository {
       compressedId,
       files: [],
       user: null,
+      typename: 'Album',
       ...params,
       createdAt: new Date().toISOString(),
     };

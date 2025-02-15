@@ -44,7 +44,12 @@ class UserDynamoDBRepository implements UserRepository {
 
     const item = {
       albums: [],
-      publicProfiles: [],
+      statistics: {
+        albums: 0,
+        files: 0,
+        totalSize: 0,
+      },
+      typename: 'User',
       ...params,
       createdAt: new Date().toISOString(),
     };

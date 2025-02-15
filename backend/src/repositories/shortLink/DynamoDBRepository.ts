@@ -43,6 +43,7 @@ class ShortLinkDynamoDBRepository implements ShortLinkRepository {
 
     const item = {
       id: `shortlink#${params.path}`,
+      typename: 'ShortLink',
       ...params,
       createdAt: new Date().toISOString(),
     };
