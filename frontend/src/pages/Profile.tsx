@@ -38,7 +38,7 @@ const Profile: FunctionComponent = () => {
                 <hr />
                 <PublicProfiles user={user} />
                 <hr />
-                <Statistics />
+                <Statistics {...user?.statistics} />
                 <hr />
                 <h4>Vymazať účet</h4>
                 <p>Spolu s účtom sa zmažú aj všetky nahrané súbory a albumy.</p>

@@ -41,6 +41,11 @@ type User = {
   accessToken: string;
   meta?: Record<string, string | number | boolean>;
   publicProfileId?: ID;
+  statistics?: {
+    albums: number;
+    files: number;
+    totalSize: number;
+  };
 }
 
 type PublicProfile = {
