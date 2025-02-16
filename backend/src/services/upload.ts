@@ -14,6 +14,10 @@ class Upload implements Services.Upload {
   }
 
   public async listFiles(ids: ID[]): Promise<ListFilesResponse> {
+    if (ids.length === 0) {
+      return { error: null, data: { files: [] } };
+    }
+
     return this.httpClient.get(`${this.url}/upload/admin/file`, { ids }) as Promise<ListFilesResponse>;
   }
 
