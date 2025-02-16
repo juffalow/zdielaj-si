@@ -75,12 +75,11 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
   }, []);
 
   const loadMore = useCallback(async (): Promise<void> => {
-    if (!hasMore || isLoadingAlbums) {
+    if (!hasMore) {
       return;
     }
 
     startLoadingTransition(async () => {
-      
       const moreAlbums = await getUserAlbums(user, 8, page * 8);
       
       setAllAlbums((allAlbums) => [  ...allAlbums, ...moreAlbums ]);
@@ -89,7 +88,7 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
 
       setHasMore(moreAlbums.length === 8);
     });
-  }, [ page, hasMore, isLoadingAlbums ]);
+  }, [ page, hasMore ]);
 
   return (
     <>
@@ -100,7 +99,7 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
           </Alert>
         ) : null
       }
-      <AlbumsList albums={optimisticAlbums} loadMore={loadMore} hasMore={hasMore} onPublicProfileToggle={onPublicProfileToggle} onDelete={onDeleteClick} />
+      <AlbumsList albums={optimisticAlbums} loadMore={loadMore} hasMore={hasMore} isLoading={isLoadingAlbums} onPublicProfileToggle={onPublicProfileToggle} onDelete={onDeleteClick} />
 
       <Modal show={isModalOpen} onHide={onModalClose} onExited={() => startTransition(() => onModalExit())}>
         <Modal.Header closeButton>

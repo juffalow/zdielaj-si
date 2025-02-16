@@ -1,26 +1,40 @@
-import { useEffect } from 'react';
+import { useRef, useCallback } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import AlbumPreview from './AlbumPreview';
-import useOnScreen from '../../utils/useOnScreen';
 
 interface Props {
   albums: Album[];
   loadMore: () => Promise<void>;
+  isLoading: boolean;
   hasMore: boolean;
   onPublicProfileToggle?: (album: Album) => void;
   onDelete?: (album: Album) => void;
 }
 
-const AlbumsList = ({ albums, loadMore, hasMore, onPublicProfileToggle, onDelete }: Props) => {
-  const { measureRef, isIntersecting, observer } = useOnScreen();
+const AlbumsList = ({ albums, loadMore, isLoading, hasMore, onPublicProfileToggle, onDelete }: Props) => {
+  const observer = useRef<IntersectionObserver | null>(null);
 
-  useEffect(() => {
-    if (isIntersecting) {
-      loadMore();
-      observer?.disconnect();
-    }
-  }, [isIntersecting, observer, loadMore]);
+  const lastAlbumElementRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (isLoading) return;
+
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && hasMore) {
+            loadMore();
+          }
+        },
+        { threshold: 1.0 }
+      );
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore]
+  );
+
+  console.log('Albumslist.albums', albums);
 
   return (
     <Row>                
@@ -28,7 +42,7 @@ const AlbumsList = ({ albums, loadMore, hasMore, onPublicProfileToggle, onDelete
         albums.map((album, index) => {
           if (index === albums.length - 1 && hasMore) {
             return (
-              <Col key={album.id} lg={3} md={4} sm={4} xs={6} className="mb-4" ref={measureRef}>
+              <Col key={album.id} lg={3} md={4} sm={4} xs={6} className="mb-4" ref={lastAlbumElementRef}>
                 <AlbumPreview album={album} onPublicProfileToggle={onPublicProfileToggle} onDelete={onDelete} />
               </Col>
             );
