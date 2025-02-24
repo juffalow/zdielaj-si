@@ -40,7 +40,7 @@ const Login: FunctionComponent = () => {
 
   return (
     <SEO title={t("login.title")} description="">
-      <Container className="main" style={{ marginTop: 50 }}>
+      <Container className="main">
         <Row>
           <Col>
             <h1 className="text-center">{t("login.title")}</h1>

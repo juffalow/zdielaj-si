@@ -28,7 +28,7 @@ const Register: FunctionComponent = () => {
 
   return (
     <SEO title="Registrácia" description="">
-      <Container className="main" style={{ marginTop: 50 }}>
+      <Container className="main">
         {
           step === 0 ? (
             <RegisterForm onRegisterSubmit={onRegisterSubmit} />

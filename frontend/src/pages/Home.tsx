@@ -12,8 +12,6 @@ import FeaturesList from './home/FeaturesList';
 import SEO from '../components/SEO';
 import { createAlbum, createShortLink, addMedia } from '../api/services';
 import useUpload from '../utils/useUpload';
-import GOOGLE_PLAY_LOGO from '../img/google_play_logo.png';
-import APP_STORE_LOGO from '../img/app_store_logo.png';
 import styles from './home/Home.module.css';
 
 const Home: FunctionComponent = () => {

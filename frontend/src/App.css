@@ -4,5 +4,5 @@ html, body, #root {
 
 .main-container {
   position: relative;
-  min-height: calc(100vh - 251px);
+  min-height: calc(100vh - 373px);
 }

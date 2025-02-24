@@ -8,6 +8,7 @@ import type { APIError } from '../api/errors'
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
+  notFound?: ReactNode;
 }
 
 interface State {
@@ -37,6 +38,10 @@ class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.hasError && this.state.error !== null) {
+      if ('response' in this.state.error && this.state.error.response.status === 404 && this.props.notFound) {
+        return this.props.notFound;
+      }
+
       if (this.props.fallback) {
         return this.props.fallback;
       }

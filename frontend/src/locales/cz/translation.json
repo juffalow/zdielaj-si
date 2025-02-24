@@ -46,6 +46,14 @@
       "signInButton": "Přihlásit se"
     }
   },
+  "publicProfile": {
+    "notFound": {
+      "title": "Veřejný profil nenalezen!",
+      "subtitle": "Veřejný profil, který hledáte, neexistuje.",
+      "clarifyingText": "Možná jste zadali špatnou adresu, použili starý odkaz nebo byl veřejný profil smazán.",
+      "ctaButton": "Zpět na domovskou stránku"
+    }
+  },
   "register": {
     "title": "Registrace",
     "subtitle": "Máš už účet?",

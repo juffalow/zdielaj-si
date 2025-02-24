@@ -46,6 +46,14 @@
       "signInButton": "Sign in"
     }
   },
+  "publicProfile": {
+    "notFound": {
+      "title": "Public profile not found!",
+      "subtitle": "The public profile you are looking for does not exist.",
+      "clarifyingText": "Maybe you typed in wrong address, used an old link or the public profile was deleted.",
+      "ctaButton": "Back to home page"
+    }
+  },
   "register": {
     "title": "Sign up",
     "subtitle": "Already have an account?",

@@ -46,6 +46,14 @@
       "signInButton": "Anmelden"
     }
   },
+  "publicProfile": {
+    "notFound": {
+      "title": "Öffentliches Profil nicht gefunden!",
+      "subtitle": "Das öffentliche Profil, das Sie suchen, existiert nicht.",
+      "clarifyingText": "Vielleicht haben Sie die falsche Adresse eingegeben, einen alten Link verwendet oder das öffentliche Profil wurde gelöscht.",
+      "ctaButton": "Zurück zur Startseite"
+    }
+  },
   "register": {
     "title": "Registrieren",
     "subtitle": "Bereits ein Konto?",

@@ -46,6 +46,14 @@
       "signInButton": "Iniciar sesión"
     }
   },
+  "publicProfile": {
+    "notFound": {
+      "title": "¡Perfil público no encontrado!",
+      "subtitle": "El perfil público que estás buscando no existe.",
+      "clarifyingText": "Tal vez escribiste la dirección incorrecta, usaste un enlace antiguo o el perfil público fue eliminado.",
+      "ctaButton": "Volver a la página de inicio"
+    }
+  },
   "register": {
     "title": "Regístrate",
     "subtitle": "¿Ya tienes una cuenta?",
