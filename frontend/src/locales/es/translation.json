@@ -94,6 +94,12 @@
       "formLink": "Enlace del álbum",
       "formSubmitButton": "Guardar",
       "copyButton": "Copiar enlace"
+    },
+    "notFound": {
+      "title": "¡Álbum no encontrado!",
+      "subtitle": "El álbum que buscas no existe.",
+      "clarifyingText": "Tal vez escribiste la dirección incorrecta, usaste un enlace antiguo o el álbum fue eliminado.",
+      "ctaButton": "Volver a la página de inicio"
     }
   },
   "albums": {

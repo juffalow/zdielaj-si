@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import UserAlbum from './album/UserAlbum';
 import GalleryLoader from './album/GalleryLoader';
 import Gallery from './album/Gallery';
+import NotFound from './album/NotFound';
 import { getAlbum, updateAlbum } from '../api/services';
 import useUpload from '../utils/useUpload';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -37,7 +38,7 @@ const Album: React.FC = () => {
 
   return (
     <Container fluid>
-      <ErrorBoundary>
+      <ErrorBoundary notFound={<NotFound />}>
         <Suspense fallback={<GalleryLoader />}>
           <Gallery albumPromise={albumPromise} />
         </Suspense>

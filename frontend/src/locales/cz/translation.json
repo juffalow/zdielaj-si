@@ -94,6 +94,12 @@
       "formLink": "Odkaz na album",
       "formSubmitButton": "Uložit",
       "copyButton": "Kopírovat odkaz"
+    },
+    "notFound": {
+      "title": "Album nenalezen!",
+      "subtitle": "Album, které hledáte, neexistuje.",
+      "clarifyingText": "Možná jste zadali špatnou adresu, použili starý odkaz nebo bylo album smazáno.",
+      "ctaButton": "Zpět na domovskou stránku"
     }
   },
   "albums": {
