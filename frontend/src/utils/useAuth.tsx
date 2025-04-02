@@ -7,7 +7,17 @@ import {
   useState,
 } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { refreshToken, login, logout, register } from '../api/services';
+import { Amplify } from 'aws-amplify';
+import {
+  signUp as signUpAmplify,
+  confirmSignUp as confirmSignUpAmplify,
+  signIn as signInAmplify,
+  signOut as signOutAmplify,
+  resetPassword as resetPasswordAmplify,
+  confirmResetPassword as confirmResetPasswordAmplify,
+  fetchAuthSession as fetchAuthSessionAmplify,
+  fetchUserAttributes as fetchUserAttributesAmplify,
+} from 'aws-amplify/auth';
 import { setUserToken } from '../api/token';
 
 interface AuthContextType {
@@ -16,9 +26,30 @@ interface AuthContextType {
   loading: boolean;
   error?: Error;
   signIn: (username: string, password: string) => Promise<void>;
-  signUp: (firstName: string, lastName: string, email: string, password: string) => Promise<void>;
+  signUp: (name: string, email: string, password: string) => Promise<void>;
+  confirmSignUp: (username: string, password: string) => Promise<void>;
+  resetPassword: (username: string) => Promise<void>;
+  confirmResetPassword: (username: string, code: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
 }
+
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      userPoolId: process.env.REACT_APP_USER_POOL_ID as string,
+      userPoolClientId: process.env.REACT_APP_USER_POOL_CLIENT_ID as string,
+      loginWith: {
+        email: true,
+      },
+      userAttributes: {
+        email: {
+          required: true,
+        },
+      },
+      signUpVerificationMethod: 'code',
+    },
+  },
+});
 
 const AuthContext = createContext<AuthContextType>(
   {} as AuthContextType
@@ -29,18 +60,20 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   const [ loading, setLoading ] = useState<boolean>(false);
   const [ hasInitialized, setHasInitialized ] = useState<boolean>(false);
 
-  // Check if there is a currently active session
-  // when the provider is mounted for the first time.
-  //
-  // If there is an error, it means there is no session.
-  //
-  // Finally, just signal the component that the initial load
-  // is over.
   useEffect(() => {
-    refreshToken()
-      .then((response) => {
-        setUser(response.data.user);
-        setUserToken(response.data.user.accessToken);
+    Promise.all([ fetchUserAttributesAmplify(), fetchAuthSessionAmplify() ])
+      .then(([user, session]) => {
+        setUser({
+          id: user.sub,
+          username: user.email,
+          email: user.email,
+          meta: {
+            name: user.name as string,
+          },
+          accessToken: session.tokens?.accessToken.toString() as string,
+        });
+
+        setUserToken(session.tokens?.accessToken.toString() as string);
       })
       .catch(() => {
         setUser(undefined);
@@ -51,63 +84,71 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       });
   }, []);
 
-  // window.addEventListener('storage', (event) => {
-  //   if (event.key === 'onLogout') {
-  //     setUserToken({ id: '', expiresAt: '', token: null });
-  //   }
-  // });
-
-  // Flags the component loading state and posts the login
-  // data to the server.
-  //
-  // An error means that the email/password combination is
-  // not valid.
-  //
-  // Finally, just signal the component that loading the
-  // loading state is over.
   function signIn(username: string, password: string): Promise<void> {
     setLoading(true);
 
-    return login(username, password)
-      .then((user) => {
-        setUser(user);
-        setUserToken(user.accessToken);
-        autoRefresh();
+    return signInAmplify({ username, password })
+      .then((response) => {
+        console.log(response);
+      })
+      .then(() => Promise.all([ fetchUserAttributesAmplify(), fetchAuthSessionAmplify() ]))
+      .then(([user, session]) => {
+        setUser({
+          id: user.sub,
+          username: user.email,
+          email: user.email,
+          meta: {
+            name: user.name as string,
+          },
+          accessToken: session.tokens?.accessToken.toString() as string,
+        });
+
+        setUserToken(session.tokens?.accessToken.toString() as string);
+      })
+      .catch((error) => {
+        console.error('signIn error', error);
       })
       .finally(() => setLoading(false));
   }
 
-  // Sends sign up details to the server. On success we just apply
-  // the created user to the state.
   function signUp(name: string, email: string, password: string): Promise<void> {
     setLoading(true);
 
-    return register(name, email, password)
-      .then((user) => {
-        setUser(user);
-      })
-      .finally(() => setLoading(false));
+    return signUpAmplify({
+      username: email,
+      password,
+      options: {
+        userAttributes: {
+          email,
+          name,
+        },
+      },
+    }).then((response) => console.log(response)).finally(() => setLoading(false));
   }
 
-  // Call the logout endpoint and then remove the user
-  // from the state.
+  function confirmSignUp(username: string, code: string): Promise<void> {
+    return confirmSignUpAmplify({
+      username,
+      confirmationCode: code,
+    }).then((response => console.log(response)));
+  }
+
+  function resetPassword(username: string): Promise<void> {
+    return resetPasswordAmplify({
+      username,
+    }).then((response) => console.log(response));
+  }
+
+  function confirmResetPassword(username: string, code: string, password: string): Promise<void> {
+    return confirmResetPasswordAmplify({
+      username,
+      confirmationCode: code,
+      newPassword: password,
+    }).then((response) => console.log(response));
+  }
+
   function signOut(): Promise<void> {
-    return logout().then(() => setUser(undefined));
-  }
-
-  function autoRefresh() {
-    setTimeout(async () => {
-      refreshToken()
-        .then((response) => {
-          setUser(response.data.user);
-          setUserToken(response.data.user.accessToken);
-        })
-        .catch(() => {
-          setUser(undefined);
-          setUserToken(null);
-        });
-      autoRefresh();
-    }, 10 * 60 * 1000);
+    return signOutAmplify().then(() => setUser(undefined)).then(() => setUserToken(null));
   }
 
   // Make the provider update only when it should.
@@ -126,6 +167,9 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       loading,
       signIn,
       signUp,
+      confirmSignUp,
+      resetPassword,
+      confirmResetPassword,
       signOut,
     }),
     [ user, loading, hasInitialized ]

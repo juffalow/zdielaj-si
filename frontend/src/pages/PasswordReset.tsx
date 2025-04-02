@@ -5,15 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import RequestResetForm from './passwordReset/RequestResetForm';
 import ResetForm from './passwordReset/ResetForm';
 import SEO from '../components/SEO';
-import { requestPasswordReset, resetPassword } from '../api/services';
+import useAuth from '../utils/useAuth';
 
 const PasswordReset: FunctionComponent = () => {
   const navigate = useNavigate();
   const [ step, setStep ] = useState(0);
   const [ username, setUsername ] = useState('');
+  const { resetPassword, confirmResetPassword } = useAuth();
   
   const onRequestSubmit = (username: string) => {
-    return requestPasswordReset(username)
+    return resetPassword(username)
       .then(() => {
         setStep(1);
         setUsername(username);
@@ -21,7 +22,7 @@ const PasswordReset: FunctionComponent = () => {
   };
 
   const onResetSubmit = (password: string, code: string) => {
-    return resetPassword(username, password, code)
+    return confirmResetPassword(username, code, password)
       .then(() => {
         navigate('/prihlasit-sa');
       });

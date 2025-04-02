@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import type { FunctionComponent, ChangeEvent, FormEvent } from 'react';
+import { useState, useActionState } from 'react';
+import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -17,43 +17,28 @@ const RegisterForm: FunctionComponent<Props> = ({ onRegisterSubmit }: Props) => 
   const [ isValidated, setIsValidated ] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ hasError, setHasError ] = useState(false);
-  const [values, setValues] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const [ password, setPassword ] = useState('');
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+  const onSubmit = async (prevState: unknown, state: FormData): Promise<{ name: string, email: string, password: string }> => {
+    const name = state.get('name') as string;
+    const email = state.get('email') as string;
+    const password = state.get('password') as string;
 
-    setValues({
-      ...values,
-      [event.target.name]: value
-    });
+    onRegisterSubmit(email, password, { name })
+      .catch((error) => {
+        setHasError(true);
+        if (error.code === 2) {
+          setErrorMessage(t("register.error.userAlreadyExists"));
+        } else {
+          setErrorMessage(t("register.error.userNotCreated"));
+        }
+        setIsValidated(false);
+      });
+
+    return { name, email, password };
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    setIsValidated(true);
-
-    const form = event.currentTarget;
-
-    if (form.checkValidity()) {
-      const { email, password, ...rest } = values;
-      onRegisterSubmit(email, password, rest)
-        .catch((error) => {
-          setHasError(true);
-          if (error.code === 2) {
-            setErrorMessage(t("register.error.userAlreadyExists"));
-          } else {
-            setErrorMessage(t("register.error.userNotCreated"));
-          }
-          setIsValidated(false);
-        });
-    }
-  };
+  const [state, formAction, isPending] = useActionState(onSubmit, { name: '', email: '', password: '' });
 
   return (
     <>
@@ -72,36 +57,36 @@ const RegisterForm: FunctionComponent<Props> = ({ onRegisterSubmit }: Props) => 
               </Alert>
             ) : null
           }
-          <Form noValidate validated={isValidated} onSubmit={onSubmit}>
+          <Form noValidate validated={isValidated} action={formAction}>
             <Form.Group controlId="registerName">
               <Form.Label>{t("register.form.name")}</Form.Label>
-              <Form.Control required type="text" name="name" id="registerName" placeholder="Meno (Priezvisko)" value={values.name} onChange={onChange} />
+              <Form.Control required type="text" name="name" placeholder="Meno (Priezvisko)" defaultValue={state.name} />
               <Form.Control.Feedback type="invalid">{t("register.form.requiredField")}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="registerEmail" className="mt-3">
               <Form.Label>{t("register.form.email")}</Form.Label>
-              <Form.Control required type="email" name="email" id="registerEmail" placeholder="meno.priezvisko@priklad.sk" value={values.email} onChange={onChange} />
+              <Form.Control required type="email" name="email" placeholder="meno.priezvisko@priklad.sk" defaultValue={state.email} />
               <Form.Control.Feedback type="invalid">{t("register.form.requiredField")}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="registerPassword" className="mt-3">
               <Form.Label>{t("register.form.password")}</Form.Label>
-              <Form.Control required type="password" name="password" id="registerPassword" placeholder="Ozaj1TazkeHeslo!" value={values.password} onChange={onChange} />
+              <Form.Control required type="password" name="password" placeholder="Ozaj1TazkeHeslo!" defaultValue={state.password} onChange={(event) => setPassword(event.target.value)} />
               <Form.Control.Feedback type="invalid">{t("register.form.requiredField")}</Form.Control.Feedback>
               <Form.Text className="text-muted mt-4">
                 <ul>
-                  <li>{t("register.form.minEightCharacters")} { values.password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-                  <li>{t("register.form.atLeastOneUppercase")} { values.password.toLowerCase() !== values.password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-                  <li>{t("register.form.atLeastOneLowercase")} { values.password.toUpperCase() !== values.password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-                  <li>{t("register.form.atLeastOneSpecialCharacter")} { values.password.match(/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-                  <li>{t("register.form.atLeastOneNumber")} { values.password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.minEightCharacters")} { password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.atLeastOneUppercase")} { password.toLowerCase() !== password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.atLeastOneLowercase")} { password.toUpperCase() !== password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.atLeastOneSpecialCharacter")} { password.match(/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+                  <li>{t("register.form.atLeastOneNumber")} { password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
                 </ul>
               </Form.Text>
             </Form.Group>
 
             <Form.Group className="text-center mt-4 mb-2">
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" disabled={isPending}>
                 {t("register.form.signUpButton")}
               </Button>
             </Form.Group>

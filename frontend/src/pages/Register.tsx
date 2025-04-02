@@ -5,14 +5,15 @@ import RegisterForm from './register/RegisterForm';
 import ConfirmForm from  './register/ConfirmForm';
 import ThankYou from './register/ThankYou';
 import SEO from '../components/SEO';
-import { register, confirmRegister } from '../api/services';
+import useAuth from '../utils/useAuth';
 
 const Register: FunctionComponent = () => {
   const [ step, setStep ] = useState(0);
   const [ username, setUsername ] = useState('');
+  const { signUp, confirmSignUp } = useAuth();
   
   const onRegisterSubmit = (username: string, password: string, meta: Record<string, string | number | boolean>) => {
-    return register(username, password, meta)
+    return signUp(meta.name as string, username, password)
       .then(() => {
         setStep(1);
         setUsername(username);
@@ -20,7 +21,7 @@ const Register: FunctionComponent = () => {
   };
 
   const onConfirmSubmit = (code: string) => {
-    return confirmRegister(username, code)
+    return confirmSignUp(username, code)
       .then(() => {
         setStep(2);
       });
