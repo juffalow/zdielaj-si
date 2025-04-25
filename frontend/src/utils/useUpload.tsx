@@ -13,6 +13,8 @@ interface UploadContextType {
   uploadSpeed: number;
   clear: () => void,
   onDrop: (acceptedFiles: FileWithPath[], onUpload?: (media: Media) => Promise<void> | void) => Promise<unknown>;
+  uploadFile: (file: FileWithPath, url: string) => Promise<void>;
+  uploadFiles: (files: any, uploadUrls: string[]) => Promise<void>;
 }
 
 const UploadContext = createContext<UploadContextType>(
@@ -22,6 +24,46 @@ const UploadContext = createContext<UploadContextType>(
 export function UploadProvider({ children }: { children: ReactNode }): JSX.Element {
   const [ files, setFiles ] = useState<UploadedFile[]>([]);
   const [ uploadSpeed, setUploadSpeed ] = useState(0);
+
+  const uploadFile = async (file: any, url: string): Promise<void> => {
+    await fetch(url, {
+      method: 'PUT',
+      body: file,
+    });
+  }
+
+  const uploadFiles = async (acceptedFiles: any, uploadUrls: string[]): Promise<void> => {
+    setFiles(files.concat(acceptedFiles.map((file: any) => ({
+      ...file,
+      name: file.name,
+      type: file.type,
+      size: file.size,
+      preview: URL.createObjectURL(file),
+      isUploading: false,
+      isDone: false,
+    }))));
+
+    const worker = async () => {
+      while (acceptedFiles.length > 0) {
+        console.log('Uploading file...');
+
+        const file = acceptedFiles.shift();
+        const uploadUrl = uploadUrls.shift();
+
+        const start = performance.now();
+
+        setFiles(fs => fs.map(f => f.path === file.path ? { ...f, isUploading: true } : f));
+
+        await uploadFile(file as File, uploadUrl as string);
+
+        setUploadSpeed((file.size / ((performance.now() - start) / 1000)) * 3);
+
+        setFiles(fs => fs.map(f => f.path === file.path ? { ...f, isUploading: false, isDone: true } : f));
+      }
+    };
+
+    await Promise.all(Array.from({ length: 2 }, () => worker()));
+  }
 
   const onDrop = async (acceptedFiles: FileWithPath[], onUpload?: (media: Media) => Promise<void> | void): Promise<unknown> => {
     const startTime = performance.now();
@@ -95,6 +137,8 @@ export function UploadProvider({ children }: { children: ReactNode }): JSX.Eleme
       uploadSpeed,
       clear,
       onDrop,
+      uploadFile,
+      uploadFiles,
     }),
     [ files ]
   );

@@ -10,28 +10,31 @@ import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import FeaturesList from './home/FeaturesList';
 import SEO from '../components/SEO';
-import { createAlbum, createShortLink, addMedia } from '../api/services';
+import useAuth from '../utils/useAuth';
+import { createAlbum, createUserAlbum } from '../api/album';
 import useUpload from '../utils/useUpload';
 import styles from './home/Home.module.css';
 
 const Home: FunctionComponent = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const {
     clear,
-    onDrop: onUploadDrop,
+    uploadFiles,
   } = useUpload();
 
   const onDrop = async (acceptedFiles: File[]) => {
-    const album = await createAlbum();
-    const shortLink = await createShortLink(album);
-    
-    onUploadDrop(acceptedFiles, async (media) => {
-      await addMedia(album.id, media.id);
-    });
+    const album: any = typeof user === 'undefined' ? 
+      await createAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })))
+      : await createUserAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })));
 
-    navigate(`/album/${album.id}`, { state: { album: { ...album, shortLink }, isNew: true } });    
+    console.log('album', album);
+    
+    uploadFiles(acceptedFiles, album.files.map((f: any) => f.uploadUrl));
+  
+    navigate(`/album/${album.id}`, { state: { album: { ...album, /* shortLink */ }, isNew: true } });    
   };
 
   const {

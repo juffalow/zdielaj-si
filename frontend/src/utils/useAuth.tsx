@@ -71,9 +71,10 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
             name: user.name as string,
           },
           accessToken: session.tokens?.accessToken.toString() as string,
+          idToken: session.tokens?.idToken?.toString() as string,
         });
 
-        setUserToken(session.tokens?.accessToken.toString() as string);
+        setUserToken(session.tokens?.idToken?.toString() as string);
       })
       .catch(() => {
         setUser(undefined);
@@ -101,9 +102,10 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
             name: user.name as string,
           },
           accessToken: session.tokens?.accessToken.toString() as string,
+          idToken: session.tokens?.idToken?.toString() as string,
         });
 
-        setUserToken(session.tokens?.accessToken.toString() as string);
+        setUserToken(session.tokens?.idToken?.toString() as string);
       })
       .catch((error) => {
         console.error('signIn error', error);

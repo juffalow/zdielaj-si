@@ -9,24 +9,28 @@ import PublicProfiles from './profile/PublicProfiles';
 import ProfileForm from './profile/ProfileForm';
 import ImagePlaceholder from './profile/image-placeholder.png';
 import SEO from '../components/SEO';
-import { getCurrentUser } from '../api/services';
+import useAuth from '../utils/useAuth';
+import { getCurrentUser } from '../api/user';
 
 const Profile: FunctionComponent = () => {
-  const [ user, setUser ] = useState<User | null>(null);
+  const { user } = useAuth();
+  const [ profile, setProfile ] = useState<User | null>(null);
 
   useEffect(() => {
-    getCurrentUser().then((currentUser) => setUser(currentUser));
+
+    console.log('user', user);
+    getCurrentUser(user?.accessToken as string).then((currentUser) => setProfile(currentUser));
   }, []);
 
   return (
     <SEO title={user?.name as string || 'Profil'} description="">
       <Container>
         {
-          user === null ? <p>Načítavam...</p> : null
+          profile === null ? <p>Načítavam...</p> : null
         }
 
         {
-          user !== null ? (
+          profile !== null ? (
             <Row>
               <Col lg={{ span: 2, offset: 2 }}>
                 <img src={ImagePlaceholder} width="100%" />
@@ -34,11 +38,11 @@ const Profile: FunctionComponent = () => {
               <Col lg={6}>
                 <h2>{ user?.name || 'Meno Priezvisko' }</h2>
                 <hr />
-                <ProfileForm user={user} />
+                <ProfileForm user={profile} />
                 <hr />
-                <PublicProfiles user={user} />
+                <PublicProfiles user={profile} />
                 <hr />
-                <Statistics {...user?.statistics} />
+                <Statistics {...profile?.statistics} />
                 <hr />
                 <h4>Vymazať účet</h4>
                 <p>Spolu s účtom sa zmažú aj všetky nahrané súbory a albumy.</p>

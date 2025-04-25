@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import ErrorBoundary from '../components/ErrorBoundary';
 import SEO from '../components/SEO';
-import { getPublicProfile, getPublicProfileAlbums } from '../api/services';
+import { getPublicProfile, getPublicProfileAlbums } from '../api/publicprofiles';
 
 import PublicProfileLoader from './publicProfile/PublicProfileLoader';
 import PublicProfileContainer from './publicProfile/PublicProfileContainer';

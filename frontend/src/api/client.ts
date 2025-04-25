@@ -71,7 +71,7 @@ function wait(delay: number): Promise<void> {
 }
 
 export async function get<T>(endpoint: string, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<T> {
-  const headers = new Headers();
+  const headers = new Headers(options.headers || {});
   const userToken = getUserToken();
 
   if (userToken !== null) {
@@ -100,7 +100,7 @@ export async function get<T>(endpoint: string, options = {} as { retries?: numbe
     .then(handleSuccess<T>);
 }
 
-export async function post(endpoint: string, data: unknown, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
+export async function post<T>(endpoint: string, data: unknown, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<T> {
   const headers = new Headers();
   const userToken = getUserToken();
   const albumToken = getAlbumToken();
@@ -135,7 +135,7 @@ export async function post(endpoint: string, data: unknown, options = {} as { re
       return response;
     })
     .then(handleErrors)
-    .then(handleResponse);
+    .then(handleSuccess<T>);
 }
 
 export async function postMultipart(endpoint: string, data: FormData, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
@@ -209,4 +209,29 @@ export async function put(endpoint: string, data: unknown, options: RequestInit 
   })
     .then(handleErrors)
     .then(handleSuccess);
+}
+
+export async function patch<T>(endpoint: string, data: unknown, options: RequestInit = {}): Promise<T> {
+  const headers = new Headers();
+  const userToken = getUserToken();
+  const albumToken = getAlbumToken();
+
+  headers.set('Content-Type', 'application/json');
+
+  if (userToken !== null) {
+    headers.set('Authorization', `Bearer ${userToken}`);
+  } else if (albumToken !== null) {
+    headers.set('X-Album-Token', albumToken);
+  }
+
+  return fetch(endpoint, {
+    ...options,
+    ...{
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify(data),
+    }
+  })
+    .then(handleErrors)
+    .then(handleSuccess<T>);
 }

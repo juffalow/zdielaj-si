@@ -7,7 +7,7 @@ import {
   createPublicProfile,
   getPublicProfile,
   updatePublicProfile,
-} from '../../api/services';
+} from '../../api/publicprofiles';
 
 interface Props {
   user: User;

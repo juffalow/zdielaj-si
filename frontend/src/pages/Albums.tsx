@@ -1,17 +1,19 @@
 import { Suspense } from 'react';
+import type { FunctionComponent } from 'react'; 
 import Container from 'react-bootstrap/Container';
-import { getUserAlbums, getCurrentUser } from '../api/services';
 import Loader from './albums/Loader';
 import AlbumsContainer from './albums/AlbumsContainer';
 import SEO from '../components/SEO';
 import ErrorBoundary from '../components/ErrorBoundary';
 import useAuth from '../utils/useAuth';
+import { getCurrentUserAlbums } from '../api/album';
+import { getCurrentUser } from '../api/user';
 
-const Albums: React.FC = () => {
+const Albums: FunctionComponent = () => {
   const { user } = useAuth();
-  const albumsPromise = getUserAlbums(user as User, 8);
-  const userPromise = getCurrentUser();
-
+  const albumsPromise = getCurrentUserAlbums(8);
+  const userPromise = getCurrentUser(user?.accessToken as string);
+  
   return (
     <SEO title="Albumy" description="">
       <Container fluid="xl">

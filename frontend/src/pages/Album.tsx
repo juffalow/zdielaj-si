@@ -5,7 +5,7 @@ import UserAlbum from './album/UserAlbum';
 import GalleryLoader from './album/GalleryLoader';
 import Gallery from './album/Gallery';
 import NotFound from './album/NotFound';
-import { getAlbum, updateAlbum } from '../api/services';
+import { getAlbum, updateAlbum } from '../api/album';
 import useUpload from '../utils/useUpload';
 import ErrorBoundary from '../components/ErrorBoundary';
 

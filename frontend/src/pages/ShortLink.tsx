@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getShortLink } from '../api/services';
+import { getShortLink } from '../api/shortlinks';
 
 export default function ShortLinkRedirect() {
   const params = useParams();
@@ -9,7 +9,8 @@ export default function ShortLinkRedirect() {
   useEffect(() => {
     const fetchData = async () => {
       const shortLink: any = await getShortLink(params.path as string);
-      navigate(`/album/${shortLink.albumId}`);
+      const albumId = shortLink.albumId || shortLink.album.id;
+      navigate(`/album/${albumId}`);
     };
 
     fetchData();

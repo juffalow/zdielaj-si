@@ -2,7 +2,7 @@ import { use, useState, useTransition, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import AlbumPreview from './AlbumPreview';
-import { getPublicProfileAlbums } from '../../api/services';
+import { getPublicProfileAlbums } from '../../api/publicprofiles';
 import useOnScreen from '../../utils/useOnScreen';
 
 export default function PublicProfileContainer({ fetchPublicProfile, fetchAlbums }: { fetchPublicProfile: Promise<PublicProfile>, fetchAlbums: Promise<Album[]> }) {

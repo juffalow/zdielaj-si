@@ -1,33 +1,17 @@
 import type { HTMLAttributes } from 'react'
 import Image from 'react-bootstrap/Image';
 import ImageLoader from '../../components/ImageLoader';
+import styles from './GalleryItems.module.css';
 
-export default function GalleryItems({ files, cols, innerWidth }: { files: Array<Media>, cols: number, innerWidth: number }) {
-  const space = 20;
-  const width = (innerWidth - (space * (cols - 1))) / cols;
-  const top = Array(cols).fill(0);
-  const galleryWidth = files.length > cols ? '100%' : files.length * width + (space * (files.length - 1)) + 'px';
-  let left = 0;
-
-  const elements = files.map((file, index) => {
-    { left += width + 20 }
-    { index % cols === 0 && (left = 0) }
-
-    const element = file.mimetype.startsWith('video') ? <GalleryVideo key={file.id} file={file} style={{ position: 'absolute', left, top: top[index % cols], width }} />
-      : <GalleryImage key={file.id} file={file} style={{ position: 'absolute', left, top: top[index % cols], width }} />;
-
-    { top[index % cols] += ((file.metadata.height * (width / file.metadata.width))) + 20 }
-
-    return element;
-  });
-
-  const galleryHeight = Math.max(...top);
-
+export default function GalleryItems({ files, layout }: { files: Array<Media>, layout: 'cols' | 'tiles' | 'rows' }) {
   return (
-    <div style={{ position: 'relative', height: galleryHeight }}>
-      <div style={{ position: 'relative', height: '100%', width: galleryWidth, margin: '0 auto' }}>
-        {elements}
-      </div>
+    <div className={`${styles.masonry} ${layout === 'cols' ? styles.cols : styles.rows}`} style={{ position: 'relative', height: '100%', width: '100%', margin: '0 auto' }}>
+      {
+        files.map((file) => (
+          file.mimetype.startsWith('video') ? <GalleryVideo key={file.id} file={file} className={styles.brick} />
+            : <GalleryImage key={file.id} file={file} className={`gallery-item ${styles.brick}`} />
+        ))
+      }
     </div>
   )
 }

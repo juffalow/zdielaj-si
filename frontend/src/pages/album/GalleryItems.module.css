@@ -1,0 +1,48 @@
+.masonry.rows {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.masonry.rows > .brick {
+  max-height: 250px;
+  line-height: 250px;
+  margin: 5px;
+  flex: 1 0 auto;
+}
+
+.masonry.rows > .brick img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.masonry.cols {
+  columns: 6 200px;
+  column-gap: 10px;
+}
+
+.masonry.cols > .brick {
+  margin-bottom: 5px;
+}
+
+.masonry.tiles {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.masonry.tiles > .brick {
+  width: 20%;
+}
+
+.masonry.tiles > .brick > div {
+  padding-bottom: 80%;
+  position: relative;
+}
+
+.masonry.tiles > .brick > img {
+  position: absolute;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  padding: 5px;
+}

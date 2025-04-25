@@ -4,12 +4,8 @@ import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import AlbumsList from './AlbumsList';
-import {
-  deleteAlbum,
-  addAlbumToPublicProfile,
-  removeAlbumFromPublicProfile,
-  getUserAlbums,
-} from '../../api/services';
+import { getCurrentUserAlbums, deleteAlbum } from '../../api/album';
+import { addAlbumToPublicProfile, removeAlbumFromPublicProfile } from '../../api/publicprofiles';
 
 const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Album[]>, fetchUser: Promise<User> }) => {
   const { t } = useTranslation();
@@ -61,7 +57,7 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
 
   const onPublicProfileToggle = useCallback(async (album: Album) => {
     startTransition(async () => {
-      if (album.publicProfile === null) {
+      if ('publicProfile' in album === false || album.publicProfile === null) {
         updateOptimisticAlbums({ album, type: 'publish' });
         await addAlbumToPublicProfile(user?.publicProfileId as string, album.id);
         setAllAlbums((allAlbums) => allAlbums.map(a => a.id === album.id ? { ...a, publicProfile: { id: user?.publicProfileId as string } } : a));
@@ -80,7 +76,7 @@ const AlbumsContainer = ({ fetchAlbums, fetchUser }: { fetchAlbums: Promise<Albu
     }
 
     startLoadingTransition(async () => {
-      const moreAlbums = await getUserAlbums(user, 8, page * 8);
+      const moreAlbums = await getCurrentUserAlbums(8, page * 8);
       
       setAllAlbums((allAlbums) => [  ...allAlbums, ...moreAlbums ]);
       

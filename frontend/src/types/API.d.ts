@@ -1,4 +1,49 @@
 namespace API {
+  namespace Album {
+    interface CreateAlbumRequest {
+      data: {
+        album: {
+          id: ID,
+          name: string,
+          user: {
+            id: ID,
+          },
+          files: Array<{
+            id: ID,
+            mimetype: string,
+            size: number,
+            uploadUrl: string,
+          }>,
+          createdAt: string,
+        }
+      },
+      error: unknown,
+    }
+  }
+
+  namespace PublicProfiles {
+    interface GetPublicProfileResponse {
+      data: {
+        publicProfile: PublicProfile,
+      },
+      error: unknown,
+    }
+
+    interface CreatePublicProfileResponse {
+      data: {
+        publicProfile: PublicProfile,
+      },
+      error: unknown,
+    }
+
+    interface UpdatePublicProfileResponse {
+      data: {
+        publicProfile: PublicProfile,
+      },
+      error: unknown,
+    }
+  }
+
   interface GetRefreshTokenResponse {
     error: unknown;
     data: {

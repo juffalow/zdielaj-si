@@ -15,9 +15,22 @@ type Media = {
   createdAt: string;
 }
 
+type AlbumFile = {
+  id: ID;
+  location: string;
+  mimetype: string;
+  size: number;
+  metadata: {
+    width: number;
+    height: number
+    [key: string]: unknown;
+  };
+  uploadUrl?: string;
+  createdAt: string;
+}
+
 type Album = {
-  id: string;
-  compressedId?: string;
+  id: ID;
   user: {
     id: ID;
   };
@@ -30,6 +43,7 @@ type Album = {
   name?: string;
   description?: string;
   media: Media[];
+  files: AlbumFile[];
   createdAt: string;
 }
 
@@ -39,6 +53,7 @@ type User = {
   email?: string;
   name?: string;
   accessToken: string;
+  idToken: string;
   meta?: Record<string, string | number | boolean>;
   publicProfileId?: ID;
   statistics?: {
