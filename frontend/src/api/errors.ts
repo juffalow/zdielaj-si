@@ -15,6 +15,6 @@ export class APIError extends Error {
     this.code = code;
     this.response =response;
     
-    Error.captureStackTrace(this, this.constructor);
+    if ('captureStackTrace' in Error) Error.captureStackTrace(this, this.constructor);
   }
 }
