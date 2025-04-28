@@ -41,7 +41,7 @@ const Home: FunctionComponent = () => {
     getRootProps,
     getInputProps,
     isDragActive,
-  } = useDropzone({ onDrop, accept: 'image/*, video/*', maxFiles: 50 });
+  } = useDropzone({ onDrop, accept: 'image/*, video/*' });
 
   useEffect(() => {
     clear();
