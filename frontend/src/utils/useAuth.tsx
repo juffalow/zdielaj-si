@@ -32,6 +32,7 @@ interface AuthContextType {
   resetPassword: (username: string) => Promise<void>;
   confirmResetPassword: (username: string, code: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  refreshSession: () => Promise<void>;
 }
 
 Amplify.configure({
@@ -62,28 +63,12 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   const [ hasInitialized, setHasInitialized ] = useState<boolean>(false);
 
   useEffect(() => {
-    Promise.all([ fetchUserAttributesAmplify(), fetchAuthSessionAmplify() ])
-      .then(([user, session]) => {
-        setUser({
-          id: user.sub,
-          username: user.email,
-          email: user.email,
-          meta: {
-            name: user.name as string,
-          },
-          accessToken: session.tokens?.accessToken.toString() as string,
-          idToken: session.tokens?.idToken?.toString() as string,
-        });
-
-        setUserToken(session.tokens?.idToken?.toString() as string);
-      })
-      .catch(() => {
-        setUser(undefined);
-        setUserToken(null);
-      })
-      .finally(() => {
-        setHasInitialized(true);
-      });
+    refreshSession().catch(() => {
+      setUser(undefined);
+      setUserToken(null);
+    }).finally(() => {
+      setHasInitialized(true);
+    });
   }, []);
 
   async function signIn(username: string, password: string): Promise<void> {
@@ -168,6 +153,23 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     setUserToken(null);
   }
 
+  async function refreshSession(): Promise<void> {
+    const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
+
+    setUser({
+      id: user.sub,
+      username: user.email,
+      email: user.email,
+      meta: {
+        name: user.name as string,
+      },
+      accessToken: session.tokens?.accessToken.toString() as string,
+      idToken: session.tokens?.idToken?.toString() as string,
+    });
+
+    setUserToken(session.tokens?.idToken?.toString() as string);
+  }
+
   const memoedValue = useMemo(
     () => ({
       user,
@@ -179,6 +181,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       resetPassword,
       confirmResetPassword,
       signOut,
+      refreshSession,
     }),
     [ user, loading, hasInitialized ]
   );

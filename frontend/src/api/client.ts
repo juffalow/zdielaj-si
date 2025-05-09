@@ -48,16 +48,6 @@ function handleSuccess<T>(response: Response): Promise<T> {
   return response.json();
 }
 
-function handleResponse(response: Response) {
-  if (response.status === 204) {
-    return {};
-  } else if (response.headers.get('Content-Type')?.startsWith('application/json')) {
-    return response.json();
-  } else {
-    return response.text();
-  }
-}
-
 function getBackoffWithJitter(attempt: number, baseDelay = 500) {
   const jitter = Math.random() * baseDelay;
 
@@ -96,6 +86,16 @@ export async function get<T>(endpoint: string, options = {} as { retries?: numbe
 
       return response;
     })
+    .then(handleErrors)
+    .then(handleSuccess<T>);
+}
+
+export async function retriableGet<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  return fetch(endpoint, {
+    ...options,
+    method: 'GET',
+  })
+    .then(handleErrors)
     .then(handleErrors)
     .then(handleSuccess<T>);
 }

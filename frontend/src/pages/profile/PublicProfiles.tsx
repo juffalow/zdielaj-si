@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { use, useState, useEffect } from 'react';
 import type { FunctionComponent, ChangeEvent, FormEvent } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
@@ -10,10 +10,11 @@ import {
 } from '../../api/publicprofiles';
 
 interface Props {
-  user: User;
+  getCurrentUserPromise: Promise<User>;
 }
 
-const PublicProfiles: FunctionComponent<Props> = ({ user }: Props) => {
+const PublicProfiles: FunctionComponent<Props> = ({ getCurrentUserPromise }: Props) => {
+  const user = use(getCurrentUserPromise);
   const [ formType, setFormType ] = useState<string>('create');
   const [ publicProfile, setPublicProfile ] = useState<PublicProfile | null>(null);
   const [ error, setError ] = useState<string | null>(null);

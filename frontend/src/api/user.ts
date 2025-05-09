@@ -1,9 +1,18 @@
-import { get } from './client';
+import { retriableGet } from './client';
+import retryPromise from '../utils/retryPromise';
+import useAuth from '../utils/useAuth';
 
 export async function getCurrentUser(accessToken: string): Promise<any> {
-  return get<any>(`${process.env.REACT_APP_API_URL}/me`, { headers: { accessToken } })
+  const { user, refreshSession } = useAuth();
+  const headers = new Headers();
+
+  if (typeof user !== 'undefined' && user !== null) {
+    headers.set('Authorization',  `Bearer ${user.idToken}`);
+    headers.set('accessToken',  accessToken);
+  }
+
+  return retryPromise(() => retriableGet<any>(`${process.env.REACT_APP_API_URL}/me`, { headers }), { retries: 3, onUnauthorized: refreshSession })
     .then((response) => {
-      console.log('API.user.getCurrentUser', response);
       return response.data.user;
     });
 }

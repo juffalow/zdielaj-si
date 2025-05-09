@@ -1,8 +1,11 @@
-import { get, post, patch, httpDelete } from './client';
+import { retriableGet, post, patch, httpDelete } from './client';
+import retryPromise from '../utils/retryPromise';
 
 export async function getPublicProfile(id: ID): Promise<PublicProfile> {
-  return get<API.PublicProfiles.GetPublicProfileResponse>(`${process.env.REACT_APP_API_URL}/publicprofiles/${id}`)
-    .then(response => response.data.publicProfile);
+  return retryPromise(() => retriableGet<API.PublicProfiles.GetPublicProfileResponse>(`${process.env.REACT_APP_API_URL}/publicprofiles/${id}`), { retries: 3, attempt: 0 })
+    .then((response) => {
+      return response.data.publicProfile;
+    });
 }
 
 export async function createPublicProfile(id: string, name: string, description: string): Promise<PublicProfile> {
@@ -30,7 +33,9 @@ export async function getPublicProfileAlbums(params: { publicProfileId: ID, firs
   for (const key in rest) {
     searchParams.append(key, rest[key]);
   }
-  
-  return get<API.GetPublicProfileAlbumsResponse>(`${process.env.REACT_APP_API_URL}/publicprofiles/${publicProfileId}/albums?${searchParams}`)
-    .then(response => response.data.albums);
+
+  return retryPromise(() => retriableGet<API.GetPublicProfileAlbumsResponse>(`${process.env.REACT_APP_API_URL}/publicprofiles/${publicProfileId}/albums?${searchParams}`), { retries: 3, attempt: 0 })
+    .then((response) => {
+      return response.data.albums;
+    });
 }
