@@ -4,7 +4,6 @@ import Sharp from 'sharp';
 import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 
 const s3 = new S3Client();
-const BUCKET = 'zdielaj-si-media-dev';
 
 export const handler = async (event) => {
   const response = event.Records[0].cf.response;
@@ -12,10 +11,13 @@ export const handler = async (event) => {
    if (response.status === '404') {
 
     const request = event.Records[0].cf.request;
+    const urlParams = new URLSearchParams(request.querystring);
 
-    if (request.uri.startsWith('/generated/') === false) {
+    if (urlParams.has('d') === false && request.uri.startsWith('/generated/') === false) {
       return response;
     }
+
+    const s3Bucket = request.headers.host[0].value.split('.')[0];
 
     const path = request.uri;
 
@@ -28,7 +30,7 @@ export const handler = async (event) => {
     const originalKey = parts.filter(value => value.trim().length > 0).concat(filename).join('/');
 
     const getObjectCommand = new GetObjectCommand({
-      Bucket: BUCKET,
+      Bucket: s3Bucket,
       Key: originalKey,
     });
 
@@ -36,10 +38,10 @@ export const handler = async (event) => {
 
     const body = await s3Response.Body.transformToByteArray();
 
-    const buffer = await Sharp(body).resize(parseInt(width), parseInt(height), { fit: Sharp.fit.inside }).toBuffer();
+    const buffer = await Sharp(body).rotate().resize(parseInt(width), parseInt(height), { fit: Sharp.fit.inside }).toBuffer();
 
     const putObjectCommand = new PutObjectCommand({
-      Bucket: BUCKET,
+      Bucket: s3Bucket,
       Key: path.substring(1),
       Body: buffer,
       ContentType: 'image/' + (format === 'jpg' ? 'jpeg' : format),
@@ -56,7 +58,7 @@ export const handler = async (event) => {
     response.ContentLength = buffer.length;
 
     return response;
+  } else {
+    return response;
   }
-
-  return response;
 };
