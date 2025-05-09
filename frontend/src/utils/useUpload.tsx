@@ -7,6 +7,7 @@ import {
 } from 'react';
 import type { FileWithPath } from 'react-dropzone';
 import { uploadPhoto } from '../api/services';
+import logger from '../logger';
 
 interface UploadContextType {
   files: UploadedFile[];
@@ -45,10 +46,10 @@ export function UploadProvider({ children }: { children: ReactNode }): JSX.Eleme
 
     const worker = async () => {
       while (acceptedFiles.length > 0) {
-        console.log('Uploading file...');
-
         const file = acceptedFiles.shift();
         const uploadUrl = uploadUrls.shift();
+
+        logger.debug('Uploading file...', file);
 
         const start = performance.now();
 

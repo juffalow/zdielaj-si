@@ -19,6 +19,7 @@ import {
   fetchUserAttributes as fetchUserAttributesAmplify,
 } from 'aws-amplify/auth';
 import { setUserToken } from '../api/token';
+import logger from '../logger';
 
 interface AuthContextType {
   user?: User;
@@ -85,38 +86,39 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       });
   }, []);
 
-  function signIn(username: string, password: string): Promise<void> {
+  async function signIn(username: string, password: string): Promise<void> {
     setLoading(true);
 
-    return signInAmplify({ username, password })
-      .then((response) => {
-        console.log(response);
-      })
-      .then(() => Promise.all([ fetchUserAttributesAmplify(), fetchAuthSessionAmplify() ]))
-      .then(([user, session]) => {
-        setUser({
-          id: user.sub,
-          username: user.email,
-          email: user.email,
-          meta: {
-            name: user.name as string,
-          },
-          accessToken: session.tokens?.accessToken.toString() as string,
-          idToken: session.tokens?.idToken?.toString() as string,
-        });
+    try {
+      const response = await signInAmplify({ username, password });
 
-        setUserToken(session.tokens?.idToken?.toString() as string);
-      })
-      .catch((error) => {
-        console.error('signIn error', error);
-      })
-      .finally(() => setLoading(false));
+      logger.debug('Sign in response', response);
+
+      const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
+
+      setUser({
+        id: user.sub,
+        username: user.email,
+        email: user.email,
+        meta: {
+          name: user.name as string,
+        },
+        accessToken: session.tokens?.accessToken.toString() as string,
+        idToken: session.tokens?.idToken?.toString() as string,
+      });
+
+      setUserToken(session.tokens?.idToken?.toString() as string);
+    } catch (error) {
+      logger.warn('Sign in error!', error);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  function signUp(name: string, email: string, password: string): Promise<void> {
+  async function signUp(name: string, email: string, password: string): Promise<void> {
     setLoading(true);
 
-    return signUpAmplify({
+    const response = await signUpAmplify({
       username: email,
       password,
       options: {
@@ -125,43 +127,47 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
           name,
         },
       },
-    }).then((response) => console.log(response)).finally(() => setLoading(false));
+    });
+
+    logger.debug('Sign up response', response);
+
+    setLoading(false);
   }
 
-  function confirmSignUp(username: string, code: string): Promise<void> {
-    return confirmSignUpAmplify({
+  async function confirmSignUp(username: string, code: string): Promise<void> {
+    const response = await confirmSignUpAmplify({
       username,
       confirmationCode: code,
-    }).then((response => console.log(response)));
+    });
+
+    logger.debug('Confirm sign up response', response);
   }
 
-  function resetPassword(username: string): Promise<void> {
-    return resetPasswordAmplify({
+  async function resetPassword(username: string): Promise<void> {
+    const response = await resetPasswordAmplify({
       username,
-    }).then((response) => console.log(response));
+    });
+    
+    logger.debug('Reset password response', response);
   }
 
-  function confirmResetPassword(username: string, code: string, password: string): Promise<void> {
-    return confirmResetPasswordAmplify({
+  async function confirmResetPassword(username: string, code: string, password: string): Promise<void> {
+    const response = await confirmResetPasswordAmplify({
       username,
       confirmationCode: code,
       newPassword: password,
-    }).then((response) => console.log(response));
+    });
+
+    logger.debug('Confirm reset password response', response);
   }
 
-  function signOut(): Promise<void> {
-    return signOutAmplify().then(() => setUser(undefined)).then(() => setUserToken(null));
+  async function signOut(): Promise<void> {
+    await signOutAmplify();
+    
+    setUser(undefined);
+    setUserToken(null);
   }
 
-  // Make the provider update only when it should.
-  // We only want to force re-renders if the user,
-  // loading or error states change.
-  //
-  // Whenever the `value` passed into a provider changes,
-  // the whole tree under the provider re-renders, and
-  // that can be very costly! Even in this case, where
-  // you only get re-renders when logging in and out
-  // we want to keep things very performant.
   const memoedValue = useMemo(
     () => ({
       user,
@@ -177,8 +183,6 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     [ user, loading, hasInitialized ]
   );
 
-  // We only want to render the underlying app after we
-  // assert for the presence of a current user.
   return (
     <AuthContext.Provider value={memoedValue}>
       { children }
@@ -195,18 +199,12 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
   }
 
   if (!auth.user) {
-    // Redirect them to the /login page, but save the current location they were
-    // trying to go to when they were redirected. This allows us to send them
-    // along to that page after they login, which is a nicer user experience
-    // than dropping them off on the home page.
     return <Navigate to="/prihlasit-sa" state={{ from: location }} replace />;
   }
 
   return children;
 }
 
-// Let's only export the `useAuth` hook instead of the context.
-// We only want to use the hook directly and never the context component.
 export default function useAuth() {
   return useContext(AuthContext);
 }

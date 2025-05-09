@@ -13,6 +13,7 @@ import SEO from '../components/SEO';
 import useAuth from '../utils/useAuth';
 import { createAlbum, createUserAlbum } from '../api/album';
 import useUpload from '../utils/useUpload';
+import logger from '../logger';
 import styles from './home/Home.module.css';
 
 const Home: FunctionComponent = () => {
@@ -30,11 +31,11 @@ const Home: FunctionComponent = () => {
       await createAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })))
       : await createUserAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })));
 
-    console.log('album', album);
+    logger.info('Album created', album);
     
     uploadFiles(acceptedFiles, album.files.map((f: any) => f.uploadUrl));
   
-    navigate(`/album/${album.id}`, { state: { album: { ...album, /* shortLink */ }, isNew: true } });    
+    navigate(`/album/${album.id}`, { state: { album, isNew: true } });    
   };
 
   const {
