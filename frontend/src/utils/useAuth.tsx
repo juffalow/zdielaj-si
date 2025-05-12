@@ -18,11 +18,11 @@ import {
   fetchAuthSession as fetchAuthSessionAmplify,
   fetchUserAttributes as fetchUserAttributesAmplify,
 } from 'aws-amplify/auth';
-import { setUserToken } from '../api/token';
+import { getUser, setUser } from '../api/auth';
 import logger from '../logger';
 
 interface AuthContextType {
-  user?: User;
+  user: User | null;
   hasInitialized: boolean;
   loading: boolean;
   error?: Error;
@@ -58,14 +58,12 @@ const AuthContext = createContext<AuthContextType>(
 );
 
 export function AuthProvider({ children }: { children: ReactNode }): JSX.Element {
-  const [ user, setUser ] = useState<User>();
   const [ loading, setLoading ] = useState<boolean>(false);
   const [ hasInitialized, setHasInitialized ] = useState<boolean>(false);
 
   useEffect(() => {
     refreshSession().catch(() => {
-      setUser(undefined);
-      setUserToken(null);
+      setUser(null);
     }).finally(() => {
       setHasInitialized(true);
     });
@@ -91,8 +89,6 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         accessToken: session.tokens?.accessToken.toString() as string,
         idToken: session.tokens?.idToken?.toString() as string,
       });
-
-      setUserToken(session.tokens?.idToken?.toString() as string);
     } catch (error) {
       logger.warn('Sign in error!', error);
     } finally {
@@ -149,11 +145,12 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   async function signOut(): Promise<void> {
     await signOutAmplify();
     
-    setUser(undefined);
-    setUserToken(null);
+    setUser(null);
   }
 
   async function refreshSession(): Promise<void> {
+    logger.debug('Refreshing session...');
+    
     const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
 
     setUser({
@@ -166,13 +163,11 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       accessToken: session.tokens?.accessToken.toString() as string,
       idToken: session.tokens?.idToken?.toString() as string,
     });
-
-    setUserToken(session.tokens?.idToken?.toString() as string);
   }
 
   const memoedValue = useMemo(
     () => ({
-      user,
+      user: getUser(),
       hasInitialized,
       loading,
       signIn,
@@ -183,7 +178,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       signOut,
       refreshSession,
     }),
-    [ user, loading, hasInitialized ]
+    [ loading, hasInitialized ]
   );
 
   return (

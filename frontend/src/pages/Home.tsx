@@ -12,6 +12,7 @@ import FeaturesList from './home/FeaturesList';
 import SEO from '../components/SEO';
 import useAuth from '../utils/useAuth';
 import { createAlbum, createUserAlbum } from '../api/album';
+import retryOperation from '../utils/retryPromise';
 import useUpload from '../utils/useUpload';
 import logger from '../logger';
 import styles from './home/Home.module.css';
@@ -19,7 +20,7 @@ import styles from './home/Home.module.css';
 const Home: FunctionComponent = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, refreshSession } = useAuth();
 
   const {
     clear,
@@ -27,13 +28,13 @@ const Home: FunctionComponent = () => {
   } = useUpload();
 
   const onDrop = async (acceptedFiles: File[]) => {
-    const album: any = typeof user === 'undefined' ? 
+    const album: Album = user === null ? 
       await createAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })))
-      : await createUserAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })));
+      : await retryOperation(() => createUserAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size }))), { retries: 2, onUnauthorized: refreshSession });
 
     logger.info('Album created', album);
     
-    uploadFiles(acceptedFiles, album.files.map((f: any) => f.uploadUrl));
+    uploadFiles(acceptedFiles, album.files.map(f => f.uploadUrl as string));
   
     navigate(`/album/${album.id}`, { state: { album, isNew: true } });    
   };

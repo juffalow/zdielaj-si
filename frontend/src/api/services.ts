@@ -1,4 +1,4 @@
-import { post, postMultipart, get, } from './client';
+import { post, protectedPostMultipart, get, } from './client';
 
 type Setting = {
   notification: string,
@@ -10,7 +10,7 @@ export async function uploadPhoto(file: File): Promise<Media> {
 
   formData.append('file', file);
 
-  return postMultipart(`${process.env.REACT_APP_UPLOAD_URL}/upload/file`, formData)
+  return protectedPostMultipart(`${process.env.REACT_APP_UPLOAD_URL}/upload/file`, formData)
     .then(res => {
       return res.data.file;
     });

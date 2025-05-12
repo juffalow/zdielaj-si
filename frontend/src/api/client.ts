@@ -1,4 +1,4 @@
-import { getUserToken, getAlbumToken } from './token';
+import { getUserIDToken } from './auth';
 import { APIError } from './errors';
 
 interface BaseErrorConstructor {
@@ -48,189 +48,123 @@ function handleSuccess<T>(response: Response): Promise<T> {
   return response.json();
 }
 
-function getBackoffWithJitter(attempt: number, baseDelay = 500) {
-  const jitter = Math.random() * baseDelay;
-
-  return Math.min(((2 ** attempt) * baseDelay) + jitter, 16_000);
-}
-
-function wait(delay: number): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
-
-export async function get<T>(endpoint: string, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<T> {
-  const headers = new Headers(options.headers || {});
-  const userToken = getUserToken();
-
-  if (userToken !== null) {
-    headers.set('Authorization',  `Bearer ${userToken}`);
-  }
-
-  const { retries = 3, _attempt = 0, ...requestOptions } = options;
-
-  return fetch(endpoint, {
-    ...requestOptions,
-    method: 'GET',
-    headers,
-  })
-    .then((response: Response) => {
-      if (response.ok) {
-        return response;
-      }
-
-      if (response.status >= 500 || response.status === 408 || response.status === 429) {
-        return wait(getBackoffWithJitter(_attempt)).then(() => get(endpoint, { ...options, retries: retries - 1, _attempt: _attempt + 1 }));
-      }
-
-      return response;
-    })
-    .then(handleErrors)
-    .then(handleSuccess<T>);
-}
-
-export async function retriableGet<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+export async function get<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   return fetch(endpoint, {
     ...options,
     method: 'GET',
   })
     .then(handleErrors)
-    .then(handleErrors)
     .then(handleSuccess<T>);
 }
 
-export async function post<T>(endpoint: string, data: unknown, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<T> {
-  const headers = new Headers();
-  const userToken = getUserToken();
-  const albumToken = getAlbumToken();
-
-  headers.set('Content-Type', 'application/json');
-
-  if (userToken !== null) {
-    headers.set('Authorization', `Bearer ${userToken}`);
-  } else if (albumToken !== null) {
-    headers.set('X-Album-Token', albumToken);
-  }
-
-  const { retries = 3, _attempt = 0, ...requestOptions } = options;
+export async function protectedGet<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  const { headers, ...rest } = options;
 
   return fetch(endpoint, {
-    ...requestOptions,
-    ...{
-      method: 'POST',
-      headers,
-      body: JSON.stringify(data),
-    }
+    headers: {
+      Authorization: `Bearer ${getUserIDToken()}`,
+      ...headers,
+    },
+    ...rest,
+    method: 'GET',
   })
-    .then((response: Response) => {
-      if (response.ok) {
-        return response;
-      }
-
-      if (response.status >= 500 || response.status === 408 || response.status === 429) {
-        return wait(getBackoffWithJitter(_attempt)).then(() => get(endpoint, { ...options, retries: retries - 1, _attempt: _attempt + 1 }));
-      }
-
-      return response;
-    })
     .then(handleErrors)
     .then(handleSuccess<T>);
 }
 
-export async function postMultipart(endpoint: string, data: FormData, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
-  const headers = new Headers();
-  const userToken = getUserToken();
-
-  if (userToken !== null) {
-    headers.set('Authorization',  `Bearer ${userToken}`);
-  }
-
-  const { retries = 3, _attempt = 0, ...requestOptions } = options;
+export async function post<T>(endpoint: string, data: unknown, options: RequestInit = {}): Promise<T> {
+  const { headers, ...rest } = options;
 
   return fetch(endpoint, {
-    ...requestOptions,
+    headers: {
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+    ...rest,
     method: 'POST',
-    headers,
+    body: JSON.stringify(data),
+  })
+    .then(handleErrors)
+    .then(handleSuccess<T>);
+}
+
+export async function protectedPost<T>(endpoint: string, data: unknown, options: RequestInit = {}): Promise<T> {
+  const { headers, ...rest } = options;
+
+  return fetch(endpoint, {
+    headers: {
+      Authorization: `Bearer ${getUserIDToken()}`,
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+    ...rest,
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+    .then(handleErrors)
+    .then(handleSuccess<T>);
+}
+
+export async function protectedPostMultipart(endpoint: string, data: FormData, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
+  const { headers, ...rest } = options;
+
+  return fetch(endpoint, {
+    headers: {
+      Authorization: `Bearer ${getUserIDToken()}`,
+      ...headers,
+    },
+    ...rest,
+    method: 'POST',
     body: data,
   })
-    .then((response: Response) => {
-      if (response.ok) {
-        return response;
-      }
-
-      if (response.status >= 500 || response.status === 408 || response.status === 429) {
-        return wait(getBackoffWithJitter(_attempt)).then(() => get(endpoint, { ...options, retries: retries - 1, _attempt: _attempt + 1 }));
-      }
-
-      return response;
-    })
     .then(handleErrors)
     .then(handleSuccess);
 }
 
-export async function httpDelete(endpoint: string, options?: RequestInit): Promise<any> {
-  const headers = new Headers();
-  const userToken = getUserToken();
-
-  if (userToken !== null) {
-    headers.set('Authorization',  `Bearer ${userToken}`);
-  }
+export async function protectedDelete(endpoint: string, options: RequestInit = {}): Promise<any> {
+  const { headers, ...rest } = options;
 
   return fetch(endpoint, {
-    ...options,
+    headers: {
+      Authorization: `Bearer ${getUserIDToken()}`,
+      ...headers,
+    },
+    ...rest,
     method: 'DELETE',
-    headers,
   })
     .then(handleErrors)
     .then(handleSuccess);
 }
 
-export async function put(endpoint: string, data: unknown, options: RequestInit = {}): Promise<any> {
-  const headers = new Headers();
-  const userToken = getUserToken();
-  const albumToken = getAlbumToken();
-
-  headers.set('Content-Type', 'application/json');
-
-  if (userToken !== null) {
-    headers.set('Authorization', `Bearer ${userToken}`);
-  } else if (albumToken !== null) {
-    headers.set('X-Album-Token', albumToken);
-  }
+export async function protectedPut(endpoint: string, data: unknown, options: RequestInit = {}): Promise<any> {
+  const { headers, ...rest } = options;
 
   return fetch(endpoint, {
-    ...options,
-    ...{
-      method: 'PUT',
-      headers,
-      body: JSON.stringify(data),
-    }
+    headers: {
+      Authorization: `Bearer ${getUserIDToken()}`,
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+    ...rest,
+    method: 'PUT',
+    body: JSON.stringify(data),
   })
     .then(handleErrors)
     .then(handleSuccess);
 }
 
-export async function patch<T>(endpoint: string, data: unknown, options: RequestInit = {}): Promise<T> {
-  const headers = new Headers();
-  const userToken = getUserToken();
-  const albumToken = getAlbumToken();
-
-  headers.set('Content-Type', 'application/json');
-
-  if (userToken !== null) {
-    headers.set('Authorization', `Bearer ${userToken}`);
-  } else if (albumToken !== null) {
-    headers.set('X-Album-Token', albumToken);
-  }
+export async function protectedPatch<T>(endpoint: string, data: unknown, options: RequestInit = {}): Promise<T> {
+  const { headers, ...rest } = options;
 
   return fetch(endpoint, {
-    ...options,
-    ...{
-      method: 'PATCH',
-      headers,
-      body: JSON.stringify(data),
-    }
+    headers: {
+      Authorization: `Bearer ${getUserIDToken()}`,
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+    ...rest,
+    method: 'PATCH',
+    body: JSON.stringify(data),
   })
     .then(handleErrors)
     .then(handleSuccess<T>);

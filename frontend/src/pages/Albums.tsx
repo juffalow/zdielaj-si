@@ -8,11 +8,12 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import useAuth from '../utils/useAuth';
 import { getCurrentUserAlbums } from '../api/album';
 import { getCurrentUser } from '../api/user';
+import retryOperation from '../utils/retryPromise';
 
 const Albums: FunctionComponent = () => {
-  const { user } = useAuth();
-  const albumsPromise = getCurrentUserAlbums(8);
-  const userPromise = getCurrentUser(user?.accessToken as string);
+  const { user, refreshSession } = useAuth();
+  const albumsPromise = retryOperation(() => getCurrentUserAlbums(8), { retries: 3, onUnauthorized: refreshSession });
+  const userPromise = retryOperation(() => getCurrentUser(user?.accessToken as string), { retries: 3, onUnauthorized: refreshSession });
   
   return (
     <SEO title="Albumy" description="">
