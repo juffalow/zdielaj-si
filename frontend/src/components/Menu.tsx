@@ -32,7 +32,7 @@ const Menu = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           {
-            user !== undefined ? (
+            user !== null ? (
               <Nav.Link as={Link} to="/albumy">{t("menu.albums")}</Nav.Link>
             ) : null
           }
@@ -41,7 +41,7 @@ const Menu = () => {
             {
               hasInitialized === false ? (
                 <></>
-              ) : user !== undefined ? (
+              ) : user !== null ? (
                 <NavDropdown title={user?.meta?.name || 'Užívateľ'} id="basic-nav-dropdown">
                   <NavDropdown.Item as={Link} to="/profil">{t("menu.profile")}</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/predplatne">{t("menu.subscription")}</NavDropdown.Item>
