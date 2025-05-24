@@ -58,6 +58,7 @@ const AuthContext = createContext<AuthContextType>(
 );
 
 export function AuthProvider({ children }: { children: ReactNode }): JSX.Element {
+  const [ lastUpdate, setLastUpdate ] = useState<Date>(new Date());
   const [ loading, setLoading ] = useState<boolean>(false);
   const [ hasInitialized, setHasInitialized ] = useState<boolean>(false);
 
@@ -89,6 +90,8 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         accessToken: session.tokens?.accessToken.toString() as string,
         idToken: session.tokens?.idToken?.toString() as string,
       });
+
+      setLastUpdate(new Date());
     } catch (error) {
       logger.warn('Sign in error!', error);
     } finally {
@@ -146,6 +149,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     await signOutAmplify();
     
     setUser(null);
+    setLastUpdate(new Date());
   }
 
   async function refreshSession(): Promise<void> {
@@ -163,6 +167,8 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       accessToken: session.tokens?.accessToken.toString() as string,
       idToken: session.tokens?.idToken?.toString() as string,
     });
+
+    setLastUpdate(new Date());
   }
 
   const memoedValue = useMemo(
@@ -178,7 +184,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       signOut,
       refreshSession,
     }),
-    [ loading, hasInitialized ]
+    [ loading, hasInitialized, lastUpdate ]
   );
 
   return (
