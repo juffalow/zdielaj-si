@@ -5,7 +5,7 @@ import styles from './GalleryItems.module.css';
 
 export default function GalleryItems({ files, layout }: { files: Array<Media>, layout: 'cols' | 'tiles' | 'rows' }) {
   return (
-    <div className={`${styles.masonry} ${layout === 'cols' ? styles.cols : styles.rows}`} style={{ position: 'relative', height: '100%', width: '100%', margin: '0 auto' }}>
+    <div className={`${styles.masonry} ${layout === 'cols' ? styles.cols : layout === 'tiles' ? styles.tiles : styles.rows}`} style={{ position: 'relative', height: '100%', width: '100%', margin: '0 auto' }}>
       {
         files.map((file) => (
           file.mimetype.startsWith('video') ? <GalleryVideo key={file.id} file={file} className={styles.brick} />

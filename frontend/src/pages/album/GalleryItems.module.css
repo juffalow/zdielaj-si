@@ -4,9 +4,9 @@
 }
 
 .masonry.rows > .brick {
-  max-height: 250px;
-  line-height: 250px;
-  margin: 5px;
+  height: 325px;
+  max-height: 325px;
+  padding: 5px;
   flex: 1 0 auto;
 }
 
@@ -30,19 +30,31 @@
   flex-wrap: wrap;
 }
 
+@media (max-width: 991px) {
+  .masonry.tiles > .brick {
+    width: 50%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .masonry.tiles > .brick {
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .masonry.tiles > .brick {
+    width: 16.66%;
+  }
+}
+
 .masonry.tiles > .brick {
-  width: 20%;
-}
-
-.masonry.tiles > .brick > div {
-  padding-bottom: 80%;
-  position: relative;
-}
-
-.masonry.tiles > .brick > img {
-  position: absolute;
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: cover;
+  /* width: 16.66%; */
   padding: 5px;
+  aspect-ratio: 1 / 1;
+}
+
+.masonry.tiles > .brick img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
