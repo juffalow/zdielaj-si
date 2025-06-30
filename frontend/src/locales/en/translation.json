@@ -1,4 +1,18 @@
 {
+  "routes": {
+    "prefix": "en/",
+    "signIn": "sign-in",
+    "signUp": "sign-up",
+    "passwordReset": "password-reset",
+    "about": "about",
+    "privacyPolicy": "privacy-policy",
+    "userData": "user-data",
+    "userProfile": "profile",
+    "publicProfile": "profile/:id",
+    "albums": "albums",
+    "album": "album/:id",
+    "home": "/"
+  },
   "home": {
     "title": "Share photos and videos in full quality",
     "subtitle": "Do you also have a problem that some applications reduce the quality of your photos and videos? Here you can share them without any problems in full quality!",
@@ -44,6 +58,23 @@
       "password": "Password",
       "forgotPassword": "Forgot your password?",
       "signInButton": "Sign in"
+    }
+  },
+  "profile": {
+    "changePasswordForm": {
+      "title": "Change password",
+      "currentPassword": "Current password",
+      "currentPasswordPlaceholder": "1ZastaraleHeslo!",
+      "newPassword": "New password",
+      "newPasswordPlaceholder": "Nove1TazkeHeslo!",
+      "confirmPassword": "Confirm new password",
+      "button": "Change password"
+    },
+    "statistics": {
+      "title": "Statistics",
+      "numberOfAlbums": "Number of albums",
+      "numberOfFiles": "Number of files",
+      "totalSize": "Total size"
     }
   },
   "publicProfile": {

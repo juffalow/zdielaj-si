@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Statistics from './profile/Statistics';
 import PublicProfiles from './profile/PublicProfiles';
 import ProfileForm from './profile/ProfileForm';
+import ChangePasswordForm from './profile/ChangePassword';
+import Loader from './profile/Loader';
 import ImagePlaceholder from './profile/image-placeholder.png';
 import SEO from '../components/SEO';
 import useAuth from '../utils/useAuth';
@@ -18,18 +20,20 @@ const Profile: FunctionComponent = () => {
   const getCurrentUserPromise = getCurrentUser(user?.accessToken as string);
 
   return (
-    <SEO title={user?.name as string || 'Profil'} description="">
+    <SEO title={user?.meta?.name as string || 'Profil'} description="">
       <Container>
         <ErrorBoundary>
-          <Suspense fallback={<p>Načítavam...</p>}>
+          <Suspense fallback={<Loader />}>
             <Row>
               <Col lg={{ span: 2, offset: 2 }}>
                 <img src={ImagePlaceholder} width="100%" />
               </Col>
               <Col lg={6}>
-                <h2>{ user?.name || 'Meno Priezvisko' }</h2>
+                <h2>{ user?.meta?.name || 'Meno Priezvisko' }</h2>
                 <hr />
                 <ProfileForm getCurrentUserPromise={getCurrentUserPromise} />
+                <hr />
+                <ChangePasswordForm />
                 <hr />
                 <PublicProfiles getCurrentUserPromise={getCurrentUserPromise} />
                 <hr />

@@ -17,6 +17,7 @@ import {
   confirmResetPassword as confirmResetPasswordAmplify,
   fetchAuthSession as fetchAuthSessionAmplify,
   fetchUserAttributes as fetchUserAttributesAmplify,
+  updatePassword as updatePasswordAmplify,
 } from 'aws-amplify/auth';
 import { getUser, setUser } from '../api/auth';
 import logger from '../logger';
@@ -31,6 +32,7 @@ interface AuthContextType {
   confirmSignUp: (username: string, password: string) => Promise<void>;
   resetPassword: (username: string) => Promise<void>;
   confirmResetPassword: (username: string, code: string, password: string) => Promise<void>;
+  updatePassword: (currentPassword: string, newPassword: string) => Promise<void>;
   signOut: () => Promise<void>;
   refreshSession: () => Promise<void>;
 }
@@ -94,6 +96,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       setLastUpdate(new Date());
     } catch (error) {
       logger.warn('Sign in error!', error);
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -145,6 +148,17 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     logger.debug('Confirm reset password response', response);
   }
 
+  async function updatePassword(oldPassword: string, newPassword: string): Promise<void> {
+    logger.debug('Updating password...');
+
+    const response = await updatePasswordAmplify({
+      oldPassword,
+      newPassword,
+    });
+
+    logger.debug('Update password response', response);
+  }
+
   async function signOut(): Promise<void> {
     await signOutAmplify();
     
@@ -181,6 +195,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       confirmSignUp,
       resetPassword,
       confirmResetPassword,
+      updatePassword,
       signOut,
       refreshSession,
     }),
