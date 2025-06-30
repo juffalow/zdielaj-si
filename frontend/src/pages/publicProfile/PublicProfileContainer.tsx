@@ -37,7 +37,6 @@ export default function PublicProfileContainer({ fetchPublicProfile, fetchAlbums
   useEffect(() => {
     if (isIntersecting) {
       loadMore();
-      observer?.disconnect();
     }
   }, [isIntersecting, observer]);
 
