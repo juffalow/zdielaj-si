@@ -18,10 +18,10 @@ const Footer = ({ t }: WithTranslation) => (
         <Col xs={{ span: 6 }} sm={{ span: 6 }} md={{ span: 3, offset: 3 }} lg={{ span: 2, offset: 5 }}>
           <h6>{t("footer.links")}</h6>
           <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }}></hr>
-          <p><Link className="nav-link text-light" to="/">{t("footer.home")}</Link></p>
-          <p><Link className="nav-link text-light" to="/registracia">{t("footer.register")}</Link></p>
+          <p><Link className="nav-link text-light" to={`${t('routes.prefix')}${t('routes.home')}`}>{t("footer.home")}</Link></p>
+          <p><Link className="nav-link text-light" to={`${t('routes.prefix')}${t('routes.signUp')}`}>{t("footer.register")}</Link></p>
           <p><Link className="nav-link text-light" to="https://status.zdielaj.si/">{t("footer.status")}</Link></p>
-          <p><Link className="nav-link text-light" to="/o-aplikacii">{t("footer.about")}</Link></p>
+          <p><Link className="nav-link text-light" to={`${t('routes.prefix')}${t('routes.about')}`}>{t("footer.about")}</Link></p>
         </Col>
         <Col xs={{ span: 6 }} sm={{ span: 6 }} md={{ span: 3 }} lg={{ span: 2 }}>
           <h6>{t("footer.contact")}</h6>

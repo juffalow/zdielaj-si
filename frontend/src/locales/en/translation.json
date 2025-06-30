@@ -11,7 +11,7 @@
     "publicProfile": "profile/:id",
     "albums": "albums",
     "album": "album/:id",
-    "home": "/"
+    "home": ""
   },
   "home": {
     "title": "Share photos and videos in full quality",

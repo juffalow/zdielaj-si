@@ -1,10 +1,12 @@
 import type { FunctionComponent } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import UserDataDeletion from './pages/UserDataDeletion';
 import Album from './pages/Album';
 import Albums from './pages/Albums';
 import Register from './pages/Register';
@@ -28,19 +30,14 @@ const App: FunctionComponent = () => (
           <Menu />
           <main role="main" className="flex-shrink-0 main-container pt-5 pb-5">
             <Routes>
-              <Route path="/o-aplikacii" element={<About />} />
-              <Route path="/zasady-ochrany-osobnych-udajov" element={<PrivacyPolicy />} />
-              <Route path="/album/:id" element={<Album />} />
-              <Route path="/albumy" element={<RequireAuth><Albums /></RequireAuth>} />
-              <Route path="/registracia" element={<Register />} />
-              <Route path="/prihlasit-sa" element={<Login />} />
-              <Route path="/reset-hesla" element={<PasswordReset />} />
-              <Route path="/notifikacie" element={<Notifications />} />
-              <Route path="/predplatne" element={<RequireAuth><Subscription /></RequireAuth>} />
-              <Route path="/profil" element={<RequireAuth><Profile /></RequireAuth>} />
-              <Route path="/profil/:id" element={<PublicProfile />} />
-              <Route path="/:path" element={<ShortLinkRedirect />} />
-              <Route path="/" element={<Home />} />
+              {appRoutes()}
+              <Route path="en/">
+                {appRoutes('en')}
+              </Route>
+              <Route path="cz/">
+                {appRoutes('en')}
+              </Route>
+
             </Routes>
           </main>
           <Footer />
@@ -51,5 +48,26 @@ const App: FunctionComponent = () => (
     </AuthProvider>
   </BrowserRouter>
 );
+
+const appRoutes = (lang = 'sk') => {
+  const { t } = useTranslation('', { keyPrefix: 'routes', lng: lang });
+
+  return [
+    <Route path={t('about')} element={<About />} />,
+    <Route path={t('privacyPolicy')} element={<PrivacyPolicy />} />,
+    <Route path={t('userData')} element={<UserDataDeletion />} />,
+    <Route path={t('album')} element={<Album />} />,
+    <Route path={t('albums')} element={<RequireAuth><Albums /></RequireAuth>} />,
+    <Route path={t('signUp')} element={<Register />} />,
+    <Route path={t('signIn')} element={<Login />} />,
+    <Route path={t('passwordReset')} element={<PasswordReset />} />,
+    <Route path="notifikacie" element={<Notifications />} />,
+    <Route path="predplatne" element={<RequireAuth><Subscription /></RequireAuth>} />,
+    <Route path={t('userProfile')} element={<RequireAuth><Profile /></RequireAuth>} />,
+    <Route path={t('publicProfile')} element={<PublicProfile />} />,
+    <Route path=":path" element={<ShortLinkRedirect />} />,
+    <Route element={<Home />} index />,
+  ]
+};
 
 export default App;

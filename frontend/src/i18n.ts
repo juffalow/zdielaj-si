@@ -9,8 +9,8 @@ import translationES from "./locales/es/translation.json";
 import translationFR from "./locales/fr/translation.json";
 
 i18n.use(detector).use(initReactI18next).init({
-  lng: 'sk',
   fallbackLng: 'sk',
+  supportedLngs: ['sk', 'en', 'cz', 'de', 'es', 'fr'],
   interpolation: {
     escapeValue: false,
   },
@@ -33,6 +33,11 @@ i18n.use(detector).use(initReactI18next).init({
     fr: {
       translation: translationFR,
     },
+  },
+  detection: {
+    order: ['path', 'localStorage'],
+    lookupFromPathIndex: 0,
+    caches: ['localStorage'],
   },
   cache: ['localStorage'],
 });

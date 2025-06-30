@@ -102,7 +102,7 @@ const Home: FunctionComponent = () => {
                   <li><Trans i18nKey="home.pricing.free.filesWillBeDeletedAfter7Days" /></li>
                 </FeaturesList>
                 <div className={`${styles.pricingCardFooter} text-center`}>
-                  <Link to="/registracia" className="btn btn-outline-primary w-100" role="button" data-tracking-id="free_register_click">{t("home.pricing.free.register")}</Link>
+                  <Link to={`${t("routes.prefix")}${t("routes.signUp")}`} className="btn btn-outline-primary w-100" role="button" data-tracking-id="free_register_click">{t("home.pricing.free.register")}</Link>
                 </div>
               </Card.Body>
             </Card>
@@ -113,7 +113,7 @@ const Home: FunctionComponent = () => {
                 <h4 className="text-center my-0">{t("home.pricing.standard.title")}</h4>
               </Card.Header>
               <Card.Body style={{ paddingBottom: '4rem' }}>
-                <p className="text-center" style={{ fontSize: '2.5rem' }}>3€ / <small className="text-body-secondary">{t("home.pricing.standard.monthly")}</small></p>
+                <p className="text-center" style={{ fontSize: '2.5rem' }}>1.99€ / <small className="text-body-secondary">{t("home.pricing.standard.monthly")}</small></p>
                 <FeaturesList>
                   <li><Trans i18nKey="home.pricing.standard.maxTenGB"  components={{ small: <small className="text-body-secondary" /> }} /></li>
                   <li>{t("home.pricing.standard.video")}</li>
@@ -123,7 +123,7 @@ const Home: FunctionComponent = () => {
                   <li><Trans i18nKey="home.pricing.standard.filesWillNotBeDeleted" /></li>
                 </FeaturesList>
                 <div className={`${styles.pricingCardFooter} text-center`}>
-                  <Link to="/registracia" className="btn btn-outline-primary w-100" role="button" data-tracking-id="standard_register_click">{t("home.pricing.standard.register")}</Link>
+                  <Link to={`${t("routes.prefix")}${t("routes.signUp")}`} className="btn btn-outline-primary w-100" role="button" data-tracking-id="standard_register_click">{t("home.pricing.standard.register")}</Link>
                 </div>
               </Card.Body>
             </Card>

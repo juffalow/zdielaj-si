@@ -1,4 +1,18 @@
 {
+  "routes": {
+    "prefix": "fr/",
+    "signIn": "connexion",
+    "signUp": "inscription",
+    "passwordReset": "reinitialiser-mot-de-passe",
+    "about": "a-propos",
+    "privacyPolicy": "politique-de-confidentialite",
+    "userData": "donnees-utilisateur",
+    "userProfile": "profil",
+    "publicProfile": "profil/:id",
+    "albums": "albums",
+    "album": "album/:id",
+    "home": ""
+  },
   "home": {
     "title": "Partagez des photos et des vidéos en pleine qualité",
     "subtitle": "Avez-vous également un problème où certaines applications réduisent la qualité de vos photos et vidéos ? Ici, vous pouvez les partager sans aucun problème en pleine qualité !",

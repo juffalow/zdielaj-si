@@ -1,4 +1,18 @@
 {
+  "routes": {
+    "prefix": "cz/",
+    "signIn": "prihlaseni",
+    "signUp": "registrace",
+    "passwordReset": "obnoveni-hesla",
+    "about": "o-aplikaci",
+    "privacyPolicy": "zasady-ochrany-osobnich-udaju",
+    "userData": "udaje-uzivatele",
+    "userProfile": "profil",
+    "publicProfile": "profil/:id",
+    "albums": "alba",
+    "album": "album/:id",
+    "home": ""
+  },
   "home": {
     "title": "Sdílej fotky a videa v plné kvalitě",
     "subtitle": "Také máš problém, že ti některé aplikace snižují kvalitu fotek a videí? Tady je můžeš sdílet bez problémů v plné kvalitě!",

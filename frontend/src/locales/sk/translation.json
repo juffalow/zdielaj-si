@@ -11,7 +11,7 @@
     "publicProfile": "profil/:id",
     "albums": "albumy",
     "album": "album/:id",
-    "home": "/"
+    "home": ""
   },
   "home": {
     "title": "Zdieľaj fotky a videá v plnej kvalite",

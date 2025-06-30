@@ -1,4 +1,18 @@
 {
+  "routes": {
+    "prefix": "de/",
+    "signIn": "anmelden",
+    "signUp": "registrieren",
+    "passwordReset": "passwort-zuruecksetzen",
+    "about": "ueber",
+    "privacyPolicy": "datenschutzrichtlinie",
+    "userData": "benutzerdaten",
+    "userProfile": "profil",
+    "publicProfile": "profil/:id",
+    "albums": "alben",
+    "album": "album/:id",
+    "home": ""
+  },
   "home": {
     "title": "Teilen Sie Fotos und Videos in voller Qualität",
     "subtitle": "Haben Sie auch das Problem, dass einige Anwendungen die Qualität Ihrer Fotos und Videos reduzieren? Hier können Sie sie problemlos in voller Qualität teilen!",

@@ -179,6 +179,21 @@ const PublicProfiles: FunctionComponent<Props> = ({ getCurrentUserPromise }: Pro
                 <Form.Control.Feedback type="invalid">Toto pole je povinné.</Form.Control.Feedback>
               </Form.Group>
 
+              <Form.Group controlId="homepageUrl" className="mt-3">
+                <Form.Label>Homepage</Form.Label>
+                <Form.Control type="text" name="homepageUrl" placeholder="https://zdielaj.si" disabled />
+              </Form.Group>
+
+              <Form.Group controlId="facebookUrl" className="mt-3">
+                <Form.Label>Facebook</Form.Label>
+                <Form.Control type="text" name="facebookUrl" placeholder="https://www.facebook.com/zdielaj.si" disabled />
+              </Form.Group>
+
+              <Form.Group controlId="instagramUrl" className="mt-3">
+                <Form.Label>Instagram</Form.Label>
+                <Form.Control type="text" name="instagramUrl" placeholder="https://www.instagram.com/zdielaj.si" disabled />
+              </Form.Group>
+
               <Form.Group className="text-center mt-4">
                 <Button variant="primary" type="submit">
                   Uložiť
