@@ -29,7 +29,7 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
     <>
       <Row>
         <Col className="ps-5 pe-5 pb-4 mt-4">
-          <div {...getSingleRootProps()} style={{ border: '1px #28a745 dashed', borderRadius: '20px', textAlign: 'center', padding: 40 }}>
+          <div {...getSingleRootProps()} style={{ border: '1px #28a745 dashed', borderRadius: '20px', textAlign: 'center', padding: 40 }} data-tracking-id="album_upload_area_click">
             <input {...getSingleInputProps()} />
             <p className="mb-0">{t("components.uploadFiles.dropzoneTitle")}</p>
           </div>

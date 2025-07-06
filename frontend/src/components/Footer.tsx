@@ -18,15 +18,15 @@ const Footer = ({ t }: WithTranslation) => (
         <Col xs={{ span: 6 }} sm={{ span: 6 }} md={{ span: 3, offset: 3 }} lg={{ span: 2, offset: 5 }}>
           <h6>{t("footer.links")}</h6>
           <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }}></hr>
-          <p><Link className="nav-link text-light" to={`${t('routes.prefix')}${t('routes.home')}`}>{t("footer.home")}</Link></p>
-          <p><Link className="nav-link text-light" to={`${t('routes.prefix')}${t('routes.signUp')}`}>{t("footer.register")}</Link></p>
-          <p><Link className="nav-link text-light" to="https://status.zdielaj.si/">{t("footer.status")}</Link></p>
-          <p><Link className="nav-link text-light" to={`${t('routes.prefix')}${t('routes.about')}`}>{t("footer.about")}</Link></p>
+          <p><Link className="nav-link text-light" to={`${t('routes.prefix')}${t('routes.home')}`} data-tracking-id="footer_link_home_click">{t("footer.home")}</Link></p>
+          <p><Link className="nav-link text-light" to={`${t('routes.prefix')}${t('routes.signUp')}`} data-tracking-id="footer_link_register_click">{t("footer.register")}</Link></p>
+          <p><Link className="nav-link text-light" to="https://status.zdielaj.si/" data-tracking-id="footer_link_status_click">{t("footer.status")}</Link></p>
+          <p><Link className="nav-link text-light" to={`${t('routes.prefix')}${t('routes.about')}`} data-tracking-id="footer_link_about_click">{t("footer.about")}</Link></p>
         </Col>
         <Col xs={{ span: 6 }} sm={{ span: 6 }} md={{ span: 3 }} lg={{ span: 2 }}>
           <h6>{t("footer.contact")}</h6>
           <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }}></hr>
-          <p><a className="nav-link text-light" href="mailto:info@zdielaj.si">info@zdielaj.si</a></p>
+          <p><a className="nav-link text-light" href="mailto:info@zdielaj.si" data-tracking-id="footer_link_email_click">info@zdielaj.si</a></p>
         </Col>
       </Row>
       <Row className="mt-3">

@@ -43,11 +43,11 @@ export default function UserAlbum({ album, updateAlbum }: { album: Album, update
           </Form.Group>
 
           <Form.Group className="text-center mt-4">
-            <Button variant="primary" type="submit" disabled={isPending}>
+            <Button variant="primary" type="submit" disabled={isPending} data-tracking-id="album_form_button_save_click">
               {t("album.userAlbum.formSubmitButton")}
             </Button>
 
-            <Button variant="outline-secondary" className="ms-2" onClick={onCopyClick}>
+            <Button variant="outline-secondary" className="ms-2" onClick={onCopyClick} data-tracking-id="album_form_button_copy_click">
               {t("album.userAlbum.copyButton")}
             </Button>
           </Form.Group>

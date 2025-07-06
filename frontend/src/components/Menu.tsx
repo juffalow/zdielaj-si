@@ -33,7 +33,7 @@ const Menu = () => {
           <Nav className="me-auto">
           {
             user !== null ? (
-              <Nav.Link as={Link} to="/albumy">{t("menu.albums")}</Nav.Link>
+              <Nav.Link as={Link} to="/albumy" data-tracking-id="menu_button_albums_click">{t("menu.albums")}</Nav.Link>
             ) : null
           }
           </Nav>
@@ -43,17 +43,17 @@ const Menu = () => {
                 <></>
               ) : user !== null ? (
                 <NavDropdown title={user?.meta?.name || 'Užívateľ'} id="basic-nav-dropdown">
-                  <NavDropdown.Item as={Link} to="/profil">{t("menu.profile")}</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/predplatne">{t("menu.subscription")}</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/profil" data-tracking-id="menu_button_profile_click">{t("menu.profile")}</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/predplatne" data-tracking-id="menu_button_subscription_click">{t("menu.subscription")}</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={signOut}>{t("menu.signOut")}</NavDropdown.Item>
+                  <NavDropdown.Item onClick={signOut} data-tracking-id="menu_button_signout_click">{t("menu.signOut")}</NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <Nav.Link as={Link} to="/prihlasit-sa">{t("menu.signIn")}</Nav.Link>
+                <Nav.Link as={Link} to={`${t('routes.prefix')}${t('routes.signIn')}`} data-tracking-id="menu_button_signin_click">{t("menu.signIn")}</Nav.Link>
               )
             }
-            <Nav.Link as={Link} to="/o-aplikacii">{t("menu.about")}</Nav.Link>
-            <NavDropdown title={lang} id="basic-nav-dropdown" active>
+            <Nav.Link as={Link} to={`${t('routes.prefix')}${t('routes.about')}`}>{t("menu.about")}</Nav.Link>
+            <NavDropdown title={lang} id="basic-nav-dropdown" data-tracking-id="menu_button_language_click" active>
               <NavDropdown.Item onClick={onChangeLang} data-lang="sk">&#x1F1F8;&#x1F1F0; SK</NavDropdown.Item>
               <NavDropdown.Item onClick={onChangeLang} data-lang="cz">&#x1F1E8;&#x1F1FF; CZ</NavDropdown.Item>
               <NavDropdown.Item onClick={onChangeLang} data-lang="en">&#x1F1EC;&#x1F1E7; EN</NavDropdown.Item>

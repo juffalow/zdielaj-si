@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import logger from '../logger';
 
 export default function Tracking() {
   const location = useLocation();
@@ -24,6 +25,8 @@ export default function Tracking() {
       if (analyticsId === null) {
         return;
       }
+
+      logger.info(`Tracking event: ${analyticsId}`);
 
       'gtag' in window && (window as any).gtag('event', analyticsId);
     };

@@ -23,7 +23,7 @@ const MobileButton: React.FC<Props> = ({ children, link }: Props) => {
     <div className="relative">
       <div style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'rgba(153, 153, 153, 0.6)' }}>
         <Col className="d-flex justify-content-center pt-4 pb-4" xs={{  span: 10, offset: 1 }} sm={{ span: 8, offset: 2  }}>
-          <Button onClick={onCopyClick} className="w-100" size="lg">{children}</Button>
+          <Button onClick={onCopyClick} className="w-100" size="lg" data-tracking-id="album_mobile_button_copy_click">{children}</Button>
         </Col>
       </div>
     </div>
