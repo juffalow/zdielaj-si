@@ -7,10 +7,14 @@ import translationCZ from "./locales/cz/translation.json";
 import translationDE from "./locales/de/translation.json";
 import translationES from "./locales/es/translation.json";
 import translationFR from "./locales/fr/translation.json";
+import translationFI from "./locales/fi/translation.json";
+import translationSE from "./locales/se/translation.json";
+import translationNO from "./locales/no/translation.json";
+import translationIT from "./locales/it/translation.json";
 
 i18n.use(detector).use(initReactI18next).init({
   fallbackLng: 'sk',
-  supportedLngs: ['sk', 'en', 'cz', 'de', 'es', 'fr'],
+  supportedLngs: ['sk', 'en', 'cz', 'de', 'es', 'fr', 'fi', 'se', 'no', 'it'],
   interpolation: {
     escapeValue: false,
   },
@@ -32,6 +36,18 @@ i18n.use(detector).use(initReactI18next).init({
     },
     fr: {
       translation: translationFR,
+    },
+    fi: {
+      translation: translationFI,
+    },
+    se: {
+      translation: translationSE,
+    },
+    no: {
+      translation: translationNO,
+    },
+    it: {
+      translation: translationIT,
     },
   },
   detection: {

@@ -1,0 +1,219 @@
+{
+  "routes": {
+    "prefix": "se/",
+    "signIn": "logga-in",
+    "signUp": "registrera",
+    "passwordReset": "återställ-lösenord",
+    "about": "om",
+    "privacyPolicy": "integritetspolicy",
+    "userData": "användardata",
+    "userProfile": "profil",
+    "publicProfile": "profil/:id",
+    "albums": "album",
+    "album": "album/:id",
+    "home": ""
+  },
+  "home": {
+    "title": "Dela foton och videor i full kvalitet",
+    "subtitle": "Har du också problem med att vissa appar försämrar kvaliteten på dina foton och videor? Här kan du dela dem utan problem i full kvalitet!",
+    "uploadAreaText": "Flytta foton hit eller välj dem genom att klicka",
+    "uploadAreaButton": "Ladda upp foton",
+    "pricing": {
+      "default": {
+        "title": "Utan registrering",
+        "monthly": "per månad",
+        "maxTenPhotos": "max <strong>10</strong> foton",
+        "deletedAfter24Hours": "filer raderas automatiskt efter <strong>24 timmar</strong>",
+        "register": "Registrera"
+      },
+      "free": {
+        "title": "Gratis",
+        "monthly": "per månad",
+        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 foton)</small>",
+        "video": "video",
+        "listOfAlbums": "lista över album",
+        "filesWillBeDeletedAfter7Days": "filer raderas automatiskt efter <strong>7 dagar</strong>",
+        "register": "Registrera"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "per månad",
+        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 foton)</small>",
+        "video": "video",
+        "listOfAlbums": "lista över album",
+        "passwordProtect": "lösenordsskydd",
+        "publicProfile": "offentlig profil",
+        "filesWillNotBeDeleted": "filer <strong>raderas inte</strong>",
+        "register": "Registrera"
+      }
+    }
+  },
+  "login": {
+    "title": "Logga in",
+    "subtitle": "Har du inget konto än?",
+    "subtitleLink": "Registrera",
+    "form": {
+      "email": "E-postadress",
+      "requiredField": "Detta fält är obligatoriskt.",
+      "password": "Lösenord",
+      "forgotPassword": "Glömt ditt lösenord?",
+      "signInButton": "Logga in"
+    }
+  },
+  "profile": {
+    "changePasswordForm": {
+      "title": "Byt lösenord",
+      "currentPassword": "Nuvarande lösenord",
+      "currentPasswordPlaceholder": "1GammaltLösenord!",
+      "newPassword": "Nytt lösenord",
+      "newPasswordPlaceholder": "Nytt1StarktLösenord!",
+      "confirmPassword": "Bekräfta nytt lösenord",
+      "button": "Byt lösenord"
+    },
+    "statistics": {
+      "title": "Statistik",
+      "numberOfAlbums": "Antal album",
+      "numberOfFiles": "Antal filer",
+      "totalSize": "Total storlek"
+    }
+  },
+  "publicProfile": {
+    "notFound": {
+      "title": "Offentlig profil hittades inte!",
+      "subtitle": "Den offentliga profil du söker finns inte.",
+      "clarifyingText": "Kanske skrev du in fel adress, använde en gammal länk eller så har profilen tagits bort.",
+      "ctaButton": "Tillbaka till startsidan"
+    }
+  },
+  "register": {
+    "title": "Registrera",
+    "subtitle": "Har du redan ett konto?",
+    "subtitleLink": "Logga in",
+    "error": {
+      "userAlreadyExists": "En användare med denna e-postadress finns redan!",
+      "userNotCreated": "Det gick inte att skapa användare!"
+    },
+    "form": {
+      "name": "Namn",
+      "email": "E-postadress",
+      "password": "Lösenord",
+      "requiredField": "Detta fält är obligatoriskt.",
+      "minEightCharacters": "Minst 8 tecken",
+      "atLeastOneUppercase": "Minst en versal",
+      "atLeastOneLowercase": "Minst en gemen",
+      "atLeastOneSpecialCharacter": "Minst ett specialtecken",
+      "atLeastOneNumber": "Minst en siffra",
+      "signUpButton": "Registrera"
+    },
+    "confirmForm": {
+      "title": "Verifiering av e-postadress",
+      "subtitle": "En verifieringskod har skickats till din e-post.",
+      "code": "Verifieringskod",
+      "requiredField": "Detta fält är obligatoriskt.",
+      "submitButton": "Slutför registrering"
+    },
+    "thankYou": {
+      "title": "Tack för din registrering!",
+      "subtitle": "Din e-postadress har verifierats. Du kan fortsätta genom att logga in på ditt konto",
+      "subtitleLink": "här"
+    }
+  },
+  "album": {
+    "userAlbum": {
+      "formName": "Namn",
+      "formDescription": "Beskrivning",
+      "formLink": "Albumlänk",
+      "formSubmitButton": "Spara",
+      "copyButton": "Kopiera länk"
+    },
+    "notFound": {
+      "title": "Album hittades inte!",
+      "subtitle": "Albumet du söker finns inte.",
+      "clarifyingText": "Kanske skrev du in fel adress, använde en gammal länk eller så har albumet tagits bort.",
+      "ctaButton": "Tillbaka till startsidan"
+    }
+  },
+  "albums": {
+    "albumPreview": {
+      "noFiles": "Inga filer",
+      "publicProfileToggle": "Visa i offentlig profil",
+      "show": "Visa",
+      "delete": "Radera"
+    },
+    "albumsContainer": {
+      "noAlbumsAlert": "Du har inga album",
+      "modalTitle": "Radera album",
+      "modalBody": "Vill du verkligen radera detta album?",
+      "modalCloseButton": "Stäng",
+      "modalSubmitButton": "Radera"
+    }
+  },
+  "components": {
+    "shareButton": {
+      "copyLink": "Kopiera länk"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Dra foton hit eller välj dem genom att klicka"
+    }
+  },
+  "menu": {
+    "albums": "Album",
+    "about": "Om",
+    "profile": "Profil",
+    "signIn": "Logga in",
+    "signOut": "Logga ut",
+    "subscription": "Prenumeration"
+  },
+  "footer": {
+    "about": "Om",
+    "contact": "Kontakt",
+    "description": "Applikationen hjälper användare att snabbt och enkelt dela foton och videor utan att minska kvaliteten.",
+    "home": "Hem",
+    "links": "Länkar",
+    "register": "Registrera",
+    "status": "Status"
+  },
+  "userDataDeletion": {
+    "title": "Radering av användardata",
+    "subtitle": "Om du vill radera dina personuppgifter eller ditt konto, vänligen kontakta oss på <mailto>{{email}}</mailto>. När vi mottagit din begäran kommer vi att säkerställa att alla dina personuppgifter raderas i enlighet med gällande lagstiftning."
+  },
+  "privacyPolicy": {
+    "title": "Integritetspolicy",
+    "subtitle": "Om du är besökare på Zdielaj.si-webbplatsen eller kund hos Zdielaj.si-tjänsten gäller \"integritetspolicyn\" för din användning av denna webbplats eller tjänst.",
+    "firstSection": {
+      "title": "Vilken typ av information samlar vi in?",
+      "paragraph1": "För att kunna tillhandahålla Zdielaj.si-tjänsterna måste vi behandla information om dig. Vilken typ av information vi samlar in beror på hur du använder våra tjänster."
+    },
+    "secondSection": {
+      "title": "Hur använder vi denna information?",
+      "paragraph1": "<strong>För att tillhandahålla, anpassa och förbättra våra tjänster.</strong> Vi använder den information vi har för att tillhandahålla våra tjänster, anpassa funktioner och skapa förslag för dig.",
+      "paragraph2": "<strong>Produktforskning och utveckling.</strong> Vi använder den information vi har för att utveckla, testa och förbättra våra tjänster. Sådan behandling är nödvändig för vårt legitima intresse att tillhandahålla innovativa tjänster till våra användare.",
+      "paragraph3": "<strong>För att stödja säkerhet och integritet.</strong> Vi använder den information vi har för att verifiera konton och aktiviteter, bekämpa skadligt beteende, upptäcka och förebygga spam och andra negativa upplevelser samt upprätthålla integriteten i våra tjänster.",
+      "paragraph4": "<strong>Kommunikation med dig.</strong> Vi använder den information vi har för att skicka marknadsföringskommunikation, relevanta nyheter och uppdateringar som vi tror kan vara av intresse för dig."
+    },
+    "thirdSection": {
+      "title": "Hur skyddar vi din information?",
+      "paragraph1": "Dina personuppgifter är krypterade, lagras bakom säkra nätverk och är endast tillgängliga för ett begränsat antal personer som har särskilda åtkomsträttigheter till sådana system och är skyldiga att hålla informationen konfidentiell."
+    },
+    "fourthSection": {
+      "title": "Hur delas denna information?",
+      "paragraph1": "Vi säljer, byter eller överför inte dina personuppgifter till utomstående parter. Detta inkluderar inte webbhotellpartners och andra parter som hjälper oss att driva vår webbplats, bedriva vår verksamhet eller betjäna våra användare, så länge dessa parter samtycker till att hålla denna information konfidentiell."
+    },
+    "fifthSection": {
+      "title": "Databevarande, avaktivering och borttagning av konto",
+      "paragraph1": "Vi behåller data så länge det är nödvändigt för att tillhandahålla våra tjänster eller tills ditt konto tas bort – beroende på vad som inträffar först."
+    },
+    "sixthSection": {
+      "title": "Hur informerar vi dig om ändringar i denna policy?",
+      "paragraph1": "Vi kan uppdatera denna policy från tid till annan. Om möjligt kommer vi att meddela dig om ändringar eller regelbundet påminna dig om att läsa denna policy via e-post."
+    },
+    "seventhSection": {
+      "title": "Hur kontaktar du Zdielaj.si med frågor?",
+      "paragraph1": "Du kan kontakta oss genom att skicka ett e-postmeddelande till <mailto>info@zdielaj.si</mailto>."
+    }
+  },
+  "about": {
+    "title": "Om applikationen",
+    "subtitle": "Applikationen hjälper användare att snabbt och enkelt dela foton och videor utan att minska kvaliteten. All data lagras i krypterad form."
+  }
+}

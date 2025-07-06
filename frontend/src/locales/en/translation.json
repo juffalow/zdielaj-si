@@ -172,5 +172,48 @@
     "links": "Links",
     "register": "Register",
     "status": "Status"
+  },
+    "userDataDeletion": {
+    "title": "User Data Deletion",
+    "subtitle": "If you wish to delete your personal data or account, please contact us at <mailto>{{email}}</mailto>. Upon receiving your request, we will ensure the deletion of all your personal data in accordance with applicable legal regulations."
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "subtitle": "If you are a visitor to the Zdielaj.si website or a customer of the Zdielaj.si service, then your use of this website or service is subject to the \"privacy policy\".",
+    "firstSection": {
+      "title": "What type of information do we collect?",
+      "paragraph1": "To provide the Zdielaj.si services, we need to process information about you. The types of information we collect depend on how you use our services."
+    },
+    "secondSection": {
+      "title": "How do we use this information?",
+      "paragraph1": "<strong>To provide, personalize, and improve our services.</strong> We use the information we have to provide our services, customize features, and create suggestions for you.",
+      "paragraph2": "<strong>Product research and development.</strong> We use the information we have to develop, test, and improve our services. Such processing is necessary for our legitimate interests in providing innovative services to our users.",
+      "paragraph3": "<strong>To support security and integrity.</strong> We use the information we have to verify accounts and activities, combat harmful behavior, detect and prevent spam and other negative experiences, and maintain the integrity of our services.",
+      "paragraph4": "<strong>Communication with you.</strong> We use the information we have to send marketing communications, relevant news, and updates that we believe may interest you."
+    },
+    "thirdSection": {
+      "title": "How do we protect your information?",
+      "paragraph1": "Your personal data is encrypted, stored behind secured networks, and accessible only to a limited number of people who have special access rights to such systems and are required to keep the information confidential."
+    },
+    "fourthSection": {
+      "title": "How is this information shared?",
+      "paragraph1": "We do not sell, trade, or otherwise transfer your personal data to outside parties. This does not include website hosting partners and other parties who assist us in operating our website, conducting our business, or serving our users, as long as those parties agree to keep this information confidential."
+    },
+    "fifthSection": {
+      "title": "Data retention, deactivation, and account deletion",
+      "paragraph1": "We retain data for as long as it is necessary to provide our services or until your account is deleted—whichever comes first."
+    },
+    "sixthSection": {
+      "title": "How will we notify you about changes to this policy?",
+      "paragraph1": "From time to time, we may update this policy. Where possible, we will notify you of changes or regularly remind you to review this policy via email."
+    },
+    "seventhSection": {
+      "title": "How to contact Zdielaj.si with questions?",
+      "paragraph1": "You can contact us by sending an email to <mailto>info@zdielaj.si</mailto>."
+    }
+  },
+  "about": {
+    "title": "About the Application",
+    "subtitle": "The application helps users quickly and easily share photos and videos without reducing quality. All data is stored in encrypted form."
   }
 }

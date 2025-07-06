@@ -35,7 +35,28 @@ const App: FunctionComponent = () => (
                 {appRoutes('en')}
               </Route>
               <Route path="cz/">
-                {appRoutes('en')}
+                {appRoutes('cz')}
+              </Route>
+              <Route path="de/">
+                {appRoutes('de')}
+              </Route>
+              <Route path="es/">
+                {appRoutes('se')}
+              </Route>
+              <Route path="fr/">
+                {appRoutes('fr')}
+              </Route>
+              <Route path="fi/">
+                {appRoutes('fi')}
+              </Route>
+              <Route path="se/">
+                {appRoutes('se')}
+              </Route>
+              <Route path="no/">
+                {appRoutes('no')}
+              </Route>
+              <Route path="it/">
+                {appRoutes('it')}
               </Route>
 
             </Routes>
