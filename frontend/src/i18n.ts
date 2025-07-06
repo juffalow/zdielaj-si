@@ -11,10 +11,13 @@ import translationFI from "./locales/fi/translation.json";
 import translationSE from "./locales/se/translation.json";
 import translationNO from "./locales/no/translation.json";
 import translationIT from "./locales/it/translation.json";
+import translationPL from "./locales/pl/translation.json";
+import translationHU from "./locales/hu/translation.json";
+import translationSI from "./locales/si/translation.json";
 
 i18n.use(detector).use(initReactI18next).init({
   fallbackLng: 'sk',
-  supportedLngs: ['sk', 'en', 'cz', 'de', 'es', 'fr', 'fi', 'se', 'no', 'it'],
+  supportedLngs: ['sk', 'en', 'cz', 'de', 'es', 'fr', 'fi', 'se', 'no', 'it', 'pl', 'hu', 'si'],
   interpolation: {
     escapeValue: false,
   },
@@ -48,6 +51,15 @@ i18n.use(detector).use(initReactI18next).init({
     },
     it: {
       translation: translationIT,
+    },
+    pl: {
+      translation: translationPL,
+    },
+    hu: {
+      translation: translationHU,
+    },
+    si: {
+      translation: translationSI,
     },
   },
   detection: {
