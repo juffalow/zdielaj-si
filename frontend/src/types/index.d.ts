@@ -70,6 +70,13 @@ type PublicProfile = {
   };
   name: string;
   description: string;
+  contact?: {
+    homepage?: string;
+    facebook?: string;
+    instagram?: string;
+    pinterest?: string;
+    strava?: string;
+  };
   createdAt?: string;
   updatedAt?: string;
 }

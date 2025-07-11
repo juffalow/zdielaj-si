@@ -7,19 +7,16 @@ function Loader() {
   return (
     <Container>
       <Row>
-        <Col lg={{ span: 2, offset: 2 }}>
-          <BarLoader style={{ height: 196, width: '100%' }} />
-        </Col>
-        <Col lg={6}>
+      <Col lg={{ span: 8, offset: 2 }}>
           <BarLoader style={{ height: '2rem' }} />
           <hr />
-          <BarLoader style={{ height: 70 }} />
+          <BarLoader style={{ height: 64 }} />
           <hr />
-          <BarLoader style={{ height: 28 }} />
-          <BarLoader style={{ height: 304 }} />
+          <BarLoader style={{ height: 64 }} />
           <hr />
-          <BarLoader style={{ height: 28 }} />
-          <BarLoader style={{ height: 200 }} />
+          <BarLoader style={{ height: 64 }} />
+          <hr />
+          <BarLoader style={{ height: 64 }} />
         </Col>
       </Row>
     </Container>

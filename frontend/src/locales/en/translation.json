@@ -61,6 +61,10 @@
     }
   },
   "profile": {
+    "detail": {
+      "title": "Account details",
+      "email": "Email address"
+    },
     "changePasswordForm": {
       "title": "Change password",
       "currentPassword": "Current password",
@@ -75,6 +79,45 @@
       "numberOfAlbums": "Number of albums",
       "numberOfFiles": "Number of files",
       "totalSize": "Total size"
+    },
+    "publicProfile": {
+      "title": "Public profile",
+      "activate": {
+        "title": "Activate public profile",
+        "subtitle": "After activating your public profile, you will choose a unique URL address for your profile, where other users will be able to see your albums.",
+        "moreInfo": "You can find more information on the pages",
+        "moreInfoLink": "About the application, in the Public Profile section",
+        "cta": "Activate"
+      },
+      "createForm": {
+        "mandatoryField": "This field is required.",
+        "fieldName": "Name",
+        "fieldSlug": "Slug",
+        "fieldSlugHelp1": "Only lowercase letters, numbers, and hyphens are allowed.",
+        "fieldSlugHelp2": "The profile will be available at:",
+        "fieldDescription": "Description",
+        "createButton": "Create",
+        "cancelButton": "Cancel",
+        "errorMessage": "Failed to create public profile."
+      },
+      "updateForm": {
+        "mandatoryField": "This field is required.",
+        "fieldName": "Name",
+        "fieldDescription": "Description",
+        "fieldHomepage": "Homepage",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Save",
+        "errorMessage": "Failed to update public profile."
+      }
+    },
+    "deleteProfile": {
+      "title": "Delete account",
+      "subtitle": "All uploaded files and albums will be deleted along with your account.",
+      "submitButton": "Delete",
+      "clarifyingText": "This feature is not supported yet. If you wish to delete your account, please contact us at the following email address"
     }
   },
   "publicProfile": {

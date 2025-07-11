@@ -28,39 +28,36 @@ const ChangePasswordForm: FunctionComponent = () => {
   const [state, formAction, isPending] = useActionState(onSubmit, { currentPassword: '', newPassword: '', confirmPassword: '', errors: [] });
   
   return (
-    <>
-      <h4>{t("title")}</h4>
-      <Form action={formAction} noValidate>
-        {
-          state.errors.length > 0 ? (
-            <Alert variant={'danger'}>
-              {state.errors.join(' ')}
-            </Alert>
-          ) : null
-        }
+    <Form action={formAction} noValidate>
+      {
+        state.errors.length > 0 ? (
+          <Alert variant={'danger'}>
+            {state.errors.join(' ')}
+          </Alert>
+        ) : null
+      }
 
-        <Form.Group controlId="currentPassword" className="mt-3">
-          <Form.Label>{t("currentPassword")}</Form.Label>
-          <Form.Control required type="password" name="currentPassword" placeholder={t("currentPasswordPlaceholder")} defaultValue={state.currentPassword} />
-        </Form.Group>
+      <Form.Group controlId="currentPassword" className="mb-3">
+        <Form.Label>{t("currentPassword")}</Form.Label>
+        <Form.Control required type="password" name="currentPassword" placeholder={t("currentPasswordPlaceholder")} defaultValue={state.currentPassword} />
+      </Form.Group>
 
-        <Form.Group controlId="newPassword" className="mt-3">
-          <Form.Label>{t("newPassword")}</Form.Label>
-          <Form.Control required type="password" name="newPassword" placeholder={t("newPasswordPlaceholder")} defaultValue={state.newPassword} />
-        </Form.Group>
-        
-        <Form.Group controlId="confirmPassword" className="mt-3">
-          <Form.Label>{t("confirmPassword")}</Form.Label>
-          <Form.Control required type="password" name="confirmPassword" placeholder="" defaultValue={state.confirmPassword} />
-        </Form.Group>
+      <Form.Group controlId="newPassword" className="mb-3">
+        <Form.Label>{t("newPassword")}</Form.Label>
+        <Form.Control required type="password" name="newPassword" placeholder={t("newPasswordPlaceholder")} defaultValue={state.newPassword} />
+      </Form.Group>
+      
+      <Form.Group controlId="confirmPassword" className="mb-3">
+        <Form.Label>{t("confirmPassword")}</Form.Label>
+        <Form.Control required type="password" name="confirmPassword" placeholder="" defaultValue={state.confirmPassword} />
+      </Form.Group>
 
-        <Form.Group className="text-center mt-4">
-          <Button variant="primary" type="submit" disabled={isPending}>
-            {t("button")}
-          </Button>
-        </Form.Group>
-      </Form>
-    </>
+      <Form.Group className="text-center">
+        <Button variant="primary" type="submit" disabled={isPending}>
+          {t("button")}
+        </Button>
+      </Form.Group>
+    </Form>
   );
 };
 

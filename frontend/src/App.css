@@ -6,3 +6,8 @@ html, body, #root {
   position: relative;
   min-height: calc(100vh - 373px);
 }
+
+.accordion-button:not(.collapsed) {
+  color: #000 !important;
+  background-color: transparent !important;
+}

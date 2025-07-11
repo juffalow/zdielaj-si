@@ -13,7 +13,7 @@ export async function createPublicProfile(id: string, name: string, description:
     .then(response => response.data.publicProfile);
 }
 
-export async function updatePublicProfile(id: ID, params: { name?: string, description?: string }): Promise<PublicProfile> {
+export async function updatePublicProfile(id: ID, params: { name?: string, description?: string, contact?: { homepage?: string, facebook?: string, instagram?: string, pinterest?: string, strava?: string } }): Promise<PublicProfile> {
   return protectedPatch<API.PublicProfiles.UpdatePublicProfileResponse>(`${process.env.REACT_APP_API_URL}/publicprofiles/${id}`, params)
     .then(response => response.data.publicProfile);
 }

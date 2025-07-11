@@ -1,6 +1,6 @@
 {
   "routes": {
-    "prefix": "",
+    "prefix": "/",
     "signIn": "prihlasit-sa",
     "signUp": "registracia",
     "passwordReset": "reset-hesla",
@@ -61,6 +61,10 @@
     }
   },
   "profile": {
+    "detail": {
+      "title": "Údaje o účte",
+      "email": "E-mailová adresa"
+    },
     "changePasswordForm": {
       "title":  "Zmeniť heslo",
       "currentPassword": "Aktuálne heslo",
@@ -75,6 +79,45 @@
       "numberOfAlbums": "Počet albumov",
       "numberOfFiles": "Počet súborov",
       "totalSize": "Celková veľkosť"
+    },
+    "publicProfile": {
+      "title": "Verejný profil",
+      "activate": {
+        "title": "Aktivovať verejný profil",
+        "subtitle": "Po aktivácii verejného profilu si zvolíš unikátnu URL adresu pre tvoj profil, na ktorej budú mocť iní užívatelia vidieť tvoje albumy.",
+        "moreInfo": "Viac informácií nájdeš na stránkach",
+        "moreInfoLink": "O aplikácii, v časti Verejný profil",
+        "cta": "Aktivovať"
+      },
+      "createForm": {
+        "mandatoryField": "Toto pole je povinné.",
+        "fieldName": "Názov",
+        "fieldSlug": "Slug",
+        "fieldSlugHelp1": "Povolené sú len malé písmená, čísla a pomlčka.",
+        "fieldSlugHelp2": "Profil bude dostupný na adrese:",
+        "fieldDescription": "Popis",
+        "createButton": "Vytvoriť",
+        "cancelButton": "Zrušiť",
+        "errorMessage": "Nepodarilo sa vytvoriť verejný profil."
+      },
+      "updateForm": {
+        "mandatoryField": "Toto pole je povinné.",
+        "fieldName": "Názov",
+        "fieldDescription": "Popis",
+        "fieldHomepage": "Domovská stránka",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Uložiť",
+        "errorMessage": "Nepodarilo sa aktualizovať verejný profil."
+      }
+    },
+    "deleteProfile": {
+      "title": "Vymazať účet",
+      "subtitle": "Spolu s účtom sa zmažú aj všetky nahrané súbory a albumy.",
+      "submitButton": "Vymazať",
+      "clarifyingText": "Funkcia zatiaľ nie je podporovaná. V prípade, že si želáte zmazať svoj účet, kontaktujte nás na e-mailovej adrese"
     }
   },
   "publicProfile": {
@@ -122,7 +165,23 @@
     "userAlbum": {
       "formName": "Názov albumu",
       "formDescription": "Popis albumu",
+      "formLayout": "Rozloženie albumu",
+      "formLayoutOptions": {
+        "cols": "Stĺpce",
+        "rows": "Riadky",
+        "tiles": "Dlaždice"
+      },
+      "formChangeLayout": "Používateľ si môže zmeniť rozloženie",
+      "formRetention": "Doba uchovávania súborov",
+      "formRetentionOptions": {
+        "1": "1 deň",
+        "7": "1 týždeň",
+        "31": "1 mesiac",
+        "366": "1 rok",
+        "0": "Navždy"
+      },
       "formLink": "Odkaz na album",
+      "formAuthWarning": "Iba prihlásený užívateľ môže upraviť svoj album.",
       "formSubmitButton": "Uložiť",
       "copyButton": "Kopírovať odkaz"
     },
