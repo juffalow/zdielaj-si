@@ -1,6 +1,13 @@
 import { use, useState, useTransition, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import {
+  FaHome,
+  FaFacebook,
+  FaInstagram,
+  FaStrava,
+  FaPinterest,
+} from 'react-icons/fa';
 import AlbumPreview from './AlbumPreview';
 import { getPublicProfileAlbums } from '../../api/publicprofiles';
 import useOnScreen from '../../utils/useOnScreen';
@@ -43,6 +50,33 @@ export default function PublicProfileContainer({ fetchPublicProfile, fetchAlbums
   return (
     <>
       <h1 className="text-center">{publicProfile.name}</h1>
+      <p className="text-center" style={{ fontSize: '2rem' }}>
+        {
+          publicProfile.contact?.homepage && (
+            <a href={publicProfile.contact.homepage} className="ms-1 me-1" style={{ color: '#000' }}><FaHome /></a>
+          )
+        }
+        {
+          publicProfile.contact?.facebook && (
+            <a href={publicProfile.contact.facebook} className="ms-1 me-1" style={{ color: '#000' }}><FaFacebook /></a>
+          )
+        }
+        {
+          publicProfile.contact?.instagram && (
+            <a href={publicProfile.contact.instagram} className="ms-1 me-1" style={{ color: '#000' }}><FaInstagram /></a>
+          )
+        }
+        {
+          publicProfile.contact?.pinterest && (
+            <a href={publicProfile.contact.pinterest} className="ms-1 me-1" style={{ color: '#000' }}><FaPinterest /></a>
+          )
+        }
+        {
+          publicProfile.contact?.strava && (
+            <a href={publicProfile.contact.strava} className="ms-1 me-1" style={{ color: '#000' }}><FaStrava /></a>
+          )
+        }
+      </p>
       <p className="text-center lead">{publicProfile.description}</p>
 
       <Row>
