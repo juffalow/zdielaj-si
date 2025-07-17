@@ -273,6 +273,32 @@
   },
   "about": {
     "title": "O aplikácii",
-    "subtitle": "Aplikácia pomáha užívateľom rýchlo a ľahko zdielať fotografie a videá bez zníženia kvality. Všetky dáta sú uložené v šifrovanej forme."
+    "subtitle": "Aplikácia pomáha užívateľom rýchlo a ľahko zdielať fotografie a videá bez zníženia kvality.",
+    "features": {
+      "title": "Funkcie",
+      "euData": {
+        "title": "Dáta sú uložené v EÚ",
+        "subtitle": "Citlivé údaje o užívateľoch ako aj všetky ich dáta sú uložené v EÚ, konkrétne vo Frankfurte (Nemecko)"
+      },
+      "encryption": {
+        "title": "Šifrovanie",
+        "subtitle": "Všetky dáta sú uložené a prenášané v šifrovanej forme a tým chráni údaje pred neoprávneným prístupom alebo úpravou"
+      },
+      "highlyAvailable": {
+        "title": "Vysoko dostupné",
+        "subtitle": "Aplikaácia je navrhnutá tak, aby minimalizovala alebo skryla účinky zlyhania jednotlivých komponentov čo zabezpečuje jej nepretržitú prevádzku s minimálnymi výpadkami"
+      },
+      "publicProfile": {
+        "title": "Verejný profil",
+        "subtitle": "Verejný profil umožňuje zdieľať vybrané albumy s inými používateľmi.",
+        "bwl": {
+          "description": "Bomby Watty Laktáty je cyklistický klub z Púchova, ktorý organizuje pravidelné jazdy po okolí."
+        },
+        "elis": {
+          "description": "Dobrodružstvá bengálskej mačky, ktorá miluje pravidelné prechádzky a rôzne dobrodružstvá."
+        },
+        "showProfileButton": "Pozriet profil"
+      }
+    }
   }
 }
