@@ -13,7 +13,7 @@ import 'lightgallery/css/lg-video.css';
 
 export default function Gallery({ albumPromise }: { albumPromise: Promise<Album> }) {
   const album = use(albumPromise);
-  const [ layout, setLayout ] = useState<'cols' | 'rows' | 'tiles'>('cols');
+  const [ layout, setLayout ] = useState<'cols' | 'rows' | 'tiles'>(album.layout);
 
   return (
     <div id="zdielaj-si-gallery">
@@ -21,13 +21,17 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
 
       <h1 className="text-center">{album.name || 'Album'}</h1>
 
-      <div className="text-center mb-2 d-none d-sm-none d-md-block">
-        <ButtonGroup aria-label="Basic example">
-          <Button variant={layout === 'cols' ? 'secondary' : 'outline-secondary'} className="ps-4 pe-4" onClick={() => setLayout('cols')}><img src={Columns} style={{ width: '1.5rem' }} /></Button>
-          <Button variant={layout === 'tiles' ? 'secondary' : 'outline-secondary'} className="ps-4 pe-4" onClick={() => setLayout('tiles')}><img src={Squares} style={{ width: '1.5rem' }} /></Button>
-          <Button variant={layout === 'rows' ? 'secondary' : 'outline-secondary'} className="ps-4 pe-4" onClick={() => setLayout('rows')}><img src={Tiles} style={{ width: '1.5rem' }} /></Button>
-        </ButtonGroup>
-      </div>
+      {
+        album.changeLayout && (
+          <div className="text-center mb-2 d-none d-sm-none d-md-block">
+            <ButtonGroup aria-label="Basic example">
+              <Button variant={layout === 'cols' ? 'secondary' : 'outline-secondary'} className="ps-4 pe-4" onClick={() => setLayout('cols')}><img src={Columns} style={{ width: '1.5rem' }} /></Button>
+              <Button variant={layout === 'tiles' ? 'secondary' : 'outline-secondary'} className="ps-4 pe-4" onClick={() => setLayout('tiles')}><img src={Squares} style={{ width: '1.5rem' }} /></Button>
+              <Button variant={layout === 'rows' ? 'secondary' : 'outline-secondary'} className="ps-4 pe-4" onClick={() => setLayout('rows')}><img src={Tiles} style={{ width: '1.5rem' }} /></Button>
+            </ButtonGroup>
+          </div>
+        )
+      }
 
       <LightGallery
         plugins={[lgVideo]}
@@ -35,7 +39,7 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
         mobileSettings={{download: true}}
         selector=".gallery-item"
       >
-        <GalleryItems files={album.media} layout={layout} />
+        <GalleryItems files={album.media} layout={layout} gaps={album.gaps} />
       </LightGallery>
 
       <ShareButton link={`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`} />

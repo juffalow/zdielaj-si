@@ -16,15 +16,19 @@ const Album: FunctionComponent = () => {
   const params = useParams();
   const [album, setAlbum] = useState(location.state?.album);
   
-  const updateAlbumAction = useCallback(async (prevState: unknown, state: FormData): Promise<{ name: string, description: string }> => {
+  const updateAlbumAction = useCallback(async (prevState: unknown, state: FormData): Promise<{ name: string, description: string, layout: 'cols' | 'rows' | 'tiles', gaps: 'none' | 'small' | 'medium' | 'large', retention: '1' | '7' | '31' | '366' | '0', changeLayout: boolean }> => {
     const name = state.get('name') as string;
     const description = state.get('description') as string;
+    const layout = state.get('layout') as 'cols' | 'rows' | 'tiles';
+    const gaps = state.get('gaps') as 'none' | 'small' | 'medium' | 'large';
+    const retention = state.get('retention') as '1' | '7' | '31' | '366' | '0';
+    const changeLayout = state.get('changeLayout') === 'on';
 
-    await updateAlbum(album.id, { name, description });
+    await updateAlbum(album.id, { name, description, layout, gaps, retention, changeLayout });
 
-    setAlbum({ ...album, name, description });
+    setAlbum({ ...album, name, description, layout, gaps, retention, changeLayout });
 
-    return { name, description };
+    return { name, description, layout, gaps, retention, changeLayout };
   }, [album]);
 
   if (files.length > 0 && location.state.isNew) {

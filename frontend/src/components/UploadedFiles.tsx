@@ -6,7 +6,7 @@ import { addMedia } from '../api/services';
 import Thumbnail from '../pages/home/Thumbnail';
 import useUpload from '../utils/useUpload';
 
-const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
+const UploadedFiles: React.FC<{album: Album; canUpload: boolean}> = ({ album, canUpload }) => {
   const { t } = useTranslation();
 
   const {
@@ -27,14 +27,18 @@ const UploadedFiles: React.FC<{album: Album}> = ({ album }) => {
 
   return (
     <>
-      <Row>
-        <Col className="ps-5 pe-5 pb-4 mt-4">
-          <div {...getSingleRootProps()} style={{ border: '1px #28a745 dashed', borderRadius: '20px', textAlign: 'center', padding: 40 }} data-tracking-id="album_upload_area_click">
-            <input {...getSingleInputProps()} />
-            <p className="mb-0">{t("components.uploadFiles.dropzoneTitle")}</p>
-          </div>
-        </Col>
-      </Row>
+      {
+        canUpload ? (
+          <Row>
+            <Col className="ps-5 pe-5 pb-4 mt-4">
+              <div {...getSingleRootProps()} style={{ border: '1px #28a745 dashed', borderRadius: '20px', textAlign: 'center', padding: 40 }} data-tracking-id="album_upload_area_click">
+                <input {...getSingleInputProps()} />
+                <p className="mb-0">{t("components.uploadFiles.dropzoneTitle")}</p>
+              </div>
+            </Col>
+          </Row>
+        ) : null
+      }
       <Row>
         {
           files.map((file: UploadedFile, index: number) => (

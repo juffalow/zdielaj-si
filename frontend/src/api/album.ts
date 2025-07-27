@@ -28,7 +28,7 @@ export async function getCurrentUserAlbums(first = 10, after = 0): Promise<Album
     });
 }
 
-export async function updateAlbum(id: ID, params: { name?: string, description?: string }): Promise<Album> {
+export async function updateAlbum(id: ID, params: { name?: string, description?: string, layout?: 'cols' | 'rows' | 'tiles', gaps?: 'none' | 'small' | 'medium' | 'large', retention?: '1' | '7' | '31' | '366' | '0', changeLayout?: boolean }): Promise<Album> {
   return protectedPatch<any>(`${process.env.REACT_APP_API_URL}/albums/${id}`, params)
     .then(response => response.data.album);
 }

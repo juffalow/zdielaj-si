@@ -44,6 +44,10 @@ type Album = {
   description?: string;
   media: Media[];
   files: AlbumFile[];
+  layout: 'cols' | 'rows' | 'tiles';
+  gaps: 'none' | 'small' | 'medium' | 'large';
+  retention: '1' | '7' | '31' | '366' | '0';
+  changeLayout: boolean;
   createdAt: string;
 }
 
