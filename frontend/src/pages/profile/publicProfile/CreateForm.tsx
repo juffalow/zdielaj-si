@@ -48,7 +48,7 @@ const CreateForm: FunctionComponent<Props> = ({ onSubmit }: Props) => {
           {t("profile.publicProfile.createForm.createButton")}
         </Button>
 
-        <Button variant="secondary" className="ms-2">
+        <Button variant="secondary" className="ms-2" disabled={isPending}>
           {t("profile.publicProfile.createForm.cancelButton")}
         </Button>
       </Form.Group>
