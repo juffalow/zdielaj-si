@@ -16,8 +16,41 @@
   "home": {
     "title": "Zdieľaj fotky a videá v plnej kvalite",
     "subtitle": "Tiež máš problém, že ti niektoré aplikácie znížujú kvalitu fotiek a videí? Tu ich môžeš zdielať bez problémov v plnej kvalite!",
-    "uploadAreaText": "Presuň sem fotky alebo ich vyber kliknutím",
-    "uploadAreaButton": "Nahrať fotky",
+    "uploadArea": {
+      "title": "Presuň sem fotky alebo ich vyber kliknutím",
+      "button": "Nahrať fotky",
+      "asUnregisteredUser": {
+        "title": "Ako neprihlásený používateľ:",
+        "maxTenPhotos": "môžeš zdieľať maximálne 10 fotiek",
+        "deletedAfter24Hours": "fotky sa po 24 hodinách zmažú"
+      }
+    },
+    "features": {
+      "title": "Funkcie",
+      "euData": {
+        "title": "Dáta sú uložené v EÚ",
+        "subtitle": "Citlivé údaje o užívateľoch ako aj všetky ich dáta sú uložené v EÚ, konkrétne vo Frankfurte (Nemecko)"
+      },
+      "encryption": {
+        "title": "Šifrovanie",
+        "subtitle": "Všetky dáta sú uložené a prenášané v šifrovanej forme a tým chráni údaje pred neoprávneným prístupom alebo úpravou"
+      },
+      "highlyAvailable": {
+        "title": "Vysoko dostupné",
+        "subtitle": "Aplikácia je navrhnutá tak, aby minimalizovala alebo skryla účinky zlyhania jednotlivých komponentov čo zabezpečuje jej nepretržitú prevádzku s minimálnymi výpadkami"
+      },
+      "publicProfile": {
+        "title": "Verejný profil",
+        "subtitle": "Verejný profil umožňuje zdieľať vybrané albumy s inými používateľmi.",
+        "bwl": {
+          "description": "Bomby Watty Laktáty je cyklistický klub z Púchova, ktorý organizuje pravidelné jazdy po okolí."
+        },
+        "elis": {
+          "description": "Dobrodružstvá bengálskej mačky, ktorá miluje pravidelné prechádzky a rôzne dobrodružstvá."
+        },
+        "showProfileButton": "Pozriet profil"
+      }
+    },
     "pricing": {
       "default": {
         "title": "Bez registrácie",
@@ -171,6 +204,13 @@
         "rows": "Riadky",
         "tiles": "Dlaždice"
       },
+      "formGaps": "Medzery",
+      "formGapsOptions": {
+        "none": "Žiadne",
+        "small": "Malé",
+        "medium": "Stredné",
+        "large": "Veľké"
+      },
       "formChangeLayout": "Používateľ si môže zmeniť rozloženie",
       "formRetention": "Doba uchovávania súborov",
       "formRetentionOptions": {
@@ -269,36 +309,6 @@
     "seventhSection": {
       "title": "Ako kontaktovať Zdielaj.si s otázkami?",
       "paragraph1": "Možete nás kontaktovať zaslaní emailu na <mailto>info@zdielaj.si</mailto>."
-    }
-  },
-  "about": {
-    "title": "O aplikácii",
-    "subtitle": "Aplikácia pomáha užívateľom rýchlo a ľahko zdielať fotografie a videá bez zníženia kvality.",
-    "features": {
-      "title": "Funkcie",
-      "euData": {
-        "title": "Dáta sú uložené v EÚ",
-        "subtitle": "Citlivé údaje o užívateľoch ako aj všetky ich dáta sú uložené v EÚ, konkrétne vo Frankfurte (Nemecko)"
-      },
-      "encryption": {
-        "title": "Šifrovanie",
-        "subtitle": "Všetky dáta sú uložené a prenášané v šifrovanej forme a tým chráni údaje pred neoprávneným prístupom alebo úpravou"
-      },
-      "highlyAvailable": {
-        "title": "Vysoko dostupné",
-        "subtitle": "Aplikaácia je navrhnutá tak, aby minimalizovala alebo skryla účinky zlyhania jednotlivých komponentov čo zabezpečuje jej nepretržitú prevádzku s minimálnymi výpadkami"
-      },
-      "publicProfile": {
-        "title": "Verejný profil",
-        "subtitle": "Verejný profil umožňuje zdieľať vybrané albumy s inými používateľmi.",
-        "bwl": {
-          "description": "Bomby Watty Laktáty je cyklistický klub z Púchova, ktorý organizuje pravidelné jazdy po okolí."
-        },
-        "elis": {
-          "description": "Dobrodružstvá bengálskej mačky, ktorá miluje pravidelné prechádzky a rôzne dobrodružstvá."
-        },
-        "showProfileButton": "Pozriet profil"
-      }
     }
   }
 }

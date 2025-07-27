@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import About from './pages/About';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import UserDataDeletion from './pages/UserDataDeletion';
 import Album from './pages/Album';
@@ -74,7 +73,6 @@ const appRoutes = (lang = 'sk') => {
   const { t } = useTranslation('', { keyPrefix: 'routes', lng: lang });
 
   return [
-    <Route path={t('about')} element={<About />} />,
     <Route path={t('privacyPolicy')} element={<PrivacyPolicy />} />,
     <Route path={t('userData')} element={<UserDataDeletion />} />,
     <Route path={t('album')} element={<Album />} />,

@@ -59,7 +59,6 @@ const Menu = () => {
                 <Nav.Link as={Link} to={`${t('routes.prefix')}${t('routes.signIn')}`} data-tracking-id="menu_button_signin_click">{t("menu.signIn")}</Nav.Link>
               )
             }
-            <Nav.Link as={Link} to={`${t('routes.prefix')}${t('routes.about')}`}>{t("menu.about")}</Nav.Link>
             <NavDropdown title={lang} id="basic-nav-dropdown" data-tracking-id="menu_button_language_click" active>
               <NavDropdown.Item onClick={onChangeLang} data-lang="sk">&#x1F1F8;&#x1F1F0; SK</NavDropdown.Item>
               <NavDropdown.Item onClick={onChangeLang} data-lang="cz">&#x1F1E8;&#x1F1FF; CZ</NavDropdown.Item>

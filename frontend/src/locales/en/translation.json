@@ -16,8 +16,41 @@
   "home": {
     "title": "Share photos and videos in full quality",
     "subtitle": "Do you also have a problem that some applications reduce the quality of your photos and videos? Here you can share them without any problems in full quality!",
-    "uploadAreaText": "Move photos here or select them by clicking",
-    "uploadAreaButton": "Upload photos",
+    "uploadArea": {
+      "title": "Move photos here or select them by clicking",
+      "button": "Upload photos",
+      "asUnregisteredUser": {
+        "title": "As an unregistered user:",
+        "maxTenPhotos": "you can share a maximum of <strong>10</strong> photos",
+        "deletedAfter24Hours": "photos will be automatically deleted after <strong>24 hours</strong>"
+      }
+    },
+    "features": {
+      "title": "Features",
+      "euData": {
+        "title": "Data Stored in the EU",
+        "subtitle": "Sensitive user information as well as all their data are stored in the EU, specifically in Frankfurt (Germany)"
+      },
+      "encryption": {
+        "title": "Encryption",
+        "subtitle": "All data is stored and transmitted in encrypted form, protecting it from unauthorized access or modification"
+      },
+      "highlyAvailable": {
+        "title": "Highly Available",
+        "subtitle": "The application is designed to minimize or hide the effects of individual component failures, ensuring continuous operation with minimal downtime"
+      },
+      "publicProfile": {
+        "title": "Public Profile",
+        "subtitle": "The public profile allows you to share selected albums with other users.",
+        "bwl": {
+          "description": "\"Bombs Watts Lactates\" is a cycling club from Púchov that organizes regular rides in the area."
+        },
+        "elis": {
+          "description": "Adventures of a Bengal cat who loves regular walks and various adventures."
+        },
+        "showProfileButton": "View Profile"
+      }
+    },
     "pricing": {
       "default": {
         "title": "Without registration",
@@ -165,7 +198,30 @@
     "userAlbum": {
       "formName": "Name",
       "formDescription": "Description",
+      "formLayout": "Layout",
+      "formLayoutOptions": {
+        "cols": "Columns",
+        "rows": "Rows",
+        "tiles": "Tiles"
+      },
+      "formGaps": "Gaps",
+      "formGapsOptions": {
+        "none": "No gaps",
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      },
+      "formChangeLayout": "User can change the layout",
+      "formRetention": "File retention",
+      "formRetentionOptions": {
+        "1": "1 day",
+        "7": "1 week",
+        "31": "1 month",
+        "366": "1 year",
+        "0": "Forever"
+      },
       "formLink": "Album link",
+      "formAuthWarning": "Only logged in user can edit their album.",
       "formSubmitButton": "Save",
       "copyButton": "Copy link"
     },
@@ -253,36 +309,6 @@
     "seventhSection": {
       "title": "How to contact Zdielaj.si with questions?",
       "paragraph1": "You can contact us by sending an email to <mailto>info@zdielaj.si</mailto>."
-    }
-  },
-  "about": {
-    "title": "About the Application",
-    "subtitle": "The application helps users quickly and easily share photos and videos without reducing quality.",
-    "features": {
-      "title": "Features",
-      "euData": {
-        "title": "Data Stored in the EU",
-        "subtitle": "Sensitive user information as well as all their data are stored in the EU, specifically in Frankfurt (Germany)"
-      },
-      "encryption": {
-        "title": "Encryption",
-        "subtitle": "All data is stored and transmitted in encrypted form, protecting it from unauthorized access or modification"
-      },
-      "highlyAvailable": {
-        "title": "Highly Available",
-        "subtitle": "The application is designed to minimize or hide the effects of individual component failures, ensuring continuous operation with minimal downtime"
-      },
-      "publicProfile": {
-        "title": "Public Profile",
-        "subtitle": "The public profile allows you to share selected albums with other users.",
-        "bwl": {
-          "description": "\"Bombs Watts Lactates\" is a cycling club from Púchov that organizes regular rides in the area."
-        },
-        "elis": {
-          "description": "Adventures of a Bengal cat who loves regular walks and various adventures."
-        },
-        "showProfileButton": "View Profile"
-      }
     }
   }
 }
