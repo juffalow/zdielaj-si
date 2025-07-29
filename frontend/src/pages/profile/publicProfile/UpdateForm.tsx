@@ -4,6 +4,13 @@ import { useTranslation } from 'react-i18next';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import {
+  FaHome,
+  FaFacebook,
+  FaInstagram,
+  FaStrava,
+  FaPinterest,
+} from 'react-icons/fa';
 
 interface Props {
   publicProfile: PublicProfile;
@@ -46,27 +53,27 @@ const UpdateForm: FunctionComponent<Props> = ({ publicProfile, onSubmit }: Props
       </Form.Group>
 
       <Form.Group controlId="contactHomepage" className="mt-3">
-        <Form.Label>{t("profile.publicProfile.updateForm.fieldHomepage")}</Form.Label>
+        <Form.Label><FaHome /> {t("profile.publicProfile.updateForm.fieldHomepage")}</Form.Label>
         <Form.Control type="text" name="contact[homepage]" placeholder="https://zdielaj.si" defaultValue={state.contact.homepage} />
       </Form.Group>
 
       <Form.Group controlId="contactFacebook" className="mt-3">
-        <Form.Label>{t("profile.publicProfile.updateForm.fieldFacebook")}</Form.Label>
+        <Form.Label><FaFacebook /> {t("profile.publicProfile.updateForm.fieldFacebook")}</Form.Label>
         <Form.Control type="text" name="contact[facebook]" placeholder="https://www.facebook.com/zdielaj.si" defaultValue={state.contact.facebook} />
       </Form.Group>
 
       <Form.Group controlId="contactInstagram" className="mt-3">
-        <Form.Label>{t("profile.publicProfile.updateForm.fieldInstagram")}</Form.Label>
+        <Form.Label><FaInstagram /> {t("profile.publicProfile.updateForm.fieldInstagram")}</Form.Label>
         <Form.Control type="text" name="contact[instagram]" placeholder="https://www.instagram.com/zdielaj.si" defaultValue={state.contact.instagram} />
       </Form.Group>
 
       <Form.Group controlId="contactPinterest" className="mt-3">
-        <Form.Label>{t("profile.publicProfile.updateForm.fieldPinterest")}</Form.Label>
+        <Form.Label><FaPinterest /> {t("profile.publicProfile.updateForm.fieldPinterest")}</Form.Label>
         <Form.Control type="text" name="contact[pinterest]" placeholder="https://www.pinterest.com/zdielaj.si" defaultValue={state.contact.pinterest} />
       </Form.Group>
 
       <Form.Group controlId="contactStrava" className="mt-3">
-        <Form.Label>{t("profile.publicProfile.updateForm.fieldStrava")}</Form.Label>
+        <Form.Label><FaStrava /> {t("profile.publicProfile.updateForm.fieldStrava")}</Form.Label>
         <Form.Control type="text" name="contact[strava]" placeholder="https://www.strava.com/clubs/1135445" defaultValue={state.contact.strava} />
       </Form.Group>
 
