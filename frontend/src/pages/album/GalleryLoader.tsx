@@ -4,13 +4,17 @@ import Col from 'react-bootstrap/Col';
 import BlockLoader from '../../components/BlockLoader';
 
 export default function GalleryLoader() {  
-  const innerWidth = window.innerWidth;
-  const [cols, setCols] = useState(innerWidth < 768 ? 2 : innerWidth < 992 ? 4 : innerWidth < 1200 ? 6 : innerWidth < 1600 ? 6 : 6);
+  const screenWidth = window.innerWidth;
+  const [ cols, setCols ] = useState(screenWidth >= 1200 ? 6 :
+    screenWidth >= 992 ? 4 :
+    screenWidth >= 768 ? 3 : 2);
 
   useLayoutEffect(() => {
     function updateSize() {
-      const innerWidth = window.innerWidth;
-      setCols(innerWidth < 768 ? 2 : innerWidth < 992 ? 4 : innerWidth < 1200 ? 6 : innerWidth < 1600 ? 6 : 6);
+      const screenWidth = window.innerWidth;
+      setCols(screenWidth >= 1200 ? 6 :
+        screenWidth >= 992 ? 4 :
+        screenWidth >= 768 ? 3 : 2);
     }
     window.addEventListener('resize', updateSize);
 
