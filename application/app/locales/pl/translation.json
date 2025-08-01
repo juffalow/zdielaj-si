@@ -1,0 +1,219 @@
+{
+  "routes": {
+    "prefix": "pl/",
+    "signIn": "zaloguj-sie",
+    "signUp": "zarejestruj-sie",
+    "passwordReset": "resetuj-haslo",
+    "about": "o-aplikacji",
+    "privacyPolicy": "polityka-prywatnosci",
+    "userData": "dane-uzytkownika",
+    "userProfile": "profil",
+    "publicProfile": "profil/:id",
+    "albums": "albumy",
+    "album": "album/:id",
+    "home": ""
+  },
+  "home": {
+    "title": "Udostępniaj zdjęcia i filmy w pełnej jakości",
+    "subtitle": "Czy masz problem, że niektóre aplikacje obniżają jakość Twoich zdjęć i filmów? Tutaj możesz je udostępniać bez żadnych problemów w pełnej jakości!",
+    "uploadAreaText": "Przenieś zdjęcia tutaj lub wybierz je klikając",
+    "uploadAreaButton": "Prześlij zdjęcia",
+    "pricing": {
+      "default": {
+        "title": "Bez rejestracji",
+        "monthly": "miesięcznie",
+        "maxTenPhotos": "max <strong>10</strong> zdjęć",
+        "deletedAfter24Hours": "pliki zostaną automatycznie usunięte po <strong>24 godzinach</strong>",
+        "register": "Zarejestruj się"
+      },
+      "free": {
+        "title": "Darmowe",
+        "monthly": "miesięcznie",
+        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 zdjęć)</small>",
+        "video": "wideo",
+        "listOfAlbums": "lista albumów",
+        "filesWillBeDeletedAfter7Days": "pliki zostaną automatycznie usunięte po <strong>7 dniach</strong>",
+        "register": "Zarejestruj się"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "miesięcznie",
+        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 zdjęć)</small>",
+        "video": "wideo",
+        "listOfAlbums": "lista albumów",
+        "passwordProtect": "ochrona hasłem",
+        "publicProfile": "profil publiczny",
+        "filesWillNotBeDeleted": "pliki <strong>nie są usuwane</strong>",
+        "register": "Zarejestruj się"
+      }
+    }
+  },
+  "login": {
+    "title": "Zaloguj się",
+    "subtitle": "Nie masz jeszcze konta?",
+    "subtitleLink": "Zarejestruj się",
+    "form": {
+      "email": "Adres e-mail",
+      "requiredField": "To pole jest wymagane.",
+      "password": "Hasło",
+      "forgotPassword": "Zapomniałeś hasła?",
+      "signInButton": "Zaloguj się"
+    }
+  },
+  "profile": {
+    "changePasswordForm": {
+      "title": "Zmień hasło",
+      "currentPassword": "Obecne hasło",
+      "currentPasswordPlaceholder": "1StareHaslo!",
+      "newPassword": "Nowe hasło",
+      "newPasswordPlaceholder": "Nowe1SilneHaslo!",
+      "confirmPassword": "Potwierdź nowe hasło",
+      "button": "Zmień hasło"
+    },
+    "statistics": {
+      "title": "Statystyki",
+      "numberOfAlbums": "Liczba albumów",
+      "numberOfFiles": "Liczba plików",
+      "totalSize": "Łączny rozmiar"
+    }
+  },
+  "publicProfile": {
+    "notFound": {
+      "title": "Profil publiczny nie znaleziony!",
+      "subtitle": "Profil publiczny, którego szukasz, nie istnieje.",
+      "clarifyingText": "Może wpisałeś zły adres, użyłeś starego linku lub profil został usunięty.",
+      "ctaButton": "Powrót do strony głównej"
+    }
+  },
+  "register": {
+    "title": "Zarejestruj się",
+    "subtitle": "Masz już konto?",
+    "subtitleLink": "Zaloguj się",
+    "error": {
+      "userAlreadyExists": "Użytkownik z tym adresem e-mail już istnieje!",
+      "userNotCreated": "Nie udało się utworzyć użytkownika!"
+    },
+    "form": {
+      "name": "Imię",
+      "email": "Adres e-mail",
+      "password": "Hasło",
+      "requiredField": "To pole jest wymagane.",
+      "minEightCharacters": "Co najmniej 8 znaków",
+      "atLeastOneUppercase": "Co najmniej jedna wielka litera",
+      "atLeastOneLowercase": "Co najmniej jedna mała litera",
+      "atLeastOneSpecialCharacter": "Co najmniej jeden znak specjalny",
+      "atLeastOneNumber": "Co najmniej jedna cyfra",
+      "signUpButton": "Zarejestruj się"
+    },
+    "confirmForm": {
+      "title": "Weryfikacja adresu e-mail",
+      "subtitle": "Kod weryfikacyjny został wysłany na Twój e-mail.",
+      "code": "Kod weryfikacyjny",
+      "requiredField": "To pole jest wymagane.",
+      "submitButton": "Zakończ rejestrację"
+    },
+    "thankYou": {
+      "title": "Dziękujemy za rejestrację!",
+      "subtitle": "Twój adres e-mail został zweryfikowany. Możesz kontynuować logując się na swoje konto",
+      "subtitleLink": "tutaj"
+    }
+  },
+  "album": {
+    "userAlbum": {
+      "formName": "Nazwa",
+      "formDescription": "Opis",
+      "formLink": "Link do albumu",
+      "formSubmitButton": "Zapisz",
+      "copyButton": "Kopiuj link"
+    },
+    "notFound": {
+      "title": "Album nie znaleziony!",
+      "subtitle": "Album, którego szukasz, nie istnieje.",
+      "clarifyingText": "Może wpisałeś zły adres, użyłeś starego linku lub album został usunięty.",
+      "ctaButton": "Powrót do strony głównej"
+    }
+  },
+  "albums": {
+    "albumPreview": {
+      "noFiles": "Brak plików",
+      "publicProfileToggle": "Pokaż w profilu publicznym",
+      "show": "Pokaż",
+      "delete": "Usuń"
+    },
+    "albumsContainer": {
+      "noAlbumsAlert": "Nie masz żadnych albumów",
+      "modalTitle": "Usuń album",
+      "modalBody": "Czy na pewno chcesz usunąć ten album?",
+      "modalCloseButton": "Zamknij",
+      "modalSubmitButton": "Usuń"
+    }
+  },
+  "components": {
+    "shareButton": {
+      "copyLink": "Kopiuj link"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Przeciągnij zdjęcia tutaj lub wybierz je klikając"
+    }
+  },
+  "menu": {
+    "albums": "Albumy",
+    "about": "O aplikacji",
+    "profile": "Profil",
+    "signIn": "Zaloguj się",
+    "signOut": "Wyloguj się",
+    "subscription": "Subskrypcja"
+  },
+  "footer": {
+    "about": "O aplikacji",
+    "contact": "Kontakt",
+    "description": "Aplikacja pomaga użytkownikom szybko i łatwo udostępniać zdjęcia i filmy bez utraty jakości.",
+    "home": "Strona główna",
+    "links": "Linki",
+    "register": "Zarejestruj się",
+    "status": "Status"
+  },
+  "userDataDeletion": {
+    "title": "Usuwanie danych użytkownika",
+    "subtitle": "Jeśli chcesz usunąć swoje dane osobowe lub konto, skontaktuj się z nami pod adresem <mailto>{{email}}</mailto>. Po otrzymaniu Twojej prośby zapewnimy usunięcie wszystkich Twoich danych osobowych zgodnie z obowiązującymi przepisami prawa."
+  },
+  "privacyPolicy": {
+    "title": "Polityka prywatności",
+    "subtitle": "Jeśli jesteś odwiedzającym stronę Zdielaj.si lub klientem usługi Zdielaj.si, korzystanie z tej strony lub usługi podlega \"polityce prywatności\".",
+    "firstSection": {
+      "title": "Jakie informacje zbieramy?",
+      "paragraph1": "Aby świadczyć usługi Zdielaj.si, musimy przetwarzać informacje o Tobie. Rodzaj zbieranych informacji zależy od tego, jak korzystasz z naszych usług."
+    },
+    "secondSection": {
+      "title": "Jak wykorzystujemy te informacje?",
+      "paragraph1": "<strong>Aby świadczyć, personalizować i ulepszać nasze usługi.</strong> Wykorzystujemy posiadane informacje do świadczenia naszych usług, dostosowywania funkcji i tworzenia sugestii dla Ciebie.",
+      "paragraph2": "<strong>Badania i rozwój produktu.</strong> Wykorzystujemy posiadane informacje do opracowywania, testowania i ulepszania naszych usług. Takie przetwarzanie jest niezbędne dla naszych uzasadnionych interesów w zakresie świadczenia innowacyjnych usług naszym użytkownikom.",
+      "paragraph3": "<strong>Wspieranie bezpieczeństwa i integralności.</strong> Wykorzystujemy posiadane informacje do weryfikacji kont i aktywności, zwalczania szkodliwych działań, wykrywania i zapobiegania spamowi oraz innym negatywnym doświadczeniom, a także utrzymania integralności naszych usług.",
+      "paragraph4": "<strong>Komunikacja z Tobą.</strong> Wykorzystujemy posiadane informacje do wysyłania komunikacji marketingowej, istotnych wiadomości i aktualizacji, które naszym zdaniem mogą Cię zainteresować."
+    },
+    "thirdSection": {
+      "title": "Jak chronimy Twoje informacje?",
+      "paragraph1": "Twoje dane osobowe są szyfrowane, przechowywane za zabezpieczonymi sieciami i dostępne tylko dla ograniczonej liczby osób, które mają specjalne uprawnienia do takich systemów i są zobowiązane do zachowania poufności informacji."
+    },
+    "fourthSection": {
+      "title": "Jak udostępniamy te informacje?",
+      "paragraph1": "Nie sprzedajemy, nie wymieniamy ani w żaden inny sposób nie przekazujemy Twoich danych osobowych stronom trzecim. Nie dotyczy to partnerów hostingowych strony internetowej i innych podmiotów, które pomagają nam w prowadzeniu strony, działalności lub obsłudze użytkowników, o ile te podmioty zobowiązują się do zachowania poufności tych informacji."
+    },
+    "fifthSection": {
+      "title": "Przechowywanie danych, dezaktywacja i usuwanie konta",
+      "paragraph1": "Przechowujemy dane tak długo, jak jest to konieczne do świadczenia naszych usług lub do momentu usunięcia Twojego konta – w zależności od tego, co nastąpi wcześniej."
+    },
+    "sixthSection": {
+      "title": "Jak powiadomimy Cię o zmianach w tej polityce?",
+      "paragraph1": "Od czasu do czasu możemy aktualizować tę politykę. W miarę możliwości powiadomimy Cię o zmianach lub regularnie przypomnimy o zapoznaniu się z tą polityką za pośrednictwem e-maila."
+    },
+    "seventhSection": {
+      "title": "Jak skontaktować się z Zdielaj.si w razie pytań?",
+      "paragraph1": "Możesz się z nami skontaktować, wysyłając e-mail na adres <mailto>info@zdielaj.si</mailto>."
+    }
+  },
+  "about": {
+    "title": "O aplikacji",
+    "subtitle": "Aplikacja pomaga użytkownikom szybko i łatwo udostępniać zdjęcia i filmy bez utraty jakości. Wszystkie dane są przechowywane w formie zaszyfrowanej."
+  }
+}

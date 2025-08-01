@@ -1,0 +1,153 @@
+{
+  "routes": {
+    "prefix": "en/",
+    "signIn": "sign-in",
+    "signUp": "sign-up",
+    "passwordReset": "password-reset",
+    "about": "about",
+    "privacyPolicy": "privacy-policy",
+    "userData": "user-data",
+    "userProfile": "profile",
+    "publicProfile": "profile/:id",
+    "albums": "albums",
+    "album": "album/:id",
+    "home": ""
+  },
+   "components": {
+    "shareButton": {
+      "copyLink": "Copy link"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Drag photos here or select them by clicking"
+    },
+    "menu": {
+      "albums": "Albums",
+      "profile": "Profile",
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "signOut": "Sign out",
+      "subscription": "Subscription"
+    },
+    "footer": {
+      "about": "About",
+      "contact": "Contact",
+      "description": "The application helps users quickly and easily share photos and videos without reducing quality.",
+      "home": "Home",
+      "links": "Links",
+      "register": "Register",
+      "status": "Status"
+    }
+  },
+  "home": {
+    "title": "Share photos and videos in full quality",
+    "subtitle": "Do you also have a problem that some applications reduce the quality of your photos and videos? Here you can share them without any problems in full quality!",
+    "uploadArea": {
+      "title": "Move photos here or select them by clicking",
+      "button": "Upload photos",
+      "asUnregisteredUser": {
+        "title": "As an unregistered user:",
+        "maxTenPhotos": "you can share a maximum of <strong>10</strong> photos",
+        "deletedAfter24Hours": "photos will be automatically deleted after <strong>24 hours</strong>"
+      }
+    },
+    "features": {
+      "title": "Features",
+      "euData": {
+        "title": "Data Stored in the EU",
+        "subtitle": "Sensitive user information as well as all their data are stored in the EU, specifically in Frankfurt (Germany)"
+      },
+      "encryption": {
+        "title": "Encryption",
+        "subtitle": "All data is stored and transmitted in encrypted form, protecting it from unauthorized access or modification"
+      },
+      "highlyAvailable": {
+        "title": "Highly Available",
+        "subtitle": "The application is designed to minimize or hide the effects of individual component failures, ensuring continuous operation with minimal downtime"
+      },
+      "publicProfile": {
+        "title": "Public Profile",
+        "subtitle": "The public profile allows you to share selected albums with other users.",
+        "bwl": {
+          "description": "\"Bombs Watts Lactates\" is a cycling club from Púchov that organizes regular rides in the area."
+        },
+        "elis": {
+          "description": "Adventures of a Bengal cat who loves regular walks and various adventures."
+        },
+        "showProfileButton": "View Profile"
+      }
+    },
+    "pricing": {
+      "default": {
+        "title": "Without registration",
+        "monthly": "monthly",
+        "maxTenPhotos": "max <strong>10</strong> photos",
+        "maxSizePerFile": "file size up to <strong>10MB</strong>",
+        "deletedAfter24Hours": "files will be automatically deleted after <strong>24 hours</strong>"
+      },
+      "free": {
+        "title": "Free",
+        "monthly": "monthly",
+        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 photos)</small>",
+        "maxSizePerFile": "file size up to <strong>100MB</strong>",
+        "video": "video",
+        "listOfAlbums": "list of albums",
+        "filesWillBeDeletedAfter7Days": "files will be automatically deleted after <strong>7 days</strong>",
+        "register": "Register"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "monthly",
+        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 photos)</small>",
+        "maxSizePerFile": "file size up to <strong>500MB</strong>",
+        "video": "video",
+        "listOfAlbums": "list of albums",
+        "passwordProtect": "password protect",
+        "publicProfile": "public profile",
+        "filesAreNotDeleted": "files are <strong>not deleted</strong>",
+        "register": "Register"
+      }
+    }
+  },
+  "signIn": {
+    "title": "Sign in",
+    "noAccount": "Don't have an account yet?",
+    "signUp": "Sign up",
+    "form": {
+      "email": "E-mail",
+      "emailPlaceholder": "Enter your e-mail",
+      "requiredField": "This field is required.",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "forgotPassword": "Forgot your password?",
+      "signInButton": "Sign in"
+    }
+  },
+  "signUp": {
+    "title": "Sign up",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Enter your name",
+      "email": "E-mail",
+      "emailPlaceholder": "Enter your e-mail",
+      "requiredField": "This field is required.",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "passwordRules": {
+        "minEightCharacters": "At least 8 characters",
+        "atLeastOneUppercase": "At least one uppercase letter",
+        "atLeastOneLowercase": "At least one lowercase letter",
+        "atLeastOneSpecialCharacter": "At least one special character",
+        "atLeastOneNumber": "At least one number"
+      },
+      "signUpButton": "Sign up"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "Album not found!",
+      "subtitle": "The album you are looking for does not exist.",
+      "clarifyingText": "Maybe you typed in wrong address, used an old link or the album was deleted.",
+      "ctaButton": "Back to home page"
+    }
+  }
+}

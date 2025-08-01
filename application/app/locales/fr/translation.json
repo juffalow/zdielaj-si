@@ -1,0 +1,159 @@
+{
+  "routes": {
+    "prefix": "fr/",
+    "signIn": "connexion",
+    "signUp": "inscription",
+    "passwordReset": "reinitialiser-mot-de-passe",
+    "about": "a-propos",
+    "privacyPolicy": "politique-de-confidentialite",
+    "userData": "donnees-utilisateur",
+    "userProfile": "profil",
+    "publicProfile": "profil/:id",
+    "albums": "albums",
+    "album": "album/:id",
+    "home": ""
+  },
+  "home": {
+    "title": "Partagez des photos et des vidéos en pleine qualité",
+    "subtitle": "Avez-vous également un problème où certaines applications réduisent la qualité de vos photos et vidéos ? Ici, vous pouvez les partager sans aucun problème en pleine qualité !",
+    "uploadAreaText": "Déplacez les photos ici ou sélectionnez-les en cliquant",
+    "uploadAreaButton": "Télécharger des photos",
+    "pricing": {
+      "default": {
+        "title": "Sans inscription",
+        "monthly": "mensuel",
+        "maxTenPhotos": "max <strong>10</strong> photos",
+        "deletedAfter24Hours": "les fichiers seront automatiquement supprimés après <strong>24 heures</strong>",
+        "register": "S'inscrire"
+      },
+      "free": {
+        "title": "Gratuit",
+        "monthly": "mensuel",
+        "maxOneGB": "max <strong>1 Go</strong> <small>(≈ 300 photos)</small>",
+        "video": "vidéo",
+        "listOfAlbums": "liste des albums",
+        "filesWillBeDeletedAfter7Days": "les fichiers seront automatiquement supprimés après <strong>7 jours</strong>",
+        "register": "S'inscrire"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "mensuel",
+        "maxTenGB": "max <strong>10 Go</strong> <small>(≈ 3000 photos)</small>",
+        "video": "vidéo",
+        "listOfAlbums": "liste des albums",
+        "passwordProtect": "protéger par mot de passe",
+        "publicProfile": "profil public",
+        "filesWillNotBeDeleted": "les fichiers ne sont <strong>pas supprimés</strong>",
+        "register": "S'inscrire"
+      }
+    }
+  },
+  "login": {
+    "title": "Se connecter",
+    "subtitle": "Vous n'avez pas encore de compte ?",
+    "subtitleLink": "S'inscrire",
+    "form": {
+      "email": "Adresse e-mail",
+      "requiredField": "Ce champ est requis.",
+      "password": "Mot de passe",
+      "forgotPassword": "Mot de passe oublié ?",
+      "signInButton": "Se connecter"
+    }
+  },
+  "publicProfile": {
+    "notFound": {
+      "title": "Profil public non trouvé!",
+      "subtitle": "Le profil public que vous recherchez n'existe pas.",
+      "clarifyingText": "Peut-être avez-vous saisi une mauvaise adresse, utilisé un ancien lien ou le profil public a été supprimé.",
+      "ctaButton": "Retour à la page d'accueil"
+    }
+  },
+  "register": {
+    "title": "S'inscrire",
+    "subtitle": "Vous avez déjà un compte ?",
+    "subtitleLink": "Se connecter",
+    "error": {
+      "userAlreadyExists": "Un utilisateur avec cette adresse e-mail existe déjà !",
+      "userNotCreated": "Échec de la création de l'utilisateur !"
+    },
+    "form": {
+      "name": "Nom",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "requiredField": "Ce champ est requis.",
+      "minEightCharacters": "Au moins 8 caractères",
+      "atLeastOneUppercase": "Au moins une majuscule",
+      "atLeastOneLowercase": "Au moins une minuscule",
+      "atLeastOneSpecialCharacter": "Au moins un caractère spécial",
+      "atLeastOneNumber": "Au moins un chiffre",
+      "signUpButton": "S'inscrire"
+    },
+    "confirmForm": {
+      "title": "Vérification de l'adresse e-mail",
+      "subtitle": "Un code de vérification a été envoyé à votre e-mail.",
+      "code": "Code de vérification",
+      "requiredField": "Ce champ est requis.",
+      "submitButton": "Compléter l'inscription"
+    },
+    "thankYou": {
+      "title": "Merci pour votre inscription !",
+      "subtitle": "Votre adresse e-mail a été vérifiée. Vous pouvez continuer en vous connectant à votre compte",
+      "subtitleLink": "ici"
+    }
+  },
+  "album": {
+    "userAlbum": {
+      "formName": "Nom de l'album",
+      "formDescription": "Description de l'album",
+      "formLink": "Lien de l'album",
+      "formSubmitButton": "Enregistrer",
+      "copyButton": "Copier le lien"
+    },
+    "notFound": {
+      "title": "Album non trouvé!",
+      "subtitle": "L'album que vous cherchez n'existe pas.",
+      "clarifyingText": "Peut-être avez-vous tapé la mauvaise adresse, utilisé un ancien lien ou l'album a été supprimé.",
+      "ctaButton": "Retour à la page d'accueil"
+    }
+  },
+  "albums": {
+    "albumPreview": {
+      "noFiles": "Aucun fichier",
+      "publicProfileToggle": "Afficher dans le profil public",
+      "show": "Afficher",
+      "delete": "Supprimer"
+    },
+    "albumsContainer": {
+      "noAlbumsAlert": "Vous n'avez pas d'albums",
+      "modalTitle": "Supprimer l'album",
+      "modalBody": "Voulez-vous vraiment supprimer cet album?",
+      "modalCloseButton": "Fermer",
+      "modalSubmitButton": "Supprimer"
+    }
+  },
+  "components": {
+    "shareButton": {
+      "copyLink": "Copier le lien"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Glissez les photos ici ou sélectionnez-les en cliquant"
+    }
+  },
+  "menu": {
+    "albums": "Albums",
+    "about": "À propos",
+    "profile": "Profil",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "subscription": "Abonnement"
+  },
+  "footer": {
+    "about": "À propos",
+    "contact": "Contact",
+    "description": "L'application aide les utilisateurs à partager rapidement et facilement des photos et des vidéos sans réduire la qualité.",
+    "home": "Accueil",
+    "links": "Liens",
+    "register": "S'inscrire",
+    "status": "Statut"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "routes": {
+    "prefix": "no/",
+    "signIn": "logg-inn",
+    "signUp": "registrer",
+    "passwordReset": "tilbakestill-passord",
+    "about": "om",
+    "privacyPolicy": "personvern",
+    "userData": "brukerdata",
+    "userProfile": "profil",
+    "publicProfile": "profil/:id",
+    "albums": "album",
+    "album": "album/:id",
+    "home": ""
+  },
+  "home": {
+    "title": "Del bilder og videoer i full kvalitet",
+    "subtitle": "Har du også problemer med at noen apper reduserer kvaliteten på bildene og videoene dine? Her kan du dele dem uten problemer i full kvalitet!",
+    "uploadAreaText": "Flytt bilder hit eller velg dem ved å klikke",
+    "uploadAreaButton": "Last opp bilder",
+    "pricing": {
+      "default": {
+        "title": "Uten registrering",
+        "monthly": "månedlig",
+        "maxTenPhotos": "maks <strong>10</strong> bilder",
+        "deletedAfter24Hours": "filer blir automatisk slettet etter <strong>24 timer</strong>",
+        "register": "Registrer"
+      },
+      "free": {
+        "title": "Gratis",
+        "monthly": "månedlig",
+        "maxOneGB": "maks <strong>1GB</strong> <small>(≈ 300 bilder)</small>",
+        "video": "video",
+        "listOfAlbums": "liste over album",
+        "filesWillBeDeletedAfter7Days": "filer blir automatisk slettet etter <strong>7 dager</strong>",
+        "register": "Registrer"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "månedlig",
+        "maxTenGB": "maks <strong>10GB</strong> <small>(≈ 3000 bilder)</small>",
+        "video": "video",
+        "listOfAlbums": "liste over album",
+        "passwordProtect": "passordbeskyttelse",
+        "publicProfile": "offentlig profil",
+        "filesWillNotBeDeleted": "filer <strong>blir ikke slettet</strong>",
+        "register": "Registrer"
+      }
+    }
+  },
+  "login": {
+    "title": "Logg inn",
+    "subtitle": "Har du ikke en konto ennå?",
+    "subtitleLink": "Registrer",
+    "form": {
+      "email": "E-postadresse",
+      "requiredField": "Dette feltet er påkrevd.",
+      "password": "Passord",
+      "forgotPassword": "Glemt passordet ditt?",
+      "signInButton": "Logg inn"
+    }
+  },
+  "profile": {
+    "changePasswordForm": {
+      "title": "Bytt passord",
+      "currentPassword": "Nåværende passord",
+      "currentPasswordPlaceholder": "1GammeltPassord!",
+      "newPassword": "Nytt passord",
+      "newPasswordPlaceholder": "Nytt1SterktPassord!",
+      "confirmPassword": "Bekreft nytt passord",
+      "button": "Bytt passord"
+    },
+    "statistics": {
+      "title": "Statistikk",
+      "numberOfAlbums": "Antall album",
+      "numberOfFiles": "Antall filer",
+      "totalSize": "Total størrelse"
+    }
+  },
+  "publicProfile": {
+    "notFound": {
+      "title": "Offentlig profil ikke funnet!",
+      "subtitle": "Den offentlige profilen du leter etter finnes ikke.",
+      "clarifyingText": "Kanskje du skrev inn feil adresse, brukte en gammel lenke eller profilen er slettet.",
+      "ctaButton": "Tilbake til startsiden"
+    }
+  },
+  "register": {
+    "title": "Registrer",
+    "subtitle": "Har du allerede en konto?",
+    "subtitleLink": "Logg inn",
+    "error": {
+      "userAlreadyExists": "En bruker med denne e-postadressen finnes allerede!",
+      "userNotCreated": "Kunne ikke opprette bruker!"
+    },
+    "form": {
+      "name": "Navn",
+      "email": "E-postadresse",
+      "password": "Passord",
+      "requiredField": "Dette feltet er påkrevd.",
+      "minEightCharacters": "Minst 8 tegn",
+      "atLeastOneUppercase": "Minst én stor bokstav",
+      "atLeastOneLowercase": "Minst én liten bokstav",
+      "atLeastOneSpecialCharacter": "Minst ett spesialtegn",
+      "atLeastOneNumber": "Minst ett tall",
+      "signUpButton": "Registrer"
+    },
+    "confirmForm": {
+      "title": "Bekreft e-postadresse",
+      "subtitle": "En bekreftelseskode har blitt sendt til din e-post.",
+      "code": "Bekreftelseskode",
+      "requiredField": "Dette feltet er påkrevd.",
+      "submitButton": "Fullfør registrering"
+    },
+    "thankYou": {
+      "title": "Takk for registreringen!",
+      "subtitle": "Din e-postadresse er bekreftet. Du kan fortsette ved å logge inn på kontoen din",
+      "subtitleLink": "her"
+    }
+  },
+  "album": {
+    "userAlbum": {
+      "formName": "Navn",
+      "formDescription": "Beskrivelse",
+      "formLink": "Albumlenke",
+      "formSubmitButton": "Lagre",
+      "copyButton": "Kopier lenke"
+    },
+    "notFound": {
+      "title": "Album ikke funnet!",
+      "subtitle": "Albumet du leter etter finnes ikke.",
+      "clarifyingText": "Kanskje du skrev inn feil adresse, brukte en gammel lenke eller albumet er slettet.",
+      "ctaButton": "Tilbake til startsiden"
+    }
+  },
+  "albums": {
+    "albumPreview": {
+      "noFiles": "Ingen filer",
+      "publicProfileToggle": "Vis i offentlig profil",
+      "show": "Vis",
+      "delete": "Slett"
+    },
+    "albumsContainer": {
+      "noAlbumsAlert": "Du har ingen album",
+      "modalTitle": "Slett album",
+      "modalBody": "Vil du virkelig slette dette albumet?",
+      "modalCloseButton": "Lukk",
+      "modalSubmitButton": "Slett"
+    }
+  },
+  "components": {
+    "shareButton": {
+      "copyLink": "Kopier lenke"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Dra bilder hit eller velg dem ved å klikke"
+    }
+  },
+  "menu": {
+    "albums": "Album",
+    "about": "Om",
+    "profile": "Profil",
+    "signIn": "Logg inn",
+    "signOut": "Logg ut",
+    "subscription": "Abonnement"
+  },
+  "footer": {
+    "about": "Om",
+    "contact": "Kontakt",
+    "description": "Applikasjonen hjelper brukere med å raskt og enkelt dele bilder og videoer uten å redusere kvaliteten.",
+    "home": "Hjem",
+    "links": "Lenker",
+    "register": "Registrer",
+    "status": "Status"
+  },
+  "userDataDeletion": {
+    "title": "Sletting av brukerdata",
+    "subtitle": "Hvis du ønsker å slette dine personlige data eller konto, vennligst kontakt oss på <mailto>{{email}}</mailto>. Når vi mottar din forespørsel, vil vi sørge for at alle dine personlige data blir slettet i samsvar med gjeldende lovgivning."
+  },
+  "privacyPolicy": {
+    "title": "Personvernregler",
+    "subtitle": "Hvis du er en besøkende på Zdielaj.si-nettstedet eller en kunde av Zdielaj.si-tjenesten, gjelder \"personvernreglene\" for din bruk av dette nettstedet eller tjenesten.",
+    "firstSection": {
+      "title": "Hvilken type informasjon samler vi inn?",
+      "paragraph1": "For å tilby Zdielaj.si-tjenestene må vi behandle informasjon om deg. Hvilken type informasjon vi samler inn avhenger av hvordan du bruker våre tjenester."
+    },
+    "secondSection": {
+      "title": "Hvordan bruker vi denne informasjonen?",
+      "paragraph1": "<strong>For å tilby, tilpasse og forbedre våre tjenester.</strong> Vi bruker informasjonen vi har for å tilby våre tjenester, tilpasse funksjoner og lage forslag til deg.",
+      "paragraph2": "<strong>Produktforskning og utvikling.</strong> Vi bruker informasjonen vi har for å utvikle, teste og forbedre våre tjenester. Slik behandling er nødvendig for våre legitime interesser i å tilby innovative tjenester til våre brukere.",
+      "paragraph3": "<strong>For å støtte sikkerhet og integritet.</strong> Vi bruker informasjonen vi har for å verifisere kontoer og aktiviteter, bekjempe skadelig atferd, oppdage og forhindre spam og andre negative opplevelser, og opprettholde integriteten til våre tjenester.",
+      "paragraph4": "<strong>Kommunikasjon med deg.</strong> Vi bruker informasjonen vi har for å sende markedsføringskommunikasjon, relevante nyheter og oppdateringer som vi tror kan være av interesse for deg."
+    },
+    "thirdSection": {
+      "title": "Hvordan beskytter vi informasjonen din?",
+      "paragraph1": "Dine personlige data er kryptert, lagret bak sikre nettverk og kun tilgjengelig for et begrenset antall personer som har spesielle tilgangsrettigheter til slike systemer og er pålagt å holde informasjonen konfidensiell."
+    },
+    "fourthSection": {
+      "title": "Hvordan deles denne informasjonen?",
+      "paragraph1": "Vi selger, bytter eller overfører ikke dine personlige data til eksterne parter. Dette inkluderer ikke webhotellpartnere og andre parter som hjelper oss med å drive nettstedet vårt, drive virksomheten vår eller betjene våre brukere, så lenge disse partene samtykker i å holde denne informasjonen konfidensiell."
+    },
+    "fifthSection": {
+      "title": "Databevaring, deaktivering og sletting av konto",
+      "paragraph1": "Vi beholder data så lenge det er nødvendig for å tilby våre tjenester eller til kontoen din blir slettet – avhengig av hva som skjer først."
+    },
+    "sixthSection": {
+      "title": "Hvordan vil vi varsle deg om endringer i denne policyen?",
+      "paragraph1": "Fra tid til annen kan vi oppdatere denne policyen. Når det er mulig, vil vi varsle deg om endringer eller regelmessig minne deg på å lese denne policyen via e-post."
+    },
+    "seventhSection": {
+      "title": "Hvordan kontakte Zdielaj.si med spørsmål?",
+      "paragraph1": "Du kan kontakte oss ved å sende en e-post til <mailto>info@zdielaj.si</mailto>."
+    }
+  },
+  "about": {
+    "title": "Om applikasjonen",
+    "subtitle": "Applikasjonen hjelper brukere med å raskt og enkelt dele bilder og videoer uten å redusere kvaliteten. All data lagres i kryptert form."
+  }
+}
