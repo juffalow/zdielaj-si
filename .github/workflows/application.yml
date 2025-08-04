@@ -44,5 +44,7 @@ jobs:
         REPOSITORY: zdielaj-si-application
         TAG: ${{ steps.vars.outputs.tag }}
       run: |
-        docker buildx build -t $REGISTRY/$REPOSITORY:$TAG --platform linux/arm64 .
-        docker push $REGISTRY/$REPOSITORY:$TAG
+        docker buildx build --platform linux/arm64 \
+        --tag $REGISTRY/$REPOSITORY:$TAG \
+        --push \
+        .
