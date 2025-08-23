@@ -37,6 +37,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_ZDIELAJ_SI_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_CONTAINER_REGISTRY_REGION }}
     - name: Sync build folder with S3
-      run: aws s3 sync ./build s3://juffalow-my-projects/zdielaj-si-dev
+      run: aws s3 sync ./build/client s3://juffalow-my-projects/zdielaj-si-dev
     - name: Invalidate CloudFront cache
       run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DEV_DISTRIBUTION_ID }} --paths "/*"
