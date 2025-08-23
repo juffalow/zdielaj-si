@@ -1,22 +1,21 @@
 import { useLayoutEffect, useState } from 'react'
 import type { HTMLAttributes } from 'react'
 import { Image } from '@heroui/react';
+import noPreview from '../../images/nopreview.png';
 
 export default function GalleryItems({ files, layout, gaps }: { files: Array<AlbumFile>, layout: 'cols' | 'tiles' | 'rows', gaps: 'none' | 'small' | 'medium' | 'large' }) {
   const cols = 4;
 
   if (layout === 'cols') {
     return (
-      <div className="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg lg:overflow-visible px-2">
-        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-2">
-            {
-              files.map(file => (
-                <div key={file.id} style={{ aspectRatio: '1/1' }}>
-                  <img src={file.thumbnails[1] || file.thumbnails[0] || file.location} className="object-cover object-center h-full w-full max-h-full max-w-full rounded-lg" loading="lazy" />
-                </div>
-              ))
-            }
-        </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-2">
+          {
+            files.map(file => (
+              <div key={file.id} style={{ aspectRatio: '1/1' }} className="justify-self-stretch">
+                <Image key={file.id} src={file.thumbnails[1] || file.thumbnails[0] || file.location} fallbackSrc={noPreview} width="100%" height="100%" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-center' }} />
+              </div>
+            ))
+          }
       </div>
     );
   }

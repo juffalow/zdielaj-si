@@ -1,20 +1,22 @@
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { ZodError } from 'zod';
 import SignInForm from './signIn/form';
+import SignInTOTP from './signIn/totp';
 import { signInFormSchema } from './signIn/formValidation';
 import useAuth from '../utils/useAuth';
 import logger from '../logger';
 
 export function meta() {
-  return [{ title: "Sign In" }, { name: "description", content: "Sign In" }];
+  return [{ title: "Sign In | Zdielaj.si" }, { name: "description", content: "Sign In" }];
 }
 
 export default function SignIn() {
   const { t } = useTranslation('', { keyPrefix: 'signIn' });
-  const { signIn } = useAuth();
+  const { signIn, confirmSignIn } = useAuth();
   const navigate = useNavigate();
+  const [ step, setStep ] = useState<'form' | 'totp'>('form');
 
   const onSubmit = useCallback(async (prevState: unknown, state: FormData): Promise<{ email: string, password: string, error: string | null }> => {
     const email = state.get('email') as string;
@@ -34,8 +36,12 @@ export default function SignIn() {
     }
 
     await signIn(email, password)
-      .then(() => {
-        setTimeout(() => navigate('/'), 100);
+      .then((response) => {
+        if (response.isSuccess === false) {
+          setStep('totp');
+        } else {
+          setTimeout(() => navigate('/'), 100);
+        }
       })
       .catch((err) => {
         logger.error('Unable to sign in!', { error: { message: err.message, stack: err.stack } });
@@ -45,12 +51,28 @@ export default function SignIn() {
     return { email, password, error };
   }, [ signIn ]);
 
+  const onTOTPSubmit = useCallback(async (prevState: unknown, state: FormData): Promise<{ totpCode: string, error: string | null }> => {
+    const totpCode = state.get('totpCode') as string;
+    let error = null;
+
+    await confirmSignIn(totpCode)
+      .then(() => {
+        setTimeout(() => navigate('/'), 100);
+      })
+      .catch((err) => {
+        logger.error('Unable to confirm sign in!', { error: { message: err.message, stack: err.stack } });
+        error = err.message;
+      });
+
+    return { totpCode, error };
+  }, [ confirmSignIn ]);
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-          alt="Your Company"
+          alt="Zdielaj.si"
           className="mx-auto h-10 w-auto"
         />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
@@ -59,7 +81,7 @@ export default function SignIn() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <SignInForm onSubmit={onSubmit} />
+        {step === 'form' ? <SignInForm onSubmit={onSubmit} /> : <SignInTOTP onSubmit={onTOTPSubmit} />}
 
         <p className="mt-10 text-center text-sm/6 text-gray-500">
           {t('noAccount')}

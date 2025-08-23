@@ -6,17 +6,44 @@ import {
   Alert,
 } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
+import { ZodError } from 'zod';
+import { signUpFormSchema } from './formValidation';
+import logger from '../../logger';
 
 export default function SignUpForm({
-  onSubmit,
+  signUp,
 }: {
-  onSubmit: (
-    prevState: unknown,
-    state: FormData
-  ) => Promise<{ name: string, email: string, password: string, error: string | null }>;
+  signUp: (name: string, email: string, password: string) => Promise<void>;
 }) {
   const { t } = useTranslation('', { keyPrefix: 'signUp.form' });
   const [password, setPassword] = useState('');
+
+  const onSubmit = async (_: unknown, state: FormData) => {
+    const name = state.get('name') as string;
+    const email = state.get('email') as string;
+    const password = state.get('password') as string;
+
+    try {
+      signUpFormSchema.parse({ name, email, password });
+
+      await signUp(name, email, password);
+    } catch (err) {
+      logger.error('Unable to sign up!', { error: err });
+
+      if (err instanceof ZodError) {
+        return { name, email, password, error: err.issues.map((issue) => issue.message).join(',') };
+      }
+
+      if (typeof err === 'object' && err !== null && 'name' in err && err.name === 'UsernameExistsException') {
+        return { name, email, password, error: t('errors.userAlreadyExists') };
+      }
+
+      return { name, email, password, error: t('errors.default') };
+    }
+
+    return { name, email, password, error: null };
+  };
+
   const [state, formAction, isPending] = useActionState(onSubmit, {
     name: "",
     email: "",
@@ -71,7 +98,7 @@ export default function SignUpForm({
         <Alert color="danger" description={state.error.split(',').map((error) => <p key={error}>{error}!</p>)} hideIcon={true} />
       ) : null}
 
-      <Button type="submit" color="primary" fullWidth={true}>
+      <Button type="submit" color="primary" fullWidth={true} isDisabled={isPending}>
         {t('signUpButton')}
       </Button>
     </Form>

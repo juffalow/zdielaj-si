@@ -10,9 +10,11 @@ import logger from '../logger';
 import { createAlbum, createUserAlbum } from '../api/album';
 
 export function meta({}: Route.MetaArgs) {
+  const { t } = useTranslation('', { keyPrefix: 'meta.home' });
+
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Zdielaj.si" },
+    { name: "description", content: t("description") },
   ];
 }
 
@@ -94,6 +96,7 @@ export default function Home() {
               <li>{t("pricing.standard.video")}</li>
               <li>{t("pricing.standard.listOfAlbums")}</li>
               <li>{t("pricing.standard.publicProfile")}</li>
+              <li>{t("pricing.standard.mfa")}</li>
               <li><Trans i18nKey="home.pricing.standard.filesAreNotDeleted" /></li>
             </ul>
           </CardBody>

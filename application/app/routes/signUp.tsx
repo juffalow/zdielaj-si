@@ -1,39 +1,33 @@
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ZodError } from 'zod';
 import SignUpForm from './signUp/form';
 import useAuth from '../utils/useAuth';
-import { signUpFormSchema } from './signUp/formValidation';
+import ConfirmForm from './signUp/confirmForm';
+import ThankYou from './signUp/thankYou';
 import logger from '../logger';
 
 export function meta() {
-  return [{ title: "Sign Up" }, { name: "description", content: "Sign Up" }];
+  return [{ title: "Sign Up | Zdielaj.si" }, { name: "description", content: "Sign Up" }];
 }
 
 export default function SignUp() {
   const { t } = useTranslation('', { keyPrefix: 'signUp' });
-  const { signUp } = useAuth();
+  const { signUp, confirmSignUp } = useAuth();
+  const [ username, setUsername ] = useState('');
+  const [ step, setStep ] = useState<'form' | 'confirm' | 'thankYou'>('form');
 
-  const onSubmit = useCallback(async (prevState: unknown, state: FormData): Promise<{ name: string, email: string, password: string, error: string | null }> => {
-    const name = state.get('name') as string;
-    const email = state.get('email') as string;
-    const password = state.get('password') as string;
-    let error = null;
+  const onSubmit = useCallback(async (name: string, email: string, password: string): Promise<void> => {
+    await signUp(name, email, password);
+    
+    setUsername(email);
+    setStep('confirm');
+  }, [ signUp, setUsername ]);
 
-    try {
-      signUpFormSchema.parse({ name, email, password });
-    } catch (err) {
-      logger.error('Unable to sign up!', { error: err });
+  const onConfirm = useCallback(async (code: string) => {
+    await confirmSignUp(username, code);
 
-      if (err instanceof ZodError) {
-        return { name, email, password, error: err.issues.map((issue) => issue.message).join(',') };
-      }
-
-      return { name, email, password, error: 'Unable to sign up!' };
-    }
-
-    return { name, email, password, error: null };
-  }, []);
+    setStep('thankYou');
+  }, [ confirmSignUp, username ]);
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -44,7 +38,15 @@ export default function SignUp() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <SignUpForm onSubmit={onSubmit} />
+        {
+          step === 'form' ? (
+            <SignUpForm signUp={onSubmit} />
+          ) : step === 'confirm' ? (
+            <ConfirmForm onConfirmSubmit={onConfirm} />
+          ) : (
+            <ThankYou />
+          )
+        }
       </div>
     </div>
   );

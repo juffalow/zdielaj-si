@@ -12,6 +12,7 @@ import {
   signUp as signUpAmplify,
   confirmSignUp as confirmSignUpAmplify,
   signIn as signInAmplify,
+  confirmSignIn as confirmSignInAmplify,
   signOut as signOutAmplify,
   resetPassword as resetPasswordAmplify,
   confirmResetPassword as confirmResetPasswordAmplify,
@@ -27,9 +28,10 @@ interface AuthContextType {
   hasInitialized: boolean;
   loading: boolean;
   error?: Error;
-  signIn: (username: string, password: string) => Promise<void>;
+  signIn: (username: string, password: string) => Promise<{ isSuccess: boolean, challenge?: string }>;
+  confirmSignIn: (code: string) => Promise<void>;
   signUp: (name: string, email: string, password: string) => Promise<void>;
-  confirmSignUp: (username: string, password: string) => Promise<void>;
+  confirmSignUp: (username: string, code: string) => Promise<void>;
   resetPassword: (username: string) => Promise<void>;
   confirmResetPassword: (username: string, code: string, password: string) => Promise<void>;
   updatePassword: (currentPassword: string, newPassword: string) => Promise<void>;
@@ -72,34 +74,56 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
     });
   }, []);
 
-  async function signIn(username: string, password: string): Promise<void> {
+  /**
+   * Sign in with email and password.
+   * If the sign in is successful, it returns `{ isSuccess: true }` without any challenge.
+   * If the sign in is not successful, it returns `{ isSuccess: false }` and the challenge type if applicable.
+   * @param username - Email address
+   * @param password - Password
+   * @returns { isSuccess: boolean, challenge?: string } - Whether the sign in was successful and the challenge type if applicable
+   */
+  async function signIn(username: string, password: string): Promise<{ isSuccess: boolean, challenge?: string }> {
     setLoading(true);
 
     try {
       const response = await signInAmplify({ username, password });
 
+      if (response.isSignedIn === false) {
+        if (response.nextStep.signInStep === 'CONFIRM_SIGN_IN_WITH_TOTP_CODE') {
+          return {
+            isSuccess: false,
+            challenge: 'TOTP_CODE',
+          };
+        }
+
+        return {
+          isSuccess: false,
+        };
+      }
+
       logger.debug('Sign in response', response);
 
-      const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
+      await refreshSession();
 
-      setUser({
-        id: user.sub,
-        username: user.email,
-        email: user.email,
-        meta: {
-          name: user.name as string,
-        },
-        accessToken: session.tokens?.accessToken.toString() as string,
-        idToken: session.tokens?.idToken?.toString() as string,
-      });
-
-      setLastUpdate(new Date());
+      return {
+        isSuccess: true,
+      };
     } catch (error) {
       logger.warn('Sign in error!', error);
       throw error;
     } finally {
       setLoading(false);
     }
+  }
+  
+  async function confirmSignIn(code: string): Promise<void> {
+    const response = await confirmSignInAmplify({
+      challengeResponse: code,
+    });
+
+    logger.debug('Confirm sign in response', response);
+
+    await refreshSession();
   }
 
   async function signUp(name: string, email: string, password: string): Promise<void> {
@@ -191,6 +215,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
       hasInitialized,
       loading,
       signIn,
+      confirmSignIn,
       signUp,
       confirmSignUp,
       resetPassword,
@@ -213,13 +238,13 @@ export function RequireAuth({ children }: { children: ReactNode }) {
   const auth = useAuth();
   const location = useLocation();
 
-  if (auth.hasInitialized === false) {
-    return null;
-  }
+  // if (auth.hasInitialized === false) {
+  //   return null;
+  // }
 
-  if (!auth.user) {
-    return <Navigate to="/prihlasit-sa" state={{ from: location }} replace />;
-  }
+  // if (!auth.user) {
+  //   return <Navigate to="/prihlasit-sa" state={{ from: location }} replace />;
+  // }
 
   return children;
 }

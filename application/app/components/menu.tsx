@@ -52,7 +52,7 @@ export default function menu() {
     : (<>&#x1F1F8;&#x1F1F0; SK</>);
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth="full" isBordered>
+    <Navbar onMenuOpenChange={setIsMenuOpen} position="static" maxWidth="full" isBordered>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -86,14 +86,26 @@ export default function menu() {
       }
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signIn', { keyPrefix: 'routes' })}`}>{t('signIn')}</Link>
-        </NavbarItem>
-        <NavbarItem className="hidden lg:flex">
-          <Button as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`} color="primary" variant="flat">
-            {t('signUp')}
-          </Button>
-        </NavbarItem>
+        {
+          user === null ? (
+            <>
+              <NavbarItem className="hidden lg:flex">
+                <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signIn', { keyPrefix: 'routes' })}`}>{t('signIn')}</Link>
+              </NavbarItem>
+              <NavbarItem className="hidden lg:flex">
+                <Button as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`} color="primary" variant="flat">
+                  {t('signUp')}
+                </Button>
+              </NavbarItem>
+            </>
+          ) : (
+            <NavbarItem className="hidden lg:flex">
+              <Button color="primary" variant="flat" onPress={signOut}>
+                {t('signOut')}
+              </Button>
+            </NavbarItem>
+          )
+        }
         <Dropdown>
           <NavbarItem>
             <DropdownTrigger>

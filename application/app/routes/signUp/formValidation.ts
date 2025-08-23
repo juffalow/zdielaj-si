@@ -19,7 +19,7 @@ export const signUpFormSchema = z.object({
     message: 'Password must contain at least one number',
     path: ['password'],
   }).refine((val) => {
-    return /[!@#$%^&*]/.test(val)
+    return /[!?@#$%^&*()_+]/.test(val)
   }, {
     message: 'Password must contain at least one special character',
     path: ['password'],

@@ -38,6 +38,12 @@
       "status": "Status"
     }
   },
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "Do you also have a problem that some applications reduce the quality of your photos and videos? Here you can share them without any problems in full quality!"
+    }
+  },
   "home": {
     "title": "Share photos and videos in full quality",
     "subtitle": "Do you also have a problem that some applications reduce the quality of your photos and videos? Here you can share them without any problems in full quality!",
@@ -103,6 +109,7 @@
         "listOfAlbums": "list of albums",
         "passwordProtect": "password protect",
         "publicProfile": "public profile",
+        "mfa": "multi-factor authentication",
         "filesAreNotDeleted": "files are <strong>not deleted</strong>",
         "register": "Register"
       }
@@ -120,6 +127,10 @@
       "passwordPlaceholder": "Enter your password",
       "forgotPassword": "Forgot your password?",
       "signInButton": "Sign in"
+    },
+    "totp": {
+      "totpCode": "Code",
+      "confirmSignInButton": "Confirm sign in"
     }
   },
   "signUp": {
@@ -139,7 +150,24 @@
         "atLeastOneSpecialCharacter": "At least one special character",
         "atLeastOneNumber": "At least one number"
       },
-      "signUpButton": "Sign up"
+      "signUpButton": "Sign up",
+      "errors": {
+        "userAlreadyExists": "User with this e-mail address already exists!",
+        "default": "Unable to sign up!"
+      }
+    },
+    "confirmForm": {
+      "code": "Code",
+      "requiredField": "This field is required.",
+      "confirmSignUpButton": "Confirm sign up",
+      "errors": {
+        "codeMismatch": "Invalid verification code provided, please try again.",
+        "default": "Unable to confirm sign up!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "You have successfully created your account. You can now sign in to your account.",
+      "subtitleLink": "Sign in"
     }
   },
   "album": {
@@ -148,6 +176,87 @@
       "subtitle": "The album you are looking for does not exist.",
       "clarifyingText": "Maybe you typed in wrong address, used an old link or the album was deleted.",
       "ctaButton": "Back to home page"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "detail": {
+      "title": "Account details",
+      "email": "E-mail"
+    },
+    "changePassword": {
+      "title": "Change password",
+      "currentPassword": "Current password",
+      "currentPasswordPlaceholder": "1ZastaraleHeslo!",
+      "newPassword": "New password",
+      "newPasswordPlaceholder": "Nove1TazkeHeslo!",
+      "confirmPassword": "Confirm new password",
+      "button": "Change password"
+    },
+    "mfa": {
+      "title": "Multi-factor authentication",
+      "activate": {
+        "title": "Activate multi-factor authentication",
+        "subtitle": "After activating multi-factor authentication, you will be able to sign in with a code sent to your e-mail."
+      },
+      "confirm": {
+        "title": "Confirm multi-factor authentication",
+        "subtitle": "Enter the code sent to your e-mail to confirm multi-factor authentication.",
+        "submitButton": "Confirm"
+      }
+    },
+    "publicProfile": {
+      "title": "Public profile",
+      "activate": {
+        "title": "Activate public profile",
+        "subtitle": "After activating your public profile, you will choose a unique URL address for your profile, where other users will be able to see your albums.",
+        "moreInfo": "You can find more information on the pages",
+        "moreInfoLink": "About the application, in the Public Profile section",
+        "cta": "Activate"
+      },
+      "createForm": {
+        "mandatoryField": "This field is required.",
+        "fieldName": "Name",
+        "fieldSlug": "Slug",
+        "fieldSlugHelp1": "Only lowercase letters, numbers, and hyphens are allowed.",
+        "fieldSlugHelp2": "The profile will be available at:",
+        "fieldDescription": "Description",
+        "createButton": "Create",
+        "cancelButton": "Cancel",
+        "errorMessage": "Failed to create public profile."
+      },
+      "updateForm": {
+        "mandatoryField": "This field is required.",
+        "fieldName": "Name",
+        "fieldSlug": "Slug",
+        "fieldDescription": "Description",
+        "fieldHomepage": "Homepage",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Save",
+        "errorMessage": "Failed to update public profile."
+      }
+    },
+    "statistics": {
+      "title": "Statistics",
+      "numberOfAlbums": "Number of albums",
+      "numberOfFiles": "Number of files",
+      "totalSize": "Total size"
+    },
+    "deleteProfile": {
+      "title": "Delete account",
+      "subtitle": "All uploaded files and albums will be deleted along with your account.",
+      "submitButton": "Delete profile",
+      "clarifyingText": "This feature is not supported yet. If you want to delete your account, please contact us at the following email address"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "You don't have any albums yet!",
+      "subtitle": "You don't have any albums yet.",
+      "ctaButton": "Go to home page and create your first album"
     }
   }
 }

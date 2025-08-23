@@ -28,6 +28,7 @@ type Album = {
   };
   name?: string;
   description?: string;
+  media: AlbumFile[];
   files: AlbumFile[];
   layout: 'cols' | 'rows' | 'tiles';
   gaps: 'none' | 'small' | 'medium' | 'large';
