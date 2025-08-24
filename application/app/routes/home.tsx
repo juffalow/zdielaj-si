@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import type { Route } from './+types/home';
 import { Card, CardHeader, CardBody, CardFooter, Button } from '@heroui/react';
@@ -18,6 +18,13 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+export function links() {
+  return [
+    { rel: "alternate", href: "https://zdielaj.si/en", hrefLang: "en" },
+    { rel: "alternate", href: "https://zdielaj.si/sk", hrefLang: "sk" },
+  ];
+}
+
 export default function Home() {
   const { t } = useTranslation('', { keyPrefix: 'home' });
   const navigate = useNavigate();
@@ -28,7 +35,7 @@ export default function Home() {
     uploadFiles,
   } = useUpload();
 
-  const onDrop = async (acceptedFiles: File[]) => {
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
     const album: Album = user === null ? 
       await createAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })))
       : await createUserAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })));
@@ -37,18 +44,21 @@ export default function Home() {
     
     uploadFiles(acceptedFiles, album.files.map(f => f.uploadUrl as string));
   
-    navigate(`/album/${album.id}`, { state: { album, isNew: true } });    
-  };
+    navigate(`/${t("prefix", { keyPrefix: "routes" })}${t("album", { keyPrefix: "routes" }).replace(':id', album.id)}`, { state: { album, isNew: true } });    
+  }, [user, uploadFiles, navigate]);
 
   const {
     getRootProps,
     getInputProps,
     isDragActive,
+    open,
   } = useDropzone({
     onDrop,
     accept: {
-      'image/*': ['.*'],
-    }
+      'image/*': [],
+    },
+    maxFiles: user === null ? 10 : 50,
+    maxSize: user === null ? 1024 * 1024 * 10 : undefined,
   });
 
   useEffect(() => {
@@ -64,7 +74,7 @@ export default function Home() {
         <div {...getRootProps()} className="rounded-xl text-center" style={{ border: '1px #28a745 dashed', padding: '40px' }} data-tracking-id="home_upload_area_click">
           <input {...getInputProps()} />
           <p>Move photos here or select them by clicking</p>
-          <Button className="mt-5" color="success" variant="ghost" data-tracking-id="home_upload_button_click">Upload files</Button>
+          <Button className="mt-5" color="success" variant="solid" size="lg" data-tracking-id="home_upload_button_click" onPress={open}>Upload files</Button>
         </div>
       </div>
 

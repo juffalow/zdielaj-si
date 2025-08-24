@@ -176,6 +176,38 @@
       "subtitle": "The album you are looking for does not exist.",
       "clarifyingText": "Maybe you typed in wrong address, used an old link or the album was deleted.",
       "ctaButton": "Back to home page"
+    },
+    "userAlbum": {
+      "name": "Name",
+      "namePlaceholder": "Enter the name of the album",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter the description of the album",
+      "layout": "Layout",
+      "layoutOptions": {
+        "cols": "Columns",
+        "rows": "Rows",
+        "tiles": "Tiles"
+      },
+      "gaps": "Gaps",
+      "gapsOptions": {
+        "none": "No gaps",
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      },
+      "changeLayout": "User can change the layout",
+      "retention": "File retention",
+      "retentionOptions": {
+        "1": "1 day",
+        "7": "1 week",
+        "31": "1 month",
+        "366": "1 year",
+        "0": "Forever"
+      },
+      "link": "Album link",
+      "authWarning": "Only logged in user can edit their album.",
+      "submitButton": "Save",
+      "copyButton": "Copy link"
     }
   },
   "profile": {

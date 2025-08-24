@@ -10,6 +10,13 @@ export function meta() {
   return [{ title: "Sign Up | Zdielaj.si" }, { name: "description", content: "Sign Up" }];
 }
 
+export function links() {
+  return [
+    { rel: "alternate", href: "https://zdielaj.si/en/sign-up", hrefLang: "en" },
+    { rel: "alternate", href: "https://zdielaj.si/sk/zaregistrovat-sa", hrefLang: "sk" },
+  ];
+}
+
 export default function SignUp() {
   const { t } = useTranslation('', { keyPrefix: 'signUp' });
   const { signUp, confirmSignUp } = useAuth();

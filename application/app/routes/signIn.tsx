@@ -12,6 +12,13 @@ export function meta() {
   return [{ title: "Sign In | Zdielaj.si" }, { name: "description", content: "Sign In" }];
 }
 
+export function links() {
+  return [
+    { rel: "alternate", href: "https://zdielaj.si/en/sign-in", hrefLang: "en" },
+    { rel: "alternate", href: "https://zdielaj.si/sk/prihlasit-sa", hrefLang: "sk" },
+  ];
+}
+
 export default function SignIn() {
   const { t } = useTranslation('', { keyPrefix: 'signIn' });
   const { signIn, confirmSignIn } = useAuth();
