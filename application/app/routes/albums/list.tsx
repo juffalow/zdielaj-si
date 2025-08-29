@@ -44,16 +44,16 @@ export default function AlbumsList({ albumsPromise, onLastAlbumVisible }: { albu
                 album.media.length > 0 ? (
                 <Image
                   alt="Card background"
-                  className="object-cover w-full rounded-xl rounded-b-none"
+                  className="object-cover w-full rounded-xl rounded-b-none aspect-square"
                   src={album.media[0].thumbnails[0]}
                   fallbackSrc={noPreview}
                 />
               ) : (
-                <div className="w-full h-full bg-gray-200 rounded-xl rounded-b-none" />
+                <div className="w-full h-full bg-gray-200 rounded-xl rounded-b-none aspect-square" />
               )
             }
             </CardBody>
-            <CardFooter className="text-small">
+            <CardFooter className="flex-col">
               <h4 className="font-bold text-large">{album.name}</h4>
               {
                 index === albums.length - 1 && (
