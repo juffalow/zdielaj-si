@@ -1,22 +1,32 @@
-import { use } from 'react';
+import { use, useEffect } from 'react';
 import {
   Card,
   CardBody,
   CardFooter,
   Image,
 } from '@heroui/react';
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { formatDate } from '../../utils/functions';
+import useOnScreen from '../../utils/useOnScreen';
 
-export default function PublicProfileAlbums({ fetchAlbums }: { fetchAlbums: Promise<Album[]> }) {
+export default function PublicProfileAlbums({ fetchAlbums, onLastAlbumVisible }: { fetchAlbums: Promise<Album[]>, onLastAlbumVisible: () => void }) {
   const albums = use(fetchAlbums);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { measureRef, isIntersecting } = useOnScreen();
+
+  useEffect(() => {
+    if (isIntersecting && albums.length === 8) {
+      onLastAlbumVisible();
+    }
+  }, [isIntersecting, albums]);
+
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {
-        albums.map(album => (
-          <Card key={album.id} isPressable={true} as={Link} to={`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`}>
+        albums.map((album, index) => (
+          <Card key={album.id} isPressable={true} onPress={() => navigate(`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`)}>
             <CardBody className="overflow-visible p-0">
               <Image
                 alt="Card background"
@@ -26,6 +36,11 @@ export default function PublicProfileAlbums({ fetchAlbums }: { fetchAlbums: Prom
             </CardBody>
             <CardFooter className="text-small">
               <h4 className="font-bold text-large">{album.name}</h4>
+              {
+                index === albums.length - 1 && (
+                  <span ref={measureRef} />
+                )
+              }
               <p className="text-default-500">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</p>
             </CardFooter>
           </Card>
