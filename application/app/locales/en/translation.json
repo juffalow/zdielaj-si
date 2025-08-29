@@ -290,5 +290,13 @@
       "subtitle": "You don't have any albums yet.",
       "ctaButton": "Go to home page and create your first album"
     }
+  },
+  "publicProfile": {
+    "notFound": {
+      "title": "Public profile not found!",
+      "subtitle": "The public profile you are looking for does not exist.",
+      "clarifyingText": "Maybe you typed in wrong address, used an old link or the public profile was deleted.",
+      "ctaButton": "Back to home page"
+    }
   }
 }

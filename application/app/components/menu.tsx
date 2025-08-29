@@ -59,7 +59,7 @@ export default function menu() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <p className="font-bold text-inherit">Zdielaj.si</p>
+          <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}`} className="font-bold text-inherit" data-tracking-id="desktop_menu_home_click">Zdielaj.si</Link>
         </NavbarBrand>
       </NavbarContent>
 
@@ -67,17 +67,17 @@ export default function menu() {
         user !== null ? (
           <NavbarContent className="hidden sm:flex gap-4" justify="center">
             <NavbarItem>
-              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('albums', { keyPrefix: 'routes' })}`} color="foreground">
+              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('albums', { keyPrefix: 'routes' })}`} color="foreground" data-tracking-id="desktop_menu_albums_click">
                 {t('albums')}
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('userProfile', { keyPrefix: 'routes' })}`} color="foreground">
+              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('userProfile', { keyPrefix: 'routes' })}`} color="foreground" data-tracking-id="desktop_menu_profile_click">
                 {t('profile')}
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('subscription', { keyPrefix: 'routes' })}`} color="foreground">
+              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('subscription', { keyPrefix: 'routes' })}`} color="foreground" data-tracking-id="desktop_menu_subscription_click">
                 {t('subscription')}
               </Link>
             </NavbarItem>
@@ -89,18 +89,18 @@ export default function menu() {
         {
           user === null ? (
             <>
-              <NavbarItem className="hidden lg:flex">
-                <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signIn', { keyPrefix: 'routes' })}`}>{t('signIn')}</Link>
+              <NavbarItem className="hidden sm:flex">
+                <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signIn', { keyPrefix: 'routes' })}`} data-tracking-id="desktop_menu_sign_in_click">{t('signIn')}</Link>
               </NavbarItem>
-              <NavbarItem className="hidden lg:flex">
-                <Button as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`} color="primary" variant="flat">
+              <NavbarItem className="hidden sm:flex">
+                <Button as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`} color="primary" variant="flat" data-tracking-id="desktop_menu_sign_up_click">
                   {t('signUp')}
                 </Button>
               </NavbarItem>
             </>
           ) : (
-            <NavbarItem className="hidden lg:flex">
-              <Button color="primary" variant="flat" onPress={signOut}>
+            <NavbarItem className="hidden sm:flex">
+              <Button color="primary" variant="flat" onPress={signOut} data-tracking-id="desktop_menu_sign_out_click">
                 {t('signOut')}
               </Button>
             </NavbarItem>
@@ -168,20 +168,86 @@ export default function menu() {
         </Dropdown>
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-              }
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+        {
+          user !== null ? (
+            <>
+              <NavbarMenuItem>
+                <Link
+                  as={RouterLink}
+                  className="w-full"
+                  color="foreground"
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('albums', { keyPrefix: 'routes' })}`}
+                  size="lg"
+                  data-tracking-id="mobile_menu_albums_click"
+                >
+                  {t('albums')}
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem>
+                <Link
+                  as={RouterLink}
+                  className="w-full"
+                  color="foreground"
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('userProfile', { keyPrefix: 'routes' })}`}
+                  size="lg"
+                  data-tracking-id="mobile_menu_profile_click"
+                >
+                  {t('profile')}
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem>
+                <Link
+                  as={RouterLink}
+                  className="w-full"
+                  color="foreground"
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('subscription', { keyPrefix: 'routes' })}`}
+                  size="lg"
+                  data-tracking-id="mobile_menu_subscription_click"
+                >
+                  {t('subscription')}
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem>
+                <Link
+                  className="w-full"
+                  color="danger"
+                  size="lg"
+                  onPress={signOut}
+                  data-tracking-id="mobile_menu_sign_out_click"
+                >
+                  {t('signOut')}
+                </Link>
+              </NavbarMenuItem>
+            </>
+          ) : (
+            <>
+              <NavbarMenuItem>
+                <Link
+                  as={RouterLink}
+                  className="w-full"
+                  color="foreground"
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signIn', { keyPrefix: 'routes' })}`}
+                  size="lg"
+                  data-tracking-id="mobile_menu_sign_in_click"
+                >
+                  {t('signIn')}
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem>
+                <Link
+                  as={RouterLink}
+                  className="w-full"
+                  color="foreground"
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`}
+                  size="lg"
+                  data-tracking-id="mobile_menu_sign_up_click"
+                >
+                  {t('signUp')}
+                </Link>
+              </NavbarMenuItem>
+            </>
+          )
+        }
       </NavbarMenu>
     </Navbar>
   );

@@ -1,6 +1,6 @@
 {
   "routes": {
-    "prefix": "/",
+    "prefix": "sk/",
     "signIn": "prihlasit-sa",
     "signUp": "registracia",
     "passwordReset": "reset-hesla",
@@ -12,6 +12,31 @@
     "albums": "albumy",
     "album": "album/:id",
     "home": ""
+  },
+  "components": {
+    "shareButton": {
+      "copyLink": "Kopírovať odkaz"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Presuň sem fotky alebo ich vyber kliknutím"
+    },
+    "menu": {
+      "albums": "Albumy",
+      "profile": "Profil",
+      "signIn": "Prihlásiť sa",
+      "signUp": "Registrovať sa",
+      "signOut": "Odhlásiť sa",
+      "subscription": "Predplatné"
+    },
+    "footer": {
+      "about": "O aplikácii",
+      "contact": "Kontakt",
+      "description": "Aplikácia pomáha užívateľom rýchlo a ľahko zdielať fotografie a videá bez zníženia kvality.",
+      "home": "Domov",
+      "links": "Odkazy",
+      "register": "Registrácia",
+      "status": "Status"
+    }
   },
   "home": {
     "title": "Zdieľaj fotky a videá v plnej kvalite",
@@ -245,14 +270,6 @@
       "modalBody": "Naozaj chceš vymazať tento album?",
       "modalCloseButton": "Zatvoriť",
       "modalSubmitButton": "Vymazať"
-    }
-  },
-  "components": {
-    "shareButton": {
-      "copyLink": "Kopírovať odkaz"
-    },
-    "uploadFiles": {
-      "dropzoneTitle": "Presuň sem fotky alebo ich vyber kliknutím"
     }
   },
   "menu": {

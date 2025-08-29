@@ -28,7 +28,7 @@ export function links() {
 export default function Home() {
   const { t } = useTranslation('', { keyPrefix: 'home' });
   const navigate = useNavigate();
-  const { user, refreshSession } = useAuth();
+  const { user } = useAuth();
 
   const {
     clear,
@@ -73,12 +73,12 @@ export default function Home() {
       <div className="mt-5 p-8">
         <div {...getRootProps()} className="rounded-xl text-center" style={{ border: '1px #28a745 dashed', padding: '40px' }} data-tracking-id="home_upload_area_click">
           <input {...getInputProps()} />
-          <p>Move photos here or select them by clicking</p>
-          <Button className="mt-5" color="success" variant="solid" size="lg" data-tracking-id="home_upload_button_click" onPress={open}>Upload files</Button>
+          <p>{t("uploadArea.title")}</p>
+          <Button className="mt-5" color="success" variant="solid" size="lg" data-tracking-id="home_upload_button_click" onPress={open}>{t("uploadArea.button")}</Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 mt-10">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-10">
         <Card shadow="sm" fullWidth={true}>
           <CardHeader className="bg-blue-100">
             <h2 className="text-center text-2xl font-semibold w-full">{t("pricing.default.title")}</h2>
@@ -111,7 +111,7 @@ export default function Home() {
             </ul>
           </CardBody>
           <CardFooter>
-          <Button as={Link} to={`/${t("prefix", { keyPrefix: "routes" })}${t("signUp", { keyPrefix: "routes" })}`} variant="bordered" fullWidth={true}>Sign up</Button>
+          <Button as={Link} to={`/${t("prefix", { keyPrefix: "routes" })}${t("signUp", { keyPrefix: "routes" })}`} variant="bordered" fullWidth={true} data-tracking-id="home_standard_sign_up_click">Sign up</Button>
           </CardFooter>
         </Card>
         <Card>
@@ -131,7 +131,7 @@ export default function Home() {
             </ul>
           </CardBody>
           <CardFooter>
-            <Button as={Link} to={`/${t("prefix", { keyPrefix: "routes" })}${t("signUp", { keyPrefix: "routes" })}`} variant="bordered" fullWidth={true}>Sign up</Button>
+            <Button as={Link} to={`/${t("prefix", { keyPrefix: "routes" })}${t("signUp", { keyPrefix: "routes" })}`} variant="bordered" fullWidth={true} data-tracking-id="home_free_sign_up_click">Sign up</Button>
           </CardFooter>
         </Card>
       </div>

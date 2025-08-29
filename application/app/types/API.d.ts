@@ -44,6 +44,21 @@ namespace API {
     }
   }
 
+  namespace ShortLinks {
+    interface GetShortLinkResponse {
+      data: {
+        shortLink: {
+          album: {
+            id: ID,
+          },
+          createdAt: string,
+          id: ID,
+          typename: 'ShortLink',
+        };
+      };
+    }
+  }
+
   interface GetRefreshTokenResponse {
     error: unknown;
     data: {
