@@ -10,6 +10,7 @@ import { I18nextProvider } from 'react-i18next';
 import { HeroUIProvider } from '@heroui/react';
 import { AuthProvider } from './utils/useAuth';
 import { UploadProvider } from './utils/useUpload';
+import Tracking from './utils/Tracking';
 import type { Route } from './+types/root';
 import Menu from './components/menu';
 import Footer from './components/footer';
@@ -17,16 +18,6 @@ import i18n from './i18n';
 import './app.css';
 
 export const links: Route.LinksFunction = () => [
-  // { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  // {
-  //   rel: "preconnect",
-  //   href: "https://fonts.gstatic.com",
-  //   crossOrigin: "anonymous",
-  // },
-  // {
-  //   rel: "stylesheet",
-  //   href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  // },
   {
     rel: "icon",
     href: "/zdielaj-si-logo.png",
@@ -52,6 +43,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   {children}
                 </main>
                 <Footer />
+
+                <Tracking />
               </HeroUIProvider>
             </UploadProvider>
           </AuthProvider>
