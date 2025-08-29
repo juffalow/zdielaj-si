@@ -30,7 +30,7 @@ export default function PublicProfileAlbums({ fetchAlbums, onLastAlbumVisible }:
             <CardBody className="overflow-visible p-0">
               <Image
                 alt="Card background"
-                className="object-cover w-full rounded-xl rounded-b-none"
+                className="object-cover w-full rounded-xl rounded-b-none aspect-square"
                 src={album.media[0].thumbnails[0]}
               />
             </CardBody>
