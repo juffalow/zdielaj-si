@@ -234,21 +234,6 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
   );
 }
 
-export function RequireAuth({ children }: { children: ReactNode }) {
-  const auth = useAuth();
-  const location = useLocation();
-
-  // if (auth.hasInitialized === false) {
-  //   return null;
-  // }
-
-  // if (!auth.user) {
-  //   return <Navigate to="/prihlasit-sa" state={{ from: location }} replace />;
-  // }
-
-  return children;
-}
-
 export default function useAuth() {
   return useContext(AuthContext);
 }
