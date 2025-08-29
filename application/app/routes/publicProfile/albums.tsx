@@ -23,7 +23,7 @@ export default function PublicProfileAlbums({ fetchAlbums, onLastAlbumVisible }:
   }, [isIntersecting, albums]);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
       {
         albums.map((album, index) => (
           <Card key={album.id} isPressable={true} onPress={() => navigate(`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`)}>
@@ -32,9 +32,10 @@ export default function PublicProfileAlbums({ fetchAlbums, onLastAlbumVisible }:
                 alt="Card background"
                 className="object-cover w-full rounded-xl rounded-b-none aspect-square"
                 src={album.media[0].thumbnails[0]}
+                classNames={{ wrapper: 'min-w-full' }}
               />
             </CardBody>
-            <CardFooter className="text-small">
+            <CardFooter className="flex-col">
               <h4 className="font-bold text-large">{album.name}</h4>
               {
                 index === albums.length - 1 && (

@@ -35,7 +35,7 @@ export default function AlbumsList({ albumsPromise, onLastAlbumVisible }: { albu
   }, [isIntersecting, albums]);
 
   return (
-    <div className="grid grid-cols-4 gap-4 mb-4">
+    <div className="grid ggrid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
       {
         albums.map((album, index) => (
           <Card key={album.id} isPressable={true} as={Link} to={`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`}>
@@ -47,6 +47,7 @@ export default function AlbumsList({ albumsPromise, onLastAlbumVisible }: { albu
                   className="object-cover w-full rounded-xl rounded-b-none aspect-square"
                   src={album.media[0].thumbnails[0]}
                   fallbackSrc={noPreview}
+                  classNames={{ wrapper: 'min-w-full' }}
                 />
               ) : (
                 <div className="w-full h-full bg-gray-200 rounded-xl rounded-b-none aspect-square" />

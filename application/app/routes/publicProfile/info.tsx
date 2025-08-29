@@ -1,5 +1,4 @@
 import { use } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   FaHome,
   FaFacebook,
@@ -9,11 +8,10 @@ import {
 } from 'react-icons/fa';
 
 const Info = ({ publicProfilePromise }: { publicProfilePromise: Promise<PublicProfile> }) => {
-  const { t } = useTranslation();
   const publicProfile = use(publicProfilePromise);
 
   return (
-    <div>
+    <div className="mb-10">
       <h1 className="text-center mb-2 text-5xl w-full">{publicProfile.name}</h1>
       <p className="text-center" style={{ fontSize: '2rem' }}>
         {

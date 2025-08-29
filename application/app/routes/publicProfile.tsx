@@ -1,7 +1,8 @@
 import { useState, useCallback, Suspense } from 'react';
 import { useParams } from 'react-router';
 import NotFound from './publicProfile/notFound';
-import PublicProfileLoader from './publicProfile/loader';
+import PublicProfileLoader from './publicProfile/profileLoader';
+import PublicProfileAlbumsLoader from './publicProfile/albumsLoader';
 import PublicProfileAlbums from './publicProfile/albums';
 import Info from './publicProfile/info';
 import { getPublicProfile, getPublicProfileAlbums } from '../api/publicprofiles';
@@ -20,7 +21,7 @@ export default function PublicProfile() {
   const publicProfilePromise = getPublicProfile(params.id as string);
 
   const loadMore = useCallback(() => {
-    setAlbumPromises([...albumPromises, getPublicProfileAlbums({ publicProfileId: params.id as string, first: albumPromises.length * 8 })]);
+    setAlbumPromises([...albumPromises, getPublicProfileAlbums({ publicProfileId: params.id as string, after: albumPromises.length * 8, first: 8 })]);
   }, [albumPromises, setAlbumPromises]);
 
   return (
@@ -31,7 +32,7 @@ export default function PublicProfile() {
       {
         albumPromises.map((albumPromise, index) => {
           return (
-            <Suspense key={index} fallback={<p>Loading...</p>}>
+            <Suspense key={index} fallback={<PublicProfileAlbumsLoader />}>
               <PublicProfileAlbums fetchAlbums={albumPromise} onLastAlbumVisible={loadMore} />
             </Suspense>
           );
