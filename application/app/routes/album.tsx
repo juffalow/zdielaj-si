@@ -21,7 +21,7 @@ export default function Album() {
 
   if (files.length > 0 && location.state.isNew) {
     return (
-      <UserAlbum album={location.state.album} updateAlbum={null} />
+      <UserAlbum album={location.state.album} />
     );
   }
 

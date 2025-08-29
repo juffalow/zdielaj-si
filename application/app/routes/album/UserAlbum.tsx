@@ -6,14 +6,29 @@ import type { PressEvent } from '@heroui/react';
 // import MobileBottomButton from '../../components/MobileBottomButton';
 import useAuth from '../../utils/useAuth';
 import useUpload from '../../utils/useUpload';
+import { updateAlbum } from '../../api/album';
 
-export default function UserAlbum({ album, updateAlbum }: { album: Album, updateAlbum: any }) {
+export default function UserAlbum({ album }: { album: Album }) {
   const { t } = useTranslation('', { keyPrefix: 'album.userAlbum' });
   const { user } = useAuth();
   const { files } = useUpload();
   const userAgent = navigator.userAgent.toLowerCase();
   const isMobile = /iphone|ipad|ipod|android|windows phone/g.test(userAgent);
-  const [state, formAction, isPending] = useActionState(updateAlbum, { name: album.name, description: album.description });
+
+  const onSubmit = async (prevState: unknown, state: FormData): Promise<{ name: string, description: string, layout: 'cols' | 'rows' | 'tiles', gaps: 'none' | 'small' | 'medium' | 'large', retention: '1' | '7' | '31' | '366' | '0', changeLayout: boolean }> => {
+    const name = state.get('name') as string;
+    const description = state.get('description') as string;
+    const layout = state.get('layout') as 'cols' | 'rows' | 'tiles';
+    const gaps = state.get('gaps') as 'none' | 'small' | 'medium' | 'large';
+    const retention = state.get('retention') as '1' | '7' | '31' | '366' | '0';
+    const changeLayout = state.get('changeLayout') === 'on';
+
+    await updateAlbum(album.id, { name, description, layout, gaps, retention, changeLayout });
+
+    return { name, description, layout, gaps, retention, changeLayout };
+  };
+
+  const [state, formAction, isPending] = useActionState(onSubmit, { name: album.name, description: album.description, layout: 'cols', gaps: 'medium', retention: '0', changeLayout: true });
 
   const onCopyClick = (event: PressEvent) => {
     navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`);
@@ -24,6 +39,8 @@ export default function UserAlbum({ album, updateAlbum }: { album: Album, update
       (event.target as HTMLButtonElement).innerHTML = t("album.userAlbum.copyButton");
     }, 2000);
   };
+
+  console.log(state);
 
   return (
     <div className="grid grid-cols-3 gap-4 mt-10">
@@ -51,7 +68,7 @@ export default function UserAlbum({ album, updateAlbum }: { album: Album, update
             }}
           />
 
-          <Select label={t("layout")} name="layout" labelPlacement="outside" defaultSelectedKeys={["cols"]} isDisabled={user === null}>
+          <Select label={t("layout")} name="layout" labelPlacement="outside" defaultSelectedKeys={[ state.layout ]} isDisabled={user === null}>
             <SelectItem key="cols">{t("layoutOptions.cols")}</SelectItem>
             <SelectItem key="rows">{t("layoutOptions.rows")}</SelectItem>
             <SelectItem key="tiles">{t("layoutOptions.tiles")}</SelectItem>
@@ -61,7 +78,7 @@ export default function UserAlbum({ album, updateAlbum }: { album: Album, update
             {t("changeLayout")}
           </Checkbox>
 
-          <Select label={t("gaps")} name="gaps" labelPlacement="outside" defaultSelectedKeys={["medium"]} isDisabled={user === null}>
+          <Select label={t("gaps")} name="gaps" labelPlacement="outside" defaultSelectedKeys={[ state.gaps ]} isDisabled={user === null}>
             <SelectItem key="none">{t("gapsOptions.none")}</SelectItem>
             <SelectItem key="small">{t("gapsOptions.small")}</SelectItem>
             <SelectItem key="medium">{t("gapsOptions.medium")}</SelectItem>
