@@ -9,6 +9,7 @@ import {
   CardFooter,
   Image,
 } from '@heroui/react';
+import { useNavigate } from 'react-router';
 import { formatDate } from '../../utils/functions';
 import noPreview from '../../images/nopreview.png';
 import useOnScreen from '../../utils/useOnScreen';
@@ -16,6 +17,7 @@ import useOnScreen from '../../utils/useOnScreen';
 export default function AlbumsList({ albumsPromise, onLastAlbumVisible }: { albumsPromise: Promise<Album[]>, onLastAlbumVisible: () => void }) {
   const { t } = useTranslation();
   const albums = use(albumsPromise);
+  const navigate = useNavigate();
   const { measureRef, isIntersecting } = useOnScreen();
 
   if (albums.length === 0) {
@@ -38,19 +40,19 @@ export default function AlbumsList({ albumsPromise, onLastAlbumVisible }: { albu
     <div className="grid ggrid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
       {
         albums.map((album, index) => (
-          <Card key={album.id} isPressable={true} as={Link} to={`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`}>
+          <Card key={album.id} radius="sm" isPressable={true} onPress={() => navigate(`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`)}>
             <CardBody className="overflow-visible p-0">
               {
                 album.media.length > 0 ? (
                 <Image
                   alt="Card background"
-                  className="object-cover w-full rounded-xl rounded-b-none aspect-square"
+                  className="object-cover w-full rounded-sm rounded-b-none aspect-square"
                   src={album.media[0].thumbnails[0]}
                   fallbackSrc={noPreview}
                   classNames={{ wrapper: 'min-w-full' }}
                 />
               ) : (
-                <div className="w-full h-full bg-gray-200 rounded-xl rounded-b-none aspect-square" />
+                <div className="w-full h-full bg-gray-200 rounded-sm rounded-b-none aspect-square" />
               )
             }
             </CardBody>

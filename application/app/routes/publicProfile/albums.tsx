@@ -26,11 +26,11 @@ export default function PublicProfileAlbums({ fetchAlbums, onLastAlbumVisible }:
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
       {
         albums.map((album, index) => (
-          <Card key={album.id} isPressable={true} onPress={() => navigate(`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`)}>
+          <Card key={album.id} radius="sm"isPressable={true} onPress={() => navigate(`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`)}>
             <CardBody className="overflow-visible p-0">
               <Image
                 alt="Card background"
-                className="object-cover w-full rounded-xl rounded-b-none aspect-square"
+                className="object-cover w-full rounded-sm rounded-b-none aspect-square"
                 src={album.media[0].thumbnails[0]}
                 classNames={{ wrapper: 'min-w-full' }}
               />
