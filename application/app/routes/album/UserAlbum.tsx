@@ -128,7 +128,7 @@ export default function UserAlbum({ album }: { album: Album }) {
           </div>
         </div>
         <div className="mt-4 flex justify-center w-full">
-          <Button color="primary" variant="solid" type="submit" disabled={isPending || user === null} data-tracking-id="album_form_button_save_click" >
+          <Button color="primary" variant="solid" type="submit" isDisabled={isPending || user === null} data-tracking-id="album_form_button_save_click" >
             {t("submitButton")}
           </Button>
 
