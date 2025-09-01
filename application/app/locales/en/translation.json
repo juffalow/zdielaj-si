@@ -205,9 +205,9 @@
         "0": "Forever"
       },
       "link": "Album link",
-      "authWarning": "Only logged in user can edit their album.",
       "submitButton": "Save",
-      "copyButton": "Copy link"
+      "copyButton": "Copy link",
+      "mobileBottomButton": "Copy link"
     }
   },
   "profile": {

@@ -21,7 +21,7 @@ export default function Album() {
 
   if (files.length > 0 && location.state.isNew) {
     return (
-      <UserAlbum album={location.state.album} />
+      <UserAlbum album={{ name: '', description: '', ...location.state.album }} />
     );
   }
 

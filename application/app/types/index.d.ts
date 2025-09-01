@@ -15,6 +15,10 @@ type AlbumFile = {
   createdAt: string;
 }
 
+type AlbumLayout = 'cols' | 'rows' | 'tiles';
+type AlbumGaps = 'none' | 'small' | 'medium' | 'large';
+type AlbumRetention = '1' | '7' | '31' | '366' | '0';
+
 type Album = {
   id: ID;
   user: {
@@ -30,9 +34,9 @@ type Album = {
   description?: string;
   media: AlbumFile[];
   files: AlbumFile[];
-  layout: 'cols' | 'rows' | 'tiles';
-  gaps: 'none' | 'small' | 'medium' | 'large';
-  retention: '1' | '7' | '31' | '366' | '0';
+  layout: AlbumLayout;
+  gaps: AlbumGaps;
+  retention: AlbumRetention;
   changeLayout: boolean;
   createdAt: string;
 }
