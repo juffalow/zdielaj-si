@@ -42,7 +42,7 @@ export default function Home() {
 
     logger.info('Album created', album);
     
-    uploadFiles(acceptedFiles, album.files.map(f => f.uploadUrl as string));
+    uploadFiles(acceptedFiles, album.files.map((f: any) => ({ url: f.url as string, fields: f.fields })));
   
     navigate(`/${t("prefix", { keyPrefix: "routes" })}${t("album", { keyPrefix: "routes" }).replace(':id', album.id)}`, { state: { album, isNew: true } });    
   }, [user, uploadFiles, navigate]);
