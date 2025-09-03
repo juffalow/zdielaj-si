@@ -13,7 +13,7 @@ export default function GalleryItems({ files, layout, gaps }: { files: Array<Alb
             files.map(file => (
               <div key={file.id} style={{ aspectRatio: '1/1' }} className="justify-self-stretch">
                 {/* <Image key={file.id} src={file.thumbnails[1] || file.thumbnails[0] || file.location} fallbackSrc={noPreview} width="100%" height="100%" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-center' }} /> */}
-                <Image key={file.id} src={file.thumbnails[1] || file.thumbnails[0] || file.location} width="100%" height="100%" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-cente gallery-item' }} />
+                <Image key={file.id} src={file.thumbnails[1] || file.thumbnails[0] || file.location} radius="sm" width="100%" height="100%" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-cente gallery-item' }} />
               </div>
             ))
           }
