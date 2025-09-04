@@ -7,6 +7,7 @@ import SignInTOTP from './signIn/totp';
 import { signInFormSchema } from './signIn/formValidation';
 import useAuth from '../utils/useAuth';
 import logger from '../logger';
+import { ROUTES } from '../constants';
 
 export function meta() {
   return [{ title: "Sign In | Zdielaj.si" }, { name: "description", content: "Sign In" }];
@@ -14,8 +15,21 @@ export function meta() {
 
 export function links() {
   return [
-    { rel: "alternate", href: "https://zdielaj.si/en/sign-in", hrefLang: "en" },
-    { rel: "alternate", href: "https://zdielaj.si/sk/prihlasit-sa", hrefLang: "sk" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.en.prefix}${ROUTES.en.signIn}`, hrefLang: "en" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.sk.prefix}${ROUTES.sk.signIn}`, hrefLang: "sk" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.cz.prefix}${ROUTES.cz.signIn}`, hrefLang: "cz" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.de.prefix}${ROUTES.de.signIn}`, hrefLang: "de" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.es.prefix}${ROUTES.es.signIn}`, hrefLang: "es" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.fr.prefix}${ROUTES.fr.signIn}`, hrefLang: "fr" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.it.prefix}${ROUTES.it.signIn}`, hrefLang: "it" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.pl.prefix}${ROUTES.pl.signIn}`, hrefLang: "pl" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.nl.prefix}${ROUTES.nl.signIn}`, hrefLang: "nl" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.si.prefix}${ROUTES.si.signIn}`, hrefLang: "si" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.fi.prefix}${ROUTES.fi.signIn}`, hrefLang: "fi" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.se.prefix}${ROUTES.se.signIn}`, hrefLang: "se" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.no.prefix}${ROUTES.no.signIn}`, hrefLang: "no" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.dk.prefix}${ROUTES.dk.signIn}`, hrefLang: "dk" },
+    { rel: "alternate", href: `https://zdielaj.si/${ROUTES.hu.prefix}${ROUTES.hu.signIn}`, hrefLang: "hu" },
   ];
 }
 

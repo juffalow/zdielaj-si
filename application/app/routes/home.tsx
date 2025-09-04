@@ -22,6 +22,19 @@ export function links() {
   return [
     { rel: "alternate", href: "https://zdielaj.si/en", hrefLang: "en" },
     { rel: "alternate", href: "https://zdielaj.si/sk", hrefLang: "sk" },
+    { rel: "alternate", href: "https://zdielaj.si/cz", hrefLang: "cz" },
+    { rel: "alternate", href: "https://zdielaj.si/de", hrefLang: "de" },
+    { rel: "alternate", href: "https://zdielaj.si/es", hrefLang: "es" },
+    { rel: "alternate", href: "https://zdielaj.si/fr", hrefLang: "fr" },
+    { rel: "alternate", href: "https://zdielaj.si/it", hrefLang: "it" },
+    { rel: "alternate", href: "https://zdielaj.si/pl", hrefLang: "pl" },
+    { rel: "alternate", href: "https://zdielaj.si/nl", hrefLang: "nl" },
+    { rel: "alternate", href: "https://zdielaj.si/si", hrefLang: "si" },
+    { rel: "alternate", href: "https://zdielaj.si/fi", hrefLang: "fi" },
+    { rel: "alternate", href: "https://zdielaj.si/se", hrefLang: "se" },
+    { rel: "alternate", href: "https://zdielaj.si/no", hrefLang: "no" },
+    { rel: "alternate", href: "https://zdielaj.si/dk", hrefLang: "dk" },
+    { rel: "alternate", href: "https://zdielaj.si/hu", hrefLang: "hu" },
   ];
 }
 
@@ -50,12 +63,17 @@ export default function Home() {
   const {
     getRootProps,
     getInputProps,
-    isDragActive,
     open,
   } = useDropzone({
     onDrop,
-    accept: {
+    onFileDialogOpen: () => {
+      console.log('onFileDialogOpen');
+    },
+    accept: user === null ? {
       'image/*': [],
+    } : {
+      'image/*': [],
+      'video/*': [],
     },
     maxFiles: user === null ? 10 : 50,
     maxSize: user === null ? 1024 * 1024 * 10 : undefined,
@@ -85,7 +103,7 @@ export default function Home() {
           </CardHeader>
           <CardBody className="px-8">
             <p className="text-center text-3xl">0€ / <small className="text-gray-500">{t("pricing.default.monthly")}</small></p>
-            <ul className="list-disc list-inside">
+            <ul className="list-inside features-list">
               <li><Trans i18nKey="home.pricing.default.maxTenPhotos" components={{ small: <small className="text-gray-500" /> }} /></li>
               <li><Trans i18nKey="home.pricing.default.maxSizePerFile" components={{ small: <small className="text-gray-500" /> }} /></li>
               <li><Trans i18nKey="home.pricing.default.deletedAfter24Hours" components={{ small: <small className="text-gray-500" /> }} /></li>
@@ -100,7 +118,7 @@ export default function Home() {
             <p className="text-center text-3xl">1.99€ / <small className="text-gray-500">{t("pricing.standard.monthly")}</small></p>
           </CardBody>
           <CardBody className="px-8">
-            <ul className="list-disc list-inside">
+            <ul className="list-inside features-list">
               <li><Trans i18nKey="home.pricing.standard.maxTenGB"  components={{ small: <small className="text-gray-500" /> }} /></li>
               <li><Trans i18nKey="home.pricing.standard.maxSizePerFile"  components={{ small: <small className="text-gray-500" /> }} /></li>
               <li>{t("pricing.standard.video")}</li>
@@ -122,7 +140,7 @@ export default function Home() {
             <p className="text-center text-3xl">0€ / <small className="text-gray-500">{t("pricing.free.monthly")}</small></p>
           </CardBody>
           <CardBody className="px-8">
-            <ul className="list-disc list-inside">
+            <ul className="list-inside features-list">
               <li><Trans i18nKey="home.pricing.free.maxOneGB" components={{ small: <small className="text-gray-500" /> }} /></li>
               <li><Trans i18nKey="home.pricing.free.maxSizePerFile" components={{ small: <small className="text-gray-500" /> }} /></li>
               <li>{t("pricing.free.video")}</li>

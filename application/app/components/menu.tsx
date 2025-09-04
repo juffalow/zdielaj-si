@@ -24,13 +24,6 @@ export default function menu() {
   const { i18n, t } = useTranslation('', { keyPrefix: 'components.menu' });
   const { user, signOut } = useAuth();
 
-  const menuItems = [
-    t('albums'),
-    t('profile'),
-    t('subscription'),
-    t('signOut'),
-  ];
-
   const onChangeLang = (e: MouseEvent) => {
     const code = (e.target as HTMLElement).getAttribute('data-lang') || 'sk';
     i18n.changeLanguage(code);
@@ -42,13 +35,15 @@ export default function menu() {
     : i18n.language === 'de' ? (<>&#x1F1E9;&#x1F1EA; DE</>)
     : i18n.language === 'es' ? (<>&#x1F1EA;&#x1F1F8; ES</>)
     : i18n.language === 'fr' ? (<>&#x1F1EB;&#x1F1F7; FR</>)
+    : i18n.language === 'it' ? (<>&#127470;&#127481; IT</>)
+    : i18n.language === 'pl' ? (<>&#127477;&#127473; PL</>)
+    : i18n.language === 'nl' ? (<>&#127475;&#127473; NL</>)
+    : i18n.language === 'si' ? (<>&#127480;&#127470; SI</>)
     : i18n.language === 'fi' ? (<>&#127467;&#127470; FI</>)
     : i18n.language === 'se' ? (<>&#127480;&#127466; SE</>)
     : i18n.language === 'no' ? (<>&#127475;&#127476; NO</>)
-    : i18n.language === 'it' ? (<>&#127470;&#127481; IT</>)
-    : i18n.language === 'pl' ? (<>&#127477;&#127473; PL</>)
+    : i18n.language === 'dk' ? (<>&#127465;&#127472; DK</>)
     : i18n.language === 'hu' ? (<>&#127469;&#127482; HU</>)
-    : i18n.language === 'si' ? (<>&#127480;&#127470; SI</>)
     : (<>&#x1F1F8;&#x1F1F0; SK</>);
 
   return (
@@ -146,23 +141,29 @@ export default function menu() {
             <DropdownItem key="it" onClick={onChangeLang} data-lang="it" className="cursor-pointer">
               &#127470;&#127481; IT
             </DropdownItem>
-            <DropdownItem key="no" onClick={onChangeLang} data-lang="no" className="cursor-pointer">
-              &#127475;&#127476; NO
+            <DropdownItem key="pl" onClick={onChangeLang} data-lang="pl" className="cursor-pointer">
+              &#127477;&#127473; PL
             </DropdownItem>
-            <DropdownItem key="se" onClick={onChangeLang} data-lang="se" className="cursor-pointer">
-              &#127480;&#127466; SE
+            <DropdownItem key="nl" onClick={onChangeLang} data-lang="nl" className="cursor-pointer">
+              &#127475;&#127473; NL
+            </DropdownItem>
+            <DropdownItem key="si" onClick={onChangeLang} data-lang="si" className="cursor-pointer">
+              &#127480;&#127470; SI
             </DropdownItem>
             <DropdownItem key="fi" onClick={onChangeLang} data-lang="fi" className="cursor-pointer">
               &#127467;&#127470; FI
             </DropdownItem>
-            <DropdownItem key="pl" onClick={onChangeLang} data-lang="pl" className="cursor-pointer">
-              &#127477;&#127473; PL
+            <DropdownItem key="se" onClick={onChangeLang} data-lang="se" className="cursor-pointer">
+              &#127480;&#127466; SE
+            </DropdownItem>
+            <DropdownItem key="no" onClick={onChangeLang} data-lang="no" className="cursor-pointer">
+              &#127475;&#127476; NO
+            </DropdownItem>
+            <DropdownItem key="dk" onClick={onChangeLang} data-lang="dk" className="cursor-pointer">
+              &#127465;&#127472; DK
             </DropdownItem>
             <DropdownItem key="hu" onClick={onChangeLang} data-lang="hu" className="cursor-pointer">
               &#127469;&#127482; HU
-            </DropdownItem>
-            <DropdownItem key="si" onClick={onChangeLang} data-lang="si" className="cursor-pointer">
-              &#127480;&#127470; SI
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
