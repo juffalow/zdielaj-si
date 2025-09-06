@@ -39,6 +39,8 @@ type Album = {
   retention: AlbumRetention;
   changeLayout: boolean;
   createdAt: string;
+  updatedAt: string;
+  token: string;
 }
 
 type User = {

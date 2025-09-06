@@ -28,6 +28,13 @@ export async function getAlbum(id: string): Promise<Album> {
     });
 }
 
+export async function getUserAlbum(id: string): Promise<Album> {
+  return protectedGet<any>(`${import.meta.env.VITE_API_URL}/me/albums/${id}`)
+    .then((response) => {
+      return response.data.album as Album;
+    });
+}
+
 export async function getCurrentUserAlbums(first = 10, after = 0): Promise<Album[]> {
   return protectedGet<any>(`${import.meta.env.VITE_API_URL}/me/albums?first=${first}&after=${after}`)
     .then((response) => {
@@ -40,7 +47,22 @@ export async function updateAlbum(id: ID, params: { name?: string, description?:
     .then(response => response.data.album);
 }
 
-export async function deleteAlbum(id: ID): Promise<Album> {
+export async function deleteAlbum(id: ID, token: string): Promise<Album> {
   return protectedDelete(`${import.meta.env.VITE_API_URL}/albums/${id}`)
+    .then(response => response.data.album);
+}
+
+export async function deleteUserAlbum(id: ID): Promise<Album> {
+  return protectedDelete(`${import.meta.env.VITE_API_URL}/albums/${id}`)
+    .then(response => response.data.album);
+}
+
+export async function addFilesToAlbum(id: ID, token: string, files: Array<{ name: string, mimetype: string, size: number }>): Promise<Album> {
+  return protectedPost<any>(`${import.meta.env.VITE_API_URL}/albums/${id}/files`, { token, files })
+    .then(response => response.data.album);
+}
+
+export async function addFilesToUserAlbum(id: ID, files: Array<{ name: string, mimetype: string, size: number }>): Promise<Album> {
+  return protectedPost<any>(`${import.meta.env.VITE_API_URL}/me/albums/${id}/files`, { files })
     .then(response => response.data.album);
 }

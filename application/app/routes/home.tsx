@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useTransition } from 'react';
 import { Link, useNavigate } from 'react-router';
 import type { Route } from './+types/home';
 import { Card, CardHeader, CardBody, CardFooter, Button } from '@heroui/react';
@@ -7,7 +7,7 @@ import { useDropzone } from 'react-dropzone';
 import useAuth from '../utils/useAuth';
 import useUpload from '../utils/useUpload';
 import logger from '../logger';
-import { createAlbum, createUserAlbum } from '../api/album';
+import { createAlbum, createUserAlbum, addFilesToAlbum, addFilesToUserAlbum, deleteUserAlbum } from '../api/album';
 
 export function meta({}: Route.MetaArgs) {
   const { t } = useTranslation('', { keyPrefix: 'meta.home' });
@@ -42,23 +42,27 @@ export default function Home() {
   const { t } = useTranslation('', { keyPrefix: 'home' });
   const navigate = useNavigate();
   const { user } = useAuth();
-
-  const {
-    clear,
-    uploadFiles,
-  } = useUpload();
+  const { clear, uploadFiles } = useUpload();
+  const [ album, setAlbum ] = useState<Album | null>(null);
+  const [ _, startTransition ] = useTransition();
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    const album: Album = user === null ? 
-      await createAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })))
-      : await createUserAlbum(acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })));
+    if (album === null) {
+      return;
+    }
 
-    logger.info('Album created', album);
-    
-    uploadFiles(acceptedFiles, album.files.map((f: any) => ({ url: f.url as string, fields: f.fields })));
+    setTimeout(async () => {
+      const { files } = user === null ?
+        await addFilesToAlbum(album.id, album.token, acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })))
+        : await addFilesToUserAlbum(album.id, acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })));
+
+      logger.info('Album created', album);
+      
+      uploadFiles(acceptedFiles, files.map((f: any) => ({ url: f.url as string, fields: f.fields })));
+    }, 1);
   
     navigate(`/${t("prefix", { keyPrefix: "routes" })}${t("album", { keyPrefix: "routes" }).replace(':id', album.id)}`, { state: { album, isNew: true } });    
-  }, [user, uploadFiles, navigate]);
+  }, [album, user, uploadFiles, navigate]);
 
   const {
     getRootProps,
@@ -66,8 +70,27 @@ export default function Home() {
     open,
   } = useDropzone({
     onDrop,
-    onFileDialogOpen: () => {
-      console.log('onFileDialogOpen');
+    onFileDialogOpen: () => startTransition(async () => {
+      logger.debug('File dialog open, creating album...');
+
+      const album = await (user === null ?
+        createAlbum([])
+        : createUserAlbum([]));
+
+      startTransition(() => {
+        setAlbum(album);
+      });
+    }),
+    onFileDialogCancel: async () => {
+      logger.debug('File dialog cancel, deleting album...');
+
+      if (album === null) {
+        return;
+      }
+
+      await deleteUserAlbum(album.id);
+
+      setAlbum(null);
     },
     accept: user === null ? {
       'image/*': [],
@@ -152,23 +175,6 @@ export default function Home() {
             <Button as={Link} to={`/${t("prefix", { keyPrefix: "routes" })}${t("signUp", { keyPrefix: "routes" })}`} variant="bordered" fullWidth={true} data-tracking-id="home_free_sign_up_click">Sign up</Button>
           </CardFooter>
         </Card>
-      </div>
-      <div className="mt-10">
-        <h2 className="text-center text-2xl font-bold w-full">Features</h2>
-      </div>
-      <div className="grid grid-cols-3 gap-4 mt-5">
-        <div>
-          <h2 className="text-center text-xl font-semibold w-full">Based in EU</h2>
-          <p>Sensitive user information as well as all their data are stored in the EU, specifically in Frankfurt (Germany).</p>
-        </div>
-        <div>
-          <h2 className="text-center text-xl font-semibold w-full">High availability</h2>
-          <p>The application is designed to minimize or hide the effects of individual component failures, ensuring continuous operation with minimal downtime.</p>
-        </div>
-        <div>
-          <h2 className="text-center text-xl font-semibold w-full">Encryption</h2>
-          <p>All data is stored and transmitted in encrypted form, protecting it from unauthorized access or modification.</p>
-        </div>
       </div>
     </div>
   )
