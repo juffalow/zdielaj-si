@@ -6,7 +6,6 @@ import {
   useState,
 } from 'react';
 import type { ReactNode } from 'react';
-import { Navigate, useLocation } from 'react-router';
 import { Amplify } from 'aws-amplify';
 import {
   signUp as signUpAmplify,

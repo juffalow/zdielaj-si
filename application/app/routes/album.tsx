@@ -4,9 +4,10 @@ import NotFound from './album/NotFound';
 import GalleryLoader from './album/GalleryLoader';
 import Gallery from './album/Gallery';
 import UserAlbum from './album/UserAlbum';
-import { getAlbum } from '../api/album';
+import { getAlbum, getUserAlbum } from '../api/album';
 import ErrorBoundary from '../components/errorBoundary';
 import useUpload from '../utils/useUpload';
+import useAuth from '../utils/useAuth';
 
 export function meta() {
   return [
@@ -16,6 +17,8 @@ export function meta() {
 }
 
 export default function Album() {
+  const { user, hasInitialized } = useAuth();
+  const params = useParams();
   const { files } = useUpload();
   const location = useLocation();
 
@@ -23,10 +26,13 @@ export default function Album() {
     return (
       <UserAlbum album={{ name: '', description: '', ...location.state.album }} />
     );
+  }  
+
+  if (hasInitialized === false) {
+    return <GalleryLoader />;
   }
 
-  const params = useParams();
-  const albumPromise = getAlbum(params.id as string);
+  const albumPromise = user !== null ? getUserAlbum(params.id as string) : getAlbum(params.id as string);
 
   return (
     <ErrorBoundary notFound={<NotFound />}>

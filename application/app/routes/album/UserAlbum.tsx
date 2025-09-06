@@ -10,6 +10,7 @@ import {
   SelectItem,
   Checkbox,
   Image,
+  Spinner,
 } from '@heroui/react';
 import type { PressEvent } from '@heroui/react';
 import MobileBottomButton from './MobileBottomButton';
@@ -141,7 +142,12 @@ export default function UserAlbum({ album }: { album: Album }) {
       <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-2 mt-10">
         {
           files.map(file => (
-            <div key={file.name} style={{ aspectRatio: '1/1' }} className="justify-self-stretch">
+            <div key={file.name} style={{ aspectRatio: '1/1' }} className="justify-self-stretch relative">
+              {
+                file.isUploading === true && (
+                  <Spinner className="absolute" style={{ top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 1000 }} />
+                )
+              }
               <Image src={file.preview} width="100%" height="100%" radius="sm" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-center' }} />
             </div>
           ))
