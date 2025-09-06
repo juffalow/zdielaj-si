@@ -1,6 +1,0 @@
-/.yarn
-/node_modules
-/dist
-/src/config.ts
-/coverage
-.env.local
