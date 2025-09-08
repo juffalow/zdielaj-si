@@ -8,6 +8,7 @@ import {
 } from 'react-router';
 import { I18nextProvider } from 'react-i18next';
 import { HeroUIProvider } from '@heroui/react';
+import * as Sentry from '@sentry/react';
 import { AuthProvider } from './utils/useAuth';
 import { UploadProvider } from './utils/useUpload';
 import Tracking from './utils/Tracking';
@@ -16,6 +17,11 @@ import Menu from './components/menu';
 import Footer from './components/footer';
 import i18n from './i18n';
 import './app.css';
+
+typeof import.meta.env.VITE_SENTRY_DSN === 'string' && Sentry.init({
+  dsn: import.meta.env.VITE_SENTRY_DSN,
+  integrations: [],
+});
 
 export const links: Route.LinksFunction = () => [
   {
@@ -72,6 +78,8 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         ? "The requested page could not be found."
         : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
+    Sentry.captureException(error);
+
     details = error.message;
     stack = error.stack;
   }

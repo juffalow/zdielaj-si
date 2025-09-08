@@ -12,6 +12,7 @@
     "@heroui/react": "^2.8.2",
     "@react-router/node": "^7.7.1",
     "@react-router/serve": "^7.7.1",
+    "@sentry/react": "^10.10.0",
     "@sindresorhus/slugify": "^2.2.1",
     "aws-amplify": "^6.15.4",
     "framer-motion": "^12.23.11",
