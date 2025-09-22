@@ -5,6 +5,7 @@ import { ZodError } from 'zod';
 import SignInForm from './signIn/form';
 import SignInTOTP from './signIn/totp';
 import { signInFormSchema } from './signIn/formValidation';
+import GoogleSignIn from './signIn/google';
 import useAuth from '../utils/useAuth';
 import logger from '../logger';
 import { ROUTES } from '../constants';
@@ -89,12 +90,12 @@ export default function SignIn() {
   }, [ confirmSignIn ]);
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
-          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+          src="/zdielaj-si.png"
           alt="Zdielaj.si"
-          className="mx-auto h-10 w-auto"
+          className="mx-auto h-40 w-auto"
         />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           {t('title')}
@@ -103,6 +104,10 @@ export default function SignIn() {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         {step === 'form' ? <SignInForm onSubmit={onSubmit} /> : <SignInTOTP onSubmit={onTOTPSubmit} />}
+
+        <div className="mt-10">
+          <GoogleSignIn />
+        </div>
 
         <p className="mt-10 text-center text-sm/6 text-gray-500">
           {t('noAccount')}

@@ -4,7 +4,6 @@ import SignUpForm from './signUp/form';
 import useAuth from '../utils/useAuth';
 import ConfirmForm from './signUp/confirmForm';
 import ThankYou from './signUp/thankYou';
-import logger from '../logger';
 import { ROUTES } from '../constants';
 
 export function meta() {
@@ -51,8 +50,13 @@ export default function SignUp() {
   }, [ confirmSignUp, username ]);
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img
+          src="/zdielaj-si.png"
+          alt="Zdielaj.si"
+          className="mx-auto h-40 w-auto"
+        />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           {t('title')}
         </h2>

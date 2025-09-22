@@ -12,8 +12,8 @@ export default function Footer() {
           <div className="mb-6 md:mb-0">
             <a href="https://zdielaj.si/" className="flex items-center">
               <img
-                src="/zdielaj-si-logo.png"
-                className="h-8 me-3"
+                src="/zdielaj-si.png"
+                className="h-10 me-3"
                 alt="Zdielaj.si logo"
               />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
