@@ -18,6 +18,7 @@ import {
   fetchAuthSession as fetchAuthSessionAmplify,
   fetchUserAttributes as fetchUserAttributesAmplify,
   updatePassword as updatePasswordAmplify,
+  getCurrentUser,
 } from 'aws-amplify/auth';
 import { getUser, setUser } from '../api/auth';
 import logger from '../logger';
@@ -45,6 +46,14 @@ Amplify.configure({
       userPoolClientId: import.meta.env.VITE_USER_POOL_CLIENT_ID as string,
       loginWith: {
         email: true,
+        oauth: {
+          domain: import.meta.env.VITE_GOOGLE_OUATH_DOMAIN as string,
+          providers: [ 'Google' ],
+          redirectSignIn: [ import.meta.env.VITE_GOOGLE_OUATH_REDIRECT_SIGN_IN as string ],
+          redirectSignOut: [ import.meta.env.VITE_GOOGLE_OUATH_REDIRECT_SIGN_OUT as string ],
+          responseType: "code",
+          scopes: [ 'openid', 'email', 'profile', 'aws.cognito.signin.user.admin' ],
+        }
       },
       userAttributes: {
         email: {
@@ -66,11 +75,31 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
   const [ hasInitialized, setHasInitialized ] = useState<boolean>(false);
 
   useEffect(() => {
-    refreshSession().catch(() => {
-      setUser(null);
-    }).finally(() => {
-      setHasInitialized(true);
-    });
+    const initializeAuth = async () => {
+      try {
+        // Check if this is an OAuth callback URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const hasOAuthParams = urlParams.has('code') || urlParams.has('state');
+
+        console.log('hasOAuthParams', hasOAuthParams);
+        console.log('urlParams', urlParams);
+        
+        if (hasOAuthParams) {
+          logger.debug('OAuth callback detected, handling callback...');
+          await handleOAuthCallback();
+        } else {
+          // Normal session refresh
+          await refreshSession();
+        }
+      } catch (error) {
+        logger.debug('Authentication initialization failed, user not logged in');
+        setUser(null);
+      } finally {
+        setHasInitialized(true);
+      }
+    };
+
+    initializeAuth();
   }, []);
 
   /**
@@ -192,20 +221,59 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
   async function refreshSession(): Promise<void> {
     logger.debug('Refreshing session...');
     
-    const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
+    try {
+      const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
 
-    setUser({
-      id: user.sub,
-      username: user.email,
-      email: user.email,
-      meta: {
-        name: user.name as string,
-      },
-      accessToken: session.tokens?.accessToken.toString() as string,
-      idToken: session.tokens?.idToken?.toString() as string,
-    });
+      logger.debug('User attributes:', user);
+      logger.debug('Auth session:', session);
 
-    setLastUpdate(new Date());
+      if (!session.tokens) {
+        throw new Error('No tokens found in session');
+      }
+
+      setUser({
+        id: user.sub,
+        username: user.email,
+        email: user.email,
+        meta: {
+          name: user.name as string,
+        },
+        accessToken: session.tokens?.accessToken.toString() as string,
+        idToken: session.tokens?.idToken?.toString() as string,
+      });
+
+      setLastUpdate(new Date());
+    } catch (error) {
+      logger.error('Failed to refresh session:', error);
+      throw error;
+    }
+  }
+
+  async function handleOAuthCallback(): Promise<void> {
+    logger.debug('Handling OAuth callback...');
+    
+    try {
+      // Check if user is authenticated after OAuth redirect
+      const currentUser = await getCurrentUser();
+      logger.debug('OAuth callback - Current user:', currentUser);
+      
+      if (currentUser) {
+        await refreshSession();
+        logger.debug('OAuth login successful');
+        
+        // Clean up the URL from OAuth parameters
+        const url = new URL(window.location.href);
+        url.searchParams.delete('code');
+        url.searchParams.delete('state');
+        window.history.replaceState({}, document.title, url.pathname);
+        
+        // Redirect to home page after successful OAuth login
+        window.location.href = '/';
+      }
+    } catch (error) {
+      logger.error('OAuth callback failed:', error);
+      throw error;
+    }
   }
 
   const memoedValue = useMemo(
