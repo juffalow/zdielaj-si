@@ -43,7 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
 
-        {
+        {/* {
           import.meta.env.VITE_NODE_ENV === 'production' && (
             <>
               <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5C0P73E1C"></script>
@@ -56,7 +56,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </script>
             </>
           )
-        }
+        } */}
       </head>
       <body>
         <I18nextProvider i18n={i18n}>
