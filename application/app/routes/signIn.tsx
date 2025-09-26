@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import type { Route } from './+types/signIn';
 import { Link, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { ZodError } from 'zod';
@@ -10,8 +11,28 @@ import useAuth from '../utils/useAuth';
 import logger from '../logger';
 import { ROUTES } from '../constants';
 
-export function meta() {
-  return [{ title: "Sign In | Zdielaj.si" }, { name: "description", content: "Sign In" }];
+export function meta({ location }: Route.MetaArgs) {
+  const language = location.pathname.split('/')[1];
+
+  switch (language) {
+    case 'sk': return [{ title: "Prihlásiť sa | Zdielaj.si" }];
+    case 'cz': return [{ title: "Přihlásit se | Zdielaj.si" }];
+    case 'de': return [{ title: "Anmelden | Zdielaj.si" }];
+    case 'es': return [{ title: "Iniciar sesión | Zdielaj.si" }];
+    case 'fr': return [{ title: "Se connecter | Zdielaj.si" }];
+    case 'it': return [{ title: "Accedi | Zdielaj.si" }];
+    case 'pl': return [{ title: "Zaloguj się | Zdielaj.si" }];
+    case 'nl': return [{ title: "Inloggen | Zdielaj.si" }];
+    case 'si': return [{ title: "Prijava | Zdielaj.si" }];
+    case 'fi': return [{ title: "Kirjaudu sisään | Zdielaj.si" }];
+    case 'se': return [{ title: "Logga in | Zdielaj.si" }];
+    case 'no': return [{ title: "Logg inn | Zdielaj.si" }];
+    case 'dk': return [{ title: "Log ind | Zdielaj.si" }];
+    case 'hu': return [{ title: "Bejelentkezés | Zdielaj.si" }];
+    case 'en':
+    default:
+      return [{ title: "Sign in | Zdielaj.si" }];
+  }
 }
 
 export function links() {

@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from 'react-router';
 import { I18nextProvider } from 'react-i18next';
 import { HeroUIProvider } from '@heroui/react';
@@ -31,6 +32,9 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  location.pathname !== '/' && i18n.changeLanguage(location.pathname.split('/')[1]);
+
   return (
     <html lang="en">
       <head>
@@ -38,6 +42,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+
+        {
+          import.meta.env.VITE_NODE_ENV === 'production' && (
+            <>
+              <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5C0P73E1C"></script>
+              <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){(window as any).dataLayer.push(arguments)}
+                gtag('js', new Date());
+              
+                gtag('config', 'G-X5C0P73E1C');
+              </script>
+            </>
+          )
+        }
       </head>
       <body>
         <I18nextProvider i18n={i18n}>

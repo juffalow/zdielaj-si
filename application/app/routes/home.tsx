@@ -9,12 +9,26 @@ import useUpload from '../utils/useUpload';
 import logger from '../logger';
 import { createAlbum, createUserAlbum, addFilesToAlbum, addFilesToUserAlbum, deleteUserAlbum } from '../api/album';
 
-export function meta({}: Route.MetaArgs) {
-  const { t } = useTranslation('', { keyPrefix: 'meta.home' });
+export function meta({ location }: Route.MetaArgs) {
+  const language = location.pathname.split('/')[1];
 
   return [
     { title: "Zdielaj.si" },
-    { name: "description", content: t("description") },
+    (language === 'en' && { name: "description", content: "Do you also have a problem that some applications reduce the quality of your photos and videos? Here you can share them without any problems in full quality!" }),
+    (language === 'sk' && { name: "description", content: "Máte problém, že niektoré aplikácie snížujú kvalitu vašich fotiek a videí? Tu ich môžete bezproblémov zdieľať v plnej kvalite!" }),
+    (language === 'cz' && { name: "description", content: "Také máš problém, že ti některé aplikace snižují kvalitu fotek a videí? Tady je můžeš sdílet bez problémů v plné kvalitě!" }),
+    (language === 'de' && { name: "description", content: "Haben Sie auch das Problem, dass einige Anwendungen die Qualität Ihrer Fotos und Videos reduzieren? Hier können Sie sie problemlos in voller Qualität teilen!" }),
+    (language === 'es' && { name: "description", content: "¿Tienes problemas con que algunas aplicaciones reduzcan la calidad de tus fotos y videos? Aquí puedes compartirlos sin problemas en calidad completa!" }),
+    (language === 'fr' && { name: "description", content: "Vous avez également un problème que certaines applications réduisent la qualité de vos photos et vidéos? Voici comment les partager sans problèmes en qualité complète!" }),
+    (language === 'it' && { name: "description", content: "Hai problemi con alcune applicazioni che riducono la qualità delle tue foto e video? Qui puoi condividerli senza problemi in qualità completa!" }),
+    (language === 'pl' && { name: "description", content: "Masz problem, że niektóre aplikacje obniżają jakość Twoich zdjęć i filmów? Tutaj możesz je udostępnić bez żadnych problemów w pełnej jakości!" }),
+    (language === 'nl' && { name: "description", content: "Hebt u ook het probleem dat sommige toepassingen de kwaliteit van uw foto's en video's verlagen? Hier kunt u ze probleemloos in volledige kwaliteit delen!" }),
+    (language === 'si' && { name: "description", content: "Imate težave, da nekatere aplikacije zmanjšujejo kakovost vaših foto in video? Tukaj jih lahko delite brez težav v celotni kakovosti!" }),
+    (language === 'fi' && { name: "description", content: "Onko sinilkojalla, että joitakin sovelluksia vähentävät kuvan ja videon laatua? Voit jakaa ne ilman ongelmia täysikokoisella laadulla!" }),
+    (language === 'se' && { name: "description", content: "Har du problem att vissa apparater minskar kvalitén på dina foton och videor? Här kan du dela dem utan problem i full kvalitet!" }),
+    (language === 'no' && { name: "description", content: "Har du problem med at noen applikasjoner reduserer kvaliteten på dine bilder og videoer? Her kan du dele dem uten problemer i full kvalitet!" }),
+    (language === 'dk' && { name: "description", content: "Har du problem med at nogle applikationer reducerer kvaliteten på dine billeder og videoer? Her kan du dele dem uden problemer i fuld kvalitet!" }),
+    (language === 'hu' && { name: "description", content: "Van probléma, hogy néhány alkalmazás csökkenti a fényképek és videók minőségét? Itt tudod megosztani őket problém nélkül teljes minőségben!" }),
   ];
 }
 
@@ -126,7 +140,7 @@ export default function Home() {
           </CardHeader>
           <CardBody className="px-8">
             <p className="text-center text-3xl">0€ / <small className="text-gray-500">{t("pricing.default.monthly")}</small></p>
-            <ul className="list-inside features-list">
+            <ul className="list-inside features-list mt-4">
               <li><Trans i18nKey="home.pricing.default.maxTenPhotos" components={{ small: <small className="text-gray-500" /> }} /></li>
               <li><Trans i18nKey="home.pricing.default.maxSizePerFile" components={{ small: <small className="text-gray-500" /> }} /></li>
               <li><Trans i18nKey="home.pricing.default.deletedAfter24Hours" components={{ small: <small className="text-gray-500" /> }} /></li>
@@ -137,11 +151,9 @@ export default function Home() {
           <CardHeader className="bg-blue-300">
             <h2 className="text-center text-2xl font-semibold w-full">{t("pricing.standard.title")}</h2>
           </CardHeader>
-          <CardBody>
-            <p className="text-center text-3xl">1.99€ / <small className="text-gray-500">{t("pricing.standard.monthly")}</small></p>
-          </CardBody>
           <CardBody className="px-8">
-            <ul className="list-inside features-list">
+            <p className="text-center text-3xl">1.99€ / <small className="text-gray-500">{t("pricing.standard.monthly")}</small></p>
+            <ul className="list-inside features-list mt-4">
               <li><Trans i18nKey="home.pricing.standard.maxTenGB"  components={{ small: <small className="text-gray-500" /> }} /></li>
               <li><Trans i18nKey="home.pricing.standard.maxSizePerFile"  components={{ small: <small className="text-gray-500" /> }} /></li>
               <li>{t("pricing.standard.video")}</li>
@@ -159,11 +171,9 @@ export default function Home() {
           <CardHeader className="bg-blue-200">
             <h2 className="text-center text-2xl font-semibold w-full">{t("pricing.free.title")}</h2>
           </CardHeader>
-          <CardBody>
-            <p className="text-center text-3xl">0€ / <small className="text-gray-500">{t("pricing.free.monthly")}</small></p>
-          </CardBody>
           <CardBody className="px-8">
-            <ul className="list-inside features-list">
+            <p className="text-center text-3xl">0€ / <small className="text-gray-500">{t("pricing.free.monthly")}</small></p>
+            <ul className="list-inside features-list mt-4">
               <li><Trans i18nKey="home.pricing.free.maxOneGB" components={{ small: <small className="text-gray-500" /> }} /></li>
               <li><Trans i18nKey="home.pricing.free.maxSizePerFile" components={{ small: <small className="text-gray-500" /> }} /></li>
               <li>{t("pricing.free.video")}</li>

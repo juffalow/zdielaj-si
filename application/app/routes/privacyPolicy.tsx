@@ -1,5 +1,30 @@
 import type { FunctionComponent } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
+import type { Route } from './+types/privacyPolicy';
+
+export function meta({ location }: Route.MetaArgs) {
+  const language = location.pathname.split('/')[1];
+
+  switch (language) {
+    case 'sk': return [{ title: "Zásady ochrany osobných údajov | Zdielaj.si" }];
+    case 'cz': return [{ title: "Zásady ochrany osobních údajů | Zdielaj.si" }];
+    case 'de': return [{ title: "Datenschutzrichtlinie | Zdielaj.si" }];
+    case 'es': return [{ title: "Política de privacidad | Zdielaj.si" }];
+    case 'fr': return [{ title: "Politique de confidentialité | Zdielaj.si" }];
+    case 'it': return [{ title: "Informativa sulla privacy | Zdielaj.si" }];
+    case 'pl': return [{ title: "Polityka prywatności | Zdielaj.si" }];
+    case 'nl': return [{ title: "Privacybeleid | Zdielaj.si" }];
+    case 'si': return [{ title: "Politika zasebnosti | Zdielaj.si" }];
+    case 'fi': return [{ title: "Tietosuojakäytäntö | Zdielaj.si" }];
+    case 'se': return [{ title: "Integritetspolicy | Zdielaj.si" }];
+    case 'no': return [{ title: "Personvernerklæring | Zdielaj.si" }];
+    case 'dk': return [{ title: "Privatlivspolitik | Zdielaj.si" }];
+    case 'hu': return [{ title: "Adatvédelmi szabályzat | Zdielaj.si" }];
+    case 'en':
+    default:
+      return [{ title: "Privacy Policy | Zdielaj.si" }];
+  }
+}
 
 const PrivacyPolicy: FunctionComponent = () => {
   const { t } = useTranslation('', { keyPrefix: 'privacyPolicy' });

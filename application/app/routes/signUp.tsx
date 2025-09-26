@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import type { Route } from './+types/signUp';
 import { useTranslation } from 'react-i18next';
 import SignUpForm from './signUp/form';
 import useAuth from '../utils/useAuth';
@@ -6,8 +7,28 @@ import ConfirmForm from './signUp/confirmForm';
 import ThankYou from './signUp/thankYou';
 import { ROUTES } from '../constants';
 
-export function meta() {
-  return [{ title: "Sign Up | Zdielaj.si" }, { name: "description", content: "Sign Up" }];
+export function meta({ location }: Route.MetaArgs) {
+  const language = location.pathname.split('/')[1];
+
+  switch (language) {
+    case 'sk': return [{ title: "Zaregistrovať sa | Zdielaj.si" }];
+    case 'cz': return [{ title: "Zaregistrovat se | Zdielaj.si" }];
+    case 'de': return [{ title: "Registrieren | Zdielaj.si" }];
+    case 'es': return [{ title: "Registrarse | Zdielaj.si" }];
+    case 'fr': return [{ title: "S'inscrire | Zdielaj.si" }];
+    case 'it': return [{ title: "Registrati | Zdielaj.si" }];
+    case 'pl': return [{ title: "Zarejestruj się | Zdielaj.si" }];
+    case 'nl': return [{ title: "Registreren | Zdielaj.si" }];
+    case 'si': return [{ title: "Registracija | Zdielaj.si" }];
+    case 'fi': return [{ title: "Rekisteröidy | Zdielaj.si" }];
+    case 'se': return [{ title: "Registrera dig | Zdielaj.si" }];
+    case 'no': return [{ title: "Registrer deg | Zdielaj.si" }];
+    case 'dk': return [{ title: "Tilmeld dig | Zdielaj.si" }];
+    case 'hu': return [{ title: "Regisztráció | Zdielaj.si" }];
+    case 'en':
+    default:
+      return [{ title: "Sign up | Zdielaj.si" }];
+  }
 }
 
 export function links() {
