@@ -23,8 +23,8 @@ export default function Footer() {
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">2021 - {new Date().getFullYear()}</p>
             <p className="mt-4" style={{ fontSize: '0.9rem' }}>{t("description")}</p>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-            <div>
+          <div className="grid grid-cols-2 gap-8 sm:gap-6">
+            <div className="px-5">
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                 {t("links")}
               </h2>
@@ -47,6 +47,15 @@ export default function Footer() {
                     {t("register")}
                   </Link>
                 </li>
+                <li className="mb-4">
+                  <Link
+                    className="nav-link text-light"
+                    to={`${t("prefix", { keyPrefix: 'routes' })}${t("privacyPolicy", { keyPrefix: 'routes' })}`}
+                    data-tracking-id="footer_link_privacypolicy_click"
+                  >
+                    {t("privacyPolicy")}
+                  </Link>
+                </li>
                 <li>
                   <Link
                     className="nav-link text-light"
@@ -58,7 +67,7 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-            <div>
+            <div className="px-5">
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                 {t("contact")}
               </h2>
