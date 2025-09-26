@@ -12,7 +12,9 @@ export default function Footer() {
           <div className="mb-6 md:mb-0">
             <a href="https://zdielaj.si/" className="flex items-center">
               <img
-                src="/zdielaj-si.png"
+                src="/zdielaj-si-small.png"
+                width={40}
+                height={40}
                 className="h-10 me-3"
                 alt="Zdielaj.si logo"
               />

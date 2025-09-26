@@ -27,7 +27,7 @@ typeof import.meta.env.VITE_SENTRY_DSN === 'string' && Sentry.init({
 export const links: Route.LinksFunction = () => [
   {
     rel: "icon",
-    href: "/zdielaj-si.png",
+    href: "/zdielaj-si-small.png",
   },
 ];
 
