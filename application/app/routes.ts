@@ -11,6 +11,7 @@ export default [
     route(ROUTES.en.album, 'routes/album.tsx', { id: 'en-album' }),
     route(ROUTES.en.publicProfile, 'routes/publicProfile.tsx', { id: 'en-public-profile' }),
     route(ROUTES.en.profile, 'routes/profile.tsx', { id: 'en-profile' }),
+    route(ROUTES.en.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'en-privacy-policy' }),
   ]),
   ...prefix(ROUTES.sk.prefix, [
     index('routes/home.tsx', { id: 'sk-home-index' }),
@@ -20,6 +21,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'sk-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'sk-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'sk-profile' }),
+    route(ROUTES.sk.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'sk-privacy-policy' }),
   ]),
   ...prefix(ROUTES.cz.prefix, [
     index('routes/home.tsx', { id: 'cz-home-index' }),
@@ -29,6 +31,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'cz-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'cz-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'cz-profile' }),
+    route(ROUTES.cz.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'cz-privacy-policy' }),
   ]),
   ...prefix(ROUTES.de.prefix, [
     index('routes/home.tsx', { id: 'de-home-index' }),
@@ -38,6 +41,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'de-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'de-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'de-profile' }),
+    route(ROUTES.de.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'de-privacy-policy' }),
   ]),
   ...prefix(ROUTES.es.prefix, [
     index('routes/home.tsx', { id: 'es-home-index' }),
@@ -47,6 +51,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'es-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'es-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'es-profile' }),
+    route(ROUTES.es.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'es-privacy-policy' }),
   ]),
   ...prefix(ROUTES.fr.prefix, [
     index('routes/home.tsx', { id: 'fr-home-index' }),
@@ -56,6 +61,7 @@ export default [
     route('albumi/:id', 'routes/album.tsx', { id: 'fr-album' }),
     route('profiili/:id', 'routes/publicProfile.tsx', { id: 'fr-public-profile' }),
     route('profiili', 'routes/profile.tsx', { id: 'fr-profile' }),
+    route(ROUTES.fr.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'fr-privacy-policy' }),
   ]),
   ...prefix(ROUTES.it.prefix, [
     index('routes/home.tsx', { id: 'it-home-index' }),
@@ -65,6 +71,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'it-album' }),
     route('profilo/:id', 'routes/publicProfile.tsx', { id: 'it-public-profile' }),
     route('profilo', 'routes/profile.tsx', { id: 'it-profile' }),
+    route(ROUTES.it.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'it-privacy-policy' }),
   ]),
   ...prefix(ROUTES.pl.prefix, [
     index('routes/home.tsx', { id: 'pl-home-index' }),
@@ -74,6 +81,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'pl-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'pl-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'pl-profile' }),
+    route(ROUTES.pl.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'pl-privacy-policy' }),
   ]),
   ...prefix(ROUTES.nl.prefix, [
     index('routes/home.tsx', { id: 'nl-home-index' }),
@@ -83,6 +91,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'nl-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'nl-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'nl-profile' }),
+    route(ROUTES.nl.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'nl-privacy-policy' }),
   ]),
   ...prefix(ROUTES.si.prefix, [
     index('routes/home.tsx', { id: 'si-home-index' }),
@@ -92,6 +101,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'si-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'si-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'si-profile' }),
+    route(ROUTES.si.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'si-privacy-policy' }),
   ]),
   ...prefix(ROUTES.fi.prefix, [
     index('routes/home.tsx', { id: 'fi-home-index' }),
@@ -101,6 +111,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'fi-album' }),
     route('profiili/:id', 'routes/publicProfile.tsx', { id: 'fi-public-profile' }),
     route('profiili', 'routes/profile.tsx', { id: 'fi-profile' }),
+    route(ROUTES.fi.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'fi-privacy-policy' }),
   ]),
   ...prefix(ROUTES.se.prefix, [
     index('routes/home.tsx', { id: 'se-home-index' }),
@@ -110,6 +121,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'se-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'se-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'se-profile' }),
+    route(ROUTES.se.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'se-privacy-policy' }),
   ]),
   ...prefix(ROUTES.no.prefix, [
     index('routes/home.tsx', { id: 'no-home-index' }),
@@ -119,6 +131,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'no-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'no-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'no-profile' }),
+    route(ROUTES.no.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'no-privacy-policy' }),
   ]),
   ...prefix(ROUTES.dk.prefix, [
     index('routes/home.tsx', { id: 'dk-home-index' }),
@@ -128,6 +141,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'dk-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'dk-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'dk-profile' }),
+    route(ROUTES.dk.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'dk-privacy-policy' }),
   ]),
   ...prefix(ROUTES.hu.prefix, [
     index('routes/home.tsx', { id: 'hu-home-index' }),
@@ -137,6 +151,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'hu-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'hu-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'hu-profile' }),
+    route(ROUTES.hu.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'hu-privacy-policy' }),
   ]),
   route('album/:id', 'routes/album.tsx'),
   route('profil/:id', 'routes/publicProfile.tsx'),

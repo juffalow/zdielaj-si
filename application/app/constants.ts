@@ -8,6 +8,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profile',
     publicProfile: 'profile/:id',
+    privacyPolicy: 'privacy-policy',
   },
   sk: {
     prefix: 'sk/',
@@ -18,6 +19,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profil',
     publicProfile: 'profil/:id',
+    privacyPolicy: 'zasady-ochrany-osobnych-udajov',
   },
   cz: {
     prefix: 'cz/',
@@ -28,6 +30,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profil',
     publicProfile: 'profil/:id',
+    privacyPolicy: 'zasady-ochrany-osobnich-udaju',
   },
   de: {
     prefix: 'de/',
@@ -38,6 +41,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profil',
     publicProfile: 'profil/:id',
+    privacyPolicy: 'datenschutz',
   },
   es: {
     prefix: 'es/',
@@ -48,6 +52,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'perfil',
     publicProfile: 'perfil/:id',
+    privacyPolicy: 'politica-de-privacidad',
   },
   fr: {
     prefix: 'fr/',
@@ -58,6 +63,7 @@ export const ROUTES = {
     album: 'albumi/:id',
     profile: 'profiili',
     publicProfile: 'profiili/:id',
+    privacyPolicy: 'politique-de-confidentialite',
   },
   it: {
     prefix: 'it/',
@@ -68,6 +74,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profilo',
     publicProfile: 'profilo/:id',
+    privacyPolicy: 'politica-di-privacy',
   },
   pl: {
     prefix: 'pl/',
@@ -78,6 +85,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profil',
     publicProfile: 'profil/:id',
+    privacyPolicy: 'prawilnik-o-zasebnosti',
   },
   nl: {
     prefix: 'nl/',
@@ -88,6 +96,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profiel',
     publicProfile: 'profiel/:id',
+    privacyPolicy: 'privacy-policy',
   },
   si: {
     prefix: 'si/',
@@ -98,6 +107,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profil',
     publicProfile: 'profil/:id',
+    privacyPolicy: 'pravilnik-o-zasebnosti',
   },
   fi: {
     prefix: 'fi/',
@@ -108,6 +118,7 @@ export const ROUTES = {
     album: 'albumi/:id',
     profile: 'profiili',
     publicProfile: 'profiili/:id',
+    privacyPolicy: 'tietosuojakaytannos',
   },
   se: {
     prefix: 'se/',
@@ -118,6 +129,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profil',
     publicProfile: 'profil/:id',
+    privacyPolicy: 'integritetspolicy',
   },
   no: {
     prefix: 'no/',
@@ -128,6 +140,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profil',
     publicProfile: 'profil/:id',
+    privacyPolicy: 'personvern',
   },
   dk: {
     prefix: 'dk/',
@@ -138,6 +151,7 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profil',
     publicProfile: 'profil/:id',
+    privacyPolicy: 'personvern',
   },
   hu: {
     prefix: 'hu/',
@@ -148,5 +162,6 @@ export const ROUTES = {
     album: 'album/:id',
     profile: 'profil',
     publicProfile: 'profil/:id',
+    privacyPolicy: 'adatvedelmi-szabalyzat',
   },
 };
