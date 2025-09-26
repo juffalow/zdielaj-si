@@ -6,6 +6,7 @@ export default {
     "/en",
     "/en/sign-up",
     "/en/sign-in",
+    "/en/privacy-policy",
     "/sk",
     "/sk/prihlasit-sa",
     "/sk/registracia",
