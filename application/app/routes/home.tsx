@@ -127,7 +127,7 @@ export default function Home() {
 
       <div className="mt-5 p-8">
         <div {...getRootProps()} className="rounded-xl text-center" style={{ border: '1px #28a745 dashed', padding: '40px' }} data-tracking-id="home_upload_area_click">
-          <input {...getInputProps()} />
+          <input {...getInputProps()} aria-label="upload files" />
           <p>{t("uploadArea.title")}</p>
           <Button className="mt-5" color="success" variant="solid" size="lg" data-tracking-id="home_upload_button_click" onPress={open}>{t("uploadArea.button")}</Button>
         </div>
