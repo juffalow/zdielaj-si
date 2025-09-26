@@ -20,6 +20,7 @@ import {
   updatePassword as updatePasswordAmplify,
   getCurrentUser,
 } from 'aws-amplify/auth';
+import 'aws-amplify/auth/enable-oauth-listener';
 import { getUser, setUser } from '../api/auth';
 import logger from '../logger';
 
