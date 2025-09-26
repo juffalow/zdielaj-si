@@ -36,7 +36,7 @@ export function links() {
   return [
     { rel: "alternate", href: "https://zdielaj.si/en", hrefLang: "en" },
     { rel: "alternate", href: "https://zdielaj.si/sk", hrefLang: "sk" },
-    { rel: "alternate", href: "https://zdielaj.si/cz", hrefLang: "cz" },
+    { rel: "alternate", href: "https://zdielaj.si/cz", hrefLang: "cs" },
     { rel: "alternate", href: "https://zdielaj.si/de", hrefLang: "de" },
     { rel: "alternate", href: "https://zdielaj.si/es", hrefLang: "es" },
     { rel: "alternate", href: "https://zdielaj.si/fr", hrefLang: "fr" },
@@ -47,7 +47,7 @@ export function links() {
     { rel: "alternate", href: "https://zdielaj.si/fi", hrefLang: "fi" },
     { rel: "alternate", href: "https://zdielaj.si/se", hrefLang: "se" },
     { rel: "alternate", href: "https://zdielaj.si/no", hrefLang: "no" },
-    { rel: "alternate", href: "https://zdielaj.si/dk", hrefLang: "dk" },
+    { rel: "alternate", href: "https://zdielaj.si/dk", hrefLang: "da" },
     { rel: "alternate", href: "https://zdielaj.si/hu", hrefLang: "hu" },
   ];
 }
