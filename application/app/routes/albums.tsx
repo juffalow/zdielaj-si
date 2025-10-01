@@ -6,6 +6,7 @@ import {
   startTransition,
   use,
 } from 'react';
+import type { Route } from './+types/albums';
 import AlbumsLoader from './albums/loader';
 import AlbumsList from './albums/list';
 import { getCurrentUserAlbums, deleteAlbum } from '../api/album';
@@ -13,11 +14,28 @@ import ErrorBoundary from '../components/errorBoundary';
 import { addAlbumToPublicProfile, removeAlbumFromPublicProfile } from '../api/publicprofiles';
 import DeleteModal from './albums/deleteModal';
 
-export function meta() {
-  return [
-    { title: "Albums | Zdielaj.si" },
-    { name: "description", content: "Albums" },
-  ];
+export function meta({ location }: Route.MetaArgs) {
+  const language = location.pathname.split('/')[1];
+
+  switch (language) {
+    case 'sk': return [{ title: "Albumy | Zdielaj.si" }];
+    case 'cz': return [{ title: "Alba | Zdielaj.si" }];
+    case 'de': return [{ title: "Alben | Zdielaj.si" }];
+    case 'es': return [{ title: "Álbumes | Zdielaj.si" }];
+    case 'fr': return [{ title: "Albums | Zdielaj.si" }];
+    case 'it': return [{ title: "Album | Zdielaj.si" }];
+    case 'pl': return [{ title: "Albumy | Zdielaj.si" }];
+    case 'nl': return [{ title: "Albums | Zdielaj.si" }];
+    case 'si': return [{ title: "Albumi | Zdielaj.si" }];
+    case 'fi': return [{ title: "Albumit | Zdielaj.si" }];
+    case 'se': return [{ title: "Album | Zdielaj.si" }];
+    case 'no': return [{ title: "Album | Zdielaj.si" }];
+    case 'dk': return [{ title: "Album | Zdielaj.si" }];
+    case 'hu': return [{ title: "Albumok | Zdielaj.si" }];
+    case 'en':
+    default:
+      return [{ title: "Albums | Zdielaj.si" }];
+  }
 }
 
 export default function Albums() {

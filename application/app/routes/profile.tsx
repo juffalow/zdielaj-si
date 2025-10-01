@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import type { Route } from './+types/profile';
 import { useTranslation } from 'react-i18next';
 import { Accordion, AccordionItem } from '@heroui/accordion';
 import NotFound from './albums/notFound';
@@ -14,12 +15,28 @@ import { getCurrentUser } from '../api/user';
 import { getPublicProfile } from '../api/publicprofiles';
 import useAuth from '../utils/useAuth';
 
-export function meta() {
-  const { t } = useTranslation('', { keyPrefix: 'profile' });
-  return [
-    { title: `${t("title")} | Zdielaj.si` },
-    { name: "description", content: "Profile" },
-  ];
+export function meta({ location }: Route.MetaArgs) {
+  const language = location.pathname.split('/')[1];
+
+  switch (language) {
+    case 'sk': return [{ title: "Profil | Zdielaj.si" }];
+    case 'cz': return [{ title: "Profil | Zdielaj.si" }];
+    case 'de': return [{ title: "Profil | Zdielaj.si" }];
+    case 'es': return [{ title: "Profil | Zdielaj.si" }];
+    case 'fr': return [{ title: "Profil | Zdielaj.si" }];
+    case 'it': return [{ title: "Profilo | Zdielaj.si" }];
+    case 'pl': return [{ title: "Profil | Zdielaj.si" }];
+    case 'nl': return [{ title: "Profiel | Zdielaj.si" }];
+    case 'si': return [{ title: "Profil | Zdielaj.si" }];
+    case 'fi': return [{ title: "Profiili | Zdielaj.si" }];
+    case 'se': return [{ title: "Profil | Zdielaj.si" }];
+    case 'no': return [{ title: "Profil | Zdielaj.si" }];
+    case 'dk': return [{ title: "Profil | Zdielaj.si" }];
+    case 'hu': return [{ title: "Profil | Zdielaj.si" }];
+    case 'en':
+    default:
+      return [{ title: "Profile | Zdielaj.si" }];
+  }
 }
 
 export default function Profile() {
