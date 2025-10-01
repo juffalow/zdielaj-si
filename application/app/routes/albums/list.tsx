@@ -1,4 +1,4 @@
-import { use, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import {
@@ -8,15 +8,16 @@ import {
   CardBody,
   CardFooter,
   Image,
+  Switch,
 } from '@heroui/react';
 import { useNavigate } from 'react-router';
+import { IoTrashSharp } from "react-icons/io5";
 import { formatDate } from '../../utils/functions';
 import noPreview from '../../images/nopreview.png';
 import useOnScreen from '../../utils/useOnScreen';
 
-export default function AlbumsList({ albumsPromise, onLastAlbumVisible }: { albumsPromise: Promise<Album[]>, onLastAlbumVisible: () => void }) {
+export default function AlbumsList({ albums, onDelete, onPublicProfileToggle, onLastAlbumVisible }: { albums: Album[], onDelete: (album: Album) => void, onPublicProfileToggle: (album: Album) => void, onLastAlbumVisible?: () => void }) {
   const { t } = useTranslation();
-  const albums = use(albumsPromise);
   const navigate = useNavigate();
   const { measureRef, isIntersecting } = useOnScreen();
 
@@ -31,7 +32,7 @@ export default function AlbumsList({ albumsPromise, onLastAlbumVisible }: { albu
   }
 
   useEffect(() => {
-    if (isIntersecting && albums.length === 8) {
+    if (isIntersecting && typeof onLastAlbumVisible === 'function') {
       onLastAlbumVisible();
     }
   }, [isIntersecting, albums]);
@@ -40,8 +41,11 @@ export default function AlbumsList({ albumsPromise, onLastAlbumVisible }: { albu
     <div className="grid ggrid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
       {
         albums.map((album, index) => (
-          <Card key={album.id} radius="sm" isPressable={true} onPress={() => navigate(`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`)}>
+          <Card as="a" key={album.id} radius="sm" isPressable={true} onPress={() => navigate(`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`)}>
             <CardBody className="overflow-visible p-0">
+              <Button isIconOnly aria-label="Like" variant="ghost" color="danger" className="absolute top-2 right-2 z-999" onPress={() => onDelete(album)}>
+                <IoTrashSharp />
+              </Button>
               {
                 album.media.length > 0 ? (
                 <Image
@@ -59,11 +63,14 @@ export default function AlbumsList({ albumsPromise, onLastAlbumVisible }: { albu
             <CardFooter className="flex-col">
               <h4 className="font-bold text-large">{album.name}</h4>
               {
-                index === albums.length - 1 && (
+                index === albums.length - 1 && typeof onLastAlbumVisible === 'function' && (
                   <span ref={measureRef} />
                 )
               }
               <p className="text-default-500">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</p>
+              <Switch className="mt-2" size="sm" defaultSelected={typeof album.publicProfile === 'object' && album.publicProfile !== null} onValueChange={() => onPublicProfileToggle(album)}>
+                {t("albums.list.publicProfileSwitch")}
+              </Switch>
             </CardFooter>
           </Card>
         ))

@@ -294,6 +294,12 @@
     "list": {
       "publicProfileSwitch": "Show in public profile",
       "deleteButton": "Delete album"
+    },
+    "deleteModal": {
+      "title": "Delete album",
+      "body": "Do you really want to delete this album?",
+      "closeButton": "Close",
+      "submitButton": "Delete"
     }
   },
   "publicProfile": {

@@ -47,7 +47,7 @@ export async function updateAlbum(id: ID, params: { name?: string, description?:
     .then(response => response.data.album);
 }
 
-export async function deleteAlbum(id: ID, token: string): Promise<Album> {
+export async function deleteAlbum(id: ID): Promise<Album> {
   return protectedDelete(`${import.meta.env.VITE_API_URL}/albums/${id}`)
     .then(response => response.data.album);
 }
