@@ -21,7 +21,6 @@ import {
   getCurrentUser,
 } from 'aws-amplify/auth';
 import 'aws-amplify/auth/enable-oauth-listener';
-import { getUser, setUser } from '../api/auth';
 import logger from '../logger';
 
 interface AuthContextType {
@@ -71,6 +70,7 @@ const AuthContext = createContext<AuthContextType>(
 );
 
 export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
+  const [ user, setUser ] = useState<User | null>(null);
   const [ lastUpdate, setLastUpdate ] = useState<Date>(new Date());
   const [ loading, setLoading ] = useState<boolean>(false);
   const [ hasInitialized, setHasInitialized ] = useState<boolean>(false);
@@ -279,7 +279,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
   const memoedValue = useMemo(
     () => ({
-      user: getUser(),
+      user: user,
       hasInitialized,
       loading,
       signIn,

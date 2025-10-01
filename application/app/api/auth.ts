@@ -1,17 +1,15 @@
-let user: User | null = null;
+import {
+  fetchAuthSession,
+} from 'aws-amplify/auth';
 
-export function setUser(newUser: User | null): void {
-  user = newUser;
+export async function getUserIDToken(): Promise<string | null> {
+  const session = await fetchAuthSession();
+
+  return session.tokens?.idToken?.toString() || null;
 }
 
-export function getUser(): User | null {
-  return user;
-}
+export async function getUserAccessToken(): Promise<string | null> {
+  const session = await fetchAuthSession();
 
-export function getUserIDToken(): string | null {
-  return user ? user.idToken : null;
-}
-
-export function getUserAccessToken(): string | null {
-  return user ? user.accessToken : null;
+  return session.tokens?.accessToken?.toString() || null;
 }

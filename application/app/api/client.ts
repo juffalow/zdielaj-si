@@ -65,10 +65,11 @@ export async function get<T>(endpoint: string, options: RequestInit = {}): Promi
 
 export async function protectedGet<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const { headers, ...rest } = options;
+  const token = await getUserIDToken();
 
   return fetch(endpoint, {
     headers: {
-      Authorization: `Bearer ${getUserIDToken()}`,
+      Authorization: `Bearer ${token}`,
       ...(typeof import.meta.env.VITE_API_KEY === 'string' && { 'X-API-Key': import.meta.env.VITE_API_KEY }),
       ...headers,
     },
@@ -98,10 +99,11 @@ export async function post<T>(endpoint: string, data: unknown, options: RequestI
 
 export async function protectedPost<T>(endpoint: string, data: unknown, options: RequestInit = {}): Promise<T> {
   const { headers, ...rest } = options;
+  const token = await getUserIDToken();
 
   return fetch(endpoint, {
     headers: {
-      Authorization: `Bearer ${getUserIDToken()}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
       ...(typeof import.meta.env.VITE_API_KEY === 'string' && { 'X-API-Key': import.meta.env.VITE_API_KEY }),
       ...headers,
@@ -116,10 +118,11 @@ export async function protectedPost<T>(endpoint: string, data: unknown, options:
 
 export async function protectedPostMultipart(endpoint: string, data: FormData, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
   const { headers, ...rest } = options;
+  const token = await getUserIDToken();
 
   return fetch(endpoint, {
     headers: {
-      Authorization: `Bearer ${getUserIDToken()}`,
+      Authorization: `Bearer ${token}`,
       ...(typeof import.meta.env.VITE_API_KEY === 'string' && { 'X-API-Key': import.meta.env.VITE_API_KEY }),
       ...headers,
     },
@@ -133,10 +136,11 @@ export async function protectedPostMultipart(endpoint: string, data: FormData, o
 
 export async function protectedDelete(endpoint: string, options: RequestInit = {}): Promise<any> {
   const { headers, ...rest } = options;
+  const token = await getUserIDToken();
 
   return fetch(endpoint, {
     headers: {
-      Authorization: `Bearer ${getUserIDToken()}`,
+      Authorization: `Bearer ${token}`,
       ...(typeof import.meta.env.VITE_API_KEY === 'string' && { 'X-API-Key': import.meta.env.VITE_API_KEY }),
       ...headers,
     },
@@ -149,10 +153,11 @@ export async function protectedDelete(endpoint: string, options: RequestInit = {
 
 export async function protectedPut(endpoint: string, data: unknown, options: RequestInit = {}): Promise<any> {
   const { headers, ...rest } = options;
+  const token = await getUserIDToken();
 
   return fetch(endpoint, {
     headers: {
-      Authorization: `Bearer ${getUserIDToken()}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
       ...(typeof import.meta.env.VITE_API_KEY === 'string' && { 'X-API-Key': import.meta.env.VITE_API_KEY }),
       ...headers,
@@ -167,10 +172,11 @@ export async function protectedPut(endpoint: string, data: unknown, options: Req
 
 export async function protectedPatch<T>(endpoint: string, data: unknown, options: RequestInit = {}): Promise<T> {
   const { headers, ...rest } = options;
+  const token = await getUserIDToken();
 
   return fetch(endpoint, {
     headers: {
-      Authorization: `Bearer ${getUserIDToken()}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
       ...(typeof import.meta.env.VITE_API_KEY === 'string' && { 'X-API-Key': import.meta.env.VITE_API_KEY }),
       ...headers,
