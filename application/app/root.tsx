@@ -33,7 +33,11 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  location.pathname !== '/' && i18n.changeLanguage(location.pathname.split('/')[1]);
+  const language = location.pathname.split('/')[1];
+
+  if (i18n.resolvedLanguage !== language) {
+    location.pathname !== '/' && i18n.changeLanguage(location.pathname.split('/')[1]);
+  }
 
   return (
     <html lang="en">
