@@ -84,7 +84,7 @@ i18n.use(Backend).use(detector).use(initReactI18next).init({
     },
   },
   detection: {
-    order: ['path', 'navigator'],
+    order: ['path'],
     lookupFromPathIndex: 0,
   },
   cache: ['path'],
