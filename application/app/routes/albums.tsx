@@ -1,10 +1,11 @@
 import {
+  useEffect,
   useState,
   useOptimistic,
-  Suspense,
   useCallback,
-  startTransition,
   use,
+  startTransition,
+  Suspense,
 } from 'react';
 import type { Route } from './+types/albums';
 import AlbumsLoader from './albums/loader';
@@ -39,12 +40,20 @@ export function meta({ location }: Route.MetaArgs) {
 }
 
 export default function Albums() {
-  const albumsPromise = getCurrentUserAlbums(8);
+  const [ albumsPromise, setAlbumsPromise ] = useState<Promise<Album[]> | null>(null);
+
+  useEffect(() => {
+    setAlbumsPromise(getCurrentUserAlbums(8));
+  }, []);
 
   return (
     <ErrorBoundary>
       <Suspense fallback={<AlbumsLoader />}>
-        <AlbumsContainer albumsPromise={albumsPromise} />
+        {
+          albumsPromise !== null ? (
+            <AlbumsContainer albumsPromise={albumsPromise} />
+          ) : null
+        }
       </Suspense>
     </ErrorBoundary>
   );

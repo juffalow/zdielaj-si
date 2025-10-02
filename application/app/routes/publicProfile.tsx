@@ -1,4 +1,4 @@
-import { useState, useCallback, Suspense } from 'react';
+import { useEffect, useState, useCallback, Suspense } from 'react';
 import { useParams } from 'react-router';
 import NotFound from './publicProfile/notFound';
 import PublicProfileLoader from './publicProfile/profileLoader';
@@ -17,8 +17,16 @@ export function meta() {
 
 export default function PublicProfile() {
   const params = useParams();
-  const [ albumPromises, setAlbumPromises ] = useState<Promise<Album[]>[]>([ getPublicProfileAlbums({ publicProfileId: params.id as string, first: 8 }) ]);
-  const publicProfilePromise = getPublicProfile(params.id as string);
+  const [ albumPromises, setAlbumPromises ] = useState<Promise<Album[]>[]>([]);
+  const [ publicProfilePromise, setPublicProfilePromise ] = useState<Promise<PublicProfile> | null>(null);
+
+  useEffect(() => {
+    setPublicProfilePromise(getPublicProfile(params.id as string));
+  }, [params.id]);
+
+  useEffect(() => {
+    setAlbumPromises([ getPublicProfileAlbums({ publicProfileId: params.id as string, first: 8 }) ]);
+  }, [params.id]);
 
   const loadMore = useCallback(() => {
     setAlbumPromises([...albumPromises, getPublicProfileAlbums({ publicProfileId: params.id as string, after: albumPromises.length * 8, first: 8 })]);
@@ -27,7 +35,11 @@ export default function PublicProfile() {
   return (
     <ErrorBoundary notFound={<NotFound />}>
       <Suspense fallback={<PublicProfileLoader />}>
-        <Info publicProfilePromise={publicProfilePromise} />
+        {
+          publicProfilePromise !== null ? (
+            <Info publicProfilePromise={publicProfilePromise} />
+          ) : null
+        }
       </Suspense>
       {
         albumPromises.map((albumPromise, index) => {

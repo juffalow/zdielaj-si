@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router';
 import NotFound from './album/NotFound';
 import GalleryLoader from './album/GalleryLoader';
@@ -21,6 +21,7 @@ export default function Album() {
   const params = useParams();
   const { files } = useUpload();
   const location = useLocation();
+  const [ albumPromise, setAlbumPromise ] = useState<Promise<Album> | null>(null);
 
   if (files.length > 0 && location.state.isNew) {
     return (
@@ -32,12 +33,18 @@ export default function Album() {
     return <GalleryLoader />;
   }
 
-  const albumPromise = user !== null ? getUserAlbum(params.id as string) : getAlbum(params.id as string);
+  useEffect(() => {
+    setAlbumPromise(user !== null ? getUserAlbum(params.id as string) : getAlbum(params.id as string));
+  }, [user, params.id]);
 
   return (
     <ErrorBoundary notFound={<NotFound />}>
       <Suspense fallback={<GalleryLoader />}>
-        <Gallery albumPromise={albumPromise} />
+        {
+          albumPromise !== null ? (
+            <Gallery albumPromise={albumPromise} />
+          ) : null
+        }
       </Suspense>
     </ErrorBoundary>
   );

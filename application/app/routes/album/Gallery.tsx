@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { use } from 'react';
 import { Divider } from '@heroui/react';
 import LightGallery from 'lightgallery/react';
 import lgVideo from 'lightgallery/plugins/video';
