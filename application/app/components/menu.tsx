@@ -16,17 +16,37 @@ import {
   DropdownItem,
 } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink } from 'react-router';
+import { Link as RouterLink, useLocation, useNavigate, matchPath } from 'react-router';
 import useAuth from '../utils/useAuth';
+import { ROUTES } from '../constants';
 
 export default function menu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { i18n, t } = useTranslation('', { keyPrefix: 'components.menu' });
   const { user, signOut } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const onChangeLang = (e: MouseEvent) => {
     const code = (e.target as HTMLElement).getAttribute('data-lang') || 'sk';
+    const pathname = location.pathname;
+
+    const route = Object.keys(ROUTES[i18n.language as keyof typeof ROUTES]).find(key => {
+      return matchPath(`/${ROUTES[i18n.language as keyof typeof ROUTES].prefix}${(ROUTES as any)[i18n.language][key]}`, pathname);
+    });
+
+    const pathnameParts = pathname.split('/');
+    const newPathnameParts = `/${ROUTES[code as keyof typeof ROUTES].prefix}${(ROUTES as any)[code][route as string]}`.split('/');
+
+    const redirectPathname = newPathnameParts.map((part, index) => {
+      if (part.startsWith(':')) {
+        return pathnameParts[index];
+      }
+      return part;
+    }).join('/');
+
     i18n.changeLanguage(code);
+    navigate(redirectPathname);
   };
 
   const lang = i18n.language === 'sk' ? (<>&#x1F1F8;&#x1F1F0; SK</>)
