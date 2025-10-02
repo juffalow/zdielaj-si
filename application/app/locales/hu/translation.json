@@ -5,148 +5,13 @@
     "signUp": "regisztracio",
     "passwordReset": "jelszo-visszaallitas",
     "about": "rolunk",
-    "privacyPolicy": "adatvedelmi-szabalyzat",
+    "privacyPolicy": "adatvedelem",
     "userData": "felhasznaloi-adatok",
     "userProfile": "profil",
     "publicProfile": "profil/:id",
-    "albums": "albumok",
+    "albums": "album",
     "album": "album/:id",
     "home": ""
-  },
-  "home": {
-    "title": "Ossza meg fényképeit és videóit teljes minőségben",
-    "subtitle": "Önnek is problémát okoz, hogy egyes alkalmazások csökkentik a fényképek és videók minőségét? Itt gond nélkül megoszthatja őket teljes minőségben!",
-    "uploadAreaText": "Húzza ide a fényképeket vagy válassza ki őket kattintással",
-    "uploadAreaButton": "Fényképek feltöltése",
-    "pricing": {
-      "default": {
-        "title": "Regisztráció nélkül",
-        "monthly": "havonta",
-        "maxTenPhotos": "max. <strong>10</strong> fénykép",
-        "deletedAfter24Hours": "a fájlok automatikusan törlődnek <strong>24 óra</strong> után",
-        "register": "Regisztráció"
-      },
-      "free": {
-        "title": "Ingyenes",
-        "monthly": "havonta",
-        "maxOneGB": "max. <strong>1GB</strong> <small>(≈ 300 fénykép)</small>",
-        "video": "videó",
-        "listOfAlbums": "albumlista",
-        "filesWillBeDeletedAfter7Days": "a fájlok automatikusan törlődnek <strong>7 nap</strong> után",
-        "register": "Regisztráció"
-      },
-      "standard": {
-        "title": "Standard",
-        "monthly": "havonta",
-        "maxTenGB": "max. <strong>10GB</strong> <small>(≈ 3000 fénykép)</small>",
-        "video": "videó",
-        "listOfAlbums": "albumlista",
-        "passwordProtect": "jelszóvédelem",
-        "publicProfile": "nyilvános profil",
-        "filesWillNotBeDeleted": "a fájlok <strong>nem törlődnek</strong>",
-        "register": "Regisztráció"
-      }
-    }
-  },
-  "login": {
-    "title": "Bejelentkezés",
-    "subtitle": "Még nincs fiókja?",
-    "subtitleLink": "Regisztráció",
-    "form": {
-      "email": "E-mail cím",
-      "requiredField": "Ez a mező kötelező.",
-      "password": "Jelszó",
-      "forgotPassword": "Elfelejtette a jelszavát?",
-      "signInButton": "Bejelentkezés"
-    }
-  },
-  "profile": {
-    "changePasswordForm": {
-      "title": "Jelszó megváltoztatása",
-      "currentPassword": "Jelenlegi jelszó",
-      "currentPasswordPlaceholder": "1RegiJelszo!",
-      "newPassword": "Új jelszó",
-      "newPasswordPlaceholder": "Uj1ErosJelszo!",
-      "confirmPassword": "Új jelszó megerősítése",
-      "button": "Jelszó megváltoztatása"
-    },
-    "statistics": {
-      "title": "Statisztika",
-      "numberOfAlbums": "Albumok száma",
-      "numberOfFiles": "Fájlok száma",
-      "totalSize": "Teljes méret"
-    }
-  },
-  "publicProfile": {
-    "notFound": {
-      "title": "A nyilvános profil nem található!",
-      "subtitle": "A keresett nyilvános profil nem létezik.",
-      "clarifyingText": "Lehet, hogy rossz címet írt be, régi linket használt vagy a profil törölve lett.",
-      "ctaButton": "Vissza a kezdőlapra"
-    }
-  },
-  "register": {
-    "title": "Regisztráció",
-    "subtitle": "Már van fiókja?",
-    "subtitleLink": "Bejelentkezés",
-    "error": {
-      "userAlreadyExists": "Ezzel az e-mail címmel már létezik felhasználó!",
-      "userNotCreated": "A felhasználó létrehozása sikertelen!"
-    },
-    "form": {
-      "name": "Név",
-      "email": "E-mail cím",
-      "password": "Jelszó",
-      "requiredField": "Ez a mező kötelező.",
-      "minEightCharacters": "Legalább 8 karakter",
-      "atLeastOneUppercase": "Legalább egy nagybetű",
-      "atLeastOneLowercase": "Legalább egy kisbetű",
-      "atLeastOneSpecialCharacter": "Legalább egy speciális karakter",
-      "atLeastOneNumber": "Legalább egy szám",
-      "signUpButton": "Regisztráció"
-    },
-    "confirmForm": {
-      "title": "E-mail cím megerősítése",
-      "subtitle": "Egy megerősítő kódot küldtünk az e-mail címére.",
-      "code": "Megerősítő kód",
-      "requiredField": "Ez a mező kötelező.",
-      "submitButton": "Regisztráció befejezése"
-    },
-    "thankYou": {
-      "title": "Köszönjük a regisztrációt!",
-      "subtitle": "Az e-mail címe megerősítésre került. Folytathatja a bejelentkezéssel",
-      "subtitleLink": "itt"
-    }
-  },
-  "album": {
-    "userAlbum": {
-      "formName": "Név",
-      "formDescription": "Leírás",
-      "formLink": "Album link",
-      "formSubmitButton": "Mentés",
-      "copyButton": "Link másolása"
-    },
-    "notFound": {
-      "title": "Album nem található!",
-      "subtitle": "A keresett album nem létezik.",
-      "clarifyingText": "Lehet, hogy rossz címet írt be, régi linket használt vagy az album törölve lett.",
-      "ctaButton": "Vissza a kezdőlapra"
-    }
-  },
-  "albums": {
-    "albumPreview": {
-      "noFiles": "Nincsenek fájlok",
-      "publicProfileToggle": "Mutasd a nyilvános profilban",
-      "show": "Mutat",
-      "delete": "Törlés"
-    },
-    "albumsContainer": {
-      "noAlbumsAlert": "Nincsenek albumjaid",
-      "modalTitle": "Album törlése",
-      "modalBody": "Biztosan törölni szeretné ezt az albumot?",
-      "modalCloseButton": "Bezárás",
-      "modalSubmitButton": "Törlés"
-    }
   },
   "components": {
     "shareButton": {
@@ -154,66 +19,304 @@
     },
     "uploadFiles": {
       "dropzoneTitle": "Húzza ide a fényképeket vagy válassza ki őket kattintással"
+    },
+    "menu": {
+      "albums": "Albumok",
+      "profile": "Profil",
+      "signIn": "Bejelentkezés",
+      "signUp": "Regisztráció",
+      "signOut": "Kijelentkezés",
+      "subscription": "Előfizetés"
+    },
+    "footer": {
+      "about": "Rólunk",
+      "contact": "Kapcsolat",
+      "description": "Az alkalmazás segíti a felhasználókat abban, hogy gyorsan és egyszerűen osszanak meg fényképeket és videókat minőségromlás nélkül.",
+      "home": "Kezdőlap",
+      "links": "Linkek",
+      "register": "Regisztráció",
+      "privacyPolicy": "Adatvédelem",
+      "status": "Állapot"
     }
   },
-  "menu": {
-    "albums": "Albumok",
-    "about": "Rólunk",
-    "profile": "Profil",
-    "signIn": "Bejelentkezés",
-    "signOut": "Kijelentkezés",
-    "subscription": "Előfizetés"
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "Önnek is problémát okoz, hogy egyes alkalmazások csökkentik fényképei és videói minőségét? Itt problémamentesen megoszthatja őket teljes minőségben!"
+    }
   },
-  "footer": {
-    "about": "Rólunk",
-    "contact": "Kapcsolat",
-    "description": "Az alkalmazás segít a felhasználóknak gyorsan és egyszerűen megosztani fényképeket és videókat minőségromlás nélkül.",
-    "home": "Kezdőlap",
-    "links": "Linkek",
-    "register": "Regisztráció",
-    "status": "Állapot"
+  "home": {
+    "title": "Ossza meg fényképeit és videóit teljes minőségben",
+    "subtitle": "Önnek is problémát okoz, hogy egyes alkalmazások csökkentik fényképei és videói minőségét? Itt problémamentesen megoszthatja őket teljes minőségben!",
+    "uploadArea": {
+      "title": "Húzza ide a fényképeket vagy válassza ki őket kattintással",
+      "button": "Fényképek feltöltése",
+      "asUnregisteredUser": {
+        "title": "Regisztrálatlan felhasználóként:",
+        "maxTenPhotos": "maximum <strong>10</strong> fényképet oszthat meg",
+        "deletedAfter24Hours": "a fényképek automatikusan törlődnek <strong>24 óra</strong> után"
+      }
+    },
+    "pricing": {
+      "default": {
+        "title": "Regisztráció nélkül",
+        "monthly": "havonta",
+        "maxTenPhotos": "max <strong>10</strong> fénykép",
+        "maxSizePerFile": "fájlméret legfeljebb <strong>10MB</strong>",
+        "deletedAfter24Hours": "a fájlok automatikusan törlődnek <strong>24 óra</strong> után"
+      },
+      "free": {
+        "title": "Ingyenes",
+        "monthly": "havonta",
+        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 fénykép)</small>",
+        "maxSizePerFile": "fájlméret legfeljebb <strong>100MB</strong>",
+        "video": "videó",
+        "listOfAlbums": "albumok listája",
+        "filesWillBeDeletedAfter7Days": "a fájlok automatikusan törlődnek <strong>7 nap</strong> után",
+        "signUp": "Regisztráció"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "havonta",
+        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 fénykép)</small>",
+        "maxSizePerFile": "fájlméret legfeljebb <strong>500MB</strong>",
+        "video": "videó",
+        "listOfAlbums": "albumok listája",
+        "passwordProtect": "jelszóvédelem",
+        "publicProfile": "nyilvános profil",
+        "mfa": "kétfaktoros hitelesítés",
+        "filesAreNotDeleted": "a fájlok <strong>nem törlődnek</strong>",
+        "signUp": "Regisztráció"
+      }
+    }
   },
-  "userDataDeletion": {
-    "title": "Felhasználói adatok törlése",
-    "subtitle": "Ha szeretné törölni személyes adatait vagy fiókját, kérjük, vegye fel velünk a kapcsolatot a <mailto>{{email}}</mailto> címen. Kérésének beérkezése után gondoskodunk minden személyes adatának törléséről a vonatkozó jogszabályoknak megfelelően."
+  "signIn": {
+    "title": "Bejelentkezés",
+    "noAccount": "Még nincs fiókja?",
+    "signUp": "Regisztráció",
+    "form": {
+      "email": "E-mail",
+      "emailPlaceholder": "Adja meg e-mail címét",
+      "requiredField": "Ez a mező kötelező.",
+      "password": "Jelszó",
+      "passwordPlaceholder": "Adja meg jelszavát",
+      "forgotPassword": "Elfelejtette jelszavát?",
+      "signInButton": "Bejelentkezés"
+    },
+    "totp": {
+      "totpCode": "Kód",
+      "confirmSignInButton": "Bejelentkezés megerősítése"
+    }
+  },
+  "signUp": {
+    "title": "Regisztráció",
+    "form": {
+      "name": "Név",
+      "namePlaceholder": "Adja meg nevét",
+      "email": "E-mail",
+      "emailPlaceholder": "Adja meg e-mail címét",
+      "requiredField": "Ez a mező kötelező.",
+      "password": "Jelszó",
+      "passwordPlaceholder": "Adja meg jelszavát",
+      "passwordRules": {
+        "minEightCharacters": "Legalább 8 karakter",
+        "atLeastOneUppercase": "Legalább egy nagybetű",
+        "atLeastOneLowercase": "Legalább egy kisbetű",
+        "atLeastOneSpecialCharacter": "Legalább egy speciális karakter",
+        "atLeastOneNumber": "Legalább egy szám"
+      },
+      "signUpButton": "Regisztráció",
+      "errors": {
+        "userAlreadyExists": "Ezzel az e-mail címmel már létezik felhasználó!",
+        "default": "Nem sikerült regisztrálni!"
+      }
+    },
+    "confirmForm": {
+      "code": "Kód",
+      "requiredField": "Ez a mező kötelező.",
+      "confirmSignUpButton": "Regisztráció megerősítése",
+      "errors": {
+        "codeMismatch": "Érvénytelen ellenőrző kód, kérjük, próbálja újra.",
+        "default": "Nem sikerült megerősíteni a regisztrációt!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "Sikeresen létrehozta fiókját. Most bejelentkezhet fiókjába.",
+      "subtitleLink": "Bejelentkezés"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "Az album nem található!",
+      "subtitle": "A keresett album nem létezik.",
+      "clarifyingText": "Lehet, hogy rossz címet adott meg, régi linket használt, vagy az albumot törölték.",
+      "ctaButton": "Vissza a kezdőlapra"
+    },
+    "userAlbum": {
+      "name": "Név",
+      "namePlaceholder": "Adja meg az album nevét",
+      "description": "Leírás",
+      "descriptionPlaceholder": "Adja meg az album leírását",
+      "layout": "Elrendezés",
+      "layoutOptions": {
+        "cols": "Oszlopok",
+        "rows": "Sorok",
+        "tiles": "Csempék"
+      },
+      "gaps": "Távolság",
+      "gapsOptions": {
+        "none": "Nincs távolság",
+        "small": "Kicsi",
+        "medium": "Közepes",
+        "large": "Nagy"
+      },
+      "changeLayout": "A felhasználó módosíthatja az elrendezést",
+      "retention": "Fájl megőrzés",
+      "retentionOptions": {
+        "1": "1 nap",
+        "7": "1 hét",
+        "31": "1 hónap",
+        "366": "1 év",
+        "0": "Örökre"
+      },
+      "link": "Album link",
+      "submitButton": "Mentés",
+      "copyButton": "Link másolása",
+      "mobileBottomButton": "Link másolása"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "detail": {
+      "title": "Fiók adatai",
+      "email": "E-mail"
+    },
+    "changePassword": {
+      "title": "Jelszó módosítása",
+      "currentPassword": "Jelenlegi jelszó",
+      "currentPasswordPlaceholder": "1RegiJelszo!",
+      "newPassword": "Új jelszó",
+      "newPasswordPlaceholder": "Uj1BiztonsagosJelszo!",
+      "confirmPassword": "Új jelszó megerősítése",
+      "button": "Jelszó módosítása"
+    },
+    "mfa": {
+      "title": "Kétfaktoros hitelesítés",
+      "activate": {
+        "title": "Kétfaktoros hitelesítés aktiválása",
+        "subtitle": "A kétfaktoros hitelesítés aktiválása után e-mailben küldött kóddal jelentkezhet be."
+      },
+      "confirm": {
+        "title": "Kétfaktoros hitelesítés megerősítése",
+        "subtitle": "Adja meg az e-mailben küldött kódot a kétfaktoros hitelesítés megerősítéséhez.",
+        "submitButton": "Megerősítés"
+      }
+    },
+    "publicProfile": {
+      "title": "Nyilvános profil",
+      "activate": {
+        "title": "Nyilvános profil aktiválása",
+        "subtitle": "A nyilvános profil aktiválása után egyedi URL címet választ profiljához, ahol más felhasználók láthatják albumait.",
+        "moreInfo": "További információt az oldalon talál",
+        "moreInfoLink": "Az alkalmazásról, a Nyilvános profil részben",
+        "cta": "Aktiválás"
+      },
+      "createForm": {
+        "mandatoryField": "Ez a mező kötelező.",
+        "fieldName": "Név",
+        "fieldSlug": "Slug",
+        "fieldSlugHelp1": "Csak kisbetűk, számok és kötőjelek engedélyezettek.",
+        "fieldSlugHelp2": "A profil elérhető lesz:",
+        "fieldDescription": "Leírás",
+        "createButton": "Létrehozás",
+        "cancelButton": "Mégse",
+        "errorMessage": "Nem sikerült létrehozni a nyilvános profilt."
+      },
+      "updateForm": {
+        "mandatoryField": "Ez a mező kötelező.",
+        "fieldName": "Név",
+        "fieldSlug": "Slug",
+        "fieldDescription": "Leírás",
+        "fieldHomepage": "Weboldal",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Mentés",
+        "errorMessage": "Nem sikerült frissíteni a nyilvános profilt."
+      }
+    },
+    "statistics": {
+      "title": "Statisztikák",
+      "numberOfAlbums": "Albumok száma",
+      "numberOfFiles": "Fájlok száma",
+      "totalSize": "Teljes méret"
+    },
+    "deleteProfile": {
+      "title": "Fiók törlése",
+      "subtitle": "Az összes feltöltött fájl és album törlődik a fiókjával együtt.",
+      "submitButton": "Profil törlése",
+      "clarifyingText": "Ez a funkció még nem támogatott. Ha törölni szeretné fiókját, kérjük, vegye fel velünk a kapcsolatot a következő e-mail címen"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "Még nincs egyetlen albuma sem!",
+      "subtitle": "Még nincs egyetlen albuma sem.",
+      "ctaButton": "Menjen a kezdőlapra és hozza létre első albumát"
+    },
+    "list": {
+      "publicProfileSwitch": "Megjelenítés nyilvános profilban",
+      "deleteButton": "Album törlése"
+    },
+    "deleteModal": {
+      "title": "Album törlése",
+      "body": "Valóban törölni szeretné ezt az albumot?",
+      "closeButton": "Bezárás",
+      "submitButton": "Törlés"
+    }
+  },
+  "publicProfile": {
+    "notFound": {
+      "title": "A nyilvános profil nem található!",
+      "subtitle": "A keresett nyilvános profil nem létezik.",
+      "clarifyingText": "Lehet, hogy rossz címet adott meg, régi linket használt, vagy a nyilvános profilt törölték.",
+      "ctaButton": "Vissza a kezdőlapra"
+    }
   },
   "privacyPolicy": {
-    "title": "Adatvédelmi szabályzat",
-    "subtitle": "Ha Ön a Zdielaj.si weboldal látogatója vagy a Zdielaj.si szolgáltatás ügyfele, akkor a weboldal vagy szolgáltatás használatára az \"adatvédelmi szabályzat\" vonatkozik.",
+    "title": "Adatvédelem",
+    "subtitle": "Ha Ön a Zdielaj.si weboldal látogatója vagy a Zdielaj.si szolgáltatás ügyfele, akkor az oldal vagy szolgáltatás használatára az \"adatvédelmi irányelvek\" vonatkoznak.",
     "firstSection": {
       "title": "Milyen típusú információkat gyűjtünk?",
-      "paragraph1": "A Zdielaj.si szolgáltatások nyújtásához információkat kell feldolgoznunk Önről. Az általunk gyűjtött információk típusa attól függ, hogyan használja szolgáltatásainkat."
+      "paragraph1": "A Zdielaj.si szolgáltatások nyújtásához fel kell dolgoznunk az Önről szóló információkat. Az általunk gyűjtött információk típusai attól függnek, hogyan használja szolgáltatásainkat."
     },
     "secondSection": {
-      "title": "Hogyan használjuk fel ezeket az információkat?",
-      "paragraph1": "<strong>Szolgáltatásaink nyújtásához, személyre szabásához és fejlesztéséhez.</strong> Az általunk birtokolt információkat szolgáltatásaink nyújtására, funkciók testreszabására és javaslatok készítésére használjuk.",
-      "paragraph2": "<strong>Termékkutatás és fejlesztés.</strong> Az információkat szolgáltatásaink fejlesztésére, tesztelésére és javítására használjuk. Az ilyen feldolgozás szükséges jogos érdekeinkhez, hogy innovatív szolgáltatásokat nyújtsunk felhasználóinknak.",
-      "paragraph3": "<strong>Biztonság és integritás támogatása.</strong> Az információkat fiókok és tevékenységek ellenőrzésére, káros viselkedés elleni küzdelemre, spam és más negatív élmények felismerésére és megelőzésére, valamint szolgáltatásaink integritásának fenntartására használjuk.",
-      "paragraph4": "<strong>Kapcsolattartás Önnel.</strong> Az információkat marketingkommunikáció, releváns hírek és frissítések küldésére használjuk, amelyek véleményünk szerint érdekelhetik Önt."
+      "title": "Hogyan használjuk ezeket az információkat?",
+      "paragraph1": "<strong>Szolgáltatásaink nyújtására, személyre szabására és javítására.</strong> A rendelkezésünkre álló információkat szolgáltatásaink nyújtására, funkciók testreszabására és javaslatok készítésére használjuk.",
+      "paragraph2": "<strong>Termékkutatás és -fejlesztés.</strong> A rendelkezésünkre álló információkat szolgáltatásaink fejlesztésére, tesztelésére és javítására használjuk. Az ilyen feldolgozás szükséges jogos érdekeinkhez, hogy innovatív szolgáltatásokat nyújtsunk felhasználóinknak.",
+      "paragraph3": "<strong>A biztonság és integritás támogatására.</strong> A rendelkezésünkre álló információkat fiókok és tevékenységek ellenőrzésére, káros viselkedés elleni küzdelemre, spam és más negatív tapasztalatok észlelésére és megelőzésére, valamint szolgáltatásaink integritásának fenntartására használjuk.",
+      "paragraph4": "<strong>Kommunikáció Önnel.</strong> A rendelkezésünkre álló információkat marketing kommunikáció, releváns hírek és frissítések küldésére használjuk, amelyek szerintünk érdekesek lehetnek Ön számára."
     },
     "thirdSection": {
-      "title": "Hogyan védjük az Ön adatait?",
-      "paragraph1": "Személyes adatai titkosítva vannak, védett hálózatok mögött tároljuk őket, és csak korlátozott számú személy férhet hozzá, akik speciális hozzáférési jogokkal rendelkeznek ezekhez a rendszerekhez, és kötelesek bizalmasan kezelni az információkat."
+      "title": "Hogyan védjük az információkat?",
+      "paragraph1": "Személyes adatait titkosítjuk, biztonságos hálózatok mögött tároljuk, és csak korlátozott számú személy férhet hozzájuk, akiknek speciális hozzáférési joguk van az ilyen rendszerekhez, és kötelesek bizalmasan kezelni az információkat."
     },
     "fourthSection": {
       "title": "Hogyan osztjuk meg ezeket az információkat?",
-      "paragraph1": "Nem adjuk el, nem cseréljük, és más módon sem adjuk át személyes adatait külső feleknek. Ez nem vonatkozik a weboldal tárhelyszolgáltató partnereire és más felekre, akik segítenek nekünk a weboldal működtetésében, üzletvitelben vagy felhasználóink kiszolgálásában, amennyiben ezek a felek vállalják, hogy bizalmasan kezelik ezeket az információkat."
+      "paragraph1": "Nem adjuk el, nem kereskedünk és nem adjuk át más módon személyes adatait külső feleknek. Ez nem vonatkozik a webtárhely-partnerekre és más felekre, akik segítenek weboldalunk üzemeltetésében, üzletünk vezetésében vagy felhasználóink kiszolgálásában, amennyiben ezek a felek beleegyeznek az információk bizalmasan kezelésébe."
     },
     "fifthSection": {
       "title": "Adatmegőrzés, deaktiválás és fiók törlése",
-      "paragraph1": "Az adatokat addig őrizzük meg, amíg az szükséges szolgáltatásaink nyújtásához, vagy amíg fiókját nem törlik – attól függően, hogy melyik következik be előbb."
+      "paragraph1": "Az adatokat addig őrizzük meg, ameddig szükséges szolgáltatásaink nyújtásához, vagy amíg fiókját nem törlik - amelyik előbb következik be."
     },
     "sixthSection": {
-      "title": "Hogyan értesítjük a szabályzat változásairól?",
-      "paragraph1": "Időről időre frissíthetjük ezt a szabályzatot. Ha lehetséges, értesítjük Önt a változásokról, vagy rendszeresen emlékeztetjük, hogy olvassa el ezt a szabályzatot e-mailben."
+      "title": "Hogyan értesítjük Önt az irányelvek változásairól?",
+      "paragraph1": "Időről időre frissíthetjük ezeket az irányelveket. Ahol lehetséges, e-mailben tájékoztatjuk a változásokról, vagy rendszeresen emlékeztetjük az irányelvek áttekintésére."
     },
     "seventhSection": {
-      "title": "Hogyan léphet kapcsolatba a Zdielaj.si-vel kérdések esetén?",
-      "paragraph1": "Kapcsolatba léphet velünk e-mailben a <mailto>info@zdielaj.si</mailto> címen."
+      "title": "Hogyan lehet kapcsolatba lépni a Zdielaj.si-vel kérdésekkel?",
+      "paragraph1": "Kapcsolatba léphet velünk e-mail küldésével az <mailto>info@zdielaj.si</mailto> címre."
     }
-  },
-  "about": {
-    "title": "Az alkalmazásról",
-    "subtitle": "Az alkalmazás segít a felhasználóknak gyorsan és egyszerűen megosztani fényképeket és videókat minőségromlás nélkül. Minden adat titkosított formában van tárolva."
   }
 }

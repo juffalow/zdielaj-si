@@ -164,7 +164,7 @@ export default function Home() {
             </ul>
           </CardBody>
           <CardFooter>
-          <Button as={Link} to={`/${t("prefix", { keyPrefix: "routes" })}${t("signUp", { keyPrefix: "routes" })}`} variant="bordered" fullWidth={true} data-tracking-id="home_standard_sign_up_click">Sign up</Button>
+          <Button as={Link} to={`/${t("prefix", { keyPrefix: "routes" })}${t("signUp", { keyPrefix: "routes" })}`} variant="bordered" fullWidth={true} data-tracking-id="home_standard_sign_up_click">{t("pricing.standard.signUp")}</Button>
           </CardFooter>
         </Card>
         <Card>
@@ -182,7 +182,7 @@ export default function Home() {
             </ul>
           </CardBody>
           <CardFooter>
-            <Button as={Link} to={`/${t("prefix", { keyPrefix: "routes" })}${t("signUp", { keyPrefix: "routes" })}`} variant="bordered" fullWidth={true} data-tracking-id="home_free_sign_up_click">Sign up</Button>
+            <Button as={Link} to={`/${t("prefix", { keyPrefix: "routes" })}${t("signUp", { keyPrefix: "routes" })}`} variant="bordered" fullWidth={true} data-tracking-id="home_free_sign_up_click">{t("pricing.free.signUp")}</Button>
           </CardFooter>
         </Card>
       </div>

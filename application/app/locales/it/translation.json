@@ -3,8 +3,8 @@
     "prefix": "it/",
     "signIn": "accedi",
     "signUp": "registrati",
-    "passwordReset": "reimposta-password",
-    "about": "informazioni",
+    "passwordReset": "ripristina-password",
+    "about": "chi-siamo",
     "privacyPolicy": "privacy-policy",
     "userData": "dati-utente",
     "userProfile": "profilo",
@@ -13,207 +13,310 @@
     "album": "album/:id",
     "home": ""
   },
+  "components": {
+    "shareButton": {
+      "copyLink": "Copia link"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Trascina le foto qui o selezionale cliccando"
+    },
+    "menu": {
+      "albums": "Album",
+      "profile": "Profilo",
+      "signIn": "Accedi",
+      "signUp": "Registrati",
+      "signOut": "Esci",
+      "subscription": "Abbonamento"
+    },
+    "footer": {
+      "about": "Chi siamo",
+      "contact": "Contatto",
+      "description": "L'applicazione aiuta gli utenti a condividere foto e video in modo rapido e semplice senza ridurre la qualità.",
+      "home": "Home",
+      "links": "Link",
+      "register": "Registrati",
+      "privacyPolicy": "Privacy Policy",
+      "status": "Stato"
+    }
+  },
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "Hai anche il problema che alcune applicazioni riducono la qualità delle tue foto e video? Qui puoi condividerli senza problemi in qualità completa!"
+    }
+  },
   "home": {
-    "title": "Condividi foto e video in qualità originale",
-    "subtitle": "Hai anche tu il problema che alcune applicazioni riducono la qualità delle tue foto e dei tuoi video? Qui puoi condividerli senza problemi in qualità completa!",
-    "uploadAreaText": "Sposta qui le foto o selezionale cliccando",
-    "uploadAreaButton": "Carica foto",
+    "title": "Condividi foto e video in qualità completa",
+    "subtitle": "Hai anche il problema che alcune applicazioni riducono la qualità delle tue foto e video? Qui puoi condividerli senza problemi in qualità completa!",
+    "uploadArea": {
+      "title": "Trascina le foto qui o selezionale cliccando",
+      "button": "Carica foto",
+      "asUnregisteredUser": {
+        "title": "Come utente non registrato:",
+        "maxTenPhotos": "puoi condividere un massimo di <strong>10</strong> foto",
+        "deletedAfter24Hours": "le foto verranno eliminate automaticamente dopo <strong>24 ore</strong>"
+      }
+    },
     "pricing": {
       "default": {
         "title": "Senza registrazione",
         "monthly": "mensile",
         "maxTenPhotos": "max <strong>10</strong> foto",
-        "deletedAfter24Hours": "i file verranno eliminati automaticamente dopo <strong>24 ore</strong>",
-        "register": "Registrati"
+        "maxSizePerFile": "dimensione file fino a <strong>10MB</strong>",
+        "deletedAfter24Hours": "i file verranno eliminati automaticamente dopo <strong>24 ore</strong>"
       },
       "free": {
         "title": "Gratis",
         "monthly": "mensile",
         "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 foto)</small>",
+        "maxSizePerFile": "dimensione file fino a <strong>100MB</strong>",
         "video": "video",
-        "listOfAlbums": "elenco album",
+        "listOfAlbums": "elenco degli album",
         "filesWillBeDeletedAfter7Days": "i file verranno eliminati automaticamente dopo <strong>7 giorni</strong>",
-        "register": "Registrati"
+        "signUp": "Registrati"
       },
       "standard": {
         "title": "Standard",
         "monthly": "mensile",
         "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 foto)</small>",
+        "maxSizePerFile": "dimensione file fino a <strong>500MB</strong>",
         "video": "video",
-        "listOfAlbums": "elenco album",
-        "passwordProtect": "protezione tramite password",
+        "listOfAlbums": "elenco degli album",
+        "passwordProtect": "protezione con password",
         "publicProfile": "profilo pubblico",
-        "filesWillNotBeDeleted": "i file <strong>non vengono eliminati</strong>",
-        "register": "Registrati"
+        "mfa": "autenticazione a più fattori",
+        "filesAreNotDeleted": "i file <strong>non vengono eliminati</strong>",
+        "signUp": "Registrati"
       }
     }
   },
-  "login": {
+  "signIn": {
     "title": "Accedi",
-    "subtitle": "Non hai ancora un account?",
-    "subtitleLink": "Registrati",
+    "noAccount": "Non hai ancora un account?",
+    "signUp": "Registrati",
     "form": {
-      "email": "Indirizzo e-mail",
+      "email": "E-mail",
+      "emailPlaceholder": "Inserisci la tua e-mail",
       "requiredField": "Questo campo è obbligatorio.",
       "password": "Password",
+      "passwordPlaceholder": "Inserisci la tua password",
       "forgotPassword": "Hai dimenticato la password?",
       "signInButton": "Accedi"
+    },
+    "totp": {
+      "totpCode": "Codice",
+      "confirmSignInButton": "Conferma accesso"
+    }
+  },
+  "signUp": {
+    "title": "Registrati",
+    "form": {
+      "name": "Nome",
+      "namePlaceholder": "Inserisci il tuo nome",
+      "email": "E-mail",
+      "emailPlaceholder": "Inserisci la tua e-mail",
+      "requiredField": "Questo campo è obbligatorio.",
+      "password": "Password",
+      "passwordPlaceholder": "Inserisci la tua password",
+      "passwordRules": {
+        "minEightCharacters": "Almeno 8 caratteri",
+        "atLeastOneUppercase": "Almeno una lettera maiuscola",
+        "atLeastOneLowercase": "Almeno una lettera minuscola",
+        "atLeastOneSpecialCharacter": "Almeno un carattere speciale",
+        "atLeastOneNumber": "Almeno un numero"
+      },
+      "signUpButton": "Registrati",
+      "errors": {
+        "userAlreadyExists": "Esiste già un utente con questo indirizzo e-mail!",
+        "default": "Impossibile registrarsi!"
+      }
+    },
+    "confirmForm": {
+      "code": "Codice",
+      "requiredField": "Questo campo è obbligatorio.",
+      "confirmSignUpButton": "Conferma registrazione",
+      "errors": {
+        "codeMismatch": "Codice di verifica non valido, riprova.",
+        "default": "Impossibile confermare la registrazione!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "Hai creato con successo il tuo account. Ora puoi accedere al tuo account.",
+      "subtitleLink": "Accedi"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "Album non trovato!",
+      "subtitle": "L'album che stai cercando non esiste.",
+      "clarifyingText": "Forse hai digitato un indirizzo errato, usato un link vecchio o l'album è stato eliminato.",
+      "ctaButton": "Torna alla home page"
+    },
+    "userAlbum": {
+      "name": "Nome",
+      "namePlaceholder": "Inserisci il nome dell'album",
+      "description": "Descrizione",
+      "descriptionPlaceholder": "Inserisci la descrizione dell'album",
+      "layout": "Layout",
+      "layoutOptions": {
+        "cols": "Colonne",
+        "rows": "Righe",
+        "tiles": "Piastrelle"
+      },
+      "gaps": "Spaziatura",
+      "gapsOptions": {
+        "none": "Nessuna spaziatura",
+        "small": "Piccola",
+        "medium": "Media",
+        "large": "Grande"
+      },
+      "changeLayout": "L'utente può cambiare il layout",
+      "retention": "Conservazione file",
+      "retentionOptions": {
+        "1": "1 giorno",
+        "7": "1 settimana",
+        "31": "1 mese",
+        "366": "1 anno",
+        "0": "Per sempre"
+      },
+      "link": "Link dell'album",
+      "submitButton": "Salva",
+      "copyButton": "Copia link",
+      "mobileBottomButton": "Copia link"
     }
   },
   "profile": {
-    "changePasswordForm": {
+    "title": "Profilo",
+    "detail": {
+      "title": "Dettagli account",
+      "email": "E-mail"
+    },
+    "changePassword": {
       "title": "Cambia password",
       "currentPassword": "Password attuale",
       "currentPasswordPlaceholder": "1VecchiaPassword!",
       "newPassword": "Nuova password",
-      "newPasswordPlaceholder": "Nuova1PasswordForte!",
+      "newPasswordPlaceholder": "Nuova1PasswordSicura!",
       "confirmPassword": "Conferma nuova password",
       "button": "Cambia password"
+    },
+    "mfa": {
+      "title": "Autenticazione a più fattori",
+      "activate": {
+        "title": "Attiva autenticazione a più fattori",
+        "subtitle": "Dopo aver attivato l'autenticazione a più fattori, potrai accedere con un codice inviato alla tua e-mail."
+      },
+      "confirm": {
+        "title": "Conferma autenticazione a più fattori",
+        "subtitle": "Inserisci il codice inviato alla tua e-mail per confermare l'autenticazione a più fattori.",
+        "submitButton": "Conferma"
+      }
+    },
+    "publicProfile": {
+      "title": "Profilo pubblico",
+      "activate": {
+        "title": "Attiva profilo pubblico",
+        "subtitle": "Dopo aver attivato il tuo profilo pubblico, sceglierai un indirizzo URL unico per il tuo profilo, dove altri utenti potranno vedere i tuoi album.",
+        "moreInfo": "Puoi trovare maggiori informazioni nelle pagine",
+        "moreInfoLink": "Informazioni sull'applicazione, nella sezione Profilo pubblico",
+        "cta": "Attiva"
+      },
+      "createForm": {
+        "mandatoryField": "Questo campo è obbligatorio.",
+        "fieldName": "Nome",
+        "fieldSlug": "Slug",
+        "fieldSlugHelp1": "Sono consentite solo lettere minuscole, numeri e trattini.",
+        "fieldSlugHelp2": "Il profilo sarà disponibile su:",
+        "fieldDescription": "Descrizione",
+        "createButton": "Crea",
+        "cancelButton": "Annulla",
+        "errorMessage": "Impossibile creare il profilo pubblico."
+      },
+      "updateForm": {
+        "mandatoryField": "Questo campo è obbligatorio.",
+        "fieldName": "Nome",
+        "fieldSlug": "Slug",
+        "fieldDescription": "Descrizione",
+        "fieldHomepage": "Sito web",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Salva",
+        "errorMessage": "Impossibile aggiornare il profilo pubblico."
+      }
     },
     "statistics": {
       "title": "Statistiche",
       "numberOfAlbums": "Numero di album",
       "numberOfFiles": "Numero di file",
       "totalSize": "Dimensione totale"
+    },
+    "deleteProfile": {
+      "title": "Elimina account",
+      "subtitle": "Tutti i file e gli album caricati verranno eliminati insieme al tuo account.",
+      "submitButton": "Elimina profilo",
+      "clarifyingText": "Questa funzione non è ancora supportata. Se desideri eliminare il tuo account, contattaci al seguente indirizzo e-mail"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "Non hai ancora album!",
+      "subtitle": "Non hai ancora album.",
+      "ctaButton": "Vai alla home page e crea il tuo primo album"
+    },
+    "list": {
+      "publicProfileSwitch": "Mostra nel profilo pubblico",
+      "deleteButton": "Elimina album"
+    },
+    "deleteModal": {
+      "title": "Elimina album",
+      "body": "Vuoi davvero eliminare questo album?",
+      "closeButton": "Chiudi",
+      "submitButton": "Elimina"
     }
   },
   "publicProfile": {
     "notFound": {
       "title": "Profilo pubblico non trovato!",
       "subtitle": "Il profilo pubblico che stai cercando non esiste.",
-      "clarifyingText": "Forse hai digitato l'indirizzo sbagliato, usato un vecchio link o il profilo pubblico è stato eliminato.",
+      "clarifyingText": "Forse hai digitato un indirizzo errato, usato un link vecchio o il profilo pubblico è stato eliminato.",
       "ctaButton": "Torna alla home page"
     }
-  },
-  "register": {
-    "title": "Registrati",
-    "subtitle": "Hai già un account?",
-    "subtitleLink": "Accedi",
-    "error": {
-      "userAlreadyExists": "Esiste già un utente con questo indirizzo e-mail!",
-      "userNotCreated": "Impossibile creare l'utente!"
-    },
-    "form": {
-      "name": "Nome",
-      "email": "Indirizzo e-mail",
-      "password": "Password",
-      "requiredField": "Questo campo è obbligatorio.",
-      "minEightCharacters": "Almeno 8 caratteri",
-      "atLeastOneUppercase": "Almeno una lettera maiuscola",
-      "atLeastOneLowercase": "Almeno una lettera minuscola",
-      "atLeastOneSpecialCharacter": "Almeno un carattere speciale",
-      "atLeastOneNumber": "Almeno un numero",
-      "signUpButton": "Registrati"
-    },
-    "confirmForm": {
-      "title": "Verifica indirizzo e-mail",
-      "subtitle": "Un codice di verifica è stato inviato alla tua e-mail.",
-      "code": "Codice di verifica",
-      "requiredField": "Questo campo è obbligatorio.",
-      "submitButton": "Completa la registrazione"
-    },
-    "thankYou": {
-      "title": "Grazie per la registrazione!",
-      "subtitle": "Il tuo indirizzo e-mail è stato verificato. Puoi continuare accedendo al tuo account",
-      "subtitleLink": "qui"
-    }
-  },
-  "album": {
-    "userAlbum": {
-      "formName": "Nome",
-      "formDescription": "Descrizione",
-      "formLink": "Link album",
-      "formSubmitButton": "Salva",
-      "copyButton": "Copia link"
-    },
-    "notFound": {
-      "title": "Album non trovato!",
-      "subtitle": "L'album che stai cercando non esiste.",
-      "clarifyingText": "Forse hai digitato l'indirizzo sbagliato, usato un vecchio link o l'album è stato eliminato.",
-      "ctaButton": "Torna alla home page"
-    }
-  },
-  "albums": {
-    "albumPreview": {
-      "noFiles": "Nessun file",
-      "publicProfileToggle": "Mostra nel profilo pubblico",
-      "show": "Mostra",
-      "delete": "Elimina"
-    },
-    "albumsContainer": {
-      "noAlbumsAlert": "Non hai album",
-      "modalTitle": "Elimina album",
-      "modalBody": "Vuoi davvero eliminare questo album?",
-      "modalCloseButton": "Chiudi",
-      "modalSubmitButton": "Elimina"
-    }
-  },
-  "components": {
-    "shareButton": {
-      "copyLink": "Copia link"
-    },
-    "uploadFiles": {
-      "dropzoneTitle": "Trascina qui le foto o selezionale cliccando"
-    }
-  },
-  "menu": {
-    "albums": "Album",
-    "about": "Informazioni",
-    "profile": "Profilo",
-    "signIn": "Accedi",
-    "signOut": "Esci",
-    "subscription": "Abbonamento"
-  },
-  "footer": {
-    "about": "Informazioni",
-    "contact": "Contatto",
-    "description": "L'applicazione aiuta gli utenti a condividere rapidamente e facilmente foto e video senza ridurre la qualità.",
-    "home": "Home",
-    "links": "Link",
-    "register": "Registrati",
-    "status": "Stato"
-  },
-  "userDataDeletion": {
-    "title": "Cancellazione dei dati utente",
-    "subtitle": "Se desideri cancellare i tuoi dati personali o il tuo account, contattaci a <mailto>{{email}}</mailto>. Dopo aver ricevuto la tua richiesta, provvederemo alla cancellazione di tutti i tuoi dati personali in conformità alle normative vigenti."
   },
   "privacyPolicy": {
-    "title": "Informativa sulla privacy",
-    "subtitle": "Se sei un visitatore del sito Zdielaj.si o un cliente del servizio Zdielaj.si, l'utilizzo di questo sito o servizio è soggetto all'\"informativa sulla privacy\".",
+    "title": "Privacy Policy",
+    "subtitle": "Se sei un visitatore del sito web Zdielaj.si o un cliente del servizio Zdielaj.si, il tuo utilizzo di questo sito web o servizio è soggetto alla \"privacy policy\".",
     "firstSection": {
       "title": "Che tipo di informazioni raccogliamo?",
-      "paragraph1": "Per fornire i servizi Zdielaj.si, dobbiamo trattare informazioni su di te. I tipi di informazioni che raccogliamo dipendono da come utilizzi i nostri servizi."
+      "paragraph1": "Per fornire i servizi Zdielaj.si, dobbiamo elaborare informazioni su di te. I tipi di informazioni che raccogliamo dipendono da come utilizzi i nostri servizi."
     },
     "secondSection": {
       "title": "Come utilizziamo queste informazioni?",
-      "paragraph1": "<strong>Per fornire, personalizzare e migliorare i nostri servizi.</strong> Utilizziamo le informazioni in nostro possesso per fornire i nostri servizi, personalizzare le funzionalità e creare suggerimenti per te.",
-      "paragraph2": "<strong>Ricerca e sviluppo del prodotto.</strong> Utilizziamo le informazioni in nostro possesso per sviluppare, testare e migliorare i nostri servizi. Tale trattamento è necessario per i nostri legittimi interessi nel fornire servizi innovativi ai nostri utenti.",
-      "paragraph3": "<strong>Per supportare la sicurezza e l'integrità.</strong> Utilizziamo le informazioni in nostro possesso per verificare account e attività, combattere comportamenti dannosi, rilevare e prevenire spam e altre esperienze negative e mantenere l'integrità dei nostri servizi.",
-      "paragraph4": "<strong>Comunicazione con te.</strong> Utilizziamo le informazioni in nostro possesso per inviare comunicazioni di marketing, notizie rilevanti e aggiornamenti che riteniamo possano interessarti."
+      "paragraph1": "<strong>Per fornire, personalizzare e migliorare i nostri servizi.</strong> Utilizziamo le informazioni che abbiamo per fornire i nostri servizi, personalizzare le funzionalità e creare suggerimenti per te.",
+      "paragraph2": "<strong>Ricerca e sviluppo del prodotto.</strong> Utilizziamo le informazioni che abbiamo per sviluppare, testare e migliorare i nostri servizi. Tale elaborazione è necessaria per i nostri interessi legittimi nel fornire servizi innovativi ai nostri utenti.",
+      "paragraph3": "<strong>Per supportare la sicurezza e l'integrità.</strong> Utilizziamo le informazioni che abbiamo per verificare account e attività, combattere comportamenti dannosi, rilevare e prevenire spam e altre esperienze negative e mantenere l'integrità dei nostri servizi.",
+      "paragraph4": "<strong>Comunicazione con te.</strong> Utilizziamo le informazioni che abbiamo per inviare comunicazioni di marketing, notizie rilevanti e aggiornamenti che riteniamo possano interessarti."
     },
     "thirdSection": {
       "title": "Come proteggiamo le tue informazioni?",
-      "paragraph1": "I tuoi dati personali sono criptati, archiviati dietro reti sicure e accessibili solo a un numero limitato di persone che hanno diritti di accesso speciali a tali sistemi e sono tenute a mantenere le informazioni riservate."
+      "paragraph1": "I tuoi dati personali sono crittografati, archiviati dietro reti protette e accessibili solo a un numero limitato di persone che hanno diritti di accesso speciali a tali sistemi e sono tenute a mantenere le informazioni riservate."
     },
     "fourthSection": {
       "title": "Come vengono condivise queste informazioni?",
-      "paragraph1": "Non vendiamo, scambiamo o trasferiamo in altro modo i tuoi dati personali a terzi. Questo non include i partner di hosting del sito web e altre parti che ci aiutano a gestire il nostro sito, condurre la nostra attività o servire i nostri utenti, purché tali parti si impegnino a mantenere queste informazioni riservate."
+      "paragraph1": "Non vendiamo, scambiamo o trasferiamo in altro modo i tuoi dati personali a terze parti. Ciò non include i partner di hosting del sito web e altre parti che ci assistono nella gestione del nostro sito web, nella conduzione della nostra attività o nel servire i nostri utenti, purché tali parti accettino di mantenere queste informazioni riservate."
     },
     "fifthSection": {
       "title": "Conservazione dei dati, disattivazione ed eliminazione dell'account",
-      "paragraph1": "Conserviamo i dati per tutto il tempo necessario a fornire i nostri servizi o fino all'eliminazione del tuo account, a seconda di quale evento si verifichi per primo."
+      "paragraph1": "Conserviamo i dati per il tempo necessario a fornire i nostri servizi o fino a quando il tuo account non viene eliminato, a seconda di quale evento si verifichi per primo."
     },
     "sixthSection": {
-      "title": "Come ti informeremo delle modifiche a questa informativa?",
-      "paragraph1": "Di tanto in tanto potremmo aggiornare questa informativa. Quando possibile, ti informeremo delle modifiche o ti ricorderemo regolarmente di consultare questa informativa tramite e-mail."
+      "title": "Come ti informeremo delle modifiche a questa policy?",
+      "paragraph1": "Di tanto in tanto, potremmo aggiornare questa policy. Quando possibile, ti informeremo delle modifiche o ti ricorderemo regolarmente di rivedere questa policy tramite e-mail."
     },
     "seventhSection": {
       "title": "Come contattare Zdielaj.si per domande?",
       "paragraph1": "Puoi contattarci inviando un'e-mail a <mailto>info@zdielaj.si</mailto>."
     }
-  },
-  "about": {
-    "title": "Informazioni sull'applicazione",
-    "subtitle": "L'applicazione aiuta gli utenti a condividere rapidamente e facilmente foto e video senza ridurre la qualità. Tutti i dati sono archiviati in forma criptata."
   }
 }

@@ -13,147 +13,310 @@
     "album": "album/:id",
     "home": ""
   },
-  "home": {
-    "title": "Comparte fotos y videos en calidad completa",
-    "subtitle": "¿También tienes el problema de que algunas aplicaciones reducen la calidad de tus fotos y videos? ¡Aquí puedes compartirlos sin ningún problema en calidad completa!",
-    "uploadAreaText": "Mueve las fotos aquí o selecciónalas haciendo clic",
-    "uploadAreaButton": "Subir fotos",
-    "pricing": {
-      "default": {
-        "title": "Sin registro",
-        "monthly": "mensual",
-        "maxTenPhotos": "máx <strong>10</strong> fotos",
-        "deletedAfter24Hours": "los archivos se eliminarán automáticamente después de <strong>24 horas</strong>",
-        "register": "Registrarse"
-      },
-      "free": {
-        "title": "Gratis",
-        "monthly": "mensual",
-        "maxOneGB": "máx <strong>1GB</strong> <small>(≈ 300 fotos)</small>",
-        "video": "video",
-        "listOfAlbums": "lista de álbumes",
-        "filesWillBeDeletedAfter7Days": "los archivos se eliminarán automáticamente después de <strong>7 días</strong>",
-        "register": "Registrarse"
-      },
-      "standard": {
-        "title": "Estándar",
-        "monthly": "mensual",
-        "maxTenGB": "máx <strong>10GB</strong> <small>(≈ 3000 fotos)</small>",
-        "video": "video",
-        "listOfAlbums": "lista de álbumes",
-        "passwordProtect": "protección con contraseña",
-        "publicProfile": "perfil público",
-        "filesWillNotBeDeleted": "los archivos <strong>no se eliminan</strong>",
-        "register": "Registrarse"
-      }
-    }
-  },
-  "login": {
-    "title": "Iniciar sesión",
-    "subtitle": "¿Aún no tienes una cuenta?",
-    "subtitleLink": "Regístrate",
-    "form": {
-      "email": "Dirección de correo electrónico",
-      "requiredField": "Este campo es obligatorio.",
-      "password": "Contraseña",
-      "forgotPassword": "¿Olvidaste tu contraseña?",
-      "signInButton": "Iniciar sesión"
-    }
-  },
-  "publicProfile": {
-    "notFound": {
-      "title": "¡Perfil público no encontrado!",
-      "subtitle": "El perfil público que estás buscando no existe.",
-      "clarifyingText": "Tal vez escribiste la dirección incorrecta, usaste un enlace antiguo o el perfil público fue eliminado.",
-      "ctaButton": "Volver a la página de inicio"
-    }
-  },
-  "register": {
-    "title": "Regístrate",
-    "subtitle": "¿Ya tienes una cuenta?",
-    "subtitleLink": "Iniciar sesión",
-    "error": {
-      "userAlreadyExists": "¡El usuario con esta dirección de correo electrónico ya existe!",
-      "userNotCreated": "¡No se pudo crear el usuario!"
-    },
-    "form": {
-      "name": "Nombre",
-      "email": "Dirección de correo electrónico",
-      "password": "Contraseña",
-      "requiredField": "Este campo es obligatorio.",
-      "minEightCharacters": "Al menos 8 caracteres",
-      "atLeastOneUppercase": "Al menos una letra mayúscula",
-      "atLeastOneLowercase": "Al menos una letra minúscula",
-      "atLeastOneSpecialCharacter": "Al menos un carácter especial",
-      "atLeastOneNumber": "Al menos un número",
-      "signUpButton": "Registrarse"
-    },
-    "confirmForm": {
-      "title": "Verificación de dirección de correo electrónico",
-      "subtitle": "Se ha enviado un código de verificación a tu correo electrónico.",
-      "code": "Código de verificación",
-      "requiredField": "Este campo es obligatorio.",
-      "submitButton": "Completar registro"
-    },
-    "thankYou": {
-      "title": "¡Gracias por registrarte!",
-      "subtitle": "Tu dirección de correo electrónico ha sido verificada. Puedes continuar iniciando sesión en tu cuenta",
-      "subtitleLink": "aquí"
-    }
-  },
-  "album": {
-    "userAlbum": {
-      "formName": "Nombre del álbum",
-      "formDescription": "Descripción del álbum",
-      "formLink": "Enlace del álbum",
-      "formSubmitButton": "Guardar",
-      "copyButton": "Copiar enlace"
-    },
-    "notFound": {
-      "title": "¡Álbum no encontrado!",
-      "subtitle": "El álbum que buscas no existe.",
-      "clarifyingText": "Tal vez escribiste la dirección incorrecta, usaste un enlace antiguo o el álbum fue eliminado.",
-      "ctaButton": "Volver a la página de inicio"
-    }
-  },
-  "albums": {
-    "albumPreview": {
-      "noFiles": "No hay archivos",
-      "publicProfileToggle": "Mostrar en el perfil público",
-      "show": "Mostrar",
-      "delete": "Eliminar"
-    },
-    "albumsContainer": {
-      "noAlbumsAlert": "No tienes álbumes",
-      "modalTitle": "Eliminar álbum",
-      "modalBody": "¿Realmente quieres eliminar este álbum?",
-      "modalCloseButton": "Cerrar",
-      "modalSubmitButton": "Eliminar"
-    }
-  },
   "components": {
     "shareButton": {
       "copyLink": "Copiar enlace"
     },
     "uploadFiles": {
       "dropzoneTitle": "Arrastra fotos aquí o selecciónalas haciendo clic"
+    },
+    "menu": {
+      "albums": "Álbumes",
+      "profile": "Perfil",
+      "signIn": "Iniciar sesión",
+      "signUp": "Registrarse",
+      "signOut": "Cerrar sesión",
+      "subscription": "Suscripción"
+    },
+    "footer": {
+      "about": "Acerca de",
+      "contact": "Contacto",
+      "description": "La aplicación ayuda a los usuarios a compartir fotos y videos de forma rápida y sencilla sin reducir la calidad.",
+      "home": "Inicio",
+      "links": "Enlaces",
+      "register": "Registrarse",
+      "privacyPolicy": "Política de privacidad",
+      "status": "Estado"
     }
   },
-  "menu": {
-    "albums": "Álbumes",
-    "about": "Acerca de",
-    "profile": "Perfil",
-    "signIn": "Iniciar sesión",
-    "signOut": "Cerrar sesión",
-    "subscription": "Suscripción"
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "¿También tienes el problema de que algunas aplicaciones reducen la calidad de tus fotos y videos? ¡Aquí puedes compartirlos sin problemas en calidad completa!"
+    }
   },
-  "footer": {
-    "about": "Acerca de",
-    "contact": "Contacto",
-    "description": "La aplicación ayuda a los usuarios a compartir fotos y videos rápidamente y sin reducir la calidad.",
-    "home": "Inicio",
-    "links": "Enlaces",
-    "register": "Registrarse",
-    "status": "Estado"
+  "home": {
+    "title": "Comparte fotos y videos en calidad completa",
+    "subtitle": "¿También tienes el problema de que algunas aplicaciones reducen la calidad de tus fotos y videos? ¡Aquí puedes compartirlos sin problemas en calidad completa!",
+    "uploadArea": {
+      "title": "Arrastra fotos aquí o selecciónalas haciendo clic",
+      "button": "Subir fotos",
+      "asUnregisteredUser": {
+        "title": "Como usuario no registrado:",
+        "maxTenPhotos": "puedes compartir un máximo de <strong>10</strong> fotos",
+        "deletedAfter24Hours": "las fotos se eliminarán automáticamente después de <strong>24 horas</strong>"
+      }
+    },
+    "pricing": {
+      "default": {
+        "title": "Sin registro",
+        "monthly": "mensual",
+        "maxTenPhotos": "máx <strong>10</strong> fotos",
+        "maxSizePerFile": "tamaño de archivo hasta <strong>10MB</strong>",
+        "deletedAfter24Hours": "los archivos se eliminarán automáticamente después de <strong>24 horas</strong>"
+      },
+      "free": {
+        "title": "Gratis",
+        "monthly": "mensual",
+        "maxOneGB": "máx <strong>1GB</strong> <small>(≈ 300 fotos)</small>",
+        "maxSizePerFile": "tamaño de archivo hasta <strong>100MB</strong>",
+        "video": "video",
+        "listOfAlbums": "lista de álbumes",
+        "filesWillBeDeletedAfter7Days": "los archivos se eliminarán automáticamente después de <strong>7 días</strong>",
+        "signUp": "Registrarse"
+      },
+      "standard": {
+        "title": "Estándar",
+        "monthly": "mensual",
+        "maxTenGB": "máx <strong>10GB</strong> <small>(≈ 3000 fotos)</small>",
+        "maxSizePerFile": "tamaño de archivo hasta <strong>500MB</strong>",
+        "video": "video",
+        "listOfAlbums": "lista de álbumes",
+        "passwordProtect": "protección con contraseña",
+        "publicProfile": "perfil público",
+        "mfa": "autenticación multifactor",
+        "filesAreNotDeleted": "los archivos <strong>no se eliminan</strong>",
+        "signUp": "Registrarse"
+      }
+    }
+  },
+  "signIn": {
+    "title": "Iniciar sesión",
+    "noAccount": "¿Aún no tienes una cuenta?",
+    "signUp": "Registrarse",
+    "form": {
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Introduce tu correo electrónico",
+      "requiredField": "Este campo es obligatorio.",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Introduce tu contraseña",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "signInButton": "Iniciar sesión"
+    },
+    "totp": {
+      "totpCode": "Código",
+      "confirmSignInButton": "Confirmar inicio de sesión"
+    }
+  },
+  "signUp": {
+    "title": "Registrarse",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Introduce tu nombre",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Introduce tu correo electrónico",
+      "requiredField": "Este campo es obligatorio.",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Introduce tu contraseña",
+      "passwordRules": {
+        "minEightCharacters": "Al menos 8 caracteres",
+        "atLeastOneUppercase": "Al menos una letra mayúscula",
+        "atLeastOneLowercase": "Al menos una letra minúscula",
+        "atLeastOneSpecialCharacter": "Al menos un carácter especial",
+        "atLeastOneNumber": "Al menos un número"
+      },
+      "signUpButton": "Registrarse",
+      "errors": {
+        "userAlreadyExists": "¡Ya existe un usuario con esta dirección de correo electrónico!",
+        "default": "¡No se pudo registrar!"
+      }
+    },
+    "confirmForm": {
+      "code": "Código",
+      "requiredField": "Este campo es obligatorio.",
+      "confirmSignUpButton": "Confirmar registro",
+      "errors": {
+        "codeMismatch": "Código de verificación no válido, por favor inténtalo de nuevo.",
+        "default": "¡No se pudo confirmar el registro!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "Has creado tu cuenta con éxito. Ahora puedes iniciar sesión en tu cuenta.",
+      "subtitleLink": "Iniciar sesión"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "¡Álbum no encontrado!",
+      "subtitle": "El álbum que buscas no existe.",
+      "clarifyingText": "Quizás escribiste una dirección incorrecta, usaste un enlace antiguo o el álbum fue eliminado.",
+      "ctaButton": "Volver a la página de inicio"
+    },
+    "userAlbum": {
+      "name": "Nombre",
+      "namePlaceholder": "Introduce el nombre del álbum",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Introduce la descripción del álbum",
+      "layout": "Diseño",
+      "layoutOptions": {
+        "cols": "Columnas",
+        "rows": "Filas",
+        "tiles": "Mosaicos"
+      },
+      "gaps": "Espacios",
+      "gapsOptions": {
+        "none": "Sin espacios",
+        "small": "Pequeño",
+        "medium": "Mediano",
+        "large": "Grande"
+      },
+      "changeLayout": "El usuario puede cambiar el diseño",
+      "retention": "Retención de archivos",
+      "retentionOptions": {
+        "1": "1 día",
+        "7": "1 semana",
+        "31": "1 mes",
+        "366": "1 año",
+        "0": "Para siempre"
+      },
+      "link": "Enlace del álbum",
+      "submitButton": "Guardar",
+      "copyButton": "Copiar enlace",
+      "mobileBottomButton": "Copiar enlace"
+    }
+  },
+  "profile": {
+    "title": "Perfil",
+    "detail": {
+      "title": "Detalles de la cuenta",
+      "email": "Correo electrónico"
+    },
+    "changePassword": {
+      "title": "Cambiar contraseña",
+      "currentPassword": "Contraseña actual",
+      "currentPasswordPlaceholder": "1ContrasenaAntigua!",
+      "newPassword": "Nueva contraseña",
+      "newPasswordPlaceholder": "Nueva1ContrasenaSegura!",
+      "confirmPassword": "Confirmar nueva contraseña",
+      "button": "Cambiar contraseña"
+    },
+    "mfa": {
+      "title": "Autenticación multifactor",
+      "activate": {
+        "title": "Activar autenticación multifactor",
+        "subtitle": "Después de activar la autenticación multifactor, podrás iniciar sesión con un código enviado a tu correo electrónico."
+      },
+      "confirm": {
+        "title": "Confirmar autenticación multifactor",
+        "subtitle": "Introduce el código enviado a tu correo electrónico para confirmar la autenticación multifactor.",
+        "submitButton": "Confirmar"
+      }
+    },
+    "publicProfile": {
+      "title": "Perfil público",
+      "activate": {
+        "title": "Activar perfil público",
+        "subtitle": "Después de activar tu perfil público, elegirás una dirección URL única para tu perfil, donde otros usuarios podrán ver tus álbumes.",
+        "moreInfo": "Puedes encontrar más información en las páginas",
+        "moreInfoLink": "Acerca de la aplicación, en la sección Perfil público",
+        "cta": "Activar"
+      },
+      "createForm": {
+        "mandatoryField": "Este campo es obligatorio.",
+        "fieldName": "Nombre",
+        "fieldSlug": "Slug",
+        "fieldSlugHelp1": "Solo se permiten letras minúsculas, números y guiones.",
+        "fieldSlugHelp2": "El perfil estará disponible en:",
+        "fieldDescription": "Descripción",
+        "createButton": "Crear",
+        "cancelButton": "Cancelar",
+        "errorMessage": "No se pudo crear el perfil público."
+      },
+      "updateForm": {
+        "mandatoryField": "Este campo es obligatorio.",
+        "fieldName": "Nombre",
+        "fieldSlug": "Slug",
+        "fieldDescription": "Descripción",
+        "fieldHomepage": "Página web",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Guardar",
+        "errorMessage": "No se pudo actualizar el perfil público."
+      }
+    },
+    "statistics": {
+      "title": "Estadísticas",
+      "numberOfAlbums": "Número de álbumes",
+      "numberOfFiles": "Número de archivos",
+      "totalSize": "Tamaño total"
+    },
+    "deleteProfile": {
+      "title": "Eliminar cuenta",
+      "subtitle": "Todos los archivos y álbumes subidos se eliminarán junto con tu cuenta.",
+      "submitButton": "Eliminar perfil",
+      "clarifyingText": "Esta función aún no es compatible. Si deseas eliminar tu cuenta, contáctanos en la siguiente dirección de correo electrónico"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "¡Aún no tienes álbumes!",
+      "subtitle": "Aún no tienes álbumes.",
+      "ctaButton": "Ve a la página de inicio y crea tu primer álbum"
+    },
+    "list": {
+      "publicProfileSwitch": "Mostrar en perfil público",
+      "deleteButton": "Eliminar álbum"
+    },
+    "deleteModal": {
+      "title": "Eliminar álbum",
+      "body": "¿Realmente quieres eliminar este álbum?",
+      "closeButton": "Cerrar",
+      "submitButton": "Eliminar"
+    }
+  },
+  "publicProfile": {
+    "notFound": {
+      "title": "¡Perfil público no encontrado!",
+      "subtitle": "El perfil público que buscas no existe.",
+      "clarifyingText": "Quizás escribiste una dirección incorrecta, usaste un enlace antiguo o el perfil público fue eliminado.",
+      "ctaButton": "Volver a la página de inicio"
+    }
+  },
+  "privacyPolicy": {
+    "title": "Política de privacidad",
+    "subtitle": "Si eres un visitante del sitio web Zdielaj.si o un cliente del servicio Zdielaj.si, entonces tu uso de este sitio web o servicio está sujeto a la \"política de privacidad\".",
+    "firstSection": {
+      "title": "¿Qué tipo de información recopilamos?",
+      "paragraph1": "Para proporcionar los servicios de Zdielaj.si, necesitamos procesar información sobre ti. Los tipos de información que recopilamos dependen de cómo uses nuestros servicios."
+    },
+    "secondSection": {
+      "title": "¿Cómo usamos esta información?",
+      "paragraph1": "<strong>Para proporcionar, personalizar y mejorar nuestros servicios.</strong> Usamos la información que tenemos para proporcionar nuestros servicios, personalizar funciones y crear sugerencias para ti.",
+      "paragraph2": "<strong>Investigación y desarrollo de productos.</strong> Usamos la información que tenemos para desarrollar, probar y mejorar nuestros servicios. Este procesamiento es necesario para nuestros intereses legítimos en proporcionar servicios innovadores a nuestros usuarios.",
+      "paragraph3": "<strong>Para apoyar la seguridad e integridad.</strong> Usamos la información que tenemos para verificar cuentas y actividades, combatir comportamientos dañinos, detectar y prevenir spam y otras experiencias negativas, y mantener la integridad de nuestros servicios.",
+      "paragraph4": "<strong>Comunicación contigo.</strong> Usamos la información que tenemos para enviar comunicaciones de marketing, noticias relevantes y actualizaciones que creemos que pueden interesarte."
+    },
+    "thirdSection": {
+      "title": "¿Cómo protegemos tu información?",
+      "paragraph1": "Tus datos personales están cifrados, almacenados detrás de redes seguras y accesibles solo para un número limitado de personas que tienen derechos de acceso especiales a dichos sistemas y están obligadas a mantener la información confidencial."
+    },
+    "fourthSection": {
+      "title": "¿Cómo se comparte esta información?",
+      "paragraph1": "No vendemos, intercambiamos ni transferimos de otra manera tus datos personales a terceros. Esto no incluye a los socios de alojamiento web y otras partes que nos ayudan a operar nuestro sitio web, realizar nuestro negocio o servir a nuestros usuarios, siempre que esas partes acuerden mantener esta información confidencial."
+    },
+    "fifthSection": {
+      "title": "Retención de datos, desactivación y eliminación de cuenta",
+      "paragraph1": "Retenemos los datos durante el tiempo que sea necesario para proporcionar nuestros servicios o hasta que se elimine tu cuenta, lo que ocurra primero."
+    },
+    "sixthSection": {
+      "title": "¿Cómo te notificaremos sobre cambios en esta política?",
+      "paragraph1": "De vez en cuando, podemos actualizar esta política. Cuando sea posible, te notificaremos sobre los cambios o te recordaremos regularmente que revises esta política por correo electrónico."
+    },
+    "seventhSection": {
+      "title": "¿Cómo contactar a Zdielaj.si con preguntas?",
+      "paragraph1": "Puedes contactarnos enviando un correo electrónico a <mailto>info@zdielaj.si</mailto>."
+    }
   }
 }

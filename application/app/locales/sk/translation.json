@@ -3,10 +3,10 @@
     "prefix": "sk/",
     "signIn": "prihlasit-sa",
     "signUp": "registracia",
-    "passwordReset": "reset-hesla",
+    "passwordReset": "obnovenie-hesla",
     "about": "o-aplikacii",
-    "privacyPolicy": "zasady-ochrany-osobnych-udajov",
-    "userData": "pouzivatelske-data",
+    "privacyPolicy": "ochrana-osobnych-udajov",
+    "userData": "udaje-pouzivatela",
     "userProfile": "profil",
     "publicProfile": "profil/:id",
     "albums": "albumy",
@@ -15,10 +15,10 @@
   },
   "components": {
     "shareButton": {
-      "copyLink": "Kopírovať odkaz"
+      "copyLink": "Skopírovať odkaz"
     },
     "uploadFiles": {
-      "dropzoneTitle": "Presuň sem fotky alebo ich vyber kliknutím"
+      "dropzoneTitle": "Presuňte fotky sem alebo ich vyberte kliknutím"
     },
     "menu": {
       "albums": "Albumy",
@@ -31,101 +31,168 @@
     "footer": {
       "about": "O aplikácii",
       "contact": "Kontakt",
-      "description": "Aplikácia pomáha užívateľom rýchlo a ľahko zdielať fotografie a videá bez zníženia kvality.",
+      "description": "Aplikácia pomáha používateľom rýchlo a jednoducho zdieľať fotky a videá bez zníženia kvality.",
       "home": "Domov",
       "links": "Odkazy",
-      "register": "Registrácia",
-      "privacyPolicy": "Zásady ochrany osobných údajov",
-      "status": "Status"
+      "register": "Registrovať",
+      "privacyPolicy": "Ochrana osobných údajov",
+      "status": "Stav"
+    }
+  },
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "Máte tiež problém, že niektoré aplikácie znižujú kvalitu vašich fotiek a videí? Tu ich môžete bez problémov zdieľať v plnej kvalite!"
     }
   },
   "home": {
-    "title": "Zdieľaj fotky a videá v plnej kvalite",
-    "subtitle": "Tiež máš problém, že ti niektoré aplikácie znížujú kvalitu fotiek a videí? Tu ich môžeš zdielať bez problémov v plnej kvalite!",
+    "title": "Zdieľajte fotky a videá v plnej kvalite",
+    "subtitle": "Máte tiež problém, že niektoré aplikácie znižujú kvalitu vašich fotiek a videí? Tu ich môžete bez problémov zdieľať v plnej kvalite!",
     "uploadArea": {
-      "title": "Presuň sem fotky alebo ich vyber kliknutím",
+      "title": "Presuňte fotky sem alebo ich vyberte kliknutím",
       "button": "Nahrať fotky",
       "asUnregisteredUser": {
-        "title": "Ako neprihlásený používateľ:",
-        "maxTenPhotos": "môžeš zdieľať maximálne 10 fotiek",
-        "deletedAfter24Hours": "fotky sa po 24 hodinách zmažú"
-      }
-    },
-    "features": {
-      "title": "Funkcie",
-      "euData": {
-        "title": "Dáta sú uložené v EÚ",
-        "subtitle": "Citlivé údaje o užívateľoch ako aj všetky ich dáta sú uložené v EÚ, konkrétne vo Frankfurte (Nemecko)"
-      },
-      "encryption": {
-        "title": "Šifrovanie",
-        "subtitle": "Všetky dáta sú uložené a prenášané v šifrovanej forme a tým chráni údaje pred neoprávneným prístupom alebo úpravou"
-      },
-      "highlyAvailable": {
-        "title": "Vysoko dostupné",
-        "subtitle": "Aplikácia je navrhnutá tak, aby minimalizovala alebo skryla účinky zlyhania jednotlivých komponentov čo zabezpečuje jej nepretržitú prevádzku s minimálnymi výpadkami"
-      },
-      "publicProfile": {
-        "title": "Verejný profil",
-        "subtitle": "Verejný profil umožňuje zdieľať vybrané albumy s inými používateľmi.",
-        "bwl": {
-          "description": "Bomby Watty Laktáty je cyklistický klub z Púchova, ktorý organizuje pravidelné jazdy po okolí."
-        },
-        "elis": {
-          "description": "Dobrodružstvá bengálskej mačky, ktorá miluje pravidelné prechádzky a rôzne dobrodružstvá."
-        },
-        "showProfileButton": "Pozriet profil"
+        "title": "Ako neregistrovaný používateľ:",
+        "maxTenPhotos": "môžete zdieľať maximálne <strong>10</strong> fotiek",
+        "deletedAfter24Hours": "fotky budú automaticky odstránené po <strong>24 hodinách</strong>"
       }
     },
     "pricing": {
       "default": {
         "title": "Bez registrácie",
         "monthly": "mesačne",
-        "maxTenPhotos": "maximálne <strong>10</strong> fotiek",
-        "deletedAfter24Hours": "fotky budú po <strong>24 hodinách</strong> automaticky zmazané",
-        "register": "Registrácia"
+        "maxTenPhotos": "max <strong>10</strong> fotiek",
+        "maxSizePerFile": "veľkosť súboru do <strong>10MB</strong>",
+        "deletedAfter24Hours": "súbory budú automaticky odstránené po <strong>24 hodinách</strong>"
       },
       "free": {
         "title": "Zadarmo",
         "monthly": "mesačne",
-        "maxOneGB": "maximálne <strong>1GB</strong> <small>(≈ 300 fotiek)</small>",
+        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 fotiek)</small>",
+        "maxSizePerFile": "veľkosť súboru do <strong>100MB</strong>",
         "video": "video",
-        "listOfAlbums": "zoznam vytvorených albumov",
-        "filesWillBeDeletedAfter7Days": "súbory budú po <strong>7 dňoch</strong> automaticky zmazané",
-        "register": "Registrácia"
+        "listOfAlbums": "zoznam albumov",
+        "filesWillBeDeletedAfter7Days": "súbory budú automaticky odstránené po <strong>7 dňoch</strong>",
+        "signUp": "Registrovať"
       },
       "standard": {
         "title": "Štandard",
         "monthly": "mesačne",
-        "maxTenGB": "maximálne <strong>10GB</strong> <small>(≈ 3000 fotiek)</small>",
+        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 fotiek)</small>",
+        "maxSizePerFile": "veľkosť súboru do <strong>500MB</strong>",
         "video": "video",
-        "listOfAlbums": "zoznam vytvorených albumov",
-        "passwordProtect": "zaheslovať prístup",
+        "listOfAlbums": "zoznam albumov",
+        "passwordProtect": "ochrana heslom",
         "publicProfile": "verejný profil",
-        "filesWillNotBeDeleted": "súbory sa <strong>nemažú</strong>",
-        "register": "Registrácia"
+        "mfa": "dvojfaktorové overenie",
+        "filesAreNotDeleted": "súbory <strong>nie sú odstránené</strong>",
+        "signUp": "Registrovať"
       }
     }
   },
-  "login": {
+  "signIn": {
     "title": "Prihlásiť sa",
-    "subtitle": "Ešte nemáš účet?",
-    "subtitleLink": "Registrovať sa",
+    "noAccount": "Ešte nemáte účet?",
+    "signUp": "Registrovať sa",
     "form": {
-      "email": "E-mailová adresa",
+      "email": "E-mail",
+      "emailPlaceholder": "Zadajte váš e-mail",
       "requiredField": "Toto pole je povinné.",
       "password": "Heslo",
-      "forgotPassword": "Zabudnuté heslo?",
+      "passwordPlaceholder": "Zadajte vaše heslo",
+      "forgotPassword": "Zabudli ste heslo?",
       "signInButton": "Prihlásiť sa"
+    },
+    "totp": {
+      "totpCode": "Kód",
+      "confirmSignInButton": "Potvrdiť prihlásenie"
+    }
+  },
+  "signUp": {
+    "title": "Registrovať sa",
+    "form": {
+      "name": "Meno",
+      "namePlaceholder": "Zadajte vaše meno",
+      "email": "E-mail",
+      "emailPlaceholder": "Zadajte váš e-mail",
+      "requiredField": "Toto pole je povinné.",
+      "password": "Heslo",
+      "passwordPlaceholder": "Zadajte vaše heslo",
+      "passwordRules": {
+        "minEightCharacters": "Aspoň 8 znakov",
+        "atLeastOneUppercase": "Aspoň jedno veľké písmeno",
+        "atLeastOneLowercase": "Aspoň jedno malé písmeno",
+        "atLeastOneSpecialCharacter": "Aspoň jeden špeciálny znak",
+        "atLeastOneNumber": "Aspoň jedno číslo"
+      },
+      "signUpButton": "Registrovať sa",
+      "errors": {
+        "userAlreadyExists": "Používateľ s touto e-mailovou adresou už existuje!",
+        "default": "Nepodarilo sa zaregistrovať!"
+      }
+    },
+    "confirmForm": {
+      "code": "Kód",
+      "requiredField": "Toto pole je povinné.",
+      "confirmSignUpButton": "Potvrdiť registráciu",
+      "errors": {
+        "codeMismatch": "Nesprávny overovací kód, skúste to prosím znova.",
+        "default": "Nepodarilo sa potvrdiť registráciu!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "Úspešne ste vytvorili svoj účet. Teraz sa môžete prihlásiť do svojho účtu.",
+      "subtitleLink": "Prihlásiť sa"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "Album sa nenašiel!",
+      "subtitle": "Album, ktorý hľadáte, neexistuje.",
+      "clarifyingText": "Možno ste zadali nesprávnu adresu, použili starý odkaz alebo bol album odstránený.",
+      "ctaButton": "Späť na domovskú stránku"
+    },
+    "userAlbum": {
+      "name": "Názov",
+      "namePlaceholder": "Zadajte názov albumu",
+      "description": "Popis",
+      "descriptionPlaceholder": "Zadajte popis albumu",
+      "layout": "Rozloženie",
+      "layoutOptions": {
+        "cols": "Stľpce",
+        "rows": "Riadky",
+        "tiles": "Dlaždice"
+      },
+      "gaps": "Medzery",
+      "gapsOptions": {
+        "none": "Bez medzier",
+        "small": "Malé",
+        "medium": "Stredné",
+        "large": "Veľké"
+      },
+      "changeLayout": "Používateľ môže zmeniť rozloženie",
+      "retention": "Uchovávanie súborov",
+      "retentionOptions": {
+        "1": "1 deň",
+        "7": "1 týždeň",
+        "31": "1 mesiac",
+        "366": "1 rok",
+        "0": "Navždy"
+      },
+      "link": "Odkaz na album",
+      "submitButton": "Uložiť",
+      "copyButton": "Skopírovať odkaz",
+      "mobileBottomButton": "Skopírovať odkaz"
     }
   },
   "profile": {
+    "title": "Profil",
     "detail": {
-      "title": "Údaje o účte",
-      "email": "E-mailová adresa"
+      "title": "Detaily účtu",
+      "email": "E-mail"
     },
-    "changePasswordForm": {
-      "title":  "Zmeniť heslo",
+    "changePassword": {
+      "title": "Zmeniť heslo",
       "currentPassword": "Aktuálne heslo",
       "currentPasswordPlaceholder": "1ZastaraleHeslo!",
       "newPassword": "Nové heslo",
@@ -133,27 +200,33 @@
       "confirmPassword": "Potvrdiť nové heslo",
       "button": "Zmeniť heslo"
     },
-    "statistics": {
-      "title": "Štatistika",
-      "numberOfAlbums": "Počet albumov",
-      "numberOfFiles": "Počet súborov",
-      "totalSize": "Celková veľkosť"
+    "mfa": {
+      "title": "Dvojfaktorové overenie",
+      "activate": {
+        "title": "Aktivovať dvojfaktorové overenie",
+        "subtitle": "Po aktivácii dvojfaktorového overenia sa budete môcť prihlásiť pomocou kódu zaslaného na váš e-mail."
+      },
+      "confirm": {
+        "title": "Potvrdiť dvojfaktorové overenie",
+        "subtitle": "Zadajte kód zaslaný na váš e-mail na potvrdenie dvojfaktorového overenia.",
+        "submitButton": "Potvrdiť"
+      }
     },
     "publicProfile": {
       "title": "Verejný profil",
       "activate": {
         "title": "Aktivovať verejný profil",
-        "subtitle": "Po aktivácii verejného profilu si zvolíš unikátnu URL adresu pre tvoj profil, na ktorej budú mocť iní užívatelia vidieť tvoje albumy.",
-        "moreInfo": "Viac informácií nájdeš na stránkach",
-        "moreInfoLink": "O aplikácii, v časti Verejný profil",
+        "subtitle": "Po aktivácii verejného profilu si vyberiete jedinečnú URL adresu pre váš profil, kde ostatní používatelia budú môcť vidieť vaše albumy.",
+        "moreInfo": "Viac informácií nájdete na stránkach",
+        "moreInfoLink": "O aplikácii, v sekcii Verejný profil",
         "cta": "Aktivovať"
       },
       "createForm": {
         "mandatoryField": "Toto pole je povinné.",
         "fieldName": "Názov",
-        "fieldSlug": "Slug",
-        "fieldSlugHelp1": "Povolené sú len malé písmená, čísla a pomlčka.",
-        "fieldSlugHelp2": "Profil bude dostupný na adrese:",
+        "fieldSlug": "URL adresa",
+        "fieldSlugHelp1": "Povolené sú len malé písmená, čísla a pomlčky.",
+        "fieldSlugHelp2": "Profil bude dostupný na:",
         "fieldDescription": "Popis",
         "createButton": "Vytvoriť",
         "cancelButton": "Zrušiť",
@@ -162,8 +235,9 @@
       "updateForm": {
         "mandatoryField": "Toto pole je povinné.",
         "fieldName": "Názov",
+        "fieldSlug": "URL adresa",
         "fieldDescription": "Popis",
-        "fieldHomepage": "Domovská stránka",
+        "fieldHomepage": "Webová stránka",
         "fieldFacebook": "Facebook",
         "fieldInstagram": "Instagram",
         "fieldPinterest": "Pinterest",
@@ -172,162 +246,77 @@
         "errorMessage": "Nepodarilo sa aktualizovať verejný profil."
       }
     },
+    "statistics": {
+      "title": "Štatistiky",
+      "numberOfAlbums": "Počet albumov",
+      "numberOfFiles": "Počet súborov",
+      "totalSize": "Celková veľkosť"
+    },
     "deleteProfile": {
-      "title": "Vymazať účet",
-      "subtitle": "Spolu s účtom sa zmažú aj všetky nahrané súbory a albumy.",
-      "submitButton": "Vymazať",
-      "clarifyingText": "Funkcia zatiaľ nie je podporovaná. V prípade, že si želáte zmazať svoj účet, kontaktujte nás na e-mailovej adrese"
+      "title": "Zmazať účet",
+      "subtitle": "Všetky nahrané súbory a albumy budú spolu s vaším účtom odstránené.",
+      "submitButton": "Zmazať profil",
+      "clarifyingText": "Táto funkcia zatiaľ nie je podporovaná. Ak chcete zmazať svoj účet, kontaktujte nás na nasledujúcej e-mailovej adrese"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "Ešte nemáte žiadne albumy!",
+      "subtitle": "Ešte nemáte žiadne albumy.",
+      "ctaButton": "Prejdite na domovskú stránku a vytvorte svoj prvý album"
+    },
+    "list": {
+      "publicProfileSwitch": "Zobraziť vo verejnom profile",
+      "deleteButton": "Zmazať album"
+    },
+    "deleteModal": {
+      "title": "Zmazať album",
+      "body": "Naozaj chcete zmazať tento album?",
+      "closeButton": "Zavrieť",
+      "submitButton": "Zmazať"
     }
   },
   "publicProfile": {
     "notFound": {
       "title": "Verejný profil sa nenašiel!",
-      "subtitle": "Verejný profil, ktorý hľadáš, neexistuje.",
-      "clarifyingText": "Možno si zadal nesprávnu adresu, použil starý odkaz alebo bol verejný profil vymazaný.",
+      "subtitle": "Verejný profil, ktorý hľadáte, neexistuje.",
+      "clarifyingText": "Možno ste zadali nesprávnu adresu, použili starý odkaz alebo bol verejný profil odstránený.",
       "ctaButton": "Späť na domovskú stránku"
     }
-  },
-  "register": {
-    "title": "Registrácia",
-    "subtitle": "Máš už účet?",
-    "subtitleLink": "Prihlásiť sa",
-    "error": {
-      "userAlreadyExists": "Užívateľ s touto e-mailovou adresou už existuje!",
-      "userNotCreated": "Nepodarilo sa vytvoriť užívateľa!"
-    },
-    "form": {
-      "name": "Meno",
-      "email": "E-mailová adresa",
-      "password": "Heslo",
-      "requiredField": "Toto pole je povinné.",
-      "minEightCharacters": "Minimálne 8 znakov",
-      "atLeastOneUppercase": "Aspoň jedno veľké písmeno",
-      "atLeastOneLowercase": "Aspoň jedno malé písmeno",
-      "atLeastOneSpecialCharacter": "Aspoň jeden špeciálny znak",
-      "atLeastOneNumber": "Aspoň jedno číslo",
-      "signUpButton": "Registrovať sa"
-    },
-    "confirmForm": {
-      "title": "Overenie e-mailovej adresy",
-      "subtitle": "Na tvoj e-mail bol odoslaný overovací kód.",
-      "code": "Overovací kód",
-      "requiredField": "Toto pole je povinné.",
-      "submitButton": "Dokončiť registráciu"
-    },
-    "thankYou": {
-      "title": "Ďakujem za registráciu!",
-      "subtitle": "Tvoja e-mailová adresa bola overená. Možeš pokračovať prihlásením sa do svojho účtu",
-      "subtitleLink": "tu"
-    }
-  },
-  "album": {
-    "userAlbum": {
-      "formName": "Názov albumu",
-      "formDescription": "Popis albumu",
-      "formLayout": "Rozloženie albumu",
-      "formLayoutOptions": {
-        "cols": "Stĺpce",
-        "rows": "Riadky",
-        "tiles": "Dlaždice"
-      },
-      "formGaps": "Medzery",
-      "formGapsOptions": {
-        "none": "Žiadne",
-        "small": "Malé",
-        "medium": "Stredné",
-        "large": "Veľké"
-      },
-      "formChangeLayout": "Používateľ si môže zmeniť rozloženie",
-      "formRetention": "Doba uchovávania súborov",
-      "formRetentionOptions": {
-        "1": "1 deň",
-        "7": "1 týždeň",
-        "31": "1 mesiac",
-        "366": "1 rok",
-        "0": "Navždy"
-      },
-      "formLink": "Odkaz na album",
-      "formAuthWarning": "Iba prihlásený užívateľ môže upraviť svoj album.",
-      "formSubmitButton": "Uložiť",
-      "copyButton": "Kopírovať odkaz"
-    },
-    "notFound": {
-      "title": "Album sa nenašiel!",
-      "subtitle": "Album, ktorý hľadáš, neexistuje.",
-      "clarifyingText": "Možno si zadal nesprávnu adresu, použil starý odkaz alebo bol album vymazaný.",
-      "ctaButton": "Späť na domovskú stránku"
-    }
-  },
-  "albums": {
-    "albumPreview": {
-      "noFiles": "Žiadne súbory",
-      "publicProfileToggle": "Zobraziť vo verejnom profile",
-      "show": "Zobraziť",
-      "delete": "Vymazať"
-    },
-    "albumsContainer": {
-      "noAlbumsAlert": "Nemáš žiadne albumy",
-      "modalTitle": "Vymazať album",
-      "modalBody": "Naozaj chceš vymazať tento album?",
-      "modalCloseButton": "Zatvoriť",
-      "modalSubmitButton": "Vymazať"
-    }
-  },
-  "menu": {
-    "albums": "Albumy",
-    "about": "O aplikácii",
-    "profile": "Profil",
-    "signIn": "Prihlásiť sa",
-    "signUp": "Registrovať sa",
-    "signOut": "Odhlásiť sa",
-    "subscription": "Predplatné"
-  },
-  "footer": {
-    "about": "O aplikácii",
-    "contact": "Kontakt",
-    "description": "Aplikácia pomáha užívateľom rýchlo a ľahko zdielať fotografie a videá bez zníženia kvality.",
-    "home": "Domov",
-    "links": "Odkazy",
-    "register": "Registrácia",
-    "status": "Status"
-  },
-  "userDataDeletion": {
-    "title": "Vymazanie používateľských údajov",
-    "subtitle": "Ak si želáte vymazať svoje osobné údaje alebo účet, kontaktujte nás na <mailto>{{email}}</mailto>. Po prijatí vašej žiadosti zabezpečíme vymazanie všetkých vašich osobných údajov v súlade s platnými právnymi predpismi."
   },
   "privacyPolicy": {
-    "title": "Zásady ochrany osobných údajov",
+    "title": "Ochrana osobných údajov",
     "subtitle": "Ak ste návštevníkom webovej stránky Zdielaj.si alebo zákazníkom služby Zdielaj.si, potom sa na vaše používanie tejto webovej stránky alebo služby vzťahujú \"zásady ochrany osobných údajov\".",
     "firstSection": {
       "title": "Aký typ informácií zhromažďujeme?",
-      "paragraph1": "Aby sme mohli poskytovať služby Zdielaj.si, musíme o vás spracovávať informácie. Typy informácií, ktoré zhromažďujeme, závisia od toho, ako používate naše služby."
+      "paragraph1": "Na poskytovanie služieb Zdielaj.si potrebujeme spracovávať informácie o vás. Typy informácií, ktoré zhromažďujeme, závisia od toho, ako používate naše služby."
     },
     "secondSection": {
       "title": "Ako tieto informácie používame?",
-      "paragraph1": "<strong>Poskytovať, personalizovať a zlepšovať naše služby.</strong> Informácie, ktoré máme, používame na poskytovanie našich služieb, prispôsobenie funkcií a vytváranie návrhov pre vás.",
-      "paragraph2": "<strong>Výskum a vývoj produktu.</strong> Informácie, ktoré máme, používame na vývoj, testovanie a zlepšovanie našich služieb. Takéto spracovanie je nevyhnutné pre naše oprávnené záujmy spočívajúce v poskytovaní inovatívnych služieb našim používateľom.",
-      "paragraph3": "<strong>Podporovať bezpečnosť a integritu.</strong> Informácie, ktoré máme, používame na overenie účtov a aktivity, boj proti škodlivému správaniu, zisťovanie a predchádzanie spamu a iným zlým skúsenostiam, udržiavanie integrity našich služieb.",
-      "paragraph4": "<strong>Komunikácia s vami.</strong> Informácie, ktoré máme, používame na zasielanie marketingovej komunikácie, relevantných noviniek a aktualizácií, o ktorých sa domnievame, že by vás mohli zaujímať."
+      "paragraph1": "<strong>Na poskytovanie, personalizáciu a zlepšovanie našich služieb.</strong> Informácie, ktoré máme, používame na poskytovanie našich služieb, prizpôsobenie funkcií a vytváranie návrhov pre vás.",
+      "paragraph2": "<strong>Výskum a vývoj produktov.</strong> Informácie, ktoré máme, používame na vývoj, testovanie a zlepšovanie našich služieb. Takéto spracovanie je nevyhnutné pre naše oprávnené záujmy pri poskytovaní inovatívnych služieb našim používateľom.",
+      "paragraph3": "<strong>Na podporu bezpečnosti a integrity.</strong> Informácie, ktoré máme, používame na overovanie účtov a aktivít, boj proti škodlivému správaniu, odhaľovanie a predchádzanie spamu a iným negatívnym skúsenostiam a udržiavanie integrity našich služieb.",
+      "paragraph4": "<strong>Komunikácia s vami.</strong> Informácie, ktoré máme, používame na zasielanie marketingových oznámení, relevantných noviniek a aktualizácií, o ktorých si myslíme, že by vás mohli zaujímať."
     },
     "thirdSection": {
       "title": "Ako chránime vaše informácie?",
-      "paragraph1": "Vaše osobné údaje sú šifrované, za zabezpečenými sieťami a sú prístupné iba obmedzenému počtu osôb, ktoré majú špeciálne prístupové práva k takýmto systémom a sú povinné uchovávať informácie v tajnosti."
+      "paragraph1": "Vaše osobné údaje sú šifrované, uložené za zabezpečenými sieťami a prístupné len obmedzenému počtu osôb, ktoré majú špeciálne prístupové práva k takýmto systémom a sú povinné zachovávať mlčanlivosť o informáciách."
     },
     "fourthSection": {
-      "title": "Ako sa tieto informácie zdieľajú?",
-      "paragraph1": "Vaše osobné údaje nepredávame, neobchodujeme s nimi ani ich inak neprevádzame externým stranám. To nezahŕňa partnerov hosťovania webových stránok a iné strany, ktoré nám pomáhajú pri prevádzke našej webovej stránky, pri vykonávaní našej činnosti alebo pri poskytovaní služieb našim používateľom, pokiaľ tieto strany súhlasia s tým, že budú tieto informácie uchovávať v tajnosti."
+      "title": "Ako sú tieto informácie zdieľané?",
+      "paragraph1": "Nepredávame, neobchodujeme ani inak neprenášame vaše osobné údaje tretím stranám. To nezahŕňa partnerov pre hosting webových stránok a ďalšie strany, ktoré nám pomáhajú prevádzkovať našu webovú stránku, vykonávať naše podnikanie alebo obsluhovať našich používateľov, pokiaľ tieto strany súhlasia s utajením týchto informácií."
     },
     "fifthSection": {
-      "title": "Uchovávanie údajov, deaktivácia a vymazanie účtu",
-      "paragraph1": "Údaje uchovávame dovtedy, kým už nie sú potrebné na poskytovanie našich služieb alebo kým sa váš účet neodstráni – podľa toho, čo nastane skôr."
+      "title": "Uchovávanie údajov, deaktivácia a odstránenie účtu",
+      "paragraph1": "Údaje uchovávame tak dlho, ako je to potrebné na poskytovanie našich služieb alebo až do odstránenia vášho účtu - podľa toho, čo nastane skôr."
     },
     "sixthSection": {
       "title": "Ako vás budeme informovať o zmenách týchto zásad?",
-      "paragraph1": "Z času na čas môžeme aktualizovať tieto zásady. Ak to bude možné, upozorníme vás na zmeny alebo vám budeme pravidelne pripomínať, aby ste si prečítali tieto sásady prostredníctvom e-mailu."
+      "paragraph1": "Tieto zásady môžeme čas od času aktualizovať. Kde je to možné, budeme vás informovať o zmenách alebo vás pravidelne upozorňovať na preskúmanie týchto zásad prostredníctvom e-mailu."
     },
     "seventhSection": {
       "title": "Ako kontaktovať Zdielaj.si s otázkami?",
-      "paragraph1": "Možete nás kontaktovať zaslaní emailu na <mailto>info@zdielaj.si</mailto>."
+      "paragraph1": "Môžete nás kontaktovať zaslaním e-mailu na <mailto>info@zdielaj.si</mailto>."
     }
   }
 }

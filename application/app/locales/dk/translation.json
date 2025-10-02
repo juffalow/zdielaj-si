@@ -1,0 +1,323 @@
+{
+  "routes": {
+    "prefix": "dk/",
+    "signIn": "log-ind",
+    "signUp": "registrer",
+    "passwordReset": "nulstil-adgangskode",
+    "about": "om-os",
+    "privacyPolicy": "privatlivspolitik",
+    "userData": "brugerdata",
+    "userProfile": "profil",
+    "publicProfile": "profil/:id",
+    "albums": "album",
+    "album": "album/:id",
+    "home": ""
+  },
+  "components": {
+    "shareButton": {
+      "copyLink": "Kopier link"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Træk billeder hertil eller vælg dem ved at klikke"
+    },
+    "menu": {
+      "albums": "Album",
+      "profile": "Profil",
+      "signIn": "Log ind",
+      "signUp": "Registrer",
+      "signOut": "Log ud",
+      "subscription": "Abonnement"
+    },
+    "footer": {
+      "about": "Om os",
+      "contact": "Kontakt",
+      "description": "Applikationen hjælper brugere med hurtigt og nemt at dele billeder og videoer uden at reducere kvaliteten.",
+      "home": "Hjem",
+      "links": "Links",
+      "register": "Registrer",
+      "privacyPolicy": "Privatlivspolitik",
+      "status": "Status"
+    }
+  },
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "Har du også det problem, at nogle applikationer reducerer kvaliteten af dine billeder og videoer? Her kan du dele dem uden problemer i fuld kvalitet!"
+    }
+  },
+  "home": {
+    "title": "Del billeder og videoer i fuld kvalitet",
+    "subtitle": "Har du også det problem, at nogle applikationer reducerer kvaliteten af dine billeder og videoer? Her kan du dele dem uden problemer i fuld kvalitet!",
+    "uploadArea": {
+      "title": "Træk billeder hertil eller vælg dem ved at klikke",
+      "button": "Upload billeder",
+      "asUnregisteredUser": {
+        "title": "Som uregistreret bruger:",
+        "maxTenPhotos": "kan du dele maksimalt <strong>10</strong> billeder",
+        "deletedAfter24Hours": "billeder slettes automatisk efter <strong>24 timer</strong>"
+      }
+    },
+    "pricing": {
+      "default": {
+        "title": "Uden registrering",
+        "monthly": "månedligt",
+        "maxTenPhotos": "maks <strong>10</strong> billeder",
+        "maxSizePerFile": "filstørrelse op til <strong>10MB</strong>",
+        "deletedAfter24Hours": "filer slettes automatisk efter <strong>24 timer</strong>"
+      },
+      "free": {
+        "title": "Gratis",
+        "monthly": "månedligt",
+        "maxOneGB": "maks <strong>1GB</strong> <small>(≈ 300 billeder)</small>",
+        "maxSizePerFile": "filstørrelse op til <strong>100MB</strong>",
+        "video": "video",
+        "listOfAlbums": "liste over album",
+        "filesWillBeDeletedAfter7Days": "filer slettes automatisk efter <strong>7 dage</strong>",
+        "signUp": "Registrer"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "månedligt",
+        "maxTenGB": "maks <strong>10GB</strong> <small>(≈ 3000 billeder)</small>",
+        "maxSizePerFile": "filstørrelse op til <strong>500MB</strong>",
+        "video": "video",
+        "listOfAlbums": "liste over album",
+        "passwordProtect": "adgangskodebeskyttelse",
+        "publicProfile": "offentlig profil",
+        "mfa": "tofaktorgodkendelse",
+        "filesAreNotDeleted": "filer slettes <strong>ikke</strong>",
+        "signUp": "Registrer"
+      }
+    }
+  },
+  "signIn": {
+    "title": "Log ind",
+    "noAccount": "Har du ikke en konto endnu?",
+    "signUp": "Registrer",
+    "form": {
+      "email": "E-mail",
+      "emailPlaceholder": "Indtast din e-mailadresse",
+      "requiredField": "Dette felt er obligatorisk.",
+      "password": "Adgangskode",
+      "passwordPlaceholder": "Indtast din adgangskode",
+      "forgotPassword": "Glemt din adgangskode?",
+      "signInButton": "Log ind"
+    },
+    "totp": {
+      "totpCode": "Kode",
+      "confirmSignInButton": "Bekræft login"
+    }
+  },
+  "signUp": {
+    "title": "Registrer",
+    "form": {
+      "name": "Navn",
+      "namePlaceholder": "Indtast dit navn",
+      "email": "E-mail",
+      "emailPlaceholder": "Indtast din e-mailadresse",
+      "requiredField": "Dette felt er obligatorisk.",
+      "password": "Adgangskode",
+      "passwordPlaceholder": "Indtast din adgangskode",
+      "passwordRules": {
+        "minEightCharacters": "Mindst 8 tegn",
+        "atLeastOneUppercase": "Mindst ét stort bogstav",
+        "atLeastOneLowercase": "Mindst ét lille bogstav",
+        "atLeastOneSpecialCharacter": "Mindst ét specialtegn",
+        "atLeastOneNumber": "Mindst ét tal"
+      },
+      "signUpButton": "Registrer",
+      "errors": {
+        "userAlreadyExists": "Der findes allerede en bruger med denne e-mailadresse!",
+        "default": "Kunne ikke registrere!"
+      }
+    },
+    "confirmForm": {
+      "code": "Kode",
+      "requiredField": "Dette felt er obligatorisk.",
+      "confirmSignUpButton": "Bekræft registrering",
+      "errors": {
+        "codeMismatch": "Ugyldig bekræftelseskode, prøv venligst igen.",
+        "default": "Kunne ikke bekræfte registreringen!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "Du har oprettet din konto. Du kan nu logge ind på din konto.",
+      "subtitleLink": "Log ind"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "Album ikke fundet!",
+      "subtitle": "Det album, du leder efter, findes ikke.",
+      "clarifyingText": "Måske indtastede du en forkert adresse, brugte et gammelt link, eller albummet blev slettet.",
+      "ctaButton": "Tilbage til hjemmesiden"
+    },
+    "userAlbum": {
+      "name": "Navn",
+      "namePlaceholder": "Indtast albummets navn",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Indtast albummets beskrivelse",
+      "layout": "Layout",
+      "layoutOptions": {
+        "cols": "Kolonner",
+        "rows": "Rækker",
+        "tiles": "Fliser"
+      },
+      "gaps": "Mellemrum",
+      "gapsOptions": {
+        "none": "Ingen mellemrum",
+        "small": "Små",
+        "medium": "Mellem",
+        "large": "Store"
+      },
+      "changeLayout": "Brugeren kan ændre layoutet",
+      "retention": "Filopbevaring",
+      "retentionOptions": {
+        "1": "1 dag",
+        "7": "1 uge",
+        "31": "1 måned",
+        "366": "1 år",
+        "0": "For altid"
+      },
+      "link": "Albumlink",
+      "submitButton": "Gem",
+      "copyButton": "Kopier link",
+      "mobileBottomButton": "Kopier link"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "detail": {
+      "title": "Kontooplysninger",
+      "email": "E-mail"
+    },
+    "changePassword": {
+      "title": "Skift adgangskode",
+      "currentPassword": "Nuværende adgangskode",
+      "currentPasswordPlaceholder": "1GammelAdgangskode!",
+      "newPassword": "Ny adgangskode",
+      "newPasswordPlaceholder": "Ny1SikkerAdgangskode!",
+      "confirmPassword": "Bekræft ny adgangskode",
+      "button": "Skift adgangskode"
+    },
+    "mfa": {
+      "title": "Tofaktorgodkendelse",
+      "activate": {
+        "title": "Aktiver tofaktorgodkendelse",
+        "subtitle": "Efter aktivering af tofaktorgodkendelse kan du logge ind med en kode sendt til din e-mail."
+      },
+      "confirm": {
+        "title": "Bekræft tofaktorgodkendelse",
+        "subtitle": "Indtast koden sendt til din e-mail for at bekræfte tofaktorgodkendelse.",
+        "submitButton": "Bekræft"
+      }
+    },
+    "publicProfile": {
+      "title": "Offentlig profil",
+      "activate": {
+        "title": "Aktiver offentlig profil",
+        "subtitle": "Efter aktivering af din offentlige profil vælger du en unik URL-adresse til din profil, hvor andre brugere kan se dine album.",
+        "moreInfo": "Du kan finde mere information på siderne",
+        "moreInfoLink": "Om applikationen, i afsnittet Offentlig profil",
+        "cta": "Aktiver"
+      },
+      "createForm": {
+        "mandatoryField": "Dette felt er obligatorisk.",
+        "fieldName": "Navn",
+        "fieldSlug": "Slug",
+        "fieldSlugHelp1": "Kun små bogstaver, tal og bindestreger er tilladt.",
+        "fieldSlugHelp2": "Profilen vil være tilgængelig på:",
+        "fieldDescription": "Beskrivelse",
+        "createButton": "Opret",
+        "cancelButton": "Annuller",
+        "errorMessage": "Kunne ikke oprette offentlig profil."
+      },
+      "updateForm": {
+        "mandatoryField": "Dette felt er obligatorisk.",
+        "fieldName": "Navn",
+        "fieldSlug": "Slug",
+        "fieldDescription": "Beskrivelse",
+        "fieldHomepage": "Hjemmeside",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Gem",
+        "errorMessage": "Kunne ikke opdatere offentlig profil."
+      }
+    },
+    "statistics": {
+      "title": "Statistik",
+      "numberOfAlbums": "Antal album",
+      "numberOfFiles": "Antal filer",
+      "totalSize": "Total størrelse"
+    },
+    "deleteProfile": {
+      "title": "Slet konto",
+      "subtitle": "Alle uploadede filer og album slettes sammen med din konto.",
+      "submitButton": "Slet profil",
+      "clarifyingText": "Denne funktion understøttes endnu ikke. Hvis du ønsker at slette din konto, bedes du kontakte os på følgende e-mailadresse"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "Du har ingen album endnu!",
+      "subtitle": "Du har ingen album endnu.",
+      "ctaButton": "Gå til hjemmesiden og opret dit første album"
+    },
+    "list": {
+      "publicProfileSwitch": "Vis i offentlig profil",
+      "deleteButton": "Slet album"
+    },
+    "deleteModal": {
+      "title": "Slet album",
+      "body": "Vil du virkelig slette dette album?",
+      "closeButton": "Luk",
+      "submitButton": "Slet"
+    }
+  },
+  "publicProfile": {
+    "notFound": {
+      "title": "Offentlig profil ikke fundet!",
+      "subtitle": "Den offentlige profil, du leder efter, findes ikke.",
+      "clarifyingText": "Måske indtastede du en forkert adresse, brugte et gammelt link, eller den offentlige profil blev slettet.",
+      "ctaButton": "Tilbage til hjemmesiden"
+    }
+  },
+  "privacyPolicy": {
+    "title": "Privatlivspolitik",
+    "subtitle": "Hvis du er besøgende på Zdielaj.si-webstedet eller kunde hos Zdielaj.si-tjenesten, er din brug af dette websted eller denne tjeneste underlagt \"privatlivspolitikken\".",
+    "firstSection": {
+      "title": "Hvilken type information indsamler vi?",
+      "paragraph1": "For at levere Zdielaj.si-tjenesterne skal vi behandle information om dig. Typerne af information, vi indsamler, afhænger af, hvordan du bruger vores tjenester."
+    },
+    "secondSection": {
+      "title": "Hvordan bruger vi denne information?",
+      "paragraph1": "<strong>Til at levere, personalisere og forbedre vores tjenester.</strong> Vi bruger den information, vi har, til at levere vores tjenester, tilpasse funktioner og oprette forslag til dig.",
+      "paragraph2": "<strong>Produktforskning og udvikling.</strong> Vi bruger den information, vi har, til at udvikle, teste og forbedre vores tjenester. Sådan behandling er nødvendig for vores legitime interesser i at levere innovative tjenester til vores brugere.",
+      "paragraph3": "<strong>Til at støtte sikkerhed og integritet.</strong> Vi bruger den information, vi har, til at verificere konti og aktiviteter, bekæmpe skadelig adfærd, opdage og forhindre spam og andre negative oplevelser og opretholde integriteten af vores tjenester.",
+      "paragraph4": "<strong>Kommunikation med dig.</strong> Vi bruger den information, vi har, til at sende marketingkommunikation, relevante nyheder og opdateringer, som vi mener kan interessere dig."
+    },
+    "thirdSection": {
+      "title": "Hvordan beskytter vi dine oplysninger?",
+      "paragraph1": "Dine personlige data er krypteret, gemt bag sikrede netværk og kun tilgængelige for et begrænset antal personer, der har særlige adgangsrettigheder til sådanne systemer og er forpligtet til at holde informationen fortrolig."
+    },
+    "fourthSection": {
+      "title": "Hvordan deles denne information?",
+      "paragraph1": "Vi sælger ikke, handler ikke eller overfører på anden måde dine personlige data til eksterne parter. Dette inkluderer ikke webstedets hostingpartnere og andre parter, der hjælper os med at drive vores websted, udføre vores forretning eller betjene vores brugere, så længe disse parter accepterer at holde denne information fortrolig."
+    },
+    "fifthSection": {
+      "title": "Dataopbevaring, deaktivering og sletning af konto",
+      "paragraph1": "Vi opbevarer data, så længe det er nødvendigt for at levere vores tjenester, eller indtil din konto slettes - alt efter hvad der kommer først."
+    },
+    "sixthSection": {
+      "title": "Hvordan vil vi underrette dig om ændringer i denne politik?",
+      "paragraph1": "Fra tid til anden kan vi opdatere denne politik. Hvor det er muligt, vil vi underrette dig om ændringer eller regelmæssigt minde dig om at gennemgå denne politik via e-mail."
+    },
+    "seventhSection": {
+      "title": "Hvordan kontakter man Zdielaj.si med spørgsmål?",
+      "paragraph1": "Du kan kontakte os ved at sende en e-mail til <mailto>info@zdielaj.si</mailto>."
+    }
+  }
+}
+

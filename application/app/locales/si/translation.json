@@ -4,149 +4,14 @@
     "signIn": "prijava",
     "signUp": "registracija",
     "passwordReset": "ponastavitev-gesla",
-    "about": "o-aplikaciji",
-    "privacyPolicy": "politika-zasebnosti",
-    "userData": "uporabniski-podatki",
+    "about": "o-nas",
+    "privacyPolicy": "varstvo-osebnih-podatkov",
+    "userData": "podatki-uporabnika",
     "userProfile": "profil",
     "publicProfile": "profil/:id",
     "albums": "albumi",
     "album": "album/:id",
     "home": ""
-  },
-  "home": {
-    "title": "Delite fotografije in videoposnetke v polni kakovosti",
-    "subtitle": "Imate tudi vi težavo, da nekatere aplikacije zmanjšajo kakovost vaših fotografij in videoposnetkov? Tukaj jih lahko delite brez težav v polni kakovosti!",
-    "uploadAreaText": "Premaknite fotografije sem ali jih izberite s klikom",
-    "uploadAreaButton": "Naloži fotografije",
-    "pricing": {
-      "default": {
-        "title": "Brez registracije",
-        "monthly": "mesečno",
-        "maxTenPhotos": "največ <strong>10</strong> fotografij",
-        "deletedAfter24Hours": "datoteke bodo samodejno izbrisane po <strong>24 urah</strong>",
-        "register": "Registriraj se"
-      },
-      "free": {
-        "title": "Brezplačno",
-        "monthly": "mesečno",
-        "maxOneGB": "največ <strong>1GB</strong> <small>(≈ 300 fotografij)</small>",
-        "video": "video",
-        "listOfAlbums": "seznam albumov",
-        "filesWillBeDeletedAfter7Days": "datoteke bodo samodejno izbrisane po <strong>7 dneh</strong>",
-        "register": "Registriraj se"
-      },
-      "standard": {
-        "title": "Standard",
-        "monthly": "mesečno",
-        "maxTenGB": "največ <strong>10GB</strong> <small>(≈ 3000 fotografij)</small>",
-        "video": "video",
-        "listOfAlbums": "seznam albumov",
-        "passwordProtect": "zaščita z geslom",
-        "publicProfile": "javni profil",
-        "filesWillNotBeDeleted": "datoteke <strong>niso izbrisane</strong>",
-        "register": "Registriraj se"
-      }
-    }
-  },
-  "login": {
-    "title": "Prijava",
-    "subtitle": "Še nimate računa?",
-    "subtitleLink": "Registriraj se",
-    "form": {
-      "email": "E-poštni naslov",
-      "requiredField": "To polje je obvezno.",
-      "password": "Geslo",
-      "forgotPassword": "Ste pozabili geslo?",
-      "signInButton": "Prijava"
-    }
-  },
-  "profile": {
-    "changePasswordForm": {
-      "title": "Spremeni geslo",
-      "currentPassword": "Trenutno geslo",
-      "currentPasswordPlaceholder": "1StaroGeslo!",
-      "newPassword": "Novo geslo",
-      "newPasswordPlaceholder": "Novo1MočnoGeslo!",
-      "confirmPassword": "Potrdi novo geslo",
-      "button": "Spremeni geslo"
-    },
-    "statistics": {
-      "title": "Statistika",
-      "numberOfAlbums": "Število albumov",
-      "numberOfFiles": "Število datotek",
-      "totalSize": "Skupna velikost"
-    }
-  },
-  "publicProfile": {
-    "notFound": {
-      "title": "Javni profil ni najden!",
-      "subtitle": "Javni profil, ki ga iščete, ne obstaja.",
-      "clarifyingText": "Morda ste vnesli napačen naslov, uporabili staro povezavo ali pa je bil javni profil izbrisan.",
-      "ctaButton": "Nazaj na domačo stran"
-    }
-  },
-  "register": {
-    "title": "Registracija",
-    "subtitle": "Že imate račun?",
-    "subtitleLink": "Prijava",
-    "error": {
-      "userAlreadyExists": "Uporabnik s tem e-poštnim naslovom že obstaja!",
-      "userNotCreated": "Uporabnika ni bilo mogoče ustvariti!"
-    },
-    "form": {
-      "name": "Ime",
-      "email": "E-poštni naslov",
-      "password": "Geslo",
-      "requiredField": "To polje je obvezno.",
-      "minEightCharacters": "Vsaj 8 znakov",
-      "atLeastOneUppercase": "Vsaj ena velika črka",
-      "atLeastOneLowercase": "Vsaj ena mala črka",
-      "atLeastOneSpecialCharacter": "Vsaj en poseben znak",
-      "atLeastOneNumber": "Vsaj ena številka",
-      "signUpButton": "Registriraj se"
-    },
-    "confirmForm": {
-      "title": "Preverjanje e-poštnega naslova",
-      "subtitle": "Na vaš e-poštni naslov je bila poslana potrditvena koda.",
-      "code": "Potrditvena koda",
-      "requiredField": "To polje je obvezno.",
-      "submitButton": "Dokončaj registracijo"
-    },
-    "thankYou": {
-      "title": "Hvala za registracijo!",
-      "subtitle": "Vaš e-poštni naslov je bil preverjen. Nadaljujete lahko s prijavo v svoj račun",
-      "subtitleLink": "tukaj"
-    }
-  },
-  "album": {
-    "userAlbum": {
-      "formName": "Ime",
-      "formDescription": "Opis",
-      "formLink": "Povezava do albuma",
-      "formSubmitButton": "Shrani",
-      "copyButton": "Kopiraj povezavo"
-    },
-    "notFound": {
-      "title": "Album ni najden!",
-      "subtitle": "Album, ki ga iščete, ne obstaja.",
-      "clarifyingText": "Morda ste vnesli napačen naslov, uporabili staro povezavo ali pa je bil album izbrisan.",
-      "ctaButton": "Nazaj na domačo stran"
-    }
-  },
-  "albums": {
-    "albumPreview": {
-      "noFiles": "Ni datotek",
-      "publicProfileToggle": "Prikaži v javnem profilu",
-      "show": "Prikaži",
-      "delete": "Izbriši"
-    },
-    "albumsContainer": {
-      "noAlbumsAlert": "Nimate albumov",
-      "modalTitle": "Izbriši album",
-      "modalBody": "Ali res želite izbrisati ta album?",
-      "modalCloseButton": "Zapri",
-      "modalSubmitButton": "Izbriši"
-    }
   },
   "components": {
     "shareButton": {
@@ -154,66 +19,304 @@
     },
     "uploadFiles": {
       "dropzoneTitle": "Povlecite fotografije sem ali jih izberite s klikom"
+    },
+    "menu": {
+      "albums": "Albumi",
+      "profile": "Profil",
+      "signIn": "Prijava",
+      "signUp": "Registracija",
+      "signOut": "Odjava",
+      "subscription": "Naročnina"
+    },
+    "footer": {
+      "about": "O nas",
+      "contact": "Kontakt",
+      "description": "Aplikacija uporabnikom pomaga hitro in enostavno deliti fotografije in videoposnetke brez zmanjšanja kakovosti.",
+      "home": "Domov",
+      "links": "Povezave",
+      "register": "Registriraj se",
+      "privacyPolicy": "Varstvo osebnih podatkov",
+      "status": "Stanje"
     }
   },
-  "menu": {
-    "albums": "Albumi",
-    "about": "O aplikaciji",
-    "profile": "Profil",
-    "signIn": "Prijava",
-    "signOut": "Odjava",
-    "subscription": "Naročnina"
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "Imate tudi težavo, da nekatere aplikacije zmanjšajo kakovost vaših fotografij in videoposnetkov? Tukaj jih lahko delite brez težav v polni kakovosti!"
+    }
   },
-  "footer": {
-    "about": "O aplikaciji",
-    "contact": "Kontakt",
-    "description": "Aplikacija uporabnikom omogoča hitro in enostavno deljenje fotografij in videoposnetkov brez zmanjšanja kakovosti.",
-    "home": "Domov",
-    "links": "Povezave",
-    "register": "Registriraj se",
-    "status": "Status"
+  "home": {
+    "title": "Delite fotografije in videoposnetke v polni kakovosti",
+    "subtitle": "Imate tudi težavo, da nekatere aplikacije zmanjšajo kakovost vaših fotografij in videoposnetkov? Tukaj jih lahko delite brez težav v polni kakovosti!",
+    "uploadArea": {
+      "title": "Povlecite fotografije sem ali jih izberite s klikom",
+      "button": "Naloži fotografije",
+      "asUnregisteredUser": {
+        "title": "Kot neregistriran uporabnik:",
+        "maxTenPhotos": "lahko delite največ <strong>10</strong> fotografij",
+        "deletedAfter24Hours": "fotografije bodo samodejno izbrisane po <strong>24 urah</strong>"
+      }
+    },
+    "pricing": {
+      "default": {
+        "title": "Brez registracije",
+        "monthly": "mesečno",
+        "maxTenPhotos": "maks <strong>10</strong> fotografij",
+        "maxSizePerFile": "velikost datoteke do <strong>10MB</strong>",
+        "deletedAfter24Hours": "datoteke bodo samodejno izbrisane po <strong>24 urah</strong>"
+      },
+      "free": {
+        "title": "Brezplačno",
+        "monthly": "mesečno",
+        "maxOneGB": "maks <strong>1GB</strong> <small>(≈ 300 fotografij)</small>",
+        "maxSizePerFile": "velikost datoteke do <strong>100MB</strong>",
+        "video": "video",
+        "listOfAlbums": "seznam albumov",
+        "filesWillBeDeletedAfter7Days": "datoteke bodo samodejno izbrisane po <strong>7 dneh</strong>",
+        "signUp": "Registriraj se"
+      },
+      "standard": {
+        "title": "Standard",
+        "monthly": "mesečno",
+        "maxTenGB": "maks <strong>10GB</strong> <small>(≈ 3000 fotografij)</small>",
+        "maxSizePerFile": "velikost datoteke do <strong>500MB</strong>",
+        "video": "video",
+        "listOfAlbums": "seznam albumov",
+        "passwordProtect": "zaščita z geslom",
+        "publicProfile": "javni profil",
+        "mfa": "večfaktorska avtentikacija",
+        "filesAreNotDeleted": "datoteke <strong>niso izbrisane</strong>",
+        "signUp": "Registriraj se"
+      }
+    }
   },
-  "userDataDeletion": {
-    "title": "Izbris uporabniških podatkov",
-    "subtitle": "Če želite izbrisati svoje osebne podatke ali račun, nas kontaktirajte na <mailto>{{email}}</mailto>. Po prejemu vaše zahteve bomo zagotovili izbris vseh vaših osebnih podatkov v skladu z veljavno zakonodajo."
+  "signIn": {
+    "title": "Prijava",
+    "noAccount": "Še nimate računa?",
+    "signUp": "Registriraj se",
+    "form": {
+      "email": "E-pošta",
+      "emailPlaceholder": "Vnesite svoj e-poštni naslov",
+      "requiredField": "To polje je obvezno.",
+      "password": "Geslo",
+      "passwordPlaceholder": "Vnesite svoje geslo",
+      "forgotPassword": "Ste pozabili geslo?",
+      "signInButton": "Prijava"
+    },
+    "totp": {
+      "totpCode": "Koda",
+      "confirmSignInButton": "Potrdi prijavo"
+    }
+  },
+  "signUp": {
+    "title": "Registracija",
+    "form": {
+      "name": "Ime",
+      "namePlaceholder": "Vnesite svoje ime",
+      "email": "E-pošta",
+      "emailPlaceholder": "Vnesite svoj e-poštni naslov",
+      "requiredField": "To polje je obvezno.",
+      "password": "Geslo",
+      "passwordPlaceholder": "Vnesite svoje geslo",
+      "passwordRules": {
+        "minEightCharacters": "Vsaj 8 znakov",
+        "atLeastOneUppercase": "Vsaj ena velika črka",
+        "atLeastOneLowercase": "Vsaj ena mala črka",
+        "atLeastOneSpecialCharacter": "Vsaj en poseben znak",
+        "atLeastOneNumber": "Vsaj ena številka"
+      },
+      "signUpButton": "Registriraj se",
+      "errors": {
+        "userAlreadyExists": "Uporabnik s tem e-poštnim naslovom že obstaja!",
+        "default": "Registracija ni uspela!"
+      }
+    },
+    "confirmForm": {
+      "code": "Koda",
+      "requiredField": "To polje je obvezno.",
+      "confirmSignUpButton": "Potrdi registracijo",
+      "errors": {
+        "codeMismatch": "Neveljavna koda za preverjanje, prosimo poskusite znova.",
+        "default": "Potrditev registracije ni uspela!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "Uspešno ste ustvarili svoj račun. Zdaj se lahko prijavite v svoj račun.",
+      "subtitleLink": "Prijava"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "Album ni bil najden!",
+      "subtitle": "Album, ki ga iščete, ne obstaja.",
+      "clarifyingText": "Morda ste vnesli napačen naslov, uporabili staro povezavo ali je bil album izbrisan.",
+      "ctaButton": "Nazaj na domačo stran"
+    },
+    "userAlbum": {
+      "name": "Ime",
+      "namePlaceholder": "Vnesite ime albuma",
+      "description": "Opis",
+      "descriptionPlaceholder": "Vnesite opis albuma",
+      "layout": "Razporeditev",
+      "layoutOptions": {
+        "cols": "Stolpci",
+        "rows": "Vrstice",
+        "tiles": "Ploščice"
+      },
+      "gaps": "Razmiki",
+      "gapsOptions": {
+        "none": "Brez razmikov",
+        "small": "Majhni",
+        "medium": "Srednji",
+        "large": "Veliki"
+      },
+      "changeLayout": "Uporabnik lahko spremeni razporeditev",
+      "retention": "Hramba datotek",
+      "retentionOptions": {
+        "1": "1 dan",
+        "7": "1 teden",
+        "31": "1 mesec",
+        "366": "1 leto",
+        "0": "Za vedno"
+      },
+      "link": "Povezava albuma",
+      "submitButton": "Shrani",
+      "copyButton": "Kopiraj povezavo",
+      "mobileBottomButton": "Kopiraj povezavo"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "detail": {
+      "title": "Podrobnosti računa",
+      "email": "E-pošta"
+    },
+    "changePassword": {
+      "title": "Spremeni geslo",
+      "currentPassword": "Trenutno geslo",
+      "currentPasswordPlaceholder": "1StaroGeslo!",
+      "newPassword": "Novo geslo",
+      "newPasswordPlaceholder": "Novo1VarnoGeslo!",
+      "confirmPassword": "Potrdi novo geslo",
+      "button": "Spremeni geslo"
+    },
+    "mfa": {
+      "title": "Večfaktorska avtentikacija",
+      "activate": {
+        "title": "Aktiviraj večfaktorsko avtentikacijo",
+        "subtitle": "Po aktivaciji večfaktorske avtentikacije se boste lahko prijavili s kodo, poslano na vaš e-poštni naslov."
+      },
+      "confirm": {
+        "title": "Potrdi večfaktorsko avtentikacijo",
+        "subtitle": "Vnesite kodo, poslano na vaš e-poštni naslov, za potrditev večfaktorske avtentikacije.",
+        "submitButton": "Potrdi"
+      }
+    },
+    "publicProfile": {
+      "title": "Javni profil",
+      "activate": {
+        "title": "Aktiviraj javni profil",
+        "subtitle": "Po aktivaciji javnega profila boste izbrali edinstven URL naslov za svoj profil, kjer bodo drugi uporabniki lahko videli vaše albume.",
+        "moreInfo": "Več informacij najdete na straneh",
+        "moreInfoLink": "O aplikaciji, v razdelku Javni profil",
+        "cta": "Aktiviraj"
+      },
+      "createForm": {
+        "mandatoryField": "To polje je obvezno.",
+        "fieldName": "Ime",
+        "fieldSlug": "URL naslov",
+        "fieldSlugHelp1": "Dovoljene so samo male črke, številke in pomišljaji.",
+        "fieldSlugHelp2": "Profil bo dosegljiv na:",
+        "fieldDescription": "Opis",
+        "createButton": "Ustvari",
+        "cancelButton": "Prekliči",
+        "errorMessage": "Ustvarjanje javnega profila ni uspelo."
+      },
+      "updateForm": {
+        "mandatoryField": "To polje je obvezno.",
+        "fieldName": "Ime",
+        "fieldSlug": "URL naslov",
+        "fieldDescription": "Opis",
+        "fieldHomepage": "Spletna stran",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Shrani",
+        "errorMessage": "Posodobitev javnega profila ni uspela."
+      }
+    },
+    "statistics": {
+      "title": "Statistika",
+      "numberOfAlbums": "Število albumov",
+      "numberOfFiles": "Število datotek",
+      "totalSize": "Skupna velikost"
+    },
+    "deleteProfile": {
+      "title": "Izbriši račun",
+      "subtitle": "Vse naložene datoteke in albumi bodo izbrisani skupaj z vašim računom.",
+      "submitButton": "Izbriši profil",
+      "clarifyingText": "Ta funkcija še ni podprta. Če želite izbrisati svoj račun, nas kontaktirajte na naslednji e-poštni naslov"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "Še nimate nobenih albumov!",
+      "subtitle": "Še nimate nobenih albumov.",
+      "ctaButton": "Pojdite na domačo stran in ustvarite svoj prvi album"
+    },
+    "list": {
+      "publicProfileSwitch": "Prikaži v javnem profilu",
+      "deleteButton": "Izbriši album"
+    },
+    "deleteModal": {
+      "title": "Izbriši album",
+      "body": "Ali res želite izbrisati ta album?",
+      "closeButton": "Zapri",
+      "submitButton": "Izbriši"
+    }
+  },
+  "publicProfile": {
+    "notFound": {
+      "title": "Javni profil ni bil najden!",
+      "subtitle": "Javni profil, ki ga iščete, ne obstaja.",
+      "clarifyingText": "Morda ste vnesli napačen naslov, uporabili staro povezavo ali je bil javni profil izbrisan.",
+      "ctaButton": "Nazaj na domačo stran"
+    }
   },
   "privacyPolicy": {
-    "title": "Politika zasebnosti",
-    "subtitle": "Če ste obiskovalec spletnega mesta Zdielaj.si ali uporabnik storitve Zdielaj.si, za vašo uporabo tega spletnega mesta ali storitve velja \"politika zasebnosti\".",
+    "title": "Varstvo osebnih podatkov",
+    "subtitle": "Če ste obiskovalec spletne strani Zdielaj.si ali stranka storitve Zdielaj.si, potem se za vašo uporabo te spletne strani ali storitve uporablja \"politika zasebnosti\".",
     "firstSection": {
-      "title": "Kakšne podatke zbiramo?",
-      "paragraph1": "Za zagotavljanje storitev Zdielaj.si moramo obdelovati podatke o vas. Vrsta podatkov, ki jih zbiramo, je odvisna od tega, kako uporabljate naše storitve."
+      "title": "Kakšne vrste informacij zbiramo?",
+      "paragraph1": "Za zagotavljanje storitev Zdielaj.si moramo obdelati informacije o vas. Vrste informacij, ki jih zbiramo, so odvisne od tega, kako uporabljate naše storitve."
     },
     "secondSection": {
-      "title": "Kako uporabljamo te podatke?",
-      "paragraph1": "<strong>Za zagotavljanje, prilagajanje in izboljšanje naših storitev.</strong> Podatke, ki jih imamo, uporabljamo za zagotavljanje naših storitev, prilagajanje funkcij in ustvarjanje predlogov za vas.",
-      "paragraph2": "<strong>Raziskave in razvoj izdelkov.</strong> Podatke, ki jih imamo, uporabljamo za razvoj, testiranje in izboljšanje naših storitev. Takšna obdelava je potrebna za naše zakonite interese pri zagotavljanju inovativnih storitev našim uporabnikom.",
-      "paragraph3": "<strong>Za podporo varnosti in integritete.</strong> Podatke, ki jih imamo, uporabljamo za preverjanje računov in dejavnosti, boj proti škodljivemu vedenju, odkrivanje in preprečevanje neželene pošte in drugih negativnih izkušenj ter za ohranjanje integritete naših storitev.",
-      "paragraph4": "<strong>Komunikacija z vami.</strong> Podatke, ki jih imamo, uporabljamo za pošiljanje marketinških sporočil, pomembnih novic in posodobitev, za katere menimo, da bi vas lahko zanimale."
+      "title": "Kako uporabljamo te informacije?",
+      "paragraph1": "<strong>Za zagotavljanje, prilagajanje in izboljševanje naših storitev.</strong> Informacije, ki jih imamo, uporabljamo za zagotavljanje naših storitev, prilagajanje funkcij in ustvarjanje predlogov za vas.",
+      "paragraph2": "<strong>Raziskave in razvoj izdelkov.</strong> Informacije, ki jih imamo, uporabljamo za razvoj, testiranje in izboljševanje naših storitev. Takšna obdelava je potrebna za naše legitimne interese pri zagotavljanju inovativnih storitev našim uporabnikom.",
+      "paragraph3": "<strong>Za podporo varnosti in integritete.</strong> Informacije, ki jih imamo, uporabljamo za preverjanje računov in aktivnosti, boj proti škodljivemu vedenju, odkrivanje in preprečevanje neželene pošte in drugih negativnih izkušenj ter vzdrževanje integritete naših storitev.",
+      "paragraph4": "<strong>Komunikacija z vami.</strong> Informacije, ki jih imamo, uporabljamo za pošiljanje tržnih sporočil, ustreznih novic in posodobitev, za katere menimo, da bi vas lahko zanimale."
     },
     "thirdSection": {
-      "title": "Kako varujemo vaše podatke?",
-      "paragraph1": "Vaši osebni podatki so šifrirani, shranjeni za varovanimi omrežji in dostopni le omejenemu številu oseb, ki imajo posebne pravice dostopa do takih sistemov in so dolžne podatke ohraniti zaupne."
+      "title": "Kako varujemo vaše informacije?",
+      "paragraph1": "Vaši osebni podatki so šifrirani, shranjeni za varnimi omrežji in dostopni samo omejenemu številu ljudi, ki imajo posebne pravice dostopa do takšnih sistemov in so zavezani k zaupnosti informacij."
     },
     "fourthSection": {
-      "title": "Kako se ti podatki delijo?",
-      "paragraph1": "Vaših osebnih podatkov ne prodajamo, ne izmenjujemo ali kako drugače ne posredujemo zunanjim osebam. To ne vključuje partnerjev za gostovanje spletnih strani in drugih oseb, ki nam pomagajo pri delovanju naše spletne strani, poslovanju ali storitvah uporabnikom, če se te osebe strinjajo, da bodo te podatke ohranile zaupne."
+      "title": "Kako se te informacije delijo?",
+      "paragraph1": "Ne prodajamo, trgujemo ali kako drugače prenašamo vaših osebnih podatkov zunanjim strankam. To ne vključuje partnerjev za gostovanje spletnih strani in drugih strank, ki nam pomagajo pri upravljanju naše spletne strani, vodenju našega poslovanja ali streženju našim uporabnikom, dokler te stranke soglašajo, da bodo te informacije ohranile zaupne."
     },
     "fifthSection": {
-      "title": "Hramba podatkov, deaktivacija in izbris računa",
-      "paragraph1": "Podatke hranimo, dokler je to potrebno za zagotavljanje naših storitev ali dokler vaš račun ni izbrisan – kar nastopi prej."
+      "title": "Hramba podatkov, deaktivacija in brisanje računa",
+      "paragraph1": "Podatke hranimo tako dolgo, kot je potrebno za zagotavljanje naših storitev ali dokler vaš račun ni izbrisan - karkoli se zgodi prej."
     },
     "sixthSection": {
       "title": "Kako vas bomo obvestili o spremembah te politike?",
-      "paragraph1": "Občasno lahko to politiko posodobimo. Kjer je mogoče, vas bomo o spremembah obvestili ali vas redno opomnili, da preberete to politiko po e-pošti."
+      "paragraph1": "Od časa do časa lahko to politiko posodobimo. Kjer je to mogoče, vas bomo obvestili o spremembah ali vas redno opominjali, da pregledate to politiko prek e-pošte."
     },
     "seventhSection": {
-      "title": "Kako kontaktirati Zdielaj.si v primeru vprašanj?",
-      "paragraph1": "Kontaktirate nas lahko tako, da pošljete e-pošto na <mailto>info@zdielaj.si</mailto>."
+      "title": "Kako kontaktirati Zdielaj.si z vprašanji?",
+      "paragraph1": "Lahko nas kontaktirate tako, da pošljete e-pošto na <mailto>info@zdielaj.si</mailto>."
     }
-  },
-  "about": {
-    "title": "O aplikaciji",
-    "subtitle": "Aplikacija uporabnikom omogoča hitro in enostavno deljenje fotografij in videoposnetkov brez zmanjšanja kakovosti. Vsi podatki so shranjeni v šifrirani obliki."
   }
 }

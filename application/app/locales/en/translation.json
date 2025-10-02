@@ -57,32 +57,6 @@
         "deletedAfter24Hours": "photos will be automatically deleted after <strong>24 hours</strong>"
       }
     },
-    "features": {
-      "title": "Features",
-      "euData": {
-        "title": "Data Stored in the EU",
-        "subtitle": "Sensitive user information as well as all their data are stored in the EU, specifically in Frankfurt (Germany)"
-      },
-      "encryption": {
-        "title": "Encryption",
-        "subtitle": "All data is stored and transmitted in encrypted form, protecting it from unauthorized access or modification"
-      },
-      "highlyAvailable": {
-        "title": "Highly Available",
-        "subtitle": "The application is designed to minimize or hide the effects of individual component failures, ensuring continuous operation with minimal downtime"
-      },
-      "publicProfile": {
-        "title": "Public Profile",
-        "subtitle": "The public profile allows you to share selected albums with other users.",
-        "bwl": {
-          "description": "\"Bombs Watts Lactates\" is a cycling club from Púchov that organizes regular rides in the area."
-        },
-        "elis": {
-          "description": "Adventures of a Bengal cat who loves regular walks and various adventures."
-        },
-        "showProfileButton": "View Profile"
-      }
-    },
     "pricing": {
       "default": {
         "title": "Without registration",
@@ -99,7 +73,7 @@
         "video": "video",
         "listOfAlbums": "list of albums",
         "filesWillBeDeletedAfter7Days": "files will be automatically deleted after <strong>7 days</strong>",
-        "register": "Register"
+        "signUp": "Sign up"
       },
       "standard": {
         "title": "Standard",
@@ -112,7 +86,7 @@
         "publicProfile": "public profile",
         "mfa": "multi-factor authentication",
         "filesAreNotDeleted": "files are <strong>not deleted</strong>",
-        "register": "Register"
+        "signUp": "Sign up"
       }
     }
   },

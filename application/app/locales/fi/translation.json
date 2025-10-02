@@ -3,8 +3,8 @@
     "prefix": "fi/",
     "signIn": "kirjaudu-sisaan",
     "signUp": "rekisteroidy",
-    "passwordReset": "salasanan-vaihto",
-    "about": "tietoa",
+    "passwordReset": "nollaa-salasana",
+    "about": "tietoa-meista",
     "privacyPolicy": "tietosuojakaytanto",
     "userData": "kayttajatiedot",
     "userProfile": "profiili",
@@ -13,207 +13,310 @@
     "album": "albumi/:id",
     "home": ""
   },
+  "components": {
+    "shareButton": {
+      "copyLink": "Kopioi linkki"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Vedä kuvat tähän tai valitse ne napsauttamalla"
+    },
+    "menu": {
+      "albums": "Albumit",
+      "profile": "Profiili",
+      "signIn": "Kirjaudu sisään",
+      "signUp": "Rekisteröidy",
+      "signOut": "Kirjaudu ulos",
+      "subscription": "Tilaus"
+    },
+    "footer": {
+      "about": "Tietoa meistä",
+      "contact": "Yhteystiedot",
+      "description": "Sovellus auttaa käyttäjiä jakamaan kuvia ja videoita nopeasti ja helposti ilman laadun heikkenemistä.",
+      "home": "Etusivu",
+      "links": "Linkit",
+      "register": "Rekisteröidy",
+      "privacyPolicy": "Tietosuojakäytäntö",
+      "status": "Tila"
+    }
+  },
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "Onko sinullakin ongelma, että jotkin sovellukset heikentävät kuviesi ja videoidesi laatua? Täällä voit jakaa ne ilman ongelmia täydessä laadussa!"
+    }
+  },
   "home": {
-    "title": "Jaa valokuvia ja videoita täydessä laadussa",
-    "subtitle": "Onko sinullakin ongelmia, että jotkin sovellukset heikentävät valokuviesi ja videoidesi laatua? Täällä voit jakaa ne ilman ongelmia täydessä laadussa!",
-    "uploadAreaText": "Siirrä valokuvat tähän tai valitse ne napsauttamalla",
-    "uploadAreaButton": "Lataa valokuvat",
+    "title": "Jaa kuvia ja videoita täydessä laadussa",
+    "subtitle": "Onko sinullakin ongelma, että jotkin sovellukset heikentävät kuviesi ja videoidesi laatua? Täällä voit jakaa ne ilman ongelmia täydessä laadussa!",
+    "uploadArea": {
+      "title": "Vedä kuvat tähän tai valitse ne napsauttamalla",
+      "button": "Lataa kuvia",
+      "asUnregisteredUser": {
+        "title": "Rekisteröimättömänä käyttäjänä:",
+        "maxTenPhotos": "voit jakaa enintään <strong>10</strong> kuvaa",
+        "deletedAfter24Hours": "kuvat poistetaan automaattisesti <strong>24 tunnin</strong> kuluttua"
+      }
+    },
     "pricing": {
       "default": {
         "title": "Ilman rekisteröitymistä",
         "monthly": "kuukausittain",
-        "maxTenPhotos": "max <strong>10</strong> valokuvaa",
-        "deletedAfter24Hours": "tiedostot poistetaan automaattisesti <strong>24 tunnin</strong> jälkeen",
-        "register": "Rekisteröidy"
+        "maxTenPhotos": "enintään <strong>10</strong> kuvaa",
+        "maxSizePerFile": "tiedostokoko enintään <strong>10MB</strong>",
+        "deletedAfter24Hours": "tiedostot poistetaan automaattisesti <strong>24 tunnin</strong> kuluttua"
       },
       "free": {
         "title": "Ilmainen",
         "monthly": "kuukausittain",
-        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 valokuvaa)</small>",
+        "maxOneGB": "enintään <strong>1GB</strong> <small>(≈ 300 kuvaa)</small>",
+        "maxSizePerFile": "tiedostokoko enintään <strong>100MB</strong>",
         "video": "video",
-        "listOfAlbums": "albumilista",
-        "filesWillBeDeletedAfter7Days": "tiedostot poistetaan automaattisesti <strong>7 päivän</strong> jälkeen",
-        "register": "Rekisteröidy"
+        "listOfAlbums": "albumiluettelo",
+        "filesWillBeDeletedAfter7Days": "tiedostot poistetaan automaattisesti <strong>7 päivän</strong> kuluttua",
+        "signUp": "Rekisteröidy"
       },
       "standard": {
-        "title": "Vakio",
+        "title": "Standardi",
         "monthly": "kuukausittain",
-        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 valokuvaa)</small>",
+        "maxTenGB": "enintään <strong>10GB</strong> <small>(≈ 3000 kuvaa)</small>",
+        "maxSizePerFile": "tiedostokoko enintään <strong>500MB</strong>",
         "video": "video",
-        "listOfAlbums": "albumilista",
+        "listOfAlbums": "albumiluettelo",
         "passwordProtect": "salasanasuojaus",
         "publicProfile": "julkinen profiili",
-        "filesWillNotBeDeleted": "tiedostoja <strong>ei poisteta</strong>",
-        "register": "Rekisteröidy"
+        "mfa": "kaksivaiheinen tunnistautuminen",
+        "filesAreNotDeleted": "tiedostoja <strong>ei poisteta</strong>",
+        "signUp": "Rekisteröidy"
       }
     }
   },
-  "login": {
+  "signIn": {
     "title": "Kirjaudu sisään",
-    "subtitle": "Eikö sinulla ole vielä tiliä?",
-    "subtitleLink": "Rekisteröidy",
+    "noAccount": "Eikö sinulla ole vielä tiliä?",
+    "signUp": "Rekisteröidy",
     "form": {
-      "email": "Sähköpostiosoite",
+      "email": "Sähköposti",
+      "emailPlaceholder": "Syötä sähköpostiosoitteesi",
       "requiredField": "Tämä kenttä on pakollinen.",
       "password": "Salasana",
+      "passwordPlaceholder": "Syötä salasanasi",
       "forgotPassword": "Unohditko salasanasi?",
       "signInButton": "Kirjaudu sisään"
+    },
+    "totp": {
+      "totpCode": "Koodi",
+      "confirmSignInButton": "Vahvista kirjautuminen"
+    }
+  },
+  "signUp": {
+    "title": "Rekisteröidy",
+    "form": {
+      "name": "Nimi",
+      "namePlaceholder": "Syötä nimesi",
+      "email": "Sähköposti",
+      "emailPlaceholder": "Syötä sähköpostiosoitteesi",
+      "requiredField": "Tämä kenttä on pakollinen.",
+      "password": "Salasana",
+      "passwordPlaceholder": "Syötä salasanasi",
+      "passwordRules": {
+        "minEightCharacters": "Vähintään 8 merkkiä",
+        "atLeastOneUppercase": "Vähintään yksi iso kirjain",
+        "atLeastOneLowercase": "Vähintään yksi pieni kirjain",
+        "atLeastOneSpecialCharacter": "Vähintään yksi erikoismerkki",
+        "atLeastOneNumber": "Vähintään yksi numero"
+      },
+      "signUpButton": "Rekisteröidy",
+      "errors": {
+        "userAlreadyExists": "Käyttäjä tällä sähköpostiosoitteella on jo olemassa!",
+        "default": "Rekisteröityminen epäonnistui!"
+      }
+    },
+    "confirmForm": {
+      "code": "Koodi",
+      "requiredField": "Tämä kenttä on pakollinen.",
+      "confirmSignUpButton": "Vahvista rekisteröityminen",
+      "errors": {
+        "codeMismatch": "Virheellinen vahvistuskoodi, yritä uudelleen.",
+        "default": "Rekisteröitymisen vahvistaminen epäonnistui!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "Olet luonut tilisi onnistuneesti. Voit nyt kirjautua sisään tilillesi.",
+      "subtitleLink": "Kirjaudu sisään"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "Albumia ei löytynyt!",
+      "subtitle": "Etsimääsi albumia ei ole olemassa.",
+      "clarifyingText": "Ehkä kirjoitit väärän osoitteen, käytit vanhaa linkkiä tai albumi on poistettu.",
+      "ctaButton": "Takaisin etusivulle"
+    },
+    "userAlbum": {
+      "name": "Nimi",
+      "namePlaceholder": "Syötä albumin nimi",
+      "description": "Kuvaus",
+      "descriptionPlaceholder": "Syötä albumin kuvaus",
+      "layout": "Asettelu",
+      "layoutOptions": {
+        "cols": "Sarakkeet",
+        "rows": "Rivit",
+        "tiles": "Laatat"
+      },
+      "gaps": "Välit",
+      "gapsOptions": {
+        "none": "Ei väleja",
+        "small": "Pienet",
+        "medium": "Keskikokoiset",
+        "large": "Suuret"
+      },
+      "changeLayout": "Käyttäjä voi vaihtaa asettelua",
+      "retention": "Tiedostojen säilytys",
+      "retentionOptions": {
+        "1": "1 päivä",
+        "7": "1 viikko",
+        "31": "1 kuukausi",
+        "366": "1 vuosi",
+        "0": "Ikuisesti"
+      },
+      "link": "Albumin linkki",
+      "submitButton": "Tallenna",
+      "copyButton": "Kopioi linkki",
+      "mobileBottomButton": "Kopioi linkki"
     }
   },
   "profile": {
-    "changePasswordForm": {
+    "title": "Profiili",
+    "detail": {
+      "title": "Tilin tiedot",
+      "email": "Sähköposti"
+    },
+    "changePassword": {
       "title": "Vaihda salasana",
       "currentPassword": "Nykyinen salasana",
       "currentPasswordPlaceholder": "1VanhaSalasana!",
       "newPassword": "Uusi salasana",
-      "newPasswordPlaceholder": "Uusi1VahvaSalasana!",
+      "newPasswordPlaceholder": "Uusi1TurvallienSalasana!",
       "confirmPassword": "Vahvista uusi salasana",
       "button": "Vaihda salasana"
+    },
+    "mfa": {
+      "title": "Kaksivaiheinen tunnistautuminen",
+      "activate": {
+        "title": "Aktivoi kaksivaiheinen tunnistautuminen",
+        "subtitle": "Kaksivaiheisen tunnistautumisen aktivoinnin jälkeen voit kirjautua sisään sähköpostiisi lähetetyllä koodilla."
+      },
+      "confirm": {
+        "title": "Vahvista kaksivaiheinen tunnistautuminen",
+        "subtitle": "Syötä sähköpostiisi lähetetty koodi vahvistaaksesi kaksivaiheisen tunnistautumisen.",
+        "submitButton": "Vahvista"
+      }
+    },
+    "publicProfile": {
+      "title": "Julkinen profiili",
+      "activate": {
+        "title": "Aktivoi julkinen profiili",
+        "subtitle": "Julkisen profiilisi aktivoinnin jälkeen valitset yksilöllisen URL-osoitteen profiilillesi, jossa muut käyttäjät voivat nähdä albumisi.",
+        "moreInfo": "Lisätietoja löydät sivuilta",
+        "moreInfoLink": "Tietoa sovelluksesta, Julkinen profiili -osiosta",
+        "cta": "Aktivoi"
+      },
+      "createForm": {
+        "mandatoryField": "Tämä kenttä on pakollinen.",
+        "fieldName": "Nimi",
+        "fieldSlug": "Slug",
+        "fieldSlugHelp1": "Vain pienet kirjaimet, numerot ja väliviivat ovat sallittuja.",
+        "fieldSlugHelp2": "Profiili on saatavilla osoitteessa:",
+        "fieldDescription": "Kuvaus",
+        "createButton": "Luo",
+        "cancelButton": "Peruuta",
+        "errorMessage": "Julkisen profiilin luominen epäonnistui."
+      },
+      "updateForm": {
+        "mandatoryField": "Tämä kenttä on pakollinen.",
+        "fieldName": "Nimi",
+        "fieldSlug": "Slug",
+        "fieldDescription": "Kuvaus",
+        "fieldHomepage": "Kotisivu",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Tallenna",
+        "errorMessage": "Julkisen profiilin päivittäminen epäonnistui."
+      }
     },
     "statistics": {
       "title": "Tilastot",
       "numberOfAlbums": "Albumien määrä",
       "numberOfFiles": "Tiedostojen määrä",
       "totalSize": "Kokonaiskoko"
+    },
+    "deleteProfile": {
+      "title": "Poista tili",
+      "subtitle": "Kaikki ladatut tiedostot ja albumit poistetaan tilisi mukana.",
+      "submitButton": "Poista profiili",
+      "clarifyingText": "Tätä toimintoa ei vielä tueta. Jos haluat poistaa tilisi, ota meihin yhteyttä seuraavassa sähköpostiosoitteessa"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "Sinulla ei ole vielä albumeita!",
+      "subtitle": "Sinulla ei ole vielä albumeita.",
+      "ctaButton": "Siirry etusivulle ja luo ensimmäinen albumisi"
+    },
+    "list": {
+      "publicProfileSwitch": "Näytä julkisessa profiilissa",
+      "deleteButton": "Poista albumi"
+    },
+    "deleteModal": {
+      "title": "Poista albumi",
+      "body": "Haluatko varmasti poistaa tämän albumin?",
+      "closeButton": "Sulje",
+      "submitButton": "Poista"
     }
   },
   "publicProfile": {
     "notFound": {
       "title": "Julkista profiilia ei löytynyt!",
       "subtitle": "Etsimääsi julkista profiilia ei ole olemassa.",
-      "clarifyingText": "Ehkä kirjoitit väärän osoitteen, käytit vanhaa linkkiä tai profiili on poistettu.",
+      "clarifyingText": "Ehkä kirjoitit väärän osoitteen, käytit vanhaa linkkiä tai julkinen profiili on poistettu.",
       "ctaButton": "Takaisin etusivulle"
     }
-  },
-  "register": {
-    "title": "Rekisteröidy",
-    "subtitle": "Onko sinulla jo tili?",
-    "subtitleLink": "Kirjaudu sisään",
-    "error": {
-      "userAlreadyExists": "Tällä sähköpostiosoitteella on jo käyttäjä!",
-      "userNotCreated": "Käyttäjän luominen epäonnistui!"
-    },
-    "form": {
-      "name": "Nimi",
-      "email": "Sähköpostiosoite",
-      "password": "Salasana",
-      "requiredField": "Tämä kenttä on pakollinen.",
-      "minEightCharacters": "Vähintään 8 merkkiä",
-      "atLeastOneUppercase": "Vähintään yksi iso kirjain",
-      "atLeastOneLowercase": "Vähintään yksi pieni kirjain",
-      "atLeastOneSpecialCharacter": "Vähintään yksi erikoismerkki",
-      "atLeastOneNumber": "Vähintään yksi numero",
-      "signUpButton": "Rekisteröidy"
-    },
-    "confirmForm": {
-      "title": "Sähköpostiosoitteen vahvistus",
-      "subtitle": "Vahvistuskoodi on lähetetty sähköpostiisi.",
-      "code": "Vahvistuskoodi",
-      "requiredField": "Tämä kenttä on pakollinen.",
-      "submitButton": "Viimeistele rekisteröinti"
-    },
-    "thankYou": {
-      "title": "Kiitos rekisteröitymisestä!",
-      "subtitle": "Sähköpostiosoitteesi on vahvistettu. Voit jatkaa kirjautumalla tilillesi",
-      "subtitleLink": "tästä"
-    }
-  },
-  "album": {
-    "userAlbum": {
-      "formName": "Nimi",
-      "formDescription": "Kuvaus",
-      "formLink": "Albumilinkki",
-      "formSubmitButton": "Tallenna",
-      "copyButton": "Kopioi linkki"
-    },
-    "notFound": {
-      "title": "Albumia ei löytynyt!",
-      "subtitle": "Etsimääsi albumia ei ole olemassa.",
-      "clarifyingText": "Ehkä kirjoitit väärän osoitteen, käytit vanhaa linkkiä tai albumi on poistettu.",
-      "ctaButton": "Takaisin etusivulle"
-    }
-  },
-  "albums": {
-    "albumPreview": {
-      "noFiles": "Ei tiedostoja",
-      "publicProfileToggle": "Näytä julkisessa profiilissa",
-      "show": "Näytä",
-      "delete": "Poista"
-    },
-    "albumsContainer": {
-      "noAlbumsAlert": "Sinulla ei ole albumeja",
-      "modalTitle": "Poista albumi",
-      "modalBody": "Haluatko varmasti poistaa tämän albumin?",
-      "modalCloseButton": "Sulje",
-      "modalSubmitButton": "Poista"
-    }
-  },
-  "components": {
-    "shareButton": {
-      "copyLink": "Kopioi linkki"
-    },
-    "uploadFiles": {
-      "dropzoneTitle": "Vedä valokuvat tähän tai valitse ne napsauttamalla"
-    }
-  },
-  "menu": {
-    "albums": "Albumit",
-    "about": "Tietoa",
-    "profile": "Profiili",
-    "signIn": "Kirjaudu sisään",
-    "signOut": "Kirjaudu ulos",
-    "subscription": "Tilaus"
-  },
-  "footer": {
-    "about": "Tietoa",
-    "contact": "Yhteystiedot",
-    "description": "Sovellus auttaa käyttäjiä jakamaan valokuvia ja videoita nopeasti ja helposti ilman laadun heikkenemistä.",
-    "home": "Etusivu",
-    "links": "Linkit",
-    "register": "Rekisteröidy",
-    "status": "Tila"
-  },
-  "userDataDeletion": {
-    "title": "Käyttäjätietojen poisto",
-    "subtitle": "Jos haluat poistaa henkilötietosi tai tilisi, ota yhteyttä osoitteeseen <mailto>{{email}}</mailto>. Kun olemme vastaanottaneet pyyntösi, varmistamme kaikkien henkilötietojesi poistamisen sovellettavien lakien mukaisesti."
   },
   "privacyPolicy": {
     "title": "Tietosuojakäytäntö",
-    "subtitle": "Jos olet Zdielaj.si-sivuston kävijä tai Zdielaj.si-palvelun asiakas, tämän sivuston tai palvelun käyttöön sovelletaan \"tietosuojakäytäntöä\".",
+    "subtitle": "Jos olet Zdielaj.si-sivuston vierailija tai Zdielaj.si-palvelun asiakas, tämän sivuston tai palvelun käyttöön sovelletaan \"tietosuojakäytäntöä\".",
     "firstSection": {
-      "title": "Mitä tietoja keräämme?",
-      "paragraph1": "Tarjotaksemme Zdielaj.si-palveluita meidän on käsiteltävä tietoja sinusta. Keräämiemme tietojen tyyppi riippuu siitä, miten käytät palveluitamme."
+      "title": "Millaista tietoa keräämme?",
+      "paragraph1": "Zdielaj.si-palvelujen tarjoamiseksi meidän on käsiteltävä tietoja sinusta. Keräämämme tietojen tyypit riippuvat siitä, miten käytät palvelujamme."
     },
     "secondSection": {
       "title": "Miten käytämme näitä tietoja?",
-      "paragraph1": "<strong>Palvelujen tarjoamiseen, personointiin ja parantamiseen.</strong> Käytämme tietoja palveluidemme tarjoamiseen, ominaisuuksien räätälöintiin ja ehdotusten luomiseen sinulle.",
-      "paragraph2": "<strong>Tuotetutkimus ja kehitys.</strong> Käytämme tietoja palveluidemme kehittämiseen, testaamiseen ja parantamiseen. Tällainen käsittely on tarpeen oikeutettujen etujemme vuoksi tarjota innovatiivisia palveluja käyttäjillemme.",
-      "paragraph3": "<strong>Turvallisuuden ja eheyden tukeminen.</strong> Käytämme tietoja tilien ja toimintojen varmentamiseen, haitallisen toiminnan torjumiseen, roskapostin ja muiden negatiivisten kokemusten havaitsemiseen ja estämiseen sekä palveluidemme eheyden ylläpitämiseen.",
-      "paragraph4": "<strong>Viestintä kanssasi.</strong> Käytämme tietoja lähettääksemme markkinointiviestintää, ajankohtaisia uutisia ja päivityksiä, joiden uskomme kiinnostavan sinua."
+      "paragraph1": "<strong>Palvelujemme tarjoamiseen, personointiin ja parantamiseen.</strong> Käytämme meillä olevia tietoja palvelujemme tarjoamiseen, ominaisuuksien mukauttamiseen ja ehdotusten tekemiseen sinulle.",
+      "paragraph2": "<strong>Tuotekehitys ja -tutkimus.</strong> Käytämme meillä olevia tietoja palvelujemme kehittämiseen, testaamiseen ja parantamiseen. Tällainen käsittely on tarpeen oikeutettujen etujemme vuoksi innovatiivisten palvelujen tarjoamisessa käyttäjillemme.",
+      "paragraph3": "<strong>Turvallisuuden ja eheyden tukemiseen.</strong> Käytämme meillä olevia tietoja tilien ja toimintojen varmistamiseen, haitallisen käyttäytymisen torjumiseen, roskapostin ja muiden negatiivisten kokemusten havaitsemiseen ja estämiseen sekä palvelujemme eheyden ylläpitämiseen.",
+      "paragraph4": "<strong>Viestintä kanssasi.</strong> Käytämme meillä olevia tietoja markkinointiviestinnän, asiaankuuluvien uutisten ja päivitysten lähettämiseen, joiden uskomme kiinnostavan sinua."
     },
     "thirdSection": {
-      "title": "Miten suojaamme tietosi?",
-      "paragraph1": "Henkilötietosi on salattu, tallennettu suojattujen verkkojen taakse ja vain rajatulla määrällä henkilöitä on erityiset käyttöoikeudet näihin järjestelmiin ja heitä velvoitetaan pitämään tiedot luottamuksellisina."
+      "title": "Miten suojaamme tietojasi?",
+      "paragraph1": "Henkilötietosi ovat salattuja, tallennettuina suojattujen verkkojen taakse ja vain rajoitetun määrän ihmisten saatavilla, joilla on erityiset pääsyoikeudet tällaisiin järjestelmiin ja jotka ovat velvollisia pitämään tiedot luottamuksellisina."
     },
     "fourthSection": {
-      "title": "Miten tietoja jaetaan?",
-      "paragraph1": "Emme myy, vaihda tai muuten siirrä henkilötietojasi ulkopuolisille osapuolille. Tämä ei koske verkkosivuston hosting-kumppaneita ja muita osapuolia, jotka auttavat meitä ylläpitämään sivustoamme, liiketoimintaamme tai palvelemaan käyttäjiämme, kunhan nämä osapuolet sitoutuvat pitämään tiedot luottamuksellisina."
+      "title": "Miten näitä tietoja jaetaan?",
+      "paragraph1": "Emme myy, vaihda tai muuten siirrä henkilötietojasi ulkopuolisille osapuolille. Tämä ei koske sivuston hosting-kumppaneita ja muita osapuolia, jotka auttavat meitä sivustomme ylläpidossa, liiketoiminnan harjoittamisessa tai käyttäjiemme palvelemisessa, niin kauan kuin nämä osapuolet suostuvat pitämään nämä tiedot luottamuksellisina."
     },
     "fifthSection": {
-      "title": "Tietojen säilytys, deaktivointi ja tilin poisto",
-      "paragraph1": "Säilytämme tietoja niin kauan kuin on tarpeen palveluidemme tarjoamiseksi tai kunnes tilisi poistetaan – sen mukaan, kumpi tapahtuu ensin."
+      "title": "Tietojen säilytys, deaktivointi ja tilin poistaminen",
+      "paragraph1": "Säilytämme tietoja niin kauan kuin on tarpeen palvelujemme tarjoamiseksi tai kunnes tilisi poistetaan - kumpi tahansa tapahtuu ensin."
     },
     "sixthSection": {
       "title": "Miten ilmoitamme sinulle tämän käytännön muutoksista?",
-      "paragraph1": "Saatamme ajoittain päivittää tätä käytäntöä. Mahdollisuuksien mukaan ilmoitamme sinulle muutoksista tai muistutamme sinua säännöllisesti tarkistamaan tämän käytännön sähköpostitse."
+      "paragraph1": "Voimme ajoittain päivittää tätä käytäntöä. Mahdollisuuksien mukaan ilmoitamme sinulle muutoksista tai muistutamme säännöllisesti tämän käytännön tarkistamisesta sähköpostitse."
     },
     "seventhSection": {
-      "title": "Miten ottaa yhteyttä Zdielaj.si:hin kysymyksissä?",
+      "title": "Miten ottaa yhteyttä Zdielaj.si:hin kysymysten kanssa?",
       "paragraph1": "Voit ottaa meihin yhteyttä lähettämällä sähköpostia osoitteeseen <mailto>info@zdielaj.si</mailto>."
     }
-  },
-  "about": {
-    "title": "Tietoa sovelluksesta",
-    "subtitle": "Sovellus auttaa käyttäjiä jakamaan valokuvia ja videoita nopeasti ja helposti ilman laadun heikkenemistä. Kaikki tiedot tallennetaan salatussa muodossa."
   }
 }

@@ -5,7 +5,7 @@
     "signUp": "registrace",
     "passwordReset": "obnoveni-hesla",
     "about": "o-aplikaci",
-    "privacyPolicy": "zasady-ochrany-osobnich-udaju",
+    "privacyPolicy": "ochrana-osobnich-udaju",
     "userData": "udaje-uzivatele",
     "userProfile": "profil",
     "publicProfile": "profil/:id",
@@ -13,147 +13,310 @@
     "album": "album/:id",
     "home": ""
   },
+  "components": {
+    "shareButton": {
+      "copyLink": "Zkopírovat odkaz"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Přesuňte fotky sem nebo je vyberte kliknutím"
+    },
+    "menu": {
+      "albums": "Alba",
+      "profile": "Profil",
+      "signIn": "Přihlásit se",
+      "signUp": "Registrovat se",
+      "signOut": "Odhlásit se",
+      "subscription": "Předplatné"
+    },
+    "footer": {
+      "about": "O aplikaci",
+      "contact": "Kontakt",
+      "description": "Aplikace pomáhá uživatelům rychle a jednoduše sdílet fotky a videa bez snížení kvality.",
+      "home": "Domů",
+      "links": "Odkazy",
+      "register": "Registrovat",
+      "privacyPolicy": "Ochrana osobních údajů",
+      "status": "Stav"
+    }
+  },
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "Máte také problém, že některé aplikace snižují kvalitu vašich fotek a videí? Zde je můžete bez problémů sdílet v plné kvalitě!"
+    }
+  },
   "home": {
-    "title": "Sdílej fotky a videa v plné kvalitě",
-    "subtitle": "Také máš problém, že ti některé aplikace snižují kvalitu fotek a videí? Tady je můžeš sdílet bez problémů v plné kvalitě!",
-    "uploadAreaText": "Přesuň sem fotky nebo je vyber kliknutím",
-    "uploadAreaButton": "Nahrát fotky",
+    "title": "Sdílejte fotky a videa v plné kvalitě",
+    "subtitle": "Máte také problém, že některé aplikace snižují kvalitu vašich fotek a videí? Zde je můžete bez problémů sdílet v plné kvalitě!",
+    "uploadArea": {
+      "title": "Přesuňte fotky sem nebo je vyberte kliknutím",
+      "button": "Nahrát fotky",
+      "asUnregisteredUser": {
+        "title": "Jako neregistrovaný uživatel:",
+        "maxTenPhotos": "můžete sdílet maximálně <strong>10</strong> fotek",
+        "deletedAfter24Hours": "fotky budou automaticky odstraněny po <strong>24 hodinách</strong>"
+      }
+    },
     "pricing": {
       "default": {
         "title": "Bez registrace",
         "monthly": "měsíčně",
-        "maxTenPhotos": "maximálně <strong>10</strong> fotek",
-        "deletedAfter24Hours": "fotky budou po <strong>24 hodinách</strong> automaticky smazány",
-        "register": "Registrace"
+        "maxTenPhotos": "max <strong>10</strong> fotek",
+        "maxSizePerFile": "velikost souboru do <strong>10MB</strong>",
+        "deletedAfter24Hours": "soubory budou automaticky odstraněny po <strong>24 hodinách</strong>"
       },
       "free": {
         "title": "Zdarma",
-        "monthly": "mměsíčně",
-        "maxOneGB": "maximálně <strong>1GB</strong> <small>(≈ 300 fotek)</small>",
+        "monthly": "měsíčně",
+        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 fotek)</small>",
+        "maxSizePerFile": "velikost souboru do <strong>100MB</strong>",
         "video": "video",
-        "listOfAlbums": "seznam vytvořených alb",
-        "filesWillBeDeletedAfter7Days": "soubory budou po <strong>7 dnech</strong> automaticky smazány",
-        "register": "Registrace"
+        "listOfAlbums": "seznam alb",
+        "filesWillBeDeletedAfter7Days": "soubory budou automaticky odstraněny po <strong>7 dnech</strong>",
+        "signUp": "Registrovat"
       },
       "standard": {
         "title": "Standard",
         "monthly": "měsíčně",
-        "maxTenGB": "maximálně <strong>10GB</strong> <small>(≈ 3000 fotek)</small>",
+        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 fotek)</small>",
+        "maxSizePerFile": "velikost souboru do <strong>500MB</strong>",
         "video": "video",
-        "listOfAlbums": "seznam vytvořených alb",
-        "passwordProtect": "zaheslovat přístup",
+        "listOfAlbums": "seznam alb",
+        "passwordProtect": "ochrana heslem",
         "publicProfile": "veřejný profil",
-        "filesWillNotBeDeleted": "soubory se <strong>nemažou</strong>",
-        "register": "Registrace"
+        "mfa": "dvoufaktorové ověření",
+        "filesAreNotDeleted": "soubory <strong>nejsou odstraněny</strong>",
+        "signUp": "Registrovat"
       }
     }
   },
-  "login": {
+  "signIn": {
     "title": "Přihlásit se",
-    "subtitle": "Ještě nemáš účet?",
-    "subtitleLink": "Registrovat se",
+    "noAccount": "Ještě nemáte účet?",
+    "signUp": "Registrovat se",
     "form": {
-      "email": "E-mailová adresa",
+      "email": "E-mail",
+      "emailPlaceholder": "Zadejte váš e-mail",
       "requiredField": "Toto pole je povinné.",
       "password": "Heslo",
-      "forgotPassword": "Zapomenuté heslo?",
+      "passwordPlaceholder": "Zadejte vaše heslo",
+      "forgotPassword": "Zapomněli jste heslo?",
       "signInButton": "Přihlásit se"
+    },
+    "totp": {
+      "totpCode": "Kód",
+      "confirmSignInButton": "Potvrdit přihlášení"
+    }
+  },
+  "signUp": {
+    "title": "Registrovat se",
+    "form": {
+      "name": "Jméno",
+      "namePlaceholder": "Zadejte vaše jméno",
+      "email": "E-mail",
+      "emailPlaceholder": "Zadejte váš e-mail",
+      "requiredField": "Toto pole je povinné.",
+      "password": "Heslo",
+      "passwordPlaceholder": "Zadejte vaše heslo",
+      "passwordRules": {
+        "minEightCharacters": "Alespoň 8 znaků",
+        "atLeastOneUppercase": "Alespoň jedno velké písmeno",
+        "atLeastOneLowercase": "Alespoň jedno malé písmeno",
+        "atLeastOneSpecialCharacter": "Alespoň jeden speciální znak",
+        "atLeastOneNumber": "Alespoň jedno číslo"
+      },
+      "signUpButton": "Registrovat se",
+      "errors": {
+        "userAlreadyExists": "Uživatel s touto e-mailovou adresou již existuje!",
+        "default": "Nepodařilo se zaregistrovat!"
+      }
+    },
+    "confirmForm": {
+      "code": "Kód",
+      "requiredField": "Toto pole je povinné.",
+      "confirmSignUpButton": "Potvrdit registraci",
+      "errors": {
+        "codeMismatch": "Nesprávný ověřovací kód, zkuste to prosím znovu.",
+        "default": "Nepodařilo se potvrdit registraci!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "Úspěšně jste vytvořili svůj účet. Nyní se můžete přihlásit do svého účtu.",
+      "subtitleLink": "Přihlásit se"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "Album nenalezeno!",
+      "subtitle": "Album, které hledáte, neexistuje.",
+      "clarifyingText": "Možná jste zadali špatnou adresu, použili starý odkaz nebo bylo album odstraněno.",
+      "ctaButton": "Zpět na domovskou stránku"
+    },
+    "userAlbum": {
+      "name": "Název",
+      "namePlaceholder": "Zadejte název alba",
+      "description": "Popis",
+      "descriptionPlaceholder": "Zadejte popis alba",
+      "layout": "Rozložení",
+      "layoutOptions": {
+        "cols": "Sloupce",
+        "rows": "Řádky",
+        "tiles": "Dlaždice"
+      },
+      "gaps": "Mezery",
+      "gapsOptions": {
+        "none": "Bez mezer",
+        "small": "Malé",
+        "medium": "Střední",
+        "large": "Velké"
+      },
+      "changeLayout": "Uživatel může změnit rozložení",
+      "retention": "Uchovávání souborů",
+      "retentionOptions": {
+        "1": "1 den",
+        "7": "1 týden",
+        "31": "1 měsíc",
+        "366": "1 rok",
+        "0": "Navždy"
+      },
+      "link": "Odkaz na album",
+      "submitButton": "Uložit",
+      "copyButton": "Zkopírovat odkaz",
+      "mobileBottomButton": "Zkopírovat odkaz"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "detail": {
+      "title": "Detail účtu",
+      "email": "E-mail"
+    },
+    "changePassword": {
+      "title": "Změnit heslo",
+      "currentPassword": "Aktuální heslo",
+      "currentPasswordPlaceholder": "1ZastaraleHeslo!",
+      "newPassword": "Nové heslo",
+      "newPasswordPlaceholder": "Nove1TezkeHeslo!",
+      "confirmPassword": "Potvrdit nové heslo",
+      "button": "Změnit heslo"
+    },
+    "mfa": {
+      "title": "Dvoufaktorové ověření",
+      "activate": {
+        "title": "Aktivovat dvoufaktorové ověření",
+        "subtitle": "Po aktivaci dvoufaktorového ověření se budete moci přihlásit pomocí kódu zaslaného na váš e-mail."
+      },
+      "confirm": {
+        "title": "Potvrdit dvoufaktorové ověření",
+        "subtitle": "Zadejte kód zaslaný na váš e-mail pro potvrzení dvoufaktorového ověření.",
+        "submitButton": "Potvrdit"
+      }
+    },
+    "publicProfile": {
+      "title": "Veřejný profil",
+      "activate": {
+        "title": "Aktivovat veřejný profil",
+        "subtitle": "Po aktivaci veřejného profilu si vyberete jedinečnou URL adresu pro váš profil, kde ostatní uživatelé budou moci vidět vaše alba.",
+        "moreInfo": "Více informací najdete na stránkách",
+        "moreInfoLink": "O aplikaci, v sekci Veřejný profil",
+        "cta": "Aktivovat"
+      },
+      "createForm": {
+        "mandatoryField": "Toto pole je povinné.",
+        "fieldName": "Název",
+        "fieldSlug": "URL adresa",
+        "fieldSlugHelp1": "Povolena jsou pouze malá písmena, čísla a pomlčky.",
+        "fieldSlugHelp2": "Profil bude dostupný na:",
+        "fieldDescription": "Popis",
+        "createButton": "Vytvořit",
+        "cancelButton": "Zrušit",
+        "errorMessage": "Nepodařilo se vytvořit veřejný profil."
+      },
+      "updateForm": {
+        "mandatoryField": "Toto pole je povinné.",
+        "fieldName": "Název",
+        "fieldSlug": "URL adresa",
+        "fieldDescription": "Popis",
+        "fieldHomepage": "Webová stránka",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Uložit",
+        "errorMessage": "Nepodařilo se aktualizovat veřejný profil."
+      }
+    },
+    "statistics": {
+      "title": "Statistiky",
+      "numberOfAlbums": "Počet alb",
+      "numberOfFiles": "Počet souborů",
+      "totalSize": "Celková velikost"
+    },
+    "deleteProfile": {
+      "title": "Smazat účet",
+      "subtitle": "Všechny nahrané soubory a alba budou spolu s vaším účtem odstraněny.",
+      "submitButton": "Smazat profil",
+      "clarifyingText": "Tato funkce zatím není podporována. Pokud chcete smazat svůj účet, kontaktujte nás na následující e-mailové adrese"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "Ještě nemáte žádná alba!",
+      "subtitle": "Ještě nemáte žádná alba.",
+      "ctaButton": "Přejděte na domovskou stránku a vytvořte své první album"
+    },
+    "list": {
+      "publicProfileSwitch": "Zobrazit ve veřejném profilu",
+      "deleteButton": "Smazat album"
+    },
+    "deleteModal": {
+      "title": "Smazat album",
+      "body": "Opravdu chcete smazat toto album?",
+      "closeButton": "Zavřít",
+      "submitButton": "Smazat"
     }
   },
   "publicProfile": {
     "notFound": {
       "title": "Veřejný profil nenalezen!",
       "subtitle": "Veřejný profil, který hledáte, neexistuje.",
-      "clarifyingText": "Možná jste zadali špatnou adresu, použili starý odkaz nebo byl veřejný profil smazán.",
+      "clarifyingText": "Možná jste zadali špatnou adresu, použili starý odkaz nebo byl veřejný profil odstraněn.",
       "ctaButton": "Zpět na domovskou stránku"
     }
   },
-  "register": {
-    "title": "Registrace",
-    "subtitle": "Máš už účet?",
-    "subtitleLink": "Přihlásit se",
-    "error": {
-      "userAlreadyExists": "Uživatel s touto e-mailovou adresou již existuje!",
-      "userNotCreated": "Nepodařilo se vytvořit uživatele!"
+  "privacyPolicy": {
+    "title": "Ochrana osobních údajů",
+    "subtitle": "Pokud jste návštěvníkem webové stránky Zdielaj.si nebo zákazníkem služby Zdielaj.si, pak se na vaše používání této webové stránky nebo služby vztahují \"zásady ochrany osobních údajů\".",
+    "firstSection": {
+      "title": "Jaký typ informací shromažďujeme?",
+      "paragraph1": "Pro poskytování služeb Zdielaj.si potřebujeme zpracovávat informace o vás. Typy informací, které shromažďujeme, závisí na tom, jak používáte naše služby."
     },
-    "form": {
-      "name": "Jméno",
-      "email": "E-mailová adresa",
-      "password": "Heslo",
-      "requiredField": "Toto pole je povinné.",
-      "minEightCharacters": "Minimálně 8 znaků",
-      "atLeastOneUppercase": "Alespoň jedno velké písmeno",
-      "atLeastOneLowercase": "Alespoň jedno malé písmeno",
-      "atLeastOneSpecialCharacter": "Alespoň jeden speciální znak",
-      "atLeastOneNumber": "Alespoň jedno číslo",
-      "signUpButton": "Registrovat se"
+    "secondSection": {
+      "title": "Jak tyto informace používáme?",
+      "paragraph1": "<strong>K poskytování, personalizaci a zlepšování našich služeb.</strong> Informace, které máme, používáme k poskytování našich služeb, přizpůsobení funkcí a vytváření návrhů pro vás.",
+      "paragraph2": "<strong>Výzkum a vývoj produktů.</strong> Informace, které máme, používáme k vývoji, testování a zlepšování našich služeb. Takové zpracování je nezbytné pro naše oprávněné zájmy při poskytování inovativních služeb našim uživatelům.",
+      "paragraph3": "<strong>K podpoře bezpečnosti a integrity.</strong> Informace, které máme, používáme k ověřování účtů a aktivit, boji proti škodlivému chování, odhalování a předcházení spamu a jiným negativním zkušenostem a udržování integrity našich služeb.",
+      "paragraph4": "<strong>Komunikace s vámi.</strong> Informace, které máme, používáme k zasílání marketingových oznámení, relevantních novinek a aktualizací, o kterých si myslíme, že by vás mohly zajímat."
     },
-    "confirmForm": {
-      "title": "Ověření e-mailové adresy",
-      "subtitle": "Na tvůj e-mail byl odeslán ověřovací kód.",
-      "code": "Ověřovací kód",
-      "requiredField": "Toto pole je povinné.",
-      "submitButton": "Dokončit registraci"
+    "thirdSection": {
+      "title": "Jak chráníme vaše informace?",
+      "paragraph1": "Vaše osobní údaje jsou šifrovány, uloženy za zabezpečenými sítěmi a přístupné pouze omezenému počtu osob, které mají speciální přístupová práva k takovým systémům a jsou povinny zachovávat mlčenlivost o informacích."
     },
-    "thankYou": {
-      "title": "Děkuji za registraci!",
-      "subtitle": "Tvoje e-mailová adresa byla ověřena. Můžeš pokračovat přihlášením se do svého účtu",
-      "subtitleLink": "zde"
+    "fourthSection": {
+      "title": "Jak jsou tyto informace sdíleny?",
+      "paragraph1": "Neprodáváme, neobchodujeme ani jinak nepřenášíme vaše osobní údaje třetím stranám. To nezahrnuje partnery pro hosting webových stránek a další strany, které nám pomáhají provozovat naši webovou stránku, vykonávat naše podnikání nebo obsluhovat naše uživatele, pokud tyto strany souhlasí s utajením těchto informací."
+    },
+    "fifthSection": {
+      "title": "Uchovávání údajů, deaktivace a odstranění účtu",
+      "paragraph1": "Údaje uchováváme tak dlouho, jak je to nezbytné k poskytování našich služeb nebo až do odstranění vašeho účtu - podle toho, co nastane dříve."
+    },
+    "sixthSection": {
+      "title": "Jak vás budeme informovat o změnách těchto zásad?",
+      "paragraph1": "Tyto zásady můžeme čas od času aktualizovat. Kde je to možné, budeme vás informovat o změnách nebo vás pravidelně upozorňovat na přezkoumání těchto zásad prostřednictvím e-mailu."
+    },
+    "seventhSection": {
+      "title": "Jak kontaktovat Zdielaj.si s otázkami?",
+      "paragraph1": "Můžete nás kontaktovat zasláním e-mailu na <mailto>info@zdielaj.si</mailto>."
     }
-  },
-  "album": {
-    "userAlbum": {
-      "formName": "Název alba",
-      "formDescription": "Popis alba",
-      "formLink": "Odkaz na album",
-      "formSubmitButton": "Uložit",
-      "copyButton": "Kopírovat odkaz"
-    },
-    "notFound": {
-      "title": "Album nenalezen!",
-      "subtitle": "Album, které hledáte, neexistuje.",
-      "clarifyingText": "Možná jste zadali špatnou adresu, použili starý odkaz nebo bylo album smazáno.",
-      "ctaButton": "Zpět na domovskou stránku"
-    }
-  },
-  "albums": {
-    "albumPreview": {
-      "noFiles": "Žádné soubory",
-      "publicProfileToggle": "Zobrazit ve veřejném profilu",
-      "show": "Zobrazit",
-      "delete": "Smazat"
-    },
-    "albumsContainer": {
-      "noAlbumsAlert": "Nemáš žádná alba",
-      "modalTitle": "Smazat album",
-      "modalBody": "Opravdu chceš smazat toto album?",
-      "modalCloseButton": "Zavřít",
-      "modalSubmitButton": "Smazat"
-    }
-  },
-  "components": {
-    "shareButton": {
-      "copyLink": "Kopírovat odkaz"
-    },
-    "uploadFiles": {
-      "dropzoneTitle": "Přetáhněte sem fotografie nebo je vyberte kliknutím"
-    }
-  },
-  "menu": {
-    "albums": "Alba",
-    "about": "O aplikaci",
-    "profile": "Profil",
-    "signIn": "Přihlásit se",
-    "signOut": "Ohlásit se",
-    "subscription": "Předplatné"
-  },
-  "footer": {
-    "about": "O aplikaci",
-    "contact": "Kontakt",
-    "description": "Aplikace pomáhá uživatelům rychle a snadno sdílet fotografie a videa bez snížení kvality.",
-    "home": "Domů",
-    "links": "Odkazy",
-    "register": "Registrace",
-    "status": "Status"
   }
 }

@@ -3,217 +3,320 @@
     "prefix": "se/",
     "signIn": "logga-in",
     "signUp": "registrera",
-    "passwordReset": "återställ-lösenord",
-    "about": "om",
+    "passwordReset": "aterstall-losenord",
+    "about": "om-oss",
     "privacyPolicy": "integritetspolicy",
-    "userData": "användardata",
+    "userData": "anvandardata",
     "userProfile": "profil",
     "publicProfile": "profil/:id",
     "albums": "album",
     "album": "album/:id",
     "home": ""
   },
+  "components": {
+    "shareButton": {
+      "copyLink": "Kopiera länk"
+    },
+    "uploadFiles": {
+      "dropzoneTitle": "Dra bilder hit eller välj dem genom att klicka"
+    },
+    "menu": {
+      "albums": "Album",
+      "profile": "Profil",
+      "signIn": "Logga in",
+      "signUp": "Registrera",
+      "signOut": "Logga ut",
+      "subscription": "Prenumeration"
+    },
+    "footer": {
+      "about": "Om oss",
+      "contact": "Kontakt",
+      "description": "Applikationen hjälper användare att snabbt och enkelt dela foton och videor utan att minska kvaliteten.",
+      "home": "Hem",
+      "links": "Länkar",
+      "register": "Registrera",
+      "privacyPolicy": "Integritetspolicy",
+      "status": "Status"
+    }
+  },
+  "meta": {
+    "title": "Zdielaj.si",
+    "home": {
+      "description": "Har du också problemet att vissa applikationer minskar kvaliteten på dina foton och videor? Här kan du dela dem utan problem i full kvalitet!"
+    }
+  },
   "home": {
     "title": "Dela foton och videor i full kvalitet",
-    "subtitle": "Har du också problem med att vissa appar försämrar kvaliteten på dina foton och videor? Här kan du dela dem utan problem i full kvalitet!",
-    "uploadAreaText": "Flytta foton hit eller välj dem genom att klicka",
-    "uploadAreaButton": "Ladda upp foton",
+    "subtitle": "Har du också problemet att vissa applikationer minskar kvaliteten på dina foton och videor? Här kan du dela dem utan problem i full kvalitet!",
+    "uploadArea": {
+      "title": "Dra bilder hit eller välj dem genom att klicka",
+      "button": "Ladda upp foton",
+      "asUnregisteredUser": {
+        "title": "Som oregistrerad användare:",
+        "maxTenPhotos": "kan du dela maximalt <strong>10</strong> foton",
+        "deletedAfter24Hours": "foton kommer automatiskt att raderas efter <strong>24 timmar</strong>"
+      }
+    },
     "pricing": {
       "default": {
         "title": "Utan registrering",
-        "monthly": "per månad",
+        "monthly": "månatligen",
         "maxTenPhotos": "max <strong>10</strong> foton",
-        "deletedAfter24Hours": "filer raderas automatiskt efter <strong>24 timmar</strong>",
-        "register": "Registrera"
+        "maxSizePerFile": "filstorlek upp till <strong>10MB</strong>",
+        "deletedAfter24Hours": "filer kommer automatiskt att raderas efter <strong>24 timmar</strong>"
       },
       "free": {
         "title": "Gratis",
-        "monthly": "per månad",
+        "monthly": "månatligen",
         "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 foton)</small>",
+        "maxSizePerFile": "filstorlek upp till <strong>100MB</strong>",
         "video": "video",
         "listOfAlbums": "lista över album",
-        "filesWillBeDeletedAfter7Days": "filer raderas automatiskt efter <strong>7 dagar</strong>",
-        "register": "Registrera"
+        "filesWillBeDeletedAfter7Days": "filer kommer automatiskt att raderas efter <strong>7 dagar</strong>",
+        "signUp": "Registrera"
       },
       "standard": {
         "title": "Standard",
-        "monthly": "per månad",
+        "monthly": "månatligen",
         "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 foton)</small>",
+        "maxSizePerFile": "filstorlek upp till <strong>500MB</strong>",
         "video": "video",
         "listOfAlbums": "lista över album",
         "passwordProtect": "lösenordsskydd",
         "publicProfile": "offentlig profil",
-        "filesWillNotBeDeleted": "filer <strong>raderas inte</strong>",
-        "register": "Registrera"
+        "mfa": "tvåfaktorsautentisering",
+        "filesAreNotDeleted": "filer raderas <strong>inte</strong>",
+        "signUp": "Registrera"
       }
     }
   },
-  "login": {
+  "signIn": {
     "title": "Logga in",
-    "subtitle": "Har du inget konto än?",
-    "subtitleLink": "Registrera",
+    "noAccount": "Har du inget konto ännu?",
+    "signUp": "Registrera",
     "form": {
-      "email": "E-postadress",
+      "email": "E-post",
+      "emailPlaceholder": "Ange din e-postadress",
       "requiredField": "Detta fält är obligatoriskt.",
       "password": "Lösenord",
+      "passwordPlaceholder": "Ange ditt lösenord",
       "forgotPassword": "Glömt ditt lösenord?",
       "signInButton": "Logga in"
+    },
+    "totp": {
+      "totpCode": "Kod",
+      "confirmSignInButton": "Bekräfta inloggning"
+    }
+  },
+  "signUp": {
+    "title": "Registrera",
+    "form": {
+      "name": "Namn",
+      "namePlaceholder": "Ange ditt namn",
+      "email": "E-post",
+      "emailPlaceholder": "Ange din e-postadress",
+      "requiredField": "Detta fält är obligatoriskt.",
+      "password": "Lösenord",
+      "passwordPlaceholder": "Ange ditt lösenord",
+      "passwordRules": {
+        "minEightCharacters": "Minst 8 tecken",
+        "atLeastOneUppercase": "Minst en stor bokstav",
+        "atLeastOneLowercase": "Minst en liten bokstav",
+        "atLeastOneSpecialCharacter": "Minst ett specialtecken",
+        "atLeastOneNumber": "Minst en siffra"
+      },
+      "signUpButton": "Registrera",
+      "errors": {
+        "userAlreadyExists": "En användare med denna e-postadress finns redan!",
+        "default": "Kunde inte registrera!"
+      }
+    },
+    "confirmForm": {
+      "code": "Kod",
+      "requiredField": "Detta fält är obligatoriskt.",
+      "confirmSignUpButton": "Bekräfta registrering",
+      "errors": {
+        "codeMismatch": "Ogiltig verifieringskod, vänligen försök igen.",
+        "default": "Kunde inte bekräfta registreringen!"
+      }
+    },
+    "thankYou": {
+      "subtitle": "Du har framgångsrikt skapat ditt konto. Du kan nu logga in på ditt konto.",
+      "subtitleLink": "Logga in"
+    }
+  },
+  "album": {
+    "notFound": {
+      "title": "Album hittades inte!",
+      "subtitle": "Albumet du letar efter finns inte.",
+      "clarifyingText": "Kanske skrev du in fel adress, använde en gammal länk eller så har albumet raderats.",
+      "ctaButton": "Tillbaka till startsidan"
+    },
+    "userAlbum": {
+      "name": "Namn",
+      "namePlaceholder": "Ange albumets namn",
+      "description": "Beskrivning",
+      "descriptionPlaceholder": "Ange albumets beskrivning",
+      "layout": "Layout",
+      "layoutOptions": {
+        "cols": "Kolumner",
+        "rows": "Rader",
+        "tiles": "Plattor"
+      },
+      "gaps": "Mellanrum",
+      "gapsOptions": {
+        "none": "Inga mellanrum",
+        "small": "Små",
+        "medium": "Medel",
+        "large": "Stora"
+      },
+      "changeLayout": "Användaren kan ändra layouten",
+      "retention": "Fillagring",
+      "retentionOptions": {
+        "1": "1 dag",
+        "7": "1 vecka",
+        "31": "1 månad",
+        "366": "1 år",
+        "0": "För alltid"
+      },
+      "link": "Albumlänk",
+      "submitButton": "Spara",
+      "copyButton": "Kopiera länk",
+      "mobileBottomButton": "Kopiera länk"
     }
   },
   "profile": {
-    "changePasswordForm": {
-      "title": "Byt lösenord",
+    "title": "Profil",
+    "detail": {
+      "title": "Kontouppgifter",
+      "email": "E-post"
+    },
+    "changePassword": {
+      "title": "Ändra lösenord",
       "currentPassword": "Nuvarande lösenord",
-      "currentPasswordPlaceholder": "1GammaltLösenord!",
+      "currentPasswordPlaceholder": "1GammaltLosenord!",
       "newPassword": "Nytt lösenord",
-      "newPasswordPlaceholder": "Nytt1StarktLösenord!",
+      "newPasswordPlaceholder": "Nytt1SakertLosenord!",
       "confirmPassword": "Bekräfta nytt lösenord",
-      "button": "Byt lösenord"
+      "button": "Ändra lösenord"
+    },
+    "mfa": {
+      "title": "Tvåfaktorsautentisering",
+      "activate": {
+        "title": "Aktivera tvåfaktorsautentisering",
+        "subtitle": "Efter aktivering av tvåfaktorsautentisering kan du logga in med en kod som skickas till din e-post."
+      },
+      "confirm": {
+        "title": "Bekräfta tvåfaktorsautentisering",
+        "subtitle": "Ange koden som skickades till din e-post för att bekräfta tvåfaktorsautentisering.",
+        "submitButton": "Bekräfta"
+      }
+    },
+    "publicProfile": {
+      "title": "Offentlig profil",
+      "activate": {
+        "title": "Aktivera offentlig profil",
+        "subtitle": "Efter aktivering av din offentliga profil väljer du en unik URL-adress för din profil, där andra användare kan se dina album.",
+        "moreInfo": "Du kan hitta mer information på sidorna",
+        "moreInfoLink": "Om applikationen, i avsnittet Offentlig profil",
+        "cta": "Aktivera"
+      },
+      "createForm": {
+        "mandatoryField": "Detta fält är obligatoriskt.",
+        "fieldName": "Namn",
+        "fieldSlug": "Slug",
+        "fieldSlugHelp1": "Endast små bokstäver, siffror och bindestreck är tillåtna.",
+        "fieldSlugHelp2": "Profilen kommer att vara tillgänglig på:",
+        "fieldDescription": "Beskrivning",
+        "createButton": "Skapa",
+        "cancelButton": "Avbryt",
+        "errorMessage": "Kunde inte skapa offentlig profil."
+      },
+      "updateForm": {
+        "mandatoryField": "Detta fält är obligatoriskt.",
+        "fieldName": "Namn",
+        "fieldSlug": "Slug",
+        "fieldDescription": "Beskrivning",
+        "fieldHomepage": "Hemsida",
+        "fieldFacebook": "Facebook",
+        "fieldInstagram": "Instagram",
+        "fieldPinterest": "Pinterest",
+        "fieldStrava": "Strava",
+        "submitButton": "Spara",
+        "errorMessage": "Kunde inte uppdatera offentlig profil."
+      }
     },
     "statistics": {
       "title": "Statistik",
       "numberOfAlbums": "Antal album",
       "numberOfFiles": "Antal filer",
       "totalSize": "Total storlek"
+    },
+    "deleteProfile": {
+      "title": "Ta bort konto",
+      "subtitle": "Alla uppladdade filer och album kommer att raderas tillsammans med ditt konto.",
+      "submitButton": "Ta bort profil",
+      "clarifyingText": "Denna funktion stöds inte ännu. Om du vill ta bort ditt konto, vänligen kontakta oss på följande e-postadress"
+    }
+  },
+  "albums": {
+    "noAlbumsInfo": {
+      "title": "Du har inga album ännu!",
+      "subtitle": "Du har inga album ännu.",
+      "ctaButton": "Gå till startsidan och skapa ditt första album"
+    },
+    "list": {
+      "publicProfileSwitch": "Visa i offentlig profil",
+      "deleteButton": "Ta bort album"
+    },
+    "deleteModal": {
+      "title": "Ta bort album",
+      "body": "Vill du verkligen ta bort detta album?",
+      "closeButton": "Stäng",
+      "submitButton": "Ta bort"
     }
   },
   "publicProfile": {
     "notFound": {
       "title": "Offentlig profil hittades inte!",
-      "subtitle": "Den offentliga profil du söker finns inte.",
-      "clarifyingText": "Kanske skrev du in fel adress, använde en gammal länk eller så har profilen tagits bort.",
+      "subtitle": "Den offentliga profilen du letar efter finns inte.",
+      "clarifyingText": "Kanske skrev du in fel adress, använde en gammal länk eller så har den offentliga profilen raderats.",
       "ctaButton": "Tillbaka till startsidan"
     }
-  },
-  "register": {
-    "title": "Registrera",
-    "subtitle": "Har du redan ett konto?",
-    "subtitleLink": "Logga in",
-    "error": {
-      "userAlreadyExists": "En användare med denna e-postadress finns redan!",
-      "userNotCreated": "Det gick inte att skapa användare!"
-    },
-    "form": {
-      "name": "Namn",
-      "email": "E-postadress",
-      "password": "Lösenord",
-      "requiredField": "Detta fält är obligatoriskt.",
-      "minEightCharacters": "Minst 8 tecken",
-      "atLeastOneUppercase": "Minst en versal",
-      "atLeastOneLowercase": "Minst en gemen",
-      "atLeastOneSpecialCharacter": "Minst ett specialtecken",
-      "atLeastOneNumber": "Minst en siffra",
-      "signUpButton": "Registrera"
-    },
-    "confirmForm": {
-      "title": "Verifiering av e-postadress",
-      "subtitle": "En verifieringskod har skickats till din e-post.",
-      "code": "Verifieringskod",
-      "requiredField": "Detta fält är obligatoriskt.",
-      "submitButton": "Slutför registrering"
-    },
-    "thankYou": {
-      "title": "Tack för din registrering!",
-      "subtitle": "Din e-postadress har verifierats. Du kan fortsätta genom att logga in på ditt konto",
-      "subtitleLink": "här"
-    }
-  },
-  "album": {
-    "userAlbum": {
-      "formName": "Namn",
-      "formDescription": "Beskrivning",
-      "formLink": "Albumlänk",
-      "formSubmitButton": "Spara",
-      "copyButton": "Kopiera länk"
-    },
-    "notFound": {
-      "title": "Album hittades inte!",
-      "subtitle": "Albumet du söker finns inte.",
-      "clarifyingText": "Kanske skrev du in fel adress, använde en gammal länk eller så har albumet tagits bort.",
-      "ctaButton": "Tillbaka till startsidan"
-    }
-  },
-  "albums": {
-    "albumPreview": {
-      "noFiles": "Inga filer",
-      "publicProfileToggle": "Visa i offentlig profil",
-      "show": "Visa",
-      "delete": "Radera"
-    },
-    "albumsContainer": {
-      "noAlbumsAlert": "Du har inga album",
-      "modalTitle": "Radera album",
-      "modalBody": "Vill du verkligen radera detta album?",
-      "modalCloseButton": "Stäng",
-      "modalSubmitButton": "Radera"
-    }
-  },
-  "components": {
-    "shareButton": {
-      "copyLink": "Kopiera länk"
-    },
-    "uploadFiles": {
-      "dropzoneTitle": "Dra foton hit eller välj dem genom att klicka"
-    }
-  },
-  "menu": {
-    "albums": "Album",
-    "about": "Om",
-    "profile": "Profil",
-    "signIn": "Logga in",
-    "signOut": "Logga ut",
-    "subscription": "Prenumeration"
-  },
-  "footer": {
-    "about": "Om",
-    "contact": "Kontakt",
-    "description": "Applikationen hjälper användare att snabbt och enkelt dela foton och videor utan att minska kvaliteten.",
-    "home": "Hem",
-    "links": "Länkar",
-    "register": "Registrera",
-    "status": "Status"
-  },
-  "userDataDeletion": {
-    "title": "Radering av användardata",
-    "subtitle": "Om du vill radera dina personuppgifter eller ditt konto, vänligen kontakta oss på <mailto>{{email}}</mailto>. När vi mottagit din begäran kommer vi att säkerställa att alla dina personuppgifter raderas i enlighet med gällande lagstiftning."
   },
   "privacyPolicy": {
     "title": "Integritetspolicy",
-    "subtitle": "Om du är besökare på Zdielaj.si-webbplatsen eller kund hos Zdielaj.si-tjänsten gäller \"integritetspolicyn\" för din användning av denna webbplats eller tjänst.",
+    "subtitle": "Om du är en besökare på Zdielaj.si-webbplatsen eller en kund av Zdielaj.si-tjänsten, då omfattas din användning av denna webbplats eller tjänst av \"integritetspolicyn\".",
     "firstSection": {
       "title": "Vilken typ av information samlar vi in?",
-      "paragraph1": "För att kunna tillhandahålla Zdielaj.si-tjänsterna måste vi behandla information om dig. Vilken typ av information vi samlar in beror på hur du använder våra tjänster."
+      "paragraph1": "För att tillhandahålla Zdielaj.si-tjänsterna måste vi behandla information om dig. Typerna av information vi samlar in beror på hur du använder våra tjänster."
     },
     "secondSection": {
       "title": "Hur använder vi denna information?",
-      "paragraph1": "<strong>För att tillhandahålla, anpassa och förbättra våra tjänster.</strong> Vi använder den information vi har för att tillhandahålla våra tjänster, anpassa funktioner och skapa förslag för dig.",
-      "paragraph2": "<strong>Produktforskning och utveckling.</strong> Vi använder den information vi har för att utveckla, testa och förbättra våra tjänster. Sådan behandling är nödvändig för vårt legitima intresse att tillhandahålla innovativa tjänster till våra användare.",
-      "paragraph3": "<strong>För att stödja säkerhet och integritet.</strong> Vi använder den information vi har för att verifiera konton och aktiviteter, bekämpa skadligt beteende, upptäcka och förebygga spam och andra negativa upplevelser samt upprätthålla integriteten i våra tjänster.",
-      "paragraph4": "<strong>Kommunikation med dig.</strong> Vi använder den information vi har för att skicka marknadsföringskommunikation, relevanta nyheter och uppdateringar som vi tror kan vara av intresse för dig."
+      "paragraph1": "<strong>För att tillhandahålla, personalisera och förbättra våra tjänster.</strong> Vi använder informationen vi har för att tillhandahålla våra tjänster, anpassa funktioner och skapa förslag för dig.",
+      "paragraph2": "<strong>Produktforskning och utveckling.</strong> Vi använder informationen vi har för att utveckla, testa och förbättra våra tjänster. Sådan behandling är nödvändig för våra legitima intressen i att tillhandahålla innovativa tjänster till våra användare.",
+      "paragraph3": "<strong>För att stödja säkerhet och integritet.</strong> Vi använder informationen vi har för att verifiera konton och aktiviteter, bekämpa skadligt beteende, upptäcka och förhindra spam och andra negativa upplevelser, och upprätthålla integriteten i våra tjänster.",
+      "paragraph4": "<strong>Kommunikation med dig.</strong> Vi använder informationen vi har för att skicka marknadsföringskommunikation, relevanta nyheter och uppdateringar som vi tror kan intressera dig."
     },
     "thirdSection": {
       "title": "Hur skyddar vi din information?",
-      "paragraph1": "Dina personuppgifter är krypterade, lagras bakom säkra nätverk och är endast tillgängliga för ett begränsat antal personer som har särskilda åtkomsträttigheter till sådana system och är skyldiga att hålla informationen konfidentiell."
+      "paragraph1": "Dina personuppgifter är krypterade, lagrade bakom säkrade nätverk och endast tillgängliga för ett begränsat antal personer som har särskilda åtkomsträttigheter till sådana system och är skyldiga att hålla informationen konfidentiell."
     },
     "fourthSection": {
       "title": "Hur delas denna information?",
-      "paragraph1": "Vi säljer, byter eller överför inte dina personuppgifter till utomstående parter. Detta inkluderar inte webbhotellpartners och andra parter som hjälper oss att driva vår webbplats, bedriva vår verksamhet eller betjäna våra användare, så länge dessa parter samtycker till att hålla denna information konfidentiell."
+      "paragraph1": "Vi säljer inte, handlar inte eller överför på annat sätt dina personuppgifter till externa parter. Detta inkluderar inte webbplatsens värdpartners och andra parter som hjälper oss att driva vår webbplats, bedriva vår verksamhet eller betjäna våra användare, så länge dessa parter samtycker till att hålla denna information konfidentiell."
     },
     "fifthSection": {
-      "title": "Databevarande, avaktivering och borttagning av konto",
-      "paragraph1": "Vi behåller data så länge det är nödvändigt för att tillhandahålla våra tjänster eller tills ditt konto tas bort – beroende på vad som inträffar först."
+      "title": "Datalagring, avaktivering och radering av konto",
+      "paragraph1": "Vi behåller data så länge det är nödvändigt för att tillhandahålla våra tjänster eller tills ditt konto raderas - beroende på vad som inträffar först."
     },
     "sixthSection": {
-      "title": "Hur informerar vi dig om ändringar i denna policy?",
-      "paragraph1": "Vi kan uppdatera denna policy från tid till annan. Om möjligt kommer vi att meddela dig om ändringar eller regelbundet påminna dig om att läsa denna policy via e-post."
+      "title": "Hur kommer vi att meddela dig om ändringar i denna policy?",
+      "paragraph1": "Från tid till annan kan vi uppdatera denna policy. Där det är möjligt kommer vi att meddela dig om ändringar eller regelbundet påminna dig om att granska denna policy via e-post."
     },
     "seventhSection": {
-      "title": "Hur kontaktar du Zdielaj.si med frågor?",
+      "title": "Hur kontaktar man Zdielaj.si med frågor?",
       "paragraph1": "Du kan kontakta oss genom att skicka ett e-postmeddelande till <mailto>info@zdielaj.si</mailto>."
     }
-  },
-  "about": {
-    "title": "Om applikationen",
-    "subtitle": "Applikationen hjälper användare att snabbt och enkelt dela foton och videor utan att minska kvaliteten. All data lagras i krypterad form."
   }
 }
