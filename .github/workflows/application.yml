@@ -26,11 +26,12 @@ jobs:
       with:
         fetch-depth: 1
     - name: configure aws credentials
-      uses: aws-actions/configure-aws-credentials@v1.7.0
+      uses: aws-actions/configure-aws-credentials@v5.0.0
       with:
         role-to-assume: ${{ secrets.AWS_ROLE }}
         role-session-name: GitHub_to_AWS_via_FederatedOIDC
         aws-region: ${{ secrets.AWS_REGION }}
+        audience: sts.amazonaws.com
     - uses: actions/setup-node@v4
       with:
         node-version: 22
