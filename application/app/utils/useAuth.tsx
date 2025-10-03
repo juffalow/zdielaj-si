@@ -245,7 +245,8 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
       setLastUpdate(new Date());
     } catch (error) {
-      logger.error('Failed to refresh session:', error);
+      logger.debug('Failed to refresh session:', error);
+
       throw error;
     }
   }
