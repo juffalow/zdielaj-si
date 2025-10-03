@@ -25,7 +25,7 @@ export default function Album() {
   }
 
   useEffect(() => {
-    if (typeof location.state.album !== 'undefined') {
+    if (location.state !== null && typeof location.state.album === 'object') {
       setAlbumPromise(new Promise((resolve) => resolve(location.state.album)));
 
       getAlbum(params.id as string).then((album) => {
