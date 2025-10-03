@@ -1,21 +1,26 @@
-import { useLayoutEffect, useState } from 'react'
-import type { HTMLAttributes } from 'react'
 import { Image } from '@heroui/react';
-import noPreview from '../../images/nopreview.png';
 
 export default function GalleryItems({ files, layout, gaps }: { files: Array<AlbumFile>, layout: 'cols' | 'tiles' | 'rows', gaps: 'none' | 'small' | 'medium' | 'large' }) {
-  const cols = 4;
-
   if (layout === 'cols') {
     return (
       <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-2">
           {
-            files.map(file => (
-              <div key={file.id} style={{ aspectRatio: '1/1' }} className="justify-self-stretch">
-                {/* <Image key={file.id} src={file.thumbnails[1] || file.thumbnails[0] || file.location} fallbackSrc={noPreview} width="100%" height="100%" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-center' }} /> */}
-                <Image key={file.id} src={file.thumbnails[1] || file.thumbnails[0] || file.location} radius="sm" width="100%" height="100%" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-cente gallery-item' }} />
-              </div>
-            ))
+            files.map(file => {
+              if ('id' in file === false) {
+                return (
+                  <div key={(file as any).name} style={{ aspectRatio: '1/1' }} className="justify-self-stretch">
+                    <Image src={(file as any).preview} radius="sm" width="100%" height="100%" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-cente gallery-item' }} />
+                  </div>
+                )
+              }
+
+              return (
+                <div key={file.id} style={{ aspectRatio: '1/1' }} className="justify-self-stretch">
+                  {/* <Image key={file.id} src={file.thumbnails[1] || file.thumbnails[0] || file.location} fallbackSrc={noPreview} width="100%" height="100%" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-center' }} /> */}
+                  <Image key={file.id} src={file.thumbnails[1] || file.thumbnails[0] || file.location} radius="sm" width="100%" height="100%" classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-cente gallery-item' }} />
+                </div>
+              )
+            })
           }
       </div>
     );
@@ -23,25 +28,26 @@ export default function GalleryItems({ files, layout, gaps }: { files: Array<Alb
   
   return (
     <div className="flex justify-center">
-    {/* <div className="grid grid-cols-2 md:grid-cols-3 gap-4"> */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div className="grid gap-4">
-      {/* {
-        files.map((file) => (
-          file.mimetype.startsWith('video') ? <GalleryVideo key={file.id} file={file} className={styles.brick} />
-            : <GalleryImage key={file.id} file={file} className={`gallery-item ${styles.brick} ${gaps === 'none' ? 'p-0' : gaps === 'small' ? 'p-1' : gaps === 'medium' ? 'p-3' : 'p-5'}`} />
-        ))
-      } */}
-      {
-        files.map((file, index) => (
-          <div key={file.id} className={`order-${index + 1}`}>
-            <img src={file.thumbnails[1] || file.thumbnails[0] || file.location} className="h-auto max-w-full rounded-lg" />
-          </div>
-        ))
-      }
-    {/* </div> */}
-    </div>
-    </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid gap-4">
+          {
+            files.map((file, index) => {
+              if ('id' in file === false) {
+                return (
+                  <div key={(file as any).name} className={`order-${index + 1}`}>
+                    <img src={(file as any).preview} className="h-auto max-w-full rounded-lg" />
+                  </div>
+                )
+              }
+              return (
+                <div key={file.id} className={`order-${index + 1}`}>
+                  <img src={file.thumbnails[1] || file.thumbnails[0] || file.location} className="h-auto max-w-full rounded-lg" />
+                </div>
+              )
+            })
+          }
+        </div>
+      </div>
     </div>
   )
 }

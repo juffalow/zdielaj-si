@@ -3,10 +3,8 @@ import { useParams, useLocation } from 'react-router';
 import NotFound from './album/NotFound';
 import GalleryLoader from './album/GalleryLoader';
 import Gallery from './album/Gallery';
-import UserAlbum from './album/UserAlbum';
 import { getAlbum, getUserAlbum } from '../api/album';
 import ErrorBoundary from '../components/errorBoundary';
-import useUpload from '../utils/useUpload';
 import useAuth from '../utils/useAuth';
 
 export function meta() {
@@ -19,22 +17,31 @@ export function meta() {
 export default function Album() {
   const { user, hasInitialized } = useAuth();
   const params = useParams();
-  const { files } = useUpload();
   const location = useLocation();
   const [ albumPromise, setAlbumPromise ] = useState<Promise<Album> | null>(null);
-
-  if (files.length > 0 && location.state.isNew) {
-    return (
-      <UserAlbum album={{ name: '', description: '', ...location.state.album }} />
-    );
-  }  
 
   if (hasInitialized === false) {
     return <GalleryLoader />;
   }
 
   useEffect(() => {
-    setAlbumPromise(user !== null ? getUserAlbum(params.id as string) : getAlbum(params.id as string));
+    if (typeof location.state.album !== 'undefined') {
+      setAlbumPromise(new Promise((resolve) => resolve(location.state.album)));
+
+      getAlbum(params.id as string).then((album) => {
+        setAlbumPromise(
+          new Promise((resolve) => resolve(
+            Object.assign({}, album, location.state.album)
+          ))
+        );
+      });
+    } else {
+      if (user !== null) {
+        setAlbumPromise(getUserAlbum(params.id as string));
+      } else {
+        setAlbumPromise(getAlbum(params.id as string));
+      }
+    }
   }, [user, params.id]);
 
   return (
