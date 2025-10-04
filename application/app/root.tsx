@@ -1,4 +1,3 @@
-import { useEffect, startTransition } from 'react';
 import {
   isRouteErrorResponse,
   Links,
@@ -17,6 +16,7 @@ import Tracking from './utils/Tracking';
 import type { Route } from './+types/root';
 import Menu from './components/menu';
 import Footer from './components/footer';
+import BackToOld from './components/BackToOld';
 import i18n from './i18n';
 import './app.css';
 
@@ -69,6 +69,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Footer />
 
                 <Tracking />
+                <BackToOld />
               </HeroUIProvider>
             </UploadProvider>
           </AuthProvider>
