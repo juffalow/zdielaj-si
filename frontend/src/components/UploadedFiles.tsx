@@ -23,7 +23,9 @@ const UploadedFiles: React.FC<{album: Album; canUpload: boolean}> = ({ album, ca
   const {
     getRootProps: getSingleRootProps,
     getInputProps: getSingleInputProps,
-  } = useDropzone({ onDrop: onSingleDrop, accept: 'image/*, video/*', maxFiles: 50 });
+  } = useDropzone({ onDrop: onSingleDrop, accept: {
+    'image/*': [],
+  }, maxFiles: 50 });
 
   return (
     <>
