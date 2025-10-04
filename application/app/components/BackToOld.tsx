@@ -13,7 +13,10 @@ export default function BackToOld() {
 
   useEffect(() => {
     window.addEventListener('error', () => {
-      if (localStorage.getItem('unhandled-error-detected') === 'true') {
+      const counter = parseInt(localStorage.getItem('unhandled-error-detected') || '0') + 1;
+      localStorage.setItem('unhandled-error-detected', String(counter));
+
+      if (counter % 3 !== 1) {
         return;
       }
       
@@ -21,7 +24,10 @@ export default function BackToOld() {
     });
     
     window.addEventListener('unhandledrejection', () => {
-      if (localStorage.getItem('unhandled-error-detected') === 'true') {
+      const counter = parseInt(localStorage.getItem('unhandled-error-detected') || '0') + 1;
+      localStorage.setItem('unhandled-error-detected', String(counter));
+
+      if (counter % 3 !== 1) {
         return;
       }
 
@@ -30,7 +36,6 @@ export default function BackToOld() {
   }, []);
 
   const onContinue = () => {
-    localStorage.setItem('unhandled-error-detected', 'true');
     setIsOpen(false);
   };
 
@@ -41,25 +46,22 @@ export default function BackToOld() {
   };
 
   return (
-    <div>
-      <Button onPress={() => setIsOpen(!isOpen)}>Open</Button>
-      <Modal backdrop="opaque" isOpen={isOpen} onOpenChange={setIsOpen}>
-        <ModalContent>
-          <ModalHeader>Unhandled error detected!</ModalHeader>
-          <ModalBody>
-            <p>This is a fresh version of the app, which is not yet stable and may contain bugs. The app already notified developers about this problem and it should be resolved in a short time.</p>
-            <p className="italic">If you are experiencing an issue, you can still use the old version of the app.</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="warning" variant="ghost" data-tracking-id="unhandled-error-modal-old" onPress={onOld}>
-              Use old version
-            </Button>
-            <Button color="primary" data-tracking-id="unhandled-error-modal-continue" onPress={onContinue}>
-              Continue with new version
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </div>
+    <Modal backdrop="opaque" isOpen={isOpen} onOpenChange={onContinue}>
+      <ModalContent>
+        <ModalHeader>Unhandled error detected!</ModalHeader>
+        <ModalBody>
+          <p>This is a fresh version of the app, which is not yet stable and may contain bugs. The app already notified developers about this problem and it should be resolved in a short time.</p>
+          <p className="italic">If you are experiencing an issue, you can still use the old version of the app.</p>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="warning" variant="ghost" data-tracking-id="unhandled-error-modal-old" onPress={onOld}>
+            Use old version
+          </Button>
+          <Button color="primary" data-tracking-id="unhandled-error-modal-continue" onPress={onContinue}>
+            Continue with new version
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
