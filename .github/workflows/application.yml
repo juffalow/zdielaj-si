@@ -40,7 +40,7 @@ jobs:
     - name: Build
       run: npm run build -- --mode staging
     - name: Sync build folder with S3
-      run: aws s3 sync ./build/client s3://juffalow-my-projects/zdielaj-si-dev
+      run: aws s3 sync ./build/client s3://juffalow-my-projects/zdielaj-si-stage
     - name: Invalidate CloudFront cache
       run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --paths "/*"
   deploy_application_prod:
