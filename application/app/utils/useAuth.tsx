@@ -28,6 +28,7 @@ interface AuthContextType {
   hasInitialized: boolean;
   loading: boolean;
   error?: Error;
+  getUser: () => Promise<User | null>;
   signIn: (username: string, password: string) => Promise<{ isSuccess: boolean, challenge?: string }>;
   confirmSignIn: (code: string) => Promise<void>;
   signUp: (name: string, email: string, password: string) => Promise<void>;
@@ -36,7 +37,6 @@ interface AuthContextType {
   confirmResetPassword: (username: string, code: string, password: string) => Promise<void>;
   updatePassword: (currentPassword: string, newPassword: string) => Promise<void>;
   signOut: () => Promise<void>;
-  refreshSession: () => Promise<void>;
 }
 
 Amplify.configure({
@@ -90,7 +90,10 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
           await handleOAuthCallback();
         } else {
           // Normal session refresh
-          await refreshSession();
+          // await refreshSession();
+          const userSession = await getUser();
+          setUser(userSession);
+          setLastUpdate(new Date());
         }
       } catch (error) {
         logger.debug('Authentication initialization failed, user not logged in');
@@ -132,7 +135,10 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
       logger.debug('Sign in response', response);
 
-      await refreshSession();
+      // await refreshSession();
+      const userSession = await getUser();
+      setUser(userSession);
+      setLastUpdate(new Date());
 
       return {
         isSuccess: true,
@@ -152,7 +158,10 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
     logger.debug('Confirm sign in response', response);
 
-    await refreshSession();
+    // await refreshSession();
+    const userSession = await getUser();
+    setUser(userSession);
+    setLastUpdate(new Date());
   }
 
   async function signUp(name: string, email: string, password: string): Promise<void> {
@@ -219,20 +228,14 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
     setLastUpdate(new Date());
   }
 
-  async function refreshSession(): Promise<void> {
-    logger.debug('Refreshing session...');
-    
+  async function getUser(): Promise<User | null> {
     try {
-      const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
+      const [user, session] = await Promise.all([
+        fetchUserAttributesAmplify(),
+        fetchAuthSessionAmplify()
+      ]);
 
-      logger.debug('User attributes:', user);
-      logger.debug('Auth session:', session);
-
-      if (!session.tokens) {
-        throw new Error('No tokens found in session');
-      }
-
-      setUser({
+      return {
         id: user.sub,
         username: user.email,
         email: user.email,
@@ -241,15 +244,58 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
         },
         accessToken: session.tokens?.accessToken.toString() as string,
         idToken: session.tokens?.idToken?.toString() as string,
-      });
-
-      setLastUpdate(new Date());
+      };
     } catch (error) {
-      logger.debug('Failed to refresh session:', error);
+      logger.debug('Failed to get user:', error);
 
-      throw error;
+      return null;
     }
   }
+
+  // async function refreshSession(): Promise<User | null> {
+  //   logger.debug('Refreshing session...');
+    
+  //   try {
+  //     const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
+
+  //     logger.debug('User attributes:', user);
+  //     logger.debug('Auth session:', session);
+
+  //     if (!session.tokens) {
+  //       throw new Error('No tokens found in session!');
+  //     }
+
+  //     // setUser({
+  //     //   id: user.sub,
+  //     //   username: user.email,
+  //     //   email: user.email,
+  //     //   meta: {
+  //     //     name: user.name as string,
+  //     //   },
+  //     //   accessToken: session.tokens?.accessToken.toString() as string,
+  //     //   idToken: session.tokens?.idToken?.toString() as string,
+  //     // });
+
+  //     // setLastUpdate(new Date());
+
+  //     return {
+  //       id: user.sub,
+  //       username: user.email,
+  //       email: user.email,
+  //       meta: {
+  //         name: user.name as string,
+  //       },
+  //       accessToken: session.tokens?.accessToken.toString() as string,
+  //       idToken: session.tokens?.idToken?.toString() as string,
+  //     };
+  //   } catch (error) {
+  //     logger.debug('Failed to refresh session:', error);
+
+  //     throw error;
+  //   }
+
+  //   return null;
+  // }
 
   async function handleOAuthCallback(): Promise<void> {
     logger.debug('Handling OAuth callback...');
@@ -260,7 +306,10 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
       logger.debug('OAuth callback - Current user:', currentUser);
       
       if (currentUser) {
-        await refreshSession();
+        // await refreshSession();
+        const userSession = await getUser();
+        setUser(userSession);
+        setLastUpdate(new Date());
         logger.debug('OAuth login successful');
         
         // Clean up the URL from OAuth parameters
@@ -283,6 +332,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
       user: user,
       hasInitialized,
       loading,
+      getUser,
       signIn,
       confirmSignIn,
       signUp,
@@ -291,7 +341,6 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
       confirmResetPassword,
       updatePassword,
       signOut,
-      refreshSession,
     }),
     [ loading, hasInitialized, lastUpdate ]
   );

@@ -14,8 +14,6 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
   const { user } = useAuth();
   const album = use(albumPromise);
   const { files } = useUpload();
-  const userAgent = navigator.userAgent.toLowerCase();
-  const isMobile = /iphone|ipad|ipod|android|windows phone/g.test(userAgent);
   const [ layout, setLayout ] = useState<'cols' | 'rows' | 'tiles'>(album.layout || 'cols');
 
   return (
@@ -47,9 +45,7 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
         <GalleryItems files={files as any} layout={layout} gaps={album.gaps} />
       </LightGallery>
 
-      {
-        isMobile ? <MobileBottomButton link={`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`} /> : null
-      }
+      <MobileBottomButton link={`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`} />
     </div>
   );
 }

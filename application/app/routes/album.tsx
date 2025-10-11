@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router';
+import { useParams, useLocation, useNavigate } from 'react-router';
 import NotFound from './album/NotFound';
 import GalleryLoader from './album/GalleryLoader';
 import Gallery from './album/Gallery';
@@ -15,38 +15,34 @@ export function meta() {
 }
 
 export default function Album() {
-  const { user, hasInitialized } = useAuth();
+  const { user, getUser } = useAuth();
   const params = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [ albumPromise, setAlbumPromise ] = useState<Promise<Album> | null>(null);
-
-  if (hasInitialized === false) {
-    return <GalleryLoader />;
-  }
 
   useEffect(() => {
     if (location.state !== null && typeof location.state.album === 'object') {
       setAlbumPromise(new Promise((resolve) => resolve(location.state.album)));
 
-      getAlbum(params.id as string).then((album) => {
-        setAlbumPromise(
-          new Promise((resolve) => resolve(
-            Object.assign({}, album, location.state.album)
-          ))
-        );
+      window.addEventListener('beforeunload', () => {
+        navigate({}, { replace: true, state: null });
       });
     } else {
-      if (user !== null) {
-        setAlbumPromise(getUserAlbum(params.id as string));
-      } else {
-        setAlbumPromise(getAlbum(params.id as string));
-      }
+      setAlbumPromise(async () => {
+        const user = await getUser();
+        if (user !== null) {
+          return getUserAlbum(params.id as string);
+        } else {
+          return getAlbum(params.id as string);
+        }
+      });
     }
-  }, [user, params.id]);
+  }, [ params.id]);
 
   return (
     <ErrorBoundary notFound={<NotFound />}>
-      <Suspense fallback={<GalleryLoader />}>
+      <Suspense fallback={<GalleryLoader showFormLoader={(location.state !== null && typeof location.state.album === 'object') || (user !== null)} />}>
         {
           albumPromise !== null ? (
             <Gallery albumPromise={albumPromise} />

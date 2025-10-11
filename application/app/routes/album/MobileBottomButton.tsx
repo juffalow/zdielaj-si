@@ -9,6 +9,12 @@ interface Props {
 
 const MobileBottomButton = ({ link }: Props) => {
   const { t } = useTranslation('', { keyPrefix: 'album.userAlbum' });
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isMobile = /iphone|ipad|ipod|android|windows phone/g.test(userAgent);
+
+  if (!isMobile) {
+    return null;
+  }
 
   const onCopyClick = (event: PressEvent) => {
     navigator.clipboard.writeText(link);
