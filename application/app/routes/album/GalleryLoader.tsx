@@ -26,7 +26,7 @@ export default function GalleryLoader({ showFormLoader }: { showFormLoader?: boo
           </div>
         ) : null
       }
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-2">
         {
           Array(8).fill(undefined).map((_, index) => (
             <Skeleton key={index} className="w-full h-full" style={{ height: 200 }} />
