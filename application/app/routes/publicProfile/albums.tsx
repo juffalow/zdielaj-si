@@ -23,7 +23,7 @@ export default function PublicProfileAlbums({ fetchAlbums, onLastAlbumVisible }:
   }, [isIntersecting, albums]);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
       {
         albums.map((album, index) => (
           <Card key={album.id} radius="sm"isPressable={true} onPress={() => navigate(`/${t("routes.prefix")}${t("routes.album").replace(":id", album.id)}`)}>
