@@ -17,7 +17,7 @@ export default function UpdateForm({ album }: { album: Album }) {
   const { t } = useTranslation('', { keyPrefix: 'album.userAlbum' });
   const { user } = useAuth();
 
-  const onSubmit = async (prevState: unknown, state: FormData): Promise<{ name: string, description: string, layout: AlbumLayout, gaps: AlbumGaps, retention: AlbumRetention, changeLayout: boolean }> => {
+  const onSubmit = async (_: unknown, state: FormData): Promise<{ name: string, description: string, layout: AlbumLayout, gaps: AlbumGaps, retention: AlbumRetention, changeLayout: boolean }> => {
     const name = state.get('name') as string;
     const description = state.get('description') as string;
     const layout = state.get('layout') as AlbumLayout;
@@ -70,13 +70,20 @@ export default function UpdateForm({ album }: { album: Album }) {
           />
         </div>
         <div>
-          <Select label={t("layout")} name="layout" labelPlacement="outside" defaultSelectedKeys={[ state.layout ]} isDisabled={user === null} selectionMode="single">
+          <Select
+            label={t("layout")}
+            name="layout"
+            labelPlacement="outside"
+            defaultSelectedKeys={[ state.layout || 'cols' ]}
+            selectionMode="single"
+            disabledKeys={user === null ? ["rows", "tiles"] : []}
+          >
             <SelectItem key="cols">{t("layoutOptions.cols")}</SelectItem>
             <SelectItem key="rows">{t("layoutOptions.rows")}</SelectItem>
             <SelectItem key="tiles">{t("layoutOptions.tiles")}</SelectItem>
           </Select>
 
-          <Checkbox name="changeLayout" defaultSelected={true} isDisabled={user === null}>
+          <Checkbox name="changeLayout" defaultSelected={true} isDisabled={user === null} className="mb-4">
             {t("changeLayout")}
           </Checkbox>
 
@@ -84,9 +91,12 @@ export default function UpdateForm({ album }: { album: Album }) {
             label={t("gaps")}
             name="gaps"
             labelPlacement="outside"
-            defaultSelectedKeys={[ state.gaps ]}
+            defaultSelectedKeys={[ state.gaps || 'medium' ]}
             disabledKeys={user === null ? ["none", "small", "large"] : []}
             selectionMode="single"
+            classNames={{
+              base: 'mb-10'
+            }}
           >
             <SelectItem key="none">{t("gapsOptions.none")}</SelectItem>
             <SelectItem key="small">{t("gapsOptions.small")}</SelectItem>
@@ -114,6 +124,7 @@ export default function UpdateForm({ album }: { album: Album }) {
             labelPlacement="outside-top"
             name="shortUrl"
             value={`${window.location.protocol}//${window.location.host}/${album.shortLink?.path}`}
+            className="mt-4"
             readOnly
             disabled
           />
