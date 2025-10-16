@@ -73,6 +73,7 @@ export default function SignUpForm({
         placeholder={t('emailPlaceholder')}
         defaultValue={state.email}
         type="email"
+        autoComplete="email"
       />
 
       <Input
@@ -84,6 +85,7 @@ export default function SignUpForm({
         placeholder={t('passwordPlaceholder')}
         defaultValue={state.password}
         type="password"
+        autoComplete="new-password"
         onChange={(e) => setPassword(e.target.value)}
         description={<ul className="list-disc list-inside">
           <li>{t("passwordRules.minEightCharacters")} { password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>

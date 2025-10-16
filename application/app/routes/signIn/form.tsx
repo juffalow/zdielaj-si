@@ -28,6 +28,7 @@ export default function SignInForm({
         placeholder={t("emailPlaceholder")}
         defaultValue={state.email}
         type="text"
+        autoComplete="email"
       />
 
       <Input
@@ -39,6 +40,7 @@ export default function SignInForm({
         placeholder={t("passwordPlaceholder")}
         defaultValue={state.password}
         type="password"
+        autoComplete="current-password"
       />
 
       {state.error !== null ? (
