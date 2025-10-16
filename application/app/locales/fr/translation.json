@@ -1,7 +1,7 @@
 {
   "routes": {
     "prefix": "fr/",
-    "signIn": "connexion",
+    "signIn": "se-connecter",
     "signUp": "inscription",
     "passwordReset": "reinitialiser-mot-de-passe",
     "about": "a-propos",

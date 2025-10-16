@@ -57,12 +57,12 @@ export const ROUTES = {
   fr: {
     prefix: 'fr/',
     home: '',
-    signIn: 'kirjaudu-sisaan',
-    signUp: 'rekisteroidy',
-    albums: 'albumit',
-    album: 'albumi/:id',
-    profile: 'profiili',
-    publicProfile: 'profiili/:id',
+    signIn: 'se-connecter',
+    signUp: 'inscription',
+    albums: 'albums',
+    album: 'album/:id',
+    profile: 'profil',
+    publicProfile: 'profil/:id',
     privacyPolicy: 'politique-de-confidentialite',
   },
   it: {

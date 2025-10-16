@@ -5,7 +5,6 @@ Disallow:
 Disallow: /album/*
 Disallow: /en/album/*
 Disallow: /sk/album/*
-Disallow: /sk/album/*
 Disallow: /cz/album/*
 Disallow: /de/album/*
 Disallow: /es/album/*
@@ -14,7 +13,7 @@ Disallow: /it/album/*
 Disallow: /pl/album/*
 Disallow: /nl/album/*
 Disallow: /si/album/*
-Disallow: /fi/album/*
+Disallow: /fi/albumi/*
 Disallow: /se/album/*
 Disallow: /no/album/*
 Disallow: /dk/album/*
