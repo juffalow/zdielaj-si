@@ -10,10 +10,11 @@ import {
 import type { Route } from './+types/albums';
 import AlbumsLoader from './albums/loader';
 import AlbumsList from './albums/list';
+import DeleteModal from './albums/deleteModal';
 import { getCurrentUserAlbums, deleteAlbum } from '../api/album';
 import ErrorBoundary from '../components/errorBoundary';
 import { addAlbumToPublicProfile, removeAlbumFromPublicProfile } from '../api/publicprofiles';
-import DeleteModal from './albums/deleteModal';
+import { getCurrentUser } from '../api/user';
 
 export function meta({ location }: Route.MetaArgs) {
   const language = location.pathname.split('/')[1];
@@ -41,17 +42,19 @@ export function meta({ location }: Route.MetaArgs) {
 
 export default function Albums() {
   const [ albumsPromise, setAlbumsPromise ] = useState<Promise<Album[]> | null>(null);
+  const [ userPromise, setUserPromise ] = useState<Promise<User> | null>(null);
 
   useEffect(() => {
     setAlbumsPromise(getCurrentUserAlbums(8));
+    setUserPromise(getCurrentUser());
   }, []);
 
   return (
     <ErrorBoundary>
       <Suspense fallback={<AlbumsLoader />}>
         {
-          albumsPromise !== null ? (
-            <AlbumsContainer albumsPromise={albumsPromise} />
+          albumsPromise !== null && userPromise !== null ? (
+            <AlbumsContainer albumsPromise={albumsPromise} userPromise={userPromise} />
           ) : null
         }
       </Suspense>
@@ -59,13 +62,12 @@ export default function Albums() {
   );
 }
 
-function AlbumsContainer({ albumsPromise }: { albumsPromise: Promise<Album[]> }) {
+function AlbumsContainer({ albumsPromise, userPromise }: { albumsPromise: Promise<Album[]>, userPromise: Promise<User> }) {
+  const user = use(userPromise);
   const [ albums, setAlbums ] = useState<Album[]>(use(albumsPromise));
   const [ hasMore, setHasMore ] = useState(albums.length === 8);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const [ albumToDelete, setAlbumToDelete ] = useState<Album | null>(null);
-
-  const user = { publicProfileId: 'test-profile-5' };
 
   const [ optimisticAlbums, updateOptimisticAlbums ] = useOptimistic(albums, (optimisticAlbums: Album[], action: { album: Album, type: string }): any => {
     if (action.type === 'delete') {
