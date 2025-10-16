@@ -67,7 +67,7 @@ export default function menu() {
     : (<>&#x1F1F8;&#x1F1F0; SK</>);
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} position="static" maxWidth="full" isBordered>
+    <Navbar onMenuOpenChange={setIsMenuOpen} isMenuOpen={isMenuOpen} position="static" maxWidth="full" isBordered>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -198,6 +198,7 @@ export default function menu() {
                   className="w-full"
                   color="foreground"
                   to={`/${t('prefix', { keyPrefix: 'routes' })}${t('albums', { keyPrefix: 'routes' })}`}
+                  onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_albums_click"
                 >
@@ -210,6 +211,7 @@ export default function menu() {
                   className="w-full"
                   color="foreground"
                   to={`/${t('prefix', { keyPrefix: 'routes' })}${t('userProfile', { keyPrefix: 'routes' })}`}
+                  onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_profile_click"
                 >
@@ -222,6 +224,7 @@ export default function menu() {
                   className="w-full"
                   color="foreground"
                   to={`/${t('prefix', { keyPrefix: 'routes' })}${t('subscription', { keyPrefix: 'routes' })}`}
+                  onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_subscription_click"
                 >
@@ -248,6 +251,7 @@ export default function menu() {
                   className="w-full"
                   color="foreground"
                   to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signIn', { keyPrefix: 'routes' })}`}
+                  onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_sign_in_click"
                 >
@@ -260,6 +264,7 @@ export default function menu() {
                   className="w-full"
                   color="foreground"
                   to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`}
+                  onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_sign_up_click"
                 >
