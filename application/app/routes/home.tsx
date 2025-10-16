@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import type { Route } from './+types/home';
 import { Card, CardHeader, CardBody, CardFooter, Button } from '@heroui/react';
 import { Trans, useTranslation } from 'react-i18next';
-import { useDropzone } from 'react-dropzone';
+import { useDropzone, type FileRejection } from 'react-dropzone';
 import useAuth from '../utils/useAuth';
 import useUpload from '../utils/useUpload';
 import logger from '../logger';
@@ -56,13 +56,17 @@ export default function Home() {
   const { t } = useTranslation('', { keyPrefix: 'home' });
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { clear, uploadFiles } = useUpload();
+  const { clear, uploadFiles, rejectedFiles } = useUpload();
   const [ album, setAlbum ] = useState<Album | null>(null);
   const [ _, startTransition ] = useTransition();
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+  const onDrop = useCallback(async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
     if (album === null) {
       return;
+    }
+
+    if (fileRejections.length > 0) {
+      rejectedFiles(fileRejections);
     }
 
     setTimeout(async () => {
@@ -70,7 +74,7 @@ export default function Home() {
         await addFilesToAlbum(album.id, album.token, acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })))
         : await addFilesToUserAlbum(album.id, acceptedFiles.map((file) => ({ name: file.name, mimetype: file.type, size: file.size })));
 
-      logger.info('Album created', album);
+      logger.info('Files added to album', album, files);
       
       uploadFiles(acceptedFiles, files.map((f: any) => ({ url: f.url as string, fields: f.fields })));
     }, 1);

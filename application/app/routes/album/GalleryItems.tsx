@@ -1,5 +1,6 @@
-import { Image } from '@heroui/react';
+import { Image, Spinner } from '@heroui/react';
 import type { HTMLAttributes } from 'react';
+import styles from './GalleryItems.module.css';
 
 export default function GalleryItems({ files, layout, gaps }: { files: Array<AlbumFile>, layout: 'cols' | 'tiles' | 'rows', gaps: 'none' | 'small' | 'medium' | 'large' }) {
   if (layout === 'cols') {
@@ -52,7 +53,7 @@ export default function GalleryItems({ files, layout, gaps }: { files: Array<Alb
 
 const GalleryImage = ({ file, ...props }: { file: AlbumFile } & HTMLAttributes<HTMLElement>) => (
   <div
-    className="gallery-item justify-self-stretch"
+    className="gallery-item justify-self-stretch relative"
     data-src={file.location || (file as any).preview}
     {...props}
   >
@@ -63,6 +64,18 @@ const GalleryImage = ({ file, ...props }: { file: AlbumFile } & HTMLAttributes<H
       height="100%"
       classNames={{ wrapper: 'h-full w-full bg-cover max-w-none', img: 'object-cover object-center' }}
     />
+    {
+      (file as any).isDone === false && (
+          <Spinner classNames={{ base: `absolute w-full h-full inset-0 z-999 ${styles.bgGrayOpaque}` }} color={(file as any).isUploading ? 'success' : 'primary'} />
+      )
+    }
+    {
+      (file as any).hasError === true && (
+        <div className={`absolute w-full h-full inset-0 z-999 flex items-center justify-center ${styles.bgGrayOpaque}`}>
+          <span className="text-red-500 text-2xl">&gt; 10MB</span>
+        </div>
+      )
+    }
   </div>
 );
 

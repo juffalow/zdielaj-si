@@ -152,6 +152,10 @@
       "clarifyingText": "Maybe you typed in wrong address, used an old link or the album was deleted.",
       "ctaButton": "Back to home page"
     },
+    "filesRejectionError": {
+      "fileTooLarge": "At least one file is too large!",
+      "tooManyFiles": "Too many files selected!"
+    },
     "userAlbum": {
       "name": "Name",
       "namePlaceholder": "Enter the name of the album",

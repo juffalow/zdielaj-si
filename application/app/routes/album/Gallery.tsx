@@ -5,6 +5,7 @@ import lgVideo from 'lightgallery/plugins/video';
 import GalleryItems from './GalleryItems';
 import UpdateForm from './UpdateForm';
 import MobileBottomButton from './MobileBottomButton';
+import FilesRejectionError from './FilesRejectionError';
 import useAuth from '../../utils/useAuth';
 import useUpload from '../../utils/useUpload';
 import 'lightgallery/css/lightgallery.css';
@@ -19,6 +20,17 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
   return (
     <div id="zdielaj-si-gallery">
       <title>{album.name || 'Album'}</title>
+
+      {
+        files.filter((file: any) => (file.hasError === true && file.error.code === 'file-too-large')).length > 0 ? (
+          <FilesRejectionError code="file-too-large" />
+        ) : null
+      }
+      {
+        files.filter((file: any) => (file.hasError === true && file.error.code === 'too-many-files')).length > 0 ? (
+          <FilesRejectionError code="too-many-files" />
+        ) : null
+      }
 
       {
         (user !== null && 'user' in album && user.id === album.user.id) || 'token' in album ? (

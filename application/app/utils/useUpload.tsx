@@ -14,6 +14,7 @@ interface UploadContextType {
   clear: () => void,
   uploadFile: (file: FileWithPath, url: string, fields: Record<string, string>) => Promise<void>;
   uploadFiles: (files: FileWithPath[], uploadParams: { url: string, fields: Record<string, string> }[]) => Promise<void>;
+  rejectedFiles: (fileRejections: any) => void;
 }
 
 const UploadContext = createContext<UploadContextType>(
@@ -40,7 +41,7 @@ export function UploadProvider({ children }: { children: ReactNode }): React.Rea
   }
 
   const uploadFiles = async (acceptedFiles: any, uploadParams: { url: string, fields: Record<string, string> }[]): Promise<void> => {
-    setFiles(files.concat(acceptedFiles.map((file: any) => ({
+    setFiles((files) => files.concat(acceptedFiles.map((file: any) => ({
       ...file,
       name: file.name,
       type: file.type,
@@ -48,28 +49,60 @@ export function UploadProvider({ children }: { children: ReactNode }): React.Rea
       preview: URL.createObjectURL(file),
       isUploading: false,
       isDone: false,
+      hasError: false,
     }))));
 
     const worker = async () => {
-      while (acceptedFiles.length > 0) {
-        const file = acceptedFiles.shift();
-        const { url, fields } = uploadParams.shift() as { url: string, fields: Record<string, string> };
-
-        logger.debug('Uploading file...', file);
-
-        const start = performance.now();
-
-        setFiles(fs => fs.map(f => f.path === file.path ? { ...f, isUploading: true } : f));
-
-        await uploadFile(file as File, url as string, fields as Record<string, string>);
-
-        setUploadSpeed((file.size / ((performance.now() - start) / 1000)) * 3);
-
-        setFiles(fs => fs.map(f => f.path === file.path ? { ...f, isUploading: false, isDone: true } : f));
+      if (acceptedFiles.length === 0) {
+        return false;
       }
+
+      const file = acceptedFiles.shift();
+      const { url, fields } = uploadParams.shift() as { url: string, fields: Record<string, string> };
+
+      logger.debug('Uploading file...', file);
+
+      setFiles(fs => fs.map(f => f.path === file.path ? { ...f, isUploading: true } : f));
+
+      const start = performance.now();
+
+      await uploadFile(file as File, url as string, fields as Record<string, string>);
+
+      setUploadSpeed((file.size / ((performance.now() - start) / 1000)) * 3);
+      setFiles(fs => fs.map(f => f.path === file.path ? { ...f, isUploading: false, isDone: true } : f));
+
+      return true
     };
 
-    await Promise.all(Array.from({ length: 2 }, () => worker()));
+    async function runWorker() {
+      const result = await worker();
+
+      if (result) {
+        runWorker();
+      }
+    }
+
+    await Promise.all(
+      Array.from({ length: 2 },
+      runWorker
+    ));
+  }
+
+  const rejectedFiles = (fileRejections: any) => {
+    setFiles((files) =>files.concat(fileRejections.map((fileRejection: any) => ({
+      ...fileRejection.file,
+      name: fileRejection.file.name,
+      type: fileRejection.file.type,
+      size: fileRejection.file.size,
+      preview: URL.createObjectURL(fileRejection.file),
+      isUploading: false,
+      isDone: true,
+      hasError: true,
+      error: {
+        message: fileRejection.errors[0].message,
+        code: fileRejection.errors[0].code,
+      },
+    }))));
   }
 
   function clear() {
@@ -83,6 +116,7 @@ export function UploadProvider({ children }: { children: ReactNode }): React.Rea
       clear,
       uploadFile,
       uploadFiles,
+      rejectedFiles,
     }),
     [ files ]
   );
