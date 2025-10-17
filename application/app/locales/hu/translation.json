@@ -26,7 +26,9 @@
       "signIn": "Bejelentkezés",
       "signUp": "Regisztráció",
       "signOut": "Kijelentkezés",
-      "subscription": "Előfizetés"
+      "subscription": "Előfizetés",
+      "navbarToggleOpen": "Menü megnyitása",
+      "navbarToggleClose": "Menü bezárása"
     },
     "footer": {
       "about": "Rólunk",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Adja meg jelszavát",
       "forgotPassword": "Elfelejtette jelszavát?",
       "signInButton": "Bejelentkezés"
+    },
+    "google": {
+      "dividerText": "Vagy folytatás",
+      "signInButton": "Bejelentkezés Google-val"
     },
     "totp": {
       "totpCode": "Kód",

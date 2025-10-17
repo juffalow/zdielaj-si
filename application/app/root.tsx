@@ -34,7 +34,7 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  const language = location.pathname.split('/')[1];
+  const language = location.pathname.split('/')[1] || 'en';
 
   if (i18n.resolvedLanguage !== language) {
     location.pathname !== '/' && i18n.changeLanguage(location.pathname.split('/')[1]);
@@ -52,7 +52,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
           import.meta.env.VITE_NODE_ENV === 'production' && (
             <>
               <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5C0P73E1C"></script>
-              <script async src="/gtag.js"></script>
+              <script dangerouslySetInnerHTML={{ __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-X5C0P73E1C');
+              `}} />
             </>
           )
         }

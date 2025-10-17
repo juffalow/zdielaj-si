@@ -26,7 +26,9 @@
       "signIn": "Prihlásiť sa",
       "signUp": "Registrovať sa",
       "signOut": "Odhlásiť sa",
-      "subscription": "Predplatné"
+      "subscription": "Predplatné",
+      "navbarToggleOpen": "Otvoriť menu",
+      "navbarToggleClose": "Zavrieť menu"
     },
     "footer": {
       "about": "O aplikácii",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Zadajte vaše heslo",
       "forgotPassword": "Zabudli ste heslo?",
       "signInButton": "Prihlásiť sa"
+    },
+    "google": {
+      "dividerText": "Alebo pokračovať s",
+      "signInButton": "Prihlásiť sa s Google"
     },
     "totp": {
       "totpCode": "Kód",

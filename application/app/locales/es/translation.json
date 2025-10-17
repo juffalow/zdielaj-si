@@ -26,7 +26,9 @@
       "signIn": "Iniciar sesión",
       "signUp": "Registrarse",
       "signOut": "Cerrar sesión",
-      "subscription": "Suscripción"
+      "subscription": "Suscripción",
+      "navbarToggleOpen": "Abrir menú",
+      "navbarToggleClose": "Cerrar menú"
     },
     "footer": {
       "about": "Acerca de",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Introduce tu contraseña",
       "forgotPassword": "¿Olvidaste tu contraseña?",
       "signInButton": "Iniciar sesión"
+    },
+    "google": {
+      "dividerText": "O continuar con",
+      "signInButton": "Iniciar sesión con Google"
     },
     "totp": {
       "totpCode": "Código",

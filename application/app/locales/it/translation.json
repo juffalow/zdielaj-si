@@ -26,7 +26,9 @@
       "signIn": "Accedi",
       "signUp": "Registrati",
       "signOut": "Esci",
-      "subscription": "Abbonamento"
+      "subscription": "Abbonamento",
+      "navbarToggleOpen": "Apri menu",
+      "navbarToggleClose": "Chiudi menu"
     },
     "footer": {
       "about": "Chi siamo",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Inserisci la tua password",
       "forgotPassword": "Hai dimenticato la password?",
       "signInButton": "Accedi"
+    },
+    "google": {
+      "dividerText": "O continuare con",
+      "signInButton": "Accedi con Google"
     },
     "totp": {
       "totpCode": "Codice",

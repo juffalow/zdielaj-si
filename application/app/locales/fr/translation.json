@@ -26,7 +26,9 @@
       "signIn": "Se connecter",
       "signUp": "S'inscrire",
       "signOut": "Se déconnecter",
-      "subscription": "Abonnement"
+      "subscription": "Abonnement",
+      "navbarToggleOpen": "Ouvrir le menu",
+      "navbarToggleClose": "Fermer le menu"
     },
     "footer": {
       "about": "À propos",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Entrez votre mot de passe",
       "forgotPassword": "Mot de passe oublié ?",
       "signInButton": "Se connecter"
+    },
+    "google": {
+      "dividerText": "Ou continuer avec",
+      "signInButton": "Se connecter avec Google"
     },
     "totp": {
       "totpCode": "Code",

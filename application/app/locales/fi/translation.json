@@ -26,7 +26,9 @@
       "signIn": "Kirjaudu sisään",
       "signUp": "Rekisteröidy",
       "signOut": "Kirjaudu ulos",
-      "subscription": "Tilaus"
+      "subscription": "Tilaus",
+      "navbarToggleOpen": "Avaa menu",
+      "navbarToggleClose": "Sulje menu"
     },
     "footer": {
       "about": "Tietoa meistä",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Syötä salasanasi",
       "forgotPassword": "Unohditko salasanasi?",
       "signInButton": "Kirjaudu sisään"
+    },
+    "google": {
+      "dividerText": "Tai jatkaa",
+      "signInButton": "Kirjaudu sisään Googlella"
     },
     "totp": {
       "totpCode": "Koodi",

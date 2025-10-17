@@ -70,8 +70,10 @@ export default function menu() {
     <Navbar onMenuOpenChange={setIsMenuOpen} isMenuOpen={isMenuOpen} position="static" maxWidth="full" isBordered>
       <NavbarContent>
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={isMenuOpen ? t('navbarToggleClose') : t('navbarToggleOpen')}
           className="sm:hidden"
+          as={"a"}
+          role="button"
         />
         <NavbarBrand>
           <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}`} className="font-bold text-inherit" data-tracking-id="desktop_menu_home_click">Zdielaj.si</Link>

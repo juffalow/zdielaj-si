@@ -26,7 +26,9 @@
       "signIn": "Logga in",
       "signUp": "Registrera",
       "signOut": "Logga ut",
-      "subscription": "Prenumeration"
+      "subscription": "Prenumeration",
+      "navbarToggleOpen": "Öppna meny",
+      "navbarToggleClose": "Stäng meny"
     },
     "footer": {
       "about": "Om oss",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Ange ditt lösenord",
       "forgotPassword": "Glömt ditt lösenord?",
       "signInButton": "Logga in"
+    },
+    "google": {
+      "dividerText": "Eller fortsätta med",
+      "signInButton": "Logga in med Google"
     },
     "totp": {
       "totpCode": "Kod",

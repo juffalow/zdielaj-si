@@ -26,7 +26,9 @@
       "signIn": "Sign in",
       "signUp": "Sign up",
       "signOut": "Sign out",
-      "subscription": "Subscription"
+      "subscription": "Subscription",
+      "navbarToggleOpen": "Open menu",
+      "navbarToggleClose": "Close menu"
     },
     "footer": {
       "about": "About",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Enter your password",
       "forgotPassword": "Forgot your password?",
       "signInButton": "Sign in"
+    },
+    "google": {
+      "dividerText": "Or continue with",
+      "signInButton": "Sign in with Google"
     },
     "totp": {
       "totpCode": "Code",

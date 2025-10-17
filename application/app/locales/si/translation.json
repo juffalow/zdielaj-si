@@ -26,7 +26,9 @@
       "signIn": "Prijava",
       "signUp": "Registracija",
       "signOut": "Odjava",
-      "subscription": "Naročnina"
+      "subscription": "Naročnina",
+      "navbarToggleOpen": "Odpri meni",
+      "navbarToggleClose": "Zapri meni"
     },
     "footer": {
       "about": "O nas",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Vnesite svoje geslo",
       "forgotPassword": "Ste pozabili geslo?",
       "signInButton": "Prijava"
+    },
+    "google": {
+      "dividerText": "Ali še naprej z",
+      "signInButton": "Prijava z Google"
     },
     "totp": {
       "totpCode": "Koda",

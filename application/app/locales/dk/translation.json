@@ -26,7 +26,9 @@
       "signIn": "Log ind",
       "signUp": "Registrer",
       "signOut": "Log ud",
-      "subscription": "Abonnement"
+      "subscription": "Abonnement",
+      "navbarToggleOpen": "Åbn menu",
+      "navbarToggleClose": "Luk menu"
     },
     "footer": {
       "about": "Om os",
@@ -102,6 +104,10 @@
       "passwordPlaceholder": "Indtast din adgangskode",
       "forgotPassword": "Glemt din adgangskode?",
       "signInButton": "Log ind"
+    },
+    "google": {
+      "dividerText": "Eller fortsæt med",
+      "signInButton": "Log ind med Google"
     },
     "totp": {
       "totpCode": "Kode",
