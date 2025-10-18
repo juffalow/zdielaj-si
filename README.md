@@ -1,17 +1,59 @@
-# Zdielaj si
+# Zdielaj.si
 
-Sluzba na zdielanie fotiek a videi v plnej kvalite.
+The application helps users quickly and easily share photos and videos without reducing quality.
 
-## Co potrebuje
+## Required AWS services
 
-* [UserService](https://github.com/openservices-dev/aws-user-service) pre spravu uzivatelov (registracia, login, ...)
-* [UploadService](https://github.com/openservices-dev/aws-upload-service) pre ukladanie suborov, generovanie thumbnailov a nahladov pre video
-* [NotificationService](https://github.com/juffalow/notification-service) pre odosielanie notifikacii uzivatelom
+* S3
+* CloudFront
+* Cognito
+* Lambda
+* DynamoDB
+* API Gateway
+* Media Convert
 
-## Ako spustit projekt
+## Run frontend app
 
 ```shell
-docker-compose up
+cd application/
+
+npm install
+
+npm run dev
+```
+
+## User flows
+
+### Basic communication
+
+```mermaid
+flowchart TD
+    User(["User"]) --> APIGW{{"API Gateway"}}
+    APIGW --> Lambda{{"Lambda"}}
+    APIGW --> C{{Cognito}}
+    Lambda --> C
+    Lambda --> DDB{{"DynamoDB"}}
+    Lambda --> CF{{CloudFront}}
+    Lambda --> S3{{S3}}
+```
+
+### Upload fllow
+
+```mermaid
+flowchart TD
+    User(["User"]) --> |presigned post request| S3{{S3}}
+    S3{{S3}} --> |.mov .avi| Lambda{{Lambda}}
+    Lambda --> |video to mp4 and preview images| MC{{MediaConvert}}
+```
+
+### View flow
+
+```mermaid
+flowchart TD
+    User(["User"]) --> CF{{CloudFront}}
+    CF --> S3{{S3}}
+    S3 --> |image preview does not exist| Lambda{{Lambda}}
+    Lambda --> |generate image preview| S3
 ```
 
 ## License
