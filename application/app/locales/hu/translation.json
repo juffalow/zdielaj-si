@@ -324,5 +324,8 @@
       "title": "Hogyan lehet kapcsolatba lépni a Zdielaj.si-vel kérdésekkel?",
       "paragraph1": "Kapcsolatba léphet velünk e-mail küldésével az <mailto>info@zdielaj.si</mailto> címre."
     }
+  },
+  "subscription": {
+    "title": "Előfizetés"
   }
 }

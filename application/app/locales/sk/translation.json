@@ -324,5 +324,8 @@
       "title": "Ako kontaktovať Zdielaj.si s otázkami?",
       "paragraph1": "Môžete nás kontaktovať zaslaním e-mailu na <mailto>info@zdielaj.si</mailto>."
     }
+  },
+  "subscription": {
+    "title": "Predplatné"
   }
 }

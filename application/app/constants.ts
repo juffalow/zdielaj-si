@@ -9,6 +9,7 @@ export const ROUTES = {
     profile: 'profile',
     publicProfile: 'profile/:id',
     privacyPolicy: 'privacy-policy',
+    subscription: 'subscription',
   },
   sk: {
     prefix: 'sk/',
@@ -20,6 +21,7 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'zasady-ochrany-osobnych-udajov',
+    subscription: 'predplatne',
   },
   cz: {
     prefix: 'cz/',
@@ -31,6 +33,7 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'zasady-ochrany-osobnich-udaju',
+    subscription: 'predplatne',
   },
   de: {
     prefix: 'de/',
@@ -42,6 +45,7 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'datenschutz',
+    subscription: 'abonnement',
   },
   es: {
     prefix: 'es/',
@@ -53,6 +57,7 @@ export const ROUTES = {
     profile: 'perfil',
     publicProfile: 'perfil/:id',
     privacyPolicy: 'politica-de-privacidad',
+    subscription: 'suscripcion',
   },
   fr: {
     prefix: 'fr/',
@@ -64,6 +69,7 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'politique-de-confidentialite',
+    subscription: 'abonnement',
   },
   it: {
     prefix: 'it/',
@@ -75,6 +81,7 @@ export const ROUTES = {
     profile: 'profilo',
     publicProfile: 'profilo/:id',
     privacyPolicy: 'politica-di-privacy',
+    subscription: 'abbonamento',
   },
   pl: {
     prefix: 'pl/',
@@ -86,6 +93,7 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'prawilnik-o-zasebnosti',
+    subscription: 'subskrypcja',
   },
   nl: {
     prefix: 'nl/',
@@ -97,6 +105,7 @@ export const ROUTES = {
     profile: 'profiel',
     publicProfile: 'profiel/:id',
     privacyPolicy: 'privacy-policy',
+    subscription: 'abonnement',
   },
   si: {
     prefix: 'si/',
@@ -108,6 +117,7 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'pravilnik-o-zasebnosti',
+    subscription: 'prenumerata',
   },
   fi: {
     prefix: 'fi/',
@@ -119,6 +129,7 @@ export const ROUTES = {
     profile: 'profiili',
     publicProfile: 'profiili/:id',
     privacyPolicy: 'tietosuojakaytannos',
+    subscription: 'tilaus',
   },
   se: {
     prefix: 'se/',
@@ -130,6 +141,7 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'integritetspolicy',
+    subscription: 'prenumeration',
   },
   no: {
     prefix: 'no/',
@@ -141,6 +153,7 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'personvern',
+    subscription: 'abonnement',
   },
   dk: {
     prefix: 'dk/',
@@ -152,6 +165,7 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'personvern',
+    subscription: 'abonnement',
   },
   hu: {
     prefix: 'hu/',
@@ -163,5 +177,6 @@ export const ROUTES = {
     profile: 'profil',
     publicProfile: 'profil/:id',
     privacyPolicy: 'adatvedelmi-szabalyzat',
+    subscription: 'elofizetes',
   },
 };

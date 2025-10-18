@@ -324,5 +324,8 @@
       "title": "Hur kontaktar man Zdielaj.si med frågor?",
       "paragraph1": "Du kan kontakta oss genom att skicka ett e-postmeddelande till <mailto>info@zdielaj.si</mailto>."
     }
+  },
+  "subscription": {
+    "title": "Prenumeration"
   }
 }

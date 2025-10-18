@@ -328,5 +328,8 @@
       "title": "How to contact Zdielaj.si with questions?",
       "paragraph1": "You can contact us by sending an email to <mailto>info@zdielaj.si</mailto>."
     }
+  },
+  "subscription": {
+    "title": "Subscription"
   }
 }

@@ -324,5 +324,8 @@
       "title": "Kako kontaktirati Zdielaj.si z vprašanji?",
       "paragraph1": "Lahko nas kontaktirate tako, da pošljete e-pošto na <mailto>info@zdielaj.si</mailto>."
     }
+  },
+  "subscription": {
+    "title": "Prenumerata"
   }
 }

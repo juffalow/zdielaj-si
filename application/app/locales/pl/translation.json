@@ -324,5 +324,8 @@
       "title": "Jak skontaktować się z Zdielaj.si w sprawie pytań?",
       "paragraph1": "Możesz skontaktować się z nami, wysyłając e-mail na adres <mailto>info@zdielaj.si</mailto>."
     }
+  },
+  "subscription": {
+    "title": "Subskrypcja"
   }
 }

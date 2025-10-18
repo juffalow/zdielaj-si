@@ -324,5 +324,8 @@
       "title": "Miten ottaa yhteyttä Zdielaj.si:hin kysymysten kanssa?",
       "paragraph1": "Voit ottaa meihin yhteyttä lähettämällä sähköpostia osoitteeseen <mailto>info@zdielaj.si</mailto>."
     }
+  },
+  "subscription": {
+    "title": "Tilaus"
   }
 }

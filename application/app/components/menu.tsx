@@ -84,17 +84,17 @@ export default function menu() {
         user !== null ? (
           <NavbarContent className="hidden sm:flex gap-4" justify="center">
             <NavbarItem>
-              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('albums', { keyPrefix: 'routes' })}`} color="foreground" data-tracking-id="desktop_menu_albums_click">
+              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].albums}`} color="foreground" data-tracking-id="desktop_menu_albums_click">
                 {t('albums')}
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('userProfile', { keyPrefix: 'routes' })}`} color="foreground" data-tracking-id="desktop_menu_profile_click">
+              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].profile}`} color="foreground" data-tracking-id="desktop_menu_profile_click">
                 {t('profile')}
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('subscription', { keyPrefix: 'routes' })}`} color="foreground" data-tracking-id="desktop_menu_subscription_click">
+              <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].subscription}`} color="foreground" data-tracking-id="desktop_menu_subscription_click">
                 {t('subscription')}
               </Link>
             </NavbarItem>
@@ -107,10 +107,10 @@ export default function menu() {
           user === null ? (
             <>
               <NavbarItem className="hidden sm:flex">
-                <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signIn', { keyPrefix: 'routes' })}`} data-tracking-id="desktop_menu_sign_in_click">{t('signIn')}</Link>
+                <Link as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`} data-tracking-id="desktop_menu_sign_in_click">{t('signIn')}</Link>
               </NavbarItem>
               <NavbarItem className="hidden sm:flex">
-                <Button as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`} color="primary" variant="flat" data-tracking-id="desktop_menu_sign_up_click">
+                <Button as={RouterLink} to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`} color="primary" variant="flat" data-tracking-id="desktop_menu_sign_up_click">
                   {t('signUp')}
                 </Button>
               </NavbarItem>
@@ -199,7 +199,7 @@ export default function menu() {
                   as={RouterLink}
                   className="w-full"
                   color="foreground"
-                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('albums', { keyPrefix: 'routes' })}`}
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].albums}`}
                   onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_albums_click"
@@ -212,7 +212,7 @@ export default function menu() {
                   as={RouterLink}
                   className="w-full"
                   color="foreground"
-                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('userProfile', { keyPrefix: 'routes' })}`}
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].profile}`}
                   onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_profile_click"
@@ -225,7 +225,7 @@ export default function menu() {
                   as={RouterLink}
                   className="w-full"
                   color="foreground"
-                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('subscription', { keyPrefix: 'routes' })}`}
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].subscription}`}
                   onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_subscription_click"
@@ -252,7 +252,7 @@ export default function menu() {
                   as={RouterLink}
                   className="w-full"
                   color="foreground"
-                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signIn', { keyPrefix: 'routes' })}`}
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}
                   onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_sign_in_click"
@@ -265,7 +265,7 @@ export default function menu() {
                   as={RouterLink}
                   className="w-full"
                   color="foreground"
-                  to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`}
+                  to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
                   onClick={() => setIsMenuOpen(false)}
                   size="lg"
                   data-tracking-id="mobile_menu_sign_up_click"

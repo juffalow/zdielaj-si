@@ -324,5 +324,8 @@
       "title": "¿Cómo contactar a Zdielaj.si con preguntas?",
       "paragraph1": "Puedes contactarnos enviando un correo electrónico a <mailto>info@zdielaj.si</mailto>."
     }
+  },
+  "subscription": {
+    "title": "Suscripción"
   }
 }

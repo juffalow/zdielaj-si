@@ -11,6 +11,7 @@ export default [
     route(ROUTES.en.album, 'routes/album.tsx', { id: 'en-album' }),
     route(ROUTES.en.publicProfile, 'routes/publicProfile.tsx', { id: 'en-public-profile' }),
     route(ROUTES.en.profile, 'routes/profile.tsx', { id: 'en-profile' }),
+    route('subscription', 'routes/subscription.tsx', { id: 'en-subscription' }),
     route(ROUTES.en.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'en-privacy-policy' }),
   ]),
   ...prefix(ROUTES.sk.prefix, [
@@ -21,6 +22,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'sk-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'sk-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'sk-profile' }),
+    route('predplatne', 'routes/subscription.tsx', { id: 'sk-subscription' }),
     route(ROUTES.sk.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'sk-privacy-policy' }),
   ]),
   ...prefix(ROUTES.cz.prefix, [
@@ -31,6 +33,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'cz-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'cz-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'cz-profile' }),
+    route('predplatne', 'routes/subscription.tsx', { id: 'cz-subscription' }),
     route(ROUTES.cz.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'cz-privacy-policy' }),
   ]),
   ...prefix(ROUTES.de.prefix, [
@@ -41,6 +44,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'de-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'de-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'de-profile' }),
+    route('abonnement', 'routes/subscription.tsx', { id: 'de-subscription' }),
     route(ROUTES.de.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'de-privacy-policy' }),
   ]),
   ...prefix(ROUTES.es.prefix, [
@@ -51,6 +55,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'es-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'es-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'es-profile' }),
+    route('suscripcion', 'routes/subscription.tsx', { id: 'es-subscription' }),
     route(ROUTES.es.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'es-privacy-policy' }),
   ]),
   ...prefix(ROUTES.fr.prefix, [
@@ -61,6 +66,7 @@ export default [
     route('albumi/:id', 'routes/album.tsx', { id: 'fr-album' }),
     route('profiili/:id', 'routes/publicProfile.tsx', { id: 'fr-public-profile' }),
     route('profiili', 'routes/profile.tsx', { id: 'fr-profile' }),
+    route('abonnement', 'routes/subscription.tsx', { id: 'fr-subscription' }),
     route(ROUTES.fr.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'fr-privacy-policy' }),
   ]),
   ...prefix(ROUTES.it.prefix, [
@@ -71,6 +77,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'it-album' }),
     route('profilo/:id', 'routes/publicProfile.tsx', { id: 'it-public-profile' }),
     route('profilo', 'routes/profile.tsx', { id: 'it-profile' }),
+    route('abbonamento', 'routes/subscription.tsx', { id: 'it-subscription' }),
     route(ROUTES.it.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'it-privacy-policy' }),
   ]),
   ...prefix(ROUTES.pl.prefix, [
@@ -81,6 +88,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'pl-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'pl-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'pl-profile' }),
+    route('subskrypcja', 'routes/subscription.tsx', { id: 'pl-subscription' }),
     route(ROUTES.pl.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'pl-privacy-policy' }),
   ]),
   ...prefix(ROUTES.nl.prefix, [
@@ -91,6 +99,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'nl-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'nl-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'nl-profile' }),
+    route('abonnement', 'routes/subscription.tsx', { id: 'nl-subscription' }),
     route(ROUTES.nl.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'nl-privacy-policy' }),
   ]),
   ...prefix(ROUTES.si.prefix, [
@@ -101,6 +110,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'si-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'si-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'si-profile' }),
+    route('prenumerata', 'routes/subscription.tsx', { id: 'si-subscription' }),
     route(ROUTES.si.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'si-privacy-policy' }),
   ]),
   ...prefix(ROUTES.fi.prefix, [
@@ -111,6 +121,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'fi-album' }),
     route('profiili/:id', 'routes/publicProfile.tsx', { id: 'fi-public-profile' }),
     route('profiili', 'routes/profile.tsx', { id: 'fi-profile' }),
+    route('tilaus', 'routes/subscription.tsx', { id: 'fi-subscription' }),
     route(ROUTES.fi.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'fi-privacy-policy' }),
   ]),
   ...prefix(ROUTES.se.prefix, [
@@ -121,6 +132,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'se-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'se-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'se-profile' }),
+    route('prenumeration', 'routes/subscription.tsx', { id: 'se-subscription' }),
     route(ROUTES.se.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'se-privacy-policy' }),
   ]),
   ...prefix(ROUTES.no.prefix, [
@@ -131,6 +143,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'no-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'no-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'no-profile' }),
+    route('abonnement', 'routes/subscription.tsx', { id: 'no-subscription' }),
     route(ROUTES.no.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'no-privacy-policy' }),
   ]),
   ...prefix(ROUTES.dk.prefix, [
@@ -141,6 +154,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'dk-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'dk-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'dk-profile' }),
+    route('abonnement', 'routes/subscription.tsx', { id: 'dk-subscription' }),
     route(ROUTES.dk.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'dk-privacy-policy' }),
   ]),
   ...prefix(ROUTES.hu.prefix, [
@@ -151,6 +165,7 @@ export default [
     route('album/:id', 'routes/album.tsx', { id: 'hu-album' }),
     route('profil/:id', 'routes/publicProfile.tsx', { id: 'hu-public-profile' }),
     route('profil', 'routes/profile.tsx', { id: 'hu-profile' }),
+    route('elofizetes', 'routes/subscription.tsx', { id: 'hu-subscription' }),
     route(ROUTES.hu.privacyPolicy, 'routes/privacyPolicy.tsx', { id: 'hu-privacy-policy' }),
   ]),
   route('album/:id', 'routes/album.tsx'),
