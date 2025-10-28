@@ -4,6 +4,7 @@ type UploadedFile = import('react-dropzone').FileWithPath & {
   size: number;
   preview: string;
   isUploading: boolean;
+  isDone: boolean;
   hasError: boolean;
   error?: {
     message: string;
