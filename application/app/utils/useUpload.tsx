@@ -12,6 +12,7 @@ interface UploadContextType {
   files: UploadedFile[];
   uploadSpeed: number;
   clear: () => void,
+  stashFiles: (files: FileWithPath[]) => void,
   uploadFile: (file: FileWithPath, url: string, fields: Record<string, string>) => Promise<void>;
   uploadFiles: (files: FileWithPath[], uploadParams: { url: string, fields: Record<string, string> }[]) => Promise<void>;
   rejectedFiles: (fileRejections: any) => void;
@@ -24,6 +25,19 @@ const UploadContext = createContext<UploadContextType>(
 export function UploadProvider({ children }: { children: ReactNode }): React.ReactNode {
   const [ files, setFiles ] = useState<UploadedFile[]>([]);
   const [ uploadSpeed, setUploadSpeed ] = useState(0);
+
+  const stashFiles = (acceptedFiles: FileWithPath[]) => {
+    setFiles(files => files.concat(acceptedFiles.map(file => ({
+      ...file,
+      name: file.name,
+      type: file.type,
+      size: file.size,
+      preview: URL.createObjectURL(file),
+      isUploading: false,
+      isDone: false,
+      hasError: false,
+    }))));
+  }
 
   const uploadFile = async (file: any, url: string, fields: Record<string, string>): Promise<void> => {
     const formData = new FormData();
@@ -40,24 +54,14 @@ export function UploadProvider({ children }: { children: ReactNode }): React.Rea
     });
   }
 
-  const uploadFiles = async (acceptedFiles: any, uploadParams: { url: string, fields: Record<string, string> }[]): Promise<void> => {
-    setFiles((files) => files.concat(acceptedFiles.map((file: any) => ({
-      ...file,
-      name: file.name,
-      type: file.type,
-      size: file.size,
-      preview: URL.createObjectURL(file),
-      isUploading: false,
-      isDone: false,
-      hasError: false,
-    }))));
-
+  const uploadFiles = async (acceptedFiles: FileWithPath[], uploadParams: { url: string, fields: Record<string, string> }[]): Promise<void> => {
     const worker = async () => {
-      if (acceptedFiles.length === 0) {
+      const file = acceptedFiles.shift();      
+
+      if (typeof file === 'undefined') {
         return false;
       }
 
-      const file = acceptedFiles.shift();
       const { url, fields } = uploadParams.shift() as { url: string, fields: Record<string, string> };
 
       logger.debug('Uploading file...', file);
@@ -71,7 +75,7 @@ export function UploadProvider({ children }: { children: ReactNode }): React.Rea
       setUploadSpeed((file.size / ((performance.now() - start) / 1000)) * 3);
       setFiles(fs => fs.map(f => f.path === file.path ? { ...f, isUploading: false, isDone: true } : f));
 
-      return true
+      return true;
     };
 
     async function runWorker() {
@@ -114,6 +118,7 @@ export function UploadProvider({ children }: { children: ReactNode }): React.Rea
       files,
       uploadSpeed,
       clear,
+      stashFiles,
       uploadFile,
       uploadFiles,
       rejectedFiles,

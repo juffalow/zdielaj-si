@@ -56,7 +56,7 @@ export default function Home() {
   const { t } = useTranslation('', { keyPrefix: 'home' });
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { clear, uploadFiles, rejectedFiles } = useUpload();
+  const { clear, uploadFiles, rejectedFiles, stashFiles } = useUpload();
   const [ album, setAlbum ] = useState<Album | null>(null);
   const [ _, startTransition ] = useTransition();
 
@@ -64,6 +64,8 @@ export default function Home() {
     if (album === null) {
       return;
     }
+
+    stashFiles(acceptedFiles);
 
     if (fileRejections.length > 0) {
       rejectedFiles(fileRejections);
