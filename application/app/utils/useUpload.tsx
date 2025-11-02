@@ -6,6 +6,7 @@ import {
 } from 'react';
 import type { ReactNode } from 'react';
 import type { FileWithPath } from 'react-dropzone';
+import pRetry from 'p-retry';
 import logger from '../logger';
 
 interface UploadContextType {
@@ -13,7 +14,6 @@ interface UploadContextType {
   uploadSpeed: number;
   clear: () => void,
   stashFiles: (files: FileWithPath[]) => void,
-  uploadFile: (file: FileWithPath, url: string, fields: Record<string, string>) => Promise<void>;
   uploadFiles: (files: FileWithPath[], uploadParams: { url: string, fields: Record<string, string> }[]) => Promise<void>;
   rejectedFiles: (fileRejections: any) => void;
 }
@@ -70,7 +70,7 @@ export function UploadProvider({ children }: { children: ReactNode }): React.Rea
 
       const start = performance.now();
 
-      await uploadFile(file as File, url as string, fields as Record<string, string>);
+      await pRetry(() => uploadFile(file as File, url as string, fields as Record<string, string>), { retries: 5 });
 
       setUploadSpeed((file.size / ((performance.now() - start) / 1000)) * 3);
       setFiles(fs => fs.map(f => f.path === file.path ? { ...f, isUploading: false, isDone: true } : f));
@@ -119,7 +119,6 @@ export function UploadProvider({ children }: { children: ReactNode }): React.Rea
       uploadSpeed,
       clear,
       stashFiles,
-      uploadFile,
       uploadFiles,
       rejectedFiles,
     }),
