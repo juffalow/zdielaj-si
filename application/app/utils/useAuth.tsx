@@ -96,7 +96,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
           setLastUpdate(new Date());
         }
       } catch (error) {
-        logger.debug('Authentication initialization failed, user not logged in');
+        logger.debug('Authentication initialization failed, user not logged in', { error });
         setUser(null);
       } finally {
         setHasInitialized(true);

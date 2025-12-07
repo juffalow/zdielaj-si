@@ -7,14 +7,14 @@ import {
   protectedPost,
 } from './client';
 
-export async function createAlbum(files: Array<{ name: string, mimetype: string, size: number }>): Promise<Album> {
+export async function createAlbum(files: { name: string, mimetype: string, size: number }[]): Promise<Album> {
   return post<API.Album.CreateAlbumRequest>(`${import.meta.env.VITE_API_URL}/albums`, { files })
     .then((response) => {
       return response.data.album as Album;
     });
 }
 
-export async function createUserAlbum(files: Array<{ name: string, mimetype: string, size: number }>): Promise<Album> {
+export async function createUserAlbum(files: { name: string, mimetype: string, size: number }[]): Promise<Album> {
   return protectedPost<API.Album.CreateAlbumRequest>(`${import.meta.env.VITE_API_URL}/me/albums`, { files })
     .then((response) => {
       return response.data.album as Album;
@@ -57,12 +57,12 @@ export async function deleteUserAlbum(id: ID): Promise<Album> {
     .then(response => response.data.album);
 }
 
-export async function addFilesToAlbum(id: ID, token: string, files: Array<{ name: string, mimetype: string, size: number }>): Promise<Album> {
+export async function addFilesToAlbum(id: ID, token: string, files: { name: string, mimetype: string, size: number }[]): Promise<Album> {
   return protectedPost<any>(`${import.meta.env.VITE_API_URL}/albums/${id}/files`, { token, files })
     .then(response => response.data.album);
 }
 
-export async function addFilesToUserAlbum(id: ID, files: Array<{ name: string, mimetype: string, size: number }>): Promise<Album> {
+export async function addFilesToUserAlbum(id: ID, files: { name: string, mimetype: string, size: number }[]): Promise<Album> {
   return protectedPost<any>(`${import.meta.env.VITE_API_URL}/me/albums/${id}/files`, { files })
     .then(response => response.data.album);
 }

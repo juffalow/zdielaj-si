@@ -1,6 +1,6 @@
 type ID = string;
 
-type AlbumFile = {
+interface AlbumFile {
   id: ID;
   location: string;
   mimetype: string;
@@ -19,7 +19,7 @@ type AlbumLayout = 'cols' | 'rows' | 'tiles';
 type AlbumGaps = 'none' | 'small' | 'medium' | 'large';
 type AlbumRetention = '1' | '7' | '31' | '366' | '0';
 
-type Album = {
+interface Album {
   id: ID;
   user: {
     id: ID;
@@ -43,7 +43,7 @@ type Album = {
   token: string;
 }
 
-type User = {
+interface User {
   id?: ID;
   username?: string;
   email?: string;
@@ -59,7 +59,7 @@ type User = {
   };
 }
 
-type PublicProfile = {
+interface PublicProfile {
   id: ID;
   user?: {
     id: ID;

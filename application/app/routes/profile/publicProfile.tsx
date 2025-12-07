@@ -26,14 +26,20 @@ const PublicProfile: FunctionComponent<Props> = ({ getCurrentUserPublicProfilePr
 
       setFormType('update');
 
-      return publicProfile;
+      return {
+        name: publicProfile.name,
+        slug: publicProfile.id,
+        description: publicProfile.description,
+        error: null,
+      };
     } catch (error) {
       logger.error(error);
 
       return {
-        error: {
-          message: t('profile.publicProfile.createForm.errorMessage')
-        },
+        name: '',
+        slug: '',
+        description: '',
+        error: t('profile.publicProfile.createForm.errorMessage'),
       };
     }
   }

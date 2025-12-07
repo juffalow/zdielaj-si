@@ -1,7 +1,6 @@
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Button, Link } from '@heroui/react';
-import { Link as RouterLink } from 'react-router';
+import { Alert, Button } from '@heroui/react';
 
 interface Props {
   onActivate: () => void;

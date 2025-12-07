@@ -2,13 +2,6 @@ import { useActionState } from 'react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Button, Form, Input } from '@heroui/react';
-import {
-  FaHome,
-  FaFacebook,
-  FaInstagram,
-  FaStrava,
-  FaPinterest,
-} from 'react-icons/fa';
 
 interface Props {
   publicProfile: PublicProfile;

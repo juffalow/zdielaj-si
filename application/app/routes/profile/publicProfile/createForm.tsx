@@ -5,13 +5,13 @@ import { Button, Form, Input } from '@heroui/react';
 import slugify from '@sindresorhus/slugify';
 
 interface Props {
-  onSubmit: (values: any) => object;
+  onSubmit: (values: any) => Promise<{ name: string, slug: string, description: string, error?: string | null }>;
 }
 
 const CreateForm: FunctionComponent<Props> = ({ onSubmit }: Props) => {
   const { t } = useTranslation();
   const [ slug, setSlug ] = useState<string>('');
-  const [state, formAction, isPending] = useActionState(onSubmit, { /* name: '', slug: '', description: ''  */ });
+  const [state, formAction, isPending] = useActionState(onSubmit, { name: '', slug: '', description: '', error: null });
 
   const onChange = (event: any) => {
     if (event.target.name === 'name' || event.target.name === 'slug') {
@@ -29,6 +29,8 @@ const CreateForm: FunctionComponent<Props> = ({ onSubmit }: Props) => {
         type="text"
         name="name"
         errorMessage={t("profile.publicProfile.createForm.mandatoryField")}
+        defaultValue={state.name}
+        onChange={onChange}
       />
       <Input
         isRequired

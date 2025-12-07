@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import type { ReactNode, ErrorInfo } from 'react';
-import { Alert, Button } from '@heroui/react';
+import { Alert } from '@heroui/react';
 import type { APIError } from '../api/errors'
+import logger from '../logger';
 
 interface Props {
   children: ReactNode;
@@ -23,6 +24,7 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   componentDidCatch(error: Error | Error & { response: { url: string, headers: { 'X-Request-Id': string } } }, errorInfo: ErrorInfo) {
+    logger.error('ErrorBoundary catched error!', { error, errorInfo });
     this.setState({ error, hasError: true });
   }
 

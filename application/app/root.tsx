@@ -20,7 +20,7 @@ import BackToOld from './components/BackToOld';
 import i18n from './i18n';
 import './app.css';
 
-typeof import.meta.env.VITE_SENTRY_DSN === 'string' && Sentry.init({
+if (typeof import.meta.env.VITE_SENTRY_DSN === 'string') Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
   integrations: [],
 });
@@ -36,8 +36,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const language = location.pathname.split('/')[1] || 'en';
 
-  if (i18n.resolvedLanguage !== language) {
-    location.pathname !== '/' && i18n.changeLanguage(location.pathname.split('/')[1]);
+  if (i18n.resolvedLanguage !== language && location.pathname !== '/') {
+     i18n.changeLanguage(location.pathname.split('/')[1]);
   }
 
   return (

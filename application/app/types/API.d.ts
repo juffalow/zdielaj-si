@@ -8,12 +8,12 @@ namespace API {
           user: {
             id: ID,
           },
-          files: Array<{
+          files: {
             id: ID,
             mimetype: string,
             size: number,
             uploadUrl: string,
-          }>,
+          }[],
           createdAt: string,
         }
       },

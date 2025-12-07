@@ -15,7 +15,7 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
   const { user } = useAuth();
   const album = use(albumPromise);
   const { files } = useUpload();
-  const [ layout, setLayout ] = useState<'cols' | 'rows' | 'tiles'>(album.layout || 'cols');
+  const [ layout ] = useState<'cols' | 'rows' | 'tiles'>(album.layout || 'cols');
 
   return (
     <div id="zdielaj-si-gallery">

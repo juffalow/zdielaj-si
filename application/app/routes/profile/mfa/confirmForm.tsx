@@ -3,6 +3,7 @@ import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InputOtp, Button } from '@heroui/react';
 import QRCode from 'qrcode';
+import logger from '../../../logger';
 
 interface Props {
   totpSetupDetails: any;
@@ -27,6 +28,7 @@ const Confirm: FunctionComponent<Props> = ({ totpSetupDetails, onValidate, onCon
       await onValidate(code as string);
       setIsOtpValid(true);
     } catch (error) {
+      logger.error(error);
       setIsOtpValid(false);
     }
   };
@@ -36,6 +38,7 @@ const Confirm: FunctionComponent<Props> = ({ totpSetupDetails, onValidate, onCon
       await onValidate(code as string);
       setIsConfirmOtpValid(true);
     } catch (error) {
+      logger.error(error);
       setIsConfirmOtpValid(false);
     }
   };

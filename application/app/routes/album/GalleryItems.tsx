@@ -2,7 +2,7 @@ import { Image, Spinner } from '@heroui/react';
 import type { HTMLAttributes } from 'react';
 import styles from './GalleryItems.module.css';
 
-export default function GalleryItems({ files, layout, gaps }: { files: Array<AlbumFile | UploadedFile>, layout: 'cols' | 'tiles' | 'rows', gaps: 'none' | 'small' | 'medium' | 'large' }) {
+export default function GalleryItems({ files, layout }: { files: (AlbumFile | UploadedFile)[], layout: 'cols' | 'tiles' | 'rows', gaps: 'none' | 'small' | 'medium' | 'large' }) {
   if (layout === 'cols') {
     return (
       <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-2">

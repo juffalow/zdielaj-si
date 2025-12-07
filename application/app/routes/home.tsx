@@ -58,7 +58,7 @@ export default function Home() {
   const { user } = useAuth();
   const { clear, uploadFiles, rejectedFiles, stashFiles } = useUpload();
   const [ album, setAlbum ] = useState<Album | null>(null);
-  const [ _, startTransition ] = useTransition();
+  const [ , startTransition ] = useTransition();
 
   const onDrop = useCallback(async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
     if (album === null) {
