@@ -1,4 +1,4 @@
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Input, Button, Alert } from '@heroui/react';
@@ -7,8 +7,9 @@ import useAuth from '../../utils/useAuth';
 const ChangePasswordForm: FunctionComponent = () => {
   const { t } = useTranslation('', { keyPrefix: 'profile.changePassword' });
   const { updatePassword } = useAuth();
+  const [password, setPassword] = useState('');
 
-  const onSubmit = async (prevState: unknown, state: FormData): Promise<{ currentPassword: string, newPassword: string, confirmPassword: string, errors: string[] }> => {
+  const onSubmit = async (_: unknown, state: FormData): Promise<{ currentPassword: string, newPassword: string, confirmPassword: string, errors: string[] }> => {
     const currentPassword = state.get('currentPassword') as string;
     const newPassword = state.get('newPassword') as string;
     const confirmPassword = state.get('confirmPassword') as string;
@@ -49,8 +50,20 @@ const ChangePasswordForm: FunctionComponent = () => {
         labelPlacement="outside-top"
         name="newPassword"
         type="password"
-        placeholder={t("newPasswordPlaceholder")}
+        autoComplete="new-password"
         defaultValue={state.newPassword}
+        minLength={4}
+        maxLength={256}
+        pattern={"^(?!\\s+)(?!.*\\s+$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$^*.\\[\\]{}()?\"!@#%&/\\\\,><':;|_~`=+\\- ])[A-Za-z0-9$^*.\\[\\]{}()?\"!@#%&/\\\\,><':;|_~`=+\\- ]{8,256}$"}
+        placeholder={t("newPasswordPlaceholder")}
+        onChange={(e) => setPassword(e.target.value)}
+        description={<ul className="list-disc list-inside">
+          <li>{t("passwordRules.minEightCharacters")} { password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+          <li>{t("passwordRules.atLeastOneUppercase")} { password.toLowerCase() !== password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+          <li>{t("passwordRules.atLeastOneLowercase")} { password.toUpperCase() !== password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+          <li>{t("passwordRules.atLeastOneSpecialCharacter")} { password.match(/[^$*.\[\]{}()?"!@#%&/\,><':;|_~`=+-]/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+          <li>{t("passwordRules.atLeastOneNumber")} { password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
+        </ul>}
       />
       
       <Input
@@ -58,6 +71,7 @@ const ChangePasswordForm: FunctionComponent = () => {
         labelPlacement="outside-top"
         name="confirmPassword"
         type="password"
+        autoComplete="new-password"
         placeholder=""
         defaultValue={state.confirmPassword}
       />
