@@ -17,8 +17,20 @@ permissions:
   contents: read
 
 jobs:
+  check:
+    name: Check application
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    - name: Install dependencies
+      run: npm ci
+    - name: Lint
+      run: npm run lint
   deploy_application_stage:
     name: Deploy application to stage
+    needs: [ check ]
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
@@ -45,6 +57,7 @@ jobs:
       run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --paths "/*"
   deploy_application_prod:
     name: Deploy application to production
+    needs: [ check ]
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
