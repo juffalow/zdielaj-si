@@ -34,7 +34,7 @@ jobs:
         audience: sts.amazonaws.com
     - uses: actions/setup-node@v4
       with:
-        node-version: 22
+        node-version: 24
     - name: Install dependencies
       run: npm ci
     - name: Build
@@ -60,7 +60,7 @@ jobs:
         audience: sts.amazonaws.com
     - uses: actions/setup-node@v4
       with:
-        node-version: 22
+        node-version: 24
     - name: Install dependencies
       run: npm ci
     - name: Build
