@@ -1,8 +1,7 @@
-import { Suspense } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import type { Route } from './+types/profile';
 import { useTranslation } from 'react-i18next';
 import { Accordion, AccordionItem } from '@heroui/accordion';
-import NotFound from './albums/notFound';
 import ProfileLoader from './profile/loader';
 import Detail from './profile/detail';
 import ChangePassword from './profile/changePassword';
@@ -42,11 +41,23 @@ export function meta({ location }: Route.MetaArgs) {
 export default function Profile() {
   const { t } = useTranslation('', { keyPrefix: 'profile' });
   const { user } = useAuth(); 
-  const userPromise = getCurrentUser(user?.accessToken as string);
-  const publicProfilePromise = userPromise.then(user => user.publicProfileId ? getPublicProfile(user.publicProfileId as string) : Promise.resolve(null));
+  const [userPromise, setUserPromise] = useState<Promise<User> | null>(null);
+  const [publicProfilePromise, setPublicProfilePromise] = useState<Promise<PublicProfile | null> | null>(null);
+
+  useEffect(() => {
+    if (user === null || userPromise !== null || publicProfilePromise !== null) {
+      return;
+    }
+
+    const currentUserPromise = getCurrentUser();
+
+    setUserPromise(currentUserPromise);
+    setPublicProfilePromise(currentUserPromise.then(user => user.publicProfileId ? getPublicProfile(user.publicProfileId as string) : Promise.resolve(null)));
+  }, [ user ]);
 
   return (
-    <ErrorBoundary notFound={<NotFound />}>
+    <ErrorBoundary>
+      {userPromise && publicProfilePromise ? (
       <Suspense fallback={<ProfileLoader />}>
         <Accordion keepContentMounted={true}>
           <AccordionItem key="1" aria-label={t("detail.title")} title={t("detail.title")} classNames={{ title: "text-xl font-medium" }}>
@@ -69,6 +80,7 @@ export default function Profile() {
           </AccordionItem>
         </Accordion>
       </Suspense>
+      ) : null}
     </ErrorBoundary>
   );
 }
