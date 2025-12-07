@@ -22,6 +22,7 @@ export default function Footer() {
                 Zdielaj.si
               </span>
             </a>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{import.meta.env.VITE_APP_VERSION}</p>
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">2021 - {new Date().getFullYear()}</p>
             <p className="mt-4" style={{ fontSize: '0.9rem' }}>{t("description")}</p>
           </div>
