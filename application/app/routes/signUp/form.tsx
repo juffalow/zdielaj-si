@@ -86,6 +86,9 @@ export default function SignUpForm({
         defaultValue={state.password}
         type="password"
         autoComplete="new-password"
+        minLength={4}
+        maxLength={256}
+        pattern={"^(?!\\s+)(?!.*\\s+$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$^*.\\[\\]{}()?\"!@#%&/\\\\,><':;|_~`=+\\- ])[A-Za-z0-9$^*.\\[\\]{}()?\"!@#%&/\\\\,><':;|_~`=+\\- ]{8,256}$"}
         onChange={(e) => setPassword(e.target.value)}
         description={<ul className="list-disc list-inside">
           <li>{t("passwordRules.minEightCharacters")} { password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
