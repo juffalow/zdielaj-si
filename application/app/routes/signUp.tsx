@@ -3,6 +3,7 @@ import type { Route } from './+types/signUp';
 import { useTranslation } from 'react-i18next';
 import SignUpForm from './signUp/form';
 import useAuth from '../utils/useAuth';
+import GoogleSignUp from './signUp/google';
 import ConfirmForm from './signUp/confirmForm';
 import ThankYou from './signUp/thankYou';
 import { ROUTES } from '../constants';
@@ -86,7 +87,10 @@ export default function SignUp() {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         {
           step === 'form' ? (
-            <SignUpForm signUp={onSubmit} />
+            <>
+              <GoogleSignUp />
+              <SignUpForm signUp={onSubmit} />
+            </>
           ) : step === 'confirm' ? (
             <ConfirmForm onConfirmSubmit={onConfirm} />
           ) : (
