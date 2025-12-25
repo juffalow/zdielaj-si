@@ -59,6 +59,12 @@
         "deletedAfter24Hours": "fotografije bodo samodejno izbrisane po <strong>24 urah</strong>"
       }
     },
+    "uploadInfo": {
+      "maxPhotosForUnregisteredUser": "Maksimal <strong>10</strong> fotografij",
+      "fileSizeForUnregisteredUser": "Velikost datoteke do <strong>10MB</strong>",
+      "retentionPeriodForUnregisteredUser": "Fotografije bodo samodejno izbrisane po <strong>24 urah</strong>",
+      "signInOrSignUp": "<signinlink>Prijavi se</signinlink> za nalaganje več datotek ali <signuplink>registriraj se</signuplink> če še nimate računa."
+    },
     "pricing": {
       "default": {
         "title": "Brez registracije",

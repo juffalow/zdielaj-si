@@ -59,6 +59,12 @@
         "deletedAfter24Hours": "les photos seront automatiquement supprimées après <strong>24 heures</strong>"
       }
     },
+    "uploadInfo": {
+      "maxPhotosForUnregisteredUser": "Maximum de <strong>10</strong> photos",
+      "fileSizeForUnregisteredUser": "Taille de fichier jusqu'à <strong>10MB</strong>",
+      "retentionPeriodForUnregisteredUser": "Les photos seront automatiquement supprimées après <strong>24 heures</strong>",
+      "signInOrSignUp": "<signinlink>Se connecter</signinlink> pour télécharger plus de fichiers ou <signuplink>s'inscrire</signuplink> si vous n'avez pas encore de compte."
+    },
     "pricing": {
       "default": {
         "title": "Sans inscription",

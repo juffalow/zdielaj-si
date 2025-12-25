@@ -59,6 +59,12 @@
         "deletedAfter24Hours": "foton kommer automatiskt att raderas efter <strong>24 timmar</strong>"
       }
     },
+    "uploadInfo": {
+      "maxPhotosForUnregisteredUser": "Maximalt <strong>10</strong> foton",
+      "fileSizeForUnregisteredUser": "Filstorlek upp till <strong>10MB</strong>",
+      "retentionPeriodForUnregisteredUser": "Foton kommer automatiskt att raderas efter <strong>24 timmar</strong>",
+      "signInOrSignUp": "<signinlink>Logga in</signinlink> för att ladda upp fler filer eller <signuplink>registrera</signuplink> om du inte har ett konto ännu."
+    },
     "pricing": {
       "default": {
         "title": "Utan registrering",

@@ -59,6 +59,12 @@
         "deletedAfter24Hours": "billeder slettes automatisk efter <strong>24 timer</strong>"
       }
     },
+    "uploadInfo": {
+      "maxPhotosForUnregisteredUser": "Maksimal <strong>10</strong> billeder",
+      "fileSizeForUnregisteredUser": "Filstørrelse op til <strong>10MB</strong>",
+      "retentionPeriodForUnregisteredUser": "Billeder slettes automatisk efter <strong>24 timer</strong>",
+      "signInOrSignUp": "<signinlink>Log ind</signinlink> for at uploade flere filer eller <signuplink>registrer</signuplink> hvis du ikke har en konto endnu."
+    },
     "pricing": {
       "default": {
         "title": "Uden registrering",

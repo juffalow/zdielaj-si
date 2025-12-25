@@ -59,6 +59,12 @@
         "deletedAfter24Hours": "a fényképek automatikusan törlődnek <strong>24 óra</strong> után"
       }
     },
+    "uploadInfo": {
+      "maxPhotosForUnregisteredUser": "Maximum <strong>10</strong> fénykép",
+      "fileSizeForUnregisteredUser": "Fájlméret legfeljebb <strong>10MB</strong>",
+      "retentionPeriodForUnregisteredUser": "A fényképek automatikusan törlődnek <strong>24 óra</strong> után",
+      "signInOrSignUp": "<signinlink>Bejelentkezés</signinlink> a fényképek feltöltéséhez vagy <signuplink>regisztráció</signuplink> ha még nincs fiókja."
+    },
     "pricing": {
       "default": {
         "title": "Regisztráció nélkül",

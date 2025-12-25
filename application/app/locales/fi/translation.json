@@ -59,6 +59,12 @@
         "deletedAfter24Hours": "kuvat poistetaan automaattisesti <strong>24 tunnin</strong> kuluttua"
       }
     },
+    "uploadInfo": {
+      "maxPhotosForUnregisteredUser": "Enintään <strong>10</strong> kuvaa",
+      "fileSizeForUnregisteredUser": "Tiedostokoko enintään <strong>10MB</strong>",
+      "retentionPeriodForUnregisteredUser": "Kuvat poistetaan automaattisesti <strong>24 tunnin</strong> kuluttua",
+      "signInOrSignUp": "<signinlink>Kirjaudu sisään</signinlink> ladataksesi lisää tiedostoja tai <signuplink>rekisteröidy</signuplink> jos sinulla ei ole vielä tiliä."
+    },
     "pricing": {
       "default": {
         "title": "Ilman rekisteröitymistä",

@@ -4,6 +4,7 @@ import type { Route } from './+types/home';
 import { Card, CardHeader, CardBody, CardFooter, Button } from '@heroui/react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useDropzone, type FileRejection } from 'react-dropzone';
+import UploadInfo from './home/UploadInfo';
 import useAuth from '../utils/useAuth';
 import useUpload from '../utils/useUpload';
 import logger from '../logger';
@@ -136,6 +137,7 @@ export default function Home() {
           <input {...getInputProps()} aria-label="upload files" />
           <p>{t("uploadArea.title")}</p>
           <Button className="mt-5" color="success" variant="solid" size="lg" data-tracking-id="home_upload_button_click" onPress={open}>{t("uploadArea.button")}</Button>
+          <UploadInfo user={user} />
         </div>
       </div>
 
@@ -160,8 +162,8 @@ export default function Home() {
           <CardBody className="px-8">
             <p className="text-center text-3xl">1.99€ / <small className="text-gray-500">{t("pricing.standard.monthly")}</small></p>
             <ul className="list-inside features-list mt-4">
-              <li><Trans i18nKey="home.pricing.standard.maxTenGB"  components={{ small: <small className="text-gray-500" /> }} /></li>
-              <li><Trans i18nKey="home.pricing.standard.maxSizePerFile"  components={{ small: <small className="text-gray-500" /> }} /></li>
+              <li><Trans i18nKey="home.pricing.standard.maxTenGB" components={{ small: <small className="text-gray-500" /> }} /></li>
+              <li><Trans i18nKey="home.pricing.standard.maxSizePerFile" components={{ small: <small className="text-gray-500" /> }} /></li>
               <li>{t("pricing.standard.video")}</li>
               <li>{t("pricing.standard.listOfAlbums")}</li>
               <li>{t("pricing.standard.publicProfile")}</li>

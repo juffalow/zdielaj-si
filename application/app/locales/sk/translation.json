@@ -59,6 +59,12 @@
         "deletedAfter24Hours": "fotky budú automaticky odstránené po <strong>24 hodinách</strong>"
       }
     },
+    "uploadInfo": {
+      "maxPhotosForUnregisteredUser": "Maximálne <strong>10</strong> fotiek",
+      "fileSizeForUnregisteredUser": "Veľkosť súboru do <strong>10MB</strong>",
+      "retentionPeriodForUnregisteredUser": "Fotky budú automaticky odstránené po <strong>24 hodinách</strong>",
+      "signInOrSignUp": "<signinlink>Prihlásiť sa</signinlink> na nahranie viac súborov alebo <signuplink>registrovať sa</signuplink> ak ešte nemáte účet."
+    },
     "pricing": {
       "default": {
         "title": "Bez registrácie",
