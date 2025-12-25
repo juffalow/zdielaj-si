@@ -38,6 +38,7 @@ const GoogleSignIn = () => {
           onClick={handleGoogleSignIn}
           disabled={isLoading}
           className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+          data-tracking-id="sign_in_google_button_click"
         >
           {isLoading ? (
             <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-gray-900" />
