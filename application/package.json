@@ -33,7 +33,7 @@
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-http-backend": "^3.0.2",
     "isbot": "^5.1.27",
-    "lightgallery": "^2.9.0-beta.1",
+    "lightgallery": "^2.9.0",
     "loglevel": "^1.9.2",
     "p-retry": "^6.2.1",
     "qrcode": "^1.5.4",
