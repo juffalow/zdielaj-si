@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
+import useAuth from './useAuth';
 import logger from '../logger';
 
 export default function Tracking() {
   const location = useLocation();
+  const { user } = useAuth();
 
   useEffect(() => {
     setTimeout(() => {
@@ -15,6 +17,14 @@ export default function Tracking() {
       }
     }, 10);
   }, [location]);
+
+  useEffect(() => {
+    if (user) {
+      if ('gtag' in window) (window as any).gtag('set', 'user_id', user.id);
+    } else {
+      if ('gtag' in window) (window as any).gtag('set', 'user_id', undefined);
+    }
+  }, [user]);
 
   useEffect(() => {
     const clickHandler = (event: Event) => {
