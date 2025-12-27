@@ -76,3 +76,5 @@ interface PublicProfile {
   createdAt?: string;
   updatedAt?: string;
 }
+
+type FeatureMap = Record<string, boolean>;
