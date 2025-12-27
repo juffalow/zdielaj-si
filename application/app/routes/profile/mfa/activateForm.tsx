@@ -11,10 +11,12 @@ const Activate: FunctionComponent<Props> = ({ onActivate }: Props) => {
 
   return (
     <Alert color="primary" hideIcon={true}>
-      <p className="text-lg font-medium">{t("profile.mfa.activate.title")}</p>
-      <p>{t("profile.mfa.activate.subtitle")}</p>
+      <p className="text-lg font-medium">{t('profile.mfa.activate.title')}</p>
+      <p>{t('profile.mfa.activate.subtitle')}</p>
       <hr />
-      <Button onPress={onActivate} className="mt-4" color="primary">{t("profile.publicProfile.activate.cta")}</Button>
+      <Button onPress={onActivate} className="mt-4" color="primary">
+        {t('profile.publicProfile.activate.cta')}
+      </Button>
     </Alert>
   );
 };

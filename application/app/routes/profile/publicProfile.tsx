@@ -14,7 +14,7 @@ interface Props {
 const PublicProfile: FunctionComponent<Props> = ({ getCurrentUserPublicProfilePromise }: Props) => {
   const { t } = useTranslation();
   const publicProfile = use(getCurrentUserPublicProfilePromise);
-  const [ formType, setFormType ] = useState<'info' | 'create' | 'update'>(publicProfile === null ? 'info' : 'update');
+  const [formType, setFormType] = useState<'info' | 'create' | 'update'>(publicProfile === null ? 'info' : 'update');
 
   const onActivate = () => {
     setFormType('create');
@@ -22,7 +22,11 @@ const PublicProfile: FunctionComponent<Props> = ({ getCurrentUserPublicProfilePr
 
   const onCreate = async (values: FormData) => {
     try {
-      const publicProfile = await createPublicProfile(values.get('slug') as string, values.get('name') as string, values.get('description') as string);
+      const publicProfile = await createPublicProfile(
+        values.get('slug') as string,
+        values.get('name') as string,
+        values.get('description') as string
+      );
 
       setFormType('update');
 
@@ -42,7 +46,7 @@ const PublicProfile: FunctionComponent<Props> = ({ getCurrentUserPublicProfilePr
         error: t('profile.publicProfile.createForm.errorMessage'),
       };
     }
-  }
+  };
 
   const onUpdate = async (prevState: unknown, values: FormData) => {
     const data = {
@@ -66,31 +70,19 @@ const PublicProfile: FunctionComponent<Props> = ({ getCurrentUserPublicProfilePr
 
       return {
         error: {
-          message: t('profile.publicProfile.updateForm.errorMessage')
-        }
+          message: t('profile.publicProfile.updateForm.errorMessage'),
+        },
       };
     }
-  }
+  };
 
   return (
     <>
-      {
-        publicProfile === null && formType === 'info' ? (
-          <Activate onActivate={onActivate} />
-        ) : null
-      }
-      {
-        formType === 'create' && publicProfile === null ? (
-          <CreateForm
-            onSubmit={onCreate}
-          />
-        ) : null
-      }
-      {
-        formType === 'update' && publicProfile !== null ? (
-          <UpdateForm publicProfile={publicProfile} onSubmit={onUpdate} />
-        ) : null
-      }
+      {publicProfile === null && formType === 'info' ? <Activate onActivate={onActivate} /> : null}
+      {formType === 'create' && publicProfile === null ? <CreateForm onSubmit={onCreate} /> : null}
+      {formType === 'update' && publicProfile !== null ? (
+        <UpdateForm publicProfile={publicProfile} onSubmit={onUpdate} />
+      ) : null}
     </>
   );
 };

@@ -16,7 +16,7 @@ export default function ShortLink() {
       logger.debug('Short link', shortLink);
 
       const albumId = shortLink.album.id;
-      navigate(`/${t("prefix")}${t("album", { keyPrefix: "routes" }).replace(':id', albumId)}`);
+      navigate(`/${t('prefix')}${t('album', { keyPrefix: 'routes' }).replace(':id', albumId)}`);
     };
 
     fetchData();

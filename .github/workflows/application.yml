@@ -24,10 +24,17 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 1
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+        cache: 'npm'
+        cache-dependency-path: './application/package-lock.json'
     - name: Install dependencies
       run: npm ci
     - name: Lint
       run: npm run lint
+    - name: Prettier check
+      run: yarn run prettier:check
   deploy_application_stage:
     name: Deploy application to stage
     needs: [ check ]
@@ -47,6 +54,8 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 24
+        cache: 'npm'
+        cache-dependency-path: './application/package-lock.json'
     - name: Install dependencies
       run: npm ci
     - name: Build
@@ -77,6 +86,8 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 24
+        cache: 'npm'
+        cache-dependency-path: './application/package-lock.json'
     - name: Install dependencies
       run: npm ci
     - name: Build

@@ -1,12 +1,4 @@
-import {
-  isRouteErrorResponse,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLocation,
-} from 'react-router';
+import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
 import { I18nextProvider } from 'react-i18next';
 import { HeroUIProvider } from '@heroui/react';
 import * as Sentry from '@sentry/react';
@@ -20,15 +12,16 @@ import BackToOld from './components/BackToOld';
 import i18n from './i18n';
 import './app.css';
 
-if (typeof import.meta.env.VITE_SENTRY_DSN === 'string') Sentry.init({
-  dsn: import.meta.env.VITE_SENTRY_DSN,
-  integrations: [],
-});
+if (typeof import.meta.env.VITE_SENTRY_DSN === 'string')
+  Sentry.init({
+    dsn: import.meta.env.VITE_SENTRY_DSN,
+    integrations: [],
+  });
 
 export const links: Route.LinksFunction = () => [
   {
-    rel: "icon",
-    href: "/zdielaj-si-small.png",
+    rel: 'icon',
+    href: '/zdielaj-si-small.png',
   },
 ];
 
@@ -37,7 +30,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const language = location.pathname.split('/')[1] || 'en';
 
   if (i18n.resolvedLanguage !== language && location.pathname !== '/') {
-     i18n.changeLanguage(location.pathname.split('/')[1]);
+    i18n.changeLanguage(location.pathname.split('/')[1]);
   }
 
   return (
@@ -48,29 +41,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
 
-        {
-          import.meta.env.VITE_NODE_ENV === 'production' && (
-            <>
-              <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5C0P73E1C"></script>
-              <script dangerouslySetInnerHTML={{ __html: `
+        {import.meta.env.VITE_NODE_ENV === 'production' && (
+          <>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5C0P73E1C"></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', 'G-X5C0P73E1C');
-              `}} />
-            </>
-          )
-        }
+              `,
+              }}
+            />
+          </>
+        )}
       </head>
       <body>
         <I18nextProvider i18n={i18n}>
           <AuthProvider>
-            <UploadProvider>            
+            <UploadProvider>
               <HeroUIProvider className="flex flex-col min-h-svh">
                 <Menu />
-                <main className="flex-grow container mx-auto pt-8 pb-8 px-2 md:px-0">
-                  {children}
-                </main>
+                <main className="flex-grow container mx-auto pt-8 pb-8 px-2 md:px-0">{children}</main>
                 <Footer />
 
                 <Tracking />
@@ -91,16 +84,13 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
+  let message = 'Oops!';
+  let details = 'An unexpected error occurred.';
   let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
-    details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
+    message = error.status === 404 ? '404' : 'Error';
+    details = error.status === 404 ? 'The requested page could not be found.' : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     Sentry.captureException(error);
 

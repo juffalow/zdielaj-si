@@ -10,11 +10,11 @@ interface Props {
 const Detail: FunctionComponent<Props> = ({ getCurrentUserPromise }: Props) => {
   const { t } = useTranslation('', { keyPrefix: 'profile.detail' });
   const user = use(getCurrentUserPromise);
-  
+
   return (
     <Form>
       <Input
-        label={t("email")}
+        label={t('email')}
         labelPlacement="outside"
         name="email"
         defaultValue={user.email}

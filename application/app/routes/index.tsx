@@ -5,6 +5,6 @@ export default function Index() {
   const languageDetector = new detector(null, {});
 
   const lang = languageDetector.detect();
-  
+
   return <Navigate to={`/${lang}`} />;
 }

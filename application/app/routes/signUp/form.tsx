@@ -1,10 +1,5 @@
 import { useActionState, useState } from 'react';
-import {
-  Form,
-  Input,
-  Button,
-  Alert,
-} from '@heroui/react';
+import { Form, Input, Button, Alert } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { ZodError } from 'zod';
 import { signUpFormSchema } from './formValidation';
@@ -45,9 +40,9 @@ export default function SignUpForm({
   };
 
   const [state, formAction, isPending] = useActionState(onSubmit, {
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
     error: null,
   });
 
@@ -88,19 +83,50 @@ export default function SignUpForm({
         autoComplete="new-password"
         minLength={4}
         maxLength={256}
-        pattern={"^(?!\\s+)(?!.*\\s+$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$^*.\\[\\]{}()?\"!@#%&/\\\\,><':;|_~`=+\\- ])[A-Za-z0-9$^*.\\[\\]{}()?\"!@#%&/\\\\,><':;|_~`=+\\- ]{8,256}$"}
+        pattern={
+          '^(?!\\s+)(?!.*\\s+$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ])[A-Za-z0-9$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ]{8,256}$'
+        }
         onChange={(e) => setPassword(e.target.value)}
-        description={<ul className="list-disc list-inside">
-          <li>{t("passwordRules.minEightCharacters")} { password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-          <li>{t("passwordRules.atLeastOneUppercase")} { password.toLowerCase() !== password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-          <li>{t("passwordRules.atLeastOneLowercase")} { password.toUpperCase() !== password ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-          <li>{t("passwordRules.atLeastOneSpecialCharacter")} { password.match(/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-          <li>{t("passwordRules.atLeastOneNumber")} { password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null }</li>
-        </ul>}
+        description={
+          <ul className="list-disc list-inside">
+            <li>
+              {t('passwordRules.minEightCharacters')}{' '}
+              {password.length >= 8 ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null}
+            </li>
+            <li>
+              {t('passwordRules.atLeastOneUppercase')}{' '}
+              {password.toLowerCase() !== password ? (
+                <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span>
+              ) : null}
+            </li>
+            <li>
+              {t('passwordRules.atLeastOneLowercase')}{' '}
+              {password.toUpperCase() !== password ? (
+                <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span>
+              ) : null}
+            </li>
+            <li>
+              {t('passwordRules.atLeastOneSpecialCharacter')}{' '}
+              {password.match(/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/) ? (
+                <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span>
+              ) : null}
+            </li>
+            <li>
+              {t('passwordRules.atLeastOneNumber')}{' '}
+              {password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null}
+            </li>
+          </ul>
+        }
       />
 
       {state.error !== null ? (
-        <Alert color="danger" description={state.error.split(',').map((error) => <p key={error}>{error}!</p>)} hideIcon={true} />
+        <Alert
+          color="danger"
+          description={state.error.split(',').map((error) => (
+            <p key={error}>{error}!</p>
+          ))}
+          hideIcon={true}
+        />
       ) : null}
 
       <Button type="submit" color="primary" fullWidth={true} isDisabled={isPending}>

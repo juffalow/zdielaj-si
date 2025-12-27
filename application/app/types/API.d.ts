@@ -3,44 +3,44 @@ namespace API {
     interface CreateAlbumRequest {
       data: {
         album: {
-          id: ID,
-          name: string,
+          id: ID;
+          name: string;
           user: {
-            id: ID,
-          },
+            id: ID;
+          };
           files: {
-            id: ID,
-            mimetype: string,
-            size: number,
-            uploadUrl: string,
-          }[],
-          createdAt: string,
-        }
-      },
-      error: unknown,
+            id: ID;
+            mimetype: string;
+            size: number;
+            uploadUrl: string;
+          }[];
+          createdAt: string;
+        };
+      };
+      error: unknown;
     }
   }
 
   namespace PublicProfiles {
     interface GetPublicProfileResponse {
       data: {
-        publicProfile: PublicProfile,
-      },
-      error: unknown,
+        publicProfile: PublicProfile;
+      };
+      error: unknown;
     }
 
     interface CreatePublicProfileResponse {
       data: {
-        publicProfile: PublicProfile,
-      },
-      error: unknown,
+        publicProfile: PublicProfile;
+      };
+      error: unknown;
     }
 
     interface UpdatePublicProfileResponse {
       data: {
-        publicProfile: PublicProfile,
-      },
-      error: unknown,
+        publicProfile: PublicProfile;
+      };
+      error: unknown;
     }
   }
 
@@ -49,11 +49,11 @@ namespace API {
       data: {
         shortLink: {
           album: {
-            id: ID,
-          },
-          createdAt: string,
-          id: ID,
-          typename: 'ShortLink',
+            id: ID;
+          };
+          createdAt: string;
+          id: ID;
+          typename: 'ShortLink';
         };
       };
     }
@@ -62,9 +62,9 @@ namespace API {
   interface GetRefreshTokenResponse {
     error: unknown;
     data: {
-      user: {      
+      user: {
         accessToken: string;
-      }
+      };
     };
   }
 

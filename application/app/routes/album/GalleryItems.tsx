@@ -35,14 +35,24 @@ export default function GalleryItems({
             return (file as any).type.startsWith('video') ? (
               <GalleryVideo key={(file as any).name} file={file} style={{ aspectRatio: '1/1' }} />
             ) : (
-              <GalleryImage key={(file as any).name} file={file} downloadButton={features.downloadbutton} style={{ aspectRatio: '1/1' }} />
+              <GalleryImage
+                key={(file as any).name}
+                file={file}
+                downloadButton={features.downloadbutton}
+                style={{ aspectRatio: '1/1' }}
+              />
             );
           }
 
           return file.mimetype.startsWith('video') ? (
             <GalleryVideo key={file.id} file={file} style={{ aspectRatio: '1/1' }} />
           ) : (
-            <GalleryImage key={file.id} file={file} downloadButton={features.downloadbutton} style={{ aspectRatio: '1/1' }} />
+            <GalleryImage
+              key={file.id}
+              file={file}
+              downloadButton={features.downloadbutton}
+              style={{ aspectRatio: '1/1' }}
+            />
           );
         })}
       </div>
@@ -76,7 +86,11 @@ export default function GalleryItems({
   );
 }
 
-const GalleryImage = ({ file, downloadButton, ...props }: { file: AlbumFile | UploadedFile, downloadButton?: boolean } & HTMLAttributes<HTMLElement>) => {
+const GalleryImage = ({
+  file,
+  downloadButton,
+  ...props
+}: { file: AlbumFile | UploadedFile; downloadButton?: boolean } & HTMLAttributes<HTMLElement>) => {
   return (
     <div className="relative">
       {downloadButton && 'preview' in file === false ? (

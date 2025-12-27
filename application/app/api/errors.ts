@@ -13,8 +13,8 @@ export class APIError extends Error {
     this.name = this.constructor.name;
     this.message = message;
     this.code = code;
-    this.response =response;
-    
+    this.response = response;
+
     if ('captureStackTrace' in Error) Error.captureStackTrace(this, this.constructor);
   }
 }

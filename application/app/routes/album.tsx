@@ -8,10 +8,7 @@ import ErrorBoundary from '../components/errorBoundary';
 import useAuth from '../utils/useAuth';
 
 export function meta() {
-  return [
-    { title: "Album" },
-    { name: "description", content: "Album" },
-  ];
+  return [{ title: 'Album' }, { name: 'description', content: 'Album' }];
 }
 
 export default function Album() {
@@ -19,7 +16,7 @@ export default function Album() {
   const params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const [ albumPromise, setAlbumPromise ] = useState<Promise<Album> | null>(null);
+  const [albumPromise, setAlbumPromise] = useState<Promise<Album> | null>(null);
 
   useEffect(() => {
     if (location.state !== null && typeof location.state.album === 'object') {
@@ -38,16 +35,18 @@ export default function Album() {
         }
       });
     }
-  }, [ params.id]);
+  }, [params.id]);
 
   return (
     <ErrorBoundary notFound={<NotFound />}>
-      <Suspense fallback={<GalleryLoader showFormLoader={(location.state !== null && typeof location.state.album === 'object') || (user !== null)} />}>
-        {
-          albumPromise !== null ? (
-            <Gallery albumPromise={albumPromise} />
-          ) : null
+      <Suspense
+        fallback={
+          <GalleryLoader
+            showFormLoader={(location.state !== null && typeof location.state.album === 'object') || user !== null}
+          />
         }
+      >
+        {albumPromise !== null ? <Gallery albumPromise={albumPromise} /> : null}
       </Suspense>
     </ErrorBoundary>
   );

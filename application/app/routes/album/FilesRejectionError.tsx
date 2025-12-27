@@ -6,9 +6,9 @@ export default function FilesRejectionError({ code }: { code: string }) {
 
   switch (code) {
     case 'file-too-large':
-      return <Alert color="danger" title={t("fileTooLarge")} hideIcon={true} classNames={{ base: 'mb-10' }} />;
+      return <Alert color="danger" title={t('fileTooLarge')} hideIcon={true} classNames={{ base: 'mb-10' }} />;
     case 'too-many-files':
-      return <Alert color="danger" title={t("tooManyFiles")} hideIcon={true} classNames={{ base: 'mb-10' }} />;
+      return <Alert color="danger" title={t('tooManyFiles')} hideIcon={true} classNames={{ base: 'mb-10' }} />;
     default:
       return null;
   }

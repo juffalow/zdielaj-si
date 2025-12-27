@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import type { ReactNode, ErrorInfo } from 'react';
 import { Alert } from '@heroui/react';
-import type { APIError } from '../api/errors'
+import type { APIError } from '../api/errors';
 import logger from '../logger';
 
 interface Props {
@@ -23,18 +23,21 @@ class ErrorBoundary extends Component<Props, State> {
     isOpen: false,
   };
 
-  componentDidCatch(error: Error | Error & { response: { url: string, headers: { 'X-Request-Id': string } } }, errorInfo: ErrorInfo) {
+  componentDidCatch(
+    error: Error | (Error & { response: { url: string; headers: { 'X-Request-Id': string } } }),
+    errorInfo: ErrorInfo
+  ) {
     logger.error('ErrorBoundary catched error!', { error, errorInfo });
     this.setState({ error, hasError: true });
   }
 
   onClick = () => {
     this.setState({ isOpen: !this.state.isOpen });
-  }
+  };
 
-  onRefresh =() => {
+  onRefresh = () => {
     location.reload();
-  }
+  };
 
   render() {
     if (this.state.hasError && this.state.error !== null) {
@@ -45,7 +48,7 @@ class ErrorBoundary extends Component<Props, State> {
       if (this.props.fallback) {
         return this.props.fallback;
       }
-      
+
       return (
         <Alert color="warning">
           <h1>Error not found</h1>

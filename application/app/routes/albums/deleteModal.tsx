@@ -1,14 +1,17 @@
 import { useTranslation } from 'react-i18next';
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-} from "@heroui/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from '@heroui/react';
 
-export default function DeleteModal({ isOpen, onConfirm, onOpenChange, onClose }: { isOpen: boolean, onConfirm: () => void, onOpenChange: () => void, onClose: () => void }) {
+export default function DeleteModal({
+  isOpen,
+  onConfirm,
+  onOpenChange,
+  onClose,
+}: {
+  isOpen: boolean;
+  onConfirm: () => void;
+  onOpenChange: () => void;
+  onClose: () => void;
+}) {
   const { t } = useTranslation('', { keyPrefix: 'albums.deleteModal' });
 
   return (

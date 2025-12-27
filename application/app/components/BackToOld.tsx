@@ -1,12 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-} from '@heroui/react';
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react';
 
 export default function BackToOld() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,10 +12,10 @@ export default function BackToOld() {
       if (counter % 3 !== 1) {
         return;
       }
-      
+
       setIsOpen(true);
     });
-    
+
     window.addEventListener('unhandledrejection', () => {
       const counter = parseInt(localStorage.getItem('unhandled-error-detected') || '0') + 1;
       localStorage.setItem('unhandled-error-detected', String(counter));
@@ -50,7 +43,10 @@ export default function BackToOld() {
       <ModalContent>
         <ModalHeader>Unhandled error detected!</ModalHeader>
         <ModalBody>
-          <p>This is a fresh version of the app, which is not yet stable and may contain bugs. The app already notified developers about this problem and it should be resolved in a short time.</p>
+          <p>
+            This is a fresh version of the app, which is not yet stable and may contain bugs. The app already notified
+            developers about this problem and it should be resolved in a short time.
+          </p>
           <p className="italic">If you are experiencing an issue, you can still use the old version of the app.</p>
         </ModalBody>
         <ModalFooter>
@@ -64,4 +60,4 @@ export default function BackToOld() {
       </ModalContent>
     </Modal>
   );
-};
+}

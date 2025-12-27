@@ -20,9 +20,39 @@ const Statistics: FunctionComponent<Props> = ({ getCurrentUserPromise }: Props) 
 
   return (
     <>
-      <p className="mb-2">{t("numberOfAlbums")} <Chip as="span" color={user?.statistics?.albums ? 'success' : 'secondary'} className="float-end" style={{ fontSize: '1rem' }}>{user?.statistics?.albums || 'N/A'}</Chip></p>
-      <p className="mb-2">{t("numberOfFiles")} <Chip as="span" color={user?.statistics?.files ? 'success' : 'secondary'} className="float-end" style={{ fontSize: '1rem' }}>{user?.statistics?.files || 'N/A'}</Chip></p>
-      <p className="mb-2">{t("totalSize")} <Chip as="span" color={user?.statistics?.totalSize ? 'success' : 'secondary'} className="float-end" style={{ fontSize: '1rem' }}>{user?.statistics?.totalSize ? formatBytes(user?.statistics?.totalSize) : 'N/A'}</Chip></p>
+      <p className="mb-2">
+        {t('numberOfAlbums')}{' '}
+        <Chip
+          as="span"
+          color={user?.statistics?.albums ? 'success' : 'secondary'}
+          className="float-end"
+          style={{ fontSize: '1rem' }}
+        >
+          {user?.statistics?.albums || 'N/A'}
+        </Chip>
+      </p>
+      <p className="mb-2">
+        {t('numberOfFiles')}{' '}
+        <Chip
+          as="span"
+          color={user?.statistics?.files ? 'success' : 'secondary'}
+          className="float-end"
+          style={{ fontSize: '1rem' }}
+        >
+          {user?.statistics?.files || 'N/A'}
+        </Chip>
+      </p>
+      <p className="mb-2">
+        {t('totalSize')}{' '}
+        <Chip
+          as="span"
+          color={user?.statistics?.totalSize ? 'success' : 'secondary'}
+          className="float-end"
+          style={{ fontSize: '1rem' }}
+        >
+          {user?.statistics?.totalSize ? formatBytes(user?.statistics?.totalSize) : 'N/A'}
+        </Chip>
+      </p>
     </>
   );
 };

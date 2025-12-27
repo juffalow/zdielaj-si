@@ -12,13 +12,19 @@ const Activate: FunctionComponent<Props> = ({ onActivate }: Props) => {
 
   return (
     <Alert color="primary" hideIcon={true}>
-      <p className="text-lg font-medium">{t("profile.publicProfile.activate.title")}</p>
-      <p>{t("profile.publicProfile.activate.subtitle")}</p>
+      <p className="text-lg font-medium">{t('profile.publicProfile.activate.title')}</p>
+      <p>{t('profile.publicProfile.activate.subtitle')}</p>
       <p className="mb-2">
-        {t("profile.publicProfile.activate.moreInfo")} <Link as={RouterLink} to={`/${t("routes.prefix")}${t("routes.about")}`}>{t("profile.publicProfile.activate.moreInfoLink")}</Link>.
+        {t('profile.publicProfile.activate.moreInfo')}{' '}
+        <Link as={RouterLink} to={`/${t('routes.prefix')}${t('routes.about')}`}>
+          {t('profile.publicProfile.activate.moreInfoLink')}
+        </Link>
+        .
       </p>
       <hr />
-      <Button color="primary" onPress={onActivate}>{t("profile.publicProfile.activate.cta")}</Button>
+      <Button color="primary" onPress={onActivate}>
+        {t('profile.publicProfile.activate.cta')}
+      </Button>
     </Alert>
   );
 };

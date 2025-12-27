@@ -15,44 +15,31 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
   const { user } = useAuth();
   const album = use(albumPromise);
   const { files } = useUpload();
-  const [ layout ] = useState<'cols' | 'rows' | 'tiles'>(album.layout || 'cols');
+  const [layout] = useState<'cols' | 'rows' | 'tiles'>(album.layout || 'cols');
 
   return (
     <div id="zdielaj-si-gallery">
       <title>{album.name || 'Album'}</title>
 
-      {
-        files.filter((file: any) => (file.hasError === true && file.error.code === 'file-too-large')).length > 0 ? (
-          <FilesRejectionError code="file-too-large" />
-        ) : null
-      }
-      {
-        files.filter((file: any) => (file.hasError === true && file.error.code === 'too-many-files')).length > 0 ? (
-          <FilesRejectionError code="too-many-files" />
-        ) : null
-      }
+      {files.filter((file: any) => file.hasError === true && file.error.code === 'file-too-large').length > 0 ? (
+        <FilesRejectionError code="file-too-large" />
+      ) : null}
+      {files.filter((file: any) => file.hasError === true && file.error.code === 'too-many-files').length > 0 ? (
+        <FilesRejectionError code="too-many-files" />
+      ) : null}
 
-      {
-        (user !== null && 'user' in album && user.id === album.user.id) || 'token' in album ? (
-          <>
-            <UpdateForm album={album} />
-            <Divider className="my-10" />
-          </>
-        ) : null
-      }
+      {(user !== null && 'user' in album && user.id === album.user.id) || 'token' in album ? (
+        <>
+          <UpdateForm album={album} />
+          <Divider className="my-10" />
+        </>
+      ) : null}
 
-      {
-        typeof album.name === 'string' && album.name.length > 0 ? (
-          <h1 className="text-center text-5xl font-bold mb-10">{album.name || 'Album'}</h1>
-        ) : null
-      }
+      {typeof album.name === 'string' && album.name.length > 0 ? (
+        <h1 className="text-center text-5xl font-bold mb-10">{album.name || 'Album'}</h1>
+      ) : null}
 
-      <LightGallery
-        plugins={[lgVideo]}
-        download={true}
-        mobileSettings={{download: true}}
-        selector=".gallery-item"
-      >
+      <LightGallery plugins={[lgVideo]} download={true} mobileSettings={{ download: true }} selector=".gallery-item">
         <GalleryItems files={(album as any).media || (album as any).files || files} layout={layout} gaps={album.gaps} />
         <GalleryItems files={files as any} layout={layout} gaps={album.gaps} />
       </LightGallery>

@@ -1,6 +1,4 @@
-import {
-  fetchAuthSession,
-} from 'aws-amplify/auth';
+import { fetchAuthSession } from 'aws-amplify/auth';
 
 export async function getUserIDToken(): Promise<string | null> {
   const session = await fetchAuthSession();

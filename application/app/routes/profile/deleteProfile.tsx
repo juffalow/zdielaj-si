@@ -8,10 +8,16 @@ const DeleteProfile: FunctionComponent = () => {
   return (
     <>
       <p className="mb-4">{t('subtitle')}</p>
-      <Button color="danger" variant="flat" disabled>{t('submitButton')}</Button>
-      <p><small>{t('clarifyingText')} <a href='mailto:info@zdielaj.si'>info@zdielaj.si</a>.</small></p>
+      <Button color="danger" variant="flat" disabled>
+        {t('submitButton')}
+      </Button>
+      <p>
+        <small>
+          {t('clarifyingText')} <a href="mailto:info@zdielaj.si">info@zdielaj.si</a>.
+        </small>
+      </p>
     </>
   );
-}
+};
 
 export default DeleteProfile;

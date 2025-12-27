@@ -1,18 +1,18 @@
-import{ useState } from 'react';
+import { useState } from 'react';
 import { signInWithRedirect } from 'aws-amplify/auth';
 import { FaGoogle } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import logger from '../../logger';
 
 const GoogleSignUp = () => {
-  const { t } = useTranslation("", { keyPrefix: "signIn.google" });
-  const [ isLoading, setIsLoading ] = useState(false);
+  const { t } = useTranslation('', { keyPrefix: 'signIn.google' });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleGoogleSignIn = async () => {
     try {
       setIsLoading(true);
       logger.debug('Initiating Google Sign In with redirect...');
-      
+
       // Start the OAuth flow with Google
       await signInWithRedirect({ provider: 'Google' });
     } catch (error) {
@@ -45,7 +45,7 @@ const GoogleSignUp = () => {
           <div className="w-full border-t border-gray-300" />
         </div>
         <div className="relative flex justify-center text-sm/6">
-          <span className="bg-white px-6 text-gray-500">{t("dividerText")}</span>
+          <span className="bg-white px-6 text-gray-500">{t('dividerText')}</span>
         </div>
       </div>
     </div>

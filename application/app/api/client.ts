@@ -25,8 +25,11 @@ async function handleErrors(response: Response | unknown): Promise<Response> {
   if (!response.ok) {
     if (response.headers.get('Content-Type')?.startsWith('application/json')) {
       const json = await response.json();
-      if ('error' in json && json.error !== null) {        
-        throw new APIError(json.error.message, json.error.code, { url: response.url, status: response.status /*, headers: { 'X-Request-Id': response.headers.get('X-Request-Id') } */ });
+      if ('error' in json && json.error !== null) {
+        throw new APIError(json.error.message, json.error.code, {
+          url: response.url,
+          status: response.status /*, headers: { 'X-Request-Id': response.headers.get('X-Request-Id') } */,
+        });
       }
     }
 
@@ -116,7 +119,11 @@ export async function protectedPost<T>(endpoint: string, data: unknown, options:
     .then(handleSuccess<T>);
 }
 
-export async function protectedPostMultipart(endpoint: string, data: FormData, options = {} as { retries?: number, _attempt?: number } & RequestInit): Promise<any> {
+export async function protectedPostMultipart(
+  endpoint: string,
+  data: FormData,
+  options = {} as { retries?: number; _attempt?: number } & RequestInit
+): Promise<any> {
   const { headers, ...rest } = options;
   const token = await getUserIDToken();
 

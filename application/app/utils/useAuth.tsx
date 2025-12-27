@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Amplify } from 'aws-amplify';
 import {
@@ -29,7 +23,7 @@ interface AuthContextType {
   loading: boolean;
   error?: Error;
   getUser: () => Promise<User | null>;
-  signIn: (username: string, password: string) => Promise<{ isSuccess: boolean, challenge?: string }>;
+  signIn: (username: string, password: string) => Promise<{ isSuccess: boolean; challenge?: string }>;
   confirmSignIn: (code: string) => Promise<void>;
   signUp: (name: string, email: string, password: string) => Promise<void>;
   confirmSignUp: (username: string, code: string) => Promise<void>;
@@ -48,12 +42,12 @@ Amplify.configure({
         email: true,
         oauth: {
           domain: import.meta.env.VITE_GOOGLE_OUATH_DOMAIN as string,
-          providers: [ 'Google' ],
-          redirectSignIn: [ import.meta.env.VITE_GOOGLE_OUATH_REDIRECT_SIGN_IN as string ],
-          redirectSignOut: [ import.meta.env.VITE_GOOGLE_OUATH_REDIRECT_SIGN_OUT as string ],
-          responseType: "code",
-          scopes: [ 'openid', 'email', 'profile', 'aws.cognito.signin.user.admin' ],
-        }
+          providers: ['Google'],
+          redirectSignIn: [import.meta.env.VITE_GOOGLE_OUATH_REDIRECT_SIGN_IN as string],
+          redirectSignOut: [import.meta.env.VITE_GOOGLE_OUATH_REDIRECT_SIGN_OUT as string],
+          responseType: 'code',
+          scopes: ['openid', 'email', 'profile', 'aws.cognito.signin.user.admin'],
+        },
       },
       userAttributes: {
         email: {
@@ -65,15 +59,13 @@ Amplify.configure({
   },
 });
 
-const AuthContext = createContext<AuthContextType>(
-  {} as AuthContextType
-);
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
-  const [ user, setUser ] = useState<User | null>(null);
-  const [ lastUpdate, setLastUpdate ] = useState<Date>(new Date());
-  const [ loading, setLoading ] = useState<boolean>(false);
-  const [ hasInitialized, setHasInitialized ] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasInitialized, setHasInitialized] = useState<boolean>(false);
 
   useEffect(() => {
     const initializeAuth = async () => {
@@ -84,7 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
         console.log('hasOAuthParams', hasOAuthParams);
         console.log('urlParams', urlParams);
-        
+
         if (hasOAuthParams) {
           logger.debug('OAuth callback detected, handling callback...');
           await handleOAuthCallback();
@@ -114,7 +106,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
    * @param password - Password
    * @returns { isSuccess: boolean, challenge?: string } - Whether the sign in was successful and the challenge type if applicable
    */
-  async function signIn(username: string, password: string): Promise<{ isSuccess: boolean, challenge?: string }> {
+  async function signIn(username: string, password: string): Promise<{ isSuccess: boolean; challenge?: string }> {
     setLoading(true);
 
     try {
@@ -150,7 +142,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
       setLoading(false);
     }
   }
-  
+
   async function confirmSignIn(code: string): Promise<void> {
     const response = await confirmSignInAmplify({
       challengeResponse: code,
@@ -196,7 +188,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
     const response = await resetPasswordAmplify({
       username,
     });
-    
+
     logger.debug('Reset password response', response);
   }
 
@@ -223,17 +215,14 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
   async function signOut(): Promise<void> {
     await signOutAmplify();
-    
+
     setUser(null);
     setLastUpdate(new Date());
   }
 
   async function getUser(): Promise<User | null> {
     try {
-      const [user, session] = await Promise.all([
-        fetchUserAttributesAmplify(),
-        fetchAuthSessionAmplify()
-      ]);
+      const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
 
       return {
         id: user.sub,
@@ -254,7 +243,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
   // async function refreshSession(): Promise<User | null> {
   //   logger.debug('Refreshing session...');
-    
+
   //   try {
   //     const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
 
@@ -299,25 +288,25 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
   async function handleOAuthCallback(): Promise<void> {
     logger.debug('Handling OAuth callback...');
-    
+
     try {
       // Check if user is authenticated after OAuth redirect
       const currentUser = await getCurrentUser();
       logger.debug('OAuth callback - Current user:', currentUser);
-      
+
       if (currentUser) {
         // await refreshSession();
         const userSession = await getUser();
         setUser(userSession);
         setLastUpdate(new Date());
         logger.debug('OAuth login successful');
-        
+
         // Clean up the URL from OAuth parameters
         const url = new URL(window.location.href);
         url.searchParams.delete('code');
         url.searchParams.delete('state');
         window.history.replaceState({}, document.title, url.pathname);
-        
+
         // Redirect to home page after successful OAuth login
         window.location.href = '/';
       }
@@ -342,14 +331,10 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
       updatePassword,
       signOut,
     }),
-    [ loading, hasInitialized, lastUpdate ]
+    [loading, hasInitialized, lastUpdate]
   );
 
-  return (
-    <AuthContext.Provider value={memoedValue}>
-      { children }
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>;
 }
 
 export default function useAuth() {

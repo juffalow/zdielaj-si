@@ -30,7 +30,10 @@ export default function Tracking() {
     const clickHandler = (event: Event) => {
       const analyticsId = (event.target as HTMLElement).getAttribute('data-tracking-id');
 
-      if ((event.target as HTMLElement).getAttribute('aria-label') === 'Download' && (event.target as HTMLElement).getAttribute('class')?.includes('lg-download')) {
+      if (
+        (event.target as HTMLElement).getAttribute('aria-label') === 'Download' &&
+        (event.target as HTMLElement).getAttribute('class')?.includes('lg-download')
+      ) {
         if ('gtag' in window) (window as any).gtag('event', 'album_download_button_click');
       }
 
@@ -40,7 +43,7 @@ export default function Tracking() {
 
       logger.info(`Tracking event: ${analyticsId}`);
 
-      if ('gtag' in window)(window as any).gtag('event', analyticsId);
+      if ('gtag' in window) (window as any).gtag('event', analyticsId);
     };
 
     document.body.addEventListener('click', clickHandler);

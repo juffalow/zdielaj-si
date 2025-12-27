@@ -7,7 +7,7 @@ interface AlbumFile {
   size: number;
   metadata: {
     width: number;
-    height: number
+    height: number;
     [key: string]: unknown;
   };
   thumbnails: string[];

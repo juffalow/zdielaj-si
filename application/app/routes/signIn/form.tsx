@@ -5,15 +5,12 @@ import { useTranslation } from 'react-i18next';
 export default function SignInForm({
   onSubmit,
 }: {
-  onSubmit: (
-    prevState: unknown,
-    state: FormData
-  ) => Promise<{ email: string; password: string; error: string | null }>;
+  onSubmit: (prevState: unknown, state: FormData) => Promise<{ email: string; password: string; error: string | null }>;
 }) {
-  const { t } = useTranslation("", { keyPrefix: "signIn.form" });
+  const { t } = useTranslation('', { keyPrefix: 'signIn.form' });
   const [state, formAction, isPending] = useActionState(onSubmit, {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     error: null,
   });
 
@@ -21,11 +18,11 @@ export default function SignInForm({
     <Form action={formAction} className="space-y-6">
       <Input
         isRequired
-        errorMessage={t("requiredField")}
-        label={t("email")}
+        errorMessage={t('requiredField')}
+        label={t('email')}
         labelPlacement="outside"
         name="email"
-        placeholder={t("emailPlaceholder")}
+        placeholder={t('emailPlaceholder')}
         defaultValue={state.email}
         type="text"
         autoComplete="email"
@@ -33,27 +30,20 @@ export default function SignInForm({
 
       <Input
         isRequired
-        errorMessage={t("requiredField")}
-        label={t("password")}
+        errorMessage={t('requiredField')}
+        label={t('password')}
         labelPlacement="outside"
         name="password"
-        placeholder={t("passwordPlaceholder")}
+        placeholder={t('passwordPlaceholder')}
         defaultValue={state.password}
         type="password"
         autoComplete="current-password"
       />
 
-      {state.error !== null ? (
-        <Alert color="danger" title={state.error} hideIcon={true} />
-      ) : null}
+      {state.error !== null ? <Alert color="danger" title={state.error} hideIcon={true} /> : null}
 
-      <Button
-        type="submit"
-        color="primary"
-        fullWidth={true}
-        isLoading={isPending}
-      >
-        {t("signInButton")}
+      <Button type="submit" color="primary" fullWidth={true} isLoading={isPending}>
+        {t('signInButton')}
       </Button>
     </Form>
   );
