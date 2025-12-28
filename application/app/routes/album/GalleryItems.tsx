@@ -2,7 +2,6 @@ import { Button, Image, Spinner } from '@heroui/react';
 import type { HTMLAttributes } from 'react';
 import { FaCloudDownloadAlt } from 'react-icons/fa';
 import styles from './GalleryItems.module.css';
-import { useFeatureFlags } from '../../utils/useFeatureFlags';
 
 async function downloadImage(imageSrc: string) {
   const image = await fetch(imageSrc);
@@ -20,13 +19,13 @@ async function downloadImage(imageSrc: string) {
 export default function GalleryItems({
   files,
   layout,
+  downloadButton,
 }: {
   files: (AlbumFile | UploadedFile)[];
   layout: 'cols' | 'tiles' | 'rows';
   gaps: 'none' | 'small' | 'medium' | 'large';
+  downloadButton: boolean;
 }) {
-  const features = useFeatureFlags();
-
   if (layout === 'cols') {
     return (
       <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-2">
@@ -38,7 +37,7 @@ export default function GalleryItems({
               <GalleryImage
                 key={(file as any).name}
                 file={file}
-                downloadButton={features.downloadbutton}
+                downloadButton={downloadButton}
                 style={{ aspectRatio: '1/1' }}
               />
             );
@@ -50,7 +49,7 @@ export default function GalleryItems({
             <GalleryImage
               key={file.id}
               file={file}
-              downloadButton={features.downloadbutton}
+              downloadButton={downloadButton}
               style={{ aspectRatio: '1/1' }}
             />
           );
