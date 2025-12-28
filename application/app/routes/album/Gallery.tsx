@@ -40,7 +40,12 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
       ) : null}
 
       <LightGallery plugins={[lgVideo]} download={true} mobileSettings={{ download: true }} selector=".gallery-item">
-        <GalleryItems files={(album as any).media || (album as any).files || files} layout={layout} gaps={album.gaps} downloadButton={true} />
+        <GalleryItems
+          files={(album as any).media || (album as any).files || files}
+          layout={layout}
+          gaps={album.gaps}
+          downloadButton={true}
+        />
         <GalleryItems files={files} layout={layout} gaps={album.gaps} downloadButton={true} />
       </LightGallery>
 

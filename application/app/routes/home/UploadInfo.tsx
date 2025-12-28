@@ -25,10 +25,18 @@ export default function UploadInfo({ user }: { user: User | null }) {
             i18nKey="home.uploadInfo.signInOrSignUp"
             components={{
               signinlink: (
-                <Link as={RouterLink} to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`} data-tracking-id="upload_info_unregistered_user_sign_in_link" />
+                <Link
+                  as={RouterLink}
+                  to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}
+                  data-tracking-id="upload_info_unregistered_user_sign_in_link"
+                />
               ),
               signuplink: (
-                <Link as={RouterLink} to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`} data-tracking-id="upload_info_unregistered_user_sign_up_link" />
+                <Link
+                  as={RouterLink}
+                  to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
+                  data-tracking-id="upload_info_unregistered_user_sign_up_link"
+                />
               ),
             }}
           />

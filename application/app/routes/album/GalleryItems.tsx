@@ -46,12 +46,7 @@ export default function GalleryItems({
           return file.mimetype.startsWith('video') ? (
             <GalleryVideo key={file.id} file={file} style={{ aspectRatio: '1/1' }} />
           ) : (
-            <GalleryImage
-              key={file.id}
-              file={file}
-              downloadButton={downloadButton}
-              style={{ aspectRatio: '1/1' }}
-            />
+            <GalleryImage key={file.id} file={file} downloadButton={downloadButton} style={{ aspectRatio: '1/1' }} />
           );
         })}
       </div>
