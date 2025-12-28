@@ -4,7 +4,7 @@ import { HeroUIProvider } from '@heroui/react';
 import * as Sentry from '@sentry/react';
 import { AuthProvider } from './utils/useAuth';
 import { UploadProvider } from './utils/useUpload';
-import Tracking from './utils/Tracking';
+import { TrackingProvider } from './utils/useTracking';
 import type { Route } from './+types/root';
 import Menu from './components/menu';
 import Footer from './components/footer';
@@ -61,14 +61,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <I18nextProvider i18n={i18n}>
           <AuthProvider>
             <UploadProvider>
-              <HeroUIProvider className="flex flex-col min-h-svh">
-                <Menu />
-                <main className="flex-grow container mx-auto pt-8 pb-8 px-2 md:px-0">{children}</main>
-                <Footer />
+              <TrackingProvider>
+                <HeroUIProvider className="flex flex-col min-h-svh">
+                  <Menu />
+                  <main className="flex-grow container mx-auto pt-8 pb-8 px-2 md:px-0">{children}</main>
+                  <Footer />
 
-                <Tracking />
-                <BackToOld />
-              </HeroUIProvider>
+                  <BackToOld />
+                </HeroUIProvider>
+              </TrackingProvider>
             </UploadProvider>
           </AuthProvider>
         </I18nextProvider>

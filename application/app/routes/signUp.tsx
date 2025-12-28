@@ -3,6 +3,7 @@ import type { Route } from './+types/signUp';
 import { useTranslation } from 'react-i18next';
 import SignUpForm from './signUp/form';
 import useAuth from '../utils/useAuth';
+import useTracking from '../utils/useTracking';
 import GoogleSignUp from './signUp/google';
 import ConfirmForm from './signUp/confirmForm';
 import ThankYou from './signUp/thankYou';
@@ -71,6 +72,7 @@ export default function SignUp() {
   const { signUp, confirmSignUp } = useAuth();
   const [username, setUsername] = useState('');
   const [step, setStep] = useState<'form' | 'confirm' | 'thankYou'>('form');
+  const { trackEvent } = useTracking();
 
   const onSubmit = useCallback(
     async (name: string, email: string, password: string): Promise<void> => {
@@ -87,6 +89,7 @@ export default function SignUp() {
       await confirmSignUp(username, code);
 
       setStep('thankYou');
+      trackEvent('sign_up', { type: 'email' });
     },
     [confirmSignUp, username]
   );

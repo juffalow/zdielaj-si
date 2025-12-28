@@ -8,6 +8,7 @@ import SignInTOTP from './signIn/totp';
 import { signInFormSchema } from './signIn/formValidation';
 import GoogleSignIn from './signIn/google';
 import useAuth from '../utils/useAuth';
+import useTracking from '../utils/useTracking';
 import logger from '../logger';
 import { ROUTES } from '../constants';
 
@@ -74,6 +75,7 @@ export default function SignIn() {
   const { signIn, confirmSignIn } = useAuth();
   const navigate = useNavigate();
   const [step, setStep] = useState<'form' | 'totp'>('form');
+  const { trackEvent } = useTracking();
 
   const onSubmit = useCallback(
     async (prevState: unknown, state: FormData): Promise<{ email: string; password: string; error: string | null }> => {
@@ -98,6 +100,7 @@ export default function SignIn() {
           if (response.isSuccess === false) {
             setStep('totp');
           } else {
+            trackEvent('login', { type: 'email' });
             setTimeout(() => navigate('/'), 100);
           }
         })
@@ -118,6 +121,7 @@ export default function SignIn() {
 
       await confirmSignIn(totpCode)
         .then(() => {
+          trackEvent('login', { type: 'totp' });
           setTimeout(() => navigate('/'), 100);
         })
         .catch((err) => {
