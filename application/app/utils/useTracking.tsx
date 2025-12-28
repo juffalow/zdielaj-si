@@ -62,6 +62,8 @@ export function TrackingProvider({ children }: { children: ReactNode }): ReactNo
 
   async function trackEvent(event: string, data?: Record<string, string | number | boolean>): Promise<void> {
     logger.debug('Tracking event:', event, data);
+
+    if ('gtag' in window) (window as any).gtag('event', event, data);
   }
 
   const memoedValue = useMemo(
