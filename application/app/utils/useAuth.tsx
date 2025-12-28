@@ -81,8 +81,6 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
           logger.debug('OAuth callback detected, handling callback...');
           await handleOAuthCallback();
         } else {
-          // Normal session refresh
-          // await refreshSession();
           const userSession = await getUser();
           setUser(userSession);
           setLastUpdate(new Date());
@@ -127,7 +125,6 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
       logger.debug('Sign in response', response);
 
-      // await refreshSession();
       const userSession = await getUser();
       setUser(userSession);
       setLastUpdate(new Date());
@@ -150,7 +147,6 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
     logger.debug('Confirm sign in response', response);
 
-    // await refreshSession();
     const userSession = await getUser();
     setUser(userSession);
     setLastUpdate(new Date());
@@ -241,51 +237,6 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
     }
   }
 
-  // async function refreshSession(): Promise<User | null> {
-  //   logger.debug('Refreshing session...');
-
-  //   try {
-  //     const [user, session] = await Promise.all([fetchUserAttributesAmplify(), fetchAuthSessionAmplify()]);
-
-  //     logger.debug('User attributes:', user);
-  //     logger.debug('Auth session:', session);
-
-  //     if (!session.tokens) {
-  //       throw new Error('No tokens found in session!');
-  //     }
-
-  //     // setUser({
-  //     //   id: user.sub,
-  //     //   username: user.email,
-  //     //   email: user.email,
-  //     //   meta: {
-  //     //     name: user.name as string,
-  //     //   },
-  //     //   accessToken: session.tokens?.accessToken.toString() as string,
-  //     //   idToken: session.tokens?.idToken?.toString() as string,
-  //     // });
-
-  //     // setLastUpdate(new Date());
-
-  //     return {
-  //       id: user.sub,
-  //       username: user.email,
-  //       email: user.email,
-  //       meta: {
-  //         name: user.name as string,
-  //       },
-  //       accessToken: session.tokens?.accessToken.toString() as string,
-  //       idToken: session.tokens?.idToken?.toString() as string,
-  //     };
-  //   } catch (error) {
-  //     logger.debug('Failed to refresh session:', error);
-
-  //     throw error;
-  //   }
-
-  //   return null;
-  // }
-
   async function handleOAuthCallback(): Promise<void> {
     logger.debug('Handling OAuth callback...');
 
@@ -295,7 +246,6 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
       logger.debug('OAuth callback - Current user:', currentUser);
 
       if (currentUser) {
-        // await refreshSession();
         const userSession = await getUser();
         setUser(userSession);
         setLastUpdate(new Date());
