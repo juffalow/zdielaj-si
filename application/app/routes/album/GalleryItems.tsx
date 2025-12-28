@@ -93,7 +93,7 @@ const GalleryImage = ({
           aria-label="Download"
           color="primary"
           variant="solid"
-          className="absolute top-2 right-2 z-999"
+          className="absolute top-2 right-2 z-1"
           data-tracking-id="album_download_button_click"
           style={{ fontSize: '1.2rem' }}
           onPress={() => downloadImage(file.location)}
@@ -112,7 +112,7 @@ const GalleryImage = ({
           width="100%"
           height="100%"
           classNames={{
-            wrapper: 'h-full w-full bg-cover max-w-none',
+            wrapper: 'h-full w-full bg-cover max-w-none z-0',
             img: 'object-cover object-center',
           }}
         />

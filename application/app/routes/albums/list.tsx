@@ -64,7 +64,7 @@ export default function AlbumsList({
               aria-label="Like"
               variant="ghost"
               color="danger"
-              className="absolute top-2 right-2 z-999"
+              className="absolute top-2 right-2 z-1"
               onPress={() => onDelete(album)}
             >
               <IoTrashSharp />
@@ -72,7 +72,7 @@ export default function AlbumsList({
             {album.media.length > 0 ? (
               <Image
                 alt="Card background"
-                className="object-cover w-full rounded-sm rounded-b-none aspect-square"
+                className="object-cover w-full rounded-sm rounded-b-none aspect-square z-0"
                 src={album.media[0].thumbnails[0]}
                 fallbackSrc={noPreview}
                 classNames={{ wrapper: 'min-w-full' }}
