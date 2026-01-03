@@ -41,7 +41,7 @@ export function TrackingProvider({ children }: { children: ReactNode }): ReactNo
         (event.target as HTMLElement).getAttribute('aria-label') === 'Download' &&
         (event.target as HTMLElement).getAttribute('class')?.includes('lg-download')
       ) {
-        if ('gtag' in window) (window as any).gtag('event', 'album_download_button_click');
+        if ('gtag' in window) (window as any).gtag('event', 'album_lightbox_download_button_click');
       }
 
       if (analyticsId === null) {
