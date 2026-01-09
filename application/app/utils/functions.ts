@@ -1,4 +1,8 @@
 export function getQueryParameter(name: string, defaultValue = ''): string {
+  if (typeof window === 'undefined') {
+    return defaultValue;
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
   const value = urlParams.get(name);
   return value || defaultValue;
