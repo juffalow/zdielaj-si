@@ -15,6 +15,7 @@ import {
   getCurrentUser,
 } from 'aws-amplify/auth';
 import 'aws-amplify/auth/enable-oauth-listener';
+import * as Sentry from '@sentry/react';
 import logger from '../logger';
 
 interface AuthContextType {
@@ -129,6 +130,10 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
       setUser(userSession);
       setLastUpdate(new Date());
 
+      Sentry.setUser({
+        id: userSession?.id,
+      });
+
       return {
         isSuccess: true,
       };
@@ -150,6 +155,10 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
     const userSession = await getUser();
     setUser(userSession);
     setLastUpdate(new Date());
+
+    Sentry.setUser({
+      id: userSession?.id,
+    });
   }
 
   async function signUp(name: string, email: string, password: string): Promise<void> {
