@@ -16,6 +16,7 @@ if (typeof import.meta.env.VITE_SENTRY_DSN === 'string')
   Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
     integrations: [],
+    release: 'zdielaj-si@' + import.meta.env.VITE_APP_VERSION,
   });
 
 export const links: Route.LinksFunction = () => [
