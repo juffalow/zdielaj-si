@@ -65,7 +65,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <TrackingProvider>
                 <HeroUIProvider className="flex flex-col min-h-svh">
                   <Menu />
-                  <main className="flex-grow container mx-auto pt-8 pb-8 px-2 md:px-0">{children}</main>
+                  <main className="light flex-grow container mx-auto pt-8 pb-8 px-2 md:px-0">{children}</main>
                   <Footer />
 
                   <BackToOld />
