@@ -145,6 +145,7 @@
     },
     "confirmForm": {
       "code": "Código",
+      "confirmCodeDescription": "Introduce el código enviado a tu correo electrónico para confirmar el registro.",
       "requiredField": "Este campo es obligatorio.",
       "confirmSignUpButton": "Confirmar registro",
       "errors": {

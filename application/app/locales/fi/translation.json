@@ -145,6 +145,7 @@
     },
     "confirmForm": {
       "code": "Koodi",
+      "confirmCodeDescription": "Syötä sähköpostiisi lähetetty koodi vahvistaaksesi rekisteröitymisen.",
       "requiredField": "Tämä kenttä on pakollinen.",
       "confirmSignUpButton": "Vahvista rekisteröityminen",
       "errors": {

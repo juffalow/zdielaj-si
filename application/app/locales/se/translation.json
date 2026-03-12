@@ -145,6 +145,7 @@
     },
     "confirmForm": {
       "code": "Kod",
+      "confirmCodeDescription": "Ange koden som skickades till din e-post för att bekräfta registreringen.",
       "requiredField": "Detta fält är obligatoriskt.",
       "confirmSignUpButton": "Bekräfta registrering",
       "errors": {

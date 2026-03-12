@@ -145,6 +145,7 @@
     },
     "confirmForm": {
       "code": "Koda",
+      "confirmCodeDescription": "Vnesite kodo, poslano na vaš e-poštni naslov, za potrditev registracije.",
       "requiredField": "To polje je obvezno.",
       "confirmSignUpButton": "Potrdi registracijo",
       "errors": {

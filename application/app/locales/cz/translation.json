@@ -145,6 +145,7 @@
     },
     "confirmForm": {
       "code": "Kód",
+      "confirmCodeDescription": "Zadejte kód zaslaný na váš e-mail pro potvrzení registrace.",
       "requiredField": "Toto pole je povinné.",
       "confirmSignUpButton": "Potvrdit registraci",
       "errors": {

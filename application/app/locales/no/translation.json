@@ -145,6 +145,7 @@
     },
     "confirmForm": {
       "code": "Kode",
+      "confirmCodeDescription": "Skriv inn koden som ble sendt til din e-post for å bekrefte registreringen.",
       "requiredField": "Dette feltet er obligatorisk.",
       "confirmSignUpButton": "Bekreft registrering",
       "errors": {

@@ -36,7 +36,9 @@ const ConfirmForm: FunctionComponent<Props> = ({ onConfirmSubmit }: Props) => {
     <Form action={formAction} className="space-y-6">
       {state.error !== null ? <Alert color="danger" description={state.error} hideIcon={true} /> : null}
 
-      <InputOtp isRequired errorMessage={t('requiredField')} label={t('code')} name="code" length={6} />
+      <p className="text-center">{t('confirmCodeDescription')}</p>
+
+      <InputOtp isRequired errorMessage={t('requiredField')} label={t('code')} name="code" length={6} size="lg" className="mx-auto" />
 
       <Button type="submit" color="primary" fullWidth={true} isDisabled={isPending}>
         {t('confirmSignUpButton')}

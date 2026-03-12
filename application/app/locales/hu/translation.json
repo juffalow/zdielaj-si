@@ -145,6 +145,7 @@
     },
     "confirmForm": {
       "code": "Kód",
+      "confirmCodeDescription": "Adja meg az e-mailben küldött kódot a regisztráció megerősítéséhez.",
       "requiredField": "Ez a mező kötelező.",
       "confirmSignUpButton": "Regisztráció megerősítése",
       "errors": {
