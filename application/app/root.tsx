@@ -8,7 +8,6 @@ import { TrackingProvider } from './utils/useTracking';
 import type { Route } from './+types/root';
 import Menu from './components/menu';
 import Footer from './components/footer';
-import BackToOld from './components/BackToOld';
 import i18n from './i18n';
 import './app.css';
 
@@ -67,8 +66,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <Menu />
                   <main className="light flex-grow container mx-auto pt-8 pb-8 px-2 md:px-0">{children}</main>
                   <Footer />
-
-                  <BackToOld />
                 </HeroUIProvider>
               </TrackingProvider>
             </UploadProvider>
