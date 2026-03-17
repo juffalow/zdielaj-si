@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Kirjaudu sisään",
     "noAccount": "Eikö sinulla ole vielä tiliä?",
+    "forgotPassword": "Unohditko salasanasi?",
+    "resetPassword": "Nollaa salasana",
     "signUp": "Rekisteröidy",
     "form": {
       "email": "Sähköposti",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "Olet luonut tilisi onnistuneesti. Voit nyt kirjautua sisään tilillesi.",
       "subtitleLink": "Kirjaudu sisään"
+    }
+  },
+  "resetPassword": {
+    "title": "Nollaa salasana",
+    "requestResetForm": {
+      "description": "Syötä sähköpostiosoitteesi nollaaksesi salasanasi.",
+      "email": "Sähköposti",
+      "emailPlaceholder": "Syötä sähköpostiosoitteesi",
+      "requiredField": "Tämä kenttä on pakollinen.",
+      "requestResetButton": "Nollaa salasana"
+    },
+    "resetForm": {
+      "email": "Sähköposti",
+      "emailPlaceholder": "Syötä sähköpostiosoitteesi",
+      "requiredField": "Tämä kenttä on pakollinen.",
+      "password": "Salasana",
+      "passwordPlaceholder": "Syötä salasanasi",
+      "code": "Koodi",
+      "codePlaceholder": "Syötä koodi",
+      "resetPasswordButton": "Nollaa salasana"
     }
   },
   "album": {

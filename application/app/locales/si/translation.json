@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Prijava",
     "noAccount": "Še nimate računa?",
+    "forgotPassword": "Ste pozabili geslo?",
+    "resetPassword": "Ponastavi geslo",
     "signUp": "Registriraj se",
     "form": {
       "email": "E-pošta",
@@ -157,6 +159,26 @@
       "subtitle": "Uspešno ste ustvarili svoj račun. Zdaj se lahko prijavite v svoj račun.",
       "subtitleLink": "Prijava"
     }
+  },
+  "resetPassword": {
+    "title": "Ponastavi geslo",
+    "requestResetForm": {
+      "description": "Vnesite svoj e-poštni naslov za ponastavitev gesla.",
+      "email": "E-pošta",
+      "emailPlaceholder": "Vnesite svoj e-poštni naslov",
+      "requiredField": "To polje je obvezno.",
+      "requestResetButton": "Ponastavi geslo"
+    }
+  },
+  "resetForm": {
+    "email": "E-pošta",
+    "emailPlaceholder": "Vnesite svoj e-poštni naslov",
+    "requiredField": "To polje je obvezno.",
+    "password": "Geslo",
+    "passwordPlaceholder": "Vnesite svoje geslo",
+    "code": "Koda",
+    "codePlaceholder": "Vnesite kodo",
+    "resetPasswordButton": "Ponastavi geslo"
   },
   "album": {
     "notFound": {

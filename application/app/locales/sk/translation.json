@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Prihlásiť sa",
     "noAccount": "Ešte nemáte účet?",
+    "forgotPassword": "Zabudli ste heslo?",
+    "resetPassword": "Obnovenie hesla",
     "signUp": "Registrovať sa",
     "form": {
       "email": "E-mail",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "Úspešne ste vytvorili svoj účet. Teraz sa môžete prihlásiť do svojho účtu.",
       "subtitleLink": "Prihlásiť sa"
+    }
+  },
+  "resetPassword": {
+    "title": "Obnovenie hesla",
+    "requestResetForm": {
+      "description": "Zadajte e-mailovú adresu, ktorú používate na prihlásenie na obnovenie hesla.",
+      "email": "E-mail",
+      "emailPlaceholder": "Zadajte váš e-mail",
+      "requiredField": "Toto pole je povinné.",
+      "requestResetButton": "Obnovenie hesla"
+    },
+    "resetForm": {
+      "email": "E-mail",
+      "emailPlaceholder": "Zadajte váš e-mail",
+      "requiredField": "Toto pole je povinné.",
+      "password": "Heslo",
+      "passwordPlaceholder": "Zadajte vaše heslo",
+      "code": "Kód",
+      "codePlaceholder": "Zadajte kód",
+      "resetPasswordButton": "Obnovenie hesla"
     }
   },
   "album": {

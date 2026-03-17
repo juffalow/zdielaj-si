@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Zaloguj się",
     "noAccount": "Nie masz jeszcze konta?",
+    "forgotPassword": "Zapomniałeś hasła?",
+    "resetPassword": "Resetuj hasło",
     "signUp": "Zarejestruj się",
     "form": {
       "email": "E-mail",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "Pomyślnie utworzyłeś swoje konto. Możesz teraz zalogować się na swoje konto.",
       "subtitleLink": "Zaloguj się"
+    }
+  },
+  "resetPassword": {
+    "title": "Resetuj hasło",
+    "requestResetForm": {
+      "description": "Wprowadź swój e-mail, aby zresetować swoje hasło.",
+      "email": "E-mail",
+      "emailPlaceholder": "Wprowadź swój e-mail",
+      "requiredField": "To pole jest wymagane.",
+      "requestResetButton": "Resetuj hasło"
+    },
+    "resetForm": {
+      "email": "E-mail",
+      "emailPlaceholder": "Wprowadź swój e-mail",
+      "requiredField": "To pole jest wymagane.",
+      "password": "Hasło",
+      "passwordPlaceholder": "Wprowadź swoje hasło",
+      "code": "Kod",
+      "codePlaceholder": "Wprowadź kod",
+      "resetPasswordButton": "Resetuj hasło"
     }
   },
   "album": {

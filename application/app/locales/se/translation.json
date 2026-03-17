@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Logga in",
     "noAccount": "Har du inget konto ännu?",
+    "forgotPassword": "Glömt ditt lösenord?",
+    "resetPassword": "Återställ lösenord",
     "signUp": "Registrera",
     "form": {
       "email": "E-post",
@@ -157,6 +159,26 @@
       "subtitle": "Du har framgångsrikt skapat ditt konto. Du kan nu logga in på ditt konto.",
       "subtitleLink": "Logga in"
     }
+  },
+  "resetPassword": {
+    "title": "Återställ lösenord",
+    "requestResetForm": {
+      "description": "Ange din e-postadress för att återställa ditt lösenord.",
+      "email": "E-post",
+      "emailPlaceholder": "Ange din e-postadress",
+      "requiredField": "Detta fält är obligatoriskt.",
+      "requestResetButton": "Återställ lösenord"
+    }
+  },
+  "resetForm": {
+    "email": "E-post",
+    "emailPlaceholder": "Ange din e-postadress",
+    "requiredField": "Detta fält är obligatoriskt.",
+    "password": "Lösenord",
+    "passwordPlaceholder": "Ange ditt lösenord",
+    "code": "Kod",
+    "codePlaceholder": "Ange koden",
+    "resetPasswordButton": "Återställ lösenord"
   },
   "album": {
     "notFound": {

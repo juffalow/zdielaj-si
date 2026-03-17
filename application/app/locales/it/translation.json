@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Accedi",
     "noAccount": "Non hai ancora un account?",
+    "forgotPassword": "Hai dimenticato la password?",
+    "resetPassword": "Ripristina password",
     "signUp": "Registrati",
     "form": {
       "email": "E-mail",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "Hai creato con successo il tuo account. Ora puoi accedere al tuo account.",
       "subtitleLink": "Accedi"
+    }
+  },
+  "resetPassword": {
+    "title": "Ripristina password",
+    "requestResetForm": {
+      "description": "Inserisci la tua e-mail per ripristinare la password.",
+      "email": "E-mail",
+      "emailPlaceholder": "Inserisci la tua e-mail",
+      "requiredField": "Questo campo è obbligatorio.",
+      "requestResetButton": "Ripristina password"
+    },
+    "resetForm": {
+      "email": "E-mail",
+      "emailPlaceholder": "Inserisci la tua e-mail",
+      "requiredField": "Questo campo è obbligatorio.",
+      "password": "Password",
+      "passwordPlaceholder": "Inserisci la tua password",
+      "code": "Codice",
+      "codePlaceholder": "Inserisci il codice",
+      "resetPasswordButton": "Ripristina password"
     }
   },
   "album": {

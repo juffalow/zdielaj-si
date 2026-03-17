@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Se connecter",
     "noAccount": "Vous n'avez pas encore de compte ?",
+    "forgotPassword": "Mot de passe oublié ?",
+    "resetPassword": "Réinitialiser le mot de passe",
     "signUp": "S'inscrire",
     "form": {
       "email": "E-mail",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "Vous avez créé votre compte avec succès. Vous pouvez maintenant vous connecter à votre compte.",
       "subtitleLink": "Se connecter"
+    }
+  },
+  "resetPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "requestResetForm": {
+      "description": "Entrez votre e-mail pour réinitialiser votre mot de passe.",
+      "email": "E-mail",
+      "emailPlaceholder": "Entrez votre e-mail",
+      "requiredField": "Ce champ est obligatoire.",
+      "requestResetButton": "Réinitialiser le mot de passe"
+    },
+    "resetForm": {
+      "email": "E-mail",
+      "emailPlaceholder": "Entrez votre e-mail",
+      "requiredField": "Ce champ est obligatoire.",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Entrez votre mot de passe",
+      "code": "Code",
+      "codePlaceholder": "Entrez le code",
+      "resetPasswordButton": "Réinitialiser le mot de passe"
     }
   },
   "album": {

@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Anmelden",
     "noAccount": "Haben Sie noch kein Konto?",
+    "forgotPassword": "Passwort vergessen?",
+    "resetPassword": "Passwort zurücksetzen",
     "signUp": "Registrieren",
     "form": {
       "email": "E-Mail",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "Sie haben Ihr Konto erfolgreich erstellt. Sie können sich jetzt in Ihr Konto anmelden.",
       "subtitleLink": "Anmelden"
+    }
+  },
+  "resetPassword": {
+    "title": "Passwort zurücksetzen",
+    "requestResetForm": {
+      "description": "Geben Sie die E-Mail-Adresse ein, die Sie für das Zurücksetzen des Passworts verwenden.",
+      "email": "E-Mail",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+      "requiredField": "Dieses Feld ist erforderlich.",
+      "requestResetButton": "Passwort zurücksetzen"
+    },
+    "resetForm": {
+      "email": "E-Mail",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+      "requiredField": "Dieses Feld ist erforderlich.",
+      "password": "Passwort",
+      "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+      "code": "Code",
+      "codePlaceholder": "Geben Sie den Code ein",
+      "resetPasswordButton": "Passwort zurücksetzen"
     }
   },
   "album": {

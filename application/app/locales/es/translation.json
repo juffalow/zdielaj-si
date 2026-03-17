@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Iniciar sesión",
     "noAccount": "¿Aún no tienes una cuenta?",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetPassword": "Restablecer contraseña",
     "signUp": "Registrarse",
     "form": {
       "email": "Correo electrónico",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "Has creado tu cuenta con éxito. Ahora puedes iniciar sesión en tu cuenta.",
       "subtitleLink": "Iniciar sesión"
+    }
+  },
+  "resetPassword": {
+    "title": "Restablecer contraseña",
+    "requestResetForm": {
+      "description": "Introduce tu correo electrónico para restablecer tu contraseña.",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Introduce tu correo electrónico",
+      "requiredField": "Este campo es obligatorio.",
+      "requestResetButton": "Restablecer contraseña"
+    },
+    "resetForm": {
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Introduce tu correo electrónico",
+      "requiredField": "Este campo es obligatorio.",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Introduce tu contraseña",
+      "code": "Código",
+      "codePlaceholder": "Introduce el código",
+      "resetPasswordButton": "Restablecer contraseña"
     }
   },
   "album": {

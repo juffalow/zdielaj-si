@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Bejelentkezés",
     "noAccount": "Még nincs fiókja?",
+    "forgotPassword": "Elfelejtette jelszavát?",
+    "resetPassword": "Jelszó visszaállítása",
     "signUp": "Regisztráció",
     "form": {
       "email": "E-mail",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "Sikeresen létrehozta fiókját. Most bejelentkezhet fiókjába.",
       "subtitleLink": "Bejelentkezés"
+    }
+  },
+  "resetPassword": {
+    "title": "Jelszó visszaállítása",
+    "requestResetForm": {
+      "description": "Adja meg e-mail címét a jelszó visszaállításához.",
+      "email": "E-mail",
+      "emailPlaceholder": "Adja meg e-mail címét",
+      "requiredField": "Ez a mező kötelező.",
+      "requestResetButton": "Jelszó visszaállítása"
+    },
+    "resetForm": {
+      "email": "E-mail",
+      "emailPlaceholder": "Adja meg e-mail címét",
+      "requiredField": "Ez a mező kötelező.",
+      "password": "Jelszó",
+      "passwordPlaceholder": "Adja meg jelszavát",
+      "code": "Kód",
+      "codePlaceholder": "Adja meg a kódot",
+      "resetPasswordButton": "Jelszó visszaállítása"
     }
   },
   "album": {

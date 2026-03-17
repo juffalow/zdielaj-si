@@ -3,7 +3,7 @@
     "prefix": "en/",
     "signIn": "sign-in",
     "signUp": "sign-up",
-    "passwordReset": "password-reset",
+    "resetPassword": "reset-password",
     "about": "about",
     "privacyPolicy": "privacy-policy",
     "userData": "user-data",
@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Sign in",
     "noAccount": "Don't have an account yet?",
+    "forgotPassword": "Forgot your password?",
+    "resetPassword": "Reset password",
     "signUp": "Sign up",
     "form": {
       "email": "E-mail",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "You have successfully created your account. You can now sign in to your account.",
       "subtitleLink": "Sign in"
+    }
+  },
+  "resetPassword": {
+    "title": "Reset password",
+    "requestResetForm": {
+      "description": "Enter the e-mail address you use to sign in to reset your password.",
+      "email": "E-mail",
+      "emailPlaceholder": "Enter your e-mail",
+      "requiredField": "This field is required.",
+      "requestResetButton": "Request reset"
+    },
+    "resetForm": {
+      "email": "E-mail",
+      "emailPlaceholder": "Enter your e-mail",
+      "requiredField": "This field is required.",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "code": "Code",
+      "codePlaceholder": "Enter the code",
+      "resetPasswordButton": "Reset password"
     }
   },
   "album": {

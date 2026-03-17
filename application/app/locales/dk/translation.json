@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Log ind",
     "noAccount": "Har du ikke en konto endnu?",
+    "forgotPassword": "Glemt din adgangskode?",
+    "resetPassword": "Nulstil adgangskode",
     "signUp": "Registrer",
     "form": {
       "email": "E-mail",
@@ -156,6 +158,26 @@
     "thankYou": {
       "subtitle": "Du har oprettet din konto. Du kan nu logge ind på din konto.",
       "subtitleLink": "Log ind"
+    }
+  },
+  "resetPassword": {
+    "title": "Nulstil adgangskode",
+    "requestResetForm": {
+      "description": "Indtast din e-mailadresse for at nulstille din adgangskode.",
+      "email": "E-mail",
+      "emailPlaceholder": "Indtast din e-mailadresse",
+      "requiredField": "Dette felt er obligatorisk.",
+      "requestResetButton": "Nulstil adgangskode"
+    },
+    "resetForm": {
+      "email": "E-mail",
+      "emailPlaceholder": "Indtast din e-mailadresse",
+      "requiredField": "Dette felt er obligatorisk.",
+      "password": "Adgangskode",
+      "passwordPlaceholder": "Indtast din adgangskode",
+      "code": "Kode",
+      "codePlaceholder": "Indtast koden",
+      "resetPasswordButton": "Nulstil adgangskode"
     }
   },
   "album": {

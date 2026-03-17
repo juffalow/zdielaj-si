@@ -101,6 +101,8 @@
   "signIn": {
     "title": "Logg inn",
     "noAccount": "Har du ikke en konto ennå?",
+    "forgotPassword": "Glemt passordet?",
+    "resetPassword": "Tilbakestill passord",
     "signUp": "Registrer",
     "form": {
       "email": "E-post",
@@ -157,6 +159,26 @@
       "subtitle": "Du har opprettet kontoen din. Du kan nå logge inn på kontoen din.",
       "subtitleLink": "Logg inn"
     }
+  },
+  "resetPassword": {
+    "title": "Tilbakestill passord",
+    "requestResetForm": {
+      "description": "Skriv inn e-postadressen din for å tilbakestille passordet ditt.",
+      "email": "E-post",
+      "emailPlaceholder": "Skriv inn e-postadressen din",
+      "requiredField": "Dette feltet er obligatorisk.",
+      "requestResetButton": "Tilbakestill passord"
+    }
+  },
+  "resetForm": {
+    "email": "E-post",
+    "emailPlaceholder": "Skriv inn e-postadressen din",
+    "requiredField": "Dette feltet er obligatorisk.",
+    "password": "Passord",
+    "passwordPlaceholder": "Skriv inn passordet ditt",
+    "code": "Kode",
+    "codePlaceholder": "Skriv inn koden",
+    "resetPasswordButton": "Tilbakestill passord"
   },
   "album": {
     "notFound": {

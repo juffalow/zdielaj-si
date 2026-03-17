@@ -78,7 +78,7 @@ export default function SignIn() {
   const { trackEvent } = useTracking();
 
   const onSubmit = useCallback(
-    async (prevState: unknown, state: FormData): Promise<{ email: string; password: string; error: string | null }> => {
+    async (_: unknown, state: FormData): Promise<{ email: string; password: string; error: string | null }> => {
       const email = state.get('email') as string;
       const password = state.get('password') as string;
       let error = null;
@@ -115,7 +115,7 @@ export default function SignIn() {
   );
 
   const onTOTPSubmit = useCallback(
-    async (prevState: unknown, state: FormData): Promise<{ totpCode: string; error: string | null }> => {
+    async (_: unknown, state: FormData): Promise<{ totpCode: string; error: string | null }> => {
       const totpCode = state.get('totpCode') as string;
       let error = null;
 
@@ -155,6 +155,16 @@ export default function SignIn() {
             className="font-semibold text-indigo-600 hover:text-indigo-500 ms-1"
           >
             {t('signUp')}
+          </Link>
+        </p>
+
+        <p className="mt-4 text-center text-sm/6 text-gray-500">
+          {t('forgotPassword')}
+          <Link
+            to={`/${t('prefix', { keyPrefix: 'routes' })}${t('resetPassword', { keyPrefix: 'routes' })}`}
+            className="font-semibold text-indigo-600 hover:text-indigo-500 ms-1"
+          >
+            {t('resetPassword')}
           </Link>
         </p>
       </div>
