@@ -28,7 +28,11 @@ async function handleErrors(response: Response | unknown): Promise<Response> {
       if ('error' in json && json.error !== null) {
         throw new APIError(json.error.message, json.error.code, {
           url: response.url,
-          status: response.status /*, headers: { 'X-Request-Id': response.headers.get('X-Request-Id') } */,
+          status: response.status,
+          headers: {
+            'x-amzn-requestid': response.headers.get('x-amzn-requestid'),
+            'x-amzn-trace-id': response.headers.get('x-amzn-trace-id'),
+          },
         });
       }
     }
