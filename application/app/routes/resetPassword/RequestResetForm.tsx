@@ -16,7 +16,7 @@ const RequestResetForm: FunctionComponent<Props> = ({ onRequestSubmit }: Props) 
     let error = null;
 
     try {
-      await onRequestSubmit(email)
+      await onRequestSubmit(email);
     } catch (err: unknown) {
       if (err instanceof Error) {
         logger.error('Unable to request reset password!', { error: { message: err.message, stack: err.stack } });
@@ -38,11 +38,7 @@ const RequestResetForm: FunctionComponent<Props> = ({ onRequestSubmit }: Props) 
   return (
     <>
       <p className="text-center mb-5">{t('description')}</p>
-      {
-        state.error !== null ? (
-          <Alert color="danger" title={state.error} hideIcon={true} />
-        ) : null
-      }
+      {state.error !== null ? <Alert color="danger" title={state.error} hideIcon={true} /> : null}
 
       <Form action={formAction} className="space-y-6">
         <Input

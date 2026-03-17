@@ -12,13 +12,16 @@ interface Props {
 const ResetForm: FunctionComponent<Props> = ({ username, onResetSubmit }: Props) => {
   const { t } = useTranslation('', { keyPrefix: 'resetPassword.resetForm' });
 
-  const onSubmit = async (_: unknown, state: FormData): Promise<{ password: string; code: string; error: string | null }> => {
+  const onSubmit = async (
+    _: unknown,
+    state: FormData
+  ): Promise<{ password: string; code: string; error: string | null }> => {
     const password = state.get('password') as string;
     const code = state.get('code') as string;
     let error = null;
 
     try {
-      await onResetSubmit(password, code)
+      await onResetSubmit(password, code);
     } catch (err: unknown) {
       if (err instanceof Error) {
         logger.error('Unable to request reset password!', { error: { message: err.message, stack: err.stack } });
@@ -40,11 +43,7 @@ const ResetForm: FunctionComponent<Props> = ({ username, onResetSubmit }: Props)
 
   return (
     <>
-      {
-        state.error !== null ? (
-          <Alert color="danger" title={state.error} hideIcon={true} />
-        ) : null
-      }
+      {state.error !== null ? <Alert color="danger" title={state.error} hideIcon={true} /> : null}
       <Form action={formAction} className="space-y-6">
         <Input
           label={t('email')}
