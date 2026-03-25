@@ -194,7 +194,7 @@ export default function Home() {
             'image/*': [],
             'video/*': [],
           },
-    maxFiles: user === null ? 10 : 50,
+    maxFiles: user === null ? 10 : 100,
     maxSize: user === null ? 1024 * 1024 * 10 : undefined,
   });
 
