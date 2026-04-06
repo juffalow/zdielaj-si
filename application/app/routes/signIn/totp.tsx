@@ -15,7 +15,7 @@ export default function SignInTOTP({
 
   return (
     <Form action={formAction} className="space-y-6">
-      <InputOtp isRequired errorMessage={t('requiredField')} name="totpCode" length={6} />
+      <InputOtp isRequired errorMessage={t('requiredField')} name="totpCode" length={6} size="lg" className="mx-auto" />
 
       {state.error !== null ? <Alert color="danger" title={state.error} hideIcon={true} /> : null}
 

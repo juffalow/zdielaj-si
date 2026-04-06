@@ -17,36 +17,36 @@ export function meta({ location }: Route.MetaArgs) {
 
   switch (language) {
     case 'sk':
-      return [{ title: 'Prihlásiť sa | Zdielaj.si' }];
+      return [{ title: 'Prihlásiť sa | Zdielaj.si' }, { name: 'og:title', content: 'Prihlásiť sa | Zdielaj.si' }];
     case 'cz':
-      return [{ title: 'Přihlásit se | Zdielaj.si' }];
+      return [{ title: 'Přihlásit se | Zdielaj.si' }, { name: 'og:title', content: 'Přihlásit se | Zdielaj.si' }];
     case 'de':
-      return [{ title: 'Anmelden | Zdielaj.si' }];
+      return [{ title: 'Anmelden | Zdielaj.si' }, { name: 'og:title', content: 'Anmelden | Zdielaj.si' }];
     case 'es':
-      return [{ title: 'Iniciar sesión | Zdielaj.si' }];
+      return [{ title: 'Iniciar sesión | Zdielaj.si' }, { name: 'og:title', content: 'Iniciar sesión | Zdielaj.si' }];
     case 'fr':
-      return [{ title: 'Se connecter | Zdielaj.si' }];
+      return [{ title: 'Se connecter | Zdielaj.si' }, { name: 'og:title', content: 'Se connecter | Zdielaj.si' }];
     case 'it':
-      return [{ title: 'Accedi | Zdielaj.si' }];
+      return [{ title: 'Accedi | Zdielaj.si' }, { name: 'og:title', content: 'Accedi | Zdielaj.si' }];
     case 'pl':
-      return [{ title: 'Zaloguj się | Zdielaj.si' }];
+      return [{ title: 'Zaloguj się | Zdielaj.si' }, { name: 'og:title', content: 'Zaloguj się | Zdielaj.si' }];
     case 'nl':
-      return [{ title: 'Inloggen | Zdielaj.si' }];
+      return [{ title: 'Inloggen | Zdielaj.si' }, { name: 'og:title', content: 'Inloggen | Zdielaj.si' }];
     case 'si':
-      return [{ title: 'Prijava | Zdielaj.si' }];
+      return [{ title: 'Prijava | Zdielaj.si' }, { name: 'og:title', content: 'Prijava | Zdielaj.si' }];
     case 'fi':
-      return [{ title: 'Kirjaudu sisään | Zdielaj.si' }];
+      return [{ title: 'Kirjaudu sisään | Zdielaj.si' }, { name: 'og:title', content: 'Kirjaudu sisään | Zdielaj.si' }];
     case 'se':
-      return [{ title: 'Logga in | Zdielaj.si' }];
+      return [{ title: 'Logga in | Zdielaj.si' }, { name: 'og:title', content: 'Logga in | Zdielaj.si' }];
     case 'no':
-      return [{ title: 'Logg inn | Zdielaj.si' }];
+      return [{ title: 'Logg inn | Zdielaj.si' }, { name: 'og:title', content: 'Logg inn | Zdielaj.si' }];
     case 'dk':
-      return [{ title: 'Log ind | Zdielaj.si' }];
+      return [{ title: 'Log ind | Zdielaj.si' }, { name: 'og:title', content: 'Log ind | Zdielaj.si' }];
     case 'hu':
-      return [{ title: 'Bejelentkezés | Zdielaj.si' }];
+      return [{ title: 'Bejelentkezés | Zdielaj.si' }, { name: 'og:title', content: 'Bejelentkezés | Zdielaj.si' }];
     case 'en':
     default:
-      return [{ title: 'Sign in | Zdielaj.si' }];
+      return [{ title: 'Sign in | Zdielaj.si' }, { name: 'og:title', content: 'Sign in | Zdielaj.si' }];
   }
 }
 
@@ -71,7 +71,7 @@ export function links() {
 }
 
 export default function SignIn() {
-  const { t } = useTranslation('', { keyPrefix: 'signIn' });
+  const { i18n, t } = useTranslation('', { keyPrefix: 'signIn' });
   const { signIn, confirmSignIn } = useAuth();
   const navigate = useNavigate();
   const [step, setStep] = useState<'form' | 'totp'>('form');
@@ -136,6 +136,9 @@ export default function SignIn() {
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
+
+      <link rel="canonical" href={`https://zdielaj.si/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`} />
+      
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img src="/zdielaj-si.png" alt="Zdielaj.si" className="mx-auto h-40 w-auto" />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">{t('title')}</h2>
@@ -151,7 +154,7 @@ export default function SignIn() {
         <p className="mt-10 text-center text-sm/6 text-gray-500">
           {t('noAccount')}
           <Link
-            to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`}
+            to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
             className="font-semibold text-indigo-600 hover:text-indigo-500 ms-1"
           >
             {t('signUp')}
@@ -161,7 +164,7 @@ export default function SignIn() {
         <p className="mt-4 text-center text-sm/6 text-gray-500">
           {t('forgotPassword')}
           <Link
-            to={`/${t('prefix', { keyPrefix: 'routes' })}${t('resetPassword', { keyPrefix: 'routes' })}`}
+            to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].resetPassword}`}
             className="font-semibold text-indigo-600 hover:text-indigo-500 ms-1"
           >
             {t('resetPassword')}

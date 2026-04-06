@@ -9,6 +9,7 @@ import useAuth from '../utils/useAuth';
 import useUpload from '../utils/useUpload';
 import logger from '../logger';
 import { createAlbum, createUserAlbum, addFilesToAlbum, addFilesToUserAlbum, deleteUserAlbum } from '../api/album';
+import { ROUTES } from '../constants';
 
 export function meta({ location }: Route.MetaArgs) {
   const language = location.pathname.split('/')[1];
@@ -114,7 +115,7 @@ export function links() {
 }
 
 export default function Home() {
-  const { t } = useTranslation('', { keyPrefix: 'home' });
+  const { i18n, t } = useTranslation('', { keyPrefix: 'home' });
   const navigate = useNavigate();
   const { user } = useAuth();
   const { clear, uploadFiles, rejectedFiles, stashFiles } = useUpload();
@@ -155,7 +156,7 @@ export default function Home() {
       }, 1);
 
       navigate(
-        `/${t('prefix', { keyPrefix: 'routes' })}${t('album', { keyPrefix: 'routes' }).replace(':id', album.id)}`,
+        `/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].album.replace(':id', album.id)}`,
         { state: { album, isNew: true } }
       );
     },
@@ -204,6 +205,9 @@ export default function Home() {
 
   return (
     <div>
+
+      <link rel="canonical" href={`https://zdielaj.si/${i18n.language}`} />
+
       <h1 className="text-center text-5xl font-bold">{t('title')}</h1>
       <p className="text-center text-gray-500 mt-3 text-xl">{t('subtitle')}</p>
 
@@ -294,7 +298,7 @@ export default function Home() {
           <CardFooter>
             <Button
               as={Link}
-              to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`}
+              to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
               variant="bordered"
               fullWidth={true}
               data-tracking-id="home_standard_sign_up_click"
@@ -334,7 +338,7 @@ export default function Home() {
           <CardFooter>
             <Button
               as={Link}
-              to={`/${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`}
+              to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
               variant="bordered"
               fullWidth={true}
               data-tracking-id="home_free_sign_up_click"

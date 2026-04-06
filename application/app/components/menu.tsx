@@ -102,7 +102,7 @@ export default function menu() {
         <NavbarBrand>
           <Link
             as={RouterLink}
-            to={`/${t('prefix', { keyPrefix: 'routes' })}`}
+            to={`/${i18n.language}`}
             className="font-bold text-inherit"
             data-tracking-id="desktop_menu_home_click"
           >
@@ -116,7 +116,7 @@ export default function menu() {
           <NavbarItem>
             <Link
               as={RouterLink}
-              to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].albums}`}
+              to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].albums}`}
               color="foreground"
               data-tracking-id="desktop_menu_albums_click"
             >
@@ -126,7 +126,7 @@ export default function menu() {
           <NavbarItem>
             <Link
               as={RouterLink}
-              to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].profile}`}
+              to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].profile}`}
               color="foreground"
               data-tracking-id="desktop_menu_profile_click"
             >
@@ -136,7 +136,7 @@ export default function menu() {
           <NavbarItem>
             <Link
               as={RouterLink}
-              to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].subscription}`}
+              to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].subscription}`}
               color="foreground"
               data-tracking-id="desktop_menu_subscription_click"
             >
@@ -152,7 +152,7 @@ export default function menu() {
             <NavbarItem className="hidden sm:flex">
               <Link
                 as={RouterLink}
-                to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}
+                to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}
                 data-tracking-id="desktop_menu_sign_in_click"
               >
                 {t('signIn')}
@@ -161,7 +161,7 @@ export default function menu() {
             <NavbarItem className="hidden sm:flex">
               <Button
                 as={RouterLink}
-                to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
+                to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
                 color="primary"
                 variant="flat"
                 data-tracking-id="desktop_menu_sign_up_click"
@@ -252,7 +252,7 @@ export default function menu() {
                 as={RouterLink}
                 className="w-full"
                 color="foreground"
-                to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].albums}`}
+                to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].albums}`}
                 onClick={() => setIsMenuOpen(false)}
                 size="lg"
                 data-tracking-id="mobile_menu_albums_click"
@@ -265,7 +265,7 @@ export default function menu() {
                 as={RouterLink}
                 className="w-full"
                 color="foreground"
-                to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].profile}`}
+                to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].profile}`}
                 onClick={() => setIsMenuOpen(false)}
                 size="lg"
                 data-tracking-id="mobile_menu_profile_click"
@@ -278,7 +278,7 @@ export default function menu() {
                 as={RouterLink}
                 className="w-full"
                 color="foreground"
-                to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].subscription}`}
+                to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].subscription}`}
                 onClick={() => setIsMenuOpen(false)}
                 size="lg"
                 data-tracking-id="mobile_menu_subscription_click"
@@ -305,7 +305,7 @@ export default function menu() {
                 as={RouterLink}
                 className="w-full"
                 color="foreground"
-                to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}
+                to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}
                 onClick={() => setIsMenuOpen(false)}
                 size="lg"
                 data-tracking-id="mobile_menu_sign_in_click"
@@ -318,7 +318,7 @@ export default function menu() {
                 as={RouterLink}
                 className="w-full"
                 color="foreground"
-                to={`/${t('prefix', { keyPrefix: 'routes' })}${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
+                to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
                 onClick={() => setIsMenuOpen(false)}
                 size="lg"
                 data-tracking-id="mobile_menu_sign_up_click"

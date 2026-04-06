@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router';
 import { getShortLink } from '../api/shortlinks';
 import logger from '../logger';
+import { ROUTES } from '../constants';
 
 export default function ShortLink() {
-  const { t } = useTranslation('', { keyPrefix: 'routes' });
+  const { i18n } = useTranslation();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ export default function ShortLink() {
       logger.debug('Short link', shortLink);
 
       const albumId = shortLink.album.id;
-      navigate(`/${t('prefix')}${t('album', { keyPrefix: 'routes' }).replace(':id', albumId)}`);
+      navigate(`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].album.replace(':id', albumId)}`);
     };
 
     fetchData();

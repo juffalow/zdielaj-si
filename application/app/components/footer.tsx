@@ -1,8 +1,9 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { ROUTES } from '../constants';
 
 export default function Footer() {
-  const { t } = useTranslation('', { keyPrefix: 'components.footer' });
+  const { i18n, t } = useTranslation('', { keyPrefix: 'components.footer' });
 
   return (
     <footer className="bg-white dark:bg-gray-900">
@@ -27,7 +28,7 @@ export default function Footer() {
                 <li className="mb-4">
                   <Link
                     className="nav-link text-light"
-                    to={`${t('prefix', { keyPrefix: 'routes' })}${t('home', { keyPrefix: 'routes' })}`}
+                    to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].home}`}
                     data-tracking-id="footer_link_home_click"
                   >
                     {t('home')}
@@ -36,7 +37,7 @@ export default function Footer() {
                 <li className="mb-4">
                   <Link
                     className="nav-link text-light"
-                    to={`${t('prefix', { keyPrefix: 'routes' })}${t('signUp', { keyPrefix: 'routes' })}`}
+                    to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
                     data-tracking-id="footer_link_register_click"
                   >
                     {t('register')}
@@ -45,7 +46,7 @@ export default function Footer() {
                 <li className="mb-4">
                   <Link
                     className="nav-link text-light"
-                    to={`${t('prefix', { keyPrefix: 'routes' })}${t('privacyPolicy', { keyPrefix: 'routes' })}`}
+                    to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].privacyPolicy}`}
                     data-tracking-id="footer_link_privacypolicy_click"
                   >
                     {t('privacyPolicy')}

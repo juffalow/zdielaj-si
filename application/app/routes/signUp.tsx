@@ -1,6 +1,7 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import type { Route } from './+types/signUp';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router';
 import SignUpForm from './signUp/form';
 import useAuth from '../utils/useAuth';
 import useTracking from '../utils/useTracking';
@@ -68,11 +69,22 @@ export function links() {
 }
 
 export default function SignUp() {
-  const { t } = useTranslation('', { keyPrefix: 'signUp' });
+  const { i18n, t } = useTranslation('', { keyPrefix: 'signUp' });
+  const [searchParams, setSearchParams] = useSearchParams();
   const { signUp, confirmSignUp } = useAuth();
   const [username, setUsername] = useState('');
-  const [step, setStep] = useState<'form' | 'confirm' | 'thankYou'>('form');
+  const [step, setStep] = useState<'signup' | 'confirm' | 'thanks'>('signup');
   const { trackEvent } = useTracking();
+
+  useEffect(() => {
+    const searchParamsStep = searchParams.get('step');
+    if (searchParamsStep === null) {
+      setSearchParams({ step: 'signup' });
+    } else {
+      setStep(searchParamsStep as 'signup' | 'confirm' | 'thanks');
+    }
+    
+  }, [searchParams, setSearchParams]);
 
   const onSubmit = useCallback(
     async (name: string, email: string, password: string): Promise<void> => {
@@ -80,6 +92,7 @@ export default function SignUp() {
 
       setUsername(email);
       setStep('confirm');
+      setSearchParams({ step: 'confirm' });
     },
     [signUp, setUsername]
   );
@@ -88,7 +101,8 @@ export default function SignUp() {
     async (code: string) => {
       await confirmSignUp(username, code);
 
-      setStep('thankYou');
+      setStep('thanks');
+      setSearchParams({ step: 'thanks' });
       trackEvent('sign_up', { type: 'email' });
     },
     [confirmSignUp, username]
@@ -96,13 +110,16 @@ export default function SignUp() {
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
+
+      <link rel="canonical" href={`https://zdielaj.si/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`} />
+      
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img src="/zdielaj-si.png" alt="Zdielaj.si" className="mx-auto h-40 w-auto" />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">{t('title')}</h2>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        {step === 'form' ? (
+        {step === 'signup' ? (
           <>
             <GoogleSignUp />
             <SignUpForm signUp={onSubmit} />
