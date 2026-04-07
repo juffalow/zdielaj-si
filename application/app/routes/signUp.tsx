@@ -83,7 +83,6 @@ export default function SignUp() {
     } else {
       setStep(searchParamsStep as 'signup' | 'confirm' | 'thanks');
     }
-    
   }, [searchParams, setSearchParams]);
 
   const onSubmit = useCallback(
@@ -110,9 +109,11 @@ export default function SignUp() {
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
+      <link
+        rel="canonical"
+        href={`https://zdielaj.si/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
+      />
 
-      <link rel="canonical" href={`https://zdielaj.si/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`} />
-      
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img src="/zdielaj-si.png" alt="Zdielaj.si" className="mx-auto h-40 w-auto" />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">{t('title')}</h2>

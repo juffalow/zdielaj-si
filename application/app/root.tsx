@@ -41,7 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         <meta name="og:site_name" content="Zdielaj.si" />
         <meta name="og:type" content="website" />
-        
+
         <Meta />
         <Links />
 

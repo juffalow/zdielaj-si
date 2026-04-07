@@ -155,10 +155,9 @@ export default function Home() {
         );
       }, 1);
 
-      navigate(
-        `/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].album.replace(':id', album.id)}`,
-        { state: { album, isNew: true } }
-      );
+      navigate(`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].album.replace(':id', album.id)}`, {
+        state: { album, isNew: true },
+      });
     },
     [album, user, uploadFiles, navigate]
   );
@@ -205,7 +204,6 @@ export default function Home() {
 
   return (
     <div>
-
       <link rel="canonical" href={`https://zdielaj.si/${i18n.language}`} />
 
       <h1 className="text-center text-5xl font-bold">{t('title')}</h1>
