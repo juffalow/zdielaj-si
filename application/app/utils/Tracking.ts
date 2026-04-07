@@ -1,57 +1,31 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router';
-import useAuth from './useAuth';
-import logger from '../logger';
+interface TrackingEvent {
+  action: string;
+  category?: string;
+  label?: string;
+  value?: number;
+  customParameters?: Record<string, string | number | boolean>;
+}
 
-export default function Tracking() {
-  const location = useLocation();
-  const { user } = useAuth();
+export function trackEvent(event: TrackingEvent): void {
+  if ('gtag' in window && typeof window.gtag === 'function') {
+    window.gtag('event', event.action, {
+      event_category: event.category || 'engagement',
+      event_label: event.label,
+      value: event.value,
+      ...event.customParameters,
+    });
+  }
+}
 
-  useEffect(() => {
-    setTimeout(() => {
-      if ('gtag' in window) {
-        (window as Window & { gtag: any }).gtag('event', 'page_view', {
-          page_title: document.title,
-          page_path: location.pathname + location.search,
-        });
-      }
-    }, 10);
-  }, [location]);
-
-  useEffect(() => {
-    if (user) {
-      if ('gtag' in window) (window as any).gtag('set', 'user_id', user.id);
-    } else {
-      if ('gtag' in window) (window as any).gtag('set', 'user_id', undefined);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    const clickHandler = (event: Event) => {
-      const analyticsId = (event.target as HTMLElement).getAttribute('data-tracking-id');
-
-      if (
-        (event.target as HTMLElement).getAttribute('aria-label') === 'Download' &&
-        (event.target as HTMLElement).getAttribute('class')?.includes('lg-download')
-      ) {
-        if ('gtag' in window) (window as any).gtag('event', 'album_download_button_click');
-      }
-
-      if (analyticsId === null) {
-        return;
-      }
-
-      logger.info(`Tracking event: ${analyticsId}`);
-
-      if ('gtag' in window) (window as any).gtag('event', analyticsId);
-    };
-
-    document.body.addEventListener('click', clickHandler);
-
-    return () => {
-      document.body.removeEventListener('click', clickHandler);
-    };
-  }, []);
-
-  return null;
+export function trackFormSubmission(formName: string, success: boolean): void {
+  trackEvent({
+    action: 'form_submission',
+    category: 'engagement',
+    label: formName,
+    value: success ? 1 : 0,
+    customParameters: {
+      form_name: formName,
+      submission_success: success,
+    },
+  });
 }

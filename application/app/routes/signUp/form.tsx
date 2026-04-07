@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ZodError } from 'zod';
 import { signUpFormSchema } from './formValidation';
 import logger from '../../logger';
+import { trackFormSubmission } from '../../utils/Tracking';
 
 export default function SignUpForm({
   signUp,
@@ -22,8 +23,12 @@ export default function SignUpForm({
       signUpFormSchema.parse({ name, email, password });
 
       await signUp(name, email, password);
+
+      trackFormSubmission('sign_up_form', true);
     } catch (err) {
       logger.error('Unable to sign up!', { error: err });
+
+      trackFormSubmission('sign_up_form', false);
 
       if (err instanceof ZodError) {
         return { name, email, password, error: err.issues.map((issue) => issue.message).join(',') };

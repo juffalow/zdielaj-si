@@ -10,6 +10,7 @@ import useUpload from '../utils/useUpload';
 import logger from '../logger';
 import { createAlbum, createUserAlbum, addFilesToAlbum, addFilesToUserAlbum, deleteUserAlbum } from '../api/album';
 import { ROUTES } from '../constants';
+import { trackEvent } from '../utils/Tracking';
 
 export function meta({ location }: Route.MetaArgs) {
   const language = location.pathname.split('/')[1];
@@ -169,6 +170,15 @@ export default function Home() {
         logger.debug('File dialog open, creating album...');
 
         const album = await (user === null ? createAlbum([]) : createUserAlbum([]));
+
+        trackEvent({
+          action: 'create_album',
+          label: album.id,
+          value: 1,
+          customParameters: {
+            album_id: album.id,
+          },
+        });
 
         startTransition(() => {
           setAlbum(album);

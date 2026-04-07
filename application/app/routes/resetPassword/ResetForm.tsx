@@ -3,6 +3,7 @@ import type { FunctionComponent } from 'react';
 import { Form, Input, Button, Alert } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import logger from '~/logger';
+import { trackFormSubmission } from '../../utils/Tracking';
 
 interface Props {
   username: string;
@@ -22,7 +23,11 @@ const ResetForm: FunctionComponent<Props> = ({ username, onResetSubmit }: Props)
 
     try {
       await onResetSubmit(password, code);
+
+      trackFormSubmission('reset_password_reset_form', true);
     } catch (err: unknown) {
+      trackFormSubmission('reset_password_reset_form', false);
+
       if (err instanceof Error) {
         logger.error('Unable to request reset password!', { error: { message: err.message, stack: err.stack } });
         error = err.message;

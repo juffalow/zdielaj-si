@@ -11,6 +11,7 @@ import useAuth from '../utils/useAuth';
 import useTracking from '../utils/useTracking';
 import logger from '../logger';
 import { ROUTES } from '../constants';
+import { trackFormSubmission } from '../utils/Tracking';
 
 export function meta({ location }: Route.MetaArgs) {
   const language = location.pathname.split('/')[1];
@@ -101,11 +102,13 @@ export default function SignIn() {
             setStep('totp');
           } else {
             trackEvent('login', { type: 'email' });
+            trackFormSubmission('sign_in_form', true);
             setTimeout(() => navigate('/'), 100);
           }
         })
         .catch((err) => {
           logger.error('Unable to sign in!', { error: { message: err.message, stack: err.stack } });
+          trackFormSubmission('sign_in_form', false);
           error = err.message;
         });
 
@@ -122,10 +125,12 @@ export default function SignIn() {
       await confirmSignIn(totpCode)
         .then(() => {
           trackEvent('login', { type: 'totp' });
+          trackFormSubmission('sign_in_totp_form', true);
           setTimeout(() => navigate('/'), 100);
         })
         .catch((err) => {
           logger.error('Unable to confirm sign in!', { error: { message: err.message, stack: err.stack } });
+          trackFormSubmission('sign_in_totp_form', false);
           error = err.message;
         });
 

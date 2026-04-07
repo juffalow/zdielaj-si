@@ -6,6 +6,7 @@ import Gallery from './album/Gallery';
 import { getAlbum, getUserAlbum } from '../api/album';
 import ErrorBoundary from '../components/errorBoundary';
 import useAuth from '../utils/useAuth';
+import { trackEvent } from '../utils/Tracking';
 
 export function meta() {
   return [{ title: 'Album' }, { name: 'description', content: 'Album' }];
@@ -19,6 +20,15 @@ export default function Album() {
   const [albumPromise, setAlbumPromise] = useState<Promise<Album> | null>(null);
 
   useEffect(() => {
+    trackEvent({
+      action: 'view_album',
+      label: params.id as string,
+      value: 1,
+      customParameters: {
+        album_id: params.id as string,
+      },
+    });
+
     if (location.state !== null && typeof location.state.album === 'object') {
       setAlbumPromise(new Promise((resolve) => resolve(location.state.album)));
 

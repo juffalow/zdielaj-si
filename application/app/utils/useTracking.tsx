@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useLocation } from 'react-router';
 import useAuth from './useAuth';
 import logger from '../logger';
+import { trackEvent as trackEventFunction } from './Tracking';
 
 interface TrackingContextType {
   trackEvent: (event: string, data?: Record<string, string | number | boolean>) => Promise<void>;
@@ -16,8 +17,8 @@ export function TrackingProvider({ children }: { children: ReactNode }): ReactNo
 
   useEffect(() => {
     setTimeout(() => {
-      if ('gtag' in window) {
-        (window as Window & { gtag: any }).gtag('event', 'page_view', {
+      if ('gtag' in window && typeof window.gtag === 'function') {
+        window.gtag('event', 'page_view', {
           page_title: document.title,
           page_path: location.pathname + location.search,
         });
@@ -27,9 +28,9 @@ export function TrackingProvider({ children }: { children: ReactNode }): ReactNo
 
   useEffect(() => {
     if (user) {
-      if ('gtag' in window) (window as any).gtag('set', 'user_id', user.id);
+      if ('gtag' in window && typeof window.gtag === 'function') window.gtag('set', 'user_id', user.id);
     } else {
-      if ('gtag' in window) (window as any).gtag('set', 'user_id', undefined);
+      if ('gtag' in window && typeof window.gtag === 'function') window.gtag('set', 'user_id', undefined);
     }
   }, [user]);
 
@@ -41,7 +42,8 @@ export function TrackingProvider({ children }: { children: ReactNode }): ReactNo
         (event.target as HTMLElement).getAttribute('aria-label') === 'Download' &&
         (event.target as HTMLElement).getAttribute('class')?.includes('lg-download')
       ) {
-        if ('gtag' in window) (window as any).gtag('event', 'album_lightbox_download_button_click');
+        if ('gtag' in window && typeof window.gtag === 'function')
+          window.gtag('event', 'album_lightbox_download_button_click');
       }
 
       if (analyticsId === null) {
@@ -50,7 +52,21 @@ export function TrackingProvider({ children }: { children: ReactNode }): ReactNo
 
       logger.debug(`Tracking event: ${analyticsId}`);
 
-      if ('gtag' in window) (window as any).gtag('event', analyticsId);
+      if (
+        event.target !== null &&
+        'tagName' in event.target &&
+        (event.target.tagName === 'BUTTON' ||
+          (event.target.tagName === 'A' && 'role' in event.target && event.target.role === 'button'))
+      ) {
+        trackEventFunction({
+          action: 'button_click',
+          label: (event.target as HTMLElement).textContent,
+          value: 1,
+          customParameters: {
+            analyticsId: analyticsId,
+          },
+        });
+      }
     };
 
     document.body.addEventListener('click', clickHandler);
@@ -63,7 +79,7 @@ export function TrackingProvider({ children }: { children: ReactNode }): ReactNo
   async function trackEvent(event: string, data?: Record<string, string | number | boolean>): Promise<void> {
     logger.debug('Tracking event:', event, data);
 
-    if ('gtag' in window) (window as any).gtag('event', event, data);
+    if ('gtag' in window && typeof window.gtag === 'function') window.gtag('event', event, data);
   }
 
   const memoedValue = useMemo(

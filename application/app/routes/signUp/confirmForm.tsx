@@ -3,6 +3,7 @@ import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, InputOtp, Button, Alert } from '@heroui/react';
 import logger from '../../logger';
+import { trackFormSubmission } from '../../utils/Tracking';
 
 interface Props {
   onConfirmSubmit: (code: string) => Promise<void>;
@@ -17,8 +18,12 @@ const ConfirmForm: FunctionComponent<Props> = ({ onConfirmSubmit }: Props) => {
 
     try {
       await onConfirmSubmit(code);
+
+      trackFormSubmission('sign_up_confirm_form', true);
     } catch (err) {
       logger.error('Unable to confirm sign up!', { error: err });
+
+      trackFormSubmission('sign_up_confirm_form', false);
 
       if (typeof err === 'object' && err !== null && 'name' in err && err.name === 'CodeMismatchException') {
         error = t('errors.codeMismatch');
