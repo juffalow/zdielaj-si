@@ -1,6 +1,6 @@
 import { useActionState } from 'react';
 import type { FunctionComponent } from 'react';
-import { Form, Input, Button, Alert } from '@heroui/react';
+import { Form, TextField, Label, Input, FieldError, Button, Alert, Spinner } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import logger from '~/logger';
 import { trackFormSubmission } from '../../utils/Tracking';
@@ -43,23 +43,28 @@ const RequestResetForm: FunctionComponent<Props> = ({ onRequestSubmit }: Props) 
   return (
     <>
       <p className="text-center mb-5">{t('description')}</p>
-      {state.error !== null ? <Alert color="danger" title={state.error} hideIcon={true} /> : null}
+      {state.error !== null ? (
+        <Alert status="danger">
+          <Alert.Content>
+            <Alert.Title>{state.error}</Alert.Title>
+          </Alert.Content>
+        </Alert>
+      ) : null}
 
       <Form action={formAction} className="space-y-6">
-        <Input
-          isRequired
-          errorMessage={t('requiredField')}
-          label={t('email')}
-          labelPlacement="outside"
-          name="email"
-          placeholder={t('emailPlaceholder')}
-          defaultValue={state.email}
-          type="text"
-          autoComplete="email"
-        />
+        <TextField isRequired name="email" type="text" defaultValue={state.email}>
+          <Label>{t('email')}</Label>
+          <Input placeholder={t('emailPlaceholder')} autoComplete="email" />
+          <FieldError>{t('requiredField')}</FieldError>
+        </TextField>
 
-        <Button type="submit" color="primary" fullWidth={true} isLoading={isPending}>
-          {t('requestResetButton')}
+        <Button type="submit" variant="primary" fullWidth={true} isPending={isPending}>
+          {({ isPending }) => (
+            <>
+              {isPending && <Spinner color="current" size="sm" />}
+              {t('requestResetButton')}
+            </>
+          )}
         </Button>
       </Form>
     </>

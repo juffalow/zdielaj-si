@@ -66,34 +66,34 @@
       "signInOrSignUp": "<signinlink>Prihlásiť sa</signinlink> na nahranie viac súborov alebo <signuplink>registrovať sa</signuplink> ak ešte nemáte účet."
     },
     "pricing": {
-      "default": {
-        "title": "Bez registrácie",
-        "monthly": "mesačne",
-        "maxTenPhotos": "max <strong>10</strong> fotiek",
-        "maxSizePerFile": "veľkosť súboru do <strong>10MB</strong>",
-        "deletedAfter24Hours": "súbory budú automaticky odstránené po <strong>24 hodinách</strong>"
-      },
       "free": {
         "title": "Zadarmo",
         "monthly": "mesačne",
-        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 fotiek)</small>",
-        "maxSizePerFile": "veľkosť súboru do <strong>100MB</strong>",
-        "video": "video",
-        "listOfAlbums": "zoznam albumov",
-        "filesWillBeDeletedAfter7Days": "súbory budú automaticky odstránené po <strong>7 dňoch</strong>",
+        "storageLimit": "Maximálne 500MB (≈ 150 fotiek)",
+        "fileSizeLimit": "Veľkosť súboru do 50MB",
+        "fileTypeLimit": "Fotky",
+        "fileRetention": "Uchovávanie súborov až 7 dní",
+        "signUp": "Registrovať"
+      },
+      "basic": {
+        "title": "Základný",
+        "monthly": "mesačne",
+        "storageLimit": "Maximálne 5GB (≈ 1500 fotiek)",
+        "fileSizeLimit": "Veľkosť súboru do 250MB",
+        "fileTypeLimit": "Fotky a videá",
+        "publicProfile": "Verejný profil",
+        "fileRetention": "Uchovávanie súborov až 3 mesiace",
         "signUp": "Registrovať"
       },
       "standard": {
         "title": "Štandard",
         "monthly": "mesačne",
-        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 fotiek)</small>",
-        "maxSizePerFile": "veľkosť súboru do <strong>500MB</strong>",
-        "video": "video",
-        "listOfAlbums": "zoznam albumov",
-        "passwordProtect": "ochrana heslom",
-        "publicProfile": "verejný profil",
-        "mfa": "dvojfaktorové overenie",
-        "filesAreNotDeleted": "súbory <strong>nie sú odstránené</strong>",
+        "storageLimit": "Maximálne 10GB (≈ 3000 fotiek)",
+        "fileSizeLimit": "Veľkosť súboru do 500MB",
+        "fileTypeLimit": "Fotky a videá",
+        "publicProfile": "Verejný profil",
+        "fileRetention": "Uchovávanie súborov až 1 rok",
+        "mfa": "Dvojfaktorové overenie",
         "signUp": "Registrovať"
       }
     }
@@ -233,6 +233,13 @@
       "newPassword": "Nové heslo",
       "newPasswordPlaceholder": "Nove1TazkeHeslo!",
       "confirmPassword": "Potvrdiť nové heslo",
+      "passwordRules": {
+        "minEightCharacters": "Aspoň 8 znakov",
+        "atLeastOneUppercase": "Aspoň jedno veľké písmeno",
+        "atLeastOneLowercase": "Aspoň jedno malé písmeno",
+        "atLeastOneSpecialCharacter": "Aspoň jeden špeciálny znak",
+        "atLeastOneNumber": "Aspoň jedno číslo"
+      },
       "button": "Zmeniť heslo"
     },
     "mfa": {

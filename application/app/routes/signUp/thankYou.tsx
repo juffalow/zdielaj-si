@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink } from 'react-router';
-import { Link } from '@heroui/react';
+import { Link } from 'react-router';
 import { ROUTES } from '../../constants';
 
 export default function ThankYou() {
@@ -9,7 +8,10 @@ export default function ThankYou() {
   return (
     <p className="text-center">
       {t('subtitle')}{' '}
-      <Link as={RouterLink} to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}>
+      <Link
+        to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}
+        className="link"
+      >
         {t('subtitleLink')}
       </Link>
       .

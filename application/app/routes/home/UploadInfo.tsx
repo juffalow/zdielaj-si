@@ -1,6 +1,5 @@
 import { useTranslation, Trans } from 'react-i18next';
-import { Link as RouterLink } from 'react-router';
-import { Link } from '@heroui/react';
+import { Link } from 'react-router';
 import { ROUTES } from '../../constants';
 
 export default function UploadInfo({ user }: { user: User | null }) {
@@ -26,16 +25,16 @@ export default function UploadInfo({ user }: { user: User | null }) {
             components={{
               signinlink: (
                 <Link
-                  as={RouterLink}
                   to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}
                   data-tracking-id="upload_info_unregistered_user_sign_in_link"
+                  className="link"
                 />
               ),
               signuplink: (
                 <Link
-                  as={RouterLink}
                   to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
                   data-tracking-id="upload_info_unregistered_user_sign_up_link"
+                  className="link"
                 />
               ),
             }}

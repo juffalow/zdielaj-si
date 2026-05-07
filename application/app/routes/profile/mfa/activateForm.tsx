@@ -10,13 +10,17 @@ const Activate: FunctionComponent<Props> = ({ onActivate }: Props) => {
   const { t } = useTranslation();
 
   return (
-    <Alert color="primary" hideIcon={true}>
-      <p className="text-lg font-medium">{t('profile.mfa.activate.title')}</p>
-      <p>{t('profile.mfa.activate.subtitle')}</p>
-      <hr />
-      <Button onPress={onActivate} className="mt-4" color="primary">
-        {t('profile.publicProfile.activate.cta')}
-      </Button>
+    <Alert status="accent">
+      <Alert.Content>
+        <Alert.Title className="text-lg font-medium">{t('profile.mfa.activate.title')}</Alert.Title>
+        <Alert.Description>
+          <p>{t('profile.mfa.activate.subtitle')}</p>
+        </Alert.Description>
+        <hr />
+        <Button onPress={onActivate} className="mt-4" variant="primary">
+          {t('profile.publicProfile.activate.cta')}
+        </Button>
+      </Alert.Content>
     </Alert>
   );
 };

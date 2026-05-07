@@ -1,6 +1,6 @@
 import { useActionState } from 'react';
 import type { FunctionComponent } from 'react';
-import { Form, Input, Button, Alert } from '@heroui/react';
+import { Form, TextField, Label, Input, FieldError, Button, Alert, Spinner } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import logger from '~/logger';
 import { trackFormSubmission } from '../../utils/Tracking';
@@ -48,43 +48,38 @@ const ResetForm: FunctionComponent<Props> = ({ username, onResetSubmit }: Props)
 
   return (
     <>
-      {state.error !== null ? <Alert color="danger" title={state.error} hideIcon={true} /> : null}
+      {state.error !== null ? (
+        <Alert status="danger">
+          <Alert.Content>
+            <Alert.Title>{state.error}</Alert.Title>
+          </Alert.Content>
+        </Alert>
+      ) : null}
       <Form action={formAction} className="space-y-6">
-        <Input
-          label={t('email')}
-          labelPlacement="outside"
-          name="email"
-          defaultValue={username}
-          type="text"
-          readOnly={true}
-        />
+        <TextField name="email" type="text" defaultValue={username}>
+          <Label>{t('email')}</Label>
+          <Input readOnly />
+        </TextField>
 
-        <Input
-          isRequired
-          errorMessage={t('requiredField')}
-          label={t('password')}
-          labelPlacement="outside"
-          name="password"
-          placeholder={t('passwordPlaceholder')}
-          defaultValue={state.password}
-          type="password"
-          autoComplete="current-password"
-        />
+        <TextField isRequired name="password" type="password" defaultValue={state.password}>
+          <Label>{t('password')}</Label>
+          <Input placeholder={t('passwordPlaceholder')} autoComplete="current-password" />
+          <FieldError>{t('requiredField')}</FieldError>
+        </TextField>
 
-        <Input
-          isRequired
-          errorMessage={t('requiredField')}
-          label={t('code')}
-          labelPlacement="outside"
-          name="code"
-          placeholder={t('codePlaceholder')}
-          defaultValue={state.code}
-          type="text"
-          autoComplete="one-time-code"
-        />
+        <TextField isRequired name="code" type="text" defaultValue={state.code}>
+          <Label>{t('code')}</Label>
+          <Input placeholder={t('codePlaceholder')} autoComplete="one-time-code" />
+          <FieldError>{t('requiredField')}</FieldError>
+        </TextField>
 
-        <Button type="submit" color="primary" fullWidth={true} isLoading={isPending}>
-          {t('resetPasswordButton')}
+        <Button type="submit" variant="primary" fullWidth={true} isPending={isPending}>
+          {({ isPending }) => (
+            <>
+              {isPending && <Spinner color="current" size="sm" />}
+              {t('resetPasswordButton')}
+            </>
+          )}
         </Button>
       </Form>
     </>

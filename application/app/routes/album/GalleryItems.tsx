@@ -1,4 +1,4 @@
-import { Button, Image, Spinner } from '@heroui/react';
+import { Button, Spinner } from '@heroui/react';
 import type { HTMLAttributes } from 'react';
 import { FaCloudDownloadAlt } from 'react-icons/fa';
 import styles from './GalleryItems.module.css';
@@ -26,6 +26,7 @@ export default function GalleryItems({
   gaps: 'none' | 'small' | 'medium' | 'large';
   downloadButton: boolean;
 }) {
+  console.log(files);
   if (layout === 'cols') {
     return (
       <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-2">
@@ -91,8 +92,7 @@ const GalleryImage = ({
         <Button
           isIconOnly
           aria-label="Download"
-          color="primary"
-          variant="solid"
+          variant="primary"
           className="absolute top-2 right-2 z-1"
           data-tracking-id="album_download_button_click"
           style={{ fontSize: '1.2rem' }}
@@ -106,23 +106,17 @@ const GalleryImage = ({
         data-src={'preview' in file ? file.preview : file.location}
         {...props}
       >
-        <Image
+        <img
           src={'preview' in file ? file.preview : file.thumbnails[1] || file.thumbnails[0] || file.location}
-          radius="sm"
           width="100%"
           height="100%"
-          classNames={{
-            wrapper: 'h-full w-full bg-cover max-w-none z-0',
-            img: 'object-cover object-center',
-          }}
+          className="rounded-sm object-cover object-center h-full w-full bg-cover max-w-none z-0"
         />
 
         {'isDone' in file && file.isDone === false && (
           <Spinner
-            classNames={{
-              base: `absolute w-full h-full inset-0 z-999 ${styles.bgGrayOpaque}`,
-            }}
-            color={file.isUploading ? 'success' : 'primary'}
+            className={`absolute w-full h-full inset-0 z-999 ${styles.bgGrayOpaque}`}
+            color={file.isUploading ? 'success' : 'accent'}
           />
         )}
         {'hasError' in file && file.hasError === true && (
@@ -150,10 +144,8 @@ const GalleryVideo = ({ file, ...props }: { file: AlbumFile | UploadedFile } & H
       >
         {file.isDone === false && (
           <Spinner
-            classNames={{
-              base: `absolute w-full h-full inset-0 z-999 ${styles.bgGrayOpaque}`,
-            }}
-            color={file.isUploading ? 'success' : 'primary'}
+            className={`absolute w-full h-full inset-0 z-999 ${styles.bgGrayOpaque}`}
+            color={file.isUploading ? 'success' : 'accent'}
           />
         )}
         <video
@@ -174,15 +166,11 @@ const GalleryVideo = ({ file, ...props }: { file: AlbumFile | UploadedFile } & H
       data-video={`{"source": [{"src":"${(file as any).video}", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}`}
       {...props}
     >
-      <Image
+      <img
         src={file.thumbnails[1] || file.thumbnails[0] || file.location}
-        radius="sm"
         width="100%"
         height="100%"
-        classNames={{
-          wrapper: 'h-full w-full bg-cover max-w-none',
-          img: 'object-cover object-center',
-        }}
+        className="rounded-sm object-cover object-center h-full w-full bg-cover max-w-none z-0"
       />
     </div>
   );

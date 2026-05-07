@@ -1,5 +1,5 @@
 import { use, useState } from 'react';
-import { Divider } from '@heroui/react';
+import { Separator } from '@heroui/react';
 import LightGallery from 'lightgallery/react';
 import lgVideo from 'lightgallery/plugins/video';
 import GalleryItems from './GalleryItems';
@@ -31,7 +31,7 @@ export default function Gallery({ albumPromise }: { albumPromise: Promise<Album>
       {(user !== null && 'user' in album && user.id === album.user.id) || 'token' in album ? (
         <>
           <UpdateForm album={album} />
-          <Divider className="my-10" />
+          <Separator className="my-10" />
         </>
       ) : null}
 

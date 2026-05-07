@@ -66,34 +66,34 @@
       "signInOrSignUp": "<signinlink>Se connecter</signinlink> pour télécharger plus de fichiers ou <signuplink>s'inscrire</signuplink> si vous n'avez pas encore de compte."
     },
     "pricing": {
-      "default": {
-        "title": "Sans inscription",
-        "monthly": "mensuel",
-        "maxTenPhotos": "max <strong>10</strong> photos",
-        "maxSizePerFile": "taille de fichier jusqu'à <strong>10MB</strong>",
-        "deletedAfter24Hours": "les fichiers seront automatiquement supprimés après <strong>24 heures</strong>"
-      },
       "free": {
         "title": "Gratuit",
         "monthly": "mensuel",
-        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 photos)</small>",
-        "maxSizePerFile": "taille de fichier jusqu'à <strong>100MB</strong>",
-        "video": "vidéo",
-        "listOfAlbums": "liste des albums",
-        "filesWillBeDeletedAfter7Days": "les fichiers seront automatiquement supprimés après <strong>7 jours</strong>",
+        "storageLimit": "Maximum 500MB (≈ 150 photos)",
+        "fileSizeLimit": "Taille de fichier jusqu'à 50MB",
+        "fileTypeLimit": "Photos",
+        "fileRetention": "Conservation des fichiers jusqu'à 7 jours",
+        "signUp": "S'inscrire"
+      },
+      "basic": {
+        "title": "Basique",
+        "monthly": "mensuel",
+        "storageLimit": "Maximum 5GB (≈ 1500 photos)",
+        "fileSizeLimit": "Taille de fichier jusqu'à 250MB",
+        "fileTypeLimit": "Photos et vidéos",
+        "fileRetention": "Conservation des fichiers jusqu'à 3 mois",
+        "publicProfile": "Profil public",
         "signUp": "S'inscrire"
       },
       "standard": {
         "title": "Standard",
         "monthly": "mensuel",
-        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 photos)</small>",
-        "maxSizePerFile": "taille de fichier jusqu'à <strong>500MB</strong>",
-        "video": "vidéo",
-        "listOfAlbums": "liste des albums",
-        "passwordProtect": "protection par mot de passe",
-        "publicProfile": "profil public",
-        "mfa": "authentification à deux facteurs",
-        "filesAreNotDeleted": "les fichiers <strong>ne sont pas supprimés</strong>",
+        "storageLimit": "Maximum 10GB (≈ 3000 photos)",
+        "fileSizeLimit": "Taille de fichier jusqu'à 500MB",
+        "fileTypeLimit": "Photos et vidéos",
+        "publicProfile": "Profil public",
+        "fileRetention": "Conservation des fichiers jusqu'à 1 an",
+        "mfa": "Authentification multi-facteurs",
         "signUp": "S'inscrire"
       }
     }
@@ -233,6 +233,13 @@
       "newPassword": "Nouveau mot de passe",
       "newPasswordPlaceholder": "Nouveau1MotDePasseSecurise!",
       "confirmPassword": "Confirmer le nouveau mot de passe",
+      "passwordRules": {
+        "minEightCharacters": "Au moins 8 caractères",
+        "atLeastOneUppercase": "Au moins une lettre majuscule",
+        "atLeastOneLowercase": "Au moins une lettre minuscule",
+        "atLeastOneSpecialCharacter": "Au moins un caractère spécial",
+        "atLeastOneNumber": "Au moins un chiffre"
+      },
       "button": "Changer le mot de passe"
     },
     "mfa": {

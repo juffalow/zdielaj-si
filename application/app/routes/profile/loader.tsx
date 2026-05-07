@@ -1,18 +1,18 @@
-import { Skeleton, Divider } from '@heroui/react';
+import { Skeleton, Separator } from '@heroui/react';
 
 export default function Loader() {
   return (
     <>
       <Skeleton style={{ height: 64 }} />
-      <Divider />
+      <Separator />
       <Skeleton style={{ height: 64 }} />
-      <Divider />
+      <Separator />
       <Skeleton style={{ height: 64 }} />
-      <Divider />
+      <Separator />
       <Skeleton style={{ height: 64 }} />
-      <Divider />
+      <Separator />
       <Skeleton style={{ height: 64 }} />
-      <Divider />
+      <Separator />
       <Skeleton style={{ height: 64 }} />
     </>
   );

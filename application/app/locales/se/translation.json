@@ -66,34 +66,34 @@
       "signInOrSignUp": "<signinlink>Logga in</signinlink> för att ladda upp fler filer eller <signuplink>registrera</signuplink> om du inte har ett konto ännu."
     },
     "pricing": {
-      "default": {
-        "title": "Utan registrering",
-        "monthly": "månatligen",
-        "maxTenPhotos": "max <strong>10</strong> foton",
-        "maxSizePerFile": "filstorlek upp till <strong>10MB</strong>",
-        "deletedAfter24Hours": "filer kommer automatiskt att raderas efter <strong>24 timmar</strong>"
-      },
       "free": {
         "title": "Gratis",
         "monthly": "månatligen",
-        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 foton)</small>",
-        "maxSizePerFile": "filstorlek upp till <strong>100MB</strong>",
-        "video": "video",
-        "listOfAlbums": "lista över album",
-        "filesWillBeDeletedAfter7Days": "filer kommer automatiskt att raderas efter <strong>7 dagar</strong>",
+        "storageLimit": "Maximalt 500MB (≈ 150 foton)",
+        "fileSizeLimit": "Filstorlek upp till 50MB",
+        "fileTypeLimit": "Foton",
+        "fileRetention": "Fillagring upp till 7 dagar",
+        "signUp": "Registrera"
+      },
+      "basic": {
+        "title": "Bas",
+        "monthly": "månatligen",
+        "storageLimit": "Maximalt 5GB (≈ 1500 foton)",
+        "fileSizeLimit": "Filstorlek upp till 250MB",
+        "fileTypeLimit": "Foton och videor",
+        "fileRetention": "Fillagring upp till 3 månader",
+        "publicProfile": "Offentlig profil",
         "signUp": "Registrera"
       },
       "standard": {
         "title": "Standard",
         "monthly": "månatligen",
-        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 foton)</small>",
-        "maxSizePerFile": "filstorlek upp till <strong>500MB</strong>",
-        "video": "video",
-        "listOfAlbums": "lista över album",
-        "passwordProtect": "lösenordsskydd",
-        "publicProfile": "offentlig profil",
-        "mfa": "tvåfaktorsautentisering",
-        "filesAreNotDeleted": "filer raderas <strong>inte</strong>",
+        "storageLimit": "Maximalt 10GB (≈ 3000 foton)",
+        "fileSizeLimit": "Filstorlek upp till 500MB",
+        "fileTypeLimit": "Foton och videor",
+        "publicProfile": "Offentlig profil",
+        "fileRetention": "Fillagring upp till 1 år",
+        "mfa": "Multifaktorautentisering",
         "signUp": "Registrera"
       }
     }
@@ -233,6 +233,13 @@
       "newPassword": "Nytt lösenord",
       "newPasswordPlaceholder": "Nytt1SakertLosenord!",
       "confirmPassword": "Bekräfta nytt lösenord",
+      "passwordRules": {
+        "minEightCharacters": "Minst 8 tecken",
+        "atLeastOneUppercase": "Minst en stor bokstav",
+        "atLeastOneLowercase": "Minst en liten bokstav",
+        "atLeastOneSpecialCharacter": "Minst ett specialtecken",
+        "atLeastOneNumber": "Minst en siffra"
+      },
       "button": "Ändra lösenord"
     },
     "mfa": {

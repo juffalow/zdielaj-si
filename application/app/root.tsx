@@ -1,6 +1,5 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
 import { I18nextProvider } from 'react-i18next';
-import { HeroUIProvider } from '@heroui/react';
 import * as Sentry from '@sentry/react';
 import { AuthProvider } from './utils/useAuth';
 import { UploadProvider } from './utils/useUpload';
@@ -34,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <html lang={language}>
+    <html lang={language} className="light" data-theme="light">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -61,16 +60,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </>
         )}
       </head>
-      <body>
+      <body className="bg-background text-foreground">
         <I18nextProvider i18n={i18n}>
           <AuthProvider>
             <UploadProvider>
               <TrackingProvider>
-                <HeroUIProvider className="flex flex-col min-h-svh">
+                <div className="flex flex-col min-h-svh">
                   <Menu />
-                  <main className="light flex-grow container mx-auto pt-8 pb-8 px-2 md:px-0">{children}</main>
+                  <main className="flex-grow container mx-auto pt-8 pb-8 px-2 md:px-0">{children}</main>
                   <Footer />
-                </HeroUIProvider>
+                </div>
               </TrackingProvider>
             </UploadProvider>
           </AuthProvider>

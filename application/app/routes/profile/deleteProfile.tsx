@@ -8,7 +8,7 @@ const DeleteProfile: FunctionComponent = () => {
   return (
     <>
       <p className="mb-4">{t('subtitle')}</p>
-      <Button color="danger" variant="flat" disabled>
+      <Button variant="danger" isDisabled>
         {t('submitButton')}
       </Button>
       <p>

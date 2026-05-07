@@ -1,10 +1,11 @@
 import { useState, useCallback, useEffect, useTransition } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import type { Route } from './+types/home';
-import { Card, CardHeader, CardBody, CardFooter, Button } from '@heroui/react';
-import { Trans, useTranslation } from 'react-i18next';
+import { Button } from '@heroui/react';
+import { useTranslation } from 'react-i18next';
 import { useDropzone, type FileRejection } from 'react-dropzone';
 import UploadInfo from './home/UploadInfo';
+import PricingCard from './home/PricingCard';
 import useAuth from '../utils/useAuth';
 import useUpload from '../utils/useUpload';
 import logger from '../logger';
@@ -229,9 +230,8 @@ export default function Home() {
           <input {...getInputProps()} aria-label="upload files" />
           <p>{t('uploadArea.title')}</p>
           <Button
-            className="mt-5"
-            color="success"
-            variant="solid"
+            className="mt-5 bg-green-700 hover:bg-green-800"
+            variant="primary"
             size="lg"
             data-tracking-id="home_upload_button_click"
             onPress={open}
@@ -243,118 +243,45 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-10">
-        <Card shadow="sm" fullWidth={true}>
-          <CardHeader className="bg-blue-100">
-            <h2 className="text-center text-2xl font-semibold w-full">{t('pricing.default.title')}</h2>
-          </CardHeader>
-          <CardBody className="px-8">
-            <p className="text-center text-3xl">
-              0€ / <small className="text-gray-500">{t('pricing.default.monthly')}</small>
-            </p>
-            <ul className="list-inside features-list mt-4">
-              <li>
-                <Trans
-                  i18nKey="home.pricing.default.maxTenPhotos"
-                  components={{ small: <small className="text-gray-500" /> }}
-                />
-              </li>
-              <li>
-                <Trans
-                  i18nKey="home.pricing.default.maxSizePerFile"
-                  components={{ small: <small className="text-gray-500" /> }}
-                />
-              </li>
-              <li>
-                <Trans
-                  i18nKey="home.pricing.default.deletedAfter24Hours"
-                  components={{ small: <small className="text-gray-500" /> }}
-                />
-              </li>
-            </ul>
-          </CardBody>
-        </Card>
-        <Card>
-          <CardHeader className="bg-blue-300">
-            <h2 className="text-center text-2xl font-semibold w-full">{t('pricing.standard.title')}</h2>
-          </CardHeader>
-          <CardBody className="px-8">
-            <p className="text-center text-3xl">
-              1.99€ / <small className="text-gray-500">{t('pricing.standard.monthly')}</small>
-            </p>
-            <ul className="list-inside features-list mt-4">
-              <li>
-                <Trans
-                  i18nKey="home.pricing.standard.maxTenGB"
-                  components={{ small: <small className="text-gray-500" /> }}
-                />
-              </li>
-              <li>
-                <Trans
-                  i18nKey="home.pricing.standard.maxSizePerFile"
-                  components={{ small: <small className="text-gray-500" /> }}
-                />
-              </li>
-              <li>{t('pricing.standard.video')}</li>
-              <li>{t('pricing.standard.listOfAlbums')}</li>
-              <li>{t('pricing.standard.publicProfile')}</li>
-              <li>{t('pricing.standard.mfa')}</li>
-              <li>
-                <Trans i18nKey="home.pricing.standard.filesAreNotDeleted" />
-              </li>
-            </ul>
-          </CardBody>
-          <CardFooter>
-            <Button
-              as={Link}
-              to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
-              variant="bordered"
-              fullWidth={true}
-              data-tracking-id="home_standard_sign_up_click"
-            >
-              {t('pricing.standard.signUp')}
-            </Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader className="bg-blue-200">
-            <h2 className="text-center text-2xl font-semibold w-full">{t('pricing.free.title')}</h2>
-          </CardHeader>
-          <CardBody className="px-8">
-            <p className="text-center text-3xl">
-              0€ / <small className="text-gray-500">{t('pricing.free.monthly')}</small>
-            </p>
-            <ul className="list-inside features-list mt-4">
-              <li>
-                <Trans
-                  i18nKey="home.pricing.free.maxOneGB"
-                  components={{ small: <small className="text-gray-500" /> }}
-                />
-              </li>
-              <li>
-                <Trans
-                  i18nKey="home.pricing.free.maxSizePerFile"
-                  components={{ small: <small className="text-gray-500" /> }}
-                />
-              </li>
-              <li>{t('pricing.free.video')}</li>
-              <li>{t('pricing.free.listOfAlbums')}</li>
-              <li>
-                <Trans i18nKey="home.pricing.free.filesWillBeDeletedAfter7Days" />
-              </li>
-            </ul>
-          </CardBody>
-          <CardFooter>
-            <Button
-              as={Link}
-              to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
-              variant="bordered"
-              fullWidth={true}
-              data-tracking-id="home_free_sign_up_click"
-            >
-              {t('pricing.free.signUp')}
-            </Button>
-          </CardFooter>
-        </Card>
+        <PricingCard
+          title={t('pricing.free.title')}
+          price="0"
+          period={t('pricing.free.monthly')}
+          features={[
+            t('pricing.free.storageLimit'),
+            t('pricing.free.fileSizeLimit'),
+            t('pricing.free.fileTypeLimit'),
+            t('pricing.free.fileRetention'),
+          ]}
+          backgroundClass="bg-blue-100"
+        />
+        <PricingCard
+          title={t('pricing.standard.title')}
+          price="1.99€"
+          period={t('pricing.standard.monthly')}
+          features={[
+            t('pricing.standard.storageLimit'),
+            t('pricing.standard.fileSizeLimit'),
+            t('pricing.standard.fileTypeLimit'),
+            t('pricing.standard.publicProfile'),
+            t('pricing.standard.mfa'),
+            t('pricing.standard.fileRetention'),
+          ]}
+          backgroundClass="bg-blue-200"
+        />
+        <PricingCard
+          title={t('pricing.basic.title')}
+          price="0.99€"
+          period={t('pricing.basic.monthly')}
+          features={[
+            t('pricing.basic.storageLimit'),
+            t('pricing.basic.fileSizeLimit'),
+            t('pricing.basic.fileTypeLimit'),
+            t('pricing.basic.publicProfile'),
+            t('pricing.basic.fileRetention'),
+          ]}
+          backgroundClass="bg-blue-100"
+        />
       </div>
     </div>
   );

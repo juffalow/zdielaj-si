@@ -66,34 +66,34 @@
       "signInOrSignUp": "<signinlink>Bejelentkezés</signinlink> a fényképek feltöltéséhez vagy <signuplink>regisztráció</signuplink> ha még nincs fiókja."
     },
     "pricing": {
-      "default": {
-        "title": "Regisztráció nélkül",
-        "monthly": "havonta",
-        "maxTenPhotos": "max <strong>10</strong> fénykép",
-        "maxSizePerFile": "fájlméret legfeljebb <strong>10MB</strong>",
-        "deletedAfter24Hours": "a fájlok automatikusan törlődnek <strong>24 óra</strong> után"
-      },
       "free": {
         "title": "Ingyenes",
         "monthly": "havonta",
-        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 fénykép)</small>",
-        "maxSizePerFile": "fájlméret legfeljebb <strong>100MB</strong>",
-        "video": "videó",
-        "listOfAlbums": "albumok listája",
-        "filesWillBeDeletedAfter7Days": "a fájlok automatikusan törlődnek <strong>7 nap</strong> után",
+        "storageLimit": "Legfeljebb 500MB (≈ 150 fénykép)",
+        "fileSizeLimit": "Fájlméret legfeljebb 50MB",
+        "fileTypeLimit": "Fényképek",
+        "fileRetention": "Fájlmegőrzés legfeljebb 7 napig",
+        "signUp": "Regisztráció"
+      },
+      "basic": {
+        "title": "Alap",
+        "monthly": "havonta",
+        "storageLimit": "Legfeljebb 5GB (≈ 1500 fénykép)",
+        "fileSizeLimit": "Fájlméret legfeljebb 250MB",
+        "fileTypeLimit": "Fényképek és videók",
+        "fileRetention": "Fájlmegőrzés legfeljebb 3 hónapig",
+        "publicProfile": "Nyilvános profil",
         "signUp": "Regisztráció"
       },
       "standard": {
         "title": "Standard",
         "monthly": "havonta",
-        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 fénykép)</small>",
-        "maxSizePerFile": "fájlméret legfeljebb <strong>500MB</strong>",
-        "video": "videó",
-        "listOfAlbums": "albumok listája",
-        "passwordProtect": "jelszóvédelem",
-        "publicProfile": "nyilvános profil",
-        "mfa": "kétfaktoros hitelesítés",
-        "filesAreNotDeleted": "a fájlok <strong>nem törlődnek</strong>",
+        "storageLimit": "Legfeljebb 10GB (≈ 3000 fénykép)",
+        "fileSizeLimit": "Fájlméret legfeljebb 500MB",
+        "fileTypeLimit": "Fényképek és videók",
+        "publicProfile": "Nyilvános profil",
+        "fileRetention": "Fájlmegőrzés legfeljebb 1 évig",
+        "mfa": "Többtényezős hitelesítés",
         "signUp": "Regisztráció"
       }
     }
@@ -233,6 +233,13 @@
       "newPassword": "Új jelszó",
       "newPasswordPlaceholder": "Uj1BiztonsagosJelszo!",
       "confirmPassword": "Új jelszó megerősítése",
+      "passwordRules": {
+        "minEightCharacters": "Legalább 8 karakter",
+        "atLeastOneUppercase": "Legalább egy nagybetű",
+        "atLeastOneLowercase": "Legalább egy kisbetű",
+        "atLeastOneSpecialCharacter": "Legalább egy speciális karakter",
+        "atLeastOneNumber": "Legalább egy szám"
+      },
       "button": "Jelszó módosítása"
     },
     "mfa": {

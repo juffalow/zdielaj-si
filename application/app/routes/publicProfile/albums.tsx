@@ -1,6 +1,6 @@
 import { use, useEffect } from 'react';
-import { Card, CardBody, CardFooter, Image } from '@heroui/react';
-import { useNavigate } from 'react-router';
+import { Card } from '@heroui/react';
+import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { formatDate } from '../../utils/functions';
 import useOnScreen from '../../utils/useOnScreen';
@@ -14,7 +14,6 @@ export default function PublicProfileAlbums({
 }) {
   const albums = use(fetchAlbums);
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { measureRef, isIntersecting } = useOnScreen();
 
   useEffect(() => {
@@ -28,23 +27,22 @@ export default function PublicProfileAlbums({
       {albums.map((album, index) => (
         <Card
           key={album.id}
-          radius="sm"
-          isPressable={true}
-          onPress={() => navigate(`/${t('routes.prefix')}${t('routes.album').replace(':id', album.id)}`)}
+          className="rounded-sm"
         >
-          <CardBody className="overflow-visible p-0">
-            <Image
-              alt="Card background"
-              className="object-cover w-full rounded-sm rounded-b-none aspect-square"
-              src={album.media[0].thumbnails[0]}
-              classNames={{ wrapper: 'min-w-full' }}
-            />
-          </CardBody>
-          <CardFooter className="flex-col">
+          <Card.Content className="overflow-visible p-0">
+            <Link to={`/${t('routes.prefix')}${t('routes.album').replace(':id', album.id)}`}>
+              <img
+                alt="Card background"
+                className="object-cover w-full min-w-full rounded-sm rounded-b-none aspect-square"
+                src={album.media[0].thumbnails[0]}
+              />
+            </Link>
+          </Card.Content>
+          <Card.Footer className="flex-col">
             <h4 className="font-bold text-large">{album.name}</h4>
             {index === albums.length - 1 && <span ref={measureRef} />}
             <p className="text-default-500">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</p>
-          </CardFooter>
+          </Card.Footer>
         </Card>
       ))}
     </div>

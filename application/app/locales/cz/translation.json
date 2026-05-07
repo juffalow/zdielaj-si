@@ -66,34 +66,34 @@
       "signInOrSignUp": "<signinlink>Přihlásit se</signinlink> na nahranie viac súborov alebo <signuplink>registrovať sa</signuplink> ak ešte nemáte účet."
     },
     "pricing": {
-      "default": {
-        "title": "Bez registrace",
-        "monthly": "měsíčně",
-        "maxTenPhotos": "max <strong>10</strong> fotek",
-        "maxSizePerFile": "velikost souboru do <strong>10MB</strong>",
-        "deletedAfter24Hours": "soubory budou automaticky odstraněny po <strong>24 hodinách</strong>"
-      },
       "free": {
         "title": "Zdarma",
         "monthly": "měsíčně",
-        "maxOneGB": "max <strong>1GB</strong> <small>(≈ 300 fotek)</small>",
-        "maxSizePerFile": "velikost souboru do <strong>100MB</strong>",
-        "video": "video",
-        "listOfAlbums": "seznam alb",
-        "filesWillBeDeletedAfter7Days": "soubory budou automaticky odstraněny po <strong>7 dnech</strong>",
+        "storageLimit": "Maximálně 500MB (≈ 150 fotek)",
+        "fileSizeLimit": "Velikost souboru do 50MB",
+        "fileTypeLimit": "Fotografie",
+        "fileRetention": "Uchovávání souborů po dobu 7 dní",
+        "signUp": "Registrovat"
+      },
+      "basic": {
+        "title": "Základní",
+        "monthly": "měsíčně",
+        "storageLimit": "Maximálně 5GB (≈ 1500 fotek)",
+        "fileSizeLimit": "Velikost souboru do 250MB",
+        "fileTypeLimit": "Fotografie a videa",
+        "fileRetention": "Uchovávání souborů po dobu 3 měsíců",
+        "publicProfile": "Veřejný profil",
         "signUp": "Registrovat"
       },
       "standard": {
         "title": "Standard",
         "monthly": "měsíčně",
-        "maxTenGB": "max <strong>10GB</strong> <small>(≈ 3000 fotek)</small>",
-        "maxSizePerFile": "velikost souboru do <strong>500MB</strong>",
-        "video": "video",
-        "listOfAlbums": "seznam alb",
-        "passwordProtect": "ochrana heslem",
-        "publicProfile": "veřejný profil",
-        "mfa": "dvoufaktorové ověření",
-        "filesAreNotDeleted": "soubory <strong>nejsou odstraněny</strong>",
+        "storageLimit": "Maximálně 10GB (≈ 3000 fotek)",
+        "fileSizeLimit": "Velikost souboru do 500MB",
+        "fileTypeLimit": "Fotografie a videa",
+        "publicProfile": "Veřejný profil",
+        "fileRetention": "Uchovávání souborů po dobu 1 roku",
+        "mfa": "Vícefaktorové ověřování",
         "signUp": "Registrovat"
       }
     }
@@ -233,6 +233,13 @@
       "newPassword": "Nové heslo",
       "newPasswordPlaceholder": "Nove1TezkeHeslo!",
       "confirmPassword": "Potvrdit nové heslo",
+      "passwordRules": {
+        "minEightCharacters": "Alespoň 8 znaků",
+        "atLeastOneUppercase": "Alespoň jedno velké písmeno",
+        "atLeastOneLowercase": "Alespoň jedno malé písmeno",
+        "atLeastOneSpecialCharacter": "Alespoň jeden speciální znak",
+        "atLeastOneNumber": "Alespoň jedno číslo"
+      },
       "button": "Změnit heslo"
     },
     "mfa": {

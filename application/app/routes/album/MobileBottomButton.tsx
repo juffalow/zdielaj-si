@@ -35,7 +35,7 @@ const MobileBottomButton = ({ link }: Props) => {
         style={{ bottom: 0, backgroundColor: 'rgba(153, 153, 153, 0.6)', zIndex: 999 }}
       >
         <Button
-          color="primary"
+          variant="primary"
           onPress={onCopyClick}
           className="w-100"
           size="lg"

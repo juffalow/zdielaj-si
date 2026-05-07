@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { InputOtp, Button } from '@heroui/react';
+import { InputOTP, Button } from '@heroui/react';
 import QRCode from 'qrcode';
 import logger from '../../../logger';
 
@@ -53,26 +53,44 @@ const Confirm: FunctionComponent<Props> = ({ totpSetupDetails, onValidate, onCon
       <p>{t('profile.mfa.confirm.subtitle')}</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <InputOtp
-            label={t('profile.mfa.confirm.code')}
+          <InputOTP
+            required
+            isInvalid
             name="code"
-            length={6}
+            maxLength={6}
+            className="mx-auto"
             onComplete={onVerifyCode}
-            color={isOtpValid === true ? 'success' : 'default'}
-            isInvalid={isOtpValid === false}
-          />
-          <InputOtp
-            label={t('profile.mfa.confirm.confirmCode')}
+          >
+            <InputOTP.Group>
+              <InputOTP.Slot index={0} />
+              <InputOTP.Slot index={1} />
+              <InputOTP.Slot index={2} />
+              <InputOTP.Slot index={3} />
+              <InputOTP.Slot index={4} />
+              <InputOTP.Slot index={5} />
+            </InputOTP.Group>
+          </InputOTP>
+          <InputOTP
+            required
+            isInvalid
             name="confirmCode"
-            length={6}
+            maxLength={6}
+            className="mx-auto"
             onComplete={onVerifyConfirmCode}
-            color={isConfirmOtpValid === true ? 'success' : 'default'}
-            isInvalid={isConfirmOtpValid === false}
-          />
+          >
+            <InputOTP.Group>
+              <InputOTP.Slot index={0} />
+              <InputOTP.Slot index={1} />
+              <InputOTP.Slot index={2} />
+              <InputOTP.Slot index={3} />
+              <InputOTP.Slot index={4} />
+              <InputOTP.Slot index={5} />
+            </InputOTP.Group>
+          </InputOTP>
         </div>
         <div>{qrCode ? <img src={qrCode} alt="QR Code" /> : <p>{t('profile.mfa.confirm.loading')}</p>}</div>
       </div>
-      <Button color="primary" isDisabled={isOtpValid !== true || isConfirmOtpValid !== true} onPress={onSubmit}>
+      <Button variant="primary" isDisabled={isOtpValid !== true || isConfirmOtpValid !== true} onPress={onSubmit}>
         {t('profile.mfa.confirm.submitButton')}
       </Button>
     </div>

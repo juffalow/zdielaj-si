@@ -66,34 +66,34 @@
       "signInOrSignUp": "<signinlink>Zaloguj się</signinlink> aby przesłać więcej plików lub <signuplink>zarejestruj się</signuplink> jeśli nie masz jeszcze konta."
     },
     "pricing": {
-      "default": {
-        "title": "Bez rejestracji",
-        "monthly": "miesięcznie",
-        "maxTenPhotos": "maks <strong>10</strong> zdjęć",
-        "maxSizePerFile": "rozmiar pliku do <strong>10MB</strong>",
-        "deletedAfter24Hours": "pliki zostaną automatycznie usunięte po <strong>24 godzinach</strong>"
-      },
       "free": {
         "title": "Za darmo",
         "monthly": "miesięcznie",
-        "maxOneGB": "maks <strong>1GB</strong> <small>(≈ 300 zdjęć)</small>",
-        "maxSizePerFile": "rozmiar pliku do <strong>100MB</strong>",
-        "video": "wideo",
-        "listOfAlbums": "lista albumów",
-        "filesWillBeDeletedAfter7Days": "pliki zostaną automatycznie usunięte po <strong>7 dniach</strong>",
+        "storageLimit": "Maksymalnie 500MB (≈ 150 zdjęć)",
+        "fileSizeLimit": "Rozmiar pliku do 50MB",
+        "fileTypeLimit": "Zdjęcia",
+        "fileRetention": "Przechowywanie plików do 7 dni",
+        "signUp": "Zarejestruj się"
+      },
+      "basic": {
+        "title": "Podstawowy",
+        "monthly": "miesięcznie",
+        "storageLimit": "Maksymalnie 5GB (≈ 1500 zdjęć)",
+        "fileSizeLimit": "Rozmiar pliku do 250MB",
+        "fileTypeLimit": "Zdjęcia i filmy",
+        "fileRetention": "Przechowywanie plików do 3 miesięcy",
+        "publicProfile": "Publiczny profil",
         "signUp": "Zarejestruj się"
       },
       "standard": {
         "title": "Standard",
         "monthly": "miesięcznie",
-        "maxTenGB": "maks <strong>10GB</strong> <small>(≈ 3000 zdjęć)</small>",
-        "maxSizePerFile": "rozmiar pliku do <strong>500MB</strong>",
-        "video": "wideo",
-        "listOfAlbums": "lista albumów",
-        "passwordProtect": "ochrona hasłem",
-        "publicProfile": "profil publiczny",
-        "mfa": "uwierzytelnianie dwuskładnikowe",
-        "filesAreNotDeleted": "pliki <strong>nie są usuwane</strong>",
+        "storageLimit": "Maksymalnie 10GB (≈ 3000 zdjęć)",
+        "fileSizeLimit": "Rozmiar pliku do 500MB",
+        "fileTypeLimit": "Zdjęcia i filmy",
+        "publicProfile": "Publiczny profil",
+        "fileRetention": "Przechowywanie plików do 1 roku",
+        "mfa": "Uwierzytelnianie wieloskładnikowe",
         "signUp": "Zarejestruj się"
       }
     }
@@ -233,6 +233,13 @@
       "newPassword": "Nowe hasło",
       "newPasswordPlaceholder": "Nowe1BezpieczneHaslo!",
       "confirmPassword": "Potwierdź nowe hasło",
+      "passwordRules": {
+        "minEightCharacters": "Minimum 8 znaków",
+        "atLeastOneUppercase": "Co najmniej jedna wielka litera",
+        "atLeastOneLowercase": "Co najmniej jedna mała litera",
+        "atLeastOneSpecialCharacter": "Co najmniej jeden znak specjalny",
+        "atLeastOneNumber": "Co najmniej jedna cyfra"
+      },
       "button": "Zmień hasło"
     },
     "mfa": {

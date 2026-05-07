@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import { Alert, Button, Card, CardBody, CardFooter, Image, Switch } from '@heroui/react';
-import { useNavigate } from 'react-router';
+import { Alert, Button, Switch, Label } from '@heroui/react';
 import { IoTrashSharp } from 'react-icons/io5';
 import { formatDate } from '../../utils/functions';
-import noPreview from '../../images/nopreview.png';
+import noPreview from '../../images/nopreview.jpg';
 import useOnScreen from '../../utils/useOnScreen';
 
 export default function AlbumsList({
@@ -19,25 +18,27 @@ export default function AlbumsList({
   onPublicProfileToggle: (album: Album) => void;
   onLastAlbumVisible?: () => void;
 }) {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { i18n, t } = useTranslation();
   const { measureRef, isIntersecting } = useOnScreen();
 
   if (albums.length === 0) {
     return (
-      <Alert color="primary" hideIcon={true}>
-        <h1 className="text-center mb-2 text-2xl w-full">{t('albums.noAlbumsInfo.title')}</h1>
-        <p className="text-center mb-2 text-lg w-full">{t('albums.noAlbumsInfo.subtitle')}</p>
-        <Button
-          as={Link}
-          to={`/${t('routes.prefix')}${t('routes.home')}`}
-          variant="bordered"
-          color="primary"
-          className="w-100 mx-auto"
-          data-tracking-id="albums_alert_button_click"
-        >
-          {t('albums.noAlbumsInfo.ctaButton')}
-        </Button>
+      <Alert status="accent">
+        <Alert.Content>
+          <Alert.Title className="text-2xl">
+            {t('albums.noAlbumsInfo.title')}
+          </Alert.Title>
+          <Alert.Description className="mt-2">
+            {t('albums.noAlbumsInfo.subtitle')}
+          </Alert.Description>
+          <Link
+            to={`/${i18n.language}/${t('routes.home')}`}
+            className="button bg-blue-200 hover:bg-blue-300 w-100 mx-auto"
+            data-tracking-id="albums_alert_button_click"
+          >
+            {t('albums.noAlbumsInfo.ctaButton')}
+          </Link>
+        </Alert.Content>
       </Alert>
     );
   }
@@ -51,50 +52,54 @@ export default function AlbumsList({
   return (
     <div className="grid ggrid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
       {albums.map((album, index) => (
-        <Card
-          as="a"
+        <div
           key={album.id}
-          radius="sm"
-          isPressable={true}
-          onPress={() => navigate(`/${t('routes.prefix')}${t('routes.album').replace(':id', album.id)}`)}
+          className="bg-white rounded-sm"
         >
-          <CardBody className="overflow-visible p-0">
+          <div className="overflow-visible p-0 relative">
             <Button
               isIconOnly
               aria-label="Like"
-              variant="ghost"
-              color="danger"
+              variant="danger"
               className="absolute top-2 right-2 z-1"
               onPress={() => onDelete(album)}
+              data-tracking-id="albums_list_delete_button_click"
             >
               <IoTrashSharp />
             </Button>
             {album.media.length > 0 ? (
-              <Image
-                alt="Card background"
-                className="object-cover w-full rounded-sm rounded-b-none aspect-square z-0"
-                src={album.media[0].thumbnails[0]}
-                fallbackSrc={noPreview}
-                classNames={{ wrapper: 'min-w-full' }}
-              />
+              <Link to={`/${t('routes.prefix')}${t('routes.album').replace(':id', album.id)}`}>
+                <img
+                  alt="Card background"
+                  className="object-cover w-full 'min-w-full rounded-sm rounded-b-none aspect-square z-0"
+                  src={album.media[0].thumbnails[0]}
+                  onError={(e) => {
+                    e.currentTarget.src = noPreview;
+                  }}
+                />
+              </Link>
             ) : (
               <div className="w-full h-full bg-gray-200 rounded-sm rounded-b-none aspect-square" />
             )}
-          </CardBody>
-          <CardFooter className="flex-col">
+          </div>
+          <div className="flex-col p-4 text-center">
             <h4 className="font-bold text-large">{album.name}</h4>
             {index === albums.length - 1 && typeof onLastAlbumVisible === 'function' && <span ref={measureRef} />}
             <p className="text-default-500">{formatDate(album.createdAt, 'dd. MM. YYYY, HH:mm')}</p>
             <Switch
-              className="mt-2"
-              size="sm"
               defaultSelected={typeof album.publicProfile === 'object' && album.publicProfile !== null}
-              onValueChange={() => onPublicProfileToggle(album)}
+              onChange={() => onPublicProfileToggle(album)}
+              className="mt-2"
             >
-              {t('albums.list.publicProfileSwitch')}
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+              <Switch.Content>
+                <Label className="text-base">{t('albums.list.publicProfileSwitch')}</Label>
+              </Switch.Content>
             </Switch>
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       ))}
     </div>
   );

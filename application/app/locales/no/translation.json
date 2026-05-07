@@ -66,34 +66,34 @@
       "signInOrSignUp": "<signinlink>Logg inn</signinlink> for å laste opp flere filer eller <signuplink>registrer</signuplink> hvis du ikke har en konto ennå."
     },
     "pricing": {
-      "default": {
-        "title": "Uten registrering",
-        "monthly": "månedlig",
-        "maxTenPhotos": "maks <strong>10</strong> bilder",
-        "maxSizePerFile": "filstørrelse opptil <strong>10MB</strong>",
-        "deletedAfter24Hours": "filer vil automatisk slettes etter <strong>24 timer</strong>"
-      },
       "free": {
         "title": "Gratis",
         "monthly": "månedlig",
-        "maxOneGB": "maks <strong>1GB</strong> <small>(≈ 300 bilder)</small>",
-        "maxSizePerFile": "filstørrelse opptil <strong>100MB</strong>",
-        "video": "video",
-        "listOfAlbums": "liste over album",
-        "filesWillBeDeletedAfter7Days": "filer vil automatisk slettes etter <strong>7 dager</strong>",
+        "storageLimit": "Maksimalt 500MB (≈ 150 bilder)",
+        "fileSizeLimit": "Filstørrelse opptil 50MB",
+        "fileTypeLimit": "Bilder",
+        "fileRetention": "Filoppbevaring opptil 7 dager",
+        "signUp": "Registrer"
+      },
+      "basic": {
+        "title": "Basis",
+        "monthly": "månedlig",
+        "storageLimit": "Maksimalt 5GB (≈ 1500 bilder)",
+        "fileSizeLimit": "Filstørrelse opptil 250MB",
+        "fileTypeLimit": "Bilder og videoer",
+        "fileRetention": "Filoppbevaring opptil 3 måneder",
+        "publicProfile": "Offentlig profil",
         "signUp": "Registrer"
       },
       "standard": {
         "title": "Standard",
         "monthly": "månedlig",
-        "maxTenGB": "maks <strong>10GB</strong> <small>(≈ 3000 bilder)</small>",
-        "maxSizePerFile": "filstørrelse opptil <strong>500MB</strong>",
-        "video": "video",
-        "listOfAlbums": "liste over album",
-        "passwordProtect": "passordbeskyttelse",
-        "publicProfile": "offentlig profil",
-        "mfa": "tofaktorautentisering",
-        "filesAreNotDeleted": "filer blir <strong>ikke slettet</strong>",
+        "storageLimit": "Maksimalt 10GB (≈ 3000 bilder)",
+        "fileSizeLimit": "Filstørrelse opptil 500MB",
+        "fileTypeLimit": "Bilder og videoer",
+        "publicProfile": "Offentlig profil",
+        "fileRetention": "Filoppbevaring opptil 1 år",
+        "mfa": "Flerfaktorautentisering",
         "signUp": "Registrer"
       }
     }
@@ -233,6 +233,13 @@
       "newPassword": "Nytt passord",
       "newPasswordPlaceholder": "Nytt1SikkertPassord!",
       "confirmPassword": "Bekreft nytt passord",
+      "passwordRules": {
+        "minEightCharacters": "Minst 8 tegn",
+        "atLeastOneUppercase": "Minst én stor bokstav",
+        "atLeastOneLowercase": "Minst én liten bokstav",
+        "atLeastOneSpecialCharacter": "Minst ett spesialtegn",
+        "atLeastOneNumber": "Minst ett tall"
+      },
       "button": "Endre passord"
     },
     "mfa": {

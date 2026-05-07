@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from '@heroui/react';
+import { Modal, Button } from '@heroui/react';
 
 export default function DeleteModal({
   isOpen,
@@ -16,20 +16,26 @@ export default function DeleteModal({
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-      <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">{t('title')}</ModalHeader>
-        <ModalBody>
-          <p>{t('body')}</p>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="default" variant="light" onPress={onClose}>
-            {t('closeButton')}
-          </Button>
-          <Button color="danger" onPress={onConfirm}>
-            {t('submitButton')}
-          </Button>
-        </ModalFooter>
-      </ModalContent>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog>
+            <Modal.Header>
+              <Modal.Heading>{t('title')}</Modal.Heading>
+            </Modal.Header>
+            <Modal.Body>
+              <p>{t('body')}</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onPress={onClose}>
+                {t('closeButton')}
+              </Button>
+              <Button variant="danger" onPress={onConfirm}>
+                {t('submitButton')}
+              </Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </Modal>
   );
 }

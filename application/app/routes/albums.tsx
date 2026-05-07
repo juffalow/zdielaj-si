@@ -184,7 +184,7 @@ function AlbumsContainer({
         isOpen={isModalOpen}
         onConfirm={onModalConfirm}
         onOpenChange={onModalClose}
-        onClose={onModalConfirm}
+        onClose={onModalClose}
       />
     </>
   );

@@ -1,5 +1,5 @@
 import { useActionState } from 'react';
-import { Form, InputOtp, Button, Alert } from '@heroui/react';
+import { Form, InputOTP, Button, Alert, FieldError } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 
 export default function SignInTOTP({
@@ -15,11 +15,28 @@ export default function SignInTOTP({
 
   return (
     <Form action={formAction} className="space-y-6">
-      <InputOtp isRequired errorMessage={t('requiredField')} name="totpCode" length={6} size="lg" className="mx-auto" />
+      <InputOTP required isInvalid name="totpCode" maxLength={6} className="mx-auto">
+        <InputOTP.Group>
+          <InputOTP.Slot index={0} />
+          <InputOTP.Slot index={1} />
+          <InputOTP.Slot index={2} />
+          <InputOTP.Slot index={3} />
+          <InputOTP.Slot index={4} />
+          <InputOTP.Slot index={5} />
+        </InputOTP.Group>
+      </InputOTP>
 
-      {state.error !== null ? <Alert color="danger" title={state.error} hideIcon={true} /> : null}
+      <FieldError>{t('requiredField')}</FieldError>
 
-      <Button type="submit" color="primary" fullWidth={true} isLoading={isPending}>
+      {state.error !== null ? (
+        <Alert status="danger">
+          <Alert.Content>
+            <Alert.Description>{state.error}</Alert.Description>
+          </Alert.Content>
+        </Alert>
+      ) : null}
+
+      <Button type="submit" variant="primary" fullWidth={true} isDisabled={isPending}>
         {t('confirmSignInButton')}
       </Button>
     </Form>

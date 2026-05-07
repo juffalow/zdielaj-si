@@ -1,7 +1,7 @@
 import { useEffect, useState, Suspense } from 'react';
 import type { Route } from './+types/profile';
 import { useTranslation } from 'react-i18next';
-import { Accordion, AccordionItem } from '@heroui/accordion';
+import { Accordion } from '@heroui/react';
 import ProfileLoader from './profile/loader';
 import Detail from './profile/detail';
 import ChangePassword from './profile/changePassword';
@@ -77,55 +77,85 @@ export default function Profile() {
     <ErrorBoundary>
       {userPromise && publicProfilePromise ? (
         <Suspense fallback={<ProfileLoader />}>
-          <Accordion keepContentMounted={true}>
-            <AccordionItem
-              key="1"
-              aria-label={t('detail.title')}
-              title={t('detail.title')}
-              classNames={{ title: 'text-xl font-medium' }}
-            >
-              <Detail getCurrentUserPromise={userPromise} />
-            </AccordionItem>
-            <AccordionItem
-              key="2"
-              aria-label={t('changePassword.title')}
-              title={t('changePassword.title')}
-              classNames={{ title: 'text-xl font-medium' }}
-            >
-              <ChangePassword />
-            </AccordionItem>
-            <AccordionItem
-              key="3"
-              aria-label={t('mfa.title')}
-              title={t('mfa.title')}
-              classNames={{ title: 'text-xl font-medium' }}
-            >
-              <MFA />
-            </AccordionItem>
-            <AccordionItem
-              key="4"
-              aria-label={t('publicProfile.title')}
-              title={t('publicProfile.title')}
-              classNames={{ title: 'text-xl font-medium' }}
-            >
-              <PublicProfile getCurrentUserPublicProfilePromise={publicProfilePromise} />
-            </AccordionItem>
-            <AccordionItem
-              key="5"
-              aria-label={t('statistics.title')}
-              title={t('statistics.title')}
-              classNames={{ title: 'text-xl font-medium' }}
-            >
-              <Statistics getCurrentUserPromise={userPromise} />
-            </AccordionItem>
-            <AccordionItem
-              key="6"
-              aria-label={t('deleteProfile.title')}
-              title={t('deleteProfile.title')}
-              classNames={{ title: 'text-xl font-medium' }}
-            >
-              <DeleteProfile />
-            </AccordionItem>
+          <Accordion>
+            <Accordion.Item id="1">
+              <Accordion.Heading>
+                <Accordion.Trigger className="text-xl font-medium">
+                  {t('detail.title')}
+                  <Accordion.Indicator />
+                </Accordion.Trigger>
+              </Accordion.Heading>
+              <Accordion.Panel>
+                <Accordion.Body>
+                  <Detail getCurrentUserPromise={userPromise} />
+                </Accordion.Body>
+              </Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item id="2">
+              <Accordion.Heading>
+                <Accordion.Trigger className="text-xl font-medium">
+                  {t('changePassword.title')}
+                  <Accordion.Indicator />
+                </Accordion.Trigger>
+              </Accordion.Heading>
+              <Accordion.Panel>
+                <Accordion.Body>
+                  <ChangePassword />
+                </Accordion.Body>
+              </Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item id="3">
+              <Accordion.Heading>
+                <Accordion.Trigger className="text-xl font-medium">
+                  {t('mfa.title')}
+                  <Accordion.Indicator />
+                </Accordion.Trigger>
+              </Accordion.Heading>
+              <Accordion.Panel>
+                <Accordion.Body>
+                  <MFA />
+                </Accordion.Body>
+              </Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item id="4">
+              <Accordion.Heading>
+                <Accordion.Trigger className="text-xl font-medium">
+                  {t('publicProfile.title')}
+                  <Accordion.Indicator />
+                </Accordion.Trigger>
+              </Accordion.Heading>
+              <Accordion.Panel>
+                <Accordion.Body>
+                  <PublicProfile getCurrentUserPublicProfilePromise={publicProfilePromise} />
+                </Accordion.Body>
+              </Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item id="5">
+              <Accordion.Heading>
+                <Accordion.Trigger className="text-xl font-medium">
+                  {t('statistics.title')}
+                  <Accordion.Indicator />
+                </Accordion.Trigger>
+              </Accordion.Heading>
+              <Accordion.Panel>
+                <Accordion.Body>
+                  <Statistics getCurrentUserPromise={userPromise} />
+                </Accordion.Body>
+              </Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item id="6">
+              <Accordion.Heading>
+                <Accordion.Trigger className="text-xl font-medium">
+                  {t('deleteProfile.title')}
+                  <Accordion.Indicator />
+                </Accordion.Trigger>
+              </Accordion.Heading>
+              <Accordion.Panel>
+                <Accordion.Body>
+                  <DeleteProfile />
+                </Accordion.Body>
+              </Accordion.Panel>
+            </Accordion.Item>
           </Accordion>
         </Suspense>
       ) : null}

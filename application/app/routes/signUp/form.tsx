@@ -1,5 +1,5 @@
 import { useActionState, useState } from 'react';
-import { Form, Input, Button, Alert } from '@heroui/react';
+import { Form, TextField, Label, Input, FieldError, Description, Button, Alert } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { ZodError } from 'zod';
 import { signUpFormSchema } from './formValidation';
@@ -53,46 +53,31 @@ export default function SignUpForm({
 
   return (
     <Form action={formAction} className="space-y-6">
-      <Input
-        isRequired
-        errorMessage={t('requiredField')}
-        label={t('name')}
-        labelPlacement="outside"
-        name="name"
-        placeholder={t('namePlaceholder')}
-        defaultValue={state.name}
-        type="text"
-      />
+      <TextField isRequired name="name" type="text" defaultValue={state.name}>
+        <Label>{t('name')}</Label>
+        <Input placeholder={t('namePlaceholder')} />
+        <FieldError>{t('requiredField')}</FieldError>
+      </TextField>
 
-      <Input
-        isRequired
-        errorMessage={t('requiredField')}
-        label={t('email')}
-        labelPlacement="outside"
-        name="email"
-        placeholder={t('emailPlaceholder')}
-        defaultValue={state.email}
-        type="email"
-        autoComplete="email"
-      />
+      <TextField isRequired name="email" type="email" defaultValue={state.email}>
+        <Label>{t('email')}</Label>
+        <Input placeholder={t('emailPlaceholder')} autoComplete="email" />
+        <FieldError>{t('requiredField')}</FieldError>
+      </TextField>
 
-      <Input
-        isRequired
-        errorMessage={t('requiredField')}
-        label={t('password')}
-        labelPlacement="outside"
-        name="password"
-        placeholder={t('passwordPlaceholder')}
-        defaultValue={state.password}
-        type="password"
-        autoComplete="new-password"
-        minLength={4}
-        maxLength={256}
-        pattern={
-          '^(?!\\s+)(?!.*\\s+$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ])[A-Za-z0-9$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ]{8,256}$'
-        }
-        onChange={(e) => setPassword(e.target.value)}
-        description={
+      <TextField isRequired name="password" type="password" defaultValue={state.password}>
+        <Label>{t('password')}</Label>
+        <Input
+          placeholder={t('passwordPlaceholder')}
+          autoComplete="new-password"
+          minLength={4}
+          maxLength={256}
+          pattern={
+            '^(?!\\s+)(?!.*\\s+$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ])[A-Za-z0-9$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ]{8,256}$'
+          }
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Description>
           <ul className="list-disc list-inside">
             <li>
               {t('passwordRules.minEightCharacters')}{' '}
@@ -121,20 +106,23 @@ export default function SignUpForm({
               {password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null}
             </li>
           </ul>
-        }
-      />
+        </Description>
+        <FieldError>{t('requiredField')}</FieldError>
+      </TextField>
 
       {state.error !== null ? (
-        <Alert
-          color="danger"
-          description={state.error.split(',').map((error) => (
-            <p key={error}>{error}!</p>
-          ))}
-          hideIcon={true}
-        />
+        <Alert status="danger">
+          <Alert.Content>
+            <Alert.Description>
+              {state.error.split(',').map((error) => (
+                <p key={error}>{error}!</p>
+              ))}
+            </Alert.Description>
+          </Alert.Content>
+        </Alert>
       ) : null}
 
-      <Button type="submit" color="primary" fullWidth={true} isDisabled={isPending}>
+      <Button type="submit" variant="primary" fullWidth={true} isDisabled={isPending}>
         {t('signUpButton')}
       </Button>
     </Form>

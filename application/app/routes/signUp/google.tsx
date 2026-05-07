@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { signInWithRedirect } from 'aws-amplify/auth';
+import { Button } from '@heroui/react';
 import { FaGoogle } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import logger from '../../logger';
@@ -24,11 +25,11 @@ const GoogleSignUp = () => {
   return (
     <div className="w-full">
       <div>
-        <button
-          type="button"
+        <Button
+          variant="tertiary"
           onClick={handleGoogleSignIn}
-          disabled={isLoading}
-          className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+          isDisabled={isLoading}
+          className="w-full"
           data-tracking-id="sign_up_google_button_click"
         >
           {isLoading ? (
@@ -37,7 +38,7 @@ const GoogleSignUp = () => {
             <FaGoogle className="h-5 w-5 text-red-500" />
           )}
           {t('signInButton')}
-        </button>
+        </Button>
       </div>
 
       <div className="relative mt-6 mb-6">
@@ -45,7 +46,7 @@ const GoogleSignUp = () => {
           <div className="w-full border-t border-gray-300" />
         </div>
         <div className="relative flex justify-center text-sm/6">
-          <span className="bg-white px-6 text-gray-500">{t('dividerText')}</span>
+          <span className="bg-background px-6 text-gray-500">{t('dividerText')}</span>
         </div>
       </div>
     </div>

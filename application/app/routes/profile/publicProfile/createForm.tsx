@@ -1,7 +1,7 @@
 import { useState, useActionState } from 'react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Form, Input } from '@heroui/react';
+import { Button, Form, TextField, Label, Input, TextArea, FieldError, Spinner } from '@heroui/react';
 import slugify from '@sindresorhus/slugify';
 
 interface Props {
@@ -22,26 +22,18 @@ const CreateForm: FunctionComponent<Props> = ({ onSubmit }: Props) => {
 
   return (
     <Form action={formAction}>
-      <Input
-        isRequired
-        label={t('profile.publicProfile.createForm.fieldName')}
-        labelPlacement="outside"
-        type="text"
-        name="name"
-        errorMessage={t('profile.publicProfile.createForm.mandatoryField')}
-        defaultValue={state.name}
-        onChange={onChange}
-      />
-      <Input
-        isRequired
-        label={t('profile.publicProfile.createForm.fieldSlug')}
-        labelPlacement="outside"
-        type="text"
-        name="slug"
-        placeholder=""
-        value={slug}
-        errorMessage={t('profile.publicProfile.createForm.mandatoryField')}
-      />
+      <TextField isRequired name="name" type="text" defaultValue={state.name}>
+        <Label>{t('profile.publicProfile.createForm.fieldName')}</Label>
+        <Input onChange={onChange} />
+        <FieldError>{t('profile.publicProfile.createForm.mandatoryField')}</FieldError>
+      </TextField>
+
+      <TextField isRequired name="slug" type="text">
+        <Label>{t('profile.publicProfile.createForm.fieldSlug')}</Label>
+        <Input value={slug} placeholder="" />
+        <FieldError>{t('profile.publicProfile.createForm.mandatoryField')}</FieldError>
+      </TextField>
+
       <p>
         {t('profile.publicProfile.createForm.fieldSlugHelp1')} <br />
         {t('profile.publicProfile.createForm.fieldSlugHelp2')}{' '}
@@ -50,20 +42,29 @@ const CreateForm: FunctionComponent<Props> = ({ onSubmit }: Props) => {
           {t('routes.publicProfile').replace(':id', slug)}
         </a>
       </p>
-      <Input
-        label={t('profile.publicProfile.createForm.fieldDescription')}
-        labelPlacement="outside"
-        type="textarea"
-        name="description"
-        errorMessage={t('profile.publicProfile.createForm.mandatoryField')}
-      />
 
-      <Button type="submit" isLoading={isPending} color="primary">
-        {t('profile.publicProfile.createForm.createButton')}
+      <TextField name="description">
+        <Label>{t('profile.publicProfile.createForm.fieldDescription')}</Label>
+        <TextArea />
+        <FieldError>{t('profile.publicProfile.createForm.mandatoryField')}</FieldError>
+      </TextField>
+
+      <Button type="submit" variant="primary" isPending={isPending}>
+        {({ isPending }) => (
+          <>
+            {isPending && <Spinner color="current" size="sm" />}
+            {t('profile.publicProfile.createForm.createButton')}
+          </>
+        )}
       </Button>
 
-      <Button type="button" isLoading={isPending} color="secondary">
-        {t('profile.publicProfile.createForm.cancelButton')}
+      <Button type="button" variant="secondary" isPending={isPending}>
+        {({ isPending }) => (
+          <>
+            {isPending && <Spinner color="current" size="sm" />}
+            {t('profile.publicProfile.createForm.cancelButton')}
+          </>
+        )}
       </Button>
     </Form>
   );

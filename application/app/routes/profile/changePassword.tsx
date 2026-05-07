@@ -1,7 +1,7 @@
 import { useActionState, useState } from 'react';
 import type { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Form, Input, Button, Alert } from '@heroui/react';
+import { Form, TextField, Label, Input, Description, Button, Alert, Spinner } from '@heroui/react';
 import useAuth from '../../utils/useAuth';
 
 const ChangePasswordForm: FunctionComponent = () => {
@@ -35,33 +35,33 @@ const ChangePasswordForm: FunctionComponent = () => {
   });
 
   return (
-    <Form action={formAction}>
-      {state.errors.length > 0 ? <Alert color="danger">{state.errors.join(' ')}</Alert> : null}
+    <Form action={formAction} className="space-y-6">
+      {state.errors.length > 0 ? (
+        <Alert status="danger">
+          <Alert.Content>
+            <Alert.Description>{state.errors.join(' ')}</Alert.Description>
+          </Alert.Content>
+        </Alert>
+      ) : null}
 
-      <Input
-        label={t('currentPassword')}
-        labelPlacement="outside-top"
-        name="currentPassword"
-        type="password"
-        placeholder={t('currentPasswordPlaceholder')}
-        defaultValue={state.currentPassword}
-      />
+      <TextField name="currentPassword" type="password" defaultValue={state.currentPassword}>
+        <Label>{t('currentPassword')}</Label>
+        <Input placeholder={t('currentPasswordPlaceholder')} />
+      </TextField>
 
-      <Input
-        label={t('newPassword')}
-        labelPlacement="outside-top"
-        name="newPassword"
-        type="password"
-        autoComplete="new-password"
-        defaultValue={state.newPassword}
-        minLength={4}
-        maxLength={256}
-        pattern={
-          '^(?!\\s+)(?!.*\\s+$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ])[A-Za-z0-9$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ]{8,256}$'
-        }
-        placeholder={t('newPasswordPlaceholder')}
-        onChange={(e) => setPassword(e.target.value)}
-        description={
+      <TextField name="newPassword" type="password" defaultValue={state.newPassword}>
+        <Label>{t('newPassword')}</Label>
+        <Input
+          autoComplete="new-password"
+          placeholder={t('newPasswordPlaceholder')}
+          minLength={4}
+          maxLength={256}
+          pattern={
+            '^(?!\\s+)(?!.*\\s+$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ])[A-Za-z0-9$^*.\\[\\]{}()?"!@#%&/\\\\,><\':;|_~`=+\\- ]{8,256}$'
+          }
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Description>
           <ul className="list-disc list-inside">
             <li>
               {t('passwordRules.minEightCharacters')}{' '}
@@ -90,21 +90,21 @@ const ChangePasswordForm: FunctionComponent = () => {
               {password.match(/\d/) ? <span style={{ color: 'green', fontWeight: 'bold' }}>&#10003;</span> : null}
             </li>
           </ul>
-        }
-      />
+        </Description>
+      </TextField>
 
-      <Input
-        label={t('confirmPassword')}
-        labelPlacement="outside-top"
-        name="confirmPassword"
-        type="password"
-        autoComplete="new-password"
-        placeholder=""
-        defaultValue={state.confirmPassword}
-      />
+      <TextField name="confirmPassword" type="password" defaultValue={state.confirmPassword}>
+        <Label>{t('confirmPassword')}</Label>
+        <Input autoComplete="new-password" placeholder="" />
+      </TextField>
 
-      <Button type="submit" isLoading={isPending} color="primary">
-        {t('button')}
+      <Button type="submit" variant="primary" isPending={isPending}>
+        {({ isPending }) => (
+          <>
+            {isPending && <Spinner color="current" size="sm" />}
+            {t('button')}
+          </>
+        )}
       </Button>
     </Form>
   );

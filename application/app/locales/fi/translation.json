@@ -66,34 +66,34 @@
       "signInOrSignUp": "<signinlink>Kirjaudu sisään</signinlink> ladataksesi lisää tiedostoja tai <signuplink>rekisteröidy</signuplink> jos sinulla ei ole vielä tiliä."
     },
     "pricing": {
-      "default": {
-        "title": "Ilman rekisteröitymistä",
-        "monthly": "kuukausittain",
-        "maxTenPhotos": "enintään <strong>10</strong> kuvaa",
-        "maxSizePerFile": "tiedostokoko enintään <strong>10MB</strong>",
-        "deletedAfter24Hours": "tiedostot poistetaan automaattisesti <strong>24 tunnin</strong> kuluttua"
-      },
       "free": {
         "title": "Ilmainen",
         "monthly": "kuukausittain",
-        "maxOneGB": "enintään <strong>1GB</strong> <small>(≈ 300 kuvaa)</small>",
-        "maxSizePerFile": "tiedostokoko enintään <strong>100MB</strong>",
-        "video": "video",
-        "listOfAlbums": "albumiluettelo",
-        "filesWillBeDeletedAfter7Days": "tiedostot poistetaan automaattisesti <strong>7 päivän</strong> kuluttua",
+        "storageLimit": "Enintään 500MB (≈ 150 kuvaa)",
+        "fileSizeLimit": "Tiedostokoko enintään 50MB",
+        "fileTypeLimit": "Kuvat",
+        "fileRetention": "Tiedostojen säilytys enintään 7 päivää",
+        "signUp": "Rekisteröidy"
+      },
+      "basic": {
+        "title": "Perus",
+        "monthly": "kuukausittain",
+        "storageLimit": "Enintään 5GB (≈ 1500 kuvaa)",
+        "fileSizeLimit": "Tiedostokoko enintään 250MB",
+        "fileTypeLimit": "Kuvat ja videot",
+        "fileRetention": "Tiedostojen säilytys enintään 3 kuukautta",
+        "publicProfile": "Julkinen profiili",
         "signUp": "Rekisteröidy"
       },
       "standard": {
         "title": "Standardi",
         "monthly": "kuukausittain",
-        "maxTenGB": "enintään <strong>10GB</strong> <small>(≈ 3000 kuvaa)</small>",
-        "maxSizePerFile": "tiedostokoko enintään <strong>500MB</strong>",
-        "video": "video",
-        "listOfAlbums": "albumiluettelo",
-        "passwordProtect": "salasanasuojaus",
-        "publicProfile": "julkinen profiili",
-        "mfa": "kaksivaiheinen tunnistautuminen",
-        "filesAreNotDeleted": "tiedostoja <strong>ei poisteta</strong>",
+        "storageLimit": "Enintään 10GB (≈ 3000 kuvaa)",
+        "fileSizeLimit": "Tiedostokoko enintään 500MB",
+        "fileTypeLimit": "Kuvat ja videot",
+        "publicProfile": "Julkinen profiili",
+        "fileRetention": "Tiedostojen säilytys enintään 1 vuosi",
+        "mfa": "Monivaiheinen tunnistautuminen",
         "signUp": "Rekisteröidy"
       }
     }
@@ -233,6 +233,13 @@
       "newPassword": "Uusi salasana",
       "newPasswordPlaceholder": "Uusi1TurvallienSalasana!",
       "confirmPassword": "Vahvista uusi salasana",
+      "passwordRules": {
+        "minEightCharacters": "Vähintään 8 merkkiä",
+        "atLeastOneUppercase": "Vähintään yksi iso kirjain",
+        "atLeastOneLowercase": "Vähintään yksi pieni kirjain",
+        "atLeastOneSpecialCharacter": "Vähintään yksi erikoismerkki",
+        "atLeastOneNumber": "Vähintään yksi numero"
+      },
       "button": "Vaihda salasana"
     },
     "mfa": {

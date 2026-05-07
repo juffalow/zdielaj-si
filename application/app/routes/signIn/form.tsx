@@ -1,5 +1,5 @@
 import { useActionState } from 'react';
-import { Form, Input, Button, Alert } from '@heroui/react';
+import { Form, TextField, Label, Input, FieldError, Button, Alert, Spinner } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 
 export default function SignInForm({
@@ -16,34 +16,33 @@ export default function SignInForm({
 
   return (
     <Form action={formAction} className="space-y-6">
-      <Input
-        isRequired
-        errorMessage={t('requiredField')}
-        label={t('email')}
-        labelPlacement="outside"
-        name="email"
-        placeholder={t('emailPlaceholder')}
-        defaultValue={state.email}
-        type="text"
-        autoComplete="email"
-      />
+      <TextField isRequired name="email" type="text" defaultValue={state.email}>
+        <Label>{t('email')}</Label>
+        <Input placeholder={t('emailPlaceholder')} autoComplete="email" />
+        <FieldError>{t('requiredField')}</FieldError>
+      </TextField>
 
-      <Input
-        isRequired
-        errorMessage={t('requiredField')}
-        label={t('password')}
-        labelPlacement="outside"
-        name="password"
-        placeholder={t('passwordPlaceholder')}
-        defaultValue={state.password}
-        type="password"
-        autoComplete="current-password"
-      />
+      <TextField isRequired name="password" type="password" defaultValue={state.password}>
+        <Label>{t('password')}</Label>
+        <Input placeholder={t('passwordPlaceholder')} autoComplete="current-password" />
+        <FieldError>{t('requiredField')}</FieldError>
+      </TextField>
 
-      {state.error !== null ? <Alert color="danger" title={state.error} hideIcon={true} /> : null}
+      {state.error !== null ? (
+        <Alert status="danger">
+          <Alert.Content>
+            <Alert.Title>{state.error}</Alert.Title>
+          </Alert.Content>
+        </Alert>
+      ) : null}
 
-      <Button type="submit" color="primary" fullWidth={true} isLoading={isPending}>
-        {t('signInButton')}
+      <Button type="submit" variant="primary" fullWidth={true} isPending={isPending}>
+        {({ isPending }) => (
+          <>
+            {isPending && <Spinner color="current" size="sm" />}
+            {t('signInButton')}
+          </>
+        )}
       </Button>
     </Form>
   );

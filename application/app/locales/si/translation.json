@@ -66,34 +66,34 @@
       "signInOrSignUp": "<signinlink>Prijavi se</signinlink> za nalaganje več datotek ali <signuplink>registriraj se</signuplink> če še nimate računa."
     },
     "pricing": {
-      "default": {
-        "title": "Brez registracije",
-        "monthly": "mesečno",
-        "maxTenPhotos": "maks <strong>10</strong> fotografij",
-        "maxSizePerFile": "velikost datoteke do <strong>10MB</strong>",
-        "deletedAfter24Hours": "datoteke bodo samodejno izbrisane po <strong>24 urah</strong>"
-      },
       "free": {
         "title": "Brezplačno",
         "monthly": "mesečno",
-        "maxOneGB": "maks <strong>1GB</strong> <small>(≈ 300 fotografij)</small>",
-        "maxSizePerFile": "velikost datoteke do <strong>100MB</strong>",
-        "video": "video",
-        "listOfAlbums": "seznam albumov",
-        "filesWillBeDeletedAfter7Days": "datoteke bodo samodejno izbrisane po <strong>7 dneh</strong>",
+        "storageLimit": "Največ 500MB (≈ 150 fotografij)",
+        "fileSizeLimit": "Velikost datoteke do 50MB",
+        "fileTypeLimit": "Fotografije",
+        "fileRetention": "Hranjenje datotek do 7 dni",
+        "signUp": "Registriraj se"
+      },
+      "basic": {
+        "title": "Osnovno",
+        "monthly": "mesečno",
+        "storageLimit": "Največ 5GB (≈ 1500 fotografij)",
+        "fileSizeLimit": "Velikost datoteke do 250MB",
+        "fileTypeLimit": "Fotografije in videi",
+        "fileRetention": "Hranjenje datotek do 3 mesece",
+        "publicProfile": "Javni profil",
         "signUp": "Registriraj se"
       },
       "standard": {
         "title": "Standard",
         "monthly": "mesečno",
-        "maxTenGB": "maks <strong>10GB</strong> <small>(≈ 3000 fotografij)</small>",
-        "maxSizePerFile": "velikost datoteke do <strong>500MB</strong>",
-        "video": "video",
-        "listOfAlbums": "seznam albumov",
-        "passwordProtect": "zaščita z geslom",
-        "publicProfile": "javni profil",
-        "mfa": "večfaktorska avtentikacija",
-        "filesAreNotDeleted": "datoteke <strong>niso izbrisane</strong>",
+        "storageLimit": "Največ 10GB (≈ 3000 fotografij)",
+        "fileSizeLimit": "Velikost datoteke do 500MB",
+        "fileTypeLimit": "Fotografije in videi",
+        "publicProfile": "Javni profil",
+        "fileRetention": "Hranjenje datotek do 1 leta",
+        "mfa": "Večfaktorska avtentikacija",
         "signUp": "Registriraj se"
       }
     }
@@ -233,6 +233,13 @@
       "newPassword": "Novo geslo",
       "newPasswordPlaceholder": "Novo1VarnoGeslo!",
       "confirmPassword": "Potrdi novo geslo",
+      "passwordRules": {
+        "minEightCharacters": "Minst 8 znakov",
+        "atLeastOneUppercase": "Minst eno veliko črko",
+        "atLeastOneLowercase": "Minst eno malo črko",
+        "atLeastOneSpecialCharacter": "Minst en poseben znak",
+        "atLeastOneNumber": "Minst ena številka"
+      },
       "button": "Spremeni geslo"
     },
     "mfa": {
