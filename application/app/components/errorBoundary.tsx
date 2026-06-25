@@ -80,46 +80,46 @@ class ErrorBoundary extends Component<Props, State> {
               </p>
             </Alert.Description>
 
-              <Separator className="my-4" />
+            <Separator className="my-4" />
 
-              <div className="w-full clearfix">
-                <Button variant="danger" size="sm" className="float-end" onPress={this.onRefresh}>
-                  Refresh
-                </Button>
-                <Button variant="danger" size="sm" className="me-2 float-end" onPress={this.onClick}>
-                  More info
-                </Button>
+            <div className="w-full clearfix">
+              <Button variant="danger" size="sm" className="float-end" onPress={this.onRefresh}>
+                Refresh
+              </Button>
+              <Button variant="danger" size="sm" className="me-2 float-end" onPress={this.onClick}>
+                More info
+              </Button>
+            </div>
+
+            {this.state.isOpen ? (
+              <div className="pt-2 pb-2">
+                {'response' in this.state.error && 'url' in this.state.error.response ? (
+                  <>
+                    <p className="mb-0 font-bold">URL:</p>
+                    <pre className="text-sm mb-2 mt-2">{(this.state.error as APIError).response.url}</pre>
+                  </>
+                ) : null}
+                {'response' in this.state.error && 'headers' in this.state.error.response ? (
+                  <>
+                    <p className="mb-0 font-bold">X-Amzn-RequestId:</p>
+                    <pre className="text-sm mb-2 mt-2">
+                      {(this.state.error as APIError).response.headers['x-amzn-requestid']}
+                    </pre>
+                  </>
+                ) : null}
+                {'response' in this.state.error && 'headers' in this.state.error.response ? (
+                  <>
+                    <p className="mb-0 font-bold">X-Amzn-Trace-Id:</p>
+                    <pre className="text-sm mb-2 mt-2">
+                      {(this.state.error as APIError).response.headers['x-amzn-trace-id']}
+                    </pre>
+                  </>
+                ) : null}
+                <p className="mb-0 font-bold">Stack:</p>
+                <pre className="text-sm mb-2 mt-2">{this.state.error.stack}</pre>
+                <pre className="text-sm mb-2 mt-2">{this.state.errorInfo?.componentStack}</pre>
               </div>
-
-              {this.state.isOpen ? (
-                <div className="pt-2 pb-2">
-                  {'response' in this.state.error && 'url' in this.state.error.response ? (
-                    <>
-                      <p className="mb-0 font-bold">URL:</p>
-                      <pre className="text-sm mb-2 mt-2">{(this.state.error as APIError).response.url}</pre>
-                    </>
-                  ) : null}
-                  {'response' in this.state.error && 'headers' in this.state.error.response ? (
-                    <>
-                      <p className="mb-0 font-bold">X-Amzn-RequestId:</p>
-                      <pre className="text-sm mb-2 mt-2">
-                        {(this.state.error as APIError).response.headers['x-amzn-requestid']}
-                      </pre>
-                    </>
-                  ) : null}
-                  {'response' in this.state.error && 'headers' in this.state.error.response ? (
-                    <>
-                      <p className="mb-0 font-bold">X-Amzn-Trace-Id:</p>
-                      <pre className="text-sm mb-2 mt-2">
-                        {(this.state.error as APIError).response.headers['x-amzn-trace-id']}
-                      </pre>
-                    </>
-                  ) : null}
-                  <p className="mb-0 font-bold">Stack:</p>
-                  <pre className="text-sm mb-2 mt-2">{this.state.error.stack}</pre>
-                  <pre className="text-sm mb-2 mt-2">{this.state.errorInfo?.componentStack}</pre>
-                </div>
-              ) : null}
+            ) : null}
           </Alert.Content>
         </Alert>
       );

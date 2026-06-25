@@ -25,12 +25,8 @@ export default function AlbumsList({
     return (
       <Alert status="accent">
         <Alert.Content>
-          <Alert.Title className="text-2xl">
-            {t('albums.noAlbumsInfo.title')}
-          </Alert.Title>
-          <Alert.Description className="mt-2">
-            {t('albums.noAlbumsInfo.subtitle')}
-          </Alert.Description>
+          <Alert.Title className="text-2xl">{t('albums.noAlbumsInfo.title')}</Alert.Title>
+          <Alert.Description className="mt-2">{t('albums.noAlbumsInfo.subtitle')}</Alert.Description>
           <Link
             to={`/${i18n.language}/${t('routes.home')}`}
             className="button bg-blue-200 hover:bg-blue-300 w-100 mx-auto"
@@ -52,10 +48,7 @@ export default function AlbumsList({
   return (
     <div className="grid ggrid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
       {albums.map((album, index) => (
-        <div
-          key={album.id}
-          className="bg-white rounded-sm"
-        >
+        <div key={album.id} className="bg-white rounded-sm">
           <div className="overflow-visible p-0 relative">
             <Button
               isIconOnly

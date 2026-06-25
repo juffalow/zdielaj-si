@@ -39,27 +39,17 @@ const ConfirmForm: FunctionComponent<Props> = ({ onConfirmSubmit }: Props) => {
 
   return (
     <Form action={formAction} className="space-y-6">
-      {
-        state.error !== null ? (
-          <Alert status="danger">
-            <Alert.Content>
-              <Alert.Description>
-                {state.error}
-              </Alert.Description>
-            </Alert.Content>
-          </Alert>
-        ) : null
-      }
+      {state.error !== null ? (
+        <Alert status="danger">
+          <Alert.Content>
+            <Alert.Description>{state.error}</Alert.Description>
+          </Alert.Content>
+        </Alert>
+      ) : null}
 
       <p className="text-center">{t('confirmCodeDescription')}</p>
 
-      <InputOTP
-        required
-        isInvalid
-        name="code"
-        maxLength={6}
-        className="mx-auto"
-      >
+      <InputOTP required isInvalid name="code" maxLength={6} className="mx-auto">
         <InputOTP.Group>
           <InputOTP.Slot index={0} />
           <InputOTP.Slot index={1} />

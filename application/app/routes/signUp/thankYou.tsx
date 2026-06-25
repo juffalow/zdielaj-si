@@ -8,10 +8,7 @@ export default function ThankYou() {
   return (
     <p className="text-center">
       {t('subtitle')}{' '}
-      <Link
-        to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`}
-        className="link"
-      >
+      <Link to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signIn}`} className="link">
         {t('subtitleLink')}
       </Link>
       .

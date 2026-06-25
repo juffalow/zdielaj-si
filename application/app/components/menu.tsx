@@ -92,11 +92,7 @@ export default function menu() {
               )}
             </svg>
           </button>
-          <RouterLink
-            to={`/${i18n.language}`}
-            className="font-bold text-lg"
-            data-tracking-id="desktop_menu_home_click"
-          >
+          <RouterLink to={`/${i18n.language}`} className="font-bold text-lg" data-tracking-id="desktop_menu_home_click">
             Zdielaj.si
           </RouterLink>
         </div>
@@ -162,10 +158,7 @@ export default function menu() {
             </Button>
           )}
           <Dropdown>
-            <Button
-              className="p-0 bg-transparent rounded-sm hover:bg-transparent"
-              variant="ghost"
-            >
+            <Button className="p-0 bg-transparent rounded-sm hover:bg-transparent" variant="ghost">
               {lang}
             </Button>
             <Dropdown.Popover>
@@ -174,21 +167,51 @@ export default function menu() {
                 className="gap-4"
                 onAction={(key) => onChangeLang(key as string)}
               >
-                <Dropdown.Item id="sk" textValue="SK"><Label>&#x1F1F8;&#x1F1F0; SK</Label></Dropdown.Item>
-                <Dropdown.Item id="cz" textValue="CZ"><Label>&#x1F1E8;&#x1F1FF; CZ</Label></Dropdown.Item>
-                <Dropdown.Item id="en" textValue="EN"><Label>&#x1F1EC;&#x1F1E7; EN</Label></Dropdown.Item>
-                <Dropdown.Item id="de" textValue="DE"><Label>&#x1F1E9;&#x1F1EA; DE</Label></Dropdown.Item>
-                <Dropdown.Item id="es" textValue="ES"><Label>&#x1F1EA;&#x1F1F8; ES</Label></Dropdown.Item>
-                <Dropdown.Item id="fr" textValue="FR"><Label>&#x1F1EB;&#x1F1F7; FR</Label></Dropdown.Item>
-                <Dropdown.Item id="it" textValue="IT"><Label>&#127470;&#127481; IT</Label></Dropdown.Item>
-                <Dropdown.Item id="pl" textValue="PL"><Label>&#127477;&#127473; PL</Label></Dropdown.Item>
-                <Dropdown.Item id="nl" textValue="NL"><Label>&#127475;&#127473; NL</Label></Dropdown.Item>
-                <Dropdown.Item id="si" textValue="SI"><Label>&#127480;&#127470; SI</Label></Dropdown.Item>
-                <Dropdown.Item id="fi" textValue="FI"><Label>&#127467;&#127470; FI</Label></Dropdown.Item>
-                <Dropdown.Item id="se" textValue="SE"><Label>&#127480;&#127466; SE</Label></Dropdown.Item>
-                <Dropdown.Item id="no" textValue="NO"><Label>&#127475;&#127476; NO</Label></Dropdown.Item>
-                <Dropdown.Item id="dk" textValue="DK"><Label>&#127465;&#127472; DK</Label></Dropdown.Item>
-                <Dropdown.Item id="hu" textValue="HU"><Label>&#127469;&#127482; HU</Label></Dropdown.Item>
+                <Dropdown.Item id="sk" textValue="SK">
+                  <Label>&#x1F1F8;&#x1F1F0; SK</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="cz" textValue="CZ">
+                  <Label>&#x1F1E8;&#x1F1FF; CZ</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="en" textValue="EN">
+                  <Label>&#x1F1EC;&#x1F1E7; EN</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="de" textValue="DE">
+                  <Label>&#x1F1E9;&#x1F1EA; DE</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="es" textValue="ES">
+                  <Label>&#x1F1EA;&#x1F1F8; ES</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="fr" textValue="FR">
+                  <Label>&#x1F1EB;&#x1F1F7; FR</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="it" textValue="IT">
+                  <Label>&#127470;&#127481; IT</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="pl" textValue="PL">
+                  <Label>&#127477;&#127473; PL</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="nl" textValue="NL">
+                  <Label>&#127475;&#127473; NL</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="si" textValue="SI">
+                  <Label>&#127480;&#127470; SI</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="fi" textValue="FI">
+                  <Label>&#127467;&#127470; FI</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="se" textValue="SE">
+                  <Label>&#127480;&#127466; SE</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="no" textValue="NO">
+                  <Label>&#127475;&#127476; NO</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="dk" textValue="DK">
+                  <Label>&#127465;&#127472; DK</Label>
+                </Dropdown.Item>
+                <Dropdown.Item id="hu" textValue="HU">
+                  <Label>&#127469;&#127482; HU</Label>
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown.Popover>
           </Dropdown>

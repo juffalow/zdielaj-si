@@ -180,12 +180,7 @@ function AlbumsContainer({
         onLastAlbumVisible={hasMore ? loadMore : undefined}
       />
 
-      <DeleteModal
-        isOpen={isModalOpen}
-        onConfirm={onModalConfirm}
-        onOpenChange={onModalClose}
-        onClose={onModalClose}
-      />
+      <DeleteModal isOpen={isModalOpen} onConfirm={onModalConfirm} onOpenChange={onModalClose} onClose={onModalClose} />
     </>
   );
 }

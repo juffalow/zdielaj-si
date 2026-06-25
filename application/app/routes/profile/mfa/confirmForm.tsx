@@ -53,14 +53,7 @@ const Confirm: FunctionComponent<Props> = ({ totpSetupDetails, onValidate, onCon
       <p>{t('profile.mfa.confirm.subtitle')}</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <InputOTP
-            required
-            isInvalid
-            name="code"
-            maxLength={6}
-            className="mx-auto"
-            onComplete={onVerifyCode}
-          >
+          <InputOTP required isInvalid name="code" maxLength={6} className="mx-auto" onComplete={onVerifyCode}>
             <InputOTP.Group>
               <InputOTP.Slot index={0} />
               <InputOTP.Slot index={1} />

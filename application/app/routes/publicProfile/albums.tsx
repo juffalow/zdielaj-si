@@ -25,10 +25,7 @@ export default function PublicProfileAlbums({
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
       {albums.map((album, index) => (
-        <Card
-          key={album.id}
-          className="rounded-sm"
-        >
+        <Card key={album.id} className="rounded-sm">
           <Card.Content className="overflow-visible p-0">
             <Link to={`/${t('routes.prefix')}${t('routes.album').replace(':id', album.id)}`}>
               <img
