@@ -24,6 +24,8 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 1
+    - name: Enable corepack
+      run: corepack enable
     - uses: actions/setup-node@v4
       with:
         node-version: 24
@@ -51,6 +53,8 @@ jobs:
         role-session-name: GitHub_to_AWS_via_FederatedOIDC
         aws-region: ${{ secrets.AWS_REGION }}
         audience: sts.amazonaws.com
+    - name: Enable corepack
+      run: corepack enable
     - uses: actions/setup-node@v4
       with:
         node-version: 24
@@ -83,6 +87,8 @@ jobs:
     - name: Set tag variable
       id: version
       run: echo ::set-output name=version::${GITHUB_REF#"refs/tags/"}
+    - name: Enable corepack
+      run: corepack enable
     - uses: actions/setup-node@v4
       with:
         node-version: 24
