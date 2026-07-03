@@ -104,3 +104,11 @@ jobs:
       run: aws s3 sync ./build/client s3://juffalow-my-projects/zdielaj-si
     - name: Invalidate CloudFront cache
       run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_PROD_DISTRIBUTION_ID }} --paths "/*"
+    - name: Slack notification
+      env:
+        RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        RELEASE_DESCRIPTION: ${{ github.event.release.body }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+        PAYLOAD=$(jq -n --arg version "$RELEASE_VERSION" --arg description "$RELEASE_DESCRIPTION" '{text: "[Release]: \($version)\n\($description)"}')
+        curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" $SLACK_WEBHOOK_URL
