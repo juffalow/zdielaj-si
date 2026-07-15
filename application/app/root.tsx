@@ -59,6 +59,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             />
           </>
         )}
+        <script async src="https://do000qgekxd7n.cloudfront.net/analytics.js?id=dec7578c-9d2f-482f-88eb-bb6336031e87"></script>
       </head>
       <body className="bg-background text-foreground">
         <I18nextProvider i18n={i18n}>
