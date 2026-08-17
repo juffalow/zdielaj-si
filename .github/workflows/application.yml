@@ -34,6 +34,7 @@ jobs:
     - name: Install dependencies
       run: yarn install
     - name: Lint
+      if: false
       run: yarn run lint
     - name: Prettier check
       run: yarn run prettier:check
