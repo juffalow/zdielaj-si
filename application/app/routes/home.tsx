@@ -244,6 +244,7 @@ export default function Home() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-10">
         <PricingCard
+          tier="free"
           title={t('pricing.free.title')}
           price="0"
           period={t('pricing.free.monthly')}
@@ -256,6 +257,7 @@ export default function Home() {
           backgroundClass="bg-blue-100"
         />
         <PricingCard
+          tier="standard"
           title={t('pricing.standard.title')}
           price="1.99€"
           period={t('pricing.standard.monthly')}
@@ -270,6 +272,7 @@ export default function Home() {
           backgroundClass="bg-blue-200"
         />
         <PricingCard
+          tier="basic"
           title={t('pricing.basic.title')}
           price="0.99€"
           period={t('pricing.basic.monthly')}

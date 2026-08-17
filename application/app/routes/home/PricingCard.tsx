@@ -1,18 +1,24 @@
-import { Button } from '@heroui/react';
+import { Link as RouterLink } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { ROUTES } from '../../constants';
 
 export default function PricingCard({
+  tier,
   title,
   price,
   period,
   features,
   backgroundClass,
 }: {
+  tier: string;
   title: string;
   price: string;
   period: string;
   features: string[];
   backgroundClass?: string;
 }) {
+  const { i18n, t } = useTranslation('', { keyPrefix: `home.pricing.${tier}` });
+
   return (
     <div className={`rounded-3xl ${backgroundClass} p-8 ring-1 ring-white/10 sm:mx-8 sm:p-10 lg:mx-0`}>
       <h3 className="text-2xl font-semibold text-indigo-400">{title}</h3>
@@ -20,13 +26,15 @@ export default function PricingCard({
         <span className="text-5xl font-semibold tracking-tight text-black">{price}</span>
         <span className="text-base text-gray-400">/{period}</span>
       </p>
-      <p className="mt-6 text-base/7">The perfect plan if you're just getting started with our product.</p>
-      <Button variant="primary" size="lg" className="mt-4">
-        Sign up
-      </Button>
-      <ul role="list" className="mt-8 space-y-3 text-sm/6 sm:mt-10">
-        {features.map((feature) => (
-          <li className="flex gap-x-3">
+      {/* <p className="mt-6 text-base/7">The perfect plan if you're just getting started with our product.</p> */}
+      <RouterLink
+        to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
+        className="button bg-blue-500 hover:bg-blue-400 text-white text-lg hidden sm:flex my-5"
+        data-tracking-id={`pricing_${tier}_sign_up_click`}
+      >{t("signUp")}</RouterLink>
+      <ul role="list" className="space-y-3 text-sm/6">
+        {features.map((feature, index) => (
+          <li className="flex gap-x-3" key={index}>
             <svg
               viewBox="0 0 20 20"
               fill="currentColor"
