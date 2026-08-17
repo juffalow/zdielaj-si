@@ -79,7 +79,7 @@ export default function SignUp() {
   useEffect(() => {
     const searchParamsStep = searchParams.get('step');
     if (searchParamsStep === null) {
-      setSearchParams({ step: 'signup' });
+      setSearchParams({ step: 'signup' }, { replace: true });
     } else {
       setStep(searchParamsStep as 'signup' | 'confirm' | 'thanks');
     }
