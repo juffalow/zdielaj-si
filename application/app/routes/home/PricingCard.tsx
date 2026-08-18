@@ -31,7 +31,9 @@ export default function PricingCard({
         to={`/${i18n.language}/${ROUTES[i18n.language as keyof typeof ROUTES].signUp}`}
         className="button bg-blue-500 hover:bg-blue-400 text-white text-lg hidden sm:flex my-5"
         data-tracking-id={`pricing_${tier}_sign_up_click`}
-      >{t("signUp")}</RouterLink>
+      >
+        {t('signUp')}
+      </RouterLink>
       <ul role="list" className="space-y-3 text-sm/6">
         {features.map((feature, index) => (
           <li className="flex gap-x-3" key={index}>
